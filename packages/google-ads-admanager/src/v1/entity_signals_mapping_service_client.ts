@@ -536,7 +536,9 @@ export class EntitySignalsMappingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getEntitySignalsMapping request %j', request);
     const wrappedCallback:
       | Callback<
@@ -664,7 +666,9 @@ export class EntitySignalsMappingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createEntitySignalsMapping request %j', request);
     const wrappedCallback:
       | Callback<
@@ -796,7 +800,9 @@ export class EntitySignalsMappingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'entity_signals_mapping.name': request.entitySignalsMapping!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateEntitySignalsMapping request %j', request);
     const wrappedCallback:
       | Callback<
@@ -926,7 +932,9 @@ export class EntitySignalsMappingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('batchCreateEntitySignalsMappings request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1062,7 +1070,9 @@ export class EntitySignalsMappingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('batchUpdateEntitySignalsMappings request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1215,7 +1225,9 @@ export class EntitySignalsMappingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.ads.admanager.v1.IListEntitySignalsMappingsRequest,
@@ -1300,7 +1312,9 @@ export class EntitySignalsMappingServiceClient {
       });
     const defaultCallSettings = this._defaults['listEntitySignalsMappings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listEntitySignalsMappings stream %j', request);
     return this.descriptors.page.listEntitySignalsMappings.createStream(
       this.innerApiCalls.listEntitySignalsMappings as GaxCall,
@@ -1367,7 +1381,9 @@ export class EntitySignalsMappingServiceClient {
       });
     const defaultCallSettings = this._defaults['listEntitySignalsMappings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listEntitySignalsMappings iterate %j', request);
     return this.descriptors.page.listEntitySignalsMappings.asyncIterate(
       this.innerApiCalls['listEntitySignalsMappings'] as GaxCall,

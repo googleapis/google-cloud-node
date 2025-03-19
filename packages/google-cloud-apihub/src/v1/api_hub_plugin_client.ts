@@ -504,7 +504,9 @@ export class ApiHubPluginClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getPlugin request %j', request);
     const wrappedCallback:
       | Callback<
@@ -612,7 +614,9 @@ export class ApiHubPluginClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('enablePlugin request %j', request);
     const wrappedCallback:
       | Callback<
@@ -722,7 +726,9 @@ export class ApiHubPluginClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('disablePlugin request %j', request);
     const wrappedCallback:
       | Callback<

@@ -274,7 +274,9 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.advisoryNotificationsServiceStub);
       client.close().then(() => {
         done();
@@ -345,7 +347,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.advisorynotifications.v1.GetNotificationRequest()
       );
@@ -379,7 +381,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.advisorynotifications.v1.GetNotificationRequest()
       );
@@ -429,7 +431,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.advisorynotifications.v1.GetNotificationRequest()
       );
@@ -463,7 +465,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.advisorynotifications.v1.GetNotificationRequest()
       );
@@ -487,7 +489,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.advisorynotifications.v1.GetSettingsRequest()
       );
@@ -521,7 +523,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.advisorynotifications.v1.GetSettingsRequest()
       );
@@ -571,7 +573,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.advisorynotifications.v1.GetSettingsRequest()
       );
@@ -605,7 +607,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.advisorynotifications.v1.GetSettingsRequest()
       );
@@ -629,7 +631,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.advisorynotifications.v1.UpdateSettingsRequest()
       );
@@ -664,7 +666,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.advisorynotifications.v1.UpdateSettingsRequest()
       );
@@ -715,7 +717,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.advisorynotifications.v1.UpdateSettingsRequest()
       );
@@ -750,7 +752,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.advisorynotifications.v1.UpdateSettingsRequest()
       );
@@ -775,7 +777,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.advisorynotifications.v1.ListNotificationsRequest()
       );
@@ -817,7 +819,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.advisorynotifications.v1.ListNotificationsRequest()
       );
@@ -877,7 +879,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.advisorynotifications.v1.ListNotificationsRequest()
       );
@@ -911,7 +913,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.advisorynotifications.v1.ListNotificationsRequest()
       );
@@ -977,7 +979,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.advisorynotifications.v1.ListNotificationsRequest()
       );
@@ -1032,7 +1034,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.advisorynotifications.v1.ListNotificationsRequest()
       );
@@ -1085,7 +1087,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.advisorynotifications.v1.ListNotificationsRequest()
       );
@@ -1123,7 +1125,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('organizationLocation', () => {
+    describe('organizationLocation', async () => {
       const fakePath = '/rendered/path/organizationLocation';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -1136,7 +1138,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationLocationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1189,7 +1191,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
       });
     });
 
-    describe('organizationLocationNotification', () => {
+    describe('organizationLocationNotification', async () => {
       const fakePath = '/rendered/path/organizationLocationNotification';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -1203,7 +1205,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationLocationNotificationPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationLocationNotificationPathTemplate.match =
@@ -1275,7 +1277,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
       });
     });
 
-    describe('organizationLocationSettings', () => {
+    describe('organizationLocationSettings', async () => {
       const fakePath = '/rendered/path/organizationLocationSettings';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -1288,7 +1290,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationLocationSettingsPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationLocationSettingsPathTemplate.match =
@@ -1341,7 +1343,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
       });
     });
 
-    describe('projectLocationNotification', () => {
+    describe('projectLocationNotification', async () => {
       const fakePath = '/rendered/path/projectLocationNotification';
       const expectedParameters = {
         project: 'projectValue',
@@ -1355,7 +1357,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationNotificationPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationNotificationPathTemplate.match = sinon
@@ -1422,7 +1424,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
       });
     });
 
-    describe('projectLocationSettings', () => {
+    describe('projectLocationSettings', async () => {
       const fakePath = '/rendered/path/projectLocationSettings';
       const expectedParameters = {
         project: 'projectValue',
@@ -1435,7 +1437,7 @@ describe('v1.AdvisoryNotificationsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationSettingsPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
