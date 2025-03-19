@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.0.0](https://github.com/googleapis/google-cloud-node/compare/meet-v0.4.0...meet-v1.0.0) (2025-03-12)
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/meet-v0.4.0...meet-v0.5.0) (2025-03-18)
 
 
 ### ⚠ BREAKING CHANGES

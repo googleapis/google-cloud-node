@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.0.0](https://github.com/googleapis/google-cloud-node/compare/admanager-v0.1.1...admanager-v1.0.0) (2025-03-12)
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/admanager-v0.1.1...admanager-v0.2.0) (2025-03-18)
 
 
 ### ⚠ BREAKING CHANGES

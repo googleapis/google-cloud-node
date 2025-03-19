@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.0.0](https://github.com/googleapis/google-cloud-node/compare/config-v0.7.0...config-v1.0.0) (2025-03-12)
+## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/config-v0.7.0...config-v0.8.0) (2025-03-18)
 
 
 ### ⚠ BREAKING CHANGES

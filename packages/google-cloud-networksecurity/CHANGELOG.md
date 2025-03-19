@@ -1,6 +1,6 @@
 # Changelog
 
-## [3.0.0](https://github.com/googleapis/google-cloud-node/compare/network-security-v2.3.1...network-security-v3.0.0) (2025-03-12)
+## [3.0.0](https://github.com/googleapis/google-cloud-node/compare/network-security-v2.3.1...network-security-v3.0.0) (2025-03-18)
 
 
 ### ⚠ BREAKING CHANGES

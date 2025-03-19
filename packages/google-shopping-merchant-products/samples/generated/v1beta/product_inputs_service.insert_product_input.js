@@ -40,8 +40,9 @@ function main(parent, productInput, dataSource) {
   /**
    *  Required. The primary or supplemental product data source name. If the
    *  product already exists and data source provided is different, then the
-   *  product will be moved to a new data source. Format:
-   *  `accounts/{account}/dataSources/{datasource}`.
+   *  product will be moved to a new data source.
+   *  Only API data sources are supported.
+   *  Format: `accounts/{account}/dataSources/{datasource}`.
    */
   // const dataSource = 'abc123'
 

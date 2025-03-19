@@ -4,6 +4,27 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+## [9.0.0](https://github.com/googleapis/google-cloud-node/compare/translate-v8.5.1...translate-v9.0.0) (2025-03-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate translate to Node 18 ([#6152](https://github.com/googleapis/google-cloud-node/issues/6152))
+
+### Features
+
+* Add request/response debug logging to gapics, update templates to gax 5 and node 18 ([#1671](https://github.com/googleapis/google-cloud-node/issues/1671)) ([eed00f4](https://github.com/googleapis/google-cloud-node/commit/eed00f4e4de22392db3a440a20486c3eeb9d33a6))
+
+
+### Bug Fixes
+
+* Add json files to tsconfig templates ([#1692](https://github.com/googleapis/google-cloud-node/issues/1692)) (ba6be1d) ([eed00f4](https://github.com/googleapis/google-cloud-node/commit/eed00f4e4de22392db3a440a20486c3eeb9d33a6))
+
+
+### Miscellaneous Chores
+
+* Migrate translate to Node 18 ([#6152](https://github.com/googleapis/google-cloud-node/issues/6152)) ([c06edca](https://github.com/googleapis/google-cloud-node/commit/c06edca281971bf2751dfdb351ffd27a44f2429d))
+
 ## [8.5.1](https://github.com/googleapis/google-cloud-node/compare/translate-v8.5.0...translate-v8.5.1) (2025-02-12)
 
 

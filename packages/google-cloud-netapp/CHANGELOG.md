@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.0.0](https://github.com/googleapis/google-cloud-node/compare/netapp-v0.9.0...netapp-v1.0.0) (2025-03-12)
+## [0.10.0](https://github.com/googleapis/google-cloud-node/compare/netapp-v0.9.0...netapp-v0.10.0) (2025-03-18)
 
 
 ### ⚠ BREAKING CHANGES

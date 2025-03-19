@@ -1,6 +1,6 @@
 # Changelog
 
-## [3.0.0](https://github.com/googleapis/google-cloud-node/compare/maps-platform-datasets-v2.1.0...maps-platform-datasets-v3.0.0) (2025-03-12)
+## [3.0.0](https://github.com/googleapis/google-cloud-node/compare/maps-platform-datasets-v2.1.0...maps-platform-datasets-v3.0.0) (2025-03-18)
 
 
 ### ⚠ BREAKING CHANGES

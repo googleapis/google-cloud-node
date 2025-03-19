@@ -1,6 +1,6 @@
 # Changelog
 
-## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/security-private-ca-v5.4.1...security-private-ca-v6.0.0) (2025-03-12)
+## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/security-private-ca-v5.4.1...security-private-ca-v6.0.0) (2025-03-18)
 
 
 ### ⚠ BREAKING CHANGES

@@ -1,6 +1,6 @@
 # Changelog
 
-## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/secret-manager-v5.6.0...secret-manager-v6.0.0) (2025-03-12)
+## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/secret-manager-v5.6.0...secret-manager-v6.0.0) (2025-03-18)
 
 
 ### ⚠ BREAKING CHANGES

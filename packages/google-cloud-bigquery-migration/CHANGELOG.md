@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.0.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-migration-v1.4.0...bigquery-migration-v2.0.0) (2025-03-12)
+## [2.0.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-migration-v1.4.0...bigquery-migration-v2.0.0) (2025-03-18)
 
 
 ### ⚠ BREAKING CHANGES
