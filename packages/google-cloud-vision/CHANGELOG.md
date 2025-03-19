@@ -4,6 +4,19 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/nodejs-vision?activeTab=versions
 
+## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/vision-v5.0.0...vision-v5.1.0) (2025-03-19)
+
+
+### Features
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6182](https://github.com/googleapis/google-cloud-node/issues/6182)) ([c41ff07](https://github.com/googleapis/google-cloud-node/commit/c41ff0729b65a1207978b4029d6369cc0552e0bf))
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6189](https://github.com/googleapis/google-cloud-node/issues/6189)) ([0eab6d4](https://github.com/googleapis/google-cloud-node/commit/0eab6d40a12aa7f387a4621c6611aa4cbc86e178))
+* **deps:** Update dependency @google-cloud/promisify to v5 ([#6150](https://github.com/googleapis/google-cloud-node/issues/6150)) ([1135b86](https://github.com/googleapis/google-cloud-node/commit/1135b8610b2471249dc3aec47eb0f985ded13f93))
+
 ## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/vision-v4.3.3...vision-v5.0.0) (2025-03-18)
 
 

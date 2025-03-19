@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/video-intelligence?activeTab=versions
 
+## [6.0.1](https://github.com/googleapis/google-cloud-node/compare/video-intelligence-v6.0.0...video-intelligence-v6.0.1) (2025-03-19)
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6189](https://github.com/googleapis/google-cloud-node/issues/6189)) ([0eab6d4](https://github.com/googleapis/google-cloud-node/commit/0eab6d40a12aa7f387a4621c6611aa4cbc86e178))
+
 ## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/video-intelligence-v5.3.0...video-intelligence-v6.0.0) (2025-03-18)
 
 
