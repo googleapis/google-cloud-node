@@ -8609,6 +8609,27 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "returnImages": {
+                              "type": "bool",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "returnBoundingBoxes": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "enableLlmLayoutParsing": {
+                              "type": "bool",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           },
                           "nested": {
