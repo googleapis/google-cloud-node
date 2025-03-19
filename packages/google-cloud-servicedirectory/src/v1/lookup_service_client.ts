@@ -517,7 +517,9 @@ export class LookupServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('resolveService request %j', request);
     const wrappedCallback:
       | Callback<

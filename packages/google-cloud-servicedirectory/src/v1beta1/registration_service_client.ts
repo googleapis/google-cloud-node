@@ -545,7 +545,9 @@ export class RegistrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createNamespace request %j', request);
     const wrappedCallback:
       | Callback<
@@ -670,7 +672,9 @@ export class RegistrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getNamespace request %j', request);
     const wrappedCallback:
       | Callback<
@@ -797,7 +801,9 @@ export class RegistrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'namespace.name': request.namespace!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateNamespace request %j', request);
     const wrappedCallback:
       | Callback<
@@ -923,7 +929,9 @@ export class RegistrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteNamespace request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1058,7 +1066,9 @@ export class RegistrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createService request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1183,7 +1193,9 @@ export class RegistrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getService request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1310,7 +1322,9 @@ export class RegistrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'service.name': request.service!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateService request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1436,7 +1450,9 @@ export class RegistrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteService request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1571,7 +1587,9 @@ export class RegistrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createEndpoint request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1696,7 +1714,9 @@ export class RegistrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getEndpoint request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1823,7 +1843,9 @@ export class RegistrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'endpoint.name': request.endpoint!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateEndpoint request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1948,7 +1970,9 @@ export class RegistrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteEndpoint request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2063,7 +2087,9 @@ export class RegistrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2181,7 +2207,9 @@ export class RegistrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2294,7 +2322,9 @@ export class RegistrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('testIamPermissions request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2460,7 +2490,9 @@ export class RegistrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.servicedirectory.v1beta1.IListNamespacesRequest,
@@ -2569,7 +2601,9 @@ export class RegistrationServiceClient {
       });
     const defaultCallSettings = this._defaults['listNamespaces'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listNamespaces stream %j', request);
     return this.descriptors.page.listNamespaces.createStream(
       this.innerApiCalls.listNamespaces as GaxCall,
@@ -2660,7 +2694,9 @@ export class RegistrationServiceClient {
       });
     const defaultCallSettings = this._defaults['listNamespaces'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listNamespaces iterate %j', request);
     return this.descriptors.page.listNamespaces.asyncIterate(
       this.innerApiCalls['listNamespaces'] as GaxCall,
@@ -2809,7 +2845,9 @@ export class RegistrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.servicedirectory.v1beta1.IListServicesRequest,
@@ -2921,7 +2959,9 @@ export class RegistrationServiceClient {
       });
     const defaultCallSettings = this._defaults['listServices'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listServices stream %j', request);
     return this.descriptors.page.listServices.createStream(
       this.innerApiCalls.listServices as GaxCall,
@@ -3015,7 +3055,9 @@ export class RegistrationServiceClient {
       });
     const defaultCallSettings = this._defaults['listServices'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listServices iterate %j', request);
     return this.descriptors.page.listServices.asyncIterate(
       this.innerApiCalls['listServices'] as GaxCall,
@@ -3166,7 +3208,9 @@ export class RegistrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.servicedirectory.v1beta1.IListEndpointsRequest,
@@ -3280,7 +3324,9 @@ export class RegistrationServiceClient {
       });
     const defaultCallSettings = this._defaults['listEndpoints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listEndpoints stream %j', request);
     return this.descriptors.page.listEndpoints.createStream(
       this.innerApiCalls.listEndpoints as GaxCall,
@@ -3376,7 +3422,9 @@ export class RegistrationServiceClient {
       });
     const defaultCallSettings = this._defaults['listEndpoints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listEndpoints iterate %j', request);
     return this.descriptors.page.listEndpoints.asyncIterate(
       this.innerApiCalls['listEndpoints'] as GaxCall,

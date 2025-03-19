@@ -536,7 +536,9 @@ export class AccountsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAccount request %j', request);
     const wrappedCallback:
       | Callback<
@@ -670,7 +672,9 @@ export class AccountsServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createAndConfigureAccount request %j', request);
     const wrappedCallback:
       | Callback<
@@ -804,7 +808,9 @@ export class AccountsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteAccount request %j', request);
     const wrappedCallback:
       | Callback<
@@ -932,7 +938,9 @@ export class AccountsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'account.name': request.account!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateAccount request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1069,7 +1077,9 @@ export class AccountsServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.shopping.merchant.accounts.v1beta.IListAccountsRequest,
@@ -1139,7 +1149,9 @@ export class AccountsServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listAccounts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAccounts stream %j', request);
     return this.descriptors.page.listAccounts.createStream(
       this.innerApiCalls.listAccounts as GaxCall,
@@ -1191,7 +1203,9 @@ export class AccountsServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listAccounts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAccounts iterate %j', request);
     return this.descriptors.page.listAccounts.asyncIterate(
       this.innerApiCalls['listAccounts'] as GaxCall,
@@ -1304,7 +1318,9 @@ export class AccountsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         provider: request.provider ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.shopping.merchant.accounts.v1beta.IListSubAccountsRequest,
@@ -1376,7 +1392,9 @@ export class AccountsServiceClient {
       });
     const defaultCallSettings = this._defaults['listSubAccounts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSubAccounts stream %j', request);
     return this.descriptors.page.listSubAccounts.createStream(
       this.innerApiCalls.listSubAccounts as GaxCall,
@@ -1430,7 +1448,9 @@ export class AccountsServiceClient {
       });
     const defaultCallSettings = this._defaults['listSubAccounts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSubAccounts iterate %j', request);
     return this.descriptors.page.listSubAccounts.asyncIterate(
       this.innerApiCalls['listSubAccounts'] as GaxCall,

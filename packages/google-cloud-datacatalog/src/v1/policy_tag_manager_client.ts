@@ -517,7 +517,9 @@ export class PolicyTagManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createTaxonomy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -637,7 +639,9 @@ export class PolicyTagManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteTaxonomy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -761,7 +765,9 @@ export class PolicyTagManagerClient {
       this._gaxModule.routingHeader.fromParams({
         'taxonomy.name': request.taxonomy!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateTaxonomy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -871,7 +877,9 @@ export class PolicyTagManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getTaxonomy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -989,7 +997,9 @@ export class PolicyTagManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createPolicyTag request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1115,7 +1125,9 @@ export class PolicyTagManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deletePolicyTag request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1243,7 +1255,9 @@ export class PolicyTagManagerClient {
       this._gaxModule.routingHeader.fromParams({
         'policy_tag.name': request.policyTag!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updatePolicyTag request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1362,7 +1376,9 @@ export class PolicyTagManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getPolicyTag request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1474,7 +1490,9 @@ export class PolicyTagManagerClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1592,7 +1610,9 @@ export class PolicyTagManagerClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1705,7 +1725,9 @@ export class PolicyTagManagerClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('testIamPermissions request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1835,7 +1857,9 @@ export class PolicyTagManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.datacatalog.v1.IListTaxonomiesRequest,
@@ -1907,7 +1931,9 @@ export class PolicyTagManagerClient {
       });
     const defaultCallSettings = this._defaults['listTaxonomies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTaxonomies stream %j', request);
     return this.descriptors.page.listTaxonomies.createStream(
       this.innerApiCalls.listTaxonomies as GaxCall,
@@ -1961,7 +1987,9 @@ export class PolicyTagManagerClient {
       });
     const defaultCallSettings = this._defaults['listTaxonomies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTaxonomies iterate %j', request);
     return this.descriptors.page.listTaxonomies.asyncIterate(
       this.innerApiCalls['listTaxonomies'] as GaxCall,
@@ -2068,7 +2096,9 @@ export class PolicyTagManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.datacatalog.v1.IListPolicyTagsRequest,
@@ -2138,7 +2168,9 @@ export class PolicyTagManagerClient {
       });
     const defaultCallSettings = this._defaults['listPolicyTags'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listPolicyTags stream %j', request);
     return this.descriptors.page.listPolicyTags.createStream(
       this.innerApiCalls.listPolicyTags as GaxCall,
@@ -2190,7 +2222,9 @@ export class PolicyTagManagerClient {
       });
     const defaultCallSettings = this._defaults['listPolicyTags'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listPolicyTags iterate %j', request);
     return this.descriptors.page.listPolicyTags.asyncIterate(
       this.innerApiCalls['listPolicyTags'] as GaxCall,

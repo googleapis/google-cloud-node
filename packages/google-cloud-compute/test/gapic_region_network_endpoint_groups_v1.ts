@@ -284,7 +284,9 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.regionNetworkEndpointGroupsStub);
       client.close().then(() => {
         done();
@@ -355,7 +357,7 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AttachNetworkEndpointsRegionNetworkEndpointGroupRequest()
       );
@@ -400,7 +402,7 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AttachNetworkEndpointsRegionNetworkEndpointGroupRequest()
       );
@@ -460,7 +462,7 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AttachNetworkEndpointsRegionNetworkEndpointGroupRequest()
       );
@@ -507,7 +509,7 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AttachNetworkEndpointsRegionNetworkEndpointGroupRequest()
       );
@@ -544,7 +546,7 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionNetworkEndpointGroupRequest()
       );
@@ -588,7 +590,7 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionNetworkEndpointGroupRequest()
       );
@@ -648,7 +650,7 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionNetworkEndpointGroupRequest()
       );
@@ -689,7 +691,7 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionNetworkEndpointGroupRequest()
       );
@@ -723,7 +725,7 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DetachNetworkEndpointsRegionNetworkEndpointGroupRequest()
       );
@@ -768,7 +770,7 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DetachNetworkEndpointsRegionNetworkEndpointGroupRequest()
       );
@@ -828,7 +830,7 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DetachNetworkEndpointsRegionNetworkEndpointGroupRequest()
       );
@@ -875,7 +877,7 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DetachNetworkEndpointsRegionNetworkEndpointGroupRequest()
       );
@@ -912,7 +914,7 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionNetworkEndpointGroupRequest()
       );
@@ -955,7 +957,7 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionNetworkEndpointGroupRequest()
       );
@@ -1013,7 +1015,7 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionNetworkEndpointGroupRequest()
       );
@@ -1053,7 +1055,7 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionNetworkEndpointGroupRequest()
       );
@@ -1087,7 +1089,7 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionNetworkEndpointGroupRequest()
       );
@@ -1126,7 +1128,7 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionNetworkEndpointGroupRequest()
       );
@@ -1181,7 +1183,7 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionNetworkEndpointGroupRequest()
       );
@@ -1217,7 +1219,7 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionNetworkEndpointGroupRequest()
       );
@@ -1246,7 +1248,7 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionNetworkEndpointGroupsRequest()
       );
@@ -1292,7 +1294,7 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionNetworkEndpointGroupsRequest()
       );
@@ -1355,7 +1357,7 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionNetworkEndpointGroupsRequest()
       );
@@ -1390,7 +1392,7 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionNetworkEndpointGroupsRequest()
       );
@@ -1459,7 +1461,7 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionNetworkEndpointGroupsRequest()
       );
@@ -1519,7 +1521,7 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionNetworkEndpointGroupsRequest()
       );
@@ -1576,7 +1578,7 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionNetworkEndpointGroupsRequest()
       );
@@ -1628,7 +1630,7 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNetworkEndpointsRegionNetworkEndpointGroupsRequest()
       );
@@ -1681,7 +1683,7 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNetworkEndpointsRegionNetworkEndpointGroupsRequest()
       );
@@ -1751,7 +1753,7 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNetworkEndpointsRegionNetworkEndpointGroupsRequest()
       );
@@ -1795,7 +1797,7 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNetworkEndpointsRegionNetworkEndpointGroupsRequest()
       );
@@ -1871,7 +1873,7 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNetworkEndpointsRegionNetworkEndpointGroupsRequest()
       );
@@ -1936,7 +1938,7 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNetworkEndpointsRegionNetworkEndpointGroupsRequest()
       );
@@ -1999,7 +2001,7 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNetworkEndpointsRegionNetworkEndpointGroupsRequest()
       );

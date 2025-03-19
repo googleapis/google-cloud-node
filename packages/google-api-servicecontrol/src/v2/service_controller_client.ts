@@ -483,7 +483,9 @@ export class ServiceControllerClient {
       this._gaxModule.routingHeader.fromParams({
         service_name: request.serviceName ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('check request %j', request);
     const wrappedCallback:
       | Callback<
@@ -619,7 +621,9 @@ export class ServiceControllerClient {
       this._gaxModule.routingHeader.fromParams({
         service_name: request.serviceName ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('report request %j', request);
     const wrappedCallback:
       | Callback<

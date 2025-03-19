@@ -265,7 +265,9 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.conferenceRecordsServiceStub);
       client.close().then(() => {
         done();
@@ -328,7 +330,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.GetConferenceRecordRequest()
       );
@@ -361,7 +363,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.GetConferenceRecordRequest()
       );
@@ -409,7 +411,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.GetConferenceRecordRequest()
       );
@@ -441,7 +443,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.GetConferenceRecordRequest()
       );
@@ -463,7 +465,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.GetParticipantRequest()
       );
@@ -495,7 +497,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.GetParticipantRequest()
       );
@@ -543,7 +545,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.GetParticipantRequest()
       );
@@ -575,7 +577,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.GetParticipantRequest()
       );
@@ -597,7 +599,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.GetParticipantSessionRequest()
       );
@@ -630,7 +632,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.GetParticipantSessionRequest()
       );
@@ -678,7 +680,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.GetParticipantSessionRequest()
       );
@@ -713,7 +715,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.GetParticipantSessionRequest()
       );
@@ -738,7 +740,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.GetRecordingRequest()
       );
@@ -770,7 +772,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.GetRecordingRequest()
       );
@@ -818,7 +820,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.GetRecordingRequest()
       );
@@ -850,7 +852,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.GetRecordingRequest()
       );
@@ -872,7 +874,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.GetTranscriptRequest()
       );
@@ -904,7 +906,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.GetTranscriptRequest()
       );
@@ -952,7 +954,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.GetTranscriptRequest()
       );
@@ -984,7 +986,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.GetTranscriptRequest()
       );
@@ -1006,7 +1008,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.GetTranscriptEntryRequest()
       );
@@ -1039,7 +1041,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.GetTranscriptEntryRequest()
       );
@@ -1087,7 +1089,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.GetTranscriptEntryRequest()
       );
@@ -1119,7 +1121,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.GetTranscriptEntryRequest()
       );
@@ -1141,7 +1143,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.ListConferenceRecordsRequest()
       );
@@ -1168,7 +1170,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.ListConferenceRecordsRequest()
       );
@@ -1210,7 +1212,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.ListConferenceRecordsRequest()
       );
@@ -1231,7 +1233,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.ListConferenceRecordsRequest()
       );
@@ -1282,7 +1284,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.ListConferenceRecordsRequest()
       );
@@ -1322,7 +1324,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.ListConferenceRecordsRequest()
       );
@@ -1360,7 +1362,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.ListConferenceRecordsRequest()
       );
@@ -1391,7 +1393,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.ListParticipantsRequest()
       );
@@ -1425,7 +1427,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.ListParticipantsRequest()
       );
@@ -1475,7 +1477,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.ListParticipantsRequest()
       );
@@ -1507,7 +1509,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.ListParticipantsRequest()
       );
@@ -1562,7 +1564,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.ListParticipantsRequest()
       );
@@ -1612,7 +1614,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.ListParticipantsRequest()
       );
@@ -1656,7 +1658,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.ListParticipantsRequest()
       );
@@ -1699,7 +1701,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.ListParticipantSessionsRequest()
       );
@@ -1740,7 +1742,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.ListParticipantSessionsRequest()
       );
@@ -1796,7 +1798,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.ListParticipantSessionsRequest()
       );
@@ -1831,7 +1833,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.ListParticipantSessionsRequest()
       );
@@ -1898,7 +1900,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.ListParticipantSessionsRequest()
       );
@@ -1954,7 +1956,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.ListParticipantSessionsRequest()
       );
@@ -2008,7 +2010,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.ListParticipantSessionsRequest()
       );
@@ -2055,7 +2057,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.ListRecordingsRequest()
       );
@@ -2089,7 +2091,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.ListRecordingsRequest()
       );
@@ -2139,7 +2141,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.ListRecordingsRequest()
       );
@@ -2171,7 +2173,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.ListRecordingsRequest()
       );
@@ -2223,7 +2225,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.ListRecordingsRequest()
       );
@@ -2270,7 +2272,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.ListRecordingsRequest()
       );
@@ -2314,7 +2316,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.ListRecordingsRequest()
       );
@@ -2357,7 +2359,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.ListTranscriptsRequest()
       );
@@ -2391,7 +2393,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.ListTranscriptsRequest()
       );
@@ -2441,7 +2443,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.ListTranscriptsRequest()
       );
@@ -2473,7 +2475,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.ListTranscriptsRequest()
       );
@@ -2525,7 +2527,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.ListTranscriptsRequest()
       );
@@ -2572,7 +2574,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.ListTranscriptsRequest()
       );
@@ -2616,7 +2618,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.ListTranscriptsRequest()
       );
@@ -2659,7 +2661,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.ListTranscriptEntriesRequest()
       );
@@ -2694,7 +2696,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.ListTranscriptEntriesRequest()
       );
@@ -2744,7 +2746,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.ListTranscriptEntriesRequest()
       );
@@ -2779,7 +2781,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.ListTranscriptEntriesRequest()
       );
@@ -2840,7 +2842,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.ListTranscriptEntriesRequest()
       );
@@ -2896,7 +2898,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.ListTranscriptEntriesRequest()
       );
@@ -2944,7 +2946,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2.ListTranscriptEntriesRequest()
       );
@@ -2985,7 +2987,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('conferenceRecord', () => {
+    describe('conferenceRecord', async () => {
       const fakePath = '/rendered/path/conferenceRecord';
       const expectedParameters = {
         conference_record: 'conferenceRecordValue',
@@ -2995,7 +2997,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.conferenceRecordPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3028,7 +3030,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
       });
     });
 
-    describe('participant', () => {
+    describe('participant', async () => {
       const fakePath = '/rendered/path/participant';
       const expectedParameters = {
         conference_record: 'conferenceRecordValue',
@@ -3039,7 +3041,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.participantPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3082,7 +3084,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
       });
     });
 
-    describe('participantSession', () => {
+    describe('participantSession', async () => {
       const fakePath = '/rendered/path/participantSession';
       const expectedParameters = {
         conference_record: 'conferenceRecordValue',
@@ -3094,7 +3096,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.participantSessionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3162,7 +3164,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
       });
     });
 
-    describe('recording', () => {
+    describe('recording', async () => {
       const fakePath = '/rendered/path/recording';
       const expectedParameters = {
         conference_record: 'conferenceRecordValue',
@@ -3173,7 +3175,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.recordingPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3215,7 +3217,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
       });
     });
 
-    describe('space', () => {
+    describe('space', async () => {
       const fakePath = '/rendered/path/space';
       const expectedParameters = {
         space: 'spaceValue',
@@ -3225,7 +3227,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.spacePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3254,7 +3256,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
       });
     });
 
-    describe('transcript', () => {
+    describe('transcript', async () => {
       const fakePath = '/rendered/path/transcript';
       const expectedParameters = {
         conference_record: 'conferenceRecordValue',
@@ -3265,7 +3267,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.transcriptPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3307,7 +3309,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
       });
     });
 
-    describe('transcriptEntry', () => {
+    describe('transcriptEntry', async () => {
       const fakePath = '/rendered/path/transcriptEntry';
       const expectedParameters = {
         conference_record: 'conferenceRecordValue',
@@ -3319,7 +3321,7 @@ describe('v2.ConferenceRecordsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.transcriptEntryPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

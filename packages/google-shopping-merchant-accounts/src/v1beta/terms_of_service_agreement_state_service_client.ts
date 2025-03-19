@@ -514,7 +514,9 @@ export class TermsOfServiceAgreementStateServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getTermsOfServiceAgreementState request %j', request);
     const wrappedCallback:
       | Callback<
@@ -646,7 +648,9 @@ export class TermsOfServiceAgreementStateServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info(
       'retrieveForApplicationTermsOfServiceAgreementState request %j',
       request

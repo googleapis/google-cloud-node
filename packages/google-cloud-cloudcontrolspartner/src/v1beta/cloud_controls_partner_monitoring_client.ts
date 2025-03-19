@@ -498,7 +498,9 @@ export class CloudControlsPartnerMonitoringClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getViolation request %j', request);
     const wrappedCallback:
       | Callback<
@@ -643,7 +645,9 @@ export class CloudControlsPartnerMonitoringClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.cloudcontrolspartner.v1beta.IListViolationsRequest,
@@ -720,7 +724,9 @@ export class CloudControlsPartnerMonitoringClient {
       });
     const defaultCallSettings = this._defaults['listViolations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listViolations stream %j', request);
     return this.descriptors.page.listViolations.createStream(
       this.innerApiCalls.listViolations as GaxCall,
@@ -779,7 +785,9 @@ export class CloudControlsPartnerMonitoringClient {
       });
     const defaultCallSettings = this._defaults['listViolations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listViolations iterate %j', request);
     return this.descriptors.page.listViolations.asyncIterate(
       this.innerApiCalls['listViolations'] as GaxCall,

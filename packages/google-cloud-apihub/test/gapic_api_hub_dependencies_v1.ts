@@ -267,7 +267,9 @@ describe('v1.ApiHubDependenciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.apiHubDependenciesStub);
       client.close().then(() => {
         done();
@@ -326,7 +328,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.CreateDependencyRequest()
       );
@@ -357,7 +359,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.CreateDependencyRequest()
       );
@@ -404,7 +406,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.CreateDependencyRequest()
       );
@@ -435,7 +437,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.CreateDependencyRequest()
       );
@@ -456,7 +458,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetDependencyRequest()
       );
@@ -487,7 +489,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetDependencyRequest()
       );
@@ -534,7 +536,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetDependencyRequest()
       );
@@ -565,7 +567,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetDependencyRequest()
       );
@@ -586,7 +588,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.UpdateDependencyRequest()
       );
@@ -618,7 +620,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.UpdateDependencyRequest()
       );
@@ -666,7 +668,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.UpdateDependencyRequest()
       );
@@ -698,7 +700,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.UpdateDependencyRequest()
       );
@@ -720,7 +722,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.DeleteDependencyRequest()
       );
@@ -751,7 +753,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.DeleteDependencyRequest()
       );
@@ -798,7 +800,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.DeleteDependencyRequest()
       );
@@ -829,7 +831,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.DeleteDependencyRequest()
       );
@@ -850,7 +852,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListDependenciesRequest()
       );
@@ -883,7 +885,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListDependenciesRequest()
       );
@@ -932,7 +934,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListDependenciesRequest()
       );
@@ -963,7 +965,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListDependenciesRequest()
       );
@@ -1017,7 +1019,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListDependenciesRequest()
       );
@@ -1066,7 +1068,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListDependenciesRequest()
       );
@@ -1109,7 +1111,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListDependenciesRequest()
       );
@@ -1150,7 +1152,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1180,7 +1182,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1224,7 +1226,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1259,7 +1261,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -1307,7 +1309,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -1344,7 +1346,7 @@ describe('v1.ApiHubDependenciesClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('api', () => {
+    describe('api', async () => {
       const fakePath = '/rendered/path/api';
       const expectedParameters = {
         project: 'projectValue',
@@ -1355,7 +1357,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.apiPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1408,7 +1410,7 @@ describe('v1.ApiHubDependenciesClient', () => {
       });
     });
 
-    describe('apiHubInstance', () => {
+    describe('apiHubInstance', async () => {
       const fakePath = '/rendered/path/apiHubInstance';
       const expectedParameters = {
         project: 'projectValue',
@@ -1419,7 +1421,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.apiHubInstancePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1473,7 +1475,7 @@ describe('v1.ApiHubDependenciesClient', () => {
       });
     });
 
-    describe('apiOperation', () => {
+    describe('apiOperation', async () => {
       const fakePath = '/rendered/path/apiOperation';
       const expectedParameters = {
         project: 'projectValue',
@@ -1486,7 +1488,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.apiOperationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1561,7 +1563,7 @@ describe('v1.ApiHubDependenciesClient', () => {
       });
     });
 
-    describe('attribute', () => {
+    describe('attribute', async () => {
       const fakePath = '/rendered/path/attribute';
       const expectedParameters = {
         project: 'projectValue',
@@ -1572,7 +1574,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.attributePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1625,7 +1627,7 @@ describe('v1.ApiHubDependenciesClient', () => {
       });
     });
 
-    describe('definition', () => {
+    describe('definition', async () => {
       const fakePath = '/rendered/path/definition';
       const expectedParameters = {
         project: 'projectValue',
@@ -1638,7 +1640,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.definitionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1713,7 +1715,7 @@ describe('v1.ApiHubDependenciesClient', () => {
       });
     });
 
-    describe('dependency', () => {
+    describe('dependency', async () => {
       const fakePath = '/rendered/path/dependency';
       const expectedParameters = {
         project: 'projectValue',
@@ -1724,7 +1726,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.dependencyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1777,7 +1779,7 @@ describe('v1.ApiHubDependenciesClient', () => {
       });
     });
 
-    describe('deployment', () => {
+    describe('deployment', async () => {
       const fakePath = '/rendered/path/deployment';
       const expectedParameters = {
         project: 'projectValue',
@@ -1788,7 +1790,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.deploymentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1841,7 +1843,7 @@ describe('v1.ApiHubDependenciesClient', () => {
       });
     });
 
-    describe('externalApi', () => {
+    describe('externalApi', async () => {
       const fakePath = '/rendered/path/externalApi';
       const expectedParameters = {
         project: 'projectValue',
@@ -1852,7 +1854,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.externalApiPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1905,7 +1907,7 @@ describe('v1.ApiHubDependenciesClient', () => {
       });
     });
 
-    describe('hostProjectRegistration', () => {
+    describe('hostProjectRegistration', async () => {
       const fakePath = '/rendered/path/hostProjectRegistration';
       const expectedParameters = {
         project: 'projectValue',
@@ -1916,7 +1918,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.hostProjectRegistrationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1986,7 +1988,7 @@ describe('v1.ApiHubDependenciesClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -1996,7 +1998,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2035,7 +2037,7 @@ describe('v1.ApiHubDependenciesClient', () => {
       });
     });
 
-    describe('plugin', () => {
+    describe('plugin', async () => {
       const fakePath = '/rendered/path/plugin';
       const expectedParameters = {
         project: 'projectValue',
@@ -2046,7 +2048,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.pluginPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2099,7 +2101,7 @@ describe('v1.ApiHubDependenciesClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -2108,7 +2110,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2137,7 +2139,7 @@ describe('v1.ApiHubDependenciesClient', () => {
       });
     });
 
-    describe('runtimeProjectAttachment', () => {
+    describe('runtimeProjectAttachment', async () => {
       const fakePath = '/rendered/path/runtimeProjectAttachment';
       const expectedParameters = {
         project: 'projectValue',
@@ -2148,7 +2150,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.runtimeProjectAttachmentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2218,7 +2220,7 @@ describe('v1.ApiHubDependenciesClient', () => {
       });
     });
 
-    describe('spec', () => {
+    describe('spec', async () => {
       const fakePath = '/rendered/path/spec';
       const expectedParameters = {
         project: 'projectValue',
@@ -2231,7 +2233,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.specPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2306,7 +2308,7 @@ describe('v1.ApiHubDependenciesClient', () => {
       });
     });
 
-    describe('styleGuide', () => {
+    describe('styleGuide', async () => {
       const fakePath = '/rendered/path/styleGuide';
       const expectedParameters = {
         project: 'projectValue',
@@ -2317,7 +2319,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.styleGuidePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2370,7 +2372,7 @@ describe('v1.ApiHubDependenciesClient', () => {
       });
     });
 
-    describe('version', () => {
+    describe('version', async () => {
       const fakePath = '/rendered/path/version';
       const expectedParameters = {
         project: 'projectValue',
@@ -2382,7 +2384,7 @@ describe('v1.ApiHubDependenciesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.versionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

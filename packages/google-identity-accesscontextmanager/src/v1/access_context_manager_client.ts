@@ -769,7 +769,9 @@ export class AccessContextManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAccessPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -909,7 +911,9 @@ export class AccessContextManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAccessLevel request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1040,7 +1044,9 @@ export class AccessContextManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getServicePerimeter request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1167,7 +1173,9 @@ export class AccessContextManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getGcpUserAccessBinding request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1295,7 +1303,9 @@ export class AccessContextManagerClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1406,7 +1416,9 @@ export class AccessContextManagerClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1523,7 +1535,9 @@ export class AccessContextManagerClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('testIamPermissions request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1681,7 +1695,9 @@ export class AccessContextManagerClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1855,7 +1871,9 @@ export class AccessContextManagerClient {
       this._gaxModule.routingHeader.fromParams({
         'policy.name': request.policy!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2028,7 +2046,9 @@ export class AccessContextManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2210,7 +2230,9 @@ export class AccessContextManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2390,7 +2412,9 @@ export class AccessContextManagerClient {
       this._gaxModule.routingHeader.fromParams({
         'access_level.name': request.accessLevel!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2566,7 +2590,9 @@ export class AccessContextManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2768,7 +2794,9 @@ export class AccessContextManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2951,7 +2979,9 @@ export class AccessContextManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3128,7 +3158,9 @@ export class AccessContextManagerClient {
       this._gaxModule.routingHeader.fromParams({
         'service_perimeter.name': request.servicePerimeter!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3304,7 +3336,9 @@ export class AccessContextManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3502,7 +3536,9 @@ export class AccessContextManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3697,7 +3733,9 @@ export class AccessContextManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3876,7 +3914,9 @@ export class AccessContextManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4056,7 +4096,9 @@ export class AccessContextManagerClient {
         'gcp_user_access_binding.name':
           request.gcpUserAccessBinding!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4227,7 +4269,9 @@ export class AccessContextManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4392,7 +4436,9 @@ export class AccessContextManagerClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.identity.accesscontextmanager.v1.IListAccessPoliciesRequest,
@@ -4458,7 +4504,9 @@ export class AccessContextManagerClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listAccessPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAccessPolicies stream %j', request);
     return this.descriptors.page.listAccessPolicies.createStream(
       this.innerApiCalls.listAccessPolicies as GaxCall,
@@ -4506,7 +4554,9 @@ export class AccessContextManagerClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listAccessPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAccessPolicies iterate %j', request);
     return this.descriptors.page.listAccessPolicies.asyncIterate(
       this.innerApiCalls['listAccessPolicies'] as GaxCall,
@@ -4622,7 +4672,9 @@ export class AccessContextManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.identity.accesscontextmanager.v1.IListAccessLevelsRequest,
@@ -4699,7 +4751,9 @@ export class AccessContextManagerClient {
       });
     const defaultCallSettings = this._defaults['listAccessLevels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAccessLevels stream %j', request);
     return this.descriptors.page.listAccessLevels.createStream(
       this.innerApiCalls.listAccessLevels as GaxCall,
@@ -4758,7 +4812,9 @@ export class AccessContextManagerClient {
       });
     const defaultCallSettings = this._defaults['listAccessLevels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAccessLevels iterate %j', request);
     return this.descriptors.page.listAccessLevels.asyncIterate(
       this.innerApiCalls['listAccessLevels'] as GaxCall,
@@ -4870,7 +4926,9 @@ export class AccessContextManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.identity.accesscontextmanager.v1.IListServicePerimetersRequest,
@@ -4943,7 +5001,9 @@ export class AccessContextManagerClient {
       });
     const defaultCallSettings = this._defaults['listServicePerimeters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listServicePerimeters stream %j', request);
     return this.descriptors.page.listServicePerimeters.createStream(
       this.innerApiCalls.listServicePerimeters as GaxCall,
@@ -4998,7 +5058,9 @@ export class AccessContextManagerClient {
       });
     const defaultCallSettings = this._defaults['listServicePerimeters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listServicePerimeters iterate %j', request);
     return this.descriptors.page.listServicePerimeters.asyncIterate(
       this.innerApiCalls['listServicePerimeters'] as GaxCall,
@@ -5106,7 +5168,9 @@ export class AccessContextManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.identity.accesscontextmanager.v1.IListGcpUserAccessBindingsRequest,
@@ -5175,7 +5239,9 @@ export class AccessContextManagerClient {
       });
     const defaultCallSettings = this._defaults['listGcpUserAccessBindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listGcpUserAccessBindings stream %j', request);
     return this.descriptors.page.listGcpUserAccessBindings.createStream(
       this.innerApiCalls.listGcpUserAccessBindings as GaxCall,
@@ -5226,7 +5292,9 @@ export class AccessContextManagerClient {
       });
     const defaultCallSettings = this._defaults['listGcpUserAccessBindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listGcpUserAccessBindings iterate %j', request);
     return this.descriptors.page.listGcpUserAccessBindings.asyncIterate(
       this.innerApiCalls['listGcpUserAccessBindings'] as GaxCall,
@@ -5328,7 +5396,7 @@ export class AccessContextManagerClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

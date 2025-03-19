@@ -274,7 +274,9 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.cloudControlsPartnerCoreStub);
       client.close().then(() => {
         done();
@@ -345,7 +347,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.GetWorkloadRequest()
       );
@@ -379,7 +381,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.GetWorkloadRequest()
       );
@@ -429,7 +431,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.GetWorkloadRequest()
       );
@@ -463,7 +465,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.GetWorkloadRequest()
       );
@@ -487,7 +489,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.GetCustomerRequest()
       );
@@ -521,7 +523,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.GetCustomerRequest()
       );
@@ -571,7 +573,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.GetCustomerRequest()
       );
@@ -605,7 +607,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.GetCustomerRequest()
       );
@@ -629,7 +631,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.GetEkmConnectionsRequest()
       );
@@ -663,7 +665,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.GetEkmConnectionsRequest()
       );
@@ -713,7 +715,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.GetEkmConnectionsRequest()
       );
@@ -747,7 +749,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.GetEkmConnectionsRequest()
       );
@@ -771,7 +773,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.GetPartnerPermissionsRequest()
       );
@@ -806,7 +808,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.GetPartnerPermissionsRequest()
       );
@@ -856,7 +858,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.GetPartnerPermissionsRequest()
       );
@@ -893,7 +895,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.GetPartnerPermissionsRequest()
       );
@@ -920,7 +922,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.GetPartnerRequest()
       );
@@ -954,7 +956,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.GetPartnerRequest()
       );
@@ -1004,7 +1006,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.GetPartnerRequest()
       );
@@ -1038,7 +1040,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.GetPartnerRequest()
       );
@@ -1062,7 +1064,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.CreateCustomerRequest()
       );
@@ -1096,7 +1098,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.CreateCustomerRequest()
       );
@@ -1146,7 +1148,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.CreateCustomerRequest()
       );
@@ -1180,7 +1182,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.CreateCustomerRequest()
       );
@@ -1204,7 +1206,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.UpdateCustomerRequest()
       );
@@ -1239,7 +1241,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.UpdateCustomerRequest()
       );
@@ -1290,7 +1292,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.UpdateCustomerRequest()
       );
@@ -1325,7 +1327,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.UpdateCustomerRequest()
       );
@@ -1350,7 +1352,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.DeleteCustomerRequest()
       );
@@ -1384,7 +1386,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.DeleteCustomerRequest()
       );
@@ -1434,7 +1436,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.DeleteCustomerRequest()
       );
@@ -1468,7 +1470,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.DeleteCustomerRequest()
       );
@@ -1492,7 +1494,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.ListWorkloadsRequest()
       );
@@ -1534,7 +1536,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.ListWorkloadsRequest()
       );
@@ -1594,7 +1596,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.ListWorkloadsRequest()
       );
@@ -1628,7 +1630,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.ListWorkloadsRequest()
       );
@@ -1694,7 +1696,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.ListWorkloadsRequest()
       );
@@ -1749,7 +1751,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.ListWorkloadsRequest()
       );
@@ -1802,7 +1804,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.ListWorkloadsRequest()
       );
@@ -1848,7 +1850,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.ListCustomersRequest()
       );
@@ -1890,7 +1892,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.ListCustomersRequest()
       );
@@ -1950,7 +1952,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.ListCustomersRequest()
       );
@@ -1984,7 +1986,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.ListCustomersRequest()
       );
@@ -2050,7 +2052,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.ListCustomersRequest()
       );
@@ -2105,7 +2107,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.ListCustomersRequest()
       );
@@ -2158,7 +2160,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.ListCustomersRequest()
       );
@@ -2205,7 +2207,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
           }
         );
       const stub = sinon.stub(client, 'warn');
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.ListAccessApprovalRequestsRequest()
       );
@@ -2250,7 +2252,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
           }
         );
       const stub = sinon.stub(client, 'warn');
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.ListAccessApprovalRequestsRequest()
       );
@@ -2312,7 +2314,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
           }
         );
       const stub = sinon.stub(client, 'warn');
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.ListAccessApprovalRequestsRequest()
       );
@@ -2351,7 +2353,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
           }
         );
       const stub = sinon.stub(client, 'warn');
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.ListAccessApprovalRequestsRequest()
       );
@@ -2425,7 +2427,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
           }
         );
       const stub = sinon.stub(client, 'warn');
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.ListAccessApprovalRequestsRequest()
       );
@@ -2488,7 +2490,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
           }
         );
       const stub = sinon.stub(client, 'warn');
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.ListAccessApprovalRequestsRequest()
       );
@@ -2547,7 +2549,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
           }
         );
       const stub = sinon.stub(client, 'warn');
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1beta.ListAccessApprovalRequestsRequest()
       );
@@ -2590,7 +2592,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('accessApprovalRequest', () => {
+    describe('accessApprovalRequest', async () => {
       const fakePath = '/rendered/path/accessApprovalRequest';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -2606,7 +2608,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.accessApprovalRequestPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2706,7 +2708,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
       });
     });
 
-    describe('customer', () => {
+    describe('customer', async () => {
       const fakePath = '/rendered/path/customer';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -2720,7 +2722,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.customerPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2773,7 +2775,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
       });
     });
 
-    describe('ekmConnections', () => {
+    describe('ekmConnections', async () => {
       const fakePath = '/rendered/path/ekmConnections';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -2788,7 +2790,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.ekmConnectionsPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2852,7 +2854,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
       });
     });
 
-    describe('partner', () => {
+    describe('partner', async () => {
       const fakePath = '/rendered/path/partner';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -2865,7 +2867,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.partnerPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2904,7 +2906,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
       });
     });
 
-    describe('partnerPermissions', () => {
+    describe('partnerPermissions', async () => {
       const fakePath = '/rendered/path/partnerPermissions';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -2919,7 +2921,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.partnerPermissionsPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2999,7 +3001,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
       });
     });
 
-    describe('violation', () => {
+    describe('violation', async () => {
       const fakePath = '/rendered/path/violation';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -3015,7 +3017,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.violationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3090,7 +3092,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
       });
     });
 
-    describe('workload', () => {
+    describe('workload', async () => {
       const fakePath = '/rendered/path/workload';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -3105,7 +3107,7 @@ describe('v1beta.CloudControlsPartnerCoreClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.workloadPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

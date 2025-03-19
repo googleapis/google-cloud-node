@@ -254,7 +254,9 @@ describe('v1.CssProductsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.cssProductsServiceStub);
       client.close().then(() => {
         done();
@@ -313,7 +315,7 @@ describe('v1.CssProductsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.css.v1.GetCssProductRequest()
       );
@@ -344,7 +346,7 @@ describe('v1.CssProductsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.css.v1.GetCssProductRequest()
       );
@@ -391,7 +393,7 @@ describe('v1.CssProductsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.css.v1.GetCssProductRequest()
       );
@@ -422,7 +424,7 @@ describe('v1.CssProductsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.css.v1.GetCssProductRequest()
       );
@@ -443,7 +445,7 @@ describe('v1.CssProductsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.css.v1.ListCssProductsRequest()
       );
@@ -476,7 +478,7 @@ describe('v1.CssProductsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.css.v1.ListCssProductsRequest()
       );
@@ -525,7 +527,7 @@ describe('v1.CssProductsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.css.v1.ListCssProductsRequest()
       );
@@ -556,7 +558,7 @@ describe('v1.CssProductsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.css.v1.ListCssProductsRequest()
       );
@@ -610,7 +612,7 @@ describe('v1.CssProductsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.css.v1.ListCssProductsRequest()
       );
@@ -659,7 +661,7 @@ describe('v1.CssProductsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.css.v1.ListCssProductsRequest()
       );
@@ -702,7 +704,7 @@ describe('v1.CssProductsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.css.v1.ListCssProductsRequest()
       );
@@ -739,7 +741,7 @@ describe('v1.CssProductsServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('account', () => {
+    describe('account', async () => {
       const fakePath = '/rendered/path/account';
       const expectedParameters = {
         account: 'accountValue',
@@ -748,7 +750,7 @@ describe('v1.CssProductsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.accountPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -777,7 +779,7 @@ describe('v1.CssProductsServiceClient', () => {
       });
     });
 
-    describe('accountLabel', () => {
+    describe('accountLabel', async () => {
       const fakePath = '/rendered/path/accountLabel';
       const expectedParameters = {
         account: 'accountValue',
@@ -787,7 +789,7 @@ describe('v1.CssProductsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.accountLabelPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -826,7 +828,7 @@ describe('v1.CssProductsServiceClient', () => {
       });
     });
 
-    describe('cssProduct', () => {
+    describe('cssProduct', async () => {
       const fakePath = '/rendered/path/cssProduct';
       const expectedParameters = {
         account: 'accountValue',
@@ -836,7 +838,7 @@ describe('v1.CssProductsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.cssProductPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -875,7 +877,7 @@ describe('v1.CssProductsServiceClient', () => {
       });
     });
 
-    describe('cssProductInput', () => {
+    describe('cssProductInput', async () => {
       const fakePath = '/rendered/path/cssProductInput';
       const expectedParameters = {
         account: 'accountValue',
@@ -885,7 +887,7 @@ describe('v1.CssProductsServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.cssProductInputPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

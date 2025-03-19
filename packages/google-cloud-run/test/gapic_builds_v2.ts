@@ -210,7 +210,9 @@ describe('v2.BuildsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.buildsStub);
       client.close().then(() => {
         done();
@@ -269,7 +271,7 @@ describe('v2.BuildsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.SubmitBuildRequest()
       );
@@ -300,7 +302,7 @@ describe('v2.BuildsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.SubmitBuildRequest()
       );
@@ -347,7 +349,7 @@ describe('v2.BuildsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.SubmitBuildRequest()
       );
@@ -378,7 +380,7 @@ describe('v2.BuildsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.run.v2.SubmitBuildRequest()
       );
@@ -398,7 +400,7 @@ describe('v2.BuildsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -428,7 +430,7 @@ describe('v2.BuildsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -472,7 +474,7 @@ describe('v2.BuildsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -507,7 +509,7 @@ describe('v2.BuildsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -555,7 +557,7 @@ describe('v2.BuildsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -592,7 +594,7 @@ describe('v2.BuildsClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('execution', () => {
+    describe('execution', async () => {
       const fakePath = '/rendered/path/execution';
       const expectedParameters = {
         project: 'projectValue',
@@ -604,7 +606,7 @@ describe('v2.BuildsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.executionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -668,7 +670,7 @@ describe('v2.BuildsClient', () => {
       });
     });
 
-    describe('job', () => {
+    describe('job', async () => {
       const fakePath = '/rendered/path/job';
       const expectedParameters = {
         project: 'projectValue',
@@ -679,7 +681,7 @@ describe('v2.BuildsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.jobPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -732,7 +734,7 @@ describe('v2.BuildsClient', () => {
       });
     });
 
-    describe('revision', () => {
+    describe('revision', async () => {
       const fakePath = '/rendered/path/revision';
       const expectedParameters = {
         project: 'projectValue',
@@ -744,7 +746,7 @@ describe('v2.BuildsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.revisionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -808,7 +810,7 @@ describe('v2.BuildsClient', () => {
       });
     });
 
-    describe('service', () => {
+    describe('service', async () => {
       const fakePath = '/rendered/path/service';
       const expectedParameters = {
         project: 'projectValue',
@@ -819,7 +821,7 @@ describe('v2.BuildsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.servicePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -872,7 +874,7 @@ describe('v2.BuildsClient', () => {
       });
     });
 
-    describe('task', () => {
+    describe('task', async () => {
       const fakePath = '/rendered/path/task';
       const expectedParameters = {
         project: 'projectValue',
@@ -885,7 +887,7 @@ describe('v2.BuildsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.taskPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -960,7 +962,7 @@ describe('v2.BuildsClient', () => {
       });
     });
 
-    describe('workerPool', () => {
+    describe('workerPool', async () => {
       const fakePath = '/rendered/path/workerPool';
       const expectedParameters = {
         project: 'projectValue',
@@ -971,7 +973,7 @@ describe('v2.BuildsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.workerPoolPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

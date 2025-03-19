@@ -265,7 +265,9 @@ describe('v1.RegionDiskTypesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.regionDiskTypesStub);
       client.close().then(() => {
         done();
@@ -324,7 +326,7 @@ describe('v1.RegionDiskTypesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionDiskTypeRequest()
       );
@@ -364,7 +366,7 @@ describe('v1.RegionDiskTypesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionDiskTypeRequest()
       );
@@ -419,7 +421,7 @@ describe('v1.RegionDiskTypesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionDiskTypeRequest()
       );
@@ -456,7 +458,7 @@ describe('v1.RegionDiskTypesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionDiskTypeRequest()
       );
@@ -487,7 +489,7 @@ describe('v1.RegionDiskTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionDiskTypesRequest()
       );
@@ -524,7 +526,7 @@ describe('v1.RegionDiskTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionDiskTypesRequest()
       );
@@ -576,7 +578,7 @@ describe('v1.RegionDiskTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionDiskTypesRequest()
       );
@@ -608,7 +610,7 @@ describe('v1.RegionDiskTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionDiskTypesRequest()
       );
@@ -667,7 +669,7 @@ describe('v1.RegionDiskTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionDiskTypesRequest()
       );
@@ -723,7 +725,7 @@ describe('v1.RegionDiskTypesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionDiskTypesRequest()
       );
@@ -770,7 +772,7 @@ describe('v1.RegionDiskTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionDiskTypesRequest()
       );

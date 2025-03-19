@@ -265,7 +265,9 @@ describe('v1.AcceleratorTypesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.acceleratorTypesStub);
       client.close().then(() => {
         done();
@@ -324,7 +326,7 @@ describe('v1.AcceleratorTypesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetAcceleratorTypeRequest()
       );
@@ -364,7 +366,7 @@ describe('v1.AcceleratorTypesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetAcceleratorTypeRequest()
       );
@@ -419,7 +421,7 @@ describe('v1.AcceleratorTypesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetAcceleratorTypeRequest()
       );
@@ -456,7 +458,7 @@ describe('v1.AcceleratorTypesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetAcceleratorTypeRequest()
       );
@@ -487,7 +489,7 @@ describe('v1.AcceleratorTypesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AggregatedListAcceleratorTypesRequest()
       );
@@ -547,7 +549,7 @@ describe('v1.AcceleratorTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AggregatedListAcceleratorTypesRequest()
       );
@@ -591,7 +593,7 @@ describe('v1.AcceleratorTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListAcceleratorTypesRequest()
       );
@@ -634,7 +636,7 @@ describe('v1.AcceleratorTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListAcceleratorTypesRequest()
       );
@@ -692,7 +694,7 @@ describe('v1.AcceleratorTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListAcceleratorTypesRequest()
       );
@@ -724,7 +726,7 @@ describe('v1.AcceleratorTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListAcceleratorTypesRequest()
       );
@@ -789,7 +791,7 @@ describe('v1.AcceleratorTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListAcceleratorTypesRequest()
       );
@@ -845,7 +847,7 @@ describe('v1.AcceleratorTypesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListAcceleratorTypesRequest()
       );
@@ -898,7 +900,7 @@ describe('v1.AcceleratorTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListAcceleratorTypesRequest()
       );

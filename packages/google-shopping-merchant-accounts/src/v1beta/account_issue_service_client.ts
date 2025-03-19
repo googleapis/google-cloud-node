@@ -539,7 +539,9 @@ export class AccountIssueServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.shopping.merchant.accounts.v1beta.IListAccountIssuesRequest,
@@ -620,7 +622,9 @@ export class AccountIssueServiceClient {
       });
     const defaultCallSettings = this._defaults['listAccountIssues'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAccountIssues stream %j', request);
     return this.descriptors.page.listAccountIssues.createStream(
       this.innerApiCalls.listAccountIssues as GaxCall,
@@ -683,7 +687,9 @@ export class AccountIssueServiceClient {
       });
     const defaultCallSettings = this._defaults['listAccountIssues'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAccountIssues iterate %j', request);
     return this.descriptors.page.listAccountIssues.asyncIterate(
       this.innerApiCalls['listAccountIssues'] as GaxCall,

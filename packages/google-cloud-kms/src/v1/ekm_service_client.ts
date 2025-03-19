@@ -518,7 +518,9 @@ export class EkmServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getEkmConnection request %j', request);
     const wrappedCallback:
       | Callback<
@@ -637,7 +639,9 @@ export class EkmServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createEkmConnection request %j', request);
     const wrappedCallback:
       | Callback<
@@ -750,7 +754,9 @@ export class EkmServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'ekm_connection.name': request.ekmConnection!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateEkmConnection request %j', request);
     const wrappedCallback:
       | Callback<
@@ -860,7 +866,9 @@ export class EkmServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getEkmConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -969,7 +977,9 @@ export class EkmServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'ekm_config.name': request.ekmConfig!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateEkmConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1082,7 +1092,9 @@ export class EkmServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('verifyConnectivity request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1219,7 +1231,9 @@ export class EkmServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.kms.v1.IListEkmConnectionsRequest,
@@ -1303,7 +1317,9 @@ export class EkmServiceClient {
       });
     const defaultCallSettings = this._defaults['listEkmConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listEkmConnections stream %j', request);
     return this.descriptors.page.listEkmConnections.createStream(
       this.innerApiCalls.listEkmConnections as GaxCall,
@@ -1369,7 +1385,9 @@ export class EkmServiceClient {
       });
     const defaultCallSettings = this._defaults['listEkmConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listEkmConnections iterate %j', request);
     return this.descriptors.page.listEkmConnections.asyncIterate(
       this.innerApiCalls['listEkmConnections'] as GaxCall,

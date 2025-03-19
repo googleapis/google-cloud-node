@@ -709,7 +709,9 @@ export class WorkflowTemplateServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createWorkflowTemplate request %j', request);
     const wrappedCallback:
       | Callback<
@@ -845,7 +847,9 @@ export class WorkflowTemplateServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getWorkflowTemplate request %j', request);
     const wrappedCallback:
       | Callback<
@@ -973,7 +977,9 @@ export class WorkflowTemplateServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'template.name': request.template!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateWorkflowTemplate request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1111,7 +1117,9 @@ export class WorkflowTemplateServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteWorkflowTemplate request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1291,7 +1299,9 @@ export class WorkflowTemplateServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1509,7 +1519,9 @@ export class WorkflowTemplateServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1687,7 +1699,9 @@ export class WorkflowTemplateServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dataproc.v1.IListWorkflowTemplatesRequest,
@@ -1762,7 +1776,9 @@ export class WorkflowTemplateServiceClient {
       });
     const defaultCallSettings = this._defaults['listWorkflowTemplates'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listWorkflowTemplates stream %j', request);
     return this.descriptors.page.listWorkflowTemplates.createStream(
       this.innerApiCalls.listWorkflowTemplates as GaxCall,
@@ -1819,7 +1835,9 @@ export class WorkflowTemplateServiceClient {
       });
     const defaultCallSettings = this._defaults['listWorkflowTemplates'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listWorkflowTemplates iterate %j', request);
     return this.descriptors.page.listWorkflowTemplates.asyncIterate(
       this.innerApiCalls['listWorkflowTemplates'] as GaxCall,
@@ -2059,7 +2077,7 @@ export class WorkflowTemplateServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

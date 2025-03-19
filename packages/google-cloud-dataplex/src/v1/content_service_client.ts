@@ -820,7 +820,9 @@ export class ContentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createContent request %j', request);
     const wrappedCallback:
       | Callback<
@@ -936,7 +938,9 @@ export class ContentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'content.name': request.content!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateContent request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1047,7 +1051,9 @@ export class ContentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteContent request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1158,7 +1164,9 @@ export class ContentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getContent request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1273,7 +1281,9 @@ export class ContentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1395,7 +1405,9 @@ export class ContentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1516,7 +1528,9 @@ export class ContentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('testIamPermissions request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1648,7 +1662,9 @@ export class ContentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dataplex.v1.IListContentRequest,
@@ -1729,7 +1745,9 @@ export class ContentServiceClient {
       });
     const defaultCallSettings = this._defaults['listContent'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listContent stream %j', request);
     return this.descriptors.page.listContent.createStream(
       this.innerApiCalls.listContent as GaxCall,
@@ -1792,7 +1810,9 @@ export class ContentServiceClient {
       });
     const defaultCallSettings = this._defaults['listContent'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listContent iterate %j', request);
     return this.descriptors.page.listContent.asyncIterate(
       this.innerApiCalls['listContent'] as GaxCall,
@@ -1972,7 +1992,7 @@ export class ContentServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

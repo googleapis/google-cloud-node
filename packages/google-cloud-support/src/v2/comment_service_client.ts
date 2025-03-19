@@ -481,7 +481,9 @@ export class CommentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createComment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -601,7 +603,9 @@ export class CommentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.support.v2.IListCommentsRequest,
@@ -668,7 +672,9 @@ export class CommentServiceClient {
       });
     const defaultCallSettings = this._defaults['listComments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listComments stream %j', request);
     return this.descriptors.page.listComments.createStream(
       this.innerApiCalls.listComments as GaxCall,
@@ -717,7 +723,9 @@ export class CommentServiceClient {
       });
     const defaultCallSettings = this._defaults['listComments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listComments iterate %j', request);
     return this.descriptors.page.listComments.asyncIterate(
       this.innerApiCalls['listComments'] as GaxCall,

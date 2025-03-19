@@ -1060,7 +1060,9 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getLake request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1167,7 +1169,9 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getZone request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1274,7 +1278,9 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAsset request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1381,7 +1387,9 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getTask request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1504,7 +1512,9 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('runTask request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1611,7 +1621,9 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1718,7 +1730,9 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('cancelJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1827,7 +1841,9 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getEnvironment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1972,7 +1988,9 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2145,7 +2163,9 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'lake.name': request.lake!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2314,7 +2334,9 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2497,7 +2519,9 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2670,7 +2694,9 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'zone.name': request.zone!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2839,7 +2865,9 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3021,7 +3049,9 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3194,7 +3224,9 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'asset.name': request.asset!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3363,7 +3395,9 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3538,7 +3572,9 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3711,7 +3747,9 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'task.name': request.task!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3879,7 +3917,9 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4059,7 +4099,9 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4232,7 +4274,9 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'environment.name': request.environment!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4401,7 +4445,9 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4565,7 +4611,9 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dataplex.v1.IListLakesRequest,
@@ -4638,7 +4686,9 @@ export class DataplexServiceClient {
       });
     const defaultCallSettings = this._defaults['listLakes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listLakes stream %j', request);
     return this.descriptors.page.listLakes.createStream(
       this.innerApiCalls.listLakes as GaxCall,
@@ -4695,7 +4745,9 @@ export class DataplexServiceClient {
       });
     const defaultCallSettings = this._defaults['listLakes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listLakes iterate %j', request);
     return this.descriptors.page.listLakes.asyncIterate(
       this.innerApiCalls['listLakes'] as GaxCall,
@@ -4797,7 +4849,9 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dataplex.v1.IListLakeActionsRequest,
@@ -4868,7 +4922,9 @@ export class DataplexServiceClient {
       });
     const defaultCallSettings = this._defaults['listLakeActions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listLakeActions stream %j', request);
     return this.descriptors.page.listLakeActions.createStream(
       this.innerApiCalls.listLakeActions as GaxCall,
@@ -4921,7 +4977,9 @@ export class DataplexServiceClient {
       });
     const defaultCallSettings = this._defaults['listLakeActions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listLakeActions iterate %j', request);
     return this.descriptors.page.listLakeActions.asyncIterate(
       this.innerApiCalls['listLakeActions'] as GaxCall,
@@ -5024,7 +5082,9 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dataplex.v1.IListZonesRequest,
@@ -5096,7 +5156,9 @@ export class DataplexServiceClient {
       });
     const defaultCallSettings = this._defaults['listZones'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listZones stream %j', request);
     return this.descriptors.page.listZones.createStream(
       this.innerApiCalls.listZones as GaxCall,
@@ -5152,7 +5214,9 @@ export class DataplexServiceClient {
       });
     const defaultCallSettings = this._defaults['listZones'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listZones iterate %j', request);
     return this.descriptors.page.listZones.asyncIterate(
       this.innerApiCalls['listZones'] as GaxCall,
@@ -5254,7 +5318,9 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dataplex.v1.IListZoneActionsRequest,
@@ -5325,7 +5391,9 @@ export class DataplexServiceClient {
       });
     const defaultCallSettings = this._defaults['listZoneActions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listZoneActions stream %j', request);
     return this.descriptors.page.listZoneActions.createStream(
       this.innerApiCalls.listZoneActions as GaxCall,
@@ -5378,7 +5446,9 @@ export class DataplexServiceClient {
       });
     const defaultCallSettings = this._defaults['listZoneActions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listZoneActions iterate %j', request);
     return this.descriptors.page.listZoneActions.asyncIterate(
       this.innerApiCalls['listZoneActions'] as GaxCall,
@@ -5484,7 +5554,9 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dataplex.v1.IListAssetsRequest,
@@ -5559,7 +5631,9 @@ export class DataplexServiceClient {
       });
     const defaultCallSettings = this._defaults['listAssets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAssets stream %j', request);
     return this.descriptors.page.listAssets.createStream(
       this.innerApiCalls.listAssets as GaxCall,
@@ -5616,7 +5690,9 @@ export class DataplexServiceClient {
       });
     const defaultCallSettings = this._defaults['listAssets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAssets iterate %j', request);
     return this.descriptors.page.listAssets.asyncIterate(
       this.innerApiCalls['listAssets'] as GaxCall,
@@ -5718,7 +5794,9 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dataplex.v1.IListAssetActionsRequest,
@@ -5789,7 +5867,9 @@ export class DataplexServiceClient {
       });
     const defaultCallSettings = this._defaults['listAssetActions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAssetActions stream %j', request);
     return this.descriptors.page.listAssetActions.createStream(
       this.innerApiCalls.listAssetActions as GaxCall,
@@ -5842,7 +5922,9 @@ export class DataplexServiceClient {
       });
     const defaultCallSettings = this._defaults['listAssetActions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAssetActions iterate %j', request);
     return this.descriptors.page.listAssetActions.asyncIterate(
       this.innerApiCalls['listAssetActions'] as GaxCall,
@@ -5945,7 +6027,9 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dataplex.v1.IListTasksRequest,
@@ -6017,7 +6101,9 @@ export class DataplexServiceClient {
       });
     const defaultCallSettings = this._defaults['listTasks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTasks stream %j', request);
     return this.descriptors.page.listTasks.createStream(
       this.innerApiCalls.listTasks as GaxCall,
@@ -6073,7 +6159,9 @@ export class DataplexServiceClient {
       });
     const defaultCallSettings = this._defaults['listTasks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTasks iterate %j', request);
     return this.descriptors.page.listTasks.asyncIterate(
       this.innerApiCalls['listTasks'] as GaxCall,
@@ -6173,7 +6261,9 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dataplex.v1.IListJobsRequest,
@@ -6242,7 +6332,9 @@ export class DataplexServiceClient {
       });
     const defaultCallSettings = this._defaults['listJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listJobs stream %j', request);
     return this.descriptors.page.listJobs.createStream(
       this.innerApiCalls.listJobs as GaxCall,
@@ -6295,7 +6387,9 @@ export class DataplexServiceClient {
       });
     const defaultCallSettings = this._defaults['listJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listJobs iterate %j', request);
     return this.descriptors.page.listJobs.asyncIterate(
       this.innerApiCalls['listJobs'] as GaxCall,
@@ -6408,7 +6502,9 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dataplex.v1.IListEnvironmentsRequest,
@@ -6484,7 +6580,9 @@ export class DataplexServiceClient {
       });
     const defaultCallSettings = this._defaults['listEnvironments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listEnvironments stream %j', request);
     return this.descriptors.page.listEnvironments.createStream(
       this.innerApiCalls.listEnvironments as GaxCall,
@@ -6542,7 +6640,9 @@ export class DataplexServiceClient {
       });
     const defaultCallSettings = this._defaults['listEnvironments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listEnvironments iterate %j', request);
     return this.descriptors.page.listEnvironments.asyncIterate(
       this.innerApiCalls['listEnvironments'] as GaxCall,
@@ -6654,7 +6754,9 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dataplex.v1.IListSessionsRequest,
@@ -6735,7 +6837,9 @@ export class DataplexServiceClient {
       });
     const defaultCallSettings = this._defaults['listSessions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSessions stream %j', request);
     return this.descriptors.page.listSessions.createStream(
       this.innerApiCalls.listSessions as GaxCall,
@@ -6798,7 +6902,9 @@ export class DataplexServiceClient {
       });
     const defaultCallSettings = this._defaults['listSessions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSessions iterate %j', request);
     return this.descriptors.page.listSessions.asyncIterate(
       this.innerApiCalls['listSessions'] as GaxCall,
@@ -6978,7 +7084,7 @@ export class DataplexServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

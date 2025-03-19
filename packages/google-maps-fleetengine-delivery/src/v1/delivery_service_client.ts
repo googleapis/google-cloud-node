@@ -535,7 +535,9 @@ export class DeliveryServiceClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createDeliveryVehicle request %j', request);
     const wrappedCallback:
       | Callback<
@@ -676,7 +678,9 @@ export class DeliveryServiceClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getDeliveryVehicle request %j', request);
     const wrappedCallback:
       | Callback<
@@ -820,7 +824,9 @@ export class DeliveryServiceClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteDeliveryVehicle request %j', request);
     const wrappedCallback:
       | Callback<
@@ -971,7 +977,9 @@ export class DeliveryServiceClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateDeliveryVehicle request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1113,7 +1121,9 @@ export class DeliveryServiceClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('batchCreateTasks request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1271,7 +1281,9 @@ export class DeliveryServiceClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createTask request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1396,7 +1408,9 @@ export class DeliveryServiceClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getTask request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1524,7 +1538,9 @@ export class DeliveryServiceClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteTask request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1668,7 +1684,9 @@ export class DeliveryServiceClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateTask request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1807,7 +1825,9 @@ export class DeliveryServiceClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getTaskTrackingInfo request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1955,7 +1975,9 @@ export class DeliveryServiceClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.maps.fleetengine.delivery.v1.IListTasksRequest,
@@ -2047,7 +2069,9 @@ export class DeliveryServiceClient {
       this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listTasks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTasks stream %j', request);
     return this.descriptors.page.listTasks.createStream(
       this.innerApiCalls.listTasks as GaxCall,
@@ -2121,7 +2145,9 @@ export class DeliveryServiceClient {
       this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listTasks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTasks iterate %j', request);
     return this.descriptors.page.listTasks.asyncIterate(
       this.innerApiCalls['listTasks'] as GaxCall,
@@ -2266,7 +2292,9 @@ export class DeliveryServiceClient {
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.maps.fleetengine.delivery.v1.IListDeliveryVehiclesRequest,
@@ -2374,7 +2402,9 @@ export class DeliveryServiceClient {
       this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listDeliveryVehicles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDeliveryVehicles stream %j', request);
     return this.descriptors.page.listDeliveryVehicles.createStream(
       this.innerApiCalls.listDeliveryVehicles as GaxCall,
@@ -2464,7 +2494,9 @@ export class DeliveryServiceClient {
       this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listDeliveryVehicles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDeliveryVehicles iterate %j', request);
     return this.descriptors.page.listDeliveryVehicles.asyncIterate(
       this.innerApiCalls['listDeliveryVehicles'] as GaxCall,

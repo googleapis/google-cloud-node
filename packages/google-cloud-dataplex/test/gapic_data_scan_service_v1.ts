@@ -289,7 +289,9 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.dataScanServiceStub);
       client.close().then(() => {
         done();
@@ -348,7 +350,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.GetDataScanRequest()
       );
@@ -379,7 +381,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.GetDataScanRequest()
       );
@@ -426,7 +428,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.GetDataScanRequest()
       );
@@ -457,7 +459,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.GetDataScanRequest()
       );
@@ -478,7 +480,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.RunDataScanRequest()
       );
@@ -509,7 +511,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.RunDataScanRequest()
       );
@@ -556,7 +558,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.RunDataScanRequest()
       );
@@ -587,7 +589,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.RunDataScanRequest()
       );
@@ -608,7 +610,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.GetDataScanJobRequest()
       );
@@ -639,7 +641,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.GetDataScanJobRequest()
       );
@@ -686,7 +688,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.GetDataScanJobRequest()
       );
@@ -717,7 +719,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.GetDataScanJobRequest()
       );
@@ -738,7 +740,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.GenerateDataQualityRulesRequest()
       );
@@ -770,7 +772,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.GenerateDataQualityRulesRequest()
       );
@@ -817,7 +819,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.GenerateDataQualityRulesRequest()
       );
@@ -851,7 +853,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.GenerateDataQualityRulesRequest()
       );
@@ -875,7 +877,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.CreateDataScanRequest()
       );
@@ -908,7 +910,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.CreateDataScanRequest()
       );
@@ -962,7 +964,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.CreateDataScanRequest()
       );
@@ -993,7 +995,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.CreateDataScanRequest()
       );
@@ -1026,7 +1028,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1048,7 +1050,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1069,7 +1071,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.UpdateDataScanRequest()
       );
@@ -1103,7 +1105,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.UpdateDataScanRequest()
       );
@@ -1158,7 +1160,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.UpdateDataScanRequest()
       );
@@ -1190,7 +1192,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.UpdateDataScanRequest()
       );
@@ -1224,7 +1226,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1246,7 +1248,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1267,7 +1269,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.DeleteDataScanRequest()
       );
@@ -1300,7 +1302,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.DeleteDataScanRequest()
       );
@@ -1354,7 +1356,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.DeleteDataScanRequest()
       );
@@ -1385,7 +1387,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.DeleteDataScanRequest()
       );
@@ -1418,7 +1420,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1440,7 +1442,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1461,7 +1463,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.ListDataScansRequest()
       );
@@ -1494,7 +1496,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.ListDataScansRequest()
       );
@@ -1543,7 +1545,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.ListDataScansRequest()
       );
@@ -1574,7 +1576,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.ListDataScansRequest()
       );
@@ -1628,7 +1630,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.ListDataScansRequest()
       );
@@ -1677,7 +1679,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.ListDataScansRequest()
       );
@@ -1720,7 +1722,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.ListDataScansRequest()
       );
@@ -1762,7 +1764,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.ListDataScanJobsRequest()
       );
@@ -1801,7 +1803,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.ListDataScanJobsRequest()
       );
@@ -1856,7 +1858,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.ListDataScanJobsRequest()
       );
@@ -1887,7 +1889,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.ListDataScanJobsRequest()
       );
@@ -1947,7 +1949,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.ListDataScanJobsRequest()
       );
@@ -1996,7 +1998,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.ListDataScanJobsRequest()
       );
@@ -2045,7 +2047,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.ListDataScanJobsRequest()
       );
@@ -2086,7 +2088,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -2116,7 +2118,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -2160,7 +2162,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -2195,7 +2197,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -2243,7 +2245,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -2284,7 +2286,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -2363,7 +2365,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -2443,7 +2445,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -2539,8 +2541,7 @@ describe('v1.DataScanServiceClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -2559,7 +2560,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -2568,8 +2569,7 @@ describe('v1.DataScanServiceClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -2585,7 +2585,7 @@ describe('v1.DataScanServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('aspectType', () => {
+    describe('aspectType', async () => {
       const fakePath = '/rendered/path/aspectType';
       const expectedParameters = {
         project: 'projectValue',
@@ -2596,7 +2596,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.aspectTypePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2649,7 +2649,7 @@ describe('v1.DataScanServiceClient', () => {
       });
     });
 
-    describe('asset', () => {
+    describe('asset', async () => {
       const fakePath = '/rendered/path/asset';
       const expectedParameters = {
         project: 'projectValue',
@@ -2662,7 +2662,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.assetPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2737,7 +2737,7 @@ describe('v1.DataScanServiceClient', () => {
       });
     });
 
-    describe('content', () => {
+    describe('content', async () => {
       const fakePath = '/rendered/path/content';
       const expectedParameters = {
         project: 'projectValue',
@@ -2749,7 +2749,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.contentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2813,7 +2813,7 @@ describe('v1.DataScanServiceClient', () => {
       });
     });
 
-    describe('dataAttribute', () => {
+    describe('dataAttribute', async () => {
       const fakePath = '/rendered/path/dataAttribute';
       const expectedParameters = {
         project: 'projectValue',
@@ -2825,7 +2825,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.dataAttributePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2890,7 +2890,7 @@ describe('v1.DataScanServiceClient', () => {
       });
     });
 
-    describe('dataAttributeBinding', () => {
+    describe('dataAttributeBinding', async () => {
       const fakePath = '/rendered/path/dataAttributeBinding';
       const expectedParameters = {
         project: 'projectValue',
@@ -2901,7 +2901,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.dataAttributeBindingPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2971,7 +2971,7 @@ describe('v1.DataScanServiceClient', () => {
       });
     });
 
-    describe('dataScan', () => {
+    describe('dataScan', async () => {
       const fakePath = '/rendered/path/dataScan';
       const expectedParameters = {
         project: 'projectValue',
@@ -2982,7 +2982,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.dataScanPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3035,7 +3035,7 @@ describe('v1.DataScanServiceClient', () => {
       });
     });
 
-    describe('dataScanJob', () => {
+    describe('dataScanJob', async () => {
       const fakePath = '/rendered/path/dataScanJob';
       const expectedParameters = {
         project: 'projectValue',
@@ -3047,7 +3047,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.dataScanJobPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3111,7 +3111,7 @@ describe('v1.DataScanServiceClient', () => {
       });
     });
 
-    describe('dataTaxonomy', () => {
+    describe('dataTaxonomy', async () => {
       const fakePath = '/rendered/path/dataTaxonomy';
       const expectedParameters = {
         project: 'projectValue',
@@ -3122,7 +3122,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.dataTaxonomyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3175,7 +3175,7 @@ describe('v1.DataScanServiceClient', () => {
       });
     });
 
-    describe('entity', () => {
+    describe('entity', async () => {
       const fakePath = '/rendered/path/entity';
       const expectedParameters = {
         project: 'projectValue',
@@ -3188,7 +3188,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.entityPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3263,7 +3263,7 @@ describe('v1.DataScanServiceClient', () => {
       });
     });
 
-    describe('entry', () => {
+    describe('entry', async () => {
       const fakePath = '/rendered/path/entry';
       const expectedParameters = {
         project: 'projectValue',
@@ -3275,7 +3275,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.entryPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3339,7 +3339,7 @@ describe('v1.DataScanServiceClient', () => {
       });
     });
 
-    describe('entryGroup', () => {
+    describe('entryGroup', async () => {
       const fakePath = '/rendered/path/entryGroup';
       const expectedParameters = {
         project: 'projectValue',
@@ -3350,7 +3350,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.entryGroupPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3403,7 +3403,7 @@ describe('v1.DataScanServiceClient', () => {
       });
     });
 
-    describe('entryType', () => {
+    describe('entryType', async () => {
       const fakePath = '/rendered/path/entryType';
       const expectedParameters = {
         project: 'projectValue',
@@ -3414,7 +3414,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.entryTypePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3467,7 +3467,7 @@ describe('v1.DataScanServiceClient', () => {
       });
     });
 
-    describe('environment', () => {
+    describe('environment', async () => {
       const fakePath = '/rendered/path/environment';
       const expectedParameters = {
         project: 'projectValue',
@@ -3479,7 +3479,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.environmentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3543,7 +3543,7 @@ describe('v1.DataScanServiceClient', () => {
       });
     });
 
-    describe('job', () => {
+    describe('job', async () => {
       const fakePath = '/rendered/path/job';
       const expectedParameters = {
         project: 'projectValue',
@@ -3556,7 +3556,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.jobPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3631,7 +3631,7 @@ describe('v1.DataScanServiceClient', () => {
       });
     });
 
-    describe('lake', () => {
+    describe('lake', async () => {
       const fakePath = '/rendered/path/lake';
       const expectedParameters = {
         project: 'projectValue',
@@ -3642,7 +3642,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.lakePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3695,7 +3695,7 @@ describe('v1.DataScanServiceClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -3705,7 +3705,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3744,7 +3744,7 @@ describe('v1.DataScanServiceClient', () => {
       });
     });
 
-    describe('metadataJob', () => {
+    describe('metadataJob', async () => {
       const fakePath = '/rendered/path/metadataJob';
       const expectedParameters = {
         project: 'projectValue',
@@ -3755,7 +3755,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.metadataJobPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3808,7 +3808,7 @@ describe('v1.DataScanServiceClient', () => {
       });
     });
 
-    describe('partition', () => {
+    describe('partition', async () => {
       const fakePath = '/rendered/path/partition';
       const expectedParameters = {
         project: 'projectValue',
@@ -3822,7 +3822,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.partitionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3908,7 +3908,7 @@ describe('v1.DataScanServiceClient', () => {
       });
     });
 
-    describe('projectLocationLakeAction', () => {
+    describe('projectLocationLakeAction', async () => {
       const fakePath = '/rendered/path/projectLocationLakeAction';
       const expectedParameters = {
         project: 'projectValue',
@@ -3920,7 +3920,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationLakeActionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4003,7 +4003,7 @@ describe('v1.DataScanServiceClient', () => {
       });
     });
 
-    describe('projectLocationLakeZoneAction', () => {
+    describe('projectLocationLakeZoneAction', async () => {
       const fakePath = '/rendered/path/projectLocationLakeZoneAction';
       const expectedParameters = {
         project: 'projectValue',
@@ -4016,7 +4016,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationLakeZoneActionPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationLakeZoneActionPathTemplate.match =
@@ -4112,7 +4112,7 @@ describe('v1.DataScanServiceClient', () => {
       });
     });
 
-    describe('projectLocationLakeZoneAssetAction', () => {
+    describe('projectLocationLakeZoneAssetAction', async () => {
       const fakePath = '/rendered/path/projectLocationLakeZoneAssetAction';
       const expectedParameters = {
         project: 'projectValue',
@@ -4126,7 +4126,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match =
@@ -4243,7 +4243,7 @@ describe('v1.DataScanServiceClient', () => {
       });
     });
 
-    describe('session', () => {
+    describe('session', async () => {
       const fakePath = '/rendered/path/session';
       const expectedParameters = {
         project: 'projectValue',
@@ -4256,7 +4256,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.sessionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4331,7 +4331,7 @@ describe('v1.DataScanServiceClient', () => {
       });
     });
 
-    describe('task', () => {
+    describe('task', async () => {
       const fakePath = '/rendered/path/task';
       const expectedParameters = {
         project: 'projectValue',
@@ -4343,7 +4343,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.taskPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4407,7 +4407,7 @@ describe('v1.DataScanServiceClient', () => {
       });
     });
 
-    describe('zone', () => {
+    describe('zone', async () => {
       const fakePath = '/rendered/path/zone';
       const expectedParameters = {
         project: 'projectValue',
@@ -4419,7 +4419,7 @@ describe('v1.DataScanServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.zonePathTemplate.render = sinon
         .stub()
         .returns(fakePath);

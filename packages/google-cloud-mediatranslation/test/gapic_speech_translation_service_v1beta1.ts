@@ -212,7 +212,9 @@ describe('v1beta1.SpeechTranslationServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.speechTranslationServiceStub);
       client.close().then(() => {
         done();
@@ -283,7 +285,7 @@ describe('v1beta1.SpeechTranslationServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechRequest()
       );
@@ -331,7 +333,7 @@ describe('v1beta1.SpeechTranslationServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechRequest()
       );

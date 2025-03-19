@@ -745,7 +745,9 @@ export class SpeechClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getRecognizer request %j', request);
     const wrappedCallback:
       | Callback<
@@ -892,7 +894,9 @@ export class SpeechClient {
       this._gaxModule.routingHeader.fromParams({
         recognizer: request.recognizer ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('recognize request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1000,7 +1004,9 @@ export class SpeechClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1111,7 +1117,9 @@ export class SpeechClient {
       this._gaxModule.routingHeader.fromParams({
         'config.name': request.config!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1221,7 +1229,9 @@ export class SpeechClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getCustomClass request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1331,7 +1341,9 @@ export class SpeechClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getPhraseSet request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1375,7 +1387,9 @@ export class SpeechClient {
    * region_tag:speech_v2_generated_Speech_StreamingRecognize_async
    */
   _streamingRecognize(options?: CallOptions): gax.CancellableStream {
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('streamingRecognize stream %j', options);
     return this.innerApiCalls.streamingRecognize(null, options);
   }
@@ -1491,7 +1505,9 @@ export class SpeechClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1667,7 +1683,9 @@ export class SpeechClient {
       this._gaxModule.routingHeader.fromParams({
         'recognizer.name': request.recognizer!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1845,7 +1863,9 @@ export class SpeechClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2020,7 +2040,9 @@ export class SpeechClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2220,7 +2242,9 @@ export class SpeechClient {
       this._gaxModule.routingHeader.fromParams({
         recognizer: request.recognizer ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2399,7 +2423,9 @@ export class SpeechClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2576,7 +2602,9 @@ export class SpeechClient {
       this._gaxModule.routingHeader.fromParams({
         'custom_class.name': request.customClass!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2755,7 +2783,9 @@ export class SpeechClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2931,7 +2961,9 @@ export class SpeechClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3110,7 +3142,9 @@ export class SpeechClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3286,7 +3320,9 @@ export class SpeechClient {
       this._gaxModule.routingHeader.fromParams({
         'phrase_set.name': request.phraseSet!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3464,7 +3500,9 @@ export class SpeechClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3639,7 +3677,9 @@ export class SpeechClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3806,7 +3846,9 @@ export class SpeechClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.speech.v2.IListRecognizersRequest,
@@ -3882,7 +3924,9 @@ export class SpeechClient {
       });
     const defaultCallSettings = this._defaults['listRecognizers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRecognizers stream %j', request);
     return this.descriptors.page.listRecognizers.createStream(
       this.innerApiCalls.listRecognizers as GaxCall,
@@ -3940,7 +3984,9 @@ export class SpeechClient {
       });
     const defaultCallSettings = this._defaults['listRecognizers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRecognizers iterate %j', request);
     return this.descriptors.page.listRecognizers.asyncIterate(
       this.innerApiCalls['listRecognizers'] as GaxCall,
@@ -4054,7 +4100,9 @@ export class SpeechClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.speech.v2.IListCustomClassesRequest,
@@ -4131,7 +4179,9 @@ export class SpeechClient {
       });
     const defaultCallSettings = this._defaults['listCustomClasses'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCustomClasses stream %j', request);
     return this.descriptors.page.listCustomClasses.createStream(
       this.innerApiCalls.listCustomClasses as GaxCall,
@@ -4190,7 +4240,9 @@ export class SpeechClient {
       });
     const defaultCallSettings = this._defaults['listCustomClasses'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCustomClasses iterate %j', request);
     return this.descriptors.page.listCustomClasses.asyncIterate(
       this.innerApiCalls['listCustomClasses'] as GaxCall,
@@ -4297,7 +4349,9 @@ export class SpeechClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.speech.v2.IListPhraseSetsRequest,
@@ -4373,7 +4427,9 @@ export class SpeechClient {
       });
     const defaultCallSettings = this._defaults['listPhraseSets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listPhraseSets stream %j', request);
     return this.descriptors.page.listPhraseSets.createStream(
       this.innerApiCalls.listPhraseSets as GaxCall,
@@ -4431,7 +4487,9 @@ export class SpeechClient {
       });
     const defaultCallSettings = this._defaults['listPhraseSets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listPhraseSets iterate %j', request);
     return this.descriptors.page.listPhraseSets.asyncIterate(
       this.innerApiCalls['listPhraseSets'] as GaxCall,
@@ -4611,7 +4669,7 @@ export class SpeechClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

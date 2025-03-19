@@ -785,7 +785,9 @@ export class SearchServiceClient {
       this._gaxModule.routingHeader.fromParams({
         placement: request.placement ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.retail.v2beta.ISearchRequest,
@@ -1085,7 +1087,9 @@ export class SearchServiceClient {
       });
     const defaultCallSettings = this._defaults['search'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('search stream %j', request);
     return this.descriptors.page.search.createStream(
       this.innerApiCalls.search as GaxCall,
@@ -1369,7 +1373,9 @@ export class SearchServiceClient {
       });
     const defaultCallSettings = this._defaults['search'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('search iterate %j', request);
     return this.descriptors.page.search.asyncIterate(
       this.innerApiCalls['search'] as GaxCall,
@@ -1549,7 +1555,7 @@ export class SearchServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

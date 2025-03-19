@@ -449,7 +449,9 @@ export class SqlTiersServiceClient {
       this._gaxModule.routingHeader.fromParams({
         project: request.project ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('list request %j', request);
     const wrappedCallback:
       | Callback<

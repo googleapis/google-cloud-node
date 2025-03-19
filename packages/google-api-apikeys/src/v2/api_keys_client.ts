@@ -556,7 +556,9 @@ export class ApiKeysClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getKey request %j', request);
     const wrappedCallback:
       | Callback<
@@ -665,7 +667,9 @@ export class ApiKeysClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getKeyString request %j', request);
     const wrappedCallback:
       | Callback<
@@ -771,7 +775,9 @@ export class ApiKeysClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('lookupKey request %j', request);
     const wrappedCallback:
       | Callback<
@@ -915,7 +921,9 @@ export class ApiKeysClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1093,7 +1101,9 @@ export class ApiKeysClient {
       this._gaxModule.routingHeader.fromParams({
         'key.name': request.key!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1264,7 +1274,9 @@ export class ApiKeysClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1431,7 +1443,9 @@ export class ApiKeysClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1589,7 +1603,9 @@ export class ApiKeysClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.api.apikeys.v2.IListKeysRequest,
@@ -1655,7 +1671,9 @@ export class ApiKeysClient {
       });
     const defaultCallSettings = this._defaults['listKeys'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listKeys stream %j', request);
     return this.descriptors.page.listKeys.createStream(
       this.innerApiCalls.listKeys as GaxCall,
@@ -1705,7 +1723,9 @@ export class ApiKeysClient {
       });
     const defaultCallSettings = this._defaults['listKeys'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listKeys iterate %j', request);
     return this.descriptors.page.listKeys.asyncIterate(
       this.innerApiCalls['listKeys'] as GaxCall,
@@ -1807,7 +1827,7 @@ export class ApiKeysClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

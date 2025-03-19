@@ -265,7 +265,9 @@ describe('v1.TargetTcpProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.targetTcpProxiesStub);
       client.close().then(() => {
         done();
@@ -324,7 +326,7 @@ describe('v1.TargetTcpProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteTargetTcpProxyRequest()
       );
@@ -360,7 +362,7 @@ describe('v1.TargetTcpProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteTargetTcpProxyRequest()
       );
@@ -412,7 +414,7 @@ describe('v1.TargetTcpProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteTargetTcpProxyRequest()
       );
@@ -445,7 +447,7 @@ describe('v1.TargetTcpProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteTargetTcpProxyRequest()
       );
@@ -471,7 +473,7 @@ describe('v1.TargetTcpProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetTargetTcpProxyRequest()
       );
@@ -506,7 +508,7 @@ describe('v1.TargetTcpProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetTargetTcpProxyRequest()
       );
@@ -556,7 +558,7 @@ describe('v1.TargetTcpProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetTargetTcpProxyRequest()
       );
@@ -588,7 +590,7 @@ describe('v1.TargetTcpProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetTargetTcpProxyRequest()
       );
@@ -614,7 +616,7 @@ describe('v1.TargetTcpProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertTargetTcpProxyRequest()
       );
@@ -645,7 +647,7 @@ describe('v1.TargetTcpProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertTargetTcpProxyRequest()
       );
@@ -692,7 +694,7 @@ describe('v1.TargetTcpProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertTargetTcpProxyRequest()
       );
@@ -720,7 +722,7 @@ describe('v1.TargetTcpProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertTargetTcpProxyRequest()
       );
@@ -741,7 +743,7 @@ describe('v1.TargetTcpProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetBackendServiceTargetTcpProxyRequest()
       );
@@ -777,7 +779,7 @@ describe('v1.TargetTcpProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetBackendServiceTargetTcpProxyRequest()
       );
@@ -829,7 +831,7 @@ describe('v1.TargetTcpProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetBackendServiceTargetTcpProxyRequest()
       );
@@ -865,7 +867,7 @@ describe('v1.TargetTcpProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetBackendServiceTargetTcpProxyRequest()
       );
@@ -891,7 +893,7 @@ describe('v1.TargetTcpProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetProxyHeaderTargetTcpProxyRequest()
       );
@@ -927,7 +929,7 @@ describe('v1.TargetTcpProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetProxyHeaderTargetTcpProxyRequest()
       );
@@ -979,7 +981,7 @@ describe('v1.TargetTcpProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetProxyHeaderTargetTcpProxyRequest()
       );
@@ -1015,7 +1017,7 @@ describe('v1.TargetTcpProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetProxyHeaderTargetTcpProxyRequest()
       );
@@ -1041,7 +1043,7 @@ describe('v1.TargetTcpProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AggregatedListTargetTcpProxiesRequest()
       );
@@ -1101,7 +1103,7 @@ describe('v1.TargetTcpProxiesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AggregatedListTargetTcpProxiesRequest()
       );
@@ -1145,7 +1147,7 @@ describe('v1.TargetTcpProxiesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListTargetTcpProxiesRequest()
       );
@@ -1183,7 +1185,7 @@ describe('v1.TargetTcpProxiesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListTargetTcpProxiesRequest()
       );
@@ -1236,7 +1238,7 @@ describe('v1.TargetTcpProxiesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListTargetTcpProxiesRequest()
       );
@@ -1263,7 +1265,7 @@ describe('v1.TargetTcpProxiesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListTargetTcpProxiesRequest()
       );
@@ -1323,7 +1325,7 @@ describe('v1.TargetTcpProxiesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListTargetTcpProxiesRequest()
       );
@@ -1374,7 +1376,7 @@ describe('v1.TargetTcpProxiesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListTargetTcpProxiesRequest()
       );
@@ -1422,7 +1424,7 @@ describe('v1.TargetTcpProxiesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListTargetTcpProxiesRequest()
       );

@@ -191,7 +191,9 @@ describe('v1beta2.LanguageServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.languageServiceStub);
       client.close().then(() => {
         done();
@@ -250,7 +252,7 @@ describe('v1beta2.LanguageServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.AnalyzeSentimentRequest()
       );
@@ -267,7 +269,7 @@ describe('v1beta2.LanguageServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.AnalyzeSentimentRequest()
       );
@@ -300,7 +302,7 @@ describe('v1beta2.LanguageServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.AnalyzeSentimentRequest()
       );
@@ -317,7 +319,7 @@ describe('v1beta2.LanguageServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.AnalyzeSentimentRequest()
       );
@@ -333,7 +335,7 @@ describe('v1beta2.LanguageServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.AnalyzeEntitiesRequest()
       );
@@ -350,7 +352,7 @@ describe('v1beta2.LanguageServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.AnalyzeEntitiesRequest()
       );
@@ -383,7 +385,7 @@ describe('v1beta2.LanguageServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.AnalyzeEntitiesRequest()
       );
@@ -400,7 +402,7 @@ describe('v1beta2.LanguageServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.AnalyzeEntitiesRequest()
       );
@@ -416,7 +418,7 @@ describe('v1beta2.LanguageServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.AnalyzeEntitySentimentRequest()
       );
@@ -434,7 +436,7 @@ describe('v1beta2.LanguageServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.AnalyzeEntitySentimentRequest()
       );
@@ -467,7 +469,7 @@ describe('v1beta2.LanguageServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.AnalyzeEntitySentimentRequest()
       );
@@ -487,7 +489,7 @@ describe('v1beta2.LanguageServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.AnalyzeEntitySentimentRequest()
       );
@@ -506,7 +508,7 @@ describe('v1beta2.LanguageServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.AnalyzeSyntaxRequest()
       );
@@ -523,7 +525,7 @@ describe('v1beta2.LanguageServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.AnalyzeSyntaxRequest()
       );
@@ -556,7 +558,7 @@ describe('v1beta2.LanguageServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.AnalyzeSyntaxRequest()
       );
@@ -573,7 +575,7 @@ describe('v1beta2.LanguageServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.AnalyzeSyntaxRequest()
       );
@@ -589,7 +591,7 @@ describe('v1beta2.LanguageServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.ClassifyTextRequest()
       );
@@ -606,7 +608,7 @@ describe('v1beta2.LanguageServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.ClassifyTextRequest()
       );
@@ -639,7 +641,7 @@ describe('v1beta2.LanguageServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.ClassifyTextRequest()
       );
@@ -656,7 +658,7 @@ describe('v1beta2.LanguageServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.ClassifyTextRequest()
       );
@@ -672,7 +674,7 @@ describe('v1beta2.LanguageServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.ModerateTextRequest()
       );
@@ -689,7 +691,7 @@ describe('v1beta2.LanguageServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.ModerateTextRequest()
       );
@@ -722,7 +724,7 @@ describe('v1beta2.LanguageServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.ModerateTextRequest()
       );
@@ -739,7 +741,7 @@ describe('v1beta2.LanguageServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.ModerateTextRequest()
       );
@@ -755,7 +757,7 @@ describe('v1beta2.LanguageServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.AnnotateTextRequest()
       );
@@ -772,7 +774,7 @@ describe('v1beta2.LanguageServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.AnnotateTextRequest()
       );
@@ -805,7 +807,7 @@ describe('v1beta2.LanguageServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.AnnotateTextRequest()
       );
@@ -822,7 +824,7 @@ describe('v1beta2.LanguageServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1beta2.AnnotateTextRequest()
       );

@@ -485,7 +485,9 @@ export class ValidationHelperV1Client {
       this._gaxModule.routingHeader.fromParams({
         attestor: request.attestor ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('validateAttestationOccurrence request %j', request);
     const wrappedCallback:
       | Callback<

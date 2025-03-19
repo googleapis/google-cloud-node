@@ -492,7 +492,9 @@ export class SecurityPoliciesClient {
         project: request.project ?? '',
         security_policy: request.securityPolicy ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('addRule request %j', request);
     const wrappedCallback:
       | Callback<
@@ -627,7 +629,9 @@ export class SecurityPoliciesClient {
         project: request.project ?? '',
         security_policy: request.securityPolicy ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('delete request %j', request);
     const wrappedCallback:
       | Callback<
@@ -755,7 +759,9 @@ export class SecurityPoliciesClient {
         project: request.project ?? '',
         security_policy: request.securityPolicy ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('get request %j', request);
     const wrappedCallback:
       | Callback<
@@ -876,7 +882,9 @@ export class SecurityPoliciesClient {
         project: request.project ?? '',
         security_policy: request.securityPolicy ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getRule request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1006,7 +1014,9 @@ export class SecurityPoliciesClient {
       this._gaxModule.routingHeader.fromParams({
         project: request.project ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('insert request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1147,7 +1157,9 @@ export class SecurityPoliciesClient {
       this._gaxModule.routingHeader.fromParams({
         project: request.project ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listPreconfiguredExpressionSets request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1286,7 +1298,9 @@ export class SecurityPoliciesClient {
         project: request.project ?? '',
         security_policy: request.securityPolicy ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('patch request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1427,7 +1441,9 @@ export class SecurityPoliciesClient {
         project: request.project ?? '',
         security_policy: request.securityPolicy ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('patchRule request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1562,7 +1578,9 @@ export class SecurityPoliciesClient {
         project: request.project ?? '',
         security_policy: request.securityPolicy ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('removeRule request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1697,7 +1715,9 @@ export class SecurityPoliciesClient {
         project: request.project ?? '',
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setLabels request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1786,7 +1806,9 @@ export class SecurityPoliciesClient {
       });
     const defaultCallSettings = this._defaults['aggregatedList'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('aggregatedList iterate %j', request);
     return this.descriptors.page.aggregatedList.asyncIterate(
       this.innerApiCalls['aggregatedList'] as GaxCall,
@@ -1888,7 +1910,9 @@ export class SecurityPoliciesClient {
       this._gaxModule.routingHeader.fromParams({
         project: request.project ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.compute.v1.IListSecurityPoliciesRequest,
@@ -1957,7 +1981,9 @@ export class SecurityPoliciesClient {
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('list stream %j', request);
     return this.descriptors.page.list.createStream(
       this.innerApiCalls.list as GaxCall,
@@ -2010,7 +2036,9 @@ export class SecurityPoliciesClient {
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('list iterate %j', request);
     return this.descriptors.page.list.asyncIterate(
       this.innerApiCalls['list'] as GaxCall,

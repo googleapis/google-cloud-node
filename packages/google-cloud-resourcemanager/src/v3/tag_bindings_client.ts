@@ -560,7 +560,9 @@ export class TagBindingsClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -729,7 +731,9 @@ export class TagBindingsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -896,7 +900,9 @@ export class TagBindingsClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.resourcemanager.v3.IListTagBindingsRequest,
@@ -962,7 +968,9 @@ export class TagBindingsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listTagBindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTagBindings stream %j', request);
     return this.descriptors.page.listTagBindings.createStream(
       this.innerApiCalls.listTagBindings as GaxCall,
@@ -1010,7 +1018,9 @@ export class TagBindingsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listTagBindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTagBindings iterate %j', request);
     return this.descriptors.page.listTagBindings.asyncIterate(
       this.innerApiCalls['listTagBindings'] as GaxCall,
@@ -1114,7 +1124,9 @@ export class TagBindingsClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.resourcemanager.v3.IListEffectiveTagsRequest,
@@ -1180,7 +1192,9 @@ export class TagBindingsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listEffectiveTags'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listEffectiveTags stream %j', request);
     return this.descriptors.page.listEffectiveTags.createStream(
       this.innerApiCalls.listEffectiveTags as GaxCall,
@@ -1228,7 +1242,9 @@ export class TagBindingsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listEffectiveTags'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listEffectiveTags iterate %j', request);
     return this.descriptors.page.listEffectiveTags.asyncIterate(
       this.innerApiCalls['listEffectiveTags'] as GaxCall,
@@ -1330,7 +1346,7 @@ export class TagBindingsClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

@@ -725,7 +725,9 @@ export class ClusterControllerClient {
         region: request.region ?? '',
         cluster_name: request.clusterName ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getCluster request %j', request);
     const wrappedCallback:
       | Callback<
@@ -875,7 +877,9 @@ export class ClusterControllerClient {
         project_id: request.projectId ?? '',
         region: request.region ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1131,7 +1135,9 @@ export class ClusterControllerClient {
         region: request.region ?? '',
         cluster_name: request.clusterName ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1321,7 +1327,9 @@ export class ClusterControllerClient {
         region: request.region ?? '',
         cluster_name: request.clusterName ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1511,7 +1519,9 @@ export class ClusterControllerClient {
         region: request.region ?? '',
         cluster_name: request.clusterName ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1703,7 +1713,9 @@ export class ClusterControllerClient {
         region: request.region ?? '',
         cluster_name: request.clusterName ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1899,7 +1911,9 @@ export class ClusterControllerClient {
         region: request.region ?? '',
         cluster_name: request.clusterName ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2079,7 +2093,9 @@ export class ClusterControllerClient {
         project_id: request.projectId ?? '',
         region: request.region ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dataproc.v1.IListClustersRequest,
@@ -2168,7 +2184,9 @@ export class ClusterControllerClient {
       });
     const defaultCallSettings = this._defaults['listClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listClusters stream %j', request);
     return this.descriptors.page.listClusters.createStream(
       this.innerApiCalls.listClusters as GaxCall,
@@ -2239,7 +2257,9 @@ export class ClusterControllerClient {
       });
     const defaultCallSettings = this._defaults['listClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listClusters iterate %j', request);
     return this.descriptors.page.listClusters.asyncIterate(
       this.innerApiCalls['listClusters'] as GaxCall,
@@ -2479,7 +2499,7 @@ export class ClusterControllerClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

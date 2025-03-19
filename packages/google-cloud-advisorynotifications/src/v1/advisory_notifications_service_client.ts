@@ -504,7 +504,9 @@ export class AdvisoryNotificationsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getNotification request %j', request);
     const wrappedCallback:
       | Callback<
@@ -632,7 +634,9 @@ export class AdvisoryNotificationsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getSettings request %j', request);
     const wrappedCallback:
       | Callback<
@@ -757,7 +761,9 @@ export class AdvisoryNotificationsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'settings.name': request.settings!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateSettings request %j', request);
     const wrappedCallback:
       | Callback<
@@ -900,7 +906,9 @@ export class AdvisoryNotificationsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.advisorynotifications.v1.IListNotificationsRequest,
@@ -981,7 +989,9 @@ export class AdvisoryNotificationsServiceClient {
       });
     const defaultCallSettings = this._defaults['listNotifications'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listNotifications stream %j', request);
     return this.descriptors.page.listNotifications.createStream(
       this.innerApiCalls.listNotifications as GaxCall,
@@ -1044,7 +1054,9 @@ export class AdvisoryNotificationsServiceClient {
       });
     const defaultCallSettings = this._defaults['listNotifications'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listNotifications iterate %j', request);
     return this.descriptors.page.listNotifications.asyncIterate(
       this.innerApiCalls['listNotifications'] as GaxCall,

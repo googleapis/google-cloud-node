@@ -287,7 +287,9 @@ describe('v1alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.modelServiceStub);
       client.close().then(() => {
         done();
@@ -346,7 +348,7 @@ describe('v1alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.GetModelRequest()
       );
@@ -377,7 +379,7 @@ describe('v1alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.GetModelRequest()
       );
@@ -424,7 +426,7 @@ describe('v1alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.GetModelRequest()
       );
@@ -452,7 +454,7 @@ describe('v1alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.GetModelRequest()
       );
@@ -473,7 +475,7 @@ describe('v1alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.GetTunedModelRequest()
       );
@@ -504,7 +506,7 @@ describe('v1alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.GetTunedModelRequest()
       );
@@ -551,7 +553,7 @@ describe('v1alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.GetTunedModelRequest()
       );
@@ -582,7 +584,7 @@ describe('v1alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.GetTunedModelRequest()
       );
@@ -603,7 +605,7 @@ describe('v1alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.UpdateTunedModelRequest()
       );
@@ -635,7 +637,7 @@ describe('v1alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.UpdateTunedModelRequest()
       );
@@ -683,7 +685,7 @@ describe('v1alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.UpdateTunedModelRequest()
       );
@@ -715,7 +717,7 @@ describe('v1alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.UpdateTunedModelRequest()
       );
@@ -737,7 +739,7 @@ describe('v1alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.DeleteTunedModelRequest()
       );
@@ -768,7 +770,7 @@ describe('v1alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.DeleteTunedModelRequest()
       );
@@ -815,7 +817,7 @@ describe('v1alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.DeleteTunedModelRequest()
       );
@@ -846,7 +848,7 @@ describe('v1alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.DeleteTunedModelRequest()
       );
@@ -867,7 +869,7 @@ describe('v1alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.CreateTunedModelRequest()
       );
@@ -886,7 +888,7 @@ describe('v1alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.CreateTunedModelRequest()
       );
@@ -926,7 +928,7 @@ describe('v1alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.CreateTunedModelRequest()
       );
@@ -943,7 +945,7 @@ describe('v1alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.CreateTunedModelRequest()
       );
@@ -962,7 +964,7 @@ describe('v1alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -984,7 +986,7 @@ describe('v1alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1005,7 +1007,7 @@ describe('v1alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.ListModelsRequest()
       );
@@ -1030,7 +1032,7 @@ describe('v1alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.ListModelsRequest()
       );
@@ -1071,7 +1073,7 @@ describe('v1alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.ListModelsRequest()
       );
@@ -1088,7 +1090,7 @@ describe('v1alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.ListModelsRequest()
       );
@@ -1136,7 +1138,7 @@ describe('v1alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.ListModelsRequest()
       );
@@ -1175,7 +1177,7 @@ describe('v1alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.ListModelsRequest()
       );
@@ -1212,7 +1214,7 @@ describe('v1alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.ListModelsRequest()
       );
@@ -1244,7 +1246,7 @@ describe('v1alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.ListTunedModelsRequest()
       );
@@ -1269,7 +1271,7 @@ describe('v1alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.ListTunedModelsRequest()
       );
@@ -1312,7 +1314,7 @@ describe('v1alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.ListTunedModelsRequest()
       );
@@ -1329,7 +1331,7 @@ describe('v1alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.ListTunedModelsRequest()
       );
@@ -1379,7 +1381,7 @@ describe('v1alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.ListTunedModelsRequest()
       );
@@ -1418,7 +1420,7 @@ describe('v1alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.ListTunedModelsRequest()
       );
@@ -1455,7 +1457,7 @@ describe('v1alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.ai.generativelanguage.v1alpha.ListTunedModelsRequest()
       );
@@ -1484,7 +1486,7 @@ describe('v1alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -1563,7 +1565,7 @@ describe('v1alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -1643,7 +1645,7 @@ describe('v1alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -1739,8 +1741,7 @@ describe('v1alpha.ModelServiceClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -1759,7 +1760,7 @@ describe('v1alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -1768,8 +1769,7 @@ describe('v1alpha.ModelServiceClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -1785,7 +1785,7 @@ describe('v1alpha.ModelServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('cachedContent', () => {
+    describe('cachedContent', async () => {
       const fakePath = '/rendered/path/cachedContent';
       const expectedParameters = {
         id: 'idValue',
@@ -1794,7 +1794,7 @@ describe('v1alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.cachedContentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1823,7 +1823,7 @@ describe('v1alpha.ModelServiceClient', () => {
       });
     });
 
-    describe('chunk', () => {
+    describe('chunk', async () => {
       const fakePath = '/rendered/path/chunk';
       const expectedParameters = {
         corpus: 'corpusValue',
@@ -1834,7 +1834,7 @@ describe('v1alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.chunkPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1887,7 +1887,7 @@ describe('v1alpha.ModelServiceClient', () => {
       });
     });
 
-    describe('corpus', () => {
+    describe('corpus', async () => {
       const fakePath = '/rendered/path/corpus';
       const expectedParameters = {
         corpus: 'corpusValue',
@@ -1896,7 +1896,7 @@ describe('v1alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.corpusPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1925,7 +1925,7 @@ describe('v1alpha.ModelServiceClient', () => {
       });
     });
 
-    describe('corpusPermission', () => {
+    describe('corpusPermission', async () => {
       const fakePath = '/rendered/path/corpusPermission';
       const expectedParameters = {
         corpus: 'corpusValue',
@@ -1935,7 +1935,7 @@ describe('v1alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.corpusPermissionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1980,7 +1980,7 @@ describe('v1alpha.ModelServiceClient', () => {
       });
     });
 
-    describe('document', () => {
+    describe('document', async () => {
       const fakePath = '/rendered/path/document';
       const expectedParameters = {
         corpus: 'corpusValue',
@@ -1990,7 +1990,7 @@ describe('v1alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.documentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2029,7 +2029,7 @@ describe('v1alpha.ModelServiceClient', () => {
       });
     });
 
-    describe('file', () => {
+    describe('file', async () => {
       const fakePath = '/rendered/path/file';
       const expectedParameters = {
         file: 'fileValue',
@@ -2038,7 +2038,7 @@ describe('v1alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.filePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2067,7 +2067,7 @@ describe('v1alpha.ModelServiceClient', () => {
       });
     });
 
-    describe('model', () => {
+    describe('model', async () => {
       const fakePath = '/rendered/path/model';
       const expectedParameters = {
         model: 'modelValue',
@@ -2076,7 +2076,7 @@ describe('v1alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.modelPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2105,7 +2105,7 @@ describe('v1alpha.ModelServiceClient', () => {
       });
     });
 
-    describe('tunedModel', () => {
+    describe('tunedModel', async () => {
       const fakePath = '/rendered/path/tunedModel';
       const expectedParameters = {
         tuned_model: 'tunedModelValue',
@@ -2114,7 +2114,7 @@ describe('v1alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.tunedModelPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2143,7 +2143,7 @@ describe('v1alpha.ModelServiceClient', () => {
       });
     });
 
-    describe('tunedModelPermission', () => {
+    describe('tunedModelPermission', async () => {
       const fakePath = '/rendered/path/tunedModelPermission';
       const expectedParameters = {
         tuned_model: 'tunedModelValue',
@@ -2153,7 +2153,7 @@ describe('v1alpha.ModelServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.tunedModelPermissionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
