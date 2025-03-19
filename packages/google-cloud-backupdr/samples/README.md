@@ -66,7 +66,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Backup_d_r.abandon_backup
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.abandon_backup.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.abandon_backup.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.abandon_backup.js,samples/README.md)
 
@@ -83,7 +83,7 @@ __Usage:__
 
 ### Backup_d_r.create_backup_plan
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.create_backup_plan.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.create_backup_plan.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.create_backup_plan.js,samples/README.md)
 
@@ -100,7 +100,7 @@ __Usage:__
 
 ### Backup_d_r.create_backup_plan_association
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.create_backup_plan_association.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.create_backup_plan_association.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.create_backup_plan_association.js,samples/README.md)
 
@@ -117,7 +117,7 @@ __Usage:__
 
 ### Backup_d_r.create_backup_vault
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.create_backup_vault.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.create_backup_vault.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.create_backup_vault.js,samples/README.md)
 
@@ -134,7 +134,7 @@ __Usage:__
 
 ### Backup_d_r.create_management_server
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.create_management_server.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.create_management_server.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.create_management_server.js,samples/README.md)
 
@@ -151,7 +151,7 @@ __Usage:__
 
 ### Backup_d_r.delete_backup
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.delete_backup.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.delete_backup.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.delete_backup.js,samples/README.md)
 
@@ -168,7 +168,7 @@ __Usage:__
 
 ### Backup_d_r.delete_backup_plan
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.delete_backup_plan.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.delete_backup_plan.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.delete_backup_plan.js,samples/README.md)
 
@@ -185,7 +185,7 @@ __Usage:__
 
 ### Backup_d_r.delete_backup_plan_association
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.delete_backup_plan_association.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.delete_backup_plan_association.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.delete_backup_plan_association.js,samples/README.md)
 
@@ -202,7 +202,7 @@ __Usage:__
 
 ### Backup_d_r.delete_backup_vault
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.delete_backup_vault.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.delete_backup_vault.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.delete_backup_vault.js,samples/README.md)
 
@@ -219,7 +219,7 @@ __Usage:__
 
 ### Backup_d_r.delete_management_server
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.delete_management_server.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.delete_management_server.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.delete_management_server.js,samples/README.md)
 
@@ -236,7 +236,7 @@ __Usage:__
 
 ### Backup_d_r.fetch_access_token
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.fetch_access_token.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.fetch_access_token.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.fetch_access_token.js,samples/README.md)
 
@@ -253,7 +253,7 @@ __Usage:__
 
 ### Backup_d_r.fetch_usable_backup_vaults
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.fetch_usable_backup_vaults.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.fetch_usable_backup_vaults.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.fetch_usable_backup_vaults.js,samples/README.md)
 
@@ -270,7 +270,7 @@ __Usage:__
 
 ### Backup_d_r.finalize_backup
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.finalize_backup.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.finalize_backup.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.finalize_backup.js,samples/README.md)
 
@@ -287,7 +287,7 @@ __Usage:__
 
 ### Backup_d_r.get_backup
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.get_backup.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.get_backup.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.get_backup.js,samples/README.md)
 
@@ -304,7 +304,7 @@ __Usage:__
 
 ### Backup_d_r.get_backup_plan
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.get_backup_plan.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.get_backup_plan.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.get_backup_plan.js,samples/README.md)
 
@@ -321,7 +321,7 @@ __Usage:__
 
 ### Backup_d_r.get_backup_plan_association
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.get_backup_plan_association.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.get_backup_plan_association.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.get_backup_plan_association.js,samples/README.md)
 
@@ -338,7 +338,7 @@ __Usage:__
 
 ### Backup_d_r.get_backup_vault
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.get_backup_vault.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.get_backup_vault.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.get_backup_vault.js,samples/README.md)
 
@@ -355,7 +355,7 @@ __Usage:__
 
 ### Backup_d_r.get_data_source
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.get_data_source.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.get_data_source.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.get_data_source.js,samples/README.md)
 
@@ -372,7 +372,7 @@ __Usage:__
 
 ### Backup_d_r.get_management_server
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.get_management_server.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.get_management_server.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.get_management_server.js,samples/README.md)
 
@@ -389,7 +389,7 @@ __Usage:__
 
 ### Backup_d_r.initialize_service
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.initialize_service.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.initialize_service.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.initialize_service.js,samples/README.md)
 
@@ -406,7 +406,7 @@ __Usage:__
 
 ### Backup_d_r.initiate_backup
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.initiate_backup.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.initiate_backup.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.initiate_backup.js,samples/README.md)
 
@@ -423,7 +423,7 @@ __Usage:__
 
 ### Backup_d_r.list_backup_plan_associations
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.list_backup_plan_associations.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.list_backup_plan_associations.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.list_backup_plan_associations.js,samples/README.md)
 
@@ -440,7 +440,7 @@ __Usage:__
 
 ### Backup_d_r.list_backup_plans
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.list_backup_plans.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.list_backup_plans.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.list_backup_plans.js,samples/README.md)
 
@@ -457,7 +457,7 @@ __Usage:__
 
 ### Backup_d_r.list_backup_vaults
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.list_backup_vaults.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.list_backup_vaults.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.list_backup_vaults.js,samples/README.md)
 
@@ -474,7 +474,7 @@ __Usage:__
 
 ### Backup_d_r.list_backups
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.list_backups.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.list_backups.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.list_backups.js,samples/README.md)
 
@@ -491,7 +491,7 @@ __Usage:__
 
 ### Backup_d_r.list_data_sources
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.list_data_sources.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.list_data_sources.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.list_data_sources.js,samples/README.md)
 
@@ -508,7 +508,7 @@ __Usage:__
 
 ### Backup_d_r.list_management_servers
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.list_management_servers.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.list_management_servers.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.list_management_servers.js,samples/README.md)
 
@@ -525,7 +525,7 @@ __Usage:__
 
 ### Backup_d_r.remove_data_source
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.remove_data_source.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.remove_data_source.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.remove_data_source.js,samples/README.md)
 
@@ -542,7 +542,7 @@ __Usage:__
 
 ### Backup_d_r.restore_backup
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.restore_backup.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.restore_backup.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.restore_backup.js,samples/README.md)
 
@@ -559,7 +559,7 @@ __Usage:__
 
 ### Backup_d_r.set_internal_status
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.set_internal_status.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.set_internal_status.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.set_internal_status.js,samples/README.md)
 
@@ -576,7 +576,7 @@ __Usage:__
 
 ### Backup_d_r.test_iam_permissions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.test_iam_permissions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.test_iam_permissions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.test_iam_permissions.js,samples/README.md)
 
@@ -593,7 +593,7 @@ __Usage:__
 
 ### Backup_d_r.trigger_backup
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.trigger_backup.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.trigger_backup.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.trigger_backup.js,samples/README.md)
 
@@ -610,7 +610,7 @@ __Usage:__
 
 ### Backup_d_r.update_backup
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.update_backup.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.update_backup.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.update_backup.js,samples/README.md)
 
@@ -627,7 +627,7 @@ __Usage:__
 
 ### Backup_d_r.update_backup_vault
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.update_backup_vault.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.update_backup_vault.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.update_backup_vault.js,samples/README.md)
 
@@ -644,7 +644,7 @@ __Usage:__
 
 ### Backup_d_r.update_data_source
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.update_data_source.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.update_data_source.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-backupdr/samples/generated/v1/backup_d_r.update_data_source.js,samples/README.md)
 
@@ -661,7 +661,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-backupdr/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-backupdr/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-backupdr/samples/quickstart.js,samples/README.md)
 

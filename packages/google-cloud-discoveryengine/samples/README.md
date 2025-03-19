@@ -302,7 +302,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Completion_service.complete_query
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/completion_service.complete_query.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/completion_service.complete_query.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/completion_service.complete_query.js,samples/README.md)
 
@@ -319,7 +319,7 @@ __Usage:__
 
 ### Completion_service.import_completion_suggestions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/completion_service.import_completion_suggestions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/completion_service.import_completion_suggestions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/completion_service.import_completion_suggestions.js,samples/README.md)
 
@@ -336,7 +336,7 @@ __Usage:__
 
 ### Completion_service.import_suggestion_deny_list_entries
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/completion_service.import_suggestion_deny_list_entries.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/completion_service.import_suggestion_deny_list_entries.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/completion_service.import_suggestion_deny_list_entries.js,samples/README.md)
 
@@ -353,7 +353,7 @@ __Usage:__
 
 ### Completion_service.purge_completion_suggestions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/completion_service.purge_completion_suggestions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/completion_service.purge_completion_suggestions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/completion_service.purge_completion_suggestions.js,samples/README.md)
 
@@ -370,7 +370,7 @@ __Usage:__
 
 ### Completion_service.purge_suggestion_deny_list_entries
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/completion_service.purge_suggestion_deny_list_entries.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/completion_service.purge_suggestion_deny_list_entries.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/completion_service.purge_suggestion_deny_list_entries.js,samples/README.md)
 
@@ -387,7 +387,7 @@ __Usage:__
 
 ### Control_service.create_control
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/control_service.create_control.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/control_service.create_control.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/control_service.create_control.js,samples/README.md)
 
@@ -404,7 +404,7 @@ __Usage:__
 
 ### Control_service.delete_control
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/control_service.delete_control.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/control_service.delete_control.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/control_service.delete_control.js,samples/README.md)
 
@@ -421,7 +421,7 @@ __Usage:__
 
 ### Control_service.get_control
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/control_service.get_control.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/control_service.get_control.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/control_service.get_control.js,samples/README.md)
 
@@ -438,7 +438,7 @@ __Usage:__
 
 ### Control_service.list_controls
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/control_service.list_controls.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/control_service.list_controls.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/control_service.list_controls.js,samples/README.md)
 
@@ -455,7 +455,7 @@ __Usage:__
 
 ### Control_service.update_control
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/control_service.update_control.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/control_service.update_control.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/control_service.update_control.js,samples/README.md)
 
@@ -472,7 +472,7 @@ __Usage:__
 
 ### Conversational_search_service.answer_query
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/conversational_search_service.answer_query.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/conversational_search_service.answer_query.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/conversational_search_service.answer_query.js,samples/README.md)
 
@@ -489,7 +489,7 @@ __Usage:__
 
 ### Conversational_search_service.converse_conversation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/conversational_search_service.converse_conversation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/conversational_search_service.converse_conversation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/conversational_search_service.converse_conversation.js,samples/README.md)
 
@@ -506,7 +506,7 @@ __Usage:__
 
 ### Conversational_search_service.create_conversation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/conversational_search_service.create_conversation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/conversational_search_service.create_conversation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/conversational_search_service.create_conversation.js,samples/README.md)
 
@@ -523,7 +523,7 @@ __Usage:__
 
 ### Conversational_search_service.create_session
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/conversational_search_service.create_session.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/conversational_search_service.create_session.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/conversational_search_service.create_session.js,samples/README.md)
 
@@ -540,7 +540,7 @@ __Usage:__
 
 ### Conversational_search_service.delete_conversation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/conversational_search_service.delete_conversation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/conversational_search_service.delete_conversation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/conversational_search_service.delete_conversation.js,samples/README.md)
 
@@ -557,7 +557,7 @@ __Usage:__
 
 ### Conversational_search_service.delete_session
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/conversational_search_service.delete_session.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/conversational_search_service.delete_session.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/conversational_search_service.delete_session.js,samples/README.md)
 
@@ -574,7 +574,7 @@ __Usage:__
 
 ### Conversational_search_service.get_answer
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/conversational_search_service.get_answer.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/conversational_search_service.get_answer.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/conversational_search_service.get_answer.js,samples/README.md)
 
@@ -591,7 +591,7 @@ __Usage:__
 
 ### Conversational_search_service.get_conversation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/conversational_search_service.get_conversation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/conversational_search_service.get_conversation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/conversational_search_service.get_conversation.js,samples/README.md)
 
@@ -608,7 +608,7 @@ __Usage:__
 
 ### Conversational_search_service.get_session
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/conversational_search_service.get_session.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/conversational_search_service.get_session.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/conversational_search_service.get_session.js,samples/README.md)
 
@@ -625,7 +625,7 @@ __Usage:__
 
 ### Conversational_search_service.list_conversations
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/conversational_search_service.list_conversations.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/conversational_search_service.list_conversations.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/conversational_search_service.list_conversations.js,samples/README.md)
 
@@ -642,7 +642,7 @@ __Usage:__
 
 ### Conversational_search_service.list_sessions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/conversational_search_service.list_sessions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/conversational_search_service.list_sessions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/conversational_search_service.list_sessions.js,samples/README.md)
 
@@ -659,7 +659,7 @@ __Usage:__
 
 ### Conversational_search_service.update_conversation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/conversational_search_service.update_conversation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/conversational_search_service.update_conversation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/conversational_search_service.update_conversation.js,samples/README.md)
 
@@ -676,7 +676,7 @@ __Usage:__
 
 ### Conversational_search_service.update_session
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/conversational_search_service.update_session.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/conversational_search_service.update_session.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/conversational_search_service.update_session.js,samples/README.md)
 
@@ -693,7 +693,7 @@ __Usage:__
 
 ### Data_store_service.create_data_store
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/data_store_service.create_data_store.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/data_store_service.create_data_store.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/data_store_service.create_data_store.js,samples/README.md)
 
@@ -710,7 +710,7 @@ __Usage:__
 
 ### Data_store_service.delete_data_store
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/data_store_service.delete_data_store.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/data_store_service.delete_data_store.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/data_store_service.delete_data_store.js,samples/README.md)
 
@@ -727,7 +727,7 @@ __Usage:__
 
 ### Data_store_service.get_data_store
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/data_store_service.get_data_store.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/data_store_service.get_data_store.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/data_store_service.get_data_store.js,samples/README.md)
 
@@ -744,7 +744,7 @@ __Usage:__
 
 ### Data_store_service.list_data_stores
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/data_store_service.list_data_stores.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/data_store_service.list_data_stores.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/data_store_service.list_data_stores.js,samples/README.md)
 
@@ -761,7 +761,7 @@ __Usage:__
 
 ### Data_store_service.update_data_store
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/data_store_service.update_data_store.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/data_store_service.update_data_store.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/data_store_service.update_data_store.js,samples/README.md)
 
@@ -778,7 +778,7 @@ __Usage:__
 
 ### Document_service.batch_get_documents_metadata
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/document_service.batch_get_documents_metadata.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/document_service.batch_get_documents_metadata.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/document_service.batch_get_documents_metadata.js,samples/README.md)
 
@@ -795,7 +795,7 @@ __Usage:__
 
 ### Document_service.create_document
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/document_service.create_document.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/document_service.create_document.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/document_service.create_document.js,samples/README.md)
 
@@ -812,7 +812,7 @@ __Usage:__
 
 ### Document_service.delete_document
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/document_service.delete_document.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/document_service.delete_document.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/document_service.delete_document.js,samples/README.md)
 
@@ -829,7 +829,7 @@ __Usage:__
 
 ### Document_service.get_document
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/document_service.get_document.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/document_service.get_document.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/document_service.get_document.js,samples/README.md)
 
@@ -846,7 +846,7 @@ __Usage:__
 
 ### Document_service.import_documents
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/document_service.import_documents.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/document_service.import_documents.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/document_service.import_documents.js,samples/README.md)
 
@@ -863,7 +863,7 @@ __Usage:__
 
 ### Document_service.list_documents
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/document_service.list_documents.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/document_service.list_documents.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/document_service.list_documents.js,samples/README.md)
 
@@ -880,7 +880,7 @@ __Usage:__
 
 ### Document_service.purge_documents
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/document_service.purge_documents.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/document_service.purge_documents.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/document_service.purge_documents.js,samples/README.md)
 
@@ -897,7 +897,7 @@ __Usage:__
 
 ### Document_service.update_document
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/document_service.update_document.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/document_service.update_document.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/document_service.update_document.js,samples/README.md)
 
@@ -914,7 +914,7 @@ __Usage:__
 
 ### Engine_service.create_engine
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/engine_service.create_engine.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/engine_service.create_engine.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/engine_service.create_engine.js,samples/README.md)
 
@@ -931,7 +931,7 @@ __Usage:__
 
 ### Engine_service.delete_engine
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/engine_service.delete_engine.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/engine_service.delete_engine.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/engine_service.delete_engine.js,samples/README.md)
 
@@ -948,7 +948,7 @@ __Usage:__
 
 ### Engine_service.get_engine
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/engine_service.get_engine.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/engine_service.get_engine.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/engine_service.get_engine.js,samples/README.md)
 
@@ -965,7 +965,7 @@ __Usage:__
 
 ### Engine_service.list_engines
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/engine_service.list_engines.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/engine_service.list_engines.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/engine_service.list_engines.js,samples/README.md)
 
@@ -982,7 +982,7 @@ __Usage:__
 
 ### Engine_service.update_engine
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/engine_service.update_engine.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/engine_service.update_engine.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/engine_service.update_engine.js,samples/README.md)
 
@@ -999,7 +999,7 @@ __Usage:__
 
 ### Grounded_generation_service.check_grounding
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/grounded_generation_service.check_grounding.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/grounded_generation_service.check_grounding.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/grounded_generation_service.check_grounding.js,samples/README.md)
 
@@ -1016,7 +1016,7 @@ __Usage:__
 
 ### Grounded_generation_service.generate_grounded_content
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/grounded_generation_service.generate_grounded_content.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/grounded_generation_service.generate_grounded_content.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/grounded_generation_service.generate_grounded_content.js,samples/README.md)
 
@@ -1033,7 +1033,7 @@ __Usage:__
 
 ### Grounded_generation_service.stream_generate_grounded_content
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/grounded_generation_service.stream_generate_grounded_content.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/grounded_generation_service.stream_generate_grounded_content.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/grounded_generation_service.stream_generate_grounded_content.js,samples/README.md)
 
@@ -1050,7 +1050,7 @@ __Usage:__
 
 ### Project_service.provision_project
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/project_service.provision_project.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/project_service.provision_project.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/project_service.provision_project.js,samples/README.md)
 
@@ -1067,7 +1067,7 @@ __Usage:__
 
 ### Rank_service.rank
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/rank_service.rank.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/rank_service.rank.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/rank_service.rank.js,samples/README.md)
 
@@ -1084,7 +1084,7 @@ __Usage:__
 
 ### Recommendation_service.recommend
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/recommendation_service.recommend.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/recommendation_service.recommend.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/recommendation_service.recommend.js,samples/README.md)
 
@@ -1101,7 +1101,7 @@ __Usage:__
 
 ### Schema_service.create_schema
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/schema_service.create_schema.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/schema_service.create_schema.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/schema_service.create_schema.js,samples/README.md)
 
@@ -1118,7 +1118,7 @@ __Usage:__
 
 ### Schema_service.delete_schema
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/schema_service.delete_schema.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/schema_service.delete_schema.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/schema_service.delete_schema.js,samples/README.md)
 
@@ -1135,7 +1135,7 @@ __Usage:__
 
 ### Schema_service.get_schema
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/schema_service.get_schema.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/schema_service.get_schema.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/schema_service.get_schema.js,samples/README.md)
 
@@ -1152,7 +1152,7 @@ __Usage:__
 
 ### Schema_service.list_schemas
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/schema_service.list_schemas.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/schema_service.list_schemas.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/schema_service.list_schemas.js,samples/README.md)
 
@@ -1169,7 +1169,7 @@ __Usage:__
 
 ### Schema_service.update_schema
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/schema_service.update_schema.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/schema_service.update_schema.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/schema_service.update_schema.js,samples/README.md)
 
@@ -1186,7 +1186,7 @@ __Usage:__
 
 ### Search_service.search
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/search_service.search.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/search_service.search.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/search_service.search.js,samples/README.md)
 
@@ -1203,7 +1203,7 @@ __Usage:__
 
 ### Search_service.search_lite
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/search_service.search_lite.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/search_service.search_lite.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/search_service.search_lite.js,samples/README.md)
 
@@ -1220,7 +1220,7 @@ __Usage:__
 
 ### Search_tuning_service.list_custom_models
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/search_tuning_service.list_custom_models.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/search_tuning_service.list_custom_models.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/search_tuning_service.list_custom_models.js,samples/README.md)
 
@@ -1237,7 +1237,7 @@ __Usage:__
 
 ### Search_tuning_service.train_custom_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/search_tuning_service.train_custom_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/search_tuning_service.train_custom_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/search_tuning_service.train_custom_model.js,samples/README.md)
 
@@ -1254,7 +1254,7 @@ __Usage:__
 
 ### Site_search_engine_service.batch_create_target_sites
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/site_search_engine_service.batch_create_target_sites.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/site_search_engine_service.batch_create_target_sites.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/site_search_engine_service.batch_create_target_sites.js,samples/README.md)
 
@@ -1271,7 +1271,7 @@ __Usage:__
 
 ### Site_search_engine_service.batch_verify_target_sites
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/site_search_engine_service.batch_verify_target_sites.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/site_search_engine_service.batch_verify_target_sites.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/site_search_engine_service.batch_verify_target_sites.js,samples/README.md)
 
@@ -1288,7 +1288,7 @@ __Usage:__
 
 ### Site_search_engine_service.create_target_site
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/site_search_engine_service.create_target_site.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/site_search_engine_service.create_target_site.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/site_search_engine_service.create_target_site.js,samples/README.md)
 
@@ -1305,7 +1305,7 @@ __Usage:__
 
 ### Site_search_engine_service.delete_target_site
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/site_search_engine_service.delete_target_site.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/site_search_engine_service.delete_target_site.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/site_search_engine_service.delete_target_site.js,samples/README.md)
 
@@ -1322,7 +1322,7 @@ __Usage:__
 
 ### Site_search_engine_service.disable_advanced_site_search
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/site_search_engine_service.disable_advanced_site_search.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/site_search_engine_service.disable_advanced_site_search.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/site_search_engine_service.disable_advanced_site_search.js,samples/README.md)
 
@@ -1339,7 +1339,7 @@ __Usage:__
 
 ### Site_search_engine_service.enable_advanced_site_search
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/site_search_engine_service.enable_advanced_site_search.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/site_search_engine_service.enable_advanced_site_search.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/site_search_engine_service.enable_advanced_site_search.js,samples/README.md)
 
@@ -1356,7 +1356,7 @@ __Usage:__
 
 ### Site_search_engine_service.fetch_domain_verification_status
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/site_search_engine_service.fetch_domain_verification_status.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/site_search_engine_service.fetch_domain_verification_status.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/site_search_engine_service.fetch_domain_verification_status.js,samples/README.md)
 
@@ -1373,7 +1373,7 @@ __Usage:__
 
 ### Site_search_engine_service.get_site_search_engine
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/site_search_engine_service.get_site_search_engine.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/site_search_engine_service.get_site_search_engine.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/site_search_engine_service.get_site_search_engine.js,samples/README.md)
 
@@ -1390,7 +1390,7 @@ __Usage:__
 
 ### Site_search_engine_service.get_target_site
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/site_search_engine_service.get_target_site.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/site_search_engine_service.get_target_site.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/site_search_engine_service.get_target_site.js,samples/README.md)
 
@@ -1407,7 +1407,7 @@ __Usage:__
 
 ### Site_search_engine_service.list_target_sites
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/site_search_engine_service.list_target_sites.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/site_search_engine_service.list_target_sites.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/site_search_engine_service.list_target_sites.js,samples/README.md)
 
@@ -1424,7 +1424,7 @@ __Usage:__
 
 ### Site_search_engine_service.recrawl_uris
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/site_search_engine_service.recrawl_uris.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/site_search_engine_service.recrawl_uris.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/site_search_engine_service.recrawl_uris.js,samples/README.md)
 
@@ -1441,7 +1441,7 @@ __Usage:__
 
 ### Site_search_engine_service.update_target_site
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/site_search_engine_service.update_target_site.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/site_search_engine_service.update_target_site.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/site_search_engine_service.update_target_site.js,samples/README.md)
 
@@ -1458,7 +1458,7 @@ __Usage:__
 
 ### User_event_service.collect_user_event
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/user_event_service.collect_user_event.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/user_event_service.collect_user_event.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/user_event_service.collect_user_event.js,samples/README.md)
 
@@ -1475,7 +1475,7 @@ __Usage:__
 
 ### User_event_service.import_user_events
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/user_event_service.import_user_events.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/user_event_service.import_user_events.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/user_event_service.import_user_events.js,samples/README.md)
 
@@ -1492,7 +1492,7 @@ __Usage:__
 
 ### User_event_service.purge_user_events
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/user_event_service.purge_user_events.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/user_event_service.purge_user_events.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/user_event_service.purge_user_events.js,samples/README.md)
 
@@ -1509,7 +1509,7 @@ __Usage:__
 
 ### User_event_service.write_user_event
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1/user_event_service.write_user_event.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/user_event_service.write_user_event.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/user_event_service.write_user_event.js,samples/README.md)
 
@@ -1526,7 +1526,7 @@ __Usage:__
 
 ### Acl_config_service.get_acl_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/acl_config_service.get_acl_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/acl_config_service.get_acl_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/acl_config_service.get_acl_config.js,samples/README.md)
 
@@ -1543,7 +1543,7 @@ __Usage:__
 
 ### Acl_config_service.update_acl_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/acl_config_service.update_acl_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/acl_config_service.update_acl_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/acl_config_service.update_acl_config.js,samples/README.md)
 
@@ -1560,7 +1560,7 @@ __Usage:__
 
 ### Chunk_service.get_chunk
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/chunk_service.get_chunk.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/chunk_service.get_chunk.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/chunk_service.get_chunk.js,samples/README.md)
 
@@ -1577,7 +1577,7 @@ __Usage:__
 
 ### Chunk_service.list_chunks
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/chunk_service.list_chunks.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/chunk_service.list_chunks.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/chunk_service.list_chunks.js,samples/README.md)
 
@@ -1594,7 +1594,7 @@ __Usage:__
 
 ### Completion_service.complete_query
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/completion_service.complete_query.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/completion_service.complete_query.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/completion_service.complete_query.js,samples/README.md)
 
@@ -1611,7 +1611,7 @@ __Usage:__
 
 ### Completion_service.import_completion_suggestions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/completion_service.import_completion_suggestions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/completion_service.import_completion_suggestions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/completion_service.import_completion_suggestions.js,samples/README.md)
 
@@ -1628,7 +1628,7 @@ __Usage:__
 
 ### Completion_service.import_suggestion_deny_list_entries
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/completion_service.import_suggestion_deny_list_entries.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/completion_service.import_suggestion_deny_list_entries.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/completion_service.import_suggestion_deny_list_entries.js,samples/README.md)
 
@@ -1645,7 +1645,7 @@ __Usage:__
 
 ### Completion_service.purge_completion_suggestions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/completion_service.purge_completion_suggestions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/completion_service.purge_completion_suggestions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/completion_service.purge_completion_suggestions.js,samples/README.md)
 
@@ -1662,7 +1662,7 @@ __Usage:__
 
 ### Completion_service.purge_suggestion_deny_list_entries
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/completion_service.purge_suggestion_deny_list_entries.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/completion_service.purge_suggestion_deny_list_entries.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/completion_service.purge_suggestion_deny_list_entries.js,samples/README.md)
 
@@ -1679,7 +1679,7 @@ __Usage:__
 
 ### Control_service.create_control
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/control_service.create_control.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/control_service.create_control.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/control_service.create_control.js,samples/README.md)
 
@@ -1696,7 +1696,7 @@ __Usage:__
 
 ### Control_service.delete_control
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/control_service.delete_control.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/control_service.delete_control.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/control_service.delete_control.js,samples/README.md)
 
@@ -1713,7 +1713,7 @@ __Usage:__
 
 ### Control_service.get_control
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/control_service.get_control.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/control_service.get_control.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/control_service.get_control.js,samples/README.md)
 
@@ -1730,7 +1730,7 @@ __Usage:__
 
 ### Control_service.list_controls
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/control_service.list_controls.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/control_service.list_controls.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/control_service.list_controls.js,samples/README.md)
 
@@ -1747,7 +1747,7 @@ __Usage:__
 
 ### Control_service.update_control
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/control_service.update_control.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/control_service.update_control.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/control_service.update_control.js,samples/README.md)
 
@@ -1764,7 +1764,7 @@ __Usage:__
 
 ### Conversational_search_service.answer_query
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/conversational_search_service.answer_query.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/conversational_search_service.answer_query.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/conversational_search_service.answer_query.js,samples/README.md)
 
@@ -1781,7 +1781,7 @@ __Usage:__
 
 ### Conversational_search_service.converse_conversation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/conversational_search_service.converse_conversation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/conversational_search_service.converse_conversation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/conversational_search_service.converse_conversation.js,samples/README.md)
 
@@ -1798,7 +1798,7 @@ __Usage:__
 
 ### Conversational_search_service.create_conversation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/conversational_search_service.create_conversation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/conversational_search_service.create_conversation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/conversational_search_service.create_conversation.js,samples/README.md)
 
@@ -1815,7 +1815,7 @@ __Usage:__
 
 ### Conversational_search_service.create_session
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/conversational_search_service.create_session.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/conversational_search_service.create_session.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/conversational_search_service.create_session.js,samples/README.md)
 
@@ -1832,7 +1832,7 @@ __Usage:__
 
 ### Conversational_search_service.delete_conversation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/conversational_search_service.delete_conversation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/conversational_search_service.delete_conversation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/conversational_search_service.delete_conversation.js,samples/README.md)
 
@@ -1849,7 +1849,7 @@ __Usage:__
 
 ### Conversational_search_service.delete_session
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/conversational_search_service.delete_session.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/conversational_search_service.delete_session.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/conversational_search_service.delete_session.js,samples/README.md)
 
@@ -1866,7 +1866,7 @@ __Usage:__
 
 ### Conversational_search_service.get_answer
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/conversational_search_service.get_answer.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/conversational_search_service.get_answer.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/conversational_search_service.get_answer.js,samples/README.md)
 
@@ -1883,7 +1883,7 @@ __Usage:__
 
 ### Conversational_search_service.get_conversation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/conversational_search_service.get_conversation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/conversational_search_service.get_conversation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/conversational_search_service.get_conversation.js,samples/README.md)
 
@@ -1900,7 +1900,7 @@ __Usage:__
 
 ### Conversational_search_service.get_session
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/conversational_search_service.get_session.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/conversational_search_service.get_session.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/conversational_search_service.get_session.js,samples/README.md)
 
@@ -1917,7 +1917,7 @@ __Usage:__
 
 ### Conversational_search_service.list_conversations
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/conversational_search_service.list_conversations.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/conversational_search_service.list_conversations.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/conversational_search_service.list_conversations.js,samples/README.md)
 
@@ -1934,7 +1934,7 @@ __Usage:__
 
 ### Conversational_search_service.list_sessions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/conversational_search_service.list_sessions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/conversational_search_service.list_sessions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/conversational_search_service.list_sessions.js,samples/README.md)
 
@@ -1951,7 +1951,7 @@ __Usage:__
 
 ### Conversational_search_service.update_conversation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/conversational_search_service.update_conversation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/conversational_search_service.update_conversation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/conversational_search_service.update_conversation.js,samples/README.md)
 
@@ -1968,7 +1968,7 @@ __Usage:__
 
 ### Conversational_search_service.update_session
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/conversational_search_service.update_session.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/conversational_search_service.update_session.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/conversational_search_service.update_session.js,samples/README.md)
 
@@ -1985,7 +1985,7 @@ __Usage:__
 
 ### Data_store_service.create_data_store
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/data_store_service.create_data_store.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/data_store_service.create_data_store.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/data_store_service.create_data_store.js,samples/README.md)
 
@@ -2002,7 +2002,7 @@ __Usage:__
 
 ### Data_store_service.delete_data_store
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/data_store_service.delete_data_store.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/data_store_service.delete_data_store.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/data_store_service.delete_data_store.js,samples/README.md)
 
@@ -2019,7 +2019,7 @@ __Usage:__
 
 ### Data_store_service.get_data_store
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/data_store_service.get_data_store.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/data_store_service.get_data_store.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/data_store_service.get_data_store.js,samples/README.md)
 
@@ -2036,7 +2036,7 @@ __Usage:__
 
 ### Data_store_service.get_document_processing_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/data_store_service.get_document_processing_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/data_store_service.get_document_processing_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/data_store_service.get_document_processing_config.js,samples/README.md)
 
@@ -2053,7 +2053,7 @@ __Usage:__
 
 ### Data_store_service.list_data_stores
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/data_store_service.list_data_stores.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/data_store_service.list_data_stores.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/data_store_service.list_data_stores.js,samples/README.md)
 
@@ -2070,7 +2070,7 @@ __Usage:__
 
 ### Data_store_service.update_data_store
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/data_store_service.update_data_store.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/data_store_service.update_data_store.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/data_store_service.update_data_store.js,samples/README.md)
 
@@ -2087,7 +2087,7 @@ __Usage:__
 
 ### Data_store_service.update_document_processing_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/data_store_service.update_document_processing_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/data_store_service.update_document_processing_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/data_store_service.update_document_processing_config.js,samples/README.md)
 
@@ -2104,7 +2104,7 @@ __Usage:__
 
 ### Document_service.batch_get_documents_metadata
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/document_service.batch_get_documents_metadata.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/document_service.batch_get_documents_metadata.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/document_service.batch_get_documents_metadata.js,samples/README.md)
 
@@ -2121,7 +2121,7 @@ __Usage:__
 
 ### Document_service.create_document
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/document_service.create_document.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/document_service.create_document.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/document_service.create_document.js,samples/README.md)
 
@@ -2138,7 +2138,7 @@ __Usage:__
 
 ### Document_service.delete_document
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/document_service.delete_document.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/document_service.delete_document.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/document_service.delete_document.js,samples/README.md)
 
@@ -2155,7 +2155,7 @@ __Usage:__
 
 ### Document_service.get_document
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/document_service.get_document.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/document_service.get_document.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/document_service.get_document.js,samples/README.md)
 
@@ -2172,7 +2172,7 @@ __Usage:__
 
 ### Document_service.get_processed_document
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/document_service.get_processed_document.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/document_service.get_processed_document.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/document_service.get_processed_document.js,samples/README.md)
 
@@ -2189,7 +2189,7 @@ __Usage:__
 
 ### Document_service.import_documents
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/document_service.import_documents.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/document_service.import_documents.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/document_service.import_documents.js,samples/README.md)
 
@@ -2206,7 +2206,7 @@ __Usage:__
 
 ### Document_service.list_documents
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/document_service.list_documents.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/document_service.list_documents.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/document_service.list_documents.js,samples/README.md)
 
@@ -2223,7 +2223,7 @@ __Usage:__
 
 ### Document_service.purge_documents
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/document_service.purge_documents.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/document_service.purge_documents.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/document_service.purge_documents.js,samples/README.md)
 
@@ -2240,7 +2240,7 @@ __Usage:__
 
 ### Document_service.update_document
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/document_service.update_document.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/document_service.update_document.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/document_service.update_document.js,samples/README.md)
 
@@ -2257,7 +2257,7 @@ __Usage:__
 
 ### Engine_service.create_engine
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/engine_service.create_engine.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/engine_service.create_engine.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/engine_service.create_engine.js,samples/README.md)
 
@@ -2274,7 +2274,7 @@ __Usage:__
 
 ### Engine_service.delete_engine
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/engine_service.delete_engine.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/engine_service.delete_engine.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/engine_service.delete_engine.js,samples/README.md)
 
@@ -2291,7 +2291,7 @@ __Usage:__
 
 ### Engine_service.get_engine
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/engine_service.get_engine.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/engine_service.get_engine.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/engine_service.get_engine.js,samples/README.md)
 
@@ -2308,7 +2308,7 @@ __Usage:__
 
 ### Engine_service.list_engines
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/engine_service.list_engines.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/engine_service.list_engines.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/engine_service.list_engines.js,samples/README.md)
 
@@ -2325,7 +2325,7 @@ __Usage:__
 
 ### Engine_service.pause_engine
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/engine_service.pause_engine.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/engine_service.pause_engine.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/engine_service.pause_engine.js,samples/README.md)
 
@@ -2342,7 +2342,7 @@ __Usage:__
 
 ### Engine_service.resume_engine
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/engine_service.resume_engine.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/engine_service.resume_engine.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/engine_service.resume_engine.js,samples/README.md)
 
@@ -2359,7 +2359,7 @@ __Usage:__
 
 ### Engine_service.tune_engine
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/engine_service.tune_engine.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/engine_service.tune_engine.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/engine_service.tune_engine.js,samples/README.md)
 
@@ -2376,7 +2376,7 @@ __Usage:__
 
 ### Engine_service.update_engine
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/engine_service.update_engine.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/engine_service.update_engine.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/engine_service.update_engine.js,samples/README.md)
 
@@ -2393,7 +2393,7 @@ __Usage:__
 
 ### Estimate_billing_service.estimate_data_size
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/estimate_billing_service.estimate_data_size.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/estimate_billing_service.estimate_data_size.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/estimate_billing_service.estimate_data_size.js,samples/README.md)
 
@@ -2410,7 +2410,7 @@ __Usage:__
 
 ### Evaluation_service.create_evaluation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/evaluation_service.create_evaluation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/evaluation_service.create_evaluation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/evaluation_service.create_evaluation.js,samples/README.md)
 
@@ -2427,7 +2427,7 @@ __Usage:__
 
 ### Evaluation_service.get_evaluation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/evaluation_service.get_evaluation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/evaluation_service.get_evaluation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/evaluation_service.get_evaluation.js,samples/README.md)
 
@@ -2444,7 +2444,7 @@ __Usage:__
 
 ### Evaluation_service.list_evaluation_results
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/evaluation_service.list_evaluation_results.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/evaluation_service.list_evaluation_results.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/evaluation_service.list_evaluation_results.js,samples/README.md)
 
@@ -2461,7 +2461,7 @@ __Usage:__
 
 ### Evaluation_service.list_evaluations
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/evaluation_service.list_evaluations.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/evaluation_service.list_evaluations.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/evaluation_service.list_evaluations.js,samples/README.md)
 
@@ -2478,7 +2478,7 @@ __Usage:__
 
 ### Grounded_generation_service.check_grounding
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/grounded_generation_service.check_grounding.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/grounded_generation_service.check_grounding.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/grounded_generation_service.check_grounding.js,samples/README.md)
 
@@ -2495,7 +2495,7 @@ __Usage:__
 
 ### Project_service.get_project
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/project_service.get_project.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/project_service.get_project.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/project_service.get_project.js,samples/README.md)
 
@@ -2512,7 +2512,7 @@ __Usage:__
 
 ### Project_service.provision_project
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/project_service.provision_project.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/project_service.provision_project.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/project_service.provision_project.js,samples/README.md)
 
@@ -2529,7 +2529,7 @@ __Usage:__
 
 ### Project_service.report_consent_change
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/project_service.report_consent_change.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/project_service.report_consent_change.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/project_service.report_consent_change.js,samples/README.md)
 
@@ -2546,7 +2546,7 @@ __Usage:__
 
 ### Rank_service.rank
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/rank_service.rank.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/rank_service.rank.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/rank_service.rank.js,samples/README.md)
 
@@ -2563,7 +2563,7 @@ __Usage:__
 
 ### Recommendation_service.recommend
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/recommendation_service.recommend.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/recommendation_service.recommend.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/recommendation_service.recommend.js,samples/README.md)
 
@@ -2580,7 +2580,7 @@ __Usage:__
 
 ### Sample_query_service.create_sample_query
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/sample_query_service.create_sample_query.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/sample_query_service.create_sample_query.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/sample_query_service.create_sample_query.js,samples/README.md)
 
@@ -2597,7 +2597,7 @@ __Usage:__
 
 ### Sample_query_service.delete_sample_query
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/sample_query_service.delete_sample_query.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/sample_query_service.delete_sample_query.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/sample_query_service.delete_sample_query.js,samples/README.md)
 
@@ -2614,7 +2614,7 @@ __Usage:__
 
 ### Sample_query_service.get_sample_query
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/sample_query_service.get_sample_query.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/sample_query_service.get_sample_query.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/sample_query_service.get_sample_query.js,samples/README.md)
 
@@ -2631,7 +2631,7 @@ __Usage:__
 
 ### Sample_query_service.import_sample_queries
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/sample_query_service.import_sample_queries.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/sample_query_service.import_sample_queries.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/sample_query_service.import_sample_queries.js,samples/README.md)
 
@@ -2648,7 +2648,7 @@ __Usage:__
 
 ### Sample_query_service.list_sample_queries
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/sample_query_service.list_sample_queries.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/sample_query_service.list_sample_queries.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/sample_query_service.list_sample_queries.js,samples/README.md)
 
@@ -2665,7 +2665,7 @@ __Usage:__
 
 ### Sample_query_service.update_sample_query
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/sample_query_service.update_sample_query.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/sample_query_service.update_sample_query.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/sample_query_service.update_sample_query.js,samples/README.md)
 
@@ -2682,7 +2682,7 @@ __Usage:__
 
 ### Sample_query_set_service.create_sample_query_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/sample_query_set_service.create_sample_query_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/sample_query_set_service.create_sample_query_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/sample_query_set_service.create_sample_query_set.js,samples/README.md)
 
@@ -2699,7 +2699,7 @@ __Usage:__
 
 ### Sample_query_set_service.delete_sample_query_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/sample_query_set_service.delete_sample_query_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/sample_query_set_service.delete_sample_query_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/sample_query_set_service.delete_sample_query_set.js,samples/README.md)
 
@@ -2716,7 +2716,7 @@ __Usage:__
 
 ### Sample_query_set_service.get_sample_query_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/sample_query_set_service.get_sample_query_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/sample_query_set_service.get_sample_query_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/sample_query_set_service.get_sample_query_set.js,samples/README.md)
 
@@ -2733,7 +2733,7 @@ __Usage:__
 
 ### Sample_query_set_service.list_sample_query_sets
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/sample_query_set_service.list_sample_query_sets.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/sample_query_set_service.list_sample_query_sets.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/sample_query_set_service.list_sample_query_sets.js,samples/README.md)
 
@@ -2750,7 +2750,7 @@ __Usage:__
 
 ### Sample_query_set_service.update_sample_query_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/sample_query_set_service.update_sample_query_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/sample_query_set_service.update_sample_query_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/sample_query_set_service.update_sample_query_set.js,samples/README.md)
 
@@ -2767,7 +2767,7 @@ __Usage:__
 
 ### Schema_service.create_schema
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/schema_service.create_schema.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/schema_service.create_schema.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/schema_service.create_schema.js,samples/README.md)
 
@@ -2784,7 +2784,7 @@ __Usage:__
 
 ### Schema_service.delete_schema
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/schema_service.delete_schema.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/schema_service.delete_schema.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/schema_service.delete_schema.js,samples/README.md)
 
@@ -2801,7 +2801,7 @@ __Usage:__
 
 ### Schema_service.get_schema
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/schema_service.get_schema.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/schema_service.get_schema.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/schema_service.get_schema.js,samples/README.md)
 
@@ -2818,7 +2818,7 @@ __Usage:__
 
 ### Schema_service.list_schemas
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/schema_service.list_schemas.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/schema_service.list_schemas.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/schema_service.list_schemas.js,samples/README.md)
 
@@ -2835,7 +2835,7 @@ __Usage:__
 
 ### Schema_service.update_schema
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/schema_service.update_schema.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/schema_service.update_schema.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/schema_service.update_schema.js,samples/README.md)
 
@@ -2852,7 +2852,7 @@ __Usage:__
 
 ### Search_service.search
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/search_service.search.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/search_service.search.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/search_service.search.js,samples/README.md)
 
@@ -2869,7 +2869,7 @@ __Usage:__
 
 ### Search_tuning_service.list_custom_models
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/search_tuning_service.list_custom_models.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/search_tuning_service.list_custom_models.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/search_tuning_service.list_custom_models.js,samples/README.md)
 
@@ -2886,7 +2886,7 @@ __Usage:__
 
 ### Search_tuning_service.train_custom_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/search_tuning_service.train_custom_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/search_tuning_service.train_custom_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/search_tuning_service.train_custom_model.js,samples/README.md)
 
@@ -2903,7 +2903,7 @@ __Usage:__
 
 ### Serving_config_service.get_serving_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/serving_config_service.get_serving_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/serving_config_service.get_serving_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/serving_config_service.get_serving_config.js,samples/README.md)
 
@@ -2920,7 +2920,7 @@ __Usage:__
 
 ### Serving_config_service.list_serving_configs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/serving_config_service.list_serving_configs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/serving_config_service.list_serving_configs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/serving_config_service.list_serving_configs.js,samples/README.md)
 
@@ -2937,7 +2937,7 @@ __Usage:__
 
 ### Serving_config_service.update_serving_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/serving_config_service.update_serving_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/serving_config_service.update_serving_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/serving_config_service.update_serving_config.js,samples/README.md)
 
@@ -2954,7 +2954,7 @@ __Usage:__
 
 ### Site_search_engine_service.batch_create_target_sites
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.batch_create_target_sites.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.batch_create_target_sites.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.batch_create_target_sites.js,samples/README.md)
 
@@ -2971,7 +2971,7 @@ __Usage:__
 
 ### Site_search_engine_service.batch_verify_target_sites
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.batch_verify_target_sites.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.batch_verify_target_sites.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.batch_verify_target_sites.js,samples/README.md)
 
@@ -2988,7 +2988,7 @@ __Usage:__
 
 ### Site_search_engine_service.create_target_site
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.create_target_site.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.create_target_site.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.create_target_site.js,samples/README.md)
 
@@ -3005,7 +3005,7 @@ __Usage:__
 
 ### Site_search_engine_service.delete_target_site
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.delete_target_site.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.delete_target_site.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.delete_target_site.js,samples/README.md)
 
@@ -3022,7 +3022,7 @@ __Usage:__
 
 ### Site_search_engine_service.disable_advanced_site_search
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.disable_advanced_site_search.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.disable_advanced_site_search.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.disable_advanced_site_search.js,samples/README.md)
 
@@ -3039,7 +3039,7 @@ __Usage:__
 
 ### Site_search_engine_service.enable_advanced_site_search
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.enable_advanced_site_search.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.enable_advanced_site_search.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.enable_advanced_site_search.js,samples/README.md)
 
@@ -3056,7 +3056,7 @@ __Usage:__
 
 ### Site_search_engine_service.fetch_domain_verification_status
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.fetch_domain_verification_status.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.fetch_domain_verification_status.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.fetch_domain_verification_status.js,samples/README.md)
 
@@ -3073,7 +3073,7 @@ __Usage:__
 
 ### Site_search_engine_service.get_site_search_engine
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.get_site_search_engine.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.get_site_search_engine.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.get_site_search_engine.js,samples/README.md)
 
@@ -3090,7 +3090,7 @@ __Usage:__
 
 ### Site_search_engine_service.get_target_site
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.get_target_site.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.get_target_site.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.get_target_site.js,samples/README.md)
 
@@ -3107,7 +3107,7 @@ __Usage:__
 
 ### Site_search_engine_service.get_uri_pattern_document_data
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.get_uri_pattern_document_data.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.get_uri_pattern_document_data.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.get_uri_pattern_document_data.js,samples/README.md)
 
@@ -3124,7 +3124,7 @@ __Usage:__
 
 ### Site_search_engine_service.list_target_sites
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.list_target_sites.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.list_target_sites.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.list_target_sites.js,samples/README.md)
 
@@ -3141,7 +3141,7 @@ __Usage:__
 
 ### Site_search_engine_service.recrawl_uris
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.recrawl_uris.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.recrawl_uris.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.recrawl_uris.js,samples/README.md)
 
@@ -3158,7 +3158,7 @@ __Usage:__
 
 ### Site_search_engine_service.set_uri_pattern_document_data
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.set_uri_pattern_document_data.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.set_uri_pattern_document_data.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.set_uri_pattern_document_data.js,samples/README.md)
 
@@ -3175,7 +3175,7 @@ __Usage:__
 
 ### Site_search_engine_service.update_target_site
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.update_target_site.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.update_target_site.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.update_target_site.js,samples/README.md)
 
@@ -3192,7 +3192,7 @@ __Usage:__
 
 ### User_event_service.collect_user_event
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/user_event_service.collect_user_event.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/user_event_service.collect_user_event.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/user_event_service.collect_user_event.js,samples/README.md)
 
@@ -3209,7 +3209,7 @@ __Usage:__
 
 ### User_event_service.import_user_events
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/user_event_service.import_user_events.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/user_event_service.import_user_events.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/user_event_service.import_user_events.js,samples/README.md)
 
@@ -3226,7 +3226,7 @@ __Usage:__
 
 ### User_event_service.purge_user_events
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/user_event_service.purge_user_events.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/user_event_service.purge_user_events.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/user_event_service.purge_user_events.js,samples/README.md)
 
@@ -3243,7 +3243,7 @@ __Usage:__
 
 ### User_event_service.write_user_event
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1alpha/user_event_service.write_user_event.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/user_event_service.write_user_event.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/user_event_service.write_user_event.js,samples/README.md)
 
@@ -3260,7 +3260,7 @@ __Usage:__
 
 ### Completion_service.advanced_complete_query
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/completion_service.advanced_complete_query.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/completion_service.advanced_complete_query.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/completion_service.advanced_complete_query.js,samples/README.md)
 
@@ -3277,7 +3277,7 @@ __Usage:__
 
 ### Completion_service.complete_query
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/completion_service.complete_query.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/completion_service.complete_query.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/completion_service.complete_query.js,samples/README.md)
 
@@ -3294,7 +3294,7 @@ __Usage:__
 
 ### Completion_service.import_completion_suggestions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/completion_service.import_completion_suggestions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/completion_service.import_completion_suggestions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/completion_service.import_completion_suggestions.js,samples/README.md)
 
@@ -3311,7 +3311,7 @@ __Usage:__
 
 ### Completion_service.import_suggestion_deny_list_entries
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/completion_service.import_suggestion_deny_list_entries.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/completion_service.import_suggestion_deny_list_entries.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/completion_service.import_suggestion_deny_list_entries.js,samples/README.md)
 
@@ -3328,7 +3328,7 @@ __Usage:__
 
 ### Completion_service.purge_completion_suggestions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/completion_service.purge_completion_suggestions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/completion_service.purge_completion_suggestions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/completion_service.purge_completion_suggestions.js,samples/README.md)
 
@@ -3345,7 +3345,7 @@ __Usage:__
 
 ### Completion_service.purge_suggestion_deny_list_entries
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/completion_service.purge_suggestion_deny_list_entries.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/completion_service.purge_suggestion_deny_list_entries.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/completion_service.purge_suggestion_deny_list_entries.js,samples/README.md)
 
@@ -3362,7 +3362,7 @@ __Usage:__
 
 ### Control_service.create_control
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/control_service.create_control.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/control_service.create_control.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/control_service.create_control.js,samples/README.md)
 
@@ -3379,7 +3379,7 @@ __Usage:__
 
 ### Control_service.delete_control
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/control_service.delete_control.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/control_service.delete_control.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/control_service.delete_control.js,samples/README.md)
 
@@ -3396,7 +3396,7 @@ __Usage:__
 
 ### Control_service.get_control
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/control_service.get_control.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/control_service.get_control.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/control_service.get_control.js,samples/README.md)
 
@@ -3413,7 +3413,7 @@ __Usage:__
 
 ### Control_service.list_controls
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/control_service.list_controls.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/control_service.list_controls.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/control_service.list_controls.js,samples/README.md)
 
@@ -3430,7 +3430,7 @@ __Usage:__
 
 ### Control_service.update_control
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/control_service.update_control.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/control_service.update_control.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/control_service.update_control.js,samples/README.md)
 
@@ -3447,7 +3447,7 @@ __Usage:__
 
 ### Conversational_search_service.answer_query
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.answer_query.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.answer_query.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.answer_query.js,samples/README.md)
 
@@ -3464,7 +3464,7 @@ __Usage:__
 
 ### Conversational_search_service.converse_conversation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.converse_conversation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.converse_conversation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.converse_conversation.js,samples/README.md)
 
@@ -3481,7 +3481,7 @@ __Usage:__
 
 ### Conversational_search_service.create_conversation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.create_conversation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.create_conversation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.create_conversation.js,samples/README.md)
 
@@ -3498,7 +3498,7 @@ __Usage:__
 
 ### Conversational_search_service.create_session
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.create_session.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.create_session.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.create_session.js,samples/README.md)
 
@@ -3515,7 +3515,7 @@ __Usage:__
 
 ### Conversational_search_service.delete_conversation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.delete_conversation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.delete_conversation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.delete_conversation.js,samples/README.md)
 
@@ -3532,7 +3532,7 @@ __Usage:__
 
 ### Conversational_search_service.delete_session
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.delete_session.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.delete_session.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.delete_session.js,samples/README.md)
 
@@ -3549,7 +3549,7 @@ __Usage:__
 
 ### Conversational_search_service.get_answer
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.get_answer.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.get_answer.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.get_answer.js,samples/README.md)
 
@@ -3566,7 +3566,7 @@ __Usage:__
 
 ### Conversational_search_service.get_conversation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.get_conversation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.get_conversation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.get_conversation.js,samples/README.md)
 
@@ -3583,7 +3583,7 @@ __Usage:__
 
 ### Conversational_search_service.get_session
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.get_session.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.get_session.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.get_session.js,samples/README.md)
 
@@ -3600,7 +3600,7 @@ __Usage:__
 
 ### Conversational_search_service.list_conversations
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.list_conversations.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.list_conversations.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.list_conversations.js,samples/README.md)
 
@@ -3617,7 +3617,7 @@ __Usage:__
 
 ### Conversational_search_service.list_sessions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.list_sessions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.list_sessions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.list_sessions.js,samples/README.md)
 
@@ -3634,7 +3634,7 @@ __Usage:__
 
 ### Conversational_search_service.update_conversation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.update_conversation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.update_conversation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.update_conversation.js,samples/README.md)
 
@@ -3651,7 +3651,7 @@ __Usage:__
 
 ### Conversational_search_service.update_session
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.update_session.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.update_session.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/conversational_search_service.update_session.js,samples/README.md)
 
@@ -3668,7 +3668,7 @@ __Usage:__
 
 ### Data_store_service.create_data_store
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/data_store_service.create_data_store.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/data_store_service.create_data_store.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/data_store_service.create_data_store.js,samples/README.md)
 
@@ -3685,7 +3685,7 @@ __Usage:__
 
 ### Data_store_service.delete_data_store
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/data_store_service.delete_data_store.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/data_store_service.delete_data_store.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/data_store_service.delete_data_store.js,samples/README.md)
 
@@ -3702,7 +3702,7 @@ __Usage:__
 
 ### Data_store_service.get_data_store
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/data_store_service.get_data_store.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/data_store_service.get_data_store.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/data_store_service.get_data_store.js,samples/README.md)
 
@@ -3719,7 +3719,7 @@ __Usage:__
 
 ### Data_store_service.list_data_stores
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/data_store_service.list_data_stores.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/data_store_service.list_data_stores.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/data_store_service.list_data_stores.js,samples/README.md)
 
@@ -3736,7 +3736,7 @@ __Usage:__
 
 ### Data_store_service.update_data_store
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/data_store_service.update_data_store.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/data_store_service.update_data_store.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/data_store_service.update_data_store.js,samples/README.md)
 
@@ -3753,7 +3753,7 @@ __Usage:__
 
 ### Document_service.batch_get_documents_metadata
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/document_service.batch_get_documents_metadata.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/document_service.batch_get_documents_metadata.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/document_service.batch_get_documents_metadata.js,samples/README.md)
 
@@ -3770,7 +3770,7 @@ __Usage:__
 
 ### Document_service.create_document
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/document_service.create_document.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/document_service.create_document.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/document_service.create_document.js,samples/README.md)
 
@@ -3787,7 +3787,7 @@ __Usage:__
 
 ### Document_service.delete_document
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/document_service.delete_document.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/document_service.delete_document.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/document_service.delete_document.js,samples/README.md)
 
@@ -3804,7 +3804,7 @@ __Usage:__
 
 ### Document_service.get_document
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/document_service.get_document.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/document_service.get_document.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/document_service.get_document.js,samples/README.md)
 
@@ -3821,7 +3821,7 @@ __Usage:__
 
 ### Document_service.import_documents
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/document_service.import_documents.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/document_service.import_documents.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/document_service.import_documents.js,samples/README.md)
 
@@ -3838,7 +3838,7 @@ __Usage:__
 
 ### Document_service.list_documents
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/document_service.list_documents.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/document_service.list_documents.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/document_service.list_documents.js,samples/README.md)
 
@@ -3855,7 +3855,7 @@ __Usage:__
 
 ### Document_service.purge_documents
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/document_service.purge_documents.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/document_service.purge_documents.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/document_service.purge_documents.js,samples/README.md)
 
@@ -3872,7 +3872,7 @@ __Usage:__
 
 ### Document_service.update_document
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/document_service.update_document.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/document_service.update_document.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/document_service.update_document.js,samples/README.md)
 
@@ -3889,7 +3889,7 @@ __Usage:__
 
 ### Engine_service.create_engine
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/engine_service.create_engine.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/engine_service.create_engine.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/engine_service.create_engine.js,samples/README.md)
 
@@ -3906,7 +3906,7 @@ __Usage:__
 
 ### Engine_service.delete_engine
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/engine_service.delete_engine.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/engine_service.delete_engine.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/engine_service.delete_engine.js,samples/README.md)
 
@@ -3923,7 +3923,7 @@ __Usage:__
 
 ### Engine_service.get_engine
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/engine_service.get_engine.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/engine_service.get_engine.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/engine_service.get_engine.js,samples/README.md)
 
@@ -3940,7 +3940,7 @@ __Usage:__
 
 ### Engine_service.list_engines
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/engine_service.list_engines.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/engine_service.list_engines.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/engine_service.list_engines.js,samples/README.md)
 
@@ -3957,7 +3957,7 @@ __Usage:__
 
 ### Engine_service.pause_engine
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/engine_service.pause_engine.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/engine_service.pause_engine.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/engine_service.pause_engine.js,samples/README.md)
 
@@ -3974,7 +3974,7 @@ __Usage:__
 
 ### Engine_service.resume_engine
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/engine_service.resume_engine.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/engine_service.resume_engine.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/engine_service.resume_engine.js,samples/README.md)
 
@@ -3991,7 +3991,7 @@ __Usage:__
 
 ### Engine_service.tune_engine
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/engine_service.tune_engine.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/engine_service.tune_engine.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/engine_service.tune_engine.js,samples/README.md)
 
@@ -4008,7 +4008,7 @@ __Usage:__
 
 ### Engine_service.update_engine
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/engine_service.update_engine.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/engine_service.update_engine.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/engine_service.update_engine.js,samples/README.md)
 
@@ -4025,7 +4025,7 @@ __Usage:__
 
 ### Evaluation_service.create_evaluation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/evaluation_service.create_evaluation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/evaluation_service.create_evaluation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/evaluation_service.create_evaluation.js,samples/README.md)
 
@@ -4042,7 +4042,7 @@ __Usage:__
 
 ### Evaluation_service.get_evaluation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/evaluation_service.get_evaluation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/evaluation_service.get_evaluation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/evaluation_service.get_evaluation.js,samples/README.md)
 
@@ -4059,7 +4059,7 @@ __Usage:__
 
 ### Evaluation_service.list_evaluation_results
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/evaluation_service.list_evaluation_results.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/evaluation_service.list_evaluation_results.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/evaluation_service.list_evaluation_results.js,samples/README.md)
 
@@ -4076,7 +4076,7 @@ __Usage:__
 
 ### Evaluation_service.list_evaluations
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/evaluation_service.list_evaluations.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/evaluation_service.list_evaluations.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/evaluation_service.list_evaluations.js,samples/README.md)
 
@@ -4093,7 +4093,7 @@ __Usage:__
 
 ### Grounded_generation_service.check_grounding
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/grounded_generation_service.check_grounding.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/grounded_generation_service.check_grounding.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/grounded_generation_service.check_grounding.js,samples/README.md)
 
@@ -4110,7 +4110,7 @@ __Usage:__
 
 ### Grounded_generation_service.generate_grounded_content
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/grounded_generation_service.generate_grounded_content.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/grounded_generation_service.generate_grounded_content.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/grounded_generation_service.generate_grounded_content.js,samples/README.md)
 
@@ -4127,7 +4127,7 @@ __Usage:__
 
 ### Grounded_generation_service.stream_generate_grounded_content
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/grounded_generation_service.stream_generate_grounded_content.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/grounded_generation_service.stream_generate_grounded_content.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/grounded_generation_service.stream_generate_grounded_content.js,samples/README.md)
 
@@ -4144,7 +4144,7 @@ __Usage:__
 
 ### Project_service.provision_project
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/project_service.provision_project.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/project_service.provision_project.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/project_service.provision_project.js,samples/README.md)
 
@@ -4161,7 +4161,7 @@ __Usage:__
 
 ### Rank_service.rank
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/rank_service.rank.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/rank_service.rank.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/rank_service.rank.js,samples/README.md)
 
@@ -4178,7 +4178,7 @@ __Usage:__
 
 ### Recommendation_service.recommend
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/recommendation_service.recommend.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/recommendation_service.recommend.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/recommendation_service.recommend.js,samples/README.md)
 
@@ -4195,7 +4195,7 @@ __Usage:__
 
 ### Sample_query_service.create_sample_query
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_service.create_sample_query.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_service.create_sample_query.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_service.create_sample_query.js,samples/README.md)
 
@@ -4212,7 +4212,7 @@ __Usage:__
 
 ### Sample_query_service.delete_sample_query
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_service.delete_sample_query.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_service.delete_sample_query.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_service.delete_sample_query.js,samples/README.md)
 
@@ -4229,7 +4229,7 @@ __Usage:__
 
 ### Sample_query_service.get_sample_query
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_service.get_sample_query.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_service.get_sample_query.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_service.get_sample_query.js,samples/README.md)
 
@@ -4246,7 +4246,7 @@ __Usage:__
 
 ### Sample_query_service.import_sample_queries
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_service.import_sample_queries.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_service.import_sample_queries.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_service.import_sample_queries.js,samples/README.md)
 
@@ -4263,7 +4263,7 @@ __Usage:__
 
 ### Sample_query_service.list_sample_queries
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_service.list_sample_queries.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_service.list_sample_queries.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_service.list_sample_queries.js,samples/README.md)
 
@@ -4280,7 +4280,7 @@ __Usage:__
 
 ### Sample_query_service.update_sample_query
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_service.update_sample_query.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_service.update_sample_query.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_service.update_sample_query.js,samples/README.md)
 
@@ -4297,7 +4297,7 @@ __Usage:__
 
 ### Sample_query_set_service.create_sample_query_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_set_service.create_sample_query_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_set_service.create_sample_query_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_set_service.create_sample_query_set.js,samples/README.md)
 
@@ -4314,7 +4314,7 @@ __Usage:__
 
 ### Sample_query_set_service.delete_sample_query_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_set_service.delete_sample_query_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_set_service.delete_sample_query_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_set_service.delete_sample_query_set.js,samples/README.md)
 
@@ -4331,7 +4331,7 @@ __Usage:__
 
 ### Sample_query_set_service.get_sample_query_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_set_service.get_sample_query_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_set_service.get_sample_query_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_set_service.get_sample_query_set.js,samples/README.md)
 
@@ -4348,7 +4348,7 @@ __Usage:__
 
 ### Sample_query_set_service.list_sample_query_sets
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_set_service.list_sample_query_sets.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_set_service.list_sample_query_sets.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_set_service.list_sample_query_sets.js,samples/README.md)
 
@@ -4365,7 +4365,7 @@ __Usage:__
 
 ### Sample_query_set_service.update_sample_query_set
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_set_service.update_sample_query_set.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_set_service.update_sample_query_set.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_set_service.update_sample_query_set.js,samples/README.md)
 
@@ -4382,7 +4382,7 @@ __Usage:__
 
 ### Schema_service.create_schema
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/schema_service.create_schema.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/schema_service.create_schema.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/schema_service.create_schema.js,samples/README.md)
 
@@ -4399,7 +4399,7 @@ __Usage:__
 
 ### Schema_service.delete_schema
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/schema_service.delete_schema.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/schema_service.delete_schema.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/schema_service.delete_schema.js,samples/README.md)
 
@@ -4416,7 +4416,7 @@ __Usage:__
 
 ### Schema_service.get_schema
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/schema_service.get_schema.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/schema_service.get_schema.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/schema_service.get_schema.js,samples/README.md)
 
@@ -4433,7 +4433,7 @@ __Usage:__
 
 ### Schema_service.list_schemas
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/schema_service.list_schemas.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/schema_service.list_schemas.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/schema_service.list_schemas.js,samples/README.md)
 
@@ -4450,7 +4450,7 @@ __Usage:__
 
 ### Schema_service.update_schema
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/schema_service.update_schema.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/schema_service.update_schema.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/schema_service.update_schema.js,samples/README.md)
 
@@ -4467,7 +4467,7 @@ __Usage:__
 
 ### Search_service.search
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/search_service.search.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/search_service.search.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/search_service.search.js,samples/README.md)
 
@@ -4484,7 +4484,7 @@ __Usage:__
 
 ### Search_service.search_lite
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/search_service.search_lite.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/search_service.search_lite.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/search_service.search_lite.js,samples/README.md)
 
@@ -4501,7 +4501,7 @@ __Usage:__
 
 ### Search_tuning_service.list_custom_models
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/search_tuning_service.list_custom_models.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/search_tuning_service.list_custom_models.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/search_tuning_service.list_custom_models.js,samples/README.md)
 
@@ -4518,7 +4518,7 @@ __Usage:__
 
 ### Search_tuning_service.train_custom_model
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/search_tuning_service.train_custom_model.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/search_tuning_service.train_custom_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/search_tuning_service.train_custom_model.js,samples/README.md)
 
@@ -4535,7 +4535,7 @@ __Usage:__
 
 ### Serving_config_service.get_serving_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/serving_config_service.get_serving_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/serving_config_service.get_serving_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/serving_config_service.get_serving_config.js,samples/README.md)
 
@@ -4552,7 +4552,7 @@ __Usage:__
 
 ### Serving_config_service.list_serving_configs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/serving_config_service.list_serving_configs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/serving_config_service.list_serving_configs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/serving_config_service.list_serving_configs.js,samples/README.md)
 
@@ -4569,7 +4569,7 @@ __Usage:__
 
 ### Serving_config_service.update_serving_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/serving_config_service.update_serving_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/serving_config_service.update_serving_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/serving_config_service.update_serving_config.js,samples/README.md)
 
@@ -4586,7 +4586,7 @@ __Usage:__
 
 ### Site_search_engine_service.batch_create_target_sites
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/site_search_engine_service.batch_create_target_sites.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/site_search_engine_service.batch_create_target_sites.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/site_search_engine_service.batch_create_target_sites.js,samples/README.md)
 
@@ -4603,7 +4603,7 @@ __Usage:__
 
 ### Site_search_engine_service.batch_verify_target_sites
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/site_search_engine_service.batch_verify_target_sites.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/site_search_engine_service.batch_verify_target_sites.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/site_search_engine_service.batch_verify_target_sites.js,samples/README.md)
 
@@ -4620,7 +4620,7 @@ __Usage:__
 
 ### Site_search_engine_service.create_sitemap
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/site_search_engine_service.create_sitemap.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/site_search_engine_service.create_sitemap.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/site_search_engine_service.create_sitemap.js,samples/README.md)
 
@@ -4637,7 +4637,7 @@ __Usage:__
 
 ### Site_search_engine_service.create_target_site
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/site_search_engine_service.create_target_site.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/site_search_engine_service.create_target_site.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/site_search_engine_service.create_target_site.js,samples/README.md)
 
@@ -4654,7 +4654,7 @@ __Usage:__
 
 ### Site_search_engine_service.delete_sitemap
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/site_search_engine_service.delete_sitemap.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/site_search_engine_service.delete_sitemap.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/site_search_engine_service.delete_sitemap.js,samples/README.md)
 
@@ -4671,7 +4671,7 @@ __Usage:__
 
 ### Site_search_engine_service.delete_target_site
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/site_search_engine_service.delete_target_site.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/site_search_engine_service.delete_target_site.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/site_search_engine_service.delete_target_site.js,samples/README.md)
 
@@ -4688,7 +4688,7 @@ __Usage:__
 
 ### Site_search_engine_service.disable_advanced_site_search
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/site_search_engine_service.disable_advanced_site_search.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/site_search_engine_service.disable_advanced_site_search.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/site_search_engine_service.disable_advanced_site_search.js,samples/README.md)
 
@@ -4705,7 +4705,7 @@ __Usage:__
 
 ### Site_search_engine_service.enable_advanced_site_search
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/site_search_engine_service.enable_advanced_site_search.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/site_search_engine_service.enable_advanced_site_search.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/site_search_engine_service.enable_advanced_site_search.js,samples/README.md)
 
@@ -4722,7 +4722,7 @@ __Usage:__
 
 ### Site_search_engine_service.fetch_domain_verification_status
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/site_search_engine_service.fetch_domain_verification_status.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/site_search_engine_service.fetch_domain_verification_status.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/site_search_engine_service.fetch_domain_verification_status.js,samples/README.md)
 
@@ -4739,7 +4739,7 @@ __Usage:__
 
 ### Site_search_engine_service.fetch_sitemaps
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/site_search_engine_service.fetch_sitemaps.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/site_search_engine_service.fetch_sitemaps.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/site_search_engine_service.fetch_sitemaps.js,samples/README.md)
 
@@ -4756,7 +4756,7 @@ __Usage:__
 
 ### Site_search_engine_service.get_site_search_engine
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/site_search_engine_service.get_site_search_engine.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/site_search_engine_service.get_site_search_engine.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/site_search_engine_service.get_site_search_engine.js,samples/README.md)
 
@@ -4773,7 +4773,7 @@ __Usage:__
 
 ### Site_search_engine_service.get_target_site
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/site_search_engine_service.get_target_site.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/site_search_engine_service.get_target_site.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/site_search_engine_service.get_target_site.js,samples/README.md)
 
@@ -4790,7 +4790,7 @@ __Usage:__
 
 ### Site_search_engine_service.list_target_sites
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/site_search_engine_service.list_target_sites.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/site_search_engine_service.list_target_sites.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/site_search_engine_service.list_target_sites.js,samples/README.md)
 
@@ -4807,7 +4807,7 @@ __Usage:__
 
 ### Site_search_engine_service.recrawl_uris
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/site_search_engine_service.recrawl_uris.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/site_search_engine_service.recrawl_uris.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/site_search_engine_service.recrawl_uris.js,samples/README.md)
 
@@ -4824,7 +4824,7 @@ __Usage:__
 
 ### Site_search_engine_service.update_target_site
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/site_search_engine_service.update_target_site.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/site_search_engine_service.update_target_site.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/site_search_engine_service.update_target_site.js,samples/README.md)
 
@@ -4841,7 +4841,7 @@ __Usage:__
 
 ### User_event_service.collect_user_event
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/user_event_service.collect_user_event.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/user_event_service.collect_user_event.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/user_event_service.collect_user_event.js,samples/README.md)
 
@@ -4858,7 +4858,7 @@ __Usage:__
 
 ### User_event_service.import_user_events
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/user_event_service.import_user_events.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/user_event_service.import_user_events.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/user_event_service.import_user_events.js,samples/README.md)
 
@@ -4875,7 +4875,7 @@ __Usage:__
 
 ### User_event_service.purge_user_events
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/user_event_service.purge_user_events.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/user_event_service.purge_user_events.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/user_event_service.purge_user_events.js,samples/README.md)
 
@@ -4892,7 +4892,7 @@ __Usage:__
 
 ### User_event_service.write_user_event
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/generated/v1beta/user_event_service.write_user_event.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/user_event_service.write_user_event.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/user_event_service.write_user_event.js,samples/README.md)
 
@@ -4909,7 +4909,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-discoveryengine/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/quickstart.js,samples/README.md)
 
