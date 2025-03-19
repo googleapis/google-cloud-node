@@ -252,7 +252,9 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.deliveryServiceStub);
       client.close().then(() => {
         done();
@@ -311,7 +313,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.CreateDeliveryVehicleRequest()
       );
@@ -340,7 +342,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.CreateDeliveryVehicleRequest()
       );
@@ -384,7 +386,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.CreateDeliveryVehicleRequest()
       );
@@ -415,7 +417,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.CreateDeliveryVehicleRequest()
       );
@@ -436,7 +438,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.GetDeliveryVehicleRequest()
       );
@@ -465,7 +467,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.GetDeliveryVehicleRequest()
       );
@@ -509,7 +511,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.GetDeliveryVehicleRequest()
       );
@@ -537,7 +539,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.GetDeliveryVehicleRequest()
       );
@@ -555,7 +557,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.DeleteDeliveryVehicleRequest()
       );
@@ -584,7 +586,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.DeleteDeliveryVehicleRequest()
       );
@@ -628,7 +630,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.DeleteDeliveryVehicleRequest()
       );
@@ -659,7 +661,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.DeleteDeliveryVehicleRequest()
       );
@@ -680,7 +682,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.UpdateDeliveryVehicleRequest()
       );
@@ -710,7 +712,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.UpdateDeliveryVehicleRequest()
       );
@@ -755,7 +757,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.UpdateDeliveryVehicleRequest()
       );
@@ -787,7 +789,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.UpdateDeliveryVehicleRequest()
       );
@@ -809,7 +811,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.BatchCreateTasksRequest()
       );
@@ -837,7 +839,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.BatchCreateTasksRequest()
       );
@@ -881,7 +883,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.BatchCreateTasksRequest()
       );
@@ -909,7 +911,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.BatchCreateTasksRequest()
       );
@@ -927,7 +929,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.CreateTaskRequest()
       );
@@ -955,7 +957,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.CreateTaskRequest()
       );
@@ -999,7 +1001,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.CreateTaskRequest()
       );
@@ -1027,7 +1029,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.CreateTaskRequest()
       );
@@ -1045,7 +1047,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.GetTaskRequest()
       );
@@ -1073,7 +1075,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.GetTaskRequest()
       );
@@ -1117,7 +1119,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.GetTaskRequest()
       );
@@ -1142,7 +1144,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.GetTaskRequest()
       );
@@ -1160,7 +1162,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.DeleteTaskRequest()
       );
@@ -1188,7 +1190,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.DeleteTaskRequest()
       );
@@ -1232,7 +1234,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.DeleteTaskRequest()
       );
@@ -1260,7 +1262,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.DeleteTaskRequest()
       );
@@ -1278,7 +1280,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.UpdateTaskRequest()
       );
@@ -1307,7 +1309,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.UpdateTaskRequest()
       );
@@ -1352,7 +1354,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.UpdateTaskRequest()
       );
@@ -1381,7 +1383,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.UpdateTaskRequest()
       );
@@ -1400,7 +1402,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.GetTaskTrackingInfoRequest()
       );
@@ -1429,7 +1431,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.GetTaskTrackingInfoRequest()
       );
@@ -1473,7 +1475,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.GetTaskTrackingInfoRequest()
       );
@@ -1501,7 +1503,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.GetTaskTrackingInfoRequest()
       );
@@ -1519,7 +1521,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.ListTasksRequest()
       );
@@ -1549,7 +1551,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.ListTasksRequest()
       );
@@ -1595,7 +1597,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.ListTasksRequest()
       );
@@ -1620,7 +1622,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.ListTasksRequest()
       );
@@ -1671,7 +1673,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.ListTasksRequest()
       );
@@ -1719,7 +1721,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.ListTasksRequest()
       );
@@ -1758,7 +1760,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.ListTasksRequest()
       );
@@ -1798,7 +1800,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.ListDeliveryVehiclesRequest()
       );
@@ -1835,7 +1837,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.ListDeliveryVehiclesRequest()
       );
@@ -1889,7 +1891,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.ListDeliveryVehiclesRequest()
       );
@@ -1917,7 +1919,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.ListDeliveryVehiclesRequest()
       );
@@ -1975,7 +1977,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.ListDeliveryVehiclesRequest()
       );
@@ -2022,7 +2024,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.ListDeliveryVehiclesRequest()
       );
@@ -2069,7 +2071,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.maps.fleetengine.delivery.v1.ListDeliveryVehiclesRequest()
       );
@@ -2104,7 +2106,7 @@ describe('v1.DeliveryServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('deliveryVehicle', () => {
+    describe('deliveryVehicle', async () => {
       const fakePath = '/rendered/path/deliveryVehicle';
       const expectedParameters = {
         provider: 'providerValue',
@@ -2114,7 +2116,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.deliveryVehiclePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2156,7 +2158,7 @@ describe('v1.DeliveryServiceClient', () => {
       });
     });
 
-    describe('provider', () => {
+    describe('provider', async () => {
       const fakePath = '/rendered/path/provider';
       const expectedParameters = {
         provider: 'providerValue',
@@ -2165,7 +2167,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.providerPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2194,7 +2196,7 @@ describe('v1.DeliveryServiceClient', () => {
       });
     });
 
-    describe('task', () => {
+    describe('task', async () => {
       const fakePath = '/rendered/path/task';
       const expectedParameters = {
         provider: 'providerValue',
@@ -2204,7 +2206,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.taskPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2243,7 +2245,7 @@ describe('v1.DeliveryServiceClient', () => {
       });
     });
 
-    describe('taskTrackingInfo', () => {
+    describe('taskTrackingInfo', async () => {
       const fakePath = '/rendered/path/taskTrackingInfo';
       const expectedParameters = {
         provider: 'providerValue',
@@ -2253,7 +2255,7 @@ describe('v1.DeliveryServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.taskTrackingInfoPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

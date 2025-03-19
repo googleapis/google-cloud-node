@@ -532,7 +532,9 @@ export class UserServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getUser request %j', request);
     const wrappedCallback:
       | Callback<
@@ -664,7 +666,9 @@ export class UserServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createUser request %j', request);
     const wrappedCallback:
       | Callback<
@@ -794,7 +798,9 @@ export class UserServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteUser request %j', request);
     const wrappedCallback:
       | Callback<
@@ -925,7 +931,9 @@ export class UserServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'user.name': request.user!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateUser request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1059,7 +1067,9 @@ export class UserServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.shopping.merchant.accounts.v1beta.IListUsersRequest,
@@ -1131,7 +1141,9 @@ export class UserServiceClient {
       });
     const defaultCallSettings = this._defaults['listUsers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listUsers stream %j', request);
     return this.descriptors.page.listUsers.createStream(
       this.innerApiCalls.listUsers as GaxCall,
@@ -1185,7 +1197,9 @@ export class UserServiceClient {
       });
     const defaultCallSettings = this._defaults['listUsers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listUsers iterate %j', request);
     return this.descriptors.page.listUsers.asyncIterate(
       this.innerApiCalls['listUsers'] as GaxCall,

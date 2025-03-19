@@ -612,7 +612,9 @@ export class ServiceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         service_name: request.serviceName ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getService request %j', request);
     const wrappedCallback:
       | Callback<
@@ -745,7 +747,9 @@ export class ServiceManagerClient {
         service_name: request.serviceName ?? '',
         config_id: request.configId ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getServiceConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -881,7 +885,9 @@ export class ServiceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         service_name: request.serviceName ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createServiceConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1012,7 +1018,9 @@ export class ServiceManagerClient {
         service_name: request.serviceName ?? '',
         rollout_id: request.rolloutId ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getServiceRollout request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1153,7 +1161,9 @@ export class ServiceManagerClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('generateConfigReport request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1291,7 +1301,9 @@ export class ServiceManagerClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1467,7 +1479,9 @@ export class ServiceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         service_name: request.serviceName ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1641,7 +1655,9 @@ export class ServiceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         service_name: request.serviceName ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1829,7 +1845,9 @@ export class ServiceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         service_name: request.serviceName ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2013,7 +2031,9 @@ export class ServiceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         service_name: request.serviceName ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2183,7 +2203,9 @@ export class ServiceManagerClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.api.servicemanagement.v1.IListServicesRequest,
@@ -2252,7 +2274,9 @@ export class ServiceManagerClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listServices'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listServices stream %j', request);
     return this.descriptors.page.listServices.createStream(
       this.innerApiCalls.listServices as GaxCall,
@@ -2303,7 +2327,9 @@ export class ServiceManagerClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listServices'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listServices iterate %j', request);
     return this.descriptors.page.listServices.asyncIterate(
       this.innerApiCalls['listServices'] as GaxCall,
@@ -2409,7 +2435,9 @@ export class ServiceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         service_name: request.serviceName ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.api.servicemanagement.v1.IListServiceConfigsRequest,
@@ -2477,7 +2505,9 @@ export class ServiceManagerClient {
       });
     const defaultCallSettings = this._defaults['listServiceConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listServiceConfigs stream %j', request);
     return this.descriptors.page.listServiceConfigs.createStream(
       this.innerApiCalls.listServiceConfigs as GaxCall,
@@ -2527,7 +2557,9 @@ export class ServiceManagerClient {
       });
     const defaultCallSettings = this._defaults['listServiceConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listServiceConfigs iterate %j', request);
     return this.descriptors.page.listServiceConfigs.asyncIterate(
       this.innerApiCalls['listServiceConfigs'] as GaxCall,
@@ -2644,7 +2676,9 @@ export class ServiceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         service_name: request.serviceName ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.api.servicemanagement.v1.IListServiceRolloutsRequest,
@@ -2723,7 +2757,9 @@ export class ServiceManagerClient {
       });
     const defaultCallSettings = this._defaults['listServiceRollouts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listServiceRollouts stream %j', request);
     return this.descriptors.page.listServiceRollouts.createStream(
       this.innerApiCalls.listServiceRollouts as GaxCall,
@@ -2784,7 +2820,9 @@ export class ServiceManagerClient {
       });
     const defaultCallSettings = this._defaults['listServiceRollouts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listServiceRollouts iterate %j', request);
     return this.descriptors.page.listServiceRollouts.asyncIterate(
       this.innerApiCalls['listServiceRollouts'] as GaxCall,
@@ -3024,7 +3062,7 @@ export class ServiceManagerClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

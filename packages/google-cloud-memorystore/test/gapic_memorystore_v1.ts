@@ -301,7 +301,9 @@ describe('v1.MemorystoreClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.memorystoreStub);
       client.close().then(() => {
         done();
@@ -360,7 +362,7 @@ describe('v1.MemorystoreClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.memorystore.v1.GetInstanceRequest()
       );
@@ -391,7 +393,7 @@ describe('v1.MemorystoreClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.memorystore.v1.GetInstanceRequest()
       );
@@ -438,7 +440,7 @@ describe('v1.MemorystoreClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.memorystore.v1.GetInstanceRequest()
       );
@@ -469,7 +471,7 @@ describe('v1.MemorystoreClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.memorystore.v1.GetInstanceRequest()
       );
@@ -490,7 +492,7 @@ describe('v1.MemorystoreClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.memorystore.v1.GetCertificateAuthorityRequest()
       );
@@ -522,7 +524,7 @@ describe('v1.MemorystoreClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.memorystore.v1.GetCertificateAuthorityRequest()
       );
@@ -569,7 +571,7 @@ describe('v1.MemorystoreClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.memorystore.v1.GetCertificateAuthorityRequest()
       );
@@ -603,7 +605,7 @@ describe('v1.MemorystoreClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.memorystore.v1.GetCertificateAuthorityRequest()
       );
@@ -627,7 +629,7 @@ describe('v1.MemorystoreClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.memorystore.v1.CreateInstanceRequest()
       );
@@ -660,7 +662,7 @@ describe('v1.MemorystoreClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.memorystore.v1.CreateInstanceRequest()
       );
@@ -714,7 +716,7 @@ describe('v1.MemorystoreClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.memorystore.v1.CreateInstanceRequest()
       );
@@ -745,7 +747,7 @@ describe('v1.MemorystoreClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.memorystore.v1.CreateInstanceRequest()
       );
@@ -778,7 +780,7 @@ describe('v1.MemorystoreClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -800,7 +802,7 @@ describe('v1.MemorystoreClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -821,7 +823,7 @@ describe('v1.MemorystoreClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.memorystore.v1.UpdateInstanceRequest()
       );
@@ -855,7 +857,7 @@ describe('v1.MemorystoreClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.memorystore.v1.UpdateInstanceRequest()
       );
@@ -910,7 +912,7 @@ describe('v1.MemorystoreClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.memorystore.v1.UpdateInstanceRequest()
       );
@@ -942,7 +944,7 @@ describe('v1.MemorystoreClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.memorystore.v1.UpdateInstanceRequest()
       );
@@ -976,7 +978,7 @@ describe('v1.MemorystoreClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -998,7 +1000,7 @@ describe('v1.MemorystoreClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1019,7 +1021,7 @@ describe('v1.MemorystoreClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.memorystore.v1.DeleteInstanceRequest()
       );
@@ -1052,7 +1054,7 @@ describe('v1.MemorystoreClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.memorystore.v1.DeleteInstanceRequest()
       );
@@ -1106,7 +1108,7 @@ describe('v1.MemorystoreClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.memorystore.v1.DeleteInstanceRequest()
       );
@@ -1137,7 +1139,7 @@ describe('v1.MemorystoreClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.memorystore.v1.DeleteInstanceRequest()
       );
@@ -1170,7 +1172,7 @@ describe('v1.MemorystoreClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1192,7 +1194,7 @@ describe('v1.MemorystoreClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1213,7 +1215,7 @@ describe('v1.MemorystoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.memorystore.v1.ListInstancesRequest()
       );
@@ -1252,7 +1254,7 @@ describe('v1.MemorystoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.memorystore.v1.ListInstancesRequest()
       );
@@ -1307,7 +1309,7 @@ describe('v1.MemorystoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.memorystore.v1.ListInstancesRequest()
       );
@@ -1338,7 +1340,7 @@ describe('v1.MemorystoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.memorystore.v1.ListInstancesRequest()
       );
@@ -1398,7 +1400,7 @@ describe('v1.MemorystoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.memorystore.v1.ListInstancesRequest()
       );
@@ -1447,7 +1449,7 @@ describe('v1.MemorystoreClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.memorystore.v1.ListInstancesRequest()
       );
@@ -1496,7 +1498,7 @@ describe('v1.MemorystoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.memorystore.v1.ListInstancesRequest()
       );
@@ -1537,7 +1539,7 @@ describe('v1.MemorystoreClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1567,7 +1569,7 @@ describe('v1.MemorystoreClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1611,7 +1613,7 @@ describe('v1.MemorystoreClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1646,7 +1648,7 @@ describe('v1.MemorystoreClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -1694,7 +1696,7 @@ describe('v1.MemorystoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -1735,7 +1737,7 @@ describe('v1.MemorystoreClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -1814,7 +1816,7 @@ describe('v1.MemorystoreClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -1894,7 +1896,7 @@ describe('v1.MemorystoreClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -1990,8 +1992,7 @@ describe('v1.MemorystoreClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -2010,7 +2011,7 @@ describe('v1.MemorystoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -2019,8 +2020,7 @@ describe('v1.MemorystoreClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -2036,7 +2036,7 @@ describe('v1.MemorystoreClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('certificateAuthority', () => {
+    describe('certificateAuthority', async () => {
       const fakePath = '/rendered/path/certificateAuthority';
       const expectedParameters = {
         project: 'projectValue',
@@ -2047,7 +2047,7 @@ describe('v1.MemorystoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.certificateAuthorityPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2115,7 +2115,7 @@ describe('v1.MemorystoreClient', () => {
       });
     });
 
-    describe('forwardingRule', () => {
+    describe('forwardingRule', async () => {
       const fakePath = '/rendered/path/forwardingRule';
       const expectedParameters = {
         project: 'projectValue',
@@ -2126,7 +2126,7 @@ describe('v1.MemorystoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.forwardingRulePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2180,7 +2180,7 @@ describe('v1.MemorystoreClient', () => {
       });
     });
 
-    describe('instance', () => {
+    describe('instance', async () => {
       const fakePath = '/rendered/path/instance';
       const expectedParameters = {
         project: 'projectValue',
@@ -2191,7 +2191,7 @@ describe('v1.MemorystoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.instancePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2244,7 +2244,7 @@ describe('v1.MemorystoreClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -2254,7 +2254,7 @@ describe('v1.MemorystoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2293,7 +2293,7 @@ describe('v1.MemorystoreClient', () => {
       });
     });
 
-    describe('network', () => {
+    describe('network', async () => {
       const fakePath = '/rendered/path/network';
       const expectedParameters = {
         project: 'projectValue',
@@ -2303,7 +2303,7 @@ describe('v1.MemorystoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.networkPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2342,7 +2342,7 @@ describe('v1.MemorystoreClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -2351,7 +2351,7 @@ describe('v1.MemorystoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2380,7 +2380,7 @@ describe('v1.MemorystoreClient', () => {
       });
     });
 
-    describe('serviceAttachment', () => {
+    describe('serviceAttachment', async () => {
       const fakePath = '/rendered/path/serviceAttachment';
       const expectedParameters = {
         project: 'projectValue',
@@ -2391,7 +2391,7 @@ describe('v1.MemorystoreClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.serviceAttachmentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

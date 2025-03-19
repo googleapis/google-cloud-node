@@ -519,7 +519,9 @@ export class CloudQuotasClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getQuotaInfo request %j', request);
     const wrappedCallback:
       | Callback<
@@ -644,7 +646,9 @@ export class CloudQuotasClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getQuotaPreference request %j', request);
     const wrappedCallback:
       | Callback<
@@ -779,7 +783,9 @@ export class CloudQuotasClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createQuotaPreference request %j', request);
     const wrappedCallback:
       | Callback<
@@ -920,7 +926,9 @@ export class CloudQuotasClient {
       this._gaxModule.routingHeader.fromParams({
         'quota_preference.name': request.quotaPreference!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateQuotaPreference request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1055,7 +1063,9 @@ export class CloudQuotasClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.api.cloudquotas.v1beta.IListQuotaInfosRequest,
@@ -1128,7 +1138,9 @@ export class CloudQuotasClient {
       });
     const defaultCallSettings = this._defaults['listQuotaInfos'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listQuotaInfos stream %j', request);
     return this.descriptors.page.listQuotaInfos.createStream(
       this.innerApiCalls.listQuotaInfos as GaxCall,
@@ -1183,7 +1195,9 @@ export class CloudQuotasClient {
       });
     const defaultCallSettings = this._defaults['listQuotaInfos'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listQuotaInfos iterate %j', request);
     return this.descriptors.page.listQuotaInfos.asyncIterate(
       this.innerApiCalls['listQuotaInfos'] as GaxCall,
@@ -1309,7 +1323,9 @@ export class CloudQuotasClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.api.cloudquotas.v1beta.IListQuotaPreferencesRequest,
@@ -1398,7 +1414,9 @@ export class CloudQuotasClient {
       });
     const defaultCallSettings = this._defaults['listQuotaPreferences'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listQuotaPreferences stream %j', request);
     return this.descriptors.page.listQuotaPreferences.createStream(
       this.innerApiCalls.listQuotaPreferences as GaxCall,
@@ -1469,7 +1487,9 @@ export class CloudQuotasClient {
       });
     const defaultCallSettings = this._defaults['listQuotaPreferences'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listQuotaPreferences iterate %j', request);
     return this.descriptors.page.listQuotaPreferences.asyncIterate(
       this.innerApiCalls['listQuotaPreferences'] as GaxCall,

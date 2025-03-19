@@ -497,7 +497,9 @@ export class CaseAttachmentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.support.v2.IListAttachmentsRequest,
@@ -566,7 +568,9 @@ export class CaseAttachmentServiceClient {
       });
     const defaultCallSettings = this._defaults['listAttachments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAttachments stream %j', request);
     return this.descriptors.page.listAttachments.createStream(
       this.innerApiCalls.listAttachments as GaxCall,
@@ -617,7 +621,9 @@ export class CaseAttachmentServiceClient {
       });
     const defaultCallSettings = this._defaults['listAttachments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAttachments iterate %j', request);
     return this.descriptors.page.listAttachments.asyncIterate(
       this.innerApiCalls['listAttachments'] as GaxCall,

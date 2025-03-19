@@ -491,7 +491,9 @@ export class ContainerAnalysisClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -608,7 +610,9 @@ export class ContainerAnalysisClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -726,7 +730,9 @@ export class ContainerAnalysisClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('testIamPermissions request %j', request);
     const wrappedCallback:
       | Callback<
@@ -849,7 +855,9 @@ export class ContainerAnalysisClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getVulnerabilityOccurrencesSummary request %j', request);
     const wrappedCallback:
       | Callback<

@@ -263,7 +263,9 @@ describe('v1.RegionZonesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.regionZonesStub);
       client.close().then(() => {
         done();
@@ -322,7 +324,7 @@ describe('v1.RegionZonesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionZonesRequest()
       );
@@ -359,7 +361,7 @@ describe('v1.RegionZonesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionZonesRequest()
       );
@@ -411,7 +413,7 @@ describe('v1.RegionZonesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionZonesRequest()
       );
@@ -443,7 +445,7 @@ describe('v1.RegionZonesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionZonesRequest()
       );
@@ -499,7 +501,7 @@ describe('v1.RegionZonesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionZonesRequest()
       );
@@ -552,7 +554,7 @@ describe('v1.RegionZonesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionZonesRequest()
       );
@@ -599,7 +601,7 @@ describe('v1.RegionZonesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionZonesRequest()
       );

@@ -493,7 +493,9 @@ export class SpacesServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createSpace request %j', request);
     const wrappedCallback:
       | Callback<
@@ -620,7 +622,9 @@ export class SpacesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getSpace request %j', request);
     const wrappedCallback:
       | Callback<
@@ -736,7 +740,9 @@ export class SpacesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'space.name': request.space!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateSpace request %j', request);
     const wrappedCallback:
       | Callback<
@@ -874,7 +880,9 @@ export class SpacesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('connectActiveConference request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1004,7 +1012,9 @@ export class SpacesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('endActiveConference request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1125,7 +1135,9 @@ export class SpacesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createMember request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1239,7 +1251,9 @@ export class SpacesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getMember request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1348,7 +1362,9 @@ export class SpacesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteMember request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1475,7 +1491,9 @@ export class SpacesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.apps.meet.v2beta.IListMembersRequest,
@@ -1543,7 +1561,9 @@ export class SpacesServiceClient {
       });
     const defaultCallSettings = this._defaults['listMembers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listMembers stream %j', request);
     return this.descriptors.page.listMembers.createStream(
       this.innerApiCalls.listMembers as GaxCall,
@@ -1593,7 +1613,9 @@ export class SpacesServiceClient {
       });
     const defaultCallSettings = this._defaults['listMembers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listMembers iterate %j', request);
     return this.descriptors.page.listMembers.asyncIterate(
       this.innerApiCalls['listMembers'] as GaxCall,

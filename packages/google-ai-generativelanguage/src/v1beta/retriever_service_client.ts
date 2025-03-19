@@ -520,7 +520,9 @@ export class RetrieverServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createCorpus request %j', request);
     const wrappedCallback:
       | Callback<
@@ -640,7 +642,9 @@ export class RetrieverServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getCorpus request %j', request);
     const wrappedCallback:
       | Callback<
@@ -768,7 +772,9 @@ export class RetrieverServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'corpus.name': request.corpus!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateCorpus request %j', request);
     const wrappedCallback:
       | Callback<
@@ -900,7 +906,9 @@ export class RetrieverServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteCorpus request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1066,7 +1074,9 @@ export class RetrieverServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('queryCorpus request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1194,7 +1204,9 @@ export class RetrieverServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createDocument request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1320,7 +1332,9 @@ export class RetrieverServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getDocument request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1449,7 +1463,9 @@ export class RetrieverServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'document.name': request.document!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateDocument request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1581,7 +1597,9 @@ export class RetrieverServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteDocument request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1747,7 +1765,9 @@ export class RetrieverServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('queryDocument request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1875,7 +1895,9 @@ export class RetrieverServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createChunk request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2005,7 +2027,9 @@ export class RetrieverServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('batchCreateChunks request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2125,7 +2149,9 @@ export class RetrieverServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getChunk request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2253,7 +2279,9 @@ export class RetrieverServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'chunk.name': request.chunk!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateChunk request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2383,7 +2411,9 @@ export class RetrieverServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('batchUpdateChunks request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2509,7 +2539,9 @@ export class RetrieverServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteChunk request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2638,7 +2670,9 @@ export class RetrieverServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('batchDeleteChunks request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2769,7 +2803,9 @@ export class RetrieverServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.ai.generativelanguage.v1beta.IListCorporaRequest,
@@ -2838,7 +2874,9 @@ export class RetrieverServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listCorpora'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCorpora stream %j', request);
     return this.descriptors.page.listCorpora.createStream(
       this.innerApiCalls.listCorpora as GaxCall,
@@ -2889,7 +2927,9 @@ export class RetrieverServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listCorpora'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCorpora iterate %j', request);
     return this.descriptors.page.listCorpora.asyncIterate(
       this.innerApiCalls['listCorpora'] as GaxCall,
@@ -3002,7 +3042,9 @@ export class RetrieverServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.ai.generativelanguage.v1beta.IListDocumentsRequest,
@@ -3078,7 +3120,9 @@ export class RetrieverServiceClient {
       });
     const defaultCallSettings = this._defaults['listDocuments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDocuments stream %j', request);
     return this.descriptors.page.listDocuments.createStream(
       this.innerApiCalls.listDocuments as GaxCall,
@@ -3136,7 +3180,9 @@ export class RetrieverServiceClient {
       });
     const defaultCallSettings = this._defaults['listDocuments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDocuments iterate %j', request);
     return this.descriptors.page.listDocuments.asyncIterate(
       this.innerApiCalls['listDocuments'] as GaxCall,
@@ -3249,7 +3295,9 @@ export class RetrieverServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.ai.generativelanguage.v1beta.IListChunksRequest,
@@ -3325,7 +3373,9 @@ export class RetrieverServiceClient {
       });
     const defaultCallSettings = this._defaults['listChunks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listChunks stream %j', request);
     return this.descriptors.page.listChunks.createStream(
       this.innerApiCalls.listChunks as GaxCall,
@@ -3383,7 +3433,9 @@ export class RetrieverServiceClient {
       });
     const defaultCallSettings = this._defaults['listChunks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listChunks iterate %j', request);
     return this.descriptors.page.listChunks.asyncIterate(
       this.innerApiCalls['listChunks'] as GaxCall,

@@ -490,7 +490,9 @@ export class GrafeasV1Beta1Client {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getOccurrence request %j', request);
     const wrappedCallback:
       | Callback<
@@ -599,7 +601,9 @@ export class GrafeasV1Beta1Client {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteOccurrence request %j', request);
     const wrappedCallback:
       | Callback<
@@ -708,7 +712,9 @@ export class GrafeasV1Beta1Client {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createOccurrence request %j', request);
     const wrappedCallback:
       | Callback<
@@ -819,7 +825,9 @@ export class GrafeasV1Beta1Client {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('batchCreateOccurrences request %j', request);
     const wrappedCallback:
       | Callback<
@@ -932,7 +940,9 @@ export class GrafeasV1Beta1Client {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateOccurrence request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1040,7 +1050,9 @@ export class GrafeasV1Beta1Client {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getOccurrenceNote request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1147,7 +1159,9 @@ export class GrafeasV1Beta1Client {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getNote request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1254,7 +1268,9 @@ export class GrafeasV1Beta1Client {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteNote request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1365,7 +1381,9 @@ export class GrafeasV1Beta1Client {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createNote request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1474,7 +1492,9 @@ export class GrafeasV1Beta1Client {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('batchCreateNotes request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1585,7 +1605,9 @@ export class GrafeasV1Beta1Client {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateNote request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1708,7 +1730,9 @@ export class GrafeasV1Beta1Client {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getVulnerabilityOccurrencesSummary request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1836,7 +1860,9 @@ export class GrafeasV1Beta1Client {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.grafeas.v1beta1.IListOccurrencesRequest,
@@ -1902,7 +1928,9 @@ export class GrafeasV1Beta1Client {
       });
     const defaultCallSettings = this._defaults['listOccurrences'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listOccurrences stream %j', request);
     return this.descriptors.page.listOccurrences.createStream(
       this.innerApiCalls.listOccurrences as GaxCall,
@@ -1952,7 +1980,9 @@ export class GrafeasV1Beta1Client {
       });
     const defaultCallSettings = this._defaults['listOccurrences'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listOccurrences iterate %j', request);
     return this.descriptors.page.listOccurrences.asyncIterate(
       this.innerApiCalls['listOccurrences'] as GaxCall,
@@ -2049,7 +2079,9 @@ export class GrafeasV1Beta1Client {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.grafeas.v1beta1.IListNotesRequest,
@@ -2115,7 +2147,9 @@ export class GrafeasV1Beta1Client {
       });
     const defaultCallSettings = this._defaults['listNotes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listNotes stream %j', request);
     return this.descriptors.page.listNotes.createStream(
       this.innerApiCalls.listNotes as GaxCall,
@@ -2165,7 +2199,9 @@ export class GrafeasV1Beta1Client {
       });
     const defaultCallSettings = this._defaults['listNotes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listNotes iterate %j', request);
     return this.descriptors.page.listNotes.asyncIterate(
       this.innerApiCalls['listNotes'] as GaxCall,
@@ -2266,7 +2302,9 @@ export class GrafeasV1Beta1Client {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.grafeas.v1beta1.IListNoteOccurrencesRequest,
@@ -2334,7 +2372,9 @@ export class GrafeasV1Beta1Client {
       });
     const defaultCallSettings = this._defaults['listNoteOccurrences'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listNoteOccurrences stream %j', request);
     return this.descriptors.page.listNoteOccurrences.createStream(
       this.innerApiCalls.listNoteOccurrences as GaxCall,
@@ -2384,7 +2424,9 @@ export class GrafeasV1Beta1Client {
       });
     const defaultCallSettings = this._defaults['listNoteOccurrences'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listNoteOccurrences iterate %j', request);
     return this.descriptors.page.listNoteOccurrences.asyncIterate(
       this.innerApiCalls['listNoteOccurrences'] as GaxCall,

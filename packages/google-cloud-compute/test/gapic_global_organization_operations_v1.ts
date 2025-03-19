@@ -284,7 +284,9 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.globalOrganizationOperationsStub);
       client.close().then(() => {
         done();
@@ -355,7 +357,7 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteGlobalOrganizationOperationRequest()
       );
@@ -389,7 +391,7 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteGlobalOrganizationOperationRequest()
       );
@@ -439,7 +441,7 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteGlobalOrganizationOperationRequest()
       );
@@ -470,7 +472,7 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteGlobalOrganizationOperationRequest()
       );
@@ -494,7 +496,7 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetGlobalOrganizationOperationRequest()
       );
@@ -527,7 +529,7 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetGlobalOrganizationOperationRequest()
       );
@@ -575,7 +577,7 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetGlobalOrganizationOperationRequest()
       );
@@ -605,7 +607,7 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetGlobalOrganizationOperationRequest()
       );
@@ -629,7 +631,7 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListGlobalOrganizationOperationsRequest()
       );
@@ -651,7 +653,7 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListGlobalOrganizationOperationsRequest()
       );
@@ -688,7 +690,7 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListGlobalOrganizationOperationsRequest()
       );
@@ -705,7 +707,7 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListGlobalOrganizationOperationsRequest()
       );
@@ -749,7 +751,7 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListGlobalOrganizationOperationsRequest()
       );
@@ -790,7 +792,7 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListGlobalOrganizationOperationsRequest()
       );
@@ -822,7 +824,7 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListGlobalOrganizationOperationsRequest()
       );

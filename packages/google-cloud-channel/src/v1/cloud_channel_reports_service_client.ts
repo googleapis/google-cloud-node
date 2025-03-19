@@ -649,7 +649,9 @@ export class CloudChannelReportsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$CloudChannelReportsService-$RunReportJob',
       'RunReportJob is deprecated and may be removed in a future version.',
@@ -844,7 +846,9 @@ export class CloudChannelReportsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         report_job: request.reportJob ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$CloudChannelReportsService-$FetchReportResults',
       'FetchReportResults is deprecated and may be removed in a future version.',
@@ -931,7 +935,9 @@ export class CloudChannelReportsServiceClient {
       });
     const defaultCallSettings = this._defaults['fetchReportResults'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$CloudChannelReportsService-$FetchReportResults',
       'FetchReportResults is deprecated and may be removed in a future version.',
@@ -1000,7 +1006,9 @@ export class CloudChannelReportsServiceClient {
       });
     const defaultCallSettings = this._defaults['fetchReportResults'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$CloudChannelReportsService-$FetchReportResults',
       'FetchReportResults is deprecated and may be removed in a future version.',
@@ -1120,7 +1128,9 @@ export class CloudChannelReportsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$CloudChannelReportsService-$ListReports',
       'ListReports is deprecated and may be removed in a future version.',
@@ -1204,7 +1214,9 @@ export class CloudChannelReportsServiceClient {
       });
     const defaultCallSettings = this._defaults['listReports'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$CloudChannelReportsService-$ListReports',
       'ListReports is deprecated and may be removed in a future version.',
@@ -1270,7 +1282,9 @@ export class CloudChannelReportsServiceClient {
       });
     const defaultCallSettings = this._defaults['listReports'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$CloudChannelReportsService-$ListReports',
       'ListReports is deprecated and may be removed in a future version.',
@@ -1377,7 +1391,7 @@ export class CloudChannelReportsServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

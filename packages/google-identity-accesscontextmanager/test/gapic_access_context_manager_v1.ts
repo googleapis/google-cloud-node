@@ -298,7 +298,9 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.accessContextManagerStub);
       client.close().then(() => {
         done();
@@ -361,7 +363,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.GetAccessPolicyRequest()
       );
@@ -393,7 +395,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.GetAccessPolicyRequest()
       );
@@ -441,7 +443,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.GetAccessPolicyRequest()
       );
@@ -473,7 +475,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.GetAccessPolicyRequest()
       );
@@ -495,7 +497,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.GetAccessLevelRequest()
       );
@@ -527,7 +529,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.GetAccessLevelRequest()
       );
@@ -575,7 +577,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.GetAccessLevelRequest()
       );
@@ -607,7 +609,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.GetAccessLevelRequest()
       );
@@ -629,7 +631,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.GetServicePerimeterRequest()
       );
@@ -662,7 +664,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.GetServicePerimeterRequest()
       );
@@ -710,7 +712,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.GetServicePerimeterRequest()
       );
@@ -742,7 +744,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.GetServicePerimeterRequest()
       );
@@ -764,7 +766,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.GetGcpUserAccessBindingRequest()
       );
@@ -797,7 +799,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.GetGcpUserAccessBindingRequest()
       );
@@ -845,7 +847,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.GetGcpUserAccessBindingRequest()
       );
@@ -880,7 +882,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.GetGcpUserAccessBindingRequest()
       );
@@ -905,7 +907,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -937,7 +939,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -985,7 +987,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -1017,7 +1019,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -1039,7 +1041,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -1071,7 +1073,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -1119,7 +1121,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -1151,7 +1153,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -1173,7 +1175,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -1206,7 +1208,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -1254,7 +1256,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -1286,7 +1288,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -1308,7 +1310,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.AccessPolicy()
       );
@@ -1328,7 +1330,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.AccessPolicy()
       );
@@ -1369,7 +1371,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.AccessPolicy()
       );
@@ -1387,7 +1389,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.AccessPolicy()
       );
@@ -1407,7 +1409,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1430,7 +1432,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1452,7 +1454,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.UpdateAccessPolicyRequest()
       );
@@ -1487,7 +1489,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.UpdateAccessPolicyRequest()
       );
@@ -1543,7 +1545,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.UpdateAccessPolicyRequest()
       );
@@ -1576,7 +1578,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.UpdateAccessPolicyRequest()
       );
@@ -1611,7 +1613,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1634,7 +1636,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1656,7 +1658,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.DeleteAccessPolicyRequest()
       );
@@ -1690,7 +1692,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.DeleteAccessPolicyRequest()
       );
@@ -1745,7 +1747,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.DeleteAccessPolicyRequest()
       );
@@ -1777,7 +1779,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.DeleteAccessPolicyRequest()
       );
@@ -1811,7 +1813,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1834,7 +1836,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1856,7 +1858,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.CreateAccessLevelRequest()
       );
@@ -1890,7 +1892,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.CreateAccessLevelRequest()
       );
@@ -1945,7 +1947,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.CreateAccessLevelRequest()
       );
@@ -1977,7 +1979,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.CreateAccessLevelRequest()
       );
@@ -2011,7 +2013,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2034,7 +2036,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2056,7 +2058,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.UpdateAccessLevelRequest()
       );
@@ -2091,7 +2093,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.UpdateAccessLevelRequest()
       );
@@ -2147,7 +2149,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.UpdateAccessLevelRequest()
       );
@@ -2180,7 +2182,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.UpdateAccessLevelRequest()
       );
@@ -2215,7 +2217,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2238,7 +2240,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2260,7 +2262,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.DeleteAccessLevelRequest()
       );
@@ -2294,7 +2296,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.DeleteAccessLevelRequest()
       );
@@ -2349,7 +2351,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.DeleteAccessLevelRequest()
       );
@@ -2381,7 +2383,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.DeleteAccessLevelRequest()
       );
@@ -2415,7 +2417,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2438,7 +2440,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2460,7 +2462,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ReplaceAccessLevelsRequest()
       );
@@ -2494,7 +2496,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ReplaceAccessLevelsRequest()
       );
@@ -2549,7 +2551,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ReplaceAccessLevelsRequest()
       );
@@ -2581,7 +2583,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ReplaceAccessLevelsRequest()
       );
@@ -2615,7 +2617,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2638,7 +2640,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2660,7 +2662,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.CreateServicePerimeterRequest()
       );
@@ -2694,7 +2696,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.CreateServicePerimeterRequest()
       );
@@ -2749,7 +2751,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.CreateServicePerimeterRequest()
       );
@@ -2784,7 +2786,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.CreateServicePerimeterRequest()
       );
@@ -2818,7 +2820,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2841,7 +2843,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2863,7 +2865,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.UpdateServicePerimeterRequest()
       );
@@ -2898,7 +2900,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.UpdateServicePerimeterRequest()
       );
@@ -2954,7 +2956,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.UpdateServicePerimeterRequest()
       );
@@ -2990,7 +2992,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.UpdateServicePerimeterRequest()
       );
@@ -3025,7 +3027,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3048,7 +3050,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3070,7 +3072,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.DeleteServicePerimeterRequest()
       );
@@ -3104,7 +3106,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.DeleteServicePerimeterRequest()
       );
@@ -3159,7 +3161,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.DeleteServicePerimeterRequest()
       );
@@ -3194,7 +3196,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.DeleteServicePerimeterRequest()
       );
@@ -3228,7 +3230,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3251,7 +3253,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3273,7 +3275,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ReplaceServicePerimetersRequest()
       );
@@ -3307,7 +3309,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ReplaceServicePerimetersRequest()
       );
@@ -3362,7 +3364,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ReplaceServicePerimetersRequest()
       );
@@ -3397,7 +3399,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ReplaceServicePerimetersRequest()
       );
@@ -3431,7 +3433,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3455,7 +3457,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3477,7 +3479,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.CommitServicePerimetersRequest()
       );
@@ -3511,7 +3513,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.CommitServicePerimetersRequest()
       );
@@ -3566,7 +3568,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.CommitServicePerimetersRequest()
       );
@@ -3601,7 +3603,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.CommitServicePerimetersRequest()
       );
@@ -3635,7 +3637,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3659,7 +3661,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3681,7 +3683,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.CreateGcpUserAccessBindingRequest()
       );
@@ -3715,7 +3717,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.CreateGcpUserAccessBindingRequest()
       );
@@ -3770,7 +3772,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.CreateGcpUserAccessBindingRequest()
       );
@@ -3805,7 +3807,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.CreateGcpUserAccessBindingRequest()
       );
@@ -3839,7 +3841,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3863,7 +3865,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3885,7 +3887,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.UpdateGcpUserAccessBindingRequest()
       );
@@ -3920,7 +3922,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.UpdateGcpUserAccessBindingRequest()
       );
@@ -3976,7 +3978,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.UpdateGcpUserAccessBindingRequest()
       );
@@ -4012,7 +4014,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.UpdateGcpUserAccessBindingRequest()
       );
@@ -4047,7 +4049,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4071,7 +4073,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4093,7 +4095,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.DeleteGcpUserAccessBindingRequest()
       );
@@ -4127,7 +4129,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.DeleteGcpUserAccessBindingRequest()
       );
@@ -4182,7 +4184,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.DeleteGcpUserAccessBindingRequest()
       );
@@ -4217,7 +4219,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.DeleteGcpUserAccessBindingRequest()
       );
@@ -4251,7 +4253,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4275,7 +4277,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4297,7 +4299,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ListAccessPoliciesRequest()
       );
@@ -4324,7 +4326,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ListAccessPoliciesRequest()
       );
@@ -4368,7 +4370,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ListAccessPoliciesRequest()
       );
@@ -4386,7 +4388,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ListAccessPoliciesRequest()
       );
@@ -4437,7 +4439,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ListAccessPoliciesRequest()
       );
@@ -4477,7 +4479,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ListAccessPoliciesRequest()
       );
@@ -4515,7 +4517,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ListAccessPoliciesRequest()
       );
@@ -4546,7 +4548,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ListAccessLevelsRequest()
       );
@@ -4586,7 +4588,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ListAccessLevelsRequest()
       );
@@ -4644,7 +4646,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ListAccessLevelsRequest()
       );
@@ -4676,7 +4678,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ListAccessLevelsRequest()
       );
@@ -4740,7 +4742,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ListAccessLevelsRequest()
       );
@@ -4793,7 +4795,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ListAccessLevelsRequest()
       );
@@ -4844,7 +4846,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ListAccessLevelsRequest()
       );
@@ -4888,7 +4890,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ListServicePerimetersRequest()
       );
@@ -4929,7 +4931,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ListServicePerimetersRequest()
       );
@@ -4987,7 +4989,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ListServicePerimetersRequest()
       );
@@ -5022,7 +5024,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ListServicePerimetersRequest()
       );
@@ -5092,7 +5094,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ListServicePerimetersRequest()
       );
@@ -5151,7 +5153,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ListServicePerimetersRequest()
       );
@@ -5206,7 +5208,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ListServicePerimetersRequest()
       );
@@ -5254,7 +5256,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsRequest()
       );
@@ -5295,7 +5297,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsRequest()
       );
@@ -5353,7 +5355,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsRequest()
       );
@@ -5388,7 +5390,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsRequest()
       );
@@ -5458,7 +5460,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsRequest()
       );
@@ -5517,7 +5519,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsRequest()
       );
@@ -5572,7 +5574,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsRequest()
       );
@@ -5619,7 +5621,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -5701,7 +5703,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -5784,7 +5786,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -5883,8 +5885,7 @@ describe('v1.AccessContextManagerClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -5904,7 +5905,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -5913,8 +5914,7 @@ describe('v1.AccessContextManagerClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -5930,7 +5930,7 @@ describe('v1.AccessContextManagerClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('accessLevel', () => {
+    describe('accessLevel', async () => {
       const fakePath = '/rendered/path/accessLevel';
       const expectedParameters = {
         access_policy: 'accessPolicyValue',
@@ -5941,7 +5941,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.accessLevelPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5983,7 +5983,7 @@ describe('v1.AccessContextManagerClient', () => {
       });
     });
 
-    describe('accessPolicy', () => {
+    describe('accessPolicy', async () => {
       const fakePath = '/rendered/path/accessPolicy';
       const expectedParameters = {
         access_policy: 'accessPolicyValue',
@@ -5993,7 +5993,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.accessPolicyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6022,7 +6022,7 @@ describe('v1.AccessContextManagerClient', () => {
       });
     });
 
-    describe('gcpUserAccessBinding', () => {
+    describe('gcpUserAccessBinding', async () => {
       const fakePath = '/rendered/path/gcpUserAccessBinding';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -6033,7 +6033,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.gcpUserAccessBindingPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6088,7 +6088,7 @@ describe('v1.AccessContextManagerClient', () => {
       });
     });
 
-    describe('organization', () => {
+    describe('organization', async () => {
       const fakePath = '/rendered/path/organization';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -6098,7 +6098,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6127,7 +6127,7 @@ describe('v1.AccessContextManagerClient', () => {
       });
     });
 
-    describe('servicePerimeter', () => {
+    describe('servicePerimeter', async () => {
       const fakePath = '/rendered/path/servicePerimeter';
       const expectedParameters = {
         access_policy: 'accessPolicyValue',
@@ -6138,7 +6138,7 @@ describe('v1.AccessContextManagerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.servicePerimeterPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

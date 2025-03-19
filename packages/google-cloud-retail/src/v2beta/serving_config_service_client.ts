@@ -557,7 +557,9 @@ export class ServingConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createServingConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -679,7 +681,9 @@ export class ServingConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteServingConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -806,7 +810,9 @@ export class ServingConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'serving_config.name': request.servingConfig!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateServingConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -928,7 +934,9 @@ export class ServingConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getServingConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1051,7 +1059,9 @@ export class ServingConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         serving_config: request.servingConfig ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('addControl request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1174,7 +1184,9 @@ export class ServingConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         serving_config: request.servingConfig ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('removeControl request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1302,7 +1314,9 @@ export class ServingConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.retail.v2beta.IListServingConfigsRequest,
@@ -1371,7 +1385,9 @@ export class ServingConfigServiceClient {
       });
     const defaultCallSettings = this._defaults['listServingConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listServingConfigs stream %j', request);
     return this.descriptors.page.listServingConfigs.createStream(
       this.innerApiCalls.listServingConfigs as GaxCall,
@@ -1422,7 +1438,9 @@ export class ServingConfigServiceClient {
       });
     const defaultCallSettings = this._defaults['listServingConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listServingConfigs iterate %j', request);
     return this.descriptors.page.listServingConfigs.asyncIterate(
       this.innerApiCalls['listServingConfigs'] as GaxCall,
@@ -1602,7 +1620,7 @@ export class ServingConfigServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

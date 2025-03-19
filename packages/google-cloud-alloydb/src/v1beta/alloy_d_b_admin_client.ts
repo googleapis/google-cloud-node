@@ -842,7 +842,9 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getCluster request %j', request);
     const wrappedCallback:
       | Callback<
@@ -955,7 +957,9 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getInstance request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1079,7 +1083,9 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('executeSql request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1189,7 +1195,9 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getBackup request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1345,7 +1353,9 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('generateClientCertificate request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1479,7 +1489,9 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getConnectionInfo request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1591,7 +1603,9 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getUser request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1720,7 +1734,9 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createUser request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1855,7 +1871,9 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         'user.name': request.user!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateUser request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1983,7 +2001,9 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteUser request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2135,7 +2155,9 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2329,7 +2351,9 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         'cluster.name': request.cluster!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2509,7 +2533,9 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2701,7 +2727,9 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2893,7 +2921,9 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3086,7 +3116,9 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3274,7 +3306,9 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3471,7 +3505,9 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3662,7 +3698,9 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3852,7 +3890,9 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4042,7 +4082,9 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4234,7 +4276,9 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4428,7 +4472,9 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         'instance.name': request.instance!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4618,7 +4664,9 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4806,7 +4854,9 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4995,7 +5045,9 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5185,7 +5237,9 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5373,7 +5427,9 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5566,7 +5622,9 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         'backup.name': request.backup!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5755,7 +5813,9 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5925,7 +5985,9 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.alloydb.v1beta.IListClustersRequest,
@@ -5998,7 +6060,9 @@ export class AlloyDBAdminClient {
       });
     const defaultCallSettings = this._defaults['listClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listClusters stream %j', request);
     return this.descriptors.page.listClusters.createStream(
       this.innerApiCalls.listClusters as GaxCall,
@@ -6053,7 +6117,9 @@ export class AlloyDBAdminClient {
       });
     const defaultCallSettings = this._defaults['listClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listClusters iterate %j', request);
     return this.descriptors.page.listClusters.asyncIterate(
       this.innerApiCalls['listClusters'] as GaxCall,
@@ -6165,7 +6231,9 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.alloydb.v1beta.IListInstancesRequest,
@@ -6240,7 +6308,9 @@ export class AlloyDBAdminClient {
       });
     const defaultCallSettings = this._defaults['listInstances'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listInstances stream %j', request);
     return this.descriptors.page.listInstances.createStream(
       this.innerApiCalls.listInstances as GaxCall,
@@ -6297,7 +6367,9 @@ export class AlloyDBAdminClient {
       });
     const defaultCallSettings = this._defaults['listInstances'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listInstances iterate %j', request);
     return this.descriptors.page.listInstances.asyncIterate(
       this.innerApiCalls['listInstances'] as GaxCall,
@@ -6404,7 +6476,9 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.alloydb.v1beta.IListBackupsRequest,
@@ -6474,7 +6548,9 @@ export class AlloyDBAdminClient {
       });
     const defaultCallSettings = this._defaults['listBackups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listBackups stream %j', request);
     return this.descriptors.page.listBackups.createStream(
       this.innerApiCalls.listBackups as GaxCall,
@@ -6526,7 +6602,9 @@ export class AlloyDBAdminClient {
       });
     const defaultCallSettings = this._defaults['listBackups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listBackups iterate %j', request);
     return this.descriptors.page.listBackups.asyncIterate(
       this.innerApiCalls['listBackups'] as GaxCall,
@@ -6635,7 +6713,9 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.alloydb.v1beta.IListSupportedDatabaseFlagsRequest,
@@ -6707,7 +6787,9 @@ export class AlloyDBAdminClient {
       });
     const defaultCallSettings = this._defaults['listSupportedDatabaseFlags'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSupportedDatabaseFlags stream %j', request);
     return this.descriptors.page.listSupportedDatabaseFlags.createStream(
       this.innerApiCalls.listSupportedDatabaseFlags as GaxCall,
@@ -6761,7 +6843,9 @@ export class AlloyDBAdminClient {
       });
     const defaultCallSettings = this._defaults['listSupportedDatabaseFlags'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSupportedDatabaseFlags iterate %j', request);
     return this.descriptors.page.listSupportedDatabaseFlags.asyncIterate(
       this.innerApiCalls['listSupportedDatabaseFlags'] as GaxCall,
@@ -6862,7 +6946,9 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.alloydb.v1beta.IListUsersRequest,
@@ -6932,7 +7018,9 @@ export class AlloyDBAdminClient {
       });
     const defaultCallSettings = this._defaults['listUsers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listUsers stream %j', request);
     return this.descriptors.page.listUsers.createStream(
       this.innerApiCalls.listUsers as GaxCall,
@@ -6984,7 +7072,9 @@ export class AlloyDBAdminClient {
       });
     const defaultCallSettings = this._defaults['listUsers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listUsers iterate %j', request);
     return this.descriptors.page.listUsers.asyncIterate(
       this.innerApiCalls['listUsers'] as GaxCall,
@@ -7094,7 +7184,9 @@ export class AlloyDBAdminClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.alloydb.v1beta.IListDatabasesRequest,
@@ -7167,7 +7259,9 @@ export class AlloyDBAdminClient {
       });
     const defaultCallSettings = this._defaults['listDatabases'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDatabases stream %j', request);
     return this.descriptors.page.listDatabases.createStream(
       this.innerApiCalls.listDatabases as GaxCall,
@@ -7222,7 +7316,9 @@ export class AlloyDBAdminClient {
       });
     const defaultCallSettings = this._defaults['listDatabases'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDatabases iterate %j', request);
     return this.descriptors.page.listDatabases.asyncIterate(
       this.innerApiCalls['listDatabases'] as GaxCall,
@@ -7540,7 +7636,7 @@ export class AlloyDBAdminClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

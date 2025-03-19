@@ -498,7 +498,9 @@ export class SubnetworksClient {
         region: request.region ?? '',
         subnetwork: request.subnetwork ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('delete request %j', request);
     const wrappedCallback:
       | Callback<
@@ -638,7 +640,9 @@ export class SubnetworksClient {
         region: request.region ?? '',
         subnetwork: request.subnetwork ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('expandIpCidrRange request %j', request);
     const wrappedCallback:
       | Callback<
@@ -763,7 +767,9 @@ export class SubnetworksClient {
         region: request.region ?? '',
         subnetwork: request.subnetwork ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('get request %j', request);
     const wrappedCallback:
       | Callback<
@@ -887,7 +893,9 @@ export class SubnetworksClient {
         region: request.region ?? '',
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1018,7 +1026,9 @@ export class SubnetworksClient {
         project: request.project ?? '',
         region: request.region ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('insert request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1154,7 +1164,9 @@ export class SubnetworksClient {
         region: request.region ?? '',
         subnetwork: request.subnetwork ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('patch request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1287,7 +1299,9 @@ export class SubnetworksClient {
         region: request.region ?? '',
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1421,7 +1435,9 @@ export class SubnetworksClient {
         region: request.region ?? '',
         subnetwork: request.subnetwork ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setPrivateIpGoogleAccess request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1560,7 +1576,9 @@ export class SubnetworksClient {
         region: request.region ?? '',
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('testIamPermissions request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1643,7 +1661,9 @@ export class SubnetworksClient {
       });
     const defaultCallSettings = this._defaults['aggregatedList'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('aggregatedList iterate %j', request);
     return this.descriptors.page.aggregatedList.asyncIterate(
       this.innerApiCalls['aggregatedList'] as GaxCall,
@@ -1748,7 +1768,9 @@ export class SubnetworksClient {
         project: request.project ?? '',
         region: request.region ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.compute.v1.IListSubnetworksRequest,
@@ -1820,7 +1842,9 @@ export class SubnetworksClient {
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('list stream %j', request);
     return this.descriptors.page.list.createStream(
       this.innerApiCalls.list as GaxCall,
@@ -1876,7 +1900,9 @@ export class SubnetworksClient {
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('list iterate %j', request);
     return this.descriptors.page.list.asyncIterate(
       this.innerApiCalls['list'] as GaxCall,
@@ -1984,7 +2010,9 @@ export class SubnetworksClient {
       this._gaxModule.routingHeader.fromParams({
         project: request.project ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.compute.v1.IListUsableSubnetworksRequest,
@@ -2055,7 +2083,9 @@ export class SubnetworksClient {
       });
     const defaultCallSettings = this._defaults['listUsable'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listUsable stream %j', request);
     return this.descriptors.page.listUsable.createStream(
       this.innerApiCalls.listUsable as GaxCall,
@@ -2108,7 +2138,9 @@ export class SubnetworksClient {
       });
     const defaultCallSettings = this._defaults['listUsable'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listUsable iterate %j', request);
     return this.descriptors.page.listUsable.asyncIterate(
       this.innerApiCalls['listUsable'] as GaxCall,

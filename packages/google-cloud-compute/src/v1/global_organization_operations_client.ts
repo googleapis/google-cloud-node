@@ -471,7 +471,9 @@ export class GlobalOrganizationOperationsClient {
       this._gaxModule.routingHeader.fromParams({
         operation: request.operation ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('delete request %j', request);
     const wrappedCallback:
       | Callback<
@@ -598,7 +600,9 @@ export class GlobalOrganizationOperationsClient {
       this._gaxModule.routingHeader.fromParams({
         operation: request.operation ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('get request %j', request);
     const wrappedCallback:
       | Callback<
@@ -719,7 +723,9 @@ export class GlobalOrganizationOperationsClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.compute.v1.IListGlobalOrganizationOperationsRequest,
@@ -784,7 +790,9 @@ export class GlobalOrganizationOperationsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('list stream %j', request);
     return this.descriptors.page.list.createStream(
       this.innerApiCalls.list as GaxCall,
@@ -833,7 +841,9 @@ export class GlobalOrganizationOperationsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('list iterate %j', request);
     return this.descriptors.page.list.asyncIterate(
       this.innerApiCalls['list'] as GaxCall,

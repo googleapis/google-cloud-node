@@ -265,7 +265,9 @@ describe('v1.ResourcePoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.resourcePoliciesStub);
       client.close().then(() => {
         done();
@@ -324,7 +326,7 @@ describe('v1.ResourcePoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteResourcePolicyRequest()
       );
@@ -365,7 +367,7 @@ describe('v1.ResourcePoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteResourcePolicyRequest()
       );
@@ -422,7 +424,7 @@ describe('v1.ResourcePoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteResourcePolicyRequest()
       );
@@ -460,7 +462,7 @@ describe('v1.ResourcePoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteResourcePolicyRequest()
       );
@@ -491,7 +493,7 @@ describe('v1.ResourcePoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetResourcePolicyRequest()
       );
@@ -531,7 +533,7 @@ describe('v1.ResourcePoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetResourcePolicyRequest()
       );
@@ -586,7 +588,7 @@ describe('v1.ResourcePoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetResourcePolicyRequest()
       );
@@ -623,7 +625,7 @@ describe('v1.ResourcePoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetResourcePolicyRequest()
       );
@@ -654,7 +656,7 @@ describe('v1.ResourcePoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyResourcePolicyRequest()
       );
@@ -695,7 +697,7 @@ describe('v1.ResourcePoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyResourcePolicyRequest()
       );
@@ -752,7 +754,7 @@ describe('v1.ResourcePoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyResourcePolicyRequest()
       );
@@ -793,7 +795,7 @@ describe('v1.ResourcePoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyResourcePolicyRequest()
       );
@@ -824,7 +826,7 @@ describe('v1.ResourcePoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertResourcePolicyRequest()
       );
@@ -860,7 +862,7 @@ describe('v1.ResourcePoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertResourcePolicyRequest()
       );
@@ -912,7 +914,7 @@ describe('v1.ResourcePoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertResourcePolicyRequest()
       );
@@ -945,7 +947,7 @@ describe('v1.ResourcePoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertResourcePolicyRequest()
       );
@@ -971,7 +973,7 @@ describe('v1.ResourcePoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchResourcePolicyRequest()
       );
@@ -1011,7 +1013,7 @@ describe('v1.ResourcePoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchResourcePolicyRequest()
       );
@@ -1066,7 +1068,7 @@ describe('v1.ResourcePoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchResourcePolicyRequest()
       );
@@ -1103,7 +1105,7 @@ describe('v1.ResourcePoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchResourcePolicyRequest()
       );
@@ -1134,7 +1136,7 @@ describe('v1.ResourcePoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyResourcePolicyRequest()
       );
@@ -1175,7 +1177,7 @@ describe('v1.ResourcePoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyResourcePolicyRequest()
       );
@@ -1232,7 +1234,7 @@ describe('v1.ResourcePoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyResourcePolicyRequest()
       );
@@ -1273,7 +1275,7 @@ describe('v1.ResourcePoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyResourcePolicyRequest()
       );
@@ -1304,7 +1306,7 @@ describe('v1.ResourcePoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsResourcePolicyRequest()
       );
@@ -1346,7 +1348,7 @@ describe('v1.ResourcePoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsResourcePolicyRequest()
       );
@@ -1403,7 +1405,7 @@ describe('v1.ResourcePoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsResourcePolicyRequest()
       );
@@ -1444,7 +1446,7 @@ describe('v1.ResourcePoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsResourcePolicyRequest()
       );
@@ -1475,7 +1477,7 @@ describe('v1.ResourcePoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AggregatedListResourcePoliciesRequest()
       );
@@ -1535,7 +1537,7 @@ describe('v1.ResourcePoliciesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AggregatedListResourcePoliciesRequest()
       );
@@ -1579,7 +1581,7 @@ describe('v1.ResourcePoliciesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListResourcePoliciesRequest()
       );
@@ -1622,7 +1624,7 @@ describe('v1.ResourcePoliciesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListResourcePoliciesRequest()
       );
@@ -1680,7 +1682,7 @@ describe('v1.ResourcePoliciesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListResourcePoliciesRequest()
       );
@@ -1712,7 +1714,7 @@ describe('v1.ResourcePoliciesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListResourcePoliciesRequest()
       );
@@ -1777,7 +1779,7 @@ describe('v1.ResourcePoliciesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListResourcePoliciesRequest()
       );
@@ -1833,7 +1835,7 @@ describe('v1.ResourcePoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListResourcePoliciesRequest()
       );
@@ -1886,7 +1888,7 @@ describe('v1.ResourcePoliciesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListResourcePoliciesRequest()
       );

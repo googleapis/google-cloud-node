@@ -512,7 +512,9 @@ export class RoleServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getRole request %j', request);
     const wrappedCallback:
       | Callback<
@@ -643,7 +645,9 @@ export class RoleServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.ads.admanager.v1.IListRolesRequest,
@@ -723,7 +727,9 @@ export class RoleServiceClient {
       });
     const defaultCallSettings = this._defaults['listRoles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRoles stream %j', request);
     return this.descriptors.page.listRoles.createStream(
       this.innerApiCalls.listRoles as GaxCall,
@@ -787,7 +793,9 @@ export class RoleServiceClient {
       });
     const defaultCallSettings = this._defaults['listRoles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRoles iterate %j', request);
     return this.descriptors.page.listRoles.asyncIterate(
       this.innerApiCalls['listRoles'] as GaxCall,

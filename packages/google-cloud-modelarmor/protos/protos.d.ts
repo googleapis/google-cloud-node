@@ -3025,8 +3025,8 @@ export namespace google {
                     /** FilterResult maliciousUriFilterResult */
                     maliciousUriFilterResult?: (google.cloud.modelarmor.v1.IMaliciousUriFilterResult|null);
 
-                    /** FilterResult csamFilterResult */
-                    csamFilterResult?: (google.cloud.modelarmor.v1.ICsamFilterResult|null);
+                    /** FilterResult csamFilterFilterResult */
+                    csamFilterFilterResult?: (google.cloud.modelarmor.v1.ICsamFilterResult|null);
 
                     /** FilterResult virusScanFilterResult */
                     virusScanFilterResult?: (google.cloud.modelarmor.v1.IVirusScanFilterResult|null);
@@ -3053,14 +3053,14 @@ export namespace google {
                     /** FilterResult maliciousUriFilterResult. */
                     public maliciousUriFilterResult?: (google.cloud.modelarmor.v1.IMaliciousUriFilterResult|null);
 
-                    /** FilterResult csamFilterResult. */
-                    public csamFilterResult?: (google.cloud.modelarmor.v1.ICsamFilterResult|null);
+                    /** FilterResult csamFilterFilterResult. */
+                    public csamFilterFilterResult?: (google.cloud.modelarmor.v1.ICsamFilterResult|null);
 
                     /** FilterResult virusScanFilterResult. */
                     public virusScanFilterResult?: (google.cloud.modelarmor.v1.IVirusScanFilterResult|null);
 
                     /** FilterResult filterResult. */
-                    public filterResult?: ("raiFilterResult"|"sdpFilterResult"|"piAndJailbreakFilterResult"|"maliciousUriFilterResult"|"csamFilterResult"|"virusScanFilterResult");
+                    public filterResult?: ("raiFilterResult"|"sdpFilterResult"|"piAndJailbreakFilterResult"|"maliciousUriFilterResult"|"csamFilterFilterResult"|"virusScanFilterResult");
 
                     /**
                      * Creates a new FilterResult instance using the specified properties.

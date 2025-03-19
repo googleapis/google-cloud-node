@@ -271,7 +271,9 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.conferenceRecordsServiceStub);
       client.close().then(() => {
         done();
@@ -342,7 +344,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.GetConferenceRecordRequest()
       );
@@ -377,7 +379,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.GetConferenceRecordRequest()
       );
@@ -427,7 +429,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.GetConferenceRecordRequest()
       );
@@ -461,7 +463,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.GetConferenceRecordRequest()
       );
@@ -485,7 +487,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.GetParticipantRequest()
       );
@@ -519,7 +521,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.GetParticipantRequest()
       );
@@ -569,7 +571,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.GetParticipantRequest()
       );
@@ -603,7 +605,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.GetParticipantRequest()
       );
@@ -627,7 +629,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.GetParticipantSessionRequest()
       );
@@ -662,7 +664,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.GetParticipantSessionRequest()
       );
@@ -712,7 +714,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.GetParticipantSessionRequest()
       );
@@ -749,7 +751,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.GetParticipantSessionRequest()
       );
@@ -776,7 +778,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.GetRecordingRequest()
       );
@@ -810,7 +812,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.GetRecordingRequest()
       );
@@ -860,7 +862,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.GetRecordingRequest()
       );
@@ -894,7 +896,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.GetRecordingRequest()
       );
@@ -918,7 +920,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.GetTranscriptRequest()
       );
@@ -952,7 +954,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.GetTranscriptRequest()
       );
@@ -1002,7 +1004,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.GetTranscriptRequest()
       );
@@ -1036,7 +1038,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.GetTranscriptRequest()
       );
@@ -1060,7 +1062,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.GetTranscriptEntryRequest()
       );
@@ -1095,7 +1097,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.GetTranscriptEntryRequest()
       );
@@ -1145,7 +1147,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.GetTranscriptEntryRequest()
       );
@@ -1179,7 +1181,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.GetTranscriptEntryRequest()
       );
@@ -1203,7 +1205,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.ListConferenceRecordsRequest()
       );
@@ -1232,7 +1234,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.ListConferenceRecordsRequest()
       );
@@ -1276,7 +1278,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.ListConferenceRecordsRequest()
       );
@@ -1299,7 +1301,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.ListConferenceRecordsRequest()
       );
@@ -1352,7 +1354,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.ListConferenceRecordsRequest()
       );
@@ -1394,7 +1396,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.ListConferenceRecordsRequest()
       );
@@ -1434,7 +1436,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.ListConferenceRecordsRequest()
       );
@@ -1468,7 +1470,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.ListParticipantsRequest()
       );
@@ -1504,7 +1506,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.ListParticipantsRequest()
       );
@@ -1556,7 +1558,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.ListParticipantsRequest()
       );
@@ -1590,7 +1592,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.ListParticipantsRequest()
       );
@@ -1647,7 +1649,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.ListParticipantsRequest()
       );
@@ -1699,7 +1701,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.ListParticipantsRequest()
       );
@@ -1745,7 +1747,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.ListParticipantsRequest()
       );
@@ -1790,7 +1792,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.ListParticipantSessionsRequest()
       );
@@ -1833,7 +1835,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.ListParticipantSessionsRequest()
       );
@@ -1891,7 +1893,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.ListParticipantSessionsRequest()
       );
@@ -1928,7 +1930,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.ListParticipantSessionsRequest()
       );
@@ -1998,7 +2000,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.ListParticipantSessionsRequest()
       );
@@ -2057,7 +2059,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.ListParticipantSessionsRequest()
       );
@@ -2114,7 +2116,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.ListParticipantSessionsRequest()
       );
@@ -2164,7 +2166,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.ListRecordingsRequest()
       );
@@ -2200,7 +2202,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.ListRecordingsRequest()
       );
@@ -2252,7 +2254,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.ListRecordingsRequest()
       );
@@ -2286,7 +2288,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.ListRecordingsRequest()
       );
@@ -2343,7 +2345,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.ListRecordingsRequest()
       );
@@ -2395,7 +2397,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.ListRecordingsRequest()
       );
@@ -2441,7 +2443,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.ListRecordingsRequest()
       );
@@ -2486,7 +2488,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.ListTranscriptsRequest()
       );
@@ -2522,7 +2524,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.ListTranscriptsRequest()
       );
@@ -2574,7 +2576,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.ListTranscriptsRequest()
       );
@@ -2608,7 +2610,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.ListTranscriptsRequest()
       );
@@ -2665,7 +2667,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.ListTranscriptsRequest()
       );
@@ -2717,7 +2719,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.ListTranscriptsRequest()
       );
@@ -2763,7 +2765,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.ListTranscriptsRequest()
       );
@@ -2808,7 +2810,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.ListTranscriptEntriesRequest()
       );
@@ -2851,7 +2853,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.ListTranscriptEntriesRequest()
       );
@@ -2909,7 +2911,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.ListTranscriptEntriesRequest()
       );
@@ -2946,7 +2948,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.ListTranscriptEntriesRequest()
       );
@@ -3015,7 +3017,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.ListTranscriptEntriesRequest()
       );
@@ -3073,7 +3075,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.ListTranscriptEntriesRequest()
       );
@@ -3129,7 +3131,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.apps.meet.v2beta.ListTranscriptEntriesRequest()
       );
@@ -3170,7 +3172,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('conferenceRecord', () => {
+    describe('conferenceRecord', async () => {
       const fakePath = '/rendered/path/conferenceRecord';
       const expectedParameters = {
         conference_record: 'conferenceRecordValue',
@@ -3182,7 +3184,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.conferenceRecordPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3215,7 +3217,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
       });
     });
 
-    describe('member', () => {
+    describe('member', async () => {
       const fakePath = '/rendered/path/member';
       const expectedParameters = {
         space: 'spaceValue',
@@ -3228,7 +3230,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.memberPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3267,7 +3269,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
       });
     });
 
-    describe('participant', () => {
+    describe('participant', async () => {
       const fakePath = '/rendered/path/participant';
       const expectedParameters = {
         conference_record: 'conferenceRecordValue',
@@ -3280,7 +3282,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.participantPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3323,7 +3325,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
       });
     });
 
-    describe('participantSession', () => {
+    describe('participantSession', async () => {
       const fakePath = '/rendered/path/participantSession';
       const expectedParameters = {
         conference_record: 'conferenceRecordValue',
@@ -3337,7 +3339,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.participantSessionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3405,7 +3407,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
       });
     });
 
-    describe('recording', () => {
+    describe('recording', async () => {
       const fakePath = '/rendered/path/recording';
       const expectedParameters = {
         conference_record: 'conferenceRecordValue',
@@ -3418,7 +3420,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.recordingPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3460,7 +3462,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
       });
     });
 
-    describe('space', () => {
+    describe('space', async () => {
       const fakePath = '/rendered/path/space';
       const expectedParameters = {
         space: 'spaceValue',
@@ -3472,7 +3474,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.spacePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3501,7 +3503,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
       });
     });
 
-    describe('transcript', () => {
+    describe('transcript', async () => {
       const fakePath = '/rendered/path/transcript';
       const expectedParameters = {
         conference_record: 'conferenceRecordValue',
@@ -3514,7 +3516,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.transcriptPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3556,7 +3558,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
       });
     });
 
-    describe('transcriptEntry', () => {
+    describe('transcriptEntry', async () => {
       const fakePath = '/rendered/path/transcriptEntry';
       const expectedParameters = {
         conference_record: 'conferenceRecordValue',
@@ -3570,7 +3572,7 @@ describe('v2beta.ConferenceRecordsServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.transcriptEntryPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

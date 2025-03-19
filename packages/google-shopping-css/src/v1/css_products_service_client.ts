@@ -474,7 +474,9 @@ export class CssProductsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getCssProduct request %j', request);
     const wrappedCallback:
       | Callback<
@@ -606,7 +608,9 @@ export class CssProductsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.shopping.css.v1.IListCssProductsRequest,
@@ -679,7 +683,9 @@ export class CssProductsServiceClient {
       });
     const defaultCallSettings = this._defaults['listCssProducts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCssProducts stream %j', request);
     return this.descriptors.page.listCssProducts.createStream(
       this.innerApiCalls.listCssProducts as GaxCall,
@@ -734,7 +740,9 @@ export class CssProductsServiceClient {
       });
     const defaultCallSettings = this._defaults['listCssProducts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCssProducts iterate %j', request);
     return this.descriptors.page.listCssProducts.asyncIterate(
       this.innerApiCalls['listCssProducts'] as GaxCall,

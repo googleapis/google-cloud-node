@@ -263,7 +263,9 @@ describe('v1.LicensesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.licensesStub);
       client.close().then(() => {
         done();
@@ -322,7 +324,7 @@ describe('v1.LicensesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteLicenseRequest()
       );
@@ -358,7 +360,7 @@ describe('v1.LicensesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteLicenseRequest()
       );
@@ -410,7 +412,7 @@ describe('v1.LicensesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteLicenseRequest()
       );
@@ -443,7 +445,7 @@ describe('v1.LicensesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteLicenseRequest()
       );
@@ -469,7 +471,7 @@ describe('v1.LicensesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetLicenseRequest()
       );
@@ -504,7 +506,7 @@ describe('v1.LicensesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetLicenseRequest()
       );
@@ -554,7 +556,7 @@ describe('v1.LicensesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetLicenseRequest()
       );
@@ -586,7 +588,7 @@ describe('v1.LicensesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetLicenseRequest()
       );
@@ -612,7 +614,7 @@ describe('v1.LicensesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyLicenseRequest()
       );
@@ -648,7 +650,7 @@ describe('v1.LicensesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyLicenseRequest()
       );
@@ -700,7 +702,7 @@ describe('v1.LicensesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyLicenseRequest()
       );
@@ -736,7 +738,7 @@ describe('v1.LicensesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyLicenseRequest()
       );
@@ -762,7 +764,7 @@ describe('v1.LicensesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertLicenseRequest()
       );
@@ -793,7 +795,7 @@ describe('v1.LicensesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertLicenseRequest()
       );
@@ -840,7 +842,7 @@ describe('v1.LicensesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertLicenseRequest()
       );
@@ -868,7 +870,7 @@ describe('v1.LicensesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertLicenseRequest()
       );
@@ -889,7 +891,7 @@ describe('v1.LicensesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyLicenseRequest()
       );
@@ -925,7 +927,7 @@ describe('v1.LicensesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyLicenseRequest()
       );
@@ -977,7 +979,7 @@ describe('v1.LicensesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyLicenseRequest()
       );
@@ -1013,7 +1015,7 @@ describe('v1.LicensesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyLicenseRequest()
       );
@@ -1039,7 +1041,7 @@ describe('v1.LicensesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsLicenseRequest()
       );
@@ -1076,7 +1078,7 @@ describe('v1.LicensesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsLicenseRequest()
       );
@@ -1128,7 +1130,7 @@ describe('v1.LicensesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsLicenseRequest()
       );
@@ -1164,7 +1166,7 @@ describe('v1.LicensesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsLicenseRequest()
       );
@@ -1190,7 +1192,7 @@ describe('v1.LicensesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListLicensesRequest()
       );
@@ -1222,7 +1224,7 @@ describe('v1.LicensesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListLicensesRequest()
       );
@@ -1269,7 +1271,7 @@ describe('v1.LicensesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListLicensesRequest()
       );
@@ -1296,7 +1298,7 @@ describe('v1.LicensesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListLicensesRequest()
       );
@@ -1350,7 +1352,7 @@ describe('v1.LicensesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListLicensesRequest()
       );
@@ -1401,7 +1403,7 @@ describe('v1.LicensesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListLicensesRequest()
       );
@@ -1443,7 +1445,7 @@ describe('v1.LicensesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListLicensesRequest()
       );
