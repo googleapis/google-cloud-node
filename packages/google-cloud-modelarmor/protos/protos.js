@@ -7153,7 +7153,7 @@
                          * @property {google.cloud.modelarmor.v1.ISdpFilterResult|null} [sdpFilterResult] FilterResult sdpFilterResult
                          * @property {google.cloud.modelarmor.v1.IPiAndJailbreakFilterResult|null} [piAndJailbreakFilterResult] FilterResult piAndJailbreakFilterResult
                          * @property {google.cloud.modelarmor.v1.IMaliciousUriFilterResult|null} [maliciousUriFilterResult] FilterResult maliciousUriFilterResult
-                         * @property {google.cloud.modelarmor.v1.ICsamFilterResult|null} [csamFilterResult] FilterResult csamFilterResult
+                         * @property {google.cloud.modelarmor.v1.ICsamFilterResult|null} [csamFilterFilterResult] FilterResult csamFilterFilterResult
                          * @property {google.cloud.modelarmor.v1.IVirusScanFilterResult|null} [virusScanFilterResult] FilterResult virusScanFilterResult
                          */
     
@@ -7205,12 +7205,12 @@
                         FilterResult.prototype.maliciousUriFilterResult = null;
     
                         /**
-                         * FilterResult csamFilterResult.
-                         * @member {google.cloud.modelarmor.v1.ICsamFilterResult|null|undefined} csamFilterResult
+                         * FilterResult csamFilterFilterResult.
+                         * @member {google.cloud.modelarmor.v1.ICsamFilterResult|null|undefined} csamFilterFilterResult
                          * @memberof google.cloud.modelarmor.v1.FilterResult
                          * @instance
                          */
-                        FilterResult.prototype.csamFilterResult = null;
+                        FilterResult.prototype.csamFilterFilterResult = null;
     
                         /**
                          * FilterResult virusScanFilterResult.
@@ -7225,12 +7225,12 @@
     
                         /**
                          * FilterResult filterResult.
-                         * @member {"raiFilterResult"|"sdpFilterResult"|"piAndJailbreakFilterResult"|"maliciousUriFilterResult"|"csamFilterResult"|"virusScanFilterResult"|undefined} filterResult
+                         * @member {"raiFilterResult"|"sdpFilterResult"|"piAndJailbreakFilterResult"|"maliciousUriFilterResult"|"csamFilterFilterResult"|"virusScanFilterResult"|undefined} filterResult
                          * @memberof google.cloud.modelarmor.v1.FilterResult
                          * @instance
                          */
                         Object.defineProperty(FilterResult.prototype, "filterResult", {
-                            get: $util.oneOfGetter($oneOfFields = ["raiFilterResult", "sdpFilterResult", "piAndJailbreakFilterResult", "maliciousUriFilterResult", "csamFilterResult", "virusScanFilterResult"]),
+                            get: $util.oneOfGetter($oneOfFields = ["raiFilterResult", "sdpFilterResult", "piAndJailbreakFilterResult", "maliciousUriFilterResult", "csamFilterFilterResult", "virusScanFilterResult"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -7266,8 +7266,8 @@
                                 $root.google.cloud.modelarmor.v1.PiAndJailbreakFilterResult.encode(message.piAndJailbreakFilterResult, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.maliciousUriFilterResult != null && Object.hasOwnProperty.call(message, "maliciousUriFilterResult"))
                                 $root.google.cloud.modelarmor.v1.MaliciousUriFilterResult.encode(message.maliciousUriFilterResult, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-                            if (message.csamFilterResult != null && Object.hasOwnProperty.call(message, "csamFilterResult"))
-                                $root.google.cloud.modelarmor.v1.CsamFilterResult.encode(message.csamFilterResult, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.csamFilterFilterResult != null && Object.hasOwnProperty.call(message, "csamFilterFilterResult"))
+                                $root.google.cloud.modelarmor.v1.CsamFilterResult.encode(message.csamFilterFilterResult, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             if (message.virusScanFilterResult != null && Object.hasOwnProperty.call(message, "virusScanFilterResult"))
                                 $root.google.cloud.modelarmor.v1.VirusScanFilterResult.encode(message.virusScanFilterResult, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             return writer;
@@ -7321,7 +7321,7 @@
                                         break;
                                     }
                                 case 5: {
-                                        message.csamFilterResult = $root.google.cloud.modelarmor.v1.CsamFilterResult.decode(reader, reader.uint32());
+                                        message.csamFilterFilterResult = $root.google.cloud.modelarmor.v1.CsamFilterResult.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 6: {
@@ -7402,14 +7402,14 @@
                                         return "maliciousUriFilterResult." + error;
                                 }
                             }
-                            if (message.csamFilterResult != null && message.hasOwnProperty("csamFilterResult")) {
+                            if (message.csamFilterFilterResult != null && message.hasOwnProperty("csamFilterFilterResult")) {
                                 if (properties.filterResult === 1)
                                     return "filterResult: multiple values";
                                 properties.filterResult = 1;
                                 {
-                                    var error = $root.google.cloud.modelarmor.v1.CsamFilterResult.verify(message.csamFilterResult);
+                                    var error = $root.google.cloud.modelarmor.v1.CsamFilterResult.verify(message.csamFilterFilterResult);
                                     if (error)
-                                        return "csamFilterResult." + error;
+                                        return "csamFilterFilterResult." + error;
                                 }
                             }
                             if (message.virusScanFilterResult != null && message.hasOwnProperty("virusScanFilterResult")) {
@@ -7457,10 +7457,10 @@
                                     throw TypeError(".google.cloud.modelarmor.v1.FilterResult.maliciousUriFilterResult: object expected");
                                 message.maliciousUriFilterResult = $root.google.cloud.modelarmor.v1.MaliciousUriFilterResult.fromObject(object.maliciousUriFilterResult);
                             }
-                            if (object.csamFilterResult != null) {
-                                if (typeof object.csamFilterResult !== "object")
-                                    throw TypeError(".google.cloud.modelarmor.v1.FilterResult.csamFilterResult: object expected");
-                                message.csamFilterResult = $root.google.cloud.modelarmor.v1.CsamFilterResult.fromObject(object.csamFilterResult);
+                            if (object.csamFilterFilterResult != null) {
+                                if (typeof object.csamFilterFilterResult !== "object")
+                                    throw TypeError(".google.cloud.modelarmor.v1.FilterResult.csamFilterFilterResult: object expected");
+                                message.csamFilterFilterResult = $root.google.cloud.modelarmor.v1.CsamFilterResult.fromObject(object.csamFilterFilterResult);
                             }
                             if (object.virusScanFilterResult != null) {
                                 if (typeof object.virusScanFilterResult !== "object")
@@ -7503,10 +7503,10 @@
                                 if (options.oneofs)
                                     object.filterResult = "maliciousUriFilterResult";
                             }
-                            if (message.csamFilterResult != null && message.hasOwnProperty("csamFilterResult")) {
-                                object.csamFilterResult = $root.google.cloud.modelarmor.v1.CsamFilterResult.toObject(message.csamFilterResult, options);
+                            if (message.csamFilterFilterResult != null && message.hasOwnProperty("csamFilterFilterResult")) {
+                                object.csamFilterFilterResult = $root.google.cloud.modelarmor.v1.CsamFilterResult.toObject(message.csamFilterFilterResult, options);
                                 if (options.oneofs)
-                                    object.filterResult = "csamFilterResult";
+                                    object.filterResult = "csamFilterFilterResult";
                             }
                             if (message.virusScanFilterResult != null && message.hasOwnProperty("virusScanFilterResult")) {
                                 object.virusScanFilterResult = $root.google.cloud.modelarmor.v1.VirusScanFilterResult.toObject(message.virusScanFilterResult, options);

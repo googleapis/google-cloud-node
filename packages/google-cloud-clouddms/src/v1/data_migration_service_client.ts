@@ -979,7 +979,9 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getMigrationJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1104,7 +1106,9 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         migration_job: request.migrationJob ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('generateSshScript request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1241,7 +1245,9 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         migration_job: request.migrationJob ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('generateTcpProxyScript request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1360,7 +1366,9 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getConnectionProfile request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1479,7 +1487,9 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getPrivateConnection request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1604,7 +1614,9 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getConversionWorkspace request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1737,7 +1749,9 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createMappingRule request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1861,7 +1875,9 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteMappingRule request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1977,7 +1993,9 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getMappingRule request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2110,7 +2128,9 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         conversion_workspace: request.conversionWorkspace ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchBackgroundJobs request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2240,7 +2260,9 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         conversion_workspace: request.conversionWorkspace ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('describeConversionWorkspaceRevisions request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2392,7 +2414,9 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2570,7 +2594,9 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'migration_job.name': request.migrationJob!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2749,7 +2775,9 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2919,7 +2947,9 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3086,7 +3116,9 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3254,7 +3286,9 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3422,7 +3456,9 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3596,7 +3632,9 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3768,7 +3806,9 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3955,7 +3995,9 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4141,7 +4183,9 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'connection_profile.name': request.connectionProfile!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4321,7 +4365,9 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4502,7 +4548,9 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4677,7 +4725,9 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4856,7 +4906,9 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5034,7 +5086,9 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'conversion_workspace.name': request.conversionWorkspace!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5212,7 +5266,9 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5390,7 +5446,9 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5567,7 +5625,9 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5745,7 +5805,9 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5914,7 +5976,9 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -6081,7 +6145,9 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -6269,7 +6335,9 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -6451,7 +6519,9 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.clouddms.v1.IListMigrationJobsRequest,
@@ -6536,7 +6606,9 @@ export class DataMigrationServiceClient {
       });
     const defaultCallSettings = this._defaults['listMigrationJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listMigrationJobs stream %j', request);
     return this.descriptors.page.listMigrationJobs.createStream(
       this.innerApiCalls.listMigrationJobs as GaxCall,
@@ -6603,7 +6675,9 @@ export class DataMigrationServiceClient {
       });
     const defaultCallSettings = this._defaults['listMigrationJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listMigrationJobs iterate %j', request);
     return this.descriptors.page.listMigrationJobs.asyncIterate(
       this.innerApiCalls['listMigrationJobs'] as GaxCall,
@@ -6725,7 +6799,9 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.clouddms.v1.IListConnectionProfilesRequest,
@@ -6809,7 +6885,9 @@ export class DataMigrationServiceClient {
       });
     const defaultCallSettings = this._defaults['listConnectionProfiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listConnectionProfiles stream %j', request);
     return this.descriptors.page.listConnectionProfiles.createStream(
       this.innerApiCalls.listConnectionProfiles as GaxCall,
@@ -6875,7 +6953,9 @@ export class DataMigrationServiceClient {
       });
     const defaultCallSettings = this._defaults['listConnectionProfiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listConnectionProfiles iterate %j', request);
     return this.descriptors.page.listConnectionProfiles.asyncIterate(
       this.innerApiCalls['listConnectionProfiles'] as GaxCall,
@@ -6993,7 +7073,9 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.clouddms.v1.IListPrivateConnectionsRequest,
@@ -7074,7 +7156,9 @@ export class DataMigrationServiceClient {
       });
     const defaultCallSettings = this._defaults['listPrivateConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listPrivateConnections stream %j', request);
     return this.descriptors.page.listPrivateConnections.createStream(
       this.innerApiCalls.listPrivateConnections as GaxCall,
@@ -7137,7 +7221,9 @@ export class DataMigrationServiceClient {
       });
     const defaultCallSettings = this._defaults['listPrivateConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listPrivateConnections iterate %j', request);
     return this.descriptors.page.listPrivateConnections.asyncIterate(
       this.innerApiCalls['listPrivateConnections'] as GaxCall,
@@ -7254,7 +7340,9 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.clouddms.v1.IListConversionWorkspacesRequest,
@@ -7334,7 +7422,9 @@ export class DataMigrationServiceClient {
       });
     const defaultCallSettings = this._defaults['listConversionWorkspaces'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listConversionWorkspaces stream %j', request);
     return this.descriptors.page.listConversionWorkspaces.createStream(
       this.innerApiCalls.listConversionWorkspaces as GaxCall,
@@ -7396,7 +7486,9 @@ export class DataMigrationServiceClient {
       });
     const defaultCallSettings = this._defaults['listConversionWorkspaces'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listConversionWorkspaces iterate %j', request);
     return this.descriptors.page.listConversionWorkspaces.asyncIterate(
       this.innerApiCalls['listConversionWorkspaces'] as GaxCall,
@@ -7505,7 +7597,9 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.clouddms.v1.IListMappingRulesRequest,
@@ -7577,7 +7671,9 @@ export class DataMigrationServiceClient {
       });
     const defaultCallSettings = this._defaults['listMappingRules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listMappingRules stream %j', request);
     return this.descriptors.page.listMappingRules.createStream(
       this.innerApiCalls.listMappingRules as GaxCall,
@@ -7631,7 +7727,9 @@ export class DataMigrationServiceClient {
       });
     const defaultCallSettings = this._defaults['listMappingRules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listMappingRules iterate %j', request);
     return this.descriptors.page.listMappingRules.asyncIterate(
       this.innerApiCalls['listMappingRules'] as GaxCall,
@@ -7759,7 +7857,9 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         conversion_workspace: request.conversionWorkspace ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.clouddms.v1.IDescribeDatabaseEntitiesRequest,
@@ -7845,7 +7945,9 @@ export class DataMigrationServiceClient {
       });
     const defaultCallSettings = this._defaults['describeDatabaseEntities'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('describeDatabaseEntities stream %j', request);
     return this.descriptors.page.describeDatabaseEntities.createStream(
       this.innerApiCalls.describeDatabaseEntities as GaxCall,
@@ -7913,7 +8015,9 @@ export class DataMigrationServiceClient {
       });
     const defaultCallSettings = this._defaults['describeDatabaseEntities'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('describeDatabaseEntities iterate %j', request);
     return this.descriptors.page.describeDatabaseEntities.asyncIterate(
       this.innerApiCalls['describeDatabaseEntities'] as GaxCall,
@@ -8017,7 +8121,9 @@ export class DataMigrationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.clouddms.v1.IFetchStaticIpsRequest,
@@ -8083,7 +8189,9 @@ export class DataMigrationServiceClient {
       });
     const defaultCallSettings = this._defaults['fetchStaticIps'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('fetchStaticIps stream %j', request);
     return this.descriptors.page.fetchStaticIps.createStream(
       this.innerApiCalls.fetchStaticIps as GaxCall,
@@ -8131,7 +8239,9 @@ export class DataMigrationServiceClient {
       });
     const defaultCallSettings = this._defaults['fetchStaticIps'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('fetchStaticIps iterate %j', request);
     return this.descriptors.page.fetchStaticIps.asyncIterate(
       this.innerApiCalls['fetchStaticIps'] as GaxCall,
@@ -8449,7 +8559,7 @@ export class DataMigrationServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

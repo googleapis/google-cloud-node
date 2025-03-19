@@ -446,7 +446,9 @@ export class LicenseCodesClient {
         project: request.project ?? '',
         license_code: request.licenseCode ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('get request %j', request);
     const wrappedCallback:
       | Callback<
@@ -573,7 +575,9 @@ export class LicenseCodesClient {
         project: request.project ?? '',
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('testIamPermissions request %j', request);
     const wrappedCallback:
       | Callback<

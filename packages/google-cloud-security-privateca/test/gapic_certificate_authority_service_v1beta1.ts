@@ -303,7 +303,9 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.certificateAuthorityServiceStub);
       client.close().then(() => {
         done();
@@ -374,7 +376,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.CreateCertificateRequest()
       );
@@ -408,7 +410,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.CreateCertificateRequest()
       );
@@ -458,7 +460,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.CreateCertificateRequest()
       );
@@ -492,7 +494,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.CreateCertificateRequest()
       );
@@ -516,7 +518,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.GetCertificateRequest()
       );
@@ -550,7 +552,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.GetCertificateRequest()
       );
@@ -600,7 +602,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.GetCertificateRequest()
       );
@@ -634,7 +636,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.GetCertificateRequest()
       );
@@ -658,7 +660,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.RevokeCertificateRequest()
       );
@@ -692,7 +694,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.RevokeCertificateRequest()
       );
@@ -742,7 +744,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.RevokeCertificateRequest()
       );
@@ -776,7 +778,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.RevokeCertificateRequest()
       );
@@ -800,7 +802,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.UpdateCertificateRequest()
       );
@@ -835,7 +837,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.UpdateCertificateRequest()
       );
@@ -886,7 +888,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.UpdateCertificateRequest()
       );
@@ -921,7 +923,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.UpdateCertificateRequest()
       );
@@ -946,7 +948,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.FetchCertificateAuthorityCsrRequest()
       );
@@ -981,7 +983,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.FetchCertificateAuthorityCsrRequest()
       );
@@ -1031,7 +1033,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.FetchCertificateAuthorityCsrRequest()
       );
@@ -1068,7 +1070,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.FetchCertificateAuthorityCsrRequest()
       );
@@ -1095,7 +1097,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.GetCertificateAuthorityRequest()
       );
@@ -1130,7 +1132,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.GetCertificateAuthorityRequest()
       );
@@ -1180,7 +1182,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.GetCertificateAuthorityRequest()
       );
@@ -1217,7 +1219,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.GetCertificateAuthorityRequest()
       );
@@ -1244,7 +1246,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.GetCertificateRevocationListRequest()
       );
@@ -1279,7 +1281,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.GetCertificateRevocationListRequest()
       );
@@ -1329,7 +1331,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.GetCertificateRevocationListRequest()
       );
@@ -1366,7 +1368,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.GetCertificateRevocationListRequest()
       );
@@ -1393,7 +1395,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.GetReusableConfigRequest()
       );
@@ -1427,7 +1429,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.GetReusableConfigRequest()
       );
@@ -1477,7 +1479,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.GetReusableConfigRequest()
       );
@@ -1511,7 +1513,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.GetReusableConfigRequest()
       );
@@ -1535,7 +1537,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.ActivateCertificateAuthorityRequest()
       );
@@ -1571,7 +1573,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.ActivateCertificateAuthorityRequest()
       );
@@ -1628,7 +1630,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.ActivateCertificateAuthorityRequest()
       );
@@ -1665,7 +1667,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.ActivateCertificateAuthorityRequest()
       );
@@ -1701,7 +1703,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1727,7 +1729,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1751,7 +1753,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.CreateCertificateAuthorityRequest()
       );
@@ -1787,7 +1789,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.CreateCertificateAuthorityRequest()
       );
@@ -1844,7 +1846,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.CreateCertificateAuthorityRequest()
       );
@@ -1881,7 +1883,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.CreateCertificateAuthorityRequest()
       );
@@ -1917,7 +1919,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1943,7 +1945,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1967,7 +1969,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.DisableCertificateAuthorityRequest()
       );
@@ -2003,7 +2005,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.DisableCertificateAuthorityRequest()
       );
@@ -2060,7 +2062,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.DisableCertificateAuthorityRequest()
       );
@@ -2097,7 +2099,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.DisableCertificateAuthorityRequest()
       );
@@ -2133,7 +2135,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2159,7 +2161,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2183,7 +2185,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.EnableCertificateAuthorityRequest()
       );
@@ -2219,7 +2221,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.EnableCertificateAuthorityRequest()
       );
@@ -2276,7 +2278,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.EnableCertificateAuthorityRequest()
       );
@@ -2313,7 +2315,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.EnableCertificateAuthorityRequest()
       );
@@ -2349,7 +2351,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2375,7 +2377,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2399,7 +2401,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.RestoreCertificateAuthorityRequest()
       );
@@ -2435,7 +2437,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.RestoreCertificateAuthorityRequest()
       );
@@ -2492,7 +2494,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.RestoreCertificateAuthorityRequest()
       );
@@ -2529,7 +2531,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.RestoreCertificateAuthorityRequest()
       );
@@ -2565,7 +2567,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2591,7 +2593,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2615,7 +2617,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.ScheduleDeleteCertificateAuthorityRequest()
       );
@@ -2652,7 +2654,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.ScheduleDeleteCertificateAuthorityRequest()
       );
@@ -2709,7 +2711,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.ScheduleDeleteCertificateAuthorityRequest()
       );
@@ -2744,7 +2746,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.ScheduleDeleteCertificateAuthorityRequest()
       );
@@ -2778,7 +2780,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2804,7 +2806,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2828,7 +2830,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.UpdateCertificateAuthorityRequest()
       );
@@ -2865,7 +2867,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.UpdateCertificateAuthorityRequest()
       );
@@ -2923,7 +2925,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.UpdateCertificateAuthorityRequest()
       );
@@ -2961,7 +2963,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.UpdateCertificateAuthorityRequest()
       );
@@ -2998,7 +3000,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3024,7 +3026,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3048,7 +3050,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.UpdateCertificateRevocationListRequest()
       );
@@ -3085,7 +3087,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.UpdateCertificateRevocationListRequest()
       );
@@ -3143,7 +3145,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.UpdateCertificateRevocationListRequest()
       );
@@ -3179,7 +3181,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.UpdateCertificateRevocationListRequest()
       );
@@ -3213,7 +3215,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3239,7 +3241,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3263,7 +3265,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.ListCertificatesRequest()
       );
@@ -3305,7 +3307,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.ListCertificatesRequest()
       );
@@ -3365,7 +3367,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.ListCertificatesRequest()
       );
@@ -3399,7 +3401,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.ListCertificatesRequest()
       );
@@ -3465,7 +3467,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.ListCertificatesRequest()
       );
@@ -3520,7 +3522,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.ListCertificatesRequest()
       );
@@ -3573,7 +3575,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.ListCertificatesRequest()
       );
@@ -3619,7 +3621,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.ListCertificateAuthoritiesRequest()
       );
@@ -3662,7 +3664,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.ListCertificateAuthoritiesRequest()
       );
@@ -3722,7 +3724,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.ListCertificateAuthoritiesRequest()
       );
@@ -3759,7 +3761,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.ListCertificateAuthoritiesRequest()
       );
@@ -3831,7 +3833,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.ListCertificateAuthoritiesRequest()
       );
@@ -3892,7 +3894,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.ListCertificateAuthoritiesRequest()
       );
@@ -3949,7 +3951,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.ListCertificateAuthoritiesRequest()
       );
@@ -3999,7 +4001,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.ListCertificateRevocationListsRequest()
       );
@@ -4042,7 +4044,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.ListCertificateRevocationListsRequest()
       );
@@ -4102,7 +4104,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.ListCertificateRevocationListsRequest()
       );
@@ -4139,7 +4141,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.ListCertificateRevocationListsRequest()
       );
@@ -4214,7 +4216,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.ListCertificateRevocationListsRequest()
       );
@@ -4278,7 +4280,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.ListCertificateRevocationListsRequest()
       );
@@ -4335,7 +4337,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.ListCertificateRevocationListsRequest()
       );
@@ -4385,7 +4387,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.ListReusableConfigsRequest()
       );
@@ -4428,7 +4430,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.ListReusableConfigsRequest()
       );
@@ -4488,7 +4490,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.ListReusableConfigsRequest()
       );
@@ -4522,7 +4524,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.ListReusableConfigsRequest()
       );
@@ -4588,7 +4590,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.ListReusableConfigsRequest()
       );
@@ -4643,7 +4645,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.ListReusableConfigsRequest()
       );
@@ -4696,7 +4698,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1beta1.ListReusableConfigsRequest()
       );
@@ -4734,7 +4736,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('certificate', () => {
+    describe('certificate', async () => {
       const fakePath = '/rendered/path/certificate';
       const expectedParameters = {
         project: 'projectValue',
@@ -4749,7 +4751,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.certificatePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4814,7 +4816,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
       });
     });
 
-    describe('certificateAuthority', () => {
+    describe('certificateAuthority', async () => {
       const fakePath = '/rendered/path/certificateAuthority';
       const expectedParameters = {
         project: 'projectValue',
@@ -4828,7 +4830,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.certificateAuthorityPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4898,7 +4900,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
       });
     });
 
-    describe('certificateRevocationList', () => {
+    describe('certificateRevocationList', async () => {
       const fakePath = '/rendered/path/certificateRevocationList';
       const expectedParameters = {
         project: 'projectValue',
@@ -4913,7 +4915,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.certificateRevocationListPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5000,7 +5002,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -5013,7 +5015,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5052,7 +5054,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
       });
     });
 
-    describe('reusableConfig', () => {
+    describe('reusableConfig', async () => {
       const fakePath = '/rendered/path/reusableConfig';
       const expectedParameters = {
         project: 'projectValue',
@@ -5066,7 +5068,7 @@ describe('v1beta1.CertificateAuthorityServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.reusableConfigPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

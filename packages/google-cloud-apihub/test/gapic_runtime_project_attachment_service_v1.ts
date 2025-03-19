@@ -284,7 +284,9 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.runtimeProjectAttachmentServiceStub);
       client.close().then(() => {
         done();
@@ -355,7 +357,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.CreateRuntimeProjectAttachmentRequest()
       );
@@ -390,7 +392,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.CreateRuntimeProjectAttachmentRequest()
       );
@@ -440,7 +442,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.CreateRuntimeProjectAttachmentRequest()
       );
@@ -477,7 +479,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.CreateRuntimeProjectAttachmentRequest()
       );
@@ -504,7 +506,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetRuntimeProjectAttachmentRequest()
       );
@@ -539,7 +541,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetRuntimeProjectAttachmentRequest()
       );
@@ -589,7 +591,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetRuntimeProjectAttachmentRequest()
       );
@@ -626,7 +628,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.GetRuntimeProjectAttachmentRequest()
       );
@@ -653,7 +655,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.DeleteRuntimeProjectAttachmentRequest()
       );
@@ -688,7 +690,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.DeleteRuntimeProjectAttachmentRequest()
       );
@@ -738,7 +740,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.DeleteRuntimeProjectAttachmentRequest()
       );
@@ -775,7 +777,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.DeleteRuntimeProjectAttachmentRequest()
       );
@@ -802,7 +804,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.LookupRuntimeProjectAttachmentRequest()
       );
@@ -837,7 +839,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.LookupRuntimeProjectAttachmentRequest()
       );
@@ -887,7 +889,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.LookupRuntimeProjectAttachmentRequest()
       );
@@ -924,7 +926,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.LookupRuntimeProjectAttachmentRequest()
       );
@@ -951,7 +953,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListRuntimeProjectAttachmentsRequest()
       );
@@ -994,7 +996,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListRuntimeProjectAttachmentsRequest()
       );
@@ -1054,7 +1056,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListRuntimeProjectAttachmentsRequest()
       );
@@ -1091,7 +1093,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListRuntimeProjectAttachmentsRequest()
       );
@@ -1166,7 +1168,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListRuntimeProjectAttachmentsRequest()
       );
@@ -1230,7 +1232,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListRuntimeProjectAttachmentsRequest()
       );
@@ -1287,7 +1289,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.apihub.v1.ListRuntimeProjectAttachmentsRequest()
       );
@@ -1336,7 +1338,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1369,7 +1371,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1416,7 +1418,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1454,7 +1456,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -1505,7 +1507,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -1542,7 +1544,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('api', () => {
+    describe('api', async () => {
       const fakePath = '/rendered/path/api';
       const expectedParameters = {
         project: 'projectValue',
@@ -1556,7 +1558,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.apiPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1609,7 +1611,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
       });
     });
 
-    describe('apiHubInstance', () => {
+    describe('apiHubInstance', async () => {
       const fakePath = '/rendered/path/apiHubInstance';
       const expectedParameters = {
         project: 'projectValue',
@@ -1623,7 +1625,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.apiHubInstancePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1677,7 +1679,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
       });
     });
 
-    describe('apiOperation', () => {
+    describe('apiOperation', async () => {
       const fakePath = '/rendered/path/apiOperation';
       const expectedParameters = {
         project: 'projectValue',
@@ -1693,7 +1695,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.apiOperationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1768,7 +1770,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
       });
     });
 
-    describe('attribute', () => {
+    describe('attribute', async () => {
       const fakePath = '/rendered/path/attribute';
       const expectedParameters = {
         project: 'projectValue',
@@ -1782,7 +1784,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.attributePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1835,7 +1837,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
       });
     });
 
-    describe('definition', () => {
+    describe('definition', async () => {
       const fakePath = '/rendered/path/definition';
       const expectedParameters = {
         project: 'projectValue',
@@ -1851,7 +1853,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.definitionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1926,7 +1928,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
       });
     });
 
-    describe('dependency', () => {
+    describe('dependency', async () => {
       const fakePath = '/rendered/path/dependency';
       const expectedParameters = {
         project: 'projectValue',
@@ -1940,7 +1942,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.dependencyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1993,7 +1995,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
       });
     });
 
-    describe('deployment', () => {
+    describe('deployment', async () => {
       const fakePath = '/rendered/path/deployment';
       const expectedParameters = {
         project: 'projectValue',
@@ -2007,7 +2009,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.deploymentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2060,7 +2062,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
       });
     });
 
-    describe('externalApi', () => {
+    describe('externalApi', async () => {
       const fakePath = '/rendered/path/externalApi';
       const expectedParameters = {
         project: 'projectValue',
@@ -2074,7 +2076,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.externalApiPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2127,7 +2129,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
       });
     });
 
-    describe('hostProjectRegistration', () => {
+    describe('hostProjectRegistration', async () => {
       const fakePath = '/rendered/path/hostProjectRegistration';
       const expectedParameters = {
         project: 'projectValue',
@@ -2141,7 +2143,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.hostProjectRegistrationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2211,7 +2213,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -2224,7 +2226,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2263,7 +2265,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
       });
     });
 
-    describe('plugin', () => {
+    describe('plugin', async () => {
       const fakePath = '/rendered/path/plugin';
       const expectedParameters = {
         project: 'projectValue',
@@ -2277,7 +2279,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.pluginPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2330,7 +2332,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -2342,7 +2344,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2371,7 +2373,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
       });
     });
 
-    describe('runtimeProjectAttachment', () => {
+    describe('runtimeProjectAttachment', async () => {
       const fakePath = '/rendered/path/runtimeProjectAttachment';
       const expectedParameters = {
         project: 'projectValue',
@@ -2385,7 +2387,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.runtimeProjectAttachmentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2455,7 +2457,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
       });
     });
 
-    describe('spec', () => {
+    describe('spec', async () => {
       const fakePath = '/rendered/path/spec';
       const expectedParameters = {
         project: 'projectValue',
@@ -2471,7 +2473,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.specPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2546,7 +2548,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
       });
     });
 
-    describe('styleGuide', () => {
+    describe('styleGuide', async () => {
       const fakePath = '/rendered/path/styleGuide';
       const expectedParameters = {
         project: 'projectValue',
@@ -2560,7 +2562,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.styleGuidePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2613,7 +2615,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
       });
     });
 
-    describe('version', () => {
+    describe('version', async () => {
       const fakePath = '/rendered/path/version';
       const expectedParameters = {
         project: 'projectValue',
@@ -2628,7 +2630,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.versionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

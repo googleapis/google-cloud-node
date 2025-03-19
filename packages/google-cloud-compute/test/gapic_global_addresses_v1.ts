@@ -265,7 +265,9 @@ describe('v1.GlobalAddressesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.globalAddressesStub);
       client.close().then(() => {
         done();
@@ -324,7 +326,7 @@ describe('v1.GlobalAddressesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteGlobalAddressRequest()
       );
@@ -360,7 +362,7 @@ describe('v1.GlobalAddressesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteGlobalAddressRequest()
       );
@@ -412,7 +414,7 @@ describe('v1.GlobalAddressesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteGlobalAddressRequest()
       );
@@ -445,7 +447,7 @@ describe('v1.GlobalAddressesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteGlobalAddressRequest()
       );
@@ -471,7 +473,7 @@ describe('v1.GlobalAddressesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetGlobalAddressRequest()
       );
@@ -506,7 +508,7 @@ describe('v1.GlobalAddressesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetGlobalAddressRequest()
       );
@@ -556,7 +558,7 @@ describe('v1.GlobalAddressesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetGlobalAddressRequest()
       );
@@ -588,7 +590,7 @@ describe('v1.GlobalAddressesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetGlobalAddressRequest()
       );
@@ -614,7 +616,7 @@ describe('v1.GlobalAddressesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertGlobalAddressRequest()
       );
@@ -645,7 +647,7 @@ describe('v1.GlobalAddressesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertGlobalAddressRequest()
       );
@@ -692,7 +694,7 @@ describe('v1.GlobalAddressesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertGlobalAddressRequest()
       );
@@ -720,7 +722,7 @@ describe('v1.GlobalAddressesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertGlobalAddressRequest()
       );
@@ -741,7 +743,7 @@ describe('v1.GlobalAddressesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.MoveGlobalAddressRequest()
       );
@@ -776,7 +778,7 @@ describe('v1.GlobalAddressesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.MoveGlobalAddressRequest()
       );
@@ -826,7 +828,7 @@ describe('v1.GlobalAddressesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.MoveGlobalAddressRequest()
       );
@@ -858,7 +860,7 @@ describe('v1.GlobalAddressesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.MoveGlobalAddressRequest()
       );
@@ -884,7 +886,7 @@ describe('v1.GlobalAddressesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsGlobalAddressRequest()
       );
@@ -920,7 +922,7 @@ describe('v1.GlobalAddressesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsGlobalAddressRequest()
       );
@@ -972,7 +974,7 @@ describe('v1.GlobalAddressesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsGlobalAddressRequest()
       );
@@ -1005,7 +1007,7 @@ describe('v1.GlobalAddressesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsGlobalAddressRequest()
       );
@@ -1031,7 +1033,7 @@ describe('v1.GlobalAddressesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListGlobalAddressesRequest()
       );
@@ -1063,7 +1065,7 @@ describe('v1.GlobalAddressesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListGlobalAddressesRequest()
       );
@@ -1110,7 +1112,7 @@ describe('v1.GlobalAddressesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListGlobalAddressesRequest()
       );
@@ -1137,7 +1139,7 @@ describe('v1.GlobalAddressesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListGlobalAddressesRequest()
       );
@@ -1191,7 +1193,7 @@ describe('v1.GlobalAddressesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListGlobalAddressesRequest()
       );
@@ -1242,7 +1244,7 @@ describe('v1.GlobalAddressesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListGlobalAddressesRequest()
       );
@@ -1284,7 +1286,7 @@ describe('v1.GlobalAddressesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListGlobalAddressesRequest()
       );

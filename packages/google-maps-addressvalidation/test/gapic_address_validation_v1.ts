@@ -193,7 +193,9 @@ describe('v1.AddressValidationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.addressValidationStub);
       client.close().then(() => {
         done();
@@ -252,7 +254,7 @@ describe('v1.AddressValidationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.addressvalidation.v1.ValidateAddressRequest()
       );
@@ -269,7 +271,7 @@ describe('v1.AddressValidationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.addressvalidation.v1.ValidateAddressRequest()
       );
@@ -302,7 +304,7 @@ describe('v1.AddressValidationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.addressvalidation.v1.ValidateAddressRequest()
       );
@@ -319,7 +321,7 @@ describe('v1.AddressValidationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.addressvalidation.v1.ValidateAddressRequest()
       );
@@ -335,7 +337,7 @@ describe('v1.AddressValidationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.addressvalidation.v1.ProvideValidationFeedbackRequest()
       );
@@ -353,7 +355,7 @@ describe('v1.AddressValidationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.addressvalidation.v1.ProvideValidationFeedbackRequest()
       );
@@ -386,7 +388,7 @@ describe('v1.AddressValidationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.addressvalidation.v1.ProvideValidationFeedbackRequest()
       );
@@ -406,7 +408,7 @@ describe('v1.AddressValidationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.addressvalidation.v1.ProvideValidationFeedbackRequest()
       );

@@ -643,7 +643,9 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createMessage request %j', request);
     const wrappedCallback:
       | Callback<
@@ -785,7 +787,9 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getMembership request %j', request);
     const wrappedCallback:
       | Callback<
@@ -911,7 +915,9 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getMessage request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1057,7 +1063,9 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'message.name': request.message!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateMessage request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1192,7 +1200,9 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteMessage request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1306,7 +1316,9 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAttachment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1424,7 +1436,9 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('uploadAttachment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1555,7 +1569,9 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getSpace request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1694,7 +1710,9 @@ export class ChatServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createSpace request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1906,7 +1924,9 @@ export class ChatServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setUpSpace request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2108,7 +2128,9 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'space.name': request.space!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateSpace request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2243,7 +2265,9 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteSpace request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2359,7 +2383,9 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('completeImportSpace request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2495,7 +2521,9 @@ export class ChatServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('findDirectMessage request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2685,7 +2713,9 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createMembership request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2823,7 +2853,9 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'membership.name': request.membership!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateMembership request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2969,7 +3001,9 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteMembership request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3084,7 +3118,9 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createReaction request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3197,7 +3233,9 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteReaction request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3323,7 +3361,9 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getSpaceReadState request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3462,7 +3502,9 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'space_read_state.name': request.spaceReadState!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateSpaceReadState request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3589,7 +3631,9 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getThreadReadState request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3713,7 +3757,9 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getSpaceEvent request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3837,7 +3883,9 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getSpaceNotificationSetting request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3968,7 +4016,9 @@ export class ChatServiceClient {
         'space_notification_setting.name':
           request.spaceNotificationSetting!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateSpaceNotificationSetting request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4168,7 +4218,9 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.chat.v1.IListMessagesRequest,
@@ -4297,7 +4349,9 @@ export class ChatServiceClient {
       });
     const defaultCallSettings = this._defaults['listMessages'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listMessages stream %j', request);
     return this.descriptors.page.listMessages.createStream(
       this.innerApiCalls.listMessages as GaxCall,
@@ -4410,7 +4464,9 @@ export class ChatServiceClient {
       });
     const defaultCallSettings = this._defaults['listMessages'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listMessages iterate %j', request);
     return this.descriptors.page.listMessages.asyncIterate(
       this.innerApiCalls['listMessages'] as GaxCall,
@@ -4609,7 +4665,9 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.chat.v1.IListMembershipsRequest,
@@ -4756,7 +4814,9 @@ export class ChatServiceClient {
       });
     const defaultCallSettings = this._defaults['listMemberships'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listMemberships stream %j', request);
     return this.descriptors.page.listMemberships.createStream(
       this.innerApiCalls.listMemberships as GaxCall,
@@ -4887,7 +4947,9 @@ export class ChatServiceClient {
       });
     const defaultCallSettings = this._defaults['listMemberships'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listMemberships iterate %j', request);
     return this.descriptors.page.listMemberships.asyncIterate(
       this.innerApiCalls['listMemberships'] as GaxCall,
@@ -5023,7 +5085,9 @@ export class ChatServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.chat.v1.IListSpacesRequest,
@@ -5112,7 +5176,9 @@ export class ChatServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listSpaces'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSpaces stream %j', request);
     return this.descriptors.page.listSpaces.createStream(
       this.innerApiCalls.listSpaces as GaxCall,
@@ -5185,7 +5251,9 @@ export class ChatServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listSpaces'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSpaces iterate %j', request);
     return this.descriptors.page.listSpaces.asyncIterate(
       this.innerApiCalls['listSpaces'] as GaxCall,
@@ -5398,7 +5466,9 @@ export class ChatServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.chat.v1.ISearchSpacesRequest,
@@ -5574,7 +5644,9 @@ export class ChatServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['searchSpaces'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchSpaces stream %j', request);
     return this.descriptors.page.searchSpaces.createStream(
       this.innerApiCalls.searchSpaces as GaxCall,
@@ -5734,7 +5806,9 @@ export class ChatServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['searchSpaces'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchSpaces iterate %j', request);
     return this.descriptors.page.searchSpaces.asyncIterate(
       this.innerApiCalls['searchSpaces'] as GaxCall,
@@ -5888,7 +5962,9 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.chat.v1.IListReactionsRequest,
@@ -6006,7 +6082,9 @@ export class ChatServiceClient {
       });
     const defaultCallSettings = this._defaults['listReactions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listReactions stream %j', request);
     return this.descriptors.page.listReactions.createStream(
       this.innerApiCalls.listReactions as GaxCall,
@@ -6108,7 +6186,9 @@ export class ChatServiceClient {
       });
     const defaultCallSettings = this._defaults['listReactions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listReactions iterate %j', request);
     return this.descriptors.page.listReactions.asyncIterate(
       this.innerApiCalls['listReactions'] as GaxCall,
@@ -6280,7 +6360,9 @@ export class ChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.chat.v1.IListSpaceEventsRequest,
@@ -6408,7 +6490,9 @@ export class ChatServiceClient {
       });
     const defaultCallSettings = this._defaults['listSpaceEvents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSpaceEvents stream %j', request);
     return this.descriptors.page.listSpaceEvents.createStream(
       this.innerApiCalls.listSpaceEvents as GaxCall,
@@ -6520,7 +6604,9 @@ export class ChatServiceClient {
       });
     const defaultCallSettings = this._defaults['listSpaceEvents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSpaceEvents iterate %j', request);
     return this.descriptors.page.listSpaceEvents.asyncIterate(
       this.innerApiCalls['listSpaceEvents'] as GaxCall,

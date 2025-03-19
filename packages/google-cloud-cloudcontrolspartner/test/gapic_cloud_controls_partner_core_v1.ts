@@ -268,7 +268,9 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.cloudControlsPartnerCoreStub);
       client.close().then(() => {
         done();
@@ -331,7 +333,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.GetWorkloadRequest()
       );
@@ -363,7 +365,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.GetWorkloadRequest()
       );
@@ -411,7 +413,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.GetWorkloadRequest()
       );
@@ -443,7 +445,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.GetWorkloadRequest()
       );
@@ -465,7 +467,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.GetCustomerRequest()
       );
@@ -497,7 +499,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.GetCustomerRequest()
       );
@@ -545,7 +547,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.GetCustomerRequest()
       );
@@ -577,7 +579,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.GetCustomerRequest()
       );
@@ -599,7 +601,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.GetEkmConnectionsRequest()
       );
@@ -631,7 +633,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.GetEkmConnectionsRequest()
       );
@@ -679,7 +681,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.GetEkmConnectionsRequest()
       );
@@ -711,7 +713,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.GetEkmConnectionsRequest()
       );
@@ -733,7 +735,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.GetPartnerPermissionsRequest()
       );
@@ -766,7 +768,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.GetPartnerPermissionsRequest()
       );
@@ -814,7 +816,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.GetPartnerPermissionsRequest()
       );
@@ -849,7 +851,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.GetPartnerPermissionsRequest()
       );
@@ -874,7 +876,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.GetPartnerRequest()
       );
@@ -906,7 +908,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.GetPartnerRequest()
       );
@@ -954,7 +956,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.GetPartnerRequest()
       );
@@ -986,7 +988,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.GetPartnerRequest()
       );
@@ -1008,7 +1010,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.ListWorkloadsRequest()
       );
@@ -1048,7 +1050,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.ListWorkloadsRequest()
       );
@@ -1106,7 +1108,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.ListWorkloadsRequest()
       );
@@ -1138,7 +1140,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.ListWorkloadsRequest()
       );
@@ -1200,7 +1202,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.ListWorkloadsRequest()
       );
@@ -1251,7 +1253,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.ListWorkloadsRequest()
       );
@@ -1302,7 +1304,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.ListWorkloadsRequest()
       );
@@ -1346,7 +1348,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.ListCustomersRequest()
       );
@@ -1386,7 +1388,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.ListCustomersRequest()
       );
@@ -1444,7 +1446,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.ListCustomersRequest()
       );
@@ -1476,7 +1478,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.ListCustomersRequest()
       );
@@ -1538,7 +1540,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.ListCustomersRequest()
       );
@@ -1589,7 +1591,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.ListCustomersRequest()
       );
@@ -1640,7 +1642,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.ListCustomersRequest()
       );
@@ -1685,7 +1687,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           projectId: 'bogus',
         });
       const stub = sinon.stub(client, 'warn');
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsRequest()
       );
@@ -1728,7 +1730,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           projectId: 'bogus',
         });
       const stub = sinon.stub(client, 'warn');
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsRequest()
       );
@@ -1788,7 +1790,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           projectId: 'bogus',
         });
       const stub = sinon.stub(client, 'warn');
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsRequest()
       );
@@ -1825,7 +1827,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           projectId: 'bogus',
         });
       const stub = sinon.stub(client, 'warn');
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsRequest()
       );
@@ -1897,7 +1899,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           projectId: 'bogus',
         });
       const stub = sinon.stub(client, 'warn');
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsRequest()
       );
@@ -1958,7 +1960,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           projectId: 'bogus',
         });
       const stub = sinon.stub(client, 'warn');
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsRequest()
       );
@@ -2015,7 +2017,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           projectId: 'bogus',
         });
       const stub = sinon.stub(client, 'warn');
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.cloudcontrolspartner.v1.ListAccessApprovalRequestsRequest()
       );
@@ -2058,7 +2060,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('accessApprovalRequest', () => {
+    describe('accessApprovalRequest', async () => {
       const fakePath = '/rendered/path/accessApprovalRequest';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -2072,7 +2074,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.accessApprovalRequestPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2172,7 +2174,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
       });
     });
 
-    describe('customer', () => {
+    describe('customer', async () => {
       const fakePath = '/rendered/path/customer';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -2184,7 +2186,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.customerPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2237,7 +2239,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
       });
     });
 
-    describe('ekmConnections', () => {
+    describe('ekmConnections', async () => {
       const fakePath = '/rendered/path/ekmConnections';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -2250,7 +2252,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.ekmConnectionsPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2314,7 +2316,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
       });
     });
 
-    describe('partner', () => {
+    describe('partner', async () => {
       const fakePath = '/rendered/path/partner';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -2325,7 +2327,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.partnerPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2364,7 +2366,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
       });
     });
 
-    describe('partnerPermissions', () => {
+    describe('partnerPermissions', async () => {
       const fakePath = '/rendered/path/partnerPermissions';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -2377,7 +2379,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.partnerPermissionsPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2457,7 +2459,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
       });
     });
 
-    describe('violation', () => {
+    describe('violation', async () => {
       const fakePath = '/rendered/path/violation';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -2471,7 +2473,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.violationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2546,7 +2548,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
       });
     });
 
-    describe('workload', () => {
+    describe('workload', async () => {
       const fakePath = '/rendered/path/workload';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -2559,7 +2561,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.workloadPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

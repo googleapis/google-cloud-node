@@ -255,7 +255,9 @@ describe('v1.StorageInsightsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.storageInsightsStub);
       client.close().then(() => {
         done();
@@ -314,7 +316,7 @@ describe('v1.StorageInsightsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.storageinsights.v1.GetReportConfigRequest()
       );
@@ -345,7 +347,7 @@ describe('v1.StorageInsightsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.storageinsights.v1.GetReportConfigRequest()
       );
@@ -392,7 +394,7 @@ describe('v1.StorageInsightsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.storageinsights.v1.GetReportConfigRequest()
       );
@@ -423,7 +425,7 @@ describe('v1.StorageInsightsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.storageinsights.v1.GetReportConfigRequest()
       );
@@ -444,7 +446,7 @@ describe('v1.StorageInsightsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.storageinsights.v1.CreateReportConfigRequest()
       );
@@ -476,7 +478,7 @@ describe('v1.StorageInsightsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.storageinsights.v1.CreateReportConfigRequest()
       );
@@ -523,7 +525,7 @@ describe('v1.StorageInsightsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.storageinsights.v1.CreateReportConfigRequest()
       );
@@ -554,7 +556,7 @@ describe('v1.StorageInsightsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.storageinsights.v1.CreateReportConfigRequest()
       );
@@ -575,7 +577,7 @@ describe('v1.StorageInsightsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.storageinsights.v1.UpdateReportConfigRequest()
       );
@@ -608,7 +610,7 @@ describe('v1.StorageInsightsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.storageinsights.v1.UpdateReportConfigRequest()
       );
@@ -656,7 +658,7 @@ describe('v1.StorageInsightsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.storageinsights.v1.UpdateReportConfigRequest()
       );
@@ -688,7 +690,7 @@ describe('v1.StorageInsightsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.storageinsights.v1.UpdateReportConfigRequest()
       );
@@ -710,7 +712,7 @@ describe('v1.StorageInsightsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.storageinsights.v1.DeleteReportConfigRequest()
       );
@@ -742,7 +744,7 @@ describe('v1.StorageInsightsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.storageinsights.v1.DeleteReportConfigRequest()
       );
@@ -789,7 +791,7 @@ describe('v1.StorageInsightsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.storageinsights.v1.DeleteReportConfigRequest()
       );
@@ -820,7 +822,7 @@ describe('v1.StorageInsightsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.storageinsights.v1.DeleteReportConfigRequest()
       );
@@ -841,7 +843,7 @@ describe('v1.StorageInsightsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.storageinsights.v1.GetReportDetailRequest()
       );
@@ -872,7 +874,7 @@ describe('v1.StorageInsightsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.storageinsights.v1.GetReportDetailRequest()
       );
@@ -919,7 +921,7 @@ describe('v1.StorageInsightsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.storageinsights.v1.GetReportDetailRequest()
       );
@@ -950,7 +952,7 @@ describe('v1.StorageInsightsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.storageinsights.v1.GetReportDetailRequest()
       );
@@ -971,7 +973,7 @@ describe('v1.StorageInsightsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.storageinsights.v1.ListReportConfigsRequest()
       );
@@ -1010,7 +1012,7 @@ describe('v1.StorageInsightsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.storageinsights.v1.ListReportConfigsRequest()
       );
@@ -1067,7 +1069,7 @@ describe('v1.StorageInsightsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.storageinsights.v1.ListReportConfigsRequest()
       );
@@ -1098,7 +1100,7 @@ describe('v1.StorageInsightsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.storageinsights.v1.ListReportConfigsRequest()
       );
@@ -1159,7 +1161,7 @@ describe('v1.StorageInsightsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.storageinsights.v1.ListReportConfigsRequest()
       );
@@ -1209,7 +1211,7 @@ describe('v1.StorageInsightsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.storageinsights.v1.ListReportConfigsRequest()
       );
@@ -1259,7 +1261,7 @@ describe('v1.StorageInsightsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.storageinsights.v1.ListReportConfigsRequest()
       );
@@ -1302,7 +1304,7 @@ describe('v1.StorageInsightsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.storageinsights.v1.ListReportDetailsRequest()
       );
@@ -1341,7 +1343,7 @@ describe('v1.StorageInsightsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.storageinsights.v1.ListReportDetailsRequest()
       );
@@ -1398,7 +1400,7 @@ describe('v1.StorageInsightsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.storageinsights.v1.ListReportDetailsRequest()
       );
@@ -1429,7 +1431,7 @@ describe('v1.StorageInsightsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.storageinsights.v1.ListReportDetailsRequest()
       );
@@ -1490,7 +1492,7 @@ describe('v1.StorageInsightsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.storageinsights.v1.ListReportDetailsRequest()
       );
@@ -1540,7 +1542,7 @@ describe('v1.StorageInsightsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.storageinsights.v1.ListReportDetailsRequest()
       );
@@ -1590,7 +1592,7 @@ describe('v1.StorageInsightsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.storageinsights.v1.ListReportDetailsRequest()
       );
@@ -1632,7 +1634,7 @@ describe('v1.StorageInsightsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1662,7 +1664,7 @@ describe('v1.StorageInsightsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1706,7 +1708,7 @@ describe('v1.StorageInsightsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1741,7 +1743,7 @@ describe('v1.StorageInsightsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -1789,7 +1791,7 @@ describe('v1.StorageInsightsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -1826,7 +1828,7 @@ describe('v1.StorageInsightsClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -1836,7 +1838,7 @@ describe('v1.StorageInsightsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1875,7 +1877,7 @@ describe('v1.StorageInsightsClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -1884,7 +1886,7 @@ describe('v1.StorageInsightsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1913,7 +1915,7 @@ describe('v1.StorageInsightsClient', () => {
       });
     });
 
-    describe('reportConfig', () => {
+    describe('reportConfig', async () => {
       const fakePath = '/rendered/path/reportConfig';
       const expectedParameters = {
         project: 'projectValue',
@@ -1924,7 +1926,7 @@ describe('v1.StorageInsightsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.reportConfigPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1977,7 +1979,7 @@ describe('v1.StorageInsightsClient', () => {
       });
     });
 
-    describe('reportDetail', () => {
+    describe('reportDetail', async () => {
       const fakePath = '/rendered/path/reportDetail';
       const expectedParameters = {
         project: 'projectValue',
@@ -1989,7 +1991,7 @@ describe('v1.StorageInsightsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.reportDetailPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

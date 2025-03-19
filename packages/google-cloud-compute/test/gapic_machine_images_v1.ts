@@ -265,7 +265,9 @@ describe('v1.MachineImagesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.machineImagesStub);
       client.close().then(() => {
         done();
@@ -324,7 +326,7 @@ describe('v1.MachineImagesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteMachineImageRequest()
       );
@@ -360,7 +362,7 @@ describe('v1.MachineImagesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteMachineImageRequest()
       );
@@ -412,7 +414,7 @@ describe('v1.MachineImagesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteMachineImageRequest()
       );
@@ -445,7 +447,7 @@ describe('v1.MachineImagesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteMachineImageRequest()
       );
@@ -471,7 +473,7 @@ describe('v1.MachineImagesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetMachineImageRequest()
       );
@@ -506,7 +508,7 @@ describe('v1.MachineImagesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetMachineImageRequest()
       );
@@ -556,7 +558,7 @@ describe('v1.MachineImagesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetMachineImageRequest()
       );
@@ -588,7 +590,7 @@ describe('v1.MachineImagesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetMachineImageRequest()
       );
@@ -614,7 +616,7 @@ describe('v1.MachineImagesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyMachineImageRequest()
       );
@@ -650,7 +652,7 @@ describe('v1.MachineImagesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyMachineImageRequest()
       );
@@ -702,7 +704,7 @@ describe('v1.MachineImagesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyMachineImageRequest()
       );
@@ -738,7 +740,7 @@ describe('v1.MachineImagesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyMachineImageRequest()
       );
@@ -764,7 +766,7 @@ describe('v1.MachineImagesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertMachineImageRequest()
       );
@@ -795,7 +797,7 @@ describe('v1.MachineImagesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertMachineImageRequest()
       );
@@ -842,7 +844,7 @@ describe('v1.MachineImagesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertMachineImageRequest()
       );
@@ -870,7 +872,7 @@ describe('v1.MachineImagesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertMachineImageRequest()
       );
@@ -891,7 +893,7 @@ describe('v1.MachineImagesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyMachineImageRequest()
       );
@@ -927,7 +929,7 @@ describe('v1.MachineImagesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyMachineImageRequest()
       );
@@ -979,7 +981,7 @@ describe('v1.MachineImagesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyMachineImageRequest()
       );
@@ -1015,7 +1017,7 @@ describe('v1.MachineImagesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyMachineImageRequest()
       );
@@ -1041,7 +1043,7 @@ describe('v1.MachineImagesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsMachineImageRequest()
       );
@@ -1078,7 +1080,7 @@ describe('v1.MachineImagesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsMachineImageRequest()
       );
@@ -1130,7 +1132,7 @@ describe('v1.MachineImagesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsMachineImageRequest()
       );
@@ -1166,7 +1168,7 @@ describe('v1.MachineImagesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsMachineImageRequest()
       );
@@ -1192,7 +1194,7 @@ describe('v1.MachineImagesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListMachineImagesRequest()
       );
@@ -1230,7 +1232,7 @@ describe('v1.MachineImagesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListMachineImagesRequest()
       );
@@ -1283,7 +1285,7 @@ describe('v1.MachineImagesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListMachineImagesRequest()
       );
@@ -1310,7 +1312,7 @@ describe('v1.MachineImagesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListMachineImagesRequest()
       );
@@ -1370,7 +1372,7 @@ describe('v1.MachineImagesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListMachineImagesRequest()
       );
@@ -1421,7 +1423,7 @@ describe('v1.MachineImagesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListMachineImagesRequest()
       );
@@ -1469,7 +1471,7 @@ describe('v1.MachineImagesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListMachineImagesRequest()
       );

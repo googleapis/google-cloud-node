@@ -569,7 +569,9 @@ export class GenerativeServiceClient {
       this._gaxModule.routingHeader.fromParams({
         model: request.model ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('generateContent request %j', request);
     const wrappedCallback:
       | Callback<
@@ -739,7 +741,9 @@ export class GenerativeServiceClient {
       this._gaxModule.routingHeader.fromParams({
         model: request.model ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('generateAnswer request %j', request);
     const wrappedCallback:
       | Callback<
@@ -888,7 +892,9 @@ export class GenerativeServiceClient {
       this._gaxModule.routingHeader.fromParams({
         model: request.model ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('embedContent request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1023,7 +1029,9 @@ export class GenerativeServiceClient {
       this._gaxModule.routingHeader.fromParams({
         model: request.model ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('batchEmbedContents request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1167,7 +1175,9 @@ export class GenerativeServiceClient {
       this._gaxModule.routingHeader.fromParams({
         model: request.model ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('countTokens request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1283,7 +1293,9 @@ export class GenerativeServiceClient {
       this._gaxModule.routingHeader.fromParams({
         model: request.model ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('streamGenerateContent stream %j', options);
     return this.innerApiCalls.streamGenerateContent(request, options);
   }

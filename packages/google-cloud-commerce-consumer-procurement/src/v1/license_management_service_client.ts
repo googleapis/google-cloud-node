@@ -487,7 +487,9 @@ export class LicenseManagementServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getLicensePool request %j', request);
     const wrappedCallback:
       | Callback<
@@ -618,7 +620,9 @@ export class LicenseManagementServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'license_pool.name': request.licensePool!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateLicensePool request %j', request);
     const wrappedCallback:
       | Callback<
@@ -746,7 +750,9 @@ export class LicenseManagementServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('assign request %j', request);
     const wrappedCallback:
       | Callback<
@@ -874,7 +880,9 @@ export class LicenseManagementServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('unassign request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1003,7 +1011,9 @@ export class LicenseManagementServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.commerce.consumer.procurement.v1.IEnumerateLicensedUsersRequest,
@@ -1070,7 +1080,9 @@ export class LicenseManagementServiceClient {
       });
     const defaultCallSettings = this._defaults['enumerateLicensedUsers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('enumerateLicensedUsers stream %j', request);
     return this.descriptors.page.enumerateLicensedUsers.createStream(
       this.innerApiCalls.enumerateLicensedUsers as GaxCall,
@@ -1119,7 +1131,9 @@ export class LicenseManagementServiceClient {
       });
     const defaultCallSettings = this._defaults['enumerateLicensedUsers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('enumerateLicensedUsers iterate %j', request);
     return this.descriptors.page.enumerateLicensedUsers.asyncIterate(
       this.innerApiCalls['enumerateLicensedUsers'] as GaxCall,

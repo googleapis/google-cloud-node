@@ -492,7 +492,9 @@ export class MarketingplatformAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getOrganization request %j', request);
     const wrappedCallback:
       | Callback<
@@ -625,7 +627,9 @@ export class MarketingplatformAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createAnalyticsAccountLink request %j', request);
     const wrappedCallback:
       | Callback<
@@ -756,7 +760,9 @@ export class MarketingplatformAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteAnalyticsAccountLink request %j', request);
     const wrappedCallback:
       | Callback<
@@ -890,7 +896,9 @@ export class MarketingplatformAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         analytics_account_link: request.analyticsAccountLink ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setPropertyServiceLevel request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1028,7 +1036,9 @@ export class MarketingplatformAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.marketingplatform.admin.v1alpha.IListAnalyticsAccountLinksRequest,
@@ -1103,7 +1113,9 @@ export class MarketingplatformAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listAnalyticsAccountLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAnalyticsAccountLinks stream %j', request);
     return this.descriptors.page.listAnalyticsAccountLinks.createStream(
       this.innerApiCalls.listAnalyticsAccountLinks as GaxCall,
@@ -1160,7 +1172,9 @@ export class MarketingplatformAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listAnalyticsAccountLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAnalyticsAccountLinks iterate %j', request);
     return this.descriptors.page.listAnalyticsAccountLinks.asyncIterate(
       this.innerApiCalls['listAnalyticsAccountLinks'] as GaxCall,

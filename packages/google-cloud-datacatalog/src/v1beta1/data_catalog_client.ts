@@ -574,7 +574,9 @@ export class DataCatalogClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataCatalog-$CreateEntryGroup',
       'CreateEntryGroup is deprecated and may be removed in a future version.',
@@ -715,7 +717,9 @@ export class DataCatalogClient {
       this._gaxModule.routingHeader.fromParams({
         'entry_group.name': request.entryGroup!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataCatalog-$UpdateEntryGroup',
       'UpdateEntryGroup is deprecated and may be removed in a future version.',
@@ -843,7 +847,9 @@ export class DataCatalogClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataCatalog-$GetEntryGroup',
       'GetEntryGroup is deprecated and may be removed in a future version.',
@@ -981,7 +987,9 @@ export class DataCatalogClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataCatalog-$DeleteEntryGroup',
       'DeleteEntryGroup is deprecated and may be removed in a future version.',
@@ -1123,7 +1131,9 @@ export class DataCatalogClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataCatalog-$CreateEntry',
       'CreateEntry is deprecated and may be removed in a future version.',
@@ -1277,7 +1287,9 @@ export class DataCatalogClient {
       this._gaxModule.routingHeader.fromParams({
         'entry.name': request.entry!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataCatalog-$UpdateEntry',
       'UpdateEntry is deprecated and may be removed in a future version.',
@@ -1410,7 +1422,9 @@ export class DataCatalogClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataCatalog-$DeleteEntry',
       'DeleteEntry is deprecated and may be removed in a future version.',
@@ -1537,7 +1551,9 @@ export class DataCatalogClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataCatalog-$GetEntry',
       'GetEntry is deprecated and may be removed in a future version.',
@@ -1678,7 +1694,9 @@ export class DataCatalogClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataCatalog-$LookupEntry',
       'LookupEntry is deprecated and may be removed in a future version.',
@@ -1822,7 +1840,9 @@ export class DataCatalogClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataCatalog-$CreateTagTemplate',
       'CreateTagTemplate is deprecated and may be removed in a future version.',
@@ -1955,7 +1975,9 @@ export class DataCatalogClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataCatalog-$GetTagTemplate',
       'GetTagTemplate is deprecated and may be removed in a future version.',
@@ -2099,7 +2121,9 @@ export class DataCatalogClient {
       this._gaxModule.routingHeader.fromParams({
         'tag_template.name': request.tagTemplate!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataCatalog-$UpdateTagTemplate',
       'UpdateTagTemplate is deprecated and may be removed in a future version.',
@@ -2240,7 +2264,9 @@ export class DataCatalogClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataCatalog-$DeleteTagTemplate',
       'DeleteTagTemplate is deprecated and may be removed in a future version.',
@@ -2388,7 +2414,9 @@ export class DataCatalogClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataCatalog-$CreateTagTemplateField',
       'CreateTagTemplateField is deprecated and may be removed in a future version.',
@@ -2544,7 +2572,9 @@ export class DataCatalogClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataCatalog-$UpdateTagTemplateField',
       'UpdateTagTemplateField is deprecated and may be removed in a future version.',
@@ -2684,7 +2714,9 @@ export class DataCatalogClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataCatalog-$RenameTagTemplateField',
       'RenameTagTemplateField is deprecated and may be removed in a future version.',
@@ -2822,7 +2854,9 @@ export class DataCatalogClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataCatalog-$RenameTagTemplateFieldEnumValue',
       'RenameTagTemplateFieldEnumValue is deprecated and may be removed in a future version.',
@@ -2969,7 +3003,9 @@ export class DataCatalogClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataCatalog-$DeleteTagTemplateField',
       'DeleteTagTemplateField is deprecated and may be removed in a future version.',
@@ -3109,7 +3145,9 @@ export class DataCatalogClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataCatalog-$CreateTag',
       'CreateTag is deprecated and may be removed in a future version.',
@@ -3240,7 +3278,9 @@ export class DataCatalogClient {
       this._gaxModule.routingHeader.fromParams({
         'tag.name': request.tag!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataCatalog-$UpdateTag',
       'UpdateTag is deprecated and may be removed in a future version.',
@@ -3364,7 +3404,9 @@ export class DataCatalogClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataCatalog-$DeleteTag',
       'DeleteTag is deprecated and may be removed in a future version.',
@@ -3503,7 +3545,9 @@ export class DataCatalogClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataCatalog-$SetIamPolicy',
       'SetIamPolicy is deprecated and may be removed in a future version.',
@@ -3634,7 +3678,9 @@ export class DataCatalogClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataCatalog-$GetIamPolicy',
       'GetIamPolicy is deprecated and may be removed in a future version.',
@@ -3764,7 +3810,9 @@ export class DataCatalogClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataCatalog-$TestIamPermissions',
       'TestIamPermissions is deprecated and may be removed in a future version.',
@@ -3935,7 +3983,9 @@ export class DataCatalogClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataCatalog-$SearchCatalog',
       'SearchCatalog is deprecated and may be removed in a future version.',
@@ -4034,7 +4084,9 @@ export class DataCatalogClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['searchCatalog'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataCatalog-$SearchCatalog',
       'SearchCatalog is deprecated and may be removed in a future version.',
@@ -4115,7 +4167,9 @@ export class DataCatalogClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['searchCatalog'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataCatalog-$SearchCatalog',
       'SearchCatalog is deprecated and may be removed in a future version.',
@@ -4228,7 +4282,9 @@ export class DataCatalogClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataCatalog-$ListEntryGroups',
       'ListEntryGroups is deprecated and may be removed in a future version.',
@@ -4304,7 +4360,9 @@ export class DataCatalogClient {
       });
     const defaultCallSettings = this._defaults['listEntryGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataCatalog-$ListEntryGroups',
       'ListEntryGroups is deprecated and may be removed in a future version.',
@@ -4362,7 +4420,9 @@ export class DataCatalogClient {
       });
     const defaultCallSettings = this._defaults['listEntryGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataCatalog-$ListEntryGroups',
       'ListEntryGroups is deprecated and may be removed in a future version.',
@@ -4480,7 +4540,9 @@ export class DataCatalogClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataCatalog-$ListEntries',
       'ListEntries is deprecated and may be removed in a future version.',
@@ -4561,7 +4623,9 @@ export class DataCatalogClient {
       });
     const defaultCallSettings = this._defaults['listEntries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataCatalog-$ListEntries',
       'ListEntries is deprecated and may be removed in a future version.',
@@ -4624,7 +4688,9 @@ export class DataCatalogClient {
       });
     const defaultCallSettings = this._defaults['listEntries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataCatalog-$ListEntries',
       'ListEntries is deprecated and may be removed in a future version.',
@@ -4742,7 +4808,9 @@ export class DataCatalogClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataCatalog-$ListTags',
       'ListTags is deprecated and may be removed in a future version.',
@@ -4821,7 +4889,9 @@ export class DataCatalogClient {
       });
     const defaultCallSettings = this._defaults['listTags'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataCatalog-$ListTags',
       'ListTags is deprecated and may be removed in a future version.',
@@ -4882,7 +4952,9 @@ export class DataCatalogClient {
       });
     const defaultCallSettings = this._defaults['listTags'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$DataCatalog-$ListTags',
       'ListTags is deprecated and may be removed in a future version.',

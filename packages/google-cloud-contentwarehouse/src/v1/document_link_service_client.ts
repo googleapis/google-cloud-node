@@ -502,7 +502,9 @@ export class DocumentLinkServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listLinkedTargets request %j', request);
     const wrappedCallback:
       | Callback<
@@ -636,7 +638,9 @@ export class DocumentLinkServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createDocumentLink request %j', request);
     const wrappedCallback:
       | Callback<
@@ -766,7 +770,9 @@ export class DocumentLinkServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteDocumentLink request %j', request);
     const wrappedCallback:
       | Callback<
@@ -906,7 +912,9 @@ export class DocumentLinkServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.contentwarehouse.v1.IListLinkedSourcesRequest,
@@ -984,7 +992,9 @@ export class DocumentLinkServiceClient {
       });
     const defaultCallSettings = this._defaults['listLinkedSources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listLinkedSources stream %j', request);
     return this.descriptors.page.listLinkedSources.createStream(
       this.innerApiCalls.listLinkedSources as GaxCall,
@@ -1044,7 +1054,9 @@ export class DocumentLinkServiceClient {
       });
     const defaultCallSettings = this._defaults['listLinkedSources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listLinkedSources iterate %j', request);
     return this.descriptors.page.listLinkedSources.asyncIterate(
       this.innerApiCalls['listLinkedSources'] as GaxCall,

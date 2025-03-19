@@ -905,7 +905,9 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAsset request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1042,7 +1044,9 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         'asset.name': request.asset!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateAsset request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1170,7 +1174,9 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('batchUpdateAssets request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1303,7 +1309,9 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteAsset request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1436,7 +1444,9 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('batchDeleteAssets request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1565,7 +1575,9 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('reportAssetFrames request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1695,7 +1707,9 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('aggregateAssetsValues request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1817,7 +1831,9 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getImportJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1942,7 +1958,9 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getImportDataFile request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2061,7 +2079,9 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getGroup request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2182,7 +2202,9 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getErrorFrame request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2301,7 +2323,9 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getSource request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2423,7 +2447,9 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getPreferenceSet request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2542,7 +2568,9 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getSettings request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2667,7 +2695,9 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getReportConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2788,7 +2818,9 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getReport request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2935,7 +2967,9 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3120,7 +3154,9 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3308,7 +3344,9 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         'import_job.name': request.importJob!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3489,7 +3527,9 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3670,7 +3710,9 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3855,7 +3897,9 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4036,7 +4080,9 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4225,7 +4271,9 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4412,7 +4460,9 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         'group.name': request.group!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4593,7 +4643,9 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4785,7 +4837,9 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         group: request.group ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4976,7 +5030,9 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         group: request.group ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5165,7 +5221,9 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5353,7 +5411,9 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         'source.name': request.source!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5534,7 +5594,9 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5724,7 +5786,9 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5912,7 +5976,9 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         'preference_set.name': request.preferenceSet!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -6093,7 +6159,9 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -6281,7 +6349,9 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         'settings.name': request.settings!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -6470,7 +6540,9 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -6655,7 +6727,9 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -6844,7 +6918,9 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -7025,7 +7101,9 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -7194,7 +7272,9 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.migrationcenter.v1.IListAssetsRequest,
@@ -7266,7 +7346,9 @@ export class MigrationCenterClient {
       });
     const defaultCallSettings = this._defaults['listAssets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAssets stream %j', request);
     return this.descriptors.page.listAssets.createStream(
       this.innerApiCalls.listAssets as GaxCall,
@@ -7320,7 +7402,9 @@ export class MigrationCenterClient {
       });
     const defaultCallSettings = this._defaults['listAssets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAssets iterate %j', request);
     return this.descriptors.page.listAssets.asyncIterate(
       this.innerApiCalls['listAssets'] as GaxCall,
@@ -7430,7 +7514,9 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.migrationcenter.v1.IListImportJobsRequest,
@@ -7503,7 +7589,9 @@ export class MigrationCenterClient {
       });
     const defaultCallSettings = this._defaults['listImportJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listImportJobs stream %j', request);
     return this.descriptors.page.listImportJobs.createStream(
       this.innerApiCalls.listImportJobs as GaxCall,
@@ -7558,7 +7646,9 @@ export class MigrationCenterClient {
       });
     const defaultCallSettings = this._defaults['listImportJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listImportJobs iterate %j', request);
     return this.descriptors.page.listImportJobs.asyncIterate(
       this.innerApiCalls['listImportJobs'] as GaxCall,
@@ -7671,7 +7761,9 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.migrationcenter.v1.IListImportDataFilesRequest,
@@ -7747,7 +7839,9 @@ export class MigrationCenterClient {
       });
     const defaultCallSettings = this._defaults['listImportDataFiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listImportDataFiles stream %j', request);
     return this.descriptors.page.listImportDataFiles.createStream(
       this.innerApiCalls.listImportDataFiles as GaxCall,
@@ -7805,7 +7899,9 @@ export class MigrationCenterClient {
       });
     const defaultCallSettings = this._defaults['listImportDataFiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listImportDataFiles iterate %j', request);
     return this.descriptors.page.listImportDataFiles.asyncIterate(
       this.innerApiCalls['listImportDataFiles'] as GaxCall,
@@ -7912,7 +8008,9 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.migrationcenter.v1.IListGroupsRequest,
@@ -7982,7 +8080,9 @@ export class MigrationCenterClient {
       });
     const defaultCallSettings = this._defaults['listGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listGroups stream %j', request);
     return this.descriptors.page.listGroups.createStream(
       this.innerApiCalls.listGroups as GaxCall,
@@ -8034,7 +8134,9 @@ export class MigrationCenterClient {
       });
     const defaultCallSettings = this._defaults['listGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listGroups iterate %j', request);
     return this.descriptors.page.listGroups.asyncIterate(
       this.innerApiCalls['listGroups'] as GaxCall,
@@ -8140,7 +8242,9 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.migrationcenter.v1.IListErrorFramesRequest,
@@ -8209,7 +8313,9 @@ export class MigrationCenterClient {
       });
     const defaultCallSettings = this._defaults['listErrorFrames'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listErrorFrames stream %j', request);
     return this.descriptors.page.listErrorFrames.createStream(
       this.innerApiCalls.listErrorFrames as GaxCall,
@@ -8260,7 +8366,9 @@ export class MigrationCenterClient {
       });
     const defaultCallSettings = this._defaults['listErrorFrames'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listErrorFrames iterate %j', request);
     return this.descriptors.page.listErrorFrames.asyncIterate(
       this.innerApiCalls['listErrorFrames'] as GaxCall,
@@ -8367,7 +8475,9 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.migrationcenter.v1.IListSourcesRequest,
@@ -8437,7 +8547,9 @@ export class MigrationCenterClient {
       });
     const defaultCallSettings = this._defaults['listSources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSources stream %j', request);
     return this.descriptors.page.listSources.createStream(
       this.innerApiCalls.listSources as GaxCall,
@@ -8489,7 +8601,9 @@ export class MigrationCenterClient {
       });
     const defaultCallSettings = this._defaults['listSources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSources iterate %j', request);
     return this.descriptors.page.listSources.asyncIterate(
       this.innerApiCalls['listSources'] as GaxCall,
@@ -8595,7 +8709,9 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.migrationcenter.v1.IListPreferenceSetsRequest,
@@ -8664,7 +8780,9 @@ export class MigrationCenterClient {
       });
     const defaultCallSettings = this._defaults['listPreferenceSets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listPreferenceSets stream %j', request);
     return this.descriptors.page.listPreferenceSets.createStream(
       this.innerApiCalls.listPreferenceSets as GaxCall,
@@ -8715,7 +8833,9 @@ export class MigrationCenterClient {
       });
     const defaultCallSettings = this._defaults['listPreferenceSets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listPreferenceSets iterate %j', request);
     return this.descriptors.page.listPreferenceSets.asyncIterate(
       this.innerApiCalls['listPreferenceSets'] as GaxCall,
@@ -8822,7 +8942,9 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.migrationcenter.v1.IListReportConfigsRequest,
@@ -8892,7 +9014,9 @@ export class MigrationCenterClient {
       });
     const defaultCallSettings = this._defaults['listReportConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listReportConfigs stream %j', request);
     return this.descriptors.page.listReportConfigs.createStream(
       this.innerApiCalls.listReportConfigs as GaxCall,
@@ -8944,7 +9068,9 @@ export class MigrationCenterClient {
       });
     const defaultCallSettings = this._defaults['listReportConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listReportConfigs iterate %j', request);
     return this.descriptors.page.listReportConfigs.asyncIterate(
       this.innerApiCalls['listReportConfigs'] as GaxCall,
@@ -9053,7 +9179,9 @@ export class MigrationCenterClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.migrationcenter.v1.IListReportsRequest,
@@ -9125,7 +9253,9 @@ export class MigrationCenterClient {
       });
     const defaultCallSettings = this._defaults['listReports'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listReports stream %j', request);
     return this.descriptors.page.listReports.createStream(
       this.innerApiCalls.listReports as GaxCall,
@@ -9179,7 +9309,9 @@ export class MigrationCenterClient {
       });
     const defaultCallSettings = this._defaults['listReports'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listReports iterate %j', request);
     return this.descriptors.page.listReports.asyncIterate(
       this.innerApiCalls['listReports'] as GaxCall,
@@ -9359,7 +9491,7 @@ export class MigrationCenterClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

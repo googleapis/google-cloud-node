@@ -278,7 +278,9 @@ describe('v1.InterconnectLocationsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.interconnectLocationsStub);
       client.close().then(() => {
         done();
@@ -341,7 +343,7 @@ describe('v1.InterconnectLocationsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInterconnectLocationRequest()
       );
@@ -377,7 +379,7 @@ describe('v1.InterconnectLocationsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInterconnectLocationRequest()
       );
@@ -428,7 +430,7 @@ describe('v1.InterconnectLocationsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInterconnectLocationRequest()
       );
@@ -461,7 +463,7 @@ describe('v1.InterconnectLocationsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInterconnectLocationRequest()
       );
@@ -488,7 +490,7 @@ describe('v1.InterconnectLocationsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInterconnectLocationsRequest()
       );
@@ -527,7 +529,7 @@ describe('v1.InterconnectLocationsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInterconnectLocationsRequest()
       );
@@ -583,7 +585,7 @@ describe('v1.InterconnectLocationsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInterconnectLocationsRequest()
       );
@@ -611,7 +613,7 @@ describe('v1.InterconnectLocationsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInterconnectLocationsRequest()
       );
@@ -673,7 +675,7 @@ describe('v1.InterconnectLocationsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInterconnectLocationsRequest()
       );
@@ -726,7 +728,7 @@ describe('v1.InterconnectLocationsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInterconnectLocationsRequest()
       );
@@ -776,7 +778,7 @@ describe('v1.InterconnectLocationsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInterconnectLocationsRequest()
       );

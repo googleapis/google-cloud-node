@@ -301,7 +301,9 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.dataprocMetastoreStub);
       client.close().then(() => {
         done();
@@ -368,7 +370,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.GetServiceRequest()
       );
@@ -401,7 +403,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.GetServiceRequest()
       );
@@ -450,7 +452,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.GetServiceRequest()
       );
@@ -483,7 +485,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.GetServiceRequest()
       );
@@ -506,7 +508,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.GetMetadataImportRequest()
       );
@@ -539,7 +541,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.GetMetadataImportRequest()
       );
@@ -588,7 +590,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.GetMetadataImportRequest()
       );
@@ -621,7 +623,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.GetMetadataImportRequest()
       );
@@ -644,7 +646,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.GetBackupRequest()
       );
@@ -677,7 +679,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.GetBackupRequest()
       );
@@ -726,7 +728,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.GetBackupRequest()
       );
@@ -756,7 +758,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.GetBackupRequest()
       );
@@ -779,7 +781,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.RemoveIamPolicyRequest()
       );
@@ -812,7 +814,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.RemoveIamPolicyRequest()
       );
@@ -861,7 +863,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.RemoveIamPolicyRequest()
       );
@@ -894,7 +896,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.RemoveIamPolicyRequest()
       );
@@ -917,7 +919,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.CreateServiceRequest()
       );
@@ -952,7 +954,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.CreateServiceRequest()
       );
@@ -1008,7 +1010,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.CreateServiceRequest()
       );
@@ -1041,7 +1043,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.CreateServiceRequest()
       );
@@ -1076,7 +1078,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1100,7 +1102,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1123,7 +1125,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.UpdateServiceRequest()
       );
@@ -1159,7 +1161,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.UpdateServiceRequest()
       );
@@ -1216,7 +1218,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.UpdateServiceRequest()
       );
@@ -1250,7 +1252,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.UpdateServiceRequest()
       );
@@ -1286,7 +1288,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1310,7 +1312,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1333,7 +1335,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.DeleteServiceRequest()
       );
@@ -1368,7 +1370,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.DeleteServiceRequest()
       );
@@ -1424,7 +1426,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.DeleteServiceRequest()
       );
@@ -1457,7 +1459,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.DeleteServiceRequest()
       );
@@ -1492,7 +1494,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1516,7 +1518,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1539,7 +1541,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.CreateMetadataImportRequest()
       );
@@ -1574,7 +1576,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.CreateMetadataImportRequest()
       );
@@ -1630,7 +1632,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.CreateMetadataImportRequest()
       );
@@ -1663,7 +1665,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.CreateMetadataImportRequest()
       );
@@ -1698,7 +1700,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1722,7 +1724,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1745,7 +1747,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.UpdateMetadataImportRequest()
       );
@@ -1781,7 +1783,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.UpdateMetadataImportRequest()
       );
@@ -1838,7 +1840,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.UpdateMetadataImportRequest()
       );
@@ -1872,7 +1874,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.UpdateMetadataImportRequest()
       );
@@ -1908,7 +1910,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1932,7 +1934,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1955,7 +1957,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.ExportMetadataRequest()
       );
@@ -1990,7 +1992,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.ExportMetadataRequest()
       );
@@ -2046,7 +2048,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.ExportMetadataRequest()
       );
@@ -2079,7 +2081,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.ExportMetadataRequest()
       );
@@ -2114,7 +2116,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2138,7 +2140,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2161,7 +2163,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.RestoreServiceRequest()
       );
@@ -2196,7 +2198,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.RestoreServiceRequest()
       );
@@ -2252,7 +2254,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.RestoreServiceRequest()
       );
@@ -2285,7 +2287,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.RestoreServiceRequest()
       );
@@ -2320,7 +2322,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2344,7 +2346,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2367,7 +2369,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.CreateBackupRequest()
       );
@@ -2401,7 +2403,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.CreateBackupRequest()
       );
@@ -2457,7 +2459,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.CreateBackupRequest()
       );
@@ -2490,7 +2492,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.CreateBackupRequest()
       );
@@ -2525,7 +2527,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2549,7 +2551,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2569,7 +2571,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.DeleteBackupRequest()
       );
@@ -2603,7 +2605,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.DeleteBackupRequest()
       );
@@ -2659,7 +2661,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.DeleteBackupRequest()
       );
@@ -2692,7 +2694,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.DeleteBackupRequest()
       );
@@ -2727,7 +2729,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2751,7 +2753,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2771,7 +2773,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.QueryMetadataRequest()
       );
@@ -2806,7 +2808,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.QueryMetadataRequest()
       );
@@ -2862,7 +2864,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.QueryMetadataRequest()
       );
@@ -2895,7 +2897,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.QueryMetadataRequest()
       );
@@ -2930,7 +2932,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2954,7 +2956,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2977,7 +2979,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.MoveTableToDatabaseRequest()
       );
@@ -3012,7 +3014,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.MoveTableToDatabaseRequest()
       );
@@ -3068,7 +3070,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.MoveTableToDatabaseRequest()
       );
@@ -3101,7 +3103,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.MoveTableToDatabaseRequest()
       );
@@ -3136,7 +3138,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3160,7 +3162,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3183,7 +3185,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.AlterMetadataResourceLocationRequest()
       );
@@ -3218,7 +3220,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.AlterMetadataResourceLocationRequest()
       );
@@ -3274,7 +3276,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.AlterMetadataResourceLocationRequest()
       );
@@ -3310,7 +3312,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.AlterMetadataResourceLocationRequest()
       );
@@ -3345,7 +3347,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3370,7 +3372,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3393,7 +3395,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.ListServicesRequest()
       );
@@ -3434,7 +3436,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.ListServicesRequest()
       );
@@ -3491,7 +3493,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.ListServicesRequest()
       );
@@ -3524,7 +3526,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.ListServicesRequest()
       );
@@ -3586,7 +3588,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.ListServicesRequest()
       );
@@ -3639,7 +3641,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.ListServicesRequest()
       );
@@ -3690,7 +3692,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.ListServicesRequest()
       );
@@ -3734,7 +3736,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.ListMetadataImportsRequest()
       );
@@ -3776,7 +3778,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.ListMetadataImportsRequest()
       );
@@ -3835,7 +3837,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.ListMetadataImportsRequest()
       );
@@ -3868,7 +3870,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.ListMetadataImportsRequest()
       );
@@ -3931,7 +3933,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.ListMetadataImportsRequest()
       );
@@ -3983,7 +3985,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.ListMetadataImportsRequest()
       );
@@ -4035,7 +4037,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.ListMetadataImportsRequest()
       );
@@ -4080,7 +4082,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.ListBackupsRequest()
       );
@@ -4121,7 +4123,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.ListBackupsRequest()
       );
@@ -4178,7 +4180,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.ListBackupsRequest()
       );
@@ -4211,7 +4213,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.ListBackupsRequest()
       );
@@ -4273,7 +4275,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.ListBackupsRequest()
       );
@@ -4326,7 +4328,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.ListBackupsRequest()
       );
@@ -4377,7 +4379,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.metastore.v1beta.ListBackupsRequest()
       );
@@ -4422,7 +4424,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -4454,7 +4456,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -4500,7 +4502,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -4534,7 +4536,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -4566,7 +4568,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -4612,7 +4614,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -4646,7 +4648,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -4681,7 +4683,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -4727,7 +4729,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -4764,7 +4766,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -4796,7 +4798,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -4842,7 +4844,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -4879,7 +4881,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -4929,7 +4931,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -4972,7 +4974,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -5057,7 +5059,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -5143,7 +5145,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -5245,8 +5247,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -5267,7 +5268,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -5276,8 +5277,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -5293,7 +5293,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('backup', () => {
+    describe('backup', async () => {
       const fakePath = '/rendered/path/backup';
       const expectedParameters = {
         project: 'projectValue',
@@ -5307,7 +5307,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.backupPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5371,7 +5371,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
       });
     });
 
-    describe('federation', () => {
+    describe('federation', async () => {
       const fakePath = '/rendered/path/federation';
       const expectedParameters = {
         project: 'projectValue',
@@ -5384,7 +5384,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.federationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5437,7 +5437,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
       });
     });
 
-    describe('lake', () => {
+    describe('lake', async () => {
       const fakePath = '/rendered/path/lake';
       const expectedParameters = {
         project: 'projectValue',
@@ -5450,7 +5450,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.lakePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5503,7 +5503,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -5515,7 +5515,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5554,7 +5554,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
       });
     });
 
-    describe('metadataImport', () => {
+    describe('metadataImport', async () => {
       const fakePath = '/rendered/path/metadataImport';
       const expectedParameters = {
         project: 'projectValue',
@@ -5568,7 +5568,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.metadataImportPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5633,7 +5633,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
       });
     });
 
-    describe('network', () => {
+    describe('network', async () => {
       const fakePath = '/rendered/path/network';
       const expectedParameters = {
         project: 'projectValue',
@@ -5645,7 +5645,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.networkPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5684,7 +5684,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -5695,7 +5695,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5724,7 +5724,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
       });
     });
 
-    describe('service', () => {
+    describe('service', async () => {
       const fakePath = '/rendered/path/service';
       const expectedParameters = {
         project: 'projectValue',
@@ -5737,7 +5737,7 @@ describe('v1beta.DataprocMetastoreClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.servicePathTemplate.render = sinon
         .stub()
         .returns(fakePath);

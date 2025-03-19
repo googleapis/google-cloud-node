@@ -265,7 +265,9 @@ describe('v1.PacketMirroringsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.packetMirroringsStub);
       client.close().then(() => {
         done();
@@ -324,7 +326,7 @@ describe('v1.PacketMirroringsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeletePacketMirroringRequest()
       );
@@ -365,7 +367,7 @@ describe('v1.PacketMirroringsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeletePacketMirroringRequest()
       );
@@ -422,7 +424,7 @@ describe('v1.PacketMirroringsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeletePacketMirroringRequest()
       );
@@ -460,7 +462,7 @@ describe('v1.PacketMirroringsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeletePacketMirroringRequest()
       );
@@ -491,7 +493,7 @@ describe('v1.PacketMirroringsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetPacketMirroringRequest()
       );
@@ -531,7 +533,7 @@ describe('v1.PacketMirroringsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetPacketMirroringRequest()
       );
@@ -586,7 +588,7 @@ describe('v1.PacketMirroringsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetPacketMirroringRequest()
       );
@@ -623,7 +625,7 @@ describe('v1.PacketMirroringsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetPacketMirroringRequest()
       );
@@ -654,7 +656,7 @@ describe('v1.PacketMirroringsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertPacketMirroringRequest()
       );
@@ -690,7 +692,7 @@ describe('v1.PacketMirroringsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertPacketMirroringRequest()
       );
@@ -742,7 +744,7 @@ describe('v1.PacketMirroringsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertPacketMirroringRequest()
       );
@@ -775,7 +777,7 @@ describe('v1.PacketMirroringsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertPacketMirroringRequest()
       );
@@ -801,7 +803,7 @@ describe('v1.PacketMirroringsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchPacketMirroringRequest()
       );
@@ -841,7 +843,7 @@ describe('v1.PacketMirroringsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchPacketMirroringRequest()
       );
@@ -896,7 +898,7 @@ describe('v1.PacketMirroringsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchPacketMirroringRequest()
       );
@@ -933,7 +935,7 @@ describe('v1.PacketMirroringsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchPacketMirroringRequest()
       );
@@ -964,7 +966,7 @@ describe('v1.PacketMirroringsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsPacketMirroringRequest()
       );
@@ -1006,7 +1008,7 @@ describe('v1.PacketMirroringsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsPacketMirroringRequest()
       );
@@ -1063,7 +1065,7 @@ describe('v1.PacketMirroringsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsPacketMirroringRequest()
       );
@@ -1104,7 +1106,7 @@ describe('v1.PacketMirroringsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsPacketMirroringRequest()
       );
@@ -1135,7 +1137,7 @@ describe('v1.PacketMirroringsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AggregatedListPacketMirroringsRequest()
       );
@@ -1195,7 +1197,7 @@ describe('v1.PacketMirroringsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AggregatedListPacketMirroringsRequest()
       );
@@ -1239,7 +1241,7 @@ describe('v1.PacketMirroringsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListPacketMirroringsRequest()
       );
@@ -1282,7 +1284,7 @@ describe('v1.PacketMirroringsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListPacketMirroringsRequest()
       );
@@ -1340,7 +1342,7 @@ describe('v1.PacketMirroringsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListPacketMirroringsRequest()
       );
@@ -1372,7 +1374,7 @@ describe('v1.PacketMirroringsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListPacketMirroringsRequest()
       );
@@ -1437,7 +1439,7 @@ describe('v1.PacketMirroringsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListPacketMirroringsRequest()
       );
@@ -1493,7 +1495,7 @@ describe('v1.PacketMirroringsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListPacketMirroringsRequest()
       );
@@ -1546,7 +1548,7 @@ describe('v1.PacketMirroringsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListPacketMirroringsRequest()
       );

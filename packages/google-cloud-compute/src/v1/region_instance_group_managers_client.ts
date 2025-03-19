@@ -518,7 +518,9 @@ export class RegionInstanceGroupManagersClient {
         region: request.region ?? '',
         instance_group_manager: request.instanceGroupManager ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('abandonInstances request %j', request);
     const wrappedCallback:
       | Callback<
@@ -656,7 +658,9 @@ export class RegionInstanceGroupManagersClient {
         region: request.region ?? '',
         instance_group_manager: request.instanceGroupManager ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('applyUpdatesToInstances request %j', request);
     const wrappedCallback:
       | Callback<
@@ -796,7 +800,9 @@ export class RegionInstanceGroupManagersClient {
         region: request.region ?? '',
         instance_group_manager: request.instanceGroupManager ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createInstances request %j', request);
     const wrappedCallback:
       | Callback<
@@ -934,7 +940,9 @@ export class RegionInstanceGroupManagersClient {
         region: request.region ?? '',
         instance_group_manager: request.instanceGroupManager ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('delete request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1074,7 +1082,9 @@ export class RegionInstanceGroupManagersClient {
         region: request.region ?? '',
         instance_group_manager: request.instanceGroupManager ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteInstances request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1212,7 +1222,9 @@ export class RegionInstanceGroupManagersClient {
         region: request.region ?? '',
         instance_group_manager: request.instanceGroupManager ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deletePerInstanceConfigs request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1349,7 +1361,9 @@ export class RegionInstanceGroupManagersClient {
         region: request.region ?? '',
         instance_group_manager: request.instanceGroupManager ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('get request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1480,7 +1494,9 @@ export class RegionInstanceGroupManagersClient {
         project: request.project ?? '',
         region: request.region ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('insert request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1620,7 +1636,9 @@ export class RegionInstanceGroupManagersClient {
         region: request.region ?? '',
         instance_group_manager: request.instanceGroupManager ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('patch request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1760,7 +1778,9 @@ export class RegionInstanceGroupManagersClient {
         region: request.region ?? '',
         instance_group_manager: request.instanceGroupManager ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('patchPerInstanceConfigs request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1900,7 +1920,9 @@ export class RegionInstanceGroupManagersClient {
         region: request.region ?? '',
         instance_group_manager: request.instanceGroupManager ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('recreateInstances request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2040,7 +2062,9 @@ export class RegionInstanceGroupManagersClient {
         region: request.region ?? '',
         instance_group_manager: request.instanceGroupManager ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('resize request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2180,7 +2204,9 @@ export class RegionInstanceGroupManagersClient {
         region: request.region ?? '',
         instance_group_manager: request.instanceGroupManager ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('resumeInstances request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2320,7 +2346,9 @@ export class RegionInstanceGroupManagersClient {
         region: request.region ?? '',
         instance_group_manager: request.instanceGroupManager ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setInstanceTemplate request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2460,7 +2488,9 @@ export class RegionInstanceGroupManagersClient {
         region: request.region ?? '',
         instance_group_manager: request.instanceGroupManager ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setTargetPools request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2600,7 +2630,9 @@ export class RegionInstanceGroupManagersClient {
         region: request.region ?? '',
         instance_group_manager: request.instanceGroupManager ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('startInstances request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2740,7 +2772,9 @@ export class RegionInstanceGroupManagersClient {
         region: request.region ?? '',
         instance_group_manager: request.instanceGroupManager ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('stopInstances request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2880,7 +2914,9 @@ export class RegionInstanceGroupManagersClient {
         region: request.region ?? '',
         instance_group_manager: request.instanceGroupManager ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('suspendInstances request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3020,7 +3056,9 @@ export class RegionInstanceGroupManagersClient {
         region: request.region ?? '',
         instance_group_manager: request.instanceGroupManager ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updatePerInstanceConfigs request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3162,7 +3200,9 @@ export class RegionInstanceGroupManagersClient {
         project: request.project ?? '',
         region: request.region ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.compute.v1.IListRegionInstanceGroupManagersRequest,
@@ -3236,7 +3276,9 @@ export class RegionInstanceGroupManagersClient {
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('list stream %j', request);
     return this.descriptors.page.list.createStream(
       this.innerApiCalls.list as GaxCall,
@@ -3292,7 +3334,9 @@ export class RegionInstanceGroupManagersClient {
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('list iterate %j', request);
     return this.descriptors.page.list.asyncIterate(
       this.innerApiCalls['list'] as GaxCall,
@@ -3406,7 +3450,9 @@ export class RegionInstanceGroupManagersClient {
         region: request.region ?? '',
         instance_group_manager: request.instanceGroupManager ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.compute.v1.IListErrorsRegionInstanceGroupManagersRequest,
@@ -3483,7 +3529,9 @@ export class RegionInstanceGroupManagersClient {
       });
     const defaultCallSettings = this._defaults['listErrors'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listErrors stream %j', request);
     return this.descriptors.page.listErrors.createStream(
       this.innerApiCalls.listErrors as GaxCall,
@@ -3542,7 +3590,9 @@ export class RegionInstanceGroupManagersClient {
       });
     const defaultCallSettings = this._defaults['listErrors'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listErrors iterate %j', request);
     return this.descriptors.page.listErrors.asyncIterate(
       this.innerApiCalls['listErrors'] as GaxCall,
@@ -3656,7 +3706,9 @@ export class RegionInstanceGroupManagersClient {
         region: request.region ?? '',
         instance_group_manager: request.instanceGroupManager ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.compute.v1.IListManagedInstancesRegionInstanceGroupManagersRequest,
@@ -3733,7 +3785,9 @@ export class RegionInstanceGroupManagersClient {
       });
     const defaultCallSettings = this._defaults['listManagedInstances'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listManagedInstances stream %j', request);
     return this.descriptors.page.listManagedInstances.createStream(
       this.innerApiCalls.listManagedInstances as GaxCall,
@@ -3792,7 +3846,9 @@ export class RegionInstanceGroupManagersClient {
       });
     const defaultCallSettings = this._defaults['listManagedInstances'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listManagedInstances iterate %j', request);
     return this.descriptors.page.listManagedInstances.asyncIterate(
       this.innerApiCalls['listManagedInstances'] as GaxCall,
@@ -3906,7 +3962,9 @@ export class RegionInstanceGroupManagersClient {
         region: request.region ?? '',
         instance_group_manager: request.instanceGroupManager ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.compute.v1.IListPerInstanceConfigsRegionInstanceGroupManagersRequest,
@@ -3983,7 +4041,9 @@ export class RegionInstanceGroupManagersClient {
       });
     const defaultCallSettings = this._defaults['listPerInstanceConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listPerInstanceConfigs stream %j', request);
     return this.descriptors.page.listPerInstanceConfigs.createStream(
       this.innerApiCalls.listPerInstanceConfigs as GaxCall,
@@ -4042,7 +4102,9 @@ export class RegionInstanceGroupManagersClient {
       });
     const defaultCallSettings = this._defaults['listPerInstanceConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listPerInstanceConfigs iterate %j', request);
     return this.descriptors.page.listPerInstanceConfigs.asyncIterate(
       this.innerApiCalls['listPerInstanceConfigs'] as GaxCall,

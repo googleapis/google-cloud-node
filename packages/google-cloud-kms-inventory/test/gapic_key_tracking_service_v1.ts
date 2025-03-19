@@ -257,7 +257,9 @@ describe('v1.KeyTrackingServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.keyTrackingServiceStub);
       client.close().then(() => {
         done();
@@ -316,7 +318,7 @@ describe('v1.KeyTrackingServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.inventory.v1.GetProtectedResourcesSummaryRequest()
       );
@@ -348,7 +350,7 @@ describe('v1.KeyTrackingServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.inventory.v1.GetProtectedResourcesSummaryRequest()
       );
@@ -395,7 +397,7 @@ describe('v1.KeyTrackingServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.inventory.v1.GetProtectedResourcesSummaryRequest()
       );
@@ -429,7 +431,7 @@ describe('v1.KeyTrackingServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.inventory.v1.GetProtectedResourcesSummaryRequest()
       );
@@ -453,7 +455,7 @@ describe('v1.KeyTrackingServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.inventory.v1.SearchProtectedResourcesRequest()
       );
@@ -493,7 +495,7 @@ describe('v1.KeyTrackingServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.inventory.v1.SearchProtectedResourcesRequest()
       );
@@ -550,7 +552,7 @@ describe('v1.KeyTrackingServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.inventory.v1.SearchProtectedResourcesRequest()
       );
@@ -584,7 +586,7 @@ describe('v1.KeyTrackingServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.inventory.v1.SearchProtectedResourcesRequest()
       );
@@ -653,7 +655,7 @@ describe('v1.KeyTrackingServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.inventory.v1.SearchProtectedResourcesRequest()
       );
@@ -711,7 +713,7 @@ describe('v1.KeyTrackingServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.inventory.v1.SearchProtectedResourcesRequest()
       );
@@ -765,7 +767,7 @@ describe('v1.KeyTrackingServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.kms.inventory.v1.SearchProtectedResourcesRequest()
       );
@@ -807,7 +809,7 @@ describe('v1.KeyTrackingServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('cryptoKey', () => {
+    describe('cryptoKey', async () => {
       const fakePath = '/rendered/path/cryptoKey';
       const expectedParameters = {
         project: 'projectValue',
@@ -819,7 +821,7 @@ describe('v1.KeyTrackingServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.cryptoKeyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -883,7 +885,7 @@ describe('v1.KeyTrackingServiceClient', () => {
       });
     });
 
-    describe('cryptoKeyVersion', () => {
+    describe('cryptoKeyVersion', async () => {
       const fakePath = '/rendered/path/cryptoKeyVersion';
       const expectedParameters = {
         project: 'projectValue',
@@ -896,7 +898,7 @@ describe('v1.KeyTrackingServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.cryptoKeyVersionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -975,7 +977,7 @@ describe('v1.KeyTrackingServiceClient', () => {
       });
     });
 
-    describe('importJob', () => {
+    describe('importJob', async () => {
       const fakePath = '/rendered/path/importJob';
       const expectedParameters = {
         project: 'projectValue',
@@ -987,7 +989,7 @@ describe('v1.KeyTrackingServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.importJobPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1051,7 +1053,7 @@ describe('v1.KeyTrackingServiceClient', () => {
       });
     });
 
-    describe('keyRing', () => {
+    describe('keyRing', async () => {
       const fakePath = '/rendered/path/keyRing';
       const expectedParameters = {
         project: 'projectValue',
@@ -1062,7 +1064,7 @@ describe('v1.KeyTrackingServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.keyRingPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1115,7 +1117,7 @@ describe('v1.KeyTrackingServiceClient', () => {
       });
     });
 
-    describe('organization', () => {
+    describe('organization', async () => {
       const fakePath = '/rendered/path/organization';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -1124,7 +1126,7 @@ describe('v1.KeyTrackingServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1153,7 +1155,7 @@ describe('v1.KeyTrackingServiceClient', () => {
       });
     });
 
-    describe('projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummary', () => {
+    describe('projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummary', async () => {
       const fakePath =
         '/rendered/path/projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummary';
       const expectedParameters = {
@@ -1167,7 +1169,7 @@ describe('v1.KeyTrackingServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationKeyRingCryptoKeyCryptoKeyVersionProtectedResourcesSummaryPathTemplate.match =
@@ -1280,7 +1282,7 @@ describe('v1.KeyTrackingServiceClient', () => {
       });
     });
 
-    describe('projectLocationKeyRingCryptoKeyProtectedResourcesSummary', () => {
+    describe('projectLocationKeyRingCryptoKeyProtectedResourcesSummary', async () => {
       const fakePath =
         '/rendered/path/projectLocationKeyRingCryptoKeyProtectedResourcesSummary';
       const expectedParameters = {
@@ -1293,7 +1295,7 @@ describe('v1.KeyTrackingServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationKeyRingCryptoKeyProtectedResourcesSummaryPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationKeyRingCryptoKeyProtectedResourcesSummaryPathTemplate.match =
@@ -1388,7 +1390,7 @@ describe('v1.KeyTrackingServiceClient', () => {
       });
     });
 
-    describe('publicKey', () => {
+    describe('publicKey', async () => {
       const fakePath = '/rendered/path/publicKey';
       const expectedParameters = {
         project: 'projectValue',
@@ -1401,7 +1403,7 @@ describe('v1.KeyTrackingServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.publicKeyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

@@ -287,7 +287,9 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.securityCenterStub);
       client.close().then(() => {
         done();
@@ -346,7 +348,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.BatchCreateResourceValueConfigsRequest()
       );
@@ -378,7 +380,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.BatchCreateResourceValueConfigsRequest()
       );
@@ -425,7 +427,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.BatchCreateResourceValueConfigsRequest()
       );
@@ -459,7 +461,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.BatchCreateResourceValueConfigsRequest()
       );
@@ -483,7 +485,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.CreateBigQueryExportRequest()
       );
@@ -515,7 +517,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.CreateBigQueryExportRequest()
       );
@@ -562,7 +564,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.CreateBigQueryExportRequest()
       );
@@ -593,7 +595,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.CreateBigQueryExportRequest()
       );
@@ -614,7 +616,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.CreateFindingRequest()
       );
@@ -645,7 +647,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.CreateFindingRequest()
       );
@@ -692,7 +694,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.CreateFindingRequest()
       );
@@ -723,7 +725,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.CreateFindingRequest()
       );
@@ -744,7 +746,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.CreateMuteConfigRequest()
       );
@@ -776,7 +778,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.CreateMuteConfigRequest()
       );
@@ -824,7 +826,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.CreateMuteConfigRequest()
       );
@@ -856,7 +858,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.CreateMuteConfigRequest()
       );
@@ -878,7 +880,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.CreateNotificationConfigRequest()
       );
@@ -910,7 +912,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.CreateNotificationConfigRequest()
       );
@@ -957,7 +959,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.CreateNotificationConfigRequest()
       );
@@ -991,7 +993,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.CreateNotificationConfigRequest()
       );
@@ -1015,7 +1017,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.CreateSourceRequest()
       );
@@ -1046,7 +1048,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.CreateSourceRequest()
       );
@@ -1093,7 +1095,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.CreateSourceRequest()
       );
@@ -1124,7 +1126,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.CreateSourceRequest()
       );
@@ -1145,7 +1147,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.DeleteBigQueryExportRequest()
       );
@@ -1177,7 +1179,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.DeleteBigQueryExportRequest()
       );
@@ -1224,7 +1226,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.DeleteBigQueryExportRequest()
       );
@@ -1255,7 +1257,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.DeleteBigQueryExportRequest()
       );
@@ -1276,7 +1278,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.DeleteMuteConfigRequest()
       );
@@ -1308,7 +1310,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.DeleteMuteConfigRequest()
       );
@@ -1356,7 +1358,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.DeleteMuteConfigRequest()
       );
@@ -1388,7 +1390,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.DeleteMuteConfigRequest()
       );
@@ -1410,7 +1412,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.DeleteNotificationConfigRequest()
       );
@@ -1442,7 +1444,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.DeleteNotificationConfigRequest()
       );
@@ -1489,7 +1491,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.DeleteNotificationConfigRequest()
       );
@@ -1523,7 +1525,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.DeleteNotificationConfigRequest()
       );
@@ -1547,7 +1549,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.DeleteResourceValueConfigRequest()
       );
@@ -1579,7 +1581,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.DeleteResourceValueConfigRequest()
       );
@@ -1626,7 +1628,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.DeleteResourceValueConfigRequest()
       );
@@ -1660,7 +1662,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.DeleteResourceValueConfigRequest()
       );
@@ -1684,7 +1686,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.GetBigQueryExportRequest()
       );
@@ -1715,7 +1717,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.GetBigQueryExportRequest()
       );
@@ -1762,7 +1764,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.GetBigQueryExportRequest()
       );
@@ -1793,7 +1795,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.GetBigQueryExportRequest()
       );
@@ -1814,7 +1816,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.GetSimulationRequest()
       );
@@ -1845,7 +1847,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.GetSimulationRequest()
       );
@@ -1892,7 +1894,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.GetSimulationRequest()
       );
@@ -1923,7 +1925,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.GetSimulationRequest()
       );
@@ -1944,7 +1946,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.GetValuedResourceRequest()
       );
@@ -1975,7 +1977,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.GetValuedResourceRequest()
       );
@@ -2022,7 +2024,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.GetValuedResourceRequest()
       );
@@ -2053,7 +2055,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.GetValuedResourceRequest()
       );
@@ -2074,7 +2076,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -2105,7 +2107,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -2152,7 +2154,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -2183,7 +2185,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -2204,7 +2206,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.GetMuteConfigRequest()
       );
@@ -2236,7 +2238,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.GetMuteConfigRequest()
       );
@@ -2284,7 +2286,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.GetMuteConfigRequest()
       );
@@ -2316,7 +2318,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.GetMuteConfigRequest()
       );
@@ -2338,7 +2340,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.GetNotificationConfigRequest()
       );
@@ -2370,7 +2372,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.GetNotificationConfigRequest()
       );
@@ -2417,7 +2419,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.GetNotificationConfigRequest()
       );
@@ -2451,7 +2453,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.GetNotificationConfigRequest()
       );
@@ -2475,7 +2477,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.GetResourceValueConfigRequest()
       );
@@ -2507,7 +2509,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.GetResourceValueConfigRequest()
       );
@@ -2554,7 +2556,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.GetResourceValueConfigRequest()
       );
@@ -2588,7 +2590,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.GetResourceValueConfigRequest()
       );
@@ -2612,7 +2614,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.GetSourceRequest()
       );
@@ -2643,7 +2645,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.GetSourceRequest()
       );
@@ -2690,7 +2692,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.GetSourceRequest()
       );
@@ -2718,7 +2720,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.GetSourceRequest()
       );
@@ -2739,7 +2741,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.SetFindingStateRequest()
       );
@@ -2770,7 +2772,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.SetFindingStateRequest()
       );
@@ -2817,7 +2819,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.SetFindingStateRequest()
       );
@@ -2848,7 +2850,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.SetFindingStateRequest()
       );
@@ -2869,7 +2871,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -2900,7 +2902,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -2947,7 +2949,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -2978,7 +2980,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -2999,7 +3001,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.SetMuteRequest()
       );
@@ -3030,7 +3032,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.SetMuteRequest()
       );
@@ -3077,7 +3079,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.SetMuteRequest()
       );
@@ -3105,7 +3107,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.SetMuteRequest()
       );
@@ -3126,7 +3128,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -3158,7 +3160,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -3205,7 +3207,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -3236,7 +3238,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -3257,7 +3259,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.UpdateBigQueryExportRequest()
       );
@@ -3290,7 +3292,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.UpdateBigQueryExportRequest()
       );
@@ -3338,7 +3340,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.UpdateBigQueryExportRequest()
       );
@@ -3370,7 +3372,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.UpdateBigQueryExportRequest()
       );
@@ -3392,7 +3394,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.UpdateExternalSystemRequest()
       );
@@ -3425,7 +3427,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.UpdateExternalSystemRequest()
       );
@@ -3473,7 +3475,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.UpdateExternalSystemRequest()
       );
@@ -3505,7 +3507,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.UpdateExternalSystemRequest()
       );
@@ -3527,7 +3529,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.UpdateFindingRequest()
       );
@@ -3559,7 +3561,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.UpdateFindingRequest()
       );
@@ -3607,7 +3609,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.UpdateFindingRequest()
       );
@@ -3639,7 +3641,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.UpdateFindingRequest()
       );
@@ -3661,7 +3663,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.UpdateMuteConfigRequest()
       );
@@ -3699,7 +3701,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.UpdateMuteConfigRequest()
       );
@@ -3753,7 +3755,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.UpdateMuteConfigRequest()
       );
@@ -3791,7 +3793,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.UpdateMuteConfigRequest()
       );
@@ -3819,7 +3821,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.UpdateNotificationConfigRequest()
       );
@@ -3852,7 +3854,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.UpdateNotificationConfigRequest()
       );
@@ -3900,7 +3902,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.UpdateNotificationConfigRequest()
       );
@@ -3935,7 +3937,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.UpdateNotificationConfigRequest()
       );
@@ -3960,7 +3962,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.UpdateResourceValueConfigRequest()
       );
@@ -3993,7 +3995,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.UpdateResourceValueConfigRequest()
       );
@@ -4041,7 +4043,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.UpdateResourceValueConfigRequest()
       );
@@ -4076,7 +4078,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.UpdateResourceValueConfigRequest()
       );
@@ -4101,7 +4103,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.UpdateSecurityMarksRequest()
       );
@@ -4134,7 +4136,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.UpdateSecurityMarksRequest()
       );
@@ -4182,7 +4184,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.UpdateSecurityMarksRequest()
       );
@@ -4214,7 +4216,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.UpdateSecurityMarksRequest()
       );
@@ -4236,7 +4238,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.UpdateSourceRequest()
       );
@@ -4268,7 +4270,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.UpdateSourceRequest()
       );
@@ -4316,7 +4318,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.UpdateSourceRequest()
       );
@@ -4348,7 +4350,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.UpdateSourceRequest()
       );
@@ -4370,7 +4372,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.BulkMuteFindingsRequest()
       );
@@ -4403,7 +4405,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.BulkMuteFindingsRequest()
       );
@@ -4457,7 +4459,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.BulkMuteFindingsRequest()
       );
@@ -4488,7 +4490,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.BulkMuteFindingsRequest()
       );
@@ -4521,7 +4523,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4543,7 +4545,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4564,7 +4566,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.GroupFindingsRequest()
       );
@@ -4603,7 +4605,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.GroupFindingsRequest()
       );
@@ -4658,7 +4660,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.GroupFindingsRequest()
       );
@@ -4689,7 +4691,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.GroupFindingsRequest()
       );
@@ -4750,7 +4752,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.GroupFindingsRequest()
       );
@@ -4800,7 +4802,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.GroupFindingsRequest()
       );
@@ -4850,7 +4852,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.GroupFindingsRequest()
       );
@@ -4893,7 +4895,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListAttackPathsRequest()
       );
@@ -4932,7 +4934,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListAttackPathsRequest()
       );
@@ -4987,7 +4989,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListAttackPathsRequest()
       );
@@ -5018,7 +5020,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListAttackPathsRequest()
       );
@@ -5079,7 +5081,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListAttackPathsRequest()
       );
@@ -5129,7 +5131,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListAttackPathsRequest()
       );
@@ -5178,7 +5180,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListAttackPathsRequest()
       );
@@ -5221,7 +5223,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListBigQueryExportsRequest()
       );
@@ -5261,7 +5263,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListBigQueryExportsRequest()
       );
@@ -5318,7 +5320,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListBigQueryExportsRequest()
       );
@@ -5349,7 +5351,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListBigQueryExportsRequest()
       );
@@ -5410,7 +5412,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListBigQueryExportsRequest()
       );
@@ -5460,7 +5462,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListBigQueryExportsRequest()
       );
@@ -5510,7 +5512,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListBigQueryExportsRequest()
       );
@@ -5553,7 +5555,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListFindingsRequest()
       );
@@ -5592,7 +5594,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListFindingsRequest()
       );
@@ -5649,7 +5651,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListFindingsRequest()
       );
@@ -5680,7 +5682,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListFindingsRequest()
       );
@@ -5743,7 +5745,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListFindingsRequest()
       );
@@ -5797,7 +5799,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListFindingsRequest()
       );
@@ -5847,7 +5849,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListFindingsRequest()
       );
@@ -5890,7 +5892,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListMuteConfigsRequest()
       );
@@ -5930,7 +5932,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListMuteConfigsRequest()
       );
@@ -5986,7 +5988,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListMuteConfigsRequest()
       );
@@ -6018,7 +6020,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListMuteConfigsRequest()
       );
@@ -6080,7 +6082,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListMuteConfigsRequest()
       );
@@ -6131,7 +6133,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListMuteConfigsRequest()
       );
@@ -6181,7 +6183,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListMuteConfigsRequest()
       );
@@ -6225,7 +6227,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListNotificationConfigsRequest()
       );
@@ -6265,7 +6267,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListNotificationConfigsRequest()
       );
@@ -6322,7 +6324,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListNotificationConfigsRequest()
       );
@@ -6356,7 +6358,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListNotificationConfigsRequest()
       );
@@ -6425,7 +6427,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListNotificationConfigsRequest()
       );
@@ -6483,7 +6485,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListNotificationConfigsRequest()
       );
@@ -6537,7 +6539,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListNotificationConfigsRequest()
       );
@@ -6584,7 +6586,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListResourceValueConfigsRequest()
       );
@@ -6624,7 +6626,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListResourceValueConfigsRequest()
       );
@@ -6681,7 +6683,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListResourceValueConfigsRequest()
       );
@@ -6715,7 +6717,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListResourceValueConfigsRequest()
       );
@@ -6784,7 +6786,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListResourceValueConfigsRequest()
       );
@@ -6842,7 +6844,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListResourceValueConfigsRequest()
       );
@@ -6896,7 +6898,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListResourceValueConfigsRequest()
       );
@@ -6943,7 +6945,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListSourcesRequest()
       );
@@ -6982,7 +6984,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListSourcesRequest()
       );
@@ -7037,7 +7039,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListSourcesRequest()
       );
@@ -7068,7 +7070,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListSourcesRequest()
       );
@@ -7128,7 +7130,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListSourcesRequest()
       );
@@ -7179,7 +7181,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListSourcesRequest()
       );
@@ -7228,7 +7230,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListSourcesRequest()
       );
@@ -7272,7 +7274,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListValuedResourcesRequest()
       );
@@ -7312,7 +7314,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListValuedResourcesRequest()
       );
@@ -7369,7 +7371,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListValuedResourcesRequest()
       );
@@ -7400,7 +7402,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListValuedResourcesRequest()
       );
@@ -7461,7 +7463,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListValuedResourcesRequest()
       );
@@ -7511,7 +7513,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListValuedResourcesRequest()
       );
@@ -7561,7 +7563,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v2.ListValuedResourcesRequest()
       );
@@ -7603,7 +7605,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -7682,7 +7684,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -7762,7 +7764,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -7858,8 +7860,7 @@ describe('v2.SecurityCenterClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -7878,7 +7879,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -7887,8 +7888,7 @@ describe('v2.SecurityCenterClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -7904,7 +7904,7 @@ describe('v2.SecurityCenterClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('folderAssetSecurityMarks', () => {
+    describe('folderAssetSecurityMarks', async () => {
       const fakePath = '/rendered/path/folderAssetSecurityMarks';
       const expectedParameters = {
         folder: 'folderValue',
@@ -7914,7 +7914,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderAssetSecurityMarksPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7967,7 +7967,7 @@ describe('v2.SecurityCenterClient', () => {
       });
     });
 
-    describe('folderConstraintName', () => {
+    describe('folderConstraintName', async () => {
       const fakePath = '/rendered/path/folderConstraintName';
       const expectedParameters = {
         folder: 'folderValue',
@@ -7977,7 +7977,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderConstraintNamePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -8029,7 +8029,7 @@ describe('v2.SecurityCenterClient', () => {
       });
     });
 
-    describe('folderLocationExport', () => {
+    describe('folderLocationExport', async () => {
       const fakePath = '/rendered/path/folderLocationExport';
       const expectedParameters = {
         folder: 'folderValue',
@@ -8040,7 +8040,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderLocationExportPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -8106,7 +8106,7 @@ describe('v2.SecurityCenterClient', () => {
       });
     });
 
-    describe('folderLocationMuteConfig', () => {
+    describe('folderLocationMuteConfig', async () => {
       const fakePath = '/rendered/path/folderLocationMuteConfig';
       const expectedParameters = {
         folder: 'folderValue',
@@ -8117,7 +8117,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderLocationMuteConfigPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -8185,7 +8185,7 @@ describe('v2.SecurityCenterClient', () => {
       });
     });
 
-    describe('folderLocationNotificationConfig', () => {
+    describe('folderLocationNotificationConfig', async () => {
       const fakePath = '/rendered/path/folderLocationNotificationConfig';
       const expectedParameters = {
         folder: 'folderValue',
@@ -8196,7 +8196,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderLocationNotificationConfigPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.folderLocationNotificationConfigPathTemplate.match =
@@ -8266,7 +8266,7 @@ describe('v2.SecurityCenterClient', () => {
       });
     });
 
-    describe('folderMuteConfig', () => {
+    describe('folderMuteConfig', async () => {
       const fakePath = '/rendered/path/folderMuteConfig';
       const expectedParameters = {
         folder: 'folderValue',
@@ -8276,7 +8276,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderMuteConfigPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -8321,7 +8321,7 @@ describe('v2.SecurityCenterClient', () => {
       });
     });
 
-    describe('folderSource', () => {
+    describe('folderSource', async () => {
       const fakePath = '/rendered/path/folderSource';
       const expectedParameters = {
         folder: 'folderValue',
@@ -8331,7 +8331,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderSourcePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -8370,7 +8370,7 @@ describe('v2.SecurityCenterClient', () => {
       });
     });
 
-    describe('folderSourceFinding', () => {
+    describe('folderSourceFinding', async () => {
       const fakePath = '/rendered/path/folderSourceFinding';
       const expectedParameters = {
         folder: 'folderValue',
@@ -8381,7 +8381,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderSourceFindingPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -8446,7 +8446,7 @@ describe('v2.SecurityCenterClient', () => {
       });
     });
 
-    describe('folderSourceFindingExternalsystem', () => {
+    describe('folderSourceFindingExternalsystem', async () => {
       const fakePath = '/rendered/path/folderSourceFindingExternalsystem';
       const expectedParameters = {
         folder: 'folderValue',
@@ -8458,7 +8458,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderSourceFindingExternalsystemPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.folderSourceFindingExternalsystemPathTemplate.match =
@@ -8543,7 +8543,7 @@ describe('v2.SecurityCenterClient', () => {
       });
     });
 
-    describe('folderSourceFindingSecurityMarks', () => {
+    describe('folderSourceFindingSecurityMarks', async () => {
       const fakePath = '/rendered/path/folderSourceFindingSecurityMarks';
       const expectedParameters = {
         folder: 'folderValue',
@@ -8554,7 +8554,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderSourceFindingSecurityMarksPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.folderSourceFindingSecurityMarksPathTemplate.match =
@@ -8620,7 +8620,7 @@ describe('v2.SecurityCenterClient', () => {
       });
     });
 
-    describe('folderSourceLocationFinding', () => {
+    describe('folderSourceLocationFinding', async () => {
       const fakePath = '/rendered/path/folderSourceLocationFinding';
       const expectedParameters = {
         folder: 'folderValue',
@@ -8632,7 +8632,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderSourceLocationFindingPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.folderSourceLocationFindingPathTemplate.match = sinon
@@ -8714,7 +8714,7 @@ describe('v2.SecurityCenterClient', () => {
       });
     });
 
-    describe('folderSourceLocationFindingExternalsystem', () => {
+    describe('folderSourceLocationFindingExternalsystem', async () => {
       const fakePath =
         '/rendered/path/folderSourceLocationFindingExternalsystem';
       const expectedParameters = {
@@ -8728,7 +8728,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderSourceLocationFindingExternalsystemPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.folderSourceLocationFindingExternalsystemPathTemplate.match =
@@ -8840,7 +8840,7 @@ describe('v2.SecurityCenterClient', () => {
       });
     });
 
-    describe('folderSourceLocationFindingSecurityMarks', () => {
+    describe('folderSourceLocationFindingSecurityMarks', async () => {
       const fakePath =
         '/rendered/path/folderSourceLocationFindingSecurityMarks';
       const expectedParameters = {
@@ -8853,7 +8853,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderSourceLocationFindingSecurityMarksPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.folderSourceLocationFindingSecurityMarksPathTemplate.match =
@@ -8947,7 +8947,7 @@ describe('v2.SecurityCenterClient', () => {
       });
     });
 
-    describe('organization', () => {
+    describe('organization', async () => {
       const fakePath = '/rendered/path/organization';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -8956,7 +8956,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -8985,7 +8985,7 @@ describe('v2.SecurityCenterClient', () => {
       });
     });
 
-    describe('organizationAssetSecurityMarks', () => {
+    describe('organizationAssetSecurityMarks', async () => {
       const fakePath = '/rendered/path/organizationAssetSecurityMarks';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -8995,7 +8995,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationAssetSecurityMarksPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationAssetSecurityMarksPathTemplate.match =
@@ -9048,7 +9048,7 @@ describe('v2.SecurityCenterClient', () => {
       });
     });
 
-    describe('organizationConstraintName', () => {
+    describe('organizationConstraintName', async () => {
       const fakePath = '/rendered/path/organizationConstraintName';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -9058,7 +9058,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationConstraintNamePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -9113,7 +9113,7 @@ describe('v2.SecurityCenterClient', () => {
       });
     });
 
-    describe('organizationLocation', () => {
+    describe('organizationLocation', async () => {
       const fakePath = '/rendered/path/organizationLocation';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -9123,7 +9123,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationLocationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -9176,7 +9176,7 @@ describe('v2.SecurityCenterClient', () => {
       });
     });
 
-    describe('organizationLocationExport', () => {
+    describe('organizationLocationExport', async () => {
       const fakePath = '/rendered/path/organizationLocationExport';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -9187,7 +9187,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationLocationExportPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -9255,7 +9255,7 @@ describe('v2.SecurityCenterClient', () => {
       });
     });
 
-    describe('organizationLocationMuteConfig', () => {
+    describe('organizationLocationMuteConfig', async () => {
       const fakePath = '/rendered/path/organizationLocationMuteConfig';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -9266,7 +9266,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationLocationMuteConfigPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationLocationMuteConfigPathTemplate.match =
@@ -9336,7 +9336,7 @@ describe('v2.SecurityCenterClient', () => {
       });
     });
 
-    describe('organizationLocationNotificationConfig', () => {
+    describe('organizationLocationNotificationConfig', async () => {
       const fakePath = '/rendered/path/organizationLocationNotificationConfig';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -9347,7 +9347,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationLocationNotificationConfigPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationLocationNotificationConfigPathTemplate.match =
@@ -9423,7 +9423,7 @@ describe('v2.SecurityCenterClient', () => {
       });
     });
 
-    describe('organizationLocationResourceValueConfig', () => {
+    describe('organizationLocationResourceValueConfig', async () => {
       const fakePath = '/rendered/path/organizationLocationResourceValueConfig';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -9434,7 +9434,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationLocationResourceValueConfigPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationLocationResourceValueConfigPathTemplate.match =
@@ -9510,7 +9510,7 @@ describe('v2.SecurityCenterClient', () => {
       });
     });
 
-    describe('organizationLocationSimluation', () => {
+    describe('organizationLocationSimluation', async () => {
       const fakePath = '/rendered/path/organizationLocationSimluation';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -9521,7 +9521,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationLocationSimluationPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationLocationSimluationPathTemplate.match =
@@ -9591,7 +9591,7 @@ describe('v2.SecurityCenterClient', () => {
       });
     });
 
-    describe('organizationLocationSimluationValuedResource', () => {
+    describe('organizationLocationSimluationValuedResource', async () => {
       const fakePath =
         '/rendered/path/organizationLocationSimluationValuedResource';
       const expectedParameters = {
@@ -9604,7 +9604,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationLocationSimluationValuedResourcePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationLocationSimluationValuedResourcePathTemplate.match =
@@ -9698,7 +9698,7 @@ describe('v2.SecurityCenterClient', () => {
       });
     });
 
-    describe('organizationLocationSimulationValuedResourceAttackPath', () => {
+    describe('organizationLocationSimulationValuedResourceAttackPath', async () => {
       const fakePath =
         '/rendered/path/organizationLocationSimulationValuedResourceAttackPath';
       const expectedParameters = {
@@ -9712,7 +9712,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationLocationSimulationValuedResourceAttackPathPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationLocationSimulationValuedResourceAttackPathPathTemplate.match =
@@ -9825,7 +9825,7 @@ describe('v2.SecurityCenterClient', () => {
       });
     });
 
-    describe('organizationMuteConfig', () => {
+    describe('organizationMuteConfig', async () => {
       const fakePath = '/rendered/path/organizationMuteConfig';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -9835,7 +9835,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationMuteConfigPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -9888,7 +9888,7 @@ describe('v2.SecurityCenterClient', () => {
       });
     });
 
-    describe('organizationResourceValueConfig', () => {
+    describe('organizationResourceValueConfig', async () => {
       const fakePath = '/rendered/path/organizationResourceValueConfig';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -9898,7 +9898,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationResourceValueConfigPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationResourceValueConfigPathTemplate.match =
@@ -9953,7 +9953,7 @@ describe('v2.SecurityCenterClient', () => {
       });
     });
 
-    describe('organizationSimulation', () => {
+    describe('organizationSimulation', async () => {
       const fakePath = '/rendered/path/organizationSimulation';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -9963,7 +9963,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationSimulationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10016,7 +10016,7 @@ describe('v2.SecurityCenterClient', () => {
       });
     });
 
-    describe('organizationSimulationValuedResource', () => {
+    describe('organizationSimulationValuedResource', async () => {
       const fakePath = '/rendered/path/organizationSimulationValuedResource';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -10027,7 +10027,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationSimulationValuedResourcePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationSimulationValuedResourcePathTemplate.match =
@@ -10103,7 +10103,7 @@ describe('v2.SecurityCenterClient', () => {
       });
     });
 
-    describe('organizationSimulationValuedResourceAttackPath', () => {
+    describe('organizationSimulationValuedResourceAttackPath', async () => {
       const fakePath =
         '/rendered/path/organizationSimulationValuedResourceAttackPath';
       const expectedParameters = {
@@ -10116,7 +10116,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationSimulationValuedResourceAttackPathPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationSimulationValuedResourceAttackPathPathTemplate.match =
@@ -10211,7 +10211,7 @@ describe('v2.SecurityCenterClient', () => {
       });
     });
 
-    describe('organizationSource', () => {
+    describe('organizationSource', async () => {
       const fakePath = '/rendered/path/organizationSource';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -10221,7 +10221,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationSourcePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10273,7 +10273,7 @@ describe('v2.SecurityCenterClient', () => {
       });
     });
 
-    describe('organizationSourceFinding', () => {
+    describe('organizationSourceFinding', async () => {
       const fakePath = '/rendered/path/organizationSourceFinding';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -10284,7 +10284,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationSourceFindingPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10352,7 +10352,7 @@ describe('v2.SecurityCenterClient', () => {
       });
     });
 
-    describe('organizationSourceFindingExternalsystem', () => {
+    describe('organizationSourceFindingExternalsystem', async () => {
       const fakePath = '/rendered/path/organizationSourceFindingExternalsystem';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -10364,7 +10364,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationSourceFindingExternalsystemPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationSourceFindingExternalsystemPathTemplate.match =
@@ -10458,7 +10458,7 @@ describe('v2.SecurityCenterClient', () => {
       });
     });
 
-    describe('organizationSourceFindingSecurityMarks', () => {
+    describe('organizationSourceFindingSecurityMarks', async () => {
       const fakePath = '/rendered/path/organizationSourceFindingSecurityMarks';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -10469,7 +10469,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationSourceFindingSecurityMarksPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationSourceFindingSecurityMarksPathTemplate.match =
@@ -10545,7 +10545,7 @@ describe('v2.SecurityCenterClient', () => {
       });
     });
 
-    describe('organizationSourceLocationFinding', () => {
+    describe('organizationSourceLocationFinding', async () => {
       const fakePath = '/rendered/path/organizationSourceLocationFinding';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -10557,7 +10557,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationSourceLocationFindingPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationSourceLocationFindingPathTemplate.match =
@@ -10644,7 +10644,7 @@ describe('v2.SecurityCenterClient', () => {
       });
     });
 
-    describe('organizationSourceLocationFindingExternalsystem', () => {
+    describe('organizationSourceLocationFindingExternalsystem', async () => {
       const fakePath =
         '/rendered/path/organizationSourceLocationFindingExternalsystem';
       const expectedParameters = {
@@ -10658,7 +10658,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationSourceLocationFindingExternalsystemPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationSourceLocationFindingExternalsystemPathTemplate.match =
@@ -10771,7 +10771,7 @@ describe('v2.SecurityCenterClient', () => {
       });
     });
 
-    describe('organizationSourceLocationFindingSecurityMarks', () => {
+    describe('organizationSourceLocationFindingSecurityMarks', async () => {
       const fakePath =
         '/rendered/path/organizationSourceLocationFindingSecurityMarks';
       const expectedParameters = {
@@ -10784,7 +10784,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationSourceLocationFindingSecurityMarksPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationSourceLocationFindingSecurityMarksPathTemplate.match =
@@ -10879,7 +10879,7 @@ describe('v2.SecurityCenterClient', () => {
       });
     });
 
-    describe('projectAssetSecurityMarks', () => {
+    describe('projectAssetSecurityMarks', async () => {
       const fakePath = '/rendered/path/projectAssetSecurityMarks';
       const expectedParameters = {
         project: 'projectValue',
@@ -10889,7 +10889,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectAssetSecurityMarksPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10942,7 +10942,7 @@ describe('v2.SecurityCenterClient', () => {
       });
     });
 
-    describe('projectConstraintName', () => {
+    describe('projectConstraintName', async () => {
       const fakePath = '/rendered/path/projectConstraintName';
       const expectedParameters = {
         project: 'projectValue',
@@ -10952,7 +10952,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectConstraintNamePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -11005,7 +11005,7 @@ describe('v2.SecurityCenterClient', () => {
       });
     });
 
-    describe('projectLocationExport', () => {
+    describe('projectLocationExport', async () => {
       const fakePath = '/rendered/path/projectLocationExport';
       const expectedParameters = {
         project: 'projectValue',
@@ -11016,7 +11016,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationExportPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -11084,7 +11084,7 @@ describe('v2.SecurityCenterClient', () => {
       });
     });
 
-    describe('projectLocationMuteConfig', () => {
+    describe('projectLocationMuteConfig', async () => {
       const fakePath = '/rendered/path/projectLocationMuteConfig';
       const expectedParameters = {
         project: 'projectValue',
@@ -11095,7 +11095,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationMuteConfigPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -11163,7 +11163,7 @@ describe('v2.SecurityCenterClient', () => {
       });
     });
 
-    describe('projectLocationNotificationConfig', () => {
+    describe('projectLocationNotificationConfig', async () => {
       const fakePath = '/rendered/path/projectLocationNotificationConfig';
       const expectedParameters = {
         project: 'projectValue',
@@ -11174,7 +11174,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationNotificationConfigPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationNotificationConfigPathTemplate.match =
@@ -11246,7 +11246,7 @@ describe('v2.SecurityCenterClient', () => {
       });
     });
 
-    describe('projectMuteConfig', () => {
+    describe('projectMuteConfig', async () => {
       const fakePath = '/rendered/path/projectMuteConfig';
       const expectedParameters = {
         project: 'projectValue',
@@ -11256,7 +11256,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectMuteConfigPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -11308,7 +11308,7 @@ describe('v2.SecurityCenterClient', () => {
       });
     });
 
-    describe('projectSource', () => {
+    describe('projectSource', async () => {
       const fakePath = '/rendered/path/projectSource';
       const expectedParameters = {
         project: 'projectValue',
@@ -11318,7 +11318,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectSourcePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -11357,7 +11357,7 @@ describe('v2.SecurityCenterClient', () => {
       });
     });
 
-    describe('projectSourceFinding', () => {
+    describe('projectSourceFinding', async () => {
       const fakePath = '/rendered/path/projectSourceFinding';
       const expectedParameters = {
         project: 'projectValue',
@@ -11368,7 +11368,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectSourceFindingPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -11435,7 +11435,7 @@ describe('v2.SecurityCenterClient', () => {
       });
     });
 
-    describe('projectSourceFindingExternalsystem', () => {
+    describe('projectSourceFindingExternalsystem', async () => {
       const fakePath = '/rendered/path/projectSourceFindingExternalsystem';
       const expectedParameters = {
         project: 'projectValue',
@@ -11447,7 +11447,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectSourceFindingExternalsystemPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectSourceFindingExternalsystemPathTemplate.match =
@@ -11536,7 +11536,7 @@ describe('v2.SecurityCenterClient', () => {
       });
     });
 
-    describe('projectSourceFindingSecurityMarks', () => {
+    describe('projectSourceFindingSecurityMarks', async () => {
       const fakePath = '/rendered/path/projectSourceFindingSecurityMarks';
       const expectedParameters = {
         project: 'projectValue',
@@ -11547,7 +11547,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectSourceFindingSecurityMarksPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectSourceFindingSecurityMarksPathTemplate.match =
@@ -11617,7 +11617,7 @@ describe('v2.SecurityCenterClient', () => {
       });
     });
 
-    describe('projectSourceLocationFinding', () => {
+    describe('projectSourceLocationFinding', async () => {
       const fakePath = '/rendered/path/projectSourceLocationFinding';
       const expectedParameters = {
         project: 'projectValue',
@@ -11629,7 +11629,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectSourceLocationFindingPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectSourceLocationFindingPathTemplate.match =
@@ -11710,7 +11710,7 @@ describe('v2.SecurityCenterClient', () => {
       });
     });
 
-    describe('projectSourceLocationFindingExternalsystem', () => {
+    describe('projectSourceLocationFindingExternalsystem', async () => {
       const fakePath =
         '/rendered/path/projectSourceLocationFindingExternalsystem';
       const expectedParameters = {
@@ -11724,7 +11724,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectSourceLocationFindingExternalsystemPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectSourceLocationFindingExternalsystemPathTemplate.match =
@@ -11836,7 +11836,7 @@ describe('v2.SecurityCenterClient', () => {
       });
     });
 
-    describe('projectSourceLocationFindingSecurityMarks', () => {
+    describe('projectSourceLocationFindingSecurityMarks', async () => {
       const fakePath =
         '/rendered/path/projectSourceLocationFindingSecurityMarks';
       const expectedParameters = {
@@ -11849,7 +11849,7 @@ describe('v2.SecurityCenterClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectSourceLocationFindingSecurityMarksPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectSourceLocationFindingSecurityMarksPathTemplate.match =

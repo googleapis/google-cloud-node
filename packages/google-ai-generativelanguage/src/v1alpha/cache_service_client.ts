@@ -498,7 +498,9 @@ export class CacheServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createCachedContent request %j', request);
     const wrappedCallback:
       | Callback<
@@ -624,7 +626,9 @@ export class CacheServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getCachedContent request %j', request);
     const wrappedCallback:
       | Callback<
@@ -751,7 +755,9 @@ export class CacheServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'cached_content.name': request.cachedContent!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateCachedContent request %j', request);
     const wrappedCallback:
       | Callback<
@@ -877,7 +883,9 @@ export class CacheServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteCachedContent request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1005,7 +1013,9 @@ export class CacheServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.ai.generativelanguage.v1alpha.IListCachedContentsRequest,
@@ -1071,7 +1081,9 @@ export class CacheServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listCachedContents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCachedContents stream %j', request);
     return this.descriptors.page.listCachedContents.createStream(
       this.innerApiCalls.listCachedContents as GaxCall,
@@ -1119,7 +1131,9 @@ export class CacheServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listCachedContents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCachedContents iterate %j', request);
     return this.descriptors.page.listCachedContents.asyncIterate(
       this.innerApiCalls['listCachedContents'] as GaxCall,

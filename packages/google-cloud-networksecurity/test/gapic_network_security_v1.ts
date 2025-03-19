@@ -293,7 +293,9 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.networkSecurityStub);
       client.close().then(() => {
         done();
@@ -352,7 +354,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.GetAuthorizationPolicyRequest()
       );
@@ -384,7 +386,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.GetAuthorizationPolicyRequest()
       );
@@ -431,7 +433,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.GetAuthorizationPolicyRequest()
       );
@@ -465,7 +467,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.GetAuthorizationPolicyRequest()
       );
@@ -489,7 +491,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.GetServerTlsPolicyRequest()
       );
@@ -521,7 +523,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.GetServerTlsPolicyRequest()
       );
@@ -568,7 +570,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.GetServerTlsPolicyRequest()
       );
@@ -599,7 +601,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.GetServerTlsPolicyRequest()
       );
@@ -620,7 +622,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.GetClientTlsPolicyRequest()
       );
@@ -652,7 +654,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.GetClientTlsPolicyRequest()
       );
@@ -699,7 +701,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.GetClientTlsPolicyRequest()
       );
@@ -730,7 +732,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.GetClientTlsPolicyRequest()
       );
@@ -751,7 +753,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.CreateAuthorizationPolicyRequest()
       );
@@ -784,7 +786,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.CreateAuthorizationPolicyRequest()
       );
@@ -838,7 +840,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.CreateAuthorizationPolicyRequest()
       );
@@ -872,7 +874,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.CreateAuthorizationPolicyRequest()
       );
@@ -905,7 +907,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -928,7 +930,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -949,7 +951,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.UpdateAuthorizationPolicyRequest()
       );
@@ -983,7 +985,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.UpdateAuthorizationPolicyRequest()
       );
@@ -1038,7 +1040,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.UpdateAuthorizationPolicyRequest()
       );
@@ -1073,7 +1075,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.UpdateAuthorizationPolicyRequest()
       );
@@ -1107,7 +1109,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1130,7 +1132,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1151,7 +1153,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.DeleteAuthorizationPolicyRequest()
       );
@@ -1184,7 +1186,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.DeleteAuthorizationPolicyRequest()
       );
@@ -1238,7 +1240,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.DeleteAuthorizationPolicyRequest()
       );
@@ -1272,7 +1274,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.DeleteAuthorizationPolicyRequest()
       );
@@ -1305,7 +1307,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1328,7 +1330,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1349,7 +1351,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.CreateServerTlsPolicyRequest()
       );
@@ -1382,7 +1384,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.CreateServerTlsPolicyRequest()
       );
@@ -1436,7 +1438,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.CreateServerTlsPolicyRequest()
       );
@@ -1470,7 +1472,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.CreateServerTlsPolicyRequest()
       );
@@ -1503,7 +1505,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1525,7 +1527,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1546,7 +1548,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.UpdateServerTlsPolicyRequest()
       );
@@ -1580,7 +1582,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.UpdateServerTlsPolicyRequest()
       );
@@ -1635,7 +1637,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.UpdateServerTlsPolicyRequest()
       );
@@ -1670,7 +1672,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.UpdateServerTlsPolicyRequest()
       );
@@ -1704,7 +1706,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1726,7 +1728,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1747,7 +1749,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.DeleteServerTlsPolicyRequest()
       );
@@ -1780,7 +1782,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.DeleteServerTlsPolicyRequest()
       );
@@ -1834,7 +1836,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.DeleteServerTlsPolicyRequest()
       );
@@ -1868,7 +1870,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.DeleteServerTlsPolicyRequest()
       );
@@ -1901,7 +1903,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1923,7 +1925,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1944,7 +1946,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.CreateClientTlsPolicyRequest()
       );
@@ -1977,7 +1979,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.CreateClientTlsPolicyRequest()
       );
@@ -2031,7 +2033,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.CreateClientTlsPolicyRequest()
       );
@@ -2065,7 +2067,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.CreateClientTlsPolicyRequest()
       );
@@ -2098,7 +2100,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2120,7 +2122,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2141,7 +2143,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.UpdateClientTlsPolicyRequest()
       );
@@ -2175,7 +2177,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.UpdateClientTlsPolicyRequest()
       );
@@ -2230,7 +2232,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.UpdateClientTlsPolicyRequest()
       );
@@ -2265,7 +2267,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.UpdateClientTlsPolicyRequest()
       );
@@ -2299,7 +2301,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2321,7 +2323,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2342,7 +2344,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.DeleteClientTlsPolicyRequest()
       );
@@ -2375,7 +2377,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.DeleteClientTlsPolicyRequest()
       );
@@ -2429,7 +2431,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.DeleteClientTlsPolicyRequest()
       );
@@ -2463,7 +2465,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.DeleteClientTlsPolicyRequest()
       );
@@ -2496,7 +2498,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2518,7 +2520,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2539,7 +2541,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest()
       );
@@ -2579,7 +2581,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest()
       );
@@ -2636,7 +2638,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest()
       );
@@ -2670,7 +2672,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest()
       );
@@ -2739,7 +2741,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest()
       );
@@ -2797,7 +2799,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest()
       );
@@ -2851,7 +2853,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest()
       );
@@ -2898,7 +2900,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest()
       );
@@ -2938,7 +2940,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest()
       );
@@ -2995,7 +2997,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest()
       );
@@ -3029,7 +3031,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest()
       );
@@ -3098,7 +3100,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest()
       );
@@ -3156,7 +3158,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest()
       );
@@ -3210,7 +3212,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest()
       );
@@ -3257,7 +3259,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest()
       );
@@ -3297,7 +3299,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest()
       );
@@ -3354,7 +3356,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest()
       );
@@ -3388,7 +3390,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest()
       );
@@ -3457,7 +3459,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest()
       );
@@ -3515,7 +3517,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest()
       );
@@ -3569,7 +3571,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest()
       );
@@ -3615,7 +3617,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -3645,7 +3647,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -3689,7 +3691,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -3721,7 +3723,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -3751,7 +3753,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -3795,7 +3797,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -3827,7 +3829,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -3860,7 +3862,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -3904,7 +3906,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -3939,7 +3941,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -3969,7 +3971,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -4013,7 +4015,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -4048,7 +4050,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -4096,7 +4098,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -4137,7 +4139,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -4216,7 +4218,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -4296,7 +4298,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -4392,8 +4394,7 @@ describe('v1.NetworkSecurityClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -4412,7 +4413,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -4421,8 +4422,7 @@ describe('v1.NetworkSecurityClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -4438,7 +4438,7 @@ describe('v1.NetworkSecurityClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('authorizationPolicy', () => {
+    describe('authorizationPolicy', async () => {
       const fakePath = '/rendered/path/authorizationPolicy';
       const expectedParameters = {
         project: 'projectValue',
@@ -4449,7 +4449,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.authorizationPolicyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4516,7 +4516,7 @@ describe('v1.NetworkSecurityClient', () => {
       });
     });
 
-    describe('clientTlsPolicy', () => {
+    describe('clientTlsPolicy', async () => {
       const fakePath = '/rendered/path/clientTlsPolicy';
       const expectedParameters = {
         project: 'projectValue',
@@ -4527,7 +4527,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.clientTlsPolicyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4581,7 +4581,7 @@ describe('v1.NetworkSecurityClient', () => {
       });
     });
 
-    describe('serverTlsPolicy', () => {
+    describe('serverTlsPolicy', async () => {
       const fakePath = '/rendered/path/serverTlsPolicy';
       const expectedParameters = {
         project: 'projectValue',
@@ -4592,7 +4592,7 @@ describe('v1.NetworkSecurityClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.serverTlsPolicyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

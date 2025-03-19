@@ -208,7 +208,9 @@ describe('v1beta.QuotaAdjusterSettingsManagerClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.quotaAdjusterSettingsManagerStub);
       client.close().then(() => {
         done();
@@ -279,7 +281,7 @@ describe('v1beta.QuotaAdjusterSettingsManagerClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest()
       );
@@ -315,7 +317,7 @@ describe('v1beta.QuotaAdjusterSettingsManagerClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest()
       );
@@ -366,7 +368,7 @@ describe('v1beta.QuotaAdjusterSettingsManagerClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest()
       );
@@ -404,7 +406,7 @@ describe('v1beta.QuotaAdjusterSettingsManagerClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.cloudquotas.v1beta.UpdateQuotaAdjusterSettingsRequest()
       );
@@ -432,7 +434,7 @@ describe('v1beta.QuotaAdjusterSettingsManagerClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.cloudquotas.v1beta.GetQuotaAdjusterSettingsRequest()
       );
@@ -467,7 +469,7 @@ describe('v1beta.QuotaAdjusterSettingsManagerClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.cloudquotas.v1beta.GetQuotaAdjusterSettingsRequest()
       );
@@ -517,7 +519,7 @@ describe('v1beta.QuotaAdjusterSettingsManagerClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.cloudquotas.v1beta.GetQuotaAdjusterSettingsRequest()
       );
@@ -554,7 +556,7 @@ describe('v1beta.QuotaAdjusterSettingsManagerClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.cloudquotas.v1beta.GetQuotaAdjusterSettingsRequest()
       );
@@ -573,7 +575,7 @@ describe('v1beta.QuotaAdjusterSettingsManagerClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('folderLocationQuotaPreference', () => {
+    describe('folderLocationQuotaPreference', async () => {
       const fakePath = '/rendered/path/folderLocationQuotaPreference';
       const expectedParameters = {
         folder: 'folderValue',
@@ -587,7 +589,7 @@ describe('v1beta.QuotaAdjusterSettingsManagerClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderLocationQuotaPreferencePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.folderLocationQuotaPreferencePathTemplate.match =
@@ -655,7 +657,7 @@ describe('v1beta.QuotaAdjusterSettingsManagerClient', () => {
       });
     });
 
-    describe('folderLocationServiceQuotaInfo', () => {
+    describe('folderLocationServiceQuotaInfo', async () => {
       const fakePath = '/rendered/path/folderLocationServiceQuotaInfo';
       const expectedParameters = {
         folder: 'folderValue',
@@ -670,7 +672,7 @@ describe('v1beta.QuotaAdjusterSettingsManagerClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderLocationServiceQuotaInfoPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.folderLocationServiceQuotaInfoPathTemplate.match =
@@ -751,7 +753,7 @@ describe('v1beta.QuotaAdjusterSettingsManagerClient', () => {
       });
     });
 
-    describe('organizationLocationQuotaPreference', () => {
+    describe('organizationLocationQuotaPreference', async () => {
       const fakePath = '/rendered/path/organizationLocationQuotaPreference';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -765,7 +767,7 @@ describe('v1beta.QuotaAdjusterSettingsManagerClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationLocationQuotaPreferencePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationLocationQuotaPreferencePathTemplate.match =
@@ -837,7 +839,7 @@ describe('v1beta.QuotaAdjusterSettingsManagerClient', () => {
       });
     });
 
-    describe('organizationLocationServiceQuotaInfo', () => {
+    describe('organizationLocationServiceQuotaInfo', async () => {
       const fakePath = '/rendered/path/organizationLocationServiceQuotaInfo';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -852,7 +854,7 @@ describe('v1beta.QuotaAdjusterSettingsManagerClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationLocationServiceQuotaInfoPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationLocationServiceQuotaInfoPathTemplate.match =
@@ -946,7 +948,7 @@ describe('v1beta.QuotaAdjusterSettingsManagerClient', () => {
       });
     });
 
-    describe('projectLocationQuotaPreference', () => {
+    describe('projectLocationQuotaPreference', async () => {
       const fakePath = '/rendered/path/projectLocationQuotaPreference';
       const expectedParameters = {
         project: 'projectValue',
@@ -960,7 +962,7 @@ describe('v1beta.QuotaAdjusterSettingsManagerClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationQuotaPreferencePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationQuotaPreferencePathTemplate.match =
@@ -1028,7 +1030,7 @@ describe('v1beta.QuotaAdjusterSettingsManagerClient', () => {
       });
     });
 
-    describe('projectLocationServiceQuotaInfo', () => {
+    describe('projectLocationServiceQuotaInfo', async () => {
       const fakePath = '/rendered/path/projectLocationServiceQuotaInfo';
       const expectedParameters = {
         project: 'projectValue',
@@ -1043,7 +1045,7 @@ describe('v1beta.QuotaAdjusterSettingsManagerClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationServiceQuotaInfoPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationServiceQuotaInfoPathTemplate.match =
@@ -1126,7 +1128,7 @@ describe('v1beta.QuotaAdjusterSettingsManagerClient', () => {
       });
     });
 
-    describe('quotaAdjusterSettings', () => {
+    describe('quotaAdjusterSettings', async () => {
       const fakePath = '/rendered/path/quotaAdjusterSettings';
       const expectedParameters = {
         project: 'projectValue',
@@ -1139,7 +1141,7 @@ describe('v1beta.QuotaAdjusterSettingsManagerClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.quotaAdjusterSettingsPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

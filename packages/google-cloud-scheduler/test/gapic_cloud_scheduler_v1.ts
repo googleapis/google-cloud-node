@@ -255,7 +255,9 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.cloudSchedulerStub);
       client.close().then(() => {
         done();
@@ -314,7 +316,7 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.GetJobRequest()
       );
@@ -345,7 +347,7 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.GetJobRequest()
       );
@@ -392,7 +394,7 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.GetJobRequest()
       );
@@ -420,7 +422,7 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.GetJobRequest()
       );
@@ -441,7 +443,7 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.CreateJobRequest()
       );
@@ -472,7 +474,7 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.CreateJobRequest()
       );
@@ -519,7 +521,7 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.CreateJobRequest()
       );
@@ -547,7 +549,7 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.CreateJobRequest()
       );
@@ -568,7 +570,7 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.UpdateJobRequest()
       );
@@ -600,7 +602,7 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.UpdateJobRequest()
       );
@@ -648,7 +650,7 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.UpdateJobRequest()
       );
@@ -677,7 +679,7 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.UpdateJobRequest()
       );
@@ -699,7 +701,7 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.DeleteJobRequest()
       );
@@ -730,7 +732,7 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.DeleteJobRequest()
       );
@@ -777,7 +779,7 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.DeleteJobRequest()
       );
@@ -805,7 +807,7 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.DeleteJobRequest()
       );
@@ -826,7 +828,7 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.PauseJobRequest()
       );
@@ -857,7 +859,7 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.PauseJobRequest()
       );
@@ -904,7 +906,7 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.PauseJobRequest()
       );
@@ -932,7 +934,7 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.PauseJobRequest()
       );
@@ -953,7 +955,7 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.ResumeJobRequest()
       );
@@ -984,7 +986,7 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.ResumeJobRequest()
       );
@@ -1031,7 +1033,7 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.ResumeJobRequest()
       );
@@ -1059,7 +1061,7 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.ResumeJobRequest()
       );
@@ -1080,7 +1082,7 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.RunJobRequest()
       );
@@ -1111,7 +1113,7 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.RunJobRequest()
       );
@@ -1158,7 +1160,7 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.RunJobRequest()
       );
@@ -1186,7 +1188,7 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.RunJobRequest()
       );
@@ -1207,7 +1209,7 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.ListJobsRequest()
       );
@@ -1240,7 +1242,7 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.ListJobsRequest()
       );
@@ -1289,7 +1291,7 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.ListJobsRequest()
       );
@@ -1317,7 +1319,7 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.ListJobsRequest()
       );
@@ -1368,7 +1370,7 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.ListJobsRequest()
       );
@@ -1416,7 +1418,7 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.ListJobsRequest()
       );
@@ -1458,7 +1460,7 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.ListJobsRequest()
       );
@@ -1500,7 +1502,7 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1530,7 +1532,7 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1574,7 +1576,7 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -1609,7 +1611,7 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -1657,7 +1659,7 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -1694,7 +1696,7 @@ describe('v1.CloudSchedulerClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('job', () => {
+    describe('job', async () => {
       const fakePath = '/rendered/path/job';
       const expectedParameters = {
         project: 'projectValue',
@@ -1705,7 +1707,7 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.jobPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1758,7 +1760,7 @@ describe('v1.CloudSchedulerClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -1768,7 +1770,7 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1807,7 +1809,7 @@ describe('v1.CloudSchedulerClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -1816,7 +1818,7 @@ describe('v1.CloudSchedulerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

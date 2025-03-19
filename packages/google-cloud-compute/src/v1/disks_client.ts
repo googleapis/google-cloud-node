@@ -501,7 +501,9 @@ export class DisksClient {
         zone: request.zone ?? '',
         disk: request.disk ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('addResourcePolicies request %j', request);
     const wrappedCallback:
       | Callback<
@@ -632,7 +634,9 @@ export class DisksClient {
         project: request.project ?? '',
         zone: request.zone ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('bulkInsert request %j', request);
     const wrappedCallback:
       | Callback<
@@ -774,7 +778,9 @@ export class DisksClient {
         zone: request.zone ?? '',
         disk: request.disk ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createSnapshot request %j', request);
     const wrappedCallback:
       | Callback<
@@ -904,7 +910,9 @@ export class DisksClient {
         zone: request.zone ?? '',
         disk: request.disk ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('delete request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1025,7 +1033,9 @@ export class DisksClient {
         zone: request.zone ?? '',
         disk: request.disk ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('get request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1147,7 +1157,9 @@ export class DisksClient {
         zone: request.zone ?? '',
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1269,7 +1281,9 @@ export class DisksClient {
         project: request.project ?? '',
         zone: request.zone ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('insert request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1407,7 +1421,9 @@ export class DisksClient {
         zone: request.zone ?? '',
         disk: request.disk ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('removeResourcePolicies request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1539,7 +1555,9 @@ export class DisksClient {
         zone: request.zone ?? '',
         disk: request.disk ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('resize request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1670,7 +1688,9 @@ export class DisksClient {
         zone: request.zone ?? '',
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1795,7 +1815,9 @@ export class DisksClient {
         zone: request.zone ?? '',
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setLabels request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1935,7 +1957,9 @@ export class DisksClient {
         zone: request.zone ?? '',
         disk: request.disk ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('startAsyncReplication request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2073,7 +2097,9 @@ export class DisksClient {
         zone: request.zone ?? '',
         disk: request.disk ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('stopAsyncReplication request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2210,7 +2236,9 @@ export class DisksClient {
         project: request.project ?? '',
         zone: request.zone ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('stopGroupAsyncReplication request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2343,7 +2371,9 @@ export class DisksClient {
         zone: request.zone ?? '',
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('testIamPermissions request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2472,7 +2502,9 @@ export class DisksClient {
         zone: request.zone ?? '',
         disk: request.disk ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('update request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2557,7 +2589,9 @@ export class DisksClient {
       });
     const defaultCallSettings = this._defaults['aggregatedList'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('aggregatedList iterate %j', request);
     return this.descriptors.page.aggregatedList.asyncIterate(
       this.innerApiCalls['aggregatedList'] as GaxCall,
@@ -2662,7 +2696,9 @@ export class DisksClient {
         project: request.project ?? '',
         zone: request.zone ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.compute.v1.IListDisksRequest,
@@ -2734,7 +2770,9 @@ export class DisksClient {
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('list stream %j', request);
     return this.descriptors.page.list.createStream(
       this.innerApiCalls.list as GaxCall,
@@ -2790,7 +2828,9 @@ export class DisksClient {
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('list iterate %j', request);
     return this.descriptors.page.list.asyncIterate(
       this.innerApiCalls['list'] as GaxCall,

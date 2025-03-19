@@ -284,7 +284,9 @@ describe('v1.InterconnectRemoteLocationsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.interconnectRemoteLocationsStub);
       client.close().then(() => {
         done();
@@ -355,7 +357,7 @@ describe('v1.InterconnectRemoteLocationsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInterconnectRemoteLocationRequest()
       );
@@ -393,7 +395,7 @@ describe('v1.InterconnectRemoteLocationsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInterconnectRemoteLocationRequest()
       );
@@ -446,7 +448,7 @@ describe('v1.InterconnectRemoteLocationsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInterconnectRemoteLocationRequest()
       );
@@ -481,7 +483,7 @@ describe('v1.InterconnectRemoteLocationsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInterconnectRemoteLocationRequest()
       );
@@ -510,7 +512,7 @@ describe('v1.InterconnectRemoteLocationsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInterconnectRemoteLocationsRequest()
       );
@@ -551,7 +553,7 @@ describe('v1.InterconnectRemoteLocationsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInterconnectRemoteLocationsRequest()
       );
@@ -609,7 +611,7 @@ describe('v1.InterconnectRemoteLocationsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInterconnectRemoteLocationsRequest()
       );
@@ -639,7 +641,7 @@ describe('v1.InterconnectRemoteLocationsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInterconnectRemoteLocationsRequest()
       );
@@ -705,7 +707,7 @@ describe('v1.InterconnectRemoteLocationsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInterconnectRemoteLocationsRequest()
       );
@@ -762,7 +764,7 @@ describe('v1.InterconnectRemoteLocationsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInterconnectRemoteLocationsRequest()
       );
@@ -814,7 +816,7 @@ describe('v1.InterconnectRemoteLocationsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInterconnectRemoteLocationsRequest()
       );

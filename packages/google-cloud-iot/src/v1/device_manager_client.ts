@@ -507,7 +507,9 @@ export class DeviceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createDeviceRegistry request %j', request);
     const wrappedCallback:
       | Callback<
@@ -618,7 +620,9 @@ export class DeviceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getDeviceRegistry request %j', request);
     const wrappedCallback:
       | Callback<
@@ -742,7 +746,9 @@ export class DeviceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         'device_registry.name': request.deviceRegistry!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateDeviceRegistry request %j', request);
     const wrappedCallback:
       | Callback<
@@ -859,7 +865,9 @@ export class DeviceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteDeviceRegistry request %j', request);
     const wrappedCallback:
       | Callback<
@@ -973,7 +981,9 @@ export class DeviceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createDevice request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1085,7 +1095,9 @@ export class DeviceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getDevice request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1199,7 +1211,9 @@ export class DeviceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         'device.name': request.device!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateDevice request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1307,7 +1321,9 @@ export class DeviceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteDevice request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1433,7 +1449,9 @@ export class DeviceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('modifyCloudToDeviceConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1559,7 +1577,9 @@ export class DeviceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDeviceConfigVersions request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1679,7 +1699,9 @@ export class DeviceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDeviceStates request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1800,7 +1822,9 @@ export class DeviceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1912,7 +1936,9 @@ export class DeviceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2026,7 +2052,9 @@ export class DeviceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('testIamPermissions request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2156,7 +2184,9 @@ export class DeviceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('sendCommandToDevice request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2274,7 +2304,9 @@ export class DeviceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('bindDeviceToGateway request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2398,7 +2430,9 @@ export class DeviceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('unbindDeviceFromGateway request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2531,7 +2565,9 @@ export class DeviceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.iot.v1.IListDeviceRegistriesRequest,
@@ -2602,7 +2638,9 @@ export class DeviceManagerClient {
       });
     const defaultCallSettings = this._defaults['listDeviceRegistries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDeviceRegistries stream %j', request);
     return this.descriptors.page.listDeviceRegistries.createStream(
       this.innerApiCalls.listDeviceRegistries as GaxCall,
@@ -2655,7 +2693,9 @@ export class DeviceManagerClient {
       });
     const defaultCallSettings = this._defaults['listDeviceRegistries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDeviceRegistries iterate %j', request);
     return this.descriptors.page.listDeviceRegistries.asyncIterate(
       this.innerApiCalls['listDeviceRegistries'] as GaxCall,
@@ -2768,7 +2808,9 @@ export class DeviceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.iot.v1.IListDevicesRequest,
@@ -2850,7 +2892,9 @@ export class DeviceManagerClient {
       });
     const defaultCallSettings = this._defaults['listDevices'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDevices stream %j', request);
     return this.descriptors.page.listDevices.createStream(
       this.innerApiCalls.listDevices as GaxCall,
@@ -2916,7 +2960,9 @@ export class DeviceManagerClient {
       });
     const defaultCallSettings = this._defaults['listDevices'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDevices iterate %j', request);
     return this.descriptors.page.listDevices.asyncIterate(
       this.innerApiCalls['listDevices'] as GaxCall,
