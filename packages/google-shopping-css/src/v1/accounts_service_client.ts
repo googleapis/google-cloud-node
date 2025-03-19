@@ -478,7 +478,9 @@ export class AccountsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAccount request %j', request);
     const wrappedCallback:
       | Callback<
@@ -600,7 +602,9 @@ export class AccountsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateLabels request %j', request);
     const wrappedCallback:
       | Callback<
@@ -738,7 +742,9 @@ export class AccountsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.shopping.css.v1.IListChildAccountsRequest,
@@ -816,7 +822,9 @@ export class AccountsServiceClient {
       });
     const defaultCallSettings = this._defaults['listChildAccounts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listChildAccounts stream %j', request);
     return this.descriptors.page.listChildAccounts.createStream(
       this.innerApiCalls.listChildAccounts as GaxCall,
@@ -876,7 +884,9 @@ export class AccountsServiceClient {
       });
     const defaultCallSettings = this._defaults['listChildAccounts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listChildAccounts iterate %j', request);
     return this.descriptors.page.listChildAccounts.asyncIterate(
       this.innerApiCalls['listChildAccounts'] as GaxCall,

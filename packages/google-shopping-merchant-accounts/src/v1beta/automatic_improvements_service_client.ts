@@ -515,7 +515,9 @@ export class AutomaticImprovementsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAutomaticImprovements request %j', request);
     const wrappedCallback:
       | Callback<
@@ -652,7 +654,9 @@ export class AutomaticImprovementsServiceClient {
         'automatic_improvements.name':
           request.automaticImprovements!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateAutomaticImprovements request %j', request);
     const wrappedCallback:
       | Callback<
