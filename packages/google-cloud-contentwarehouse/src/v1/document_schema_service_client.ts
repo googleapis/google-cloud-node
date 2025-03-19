@@ -503,7 +503,9 @@ export class DocumentSchemaServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createDocumentSchema request %j', request);
     const wrappedCallback:
       | Callback<
@@ -638,7 +640,9 @@ export class DocumentSchemaServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateDocumentSchema request %j', request);
     const wrappedCallback:
       | Callback<
@@ -764,7 +768,9 @@ export class DocumentSchemaServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getDocumentSchema request %j', request);
     const wrappedCallback:
       | Callback<
@@ -891,7 +897,9 @@ export class DocumentSchemaServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteDocumentSchema request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1026,7 +1034,9 @@ export class DocumentSchemaServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.contentwarehouse.v1.IListDocumentSchemasRequest,
@@ -1099,7 +1109,9 @@ export class DocumentSchemaServiceClient {
       });
     const defaultCallSettings = this._defaults['listDocumentSchemas'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDocumentSchemas stream %j', request);
     return this.descriptors.page.listDocumentSchemas.createStream(
       this.innerApiCalls.listDocumentSchemas as GaxCall,
@@ -1154,7 +1166,9 @@ export class DocumentSchemaServiceClient {
       });
     const defaultCallSettings = this._defaults['listDocumentSchemas'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDocumentSchemas iterate %j', request);
     return this.descriptors.page.listDocumentSchemas.asyncIterate(
       this.innerApiCalls['listDocumentSchemas'] as GaxCall,

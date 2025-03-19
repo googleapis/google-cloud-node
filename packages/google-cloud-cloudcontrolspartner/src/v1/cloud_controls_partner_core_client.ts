@@ -514,7 +514,9 @@ export class CloudControlsPartnerCoreClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getWorkload request %j', request);
     const wrappedCallback:
       | Callback<
@@ -640,7 +642,9 @@ export class CloudControlsPartnerCoreClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getCustomer request %j', request);
     const wrappedCallback:
       | Callback<
@@ -766,7 +770,9 @@ export class CloudControlsPartnerCoreClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getEkmConnections request %j', request);
     const wrappedCallback:
       | Callback<
@@ -892,7 +898,9 @@ export class CloudControlsPartnerCoreClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getPartnerPermissions request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1018,7 +1026,9 @@ export class CloudControlsPartnerCoreClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getPartner request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1153,7 +1163,9 @@ export class CloudControlsPartnerCoreClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.cloudcontrolspartner.v1.IListWorkloadsRequest,
@@ -1226,7 +1238,9 @@ export class CloudControlsPartnerCoreClient {
       });
     const defaultCallSettings = this._defaults['listWorkloads'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listWorkloads stream %j', request);
     return this.descriptors.page.listWorkloads.createStream(
       this.innerApiCalls.listWorkloads as GaxCall,
@@ -1281,7 +1295,9 @@ export class CloudControlsPartnerCoreClient {
       });
     const defaultCallSettings = this._defaults['listWorkloads'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listWorkloads iterate %j', request);
     return this.descriptors.page.listWorkloads.asyncIterate(
       this.innerApiCalls['listWorkloads'] as GaxCall,
@@ -1390,7 +1406,9 @@ export class CloudControlsPartnerCoreClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.cloudcontrolspartner.v1.IListCustomersRequest,
@@ -1462,7 +1480,9 @@ export class CloudControlsPartnerCoreClient {
       });
     const defaultCallSettings = this._defaults['listCustomers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCustomers stream %j', request);
     return this.descriptors.page.listCustomers.createStream(
       this.innerApiCalls.listCustomers as GaxCall,
@@ -1516,7 +1536,9 @@ export class CloudControlsPartnerCoreClient {
       });
     const defaultCallSettings = this._defaults['listCustomers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCustomers iterate %j', request);
     return this.descriptors.page.listCustomers.asyncIterate(
       this.innerApiCalls['listCustomers'] as GaxCall,
@@ -1630,7 +1652,9 @@ export class CloudControlsPartnerCoreClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$CloudControlsPartnerCore-$ListAccessApprovalRequests',
       'ListAccessApprovalRequests is deprecated and may be removed in a future version.',
@@ -1711,7 +1735,9 @@ export class CloudControlsPartnerCoreClient {
       });
     const defaultCallSettings = this._defaults['listAccessApprovalRequests'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$CloudControlsPartnerCore-$ListAccessApprovalRequests',
       'ListAccessApprovalRequests is deprecated and may be removed in a future version.',
@@ -1774,7 +1800,9 @@ export class CloudControlsPartnerCoreClient {
       });
     const defaultCallSettings = this._defaults['listAccessApprovalRequests'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$CloudControlsPartnerCore-$ListAccessApprovalRequests',
       'ListAccessApprovalRequests is deprecated and may be removed in a future version.',

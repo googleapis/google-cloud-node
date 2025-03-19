@@ -660,7 +660,9 @@ export class BatchControllerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getBatch request %j', request);
     const wrappedCallback:
       | Callback<
@@ -771,7 +773,9 @@ export class BatchControllerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteBatch request %j', request);
     const wrappedCallback:
       | Callback<
@@ -920,7 +924,9 @@ export class BatchControllerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1099,7 +1105,9 @@ export class BatchControllerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dataproc.v1.IListBatchesRequest,
@@ -1187,7 +1195,9 @@ export class BatchControllerClient {
       });
     const defaultCallSettings = this._defaults['listBatches'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listBatches stream %j', request);
     return this.descriptors.page.listBatches.createStream(
       this.innerApiCalls.listBatches as GaxCall,
@@ -1257,7 +1267,9 @@ export class BatchControllerClient {
       });
     const defaultCallSettings = this._defaults['listBatches'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listBatches iterate %j', request);
     return this.descriptors.page.listBatches.asyncIterate(
       this.innerApiCalls['listBatches'] as GaxCall,
@@ -1497,7 +1509,7 @@ export class BatchControllerClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

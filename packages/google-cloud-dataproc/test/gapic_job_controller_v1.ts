@@ -284,7 +284,9 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.jobControllerStub);
       client.close().then(() => {
         done();
@@ -343,7 +345,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.SubmitJobRequest()
       );
@@ -379,7 +381,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.SubmitJobRequest()
       );
@@ -431,7 +433,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.SubmitJobRequest()
       );
@@ -464,7 +466,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.SubmitJobRequest()
       );
@@ -490,7 +492,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.GetJobRequest()
       );
@@ -531,7 +533,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.GetJobRequest()
       );
@@ -588,7 +590,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.GetJobRequest()
       );
@@ -626,7 +628,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.GetJobRequest()
       );
@@ -657,7 +659,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.UpdateJobRequest()
       );
@@ -698,7 +700,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.UpdateJobRequest()
       );
@@ -755,7 +757,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.UpdateJobRequest()
       );
@@ -793,7 +795,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.UpdateJobRequest()
       );
@@ -824,7 +826,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.CancelJobRequest()
       );
@@ -865,7 +867,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.CancelJobRequest()
       );
@@ -922,7 +924,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.CancelJobRequest()
       );
@@ -960,7 +962,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.CancelJobRequest()
       );
@@ -991,7 +993,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.DeleteJobRequest()
       );
@@ -1032,7 +1034,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.DeleteJobRequest()
       );
@@ -1089,7 +1091,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.DeleteJobRequest()
       );
@@ -1127,7 +1129,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.DeleteJobRequest()
       );
@@ -1158,7 +1160,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.SubmitJobRequest()
       );
@@ -1196,7 +1198,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.SubmitJobRequest()
       );
@@ -1255,7 +1257,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.SubmitJobRequest()
       );
@@ -1291,7 +1293,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.SubmitJobRequest()
       );
@@ -1329,7 +1331,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1351,7 +1353,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1372,7 +1374,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListJobsRequest()
       );
@@ -1410,7 +1412,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListJobsRequest()
       );
@@ -1464,7 +1466,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListJobsRequest()
       );
@@ -1497,7 +1499,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListJobsRequest()
       );
@@ -1553,7 +1555,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListJobsRequest()
       );
@@ -1606,7 +1608,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListJobsRequest()
       );
@@ -1653,7 +1655,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListJobsRequest()
       );
@@ -1700,7 +1702,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -1730,7 +1732,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -1774,7 +1776,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -1806,7 +1808,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -1836,7 +1838,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -1880,7 +1882,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -1912,7 +1914,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -1945,7 +1947,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -1989,7 +1991,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -2024,7 +2026,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -2103,7 +2105,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -2183,7 +2185,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -2279,8 +2281,7 @@ describe('v1.JobControllerClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -2299,7 +2300,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -2308,8 +2309,7 @@ describe('v1.JobControllerClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -2325,7 +2325,7 @@ describe('v1.JobControllerClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('batch', () => {
+    describe('batch', async () => {
       const fakePath = '/rendered/path/batch';
       const expectedParameters = {
         project: 'projectValue',
@@ -2336,7 +2336,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.batchPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2389,7 +2389,7 @@ describe('v1.JobControllerClient', () => {
       });
     });
 
-    describe('nodeGroup', () => {
+    describe('nodeGroup', async () => {
       const fakePath = '/rendered/path/nodeGroup';
       const expectedParameters = {
         project: 'projectValue',
@@ -2401,7 +2401,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.nodeGroupPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2465,7 +2465,7 @@ describe('v1.JobControllerClient', () => {
       });
     });
 
-    describe('projectLocationAutoscalingPolicy', () => {
+    describe('projectLocationAutoscalingPolicy', async () => {
       const fakePath = '/rendered/path/projectLocationAutoscalingPolicy';
       const expectedParameters = {
         project: 'projectValue',
@@ -2476,7 +2476,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationAutoscalingPolicyPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationAutoscalingPolicyPathTemplate.match =
@@ -2546,7 +2546,7 @@ describe('v1.JobControllerClient', () => {
       });
     });
 
-    describe('projectLocationWorkflowTemplate', () => {
+    describe('projectLocationWorkflowTemplate', async () => {
       const fakePath = '/rendered/path/projectLocationWorkflowTemplate';
       const expectedParameters = {
         project: 'projectValue',
@@ -2557,7 +2557,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationWorkflowTemplatePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationWorkflowTemplatePathTemplate.match =
@@ -2625,7 +2625,7 @@ describe('v1.JobControllerClient', () => {
       });
     });
 
-    describe('projectRegionAutoscalingPolicy', () => {
+    describe('projectRegionAutoscalingPolicy', async () => {
       const fakePath = '/rendered/path/projectRegionAutoscalingPolicy';
       const expectedParameters = {
         project: 'projectValue',
@@ -2636,7 +2636,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectRegionAutoscalingPolicyPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectRegionAutoscalingPolicyPathTemplate.match =
@@ -2704,7 +2704,7 @@ describe('v1.JobControllerClient', () => {
       });
     });
 
-    describe('projectRegionWorkflowTemplate', () => {
+    describe('projectRegionWorkflowTemplate', async () => {
       const fakePath = '/rendered/path/projectRegionWorkflowTemplate';
       const expectedParameters = {
         project: 'projectValue',
@@ -2715,7 +2715,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectRegionWorkflowTemplatePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectRegionWorkflowTemplatePathTemplate.match =
@@ -2783,7 +2783,7 @@ describe('v1.JobControllerClient', () => {
       });
     });
 
-    describe('session', () => {
+    describe('session', async () => {
       const fakePath = '/rendered/path/session';
       const expectedParameters = {
         project: 'projectValue',
@@ -2794,7 +2794,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.sessionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2847,7 +2847,7 @@ describe('v1.JobControllerClient', () => {
       });
     });
 
-    describe('sessionTemplate', () => {
+    describe('sessionTemplate', async () => {
       const fakePath = '/rendered/path/sessionTemplate';
       const expectedParameters = {
         project: 'projectValue',
@@ -2858,7 +2858,7 @@ describe('v1.JobControllerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.sessionTemplatePathTemplate.render = sinon
         .stub()
         .returns(fakePath);

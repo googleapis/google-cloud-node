@@ -868,7 +868,9 @@ export class DataScanServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getDataScan request %j', request);
     const wrappedCallback:
       | Callback<
@@ -983,7 +985,9 @@ export class DataScanServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('runDataScan request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1098,7 +1102,9 @@ export class DataScanServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getDataScanJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1228,7 +1234,9 @@ export class DataScanServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('generateDataQualityRules request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1376,7 +1384,9 @@ export class DataScanServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1550,7 +1560,9 @@ export class DataScanServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'data_scan.name': request.dataScan!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1724,7 +1736,9 @@ export class DataScanServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1893,7 +1907,9 @@ export class DataScanServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dataplex.v1.IListDataScansRequest,
@@ -1971,7 +1987,9 @@ export class DataScanServiceClient {
       });
     const defaultCallSettings = this._defaults['listDataScans'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDataScans stream %j', request);
     return this.descriptors.page.listDataScans.createStream(
       this.innerApiCalls.listDataScans as GaxCall,
@@ -2031,7 +2049,9 @@ export class DataScanServiceClient {
       });
     const defaultCallSettings = this._defaults['listDataScans'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDataScans iterate %j', request);
     return this.descriptors.page.listDataScans.asyncIterate(
       this.innerApiCalls['listDataScans'] as GaxCall,
@@ -2160,7 +2180,9 @@ export class DataScanServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dataplex.v1.IListDataScanJobsRequest,
@@ -2252,7 +2274,9 @@ export class DataScanServiceClient {
       });
     const defaultCallSettings = this._defaults['listDataScanJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDataScanJobs stream %j', request);
     return this.descriptors.page.listDataScanJobs.createStream(
       this.innerApiCalls.listDataScanJobs as GaxCall,
@@ -2326,7 +2350,9 @@ export class DataScanServiceClient {
       });
     const defaultCallSettings = this._defaults['listDataScanJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDataScanJobs iterate %j', request);
     return this.descriptors.page.listDataScanJobs.asyncIterate(
       this.innerApiCalls['listDataScanJobs'] as GaxCall,
@@ -2506,7 +2532,7 @@ export class DataScanServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

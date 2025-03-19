@@ -562,7 +562,9 @@ export class ConsumerProcurementServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getOrder request %j', request);
     const wrappedCallback:
       | Callback<
@@ -716,7 +718,9 @@ export class ConsumerProcurementServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -895,7 +899,9 @@ export class ConsumerProcurementServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1070,7 +1076,9 @@ export class ConsumerProcurementServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1254,7 +1262,9 @@ export class ConsumerProcurementServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.commerce.consumer.procurement.v1.IListOrdersRequest,
@@ -1339,7 +1349,9 @@ export class ConsumerProcurementServiceClient {
       });
     const defaultCallSettings = this._defaults['listOrders'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listOrders stream %j', request);
     return this.descriptors.page.listOrders.createStream(
       this.innerApiCalls.listOrders as GaxCall,
@@ -1406,7 +1418,9 @@ export class ConsumerProcurementServiceClient {
       });
     const defaultCallSettings = this._defaults['listOrders'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listOrders iterate %j', request);
     return this.descriptors.page.listOrders.asyncIterate(
       this.innerApiCalls['listOrders'] as GaxCall,
@@ -1508,7 +1522,7 @@ export class ConsumerProcurementServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

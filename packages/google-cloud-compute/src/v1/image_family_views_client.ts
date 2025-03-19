@@ -455,7 +455,9 @@ export class ImageFamilyViewsClient {
         zone: request.zone ?? '',
         family: request.family ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('get request %j', request);
     const wrappedCallback:
       | Callback<

@@ -228,7 +228,9 @@ describe('v1.ConfidentialComputingClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.confidentialComputingStub);
       client.close().then(() => {
         done();
@@ -291,7 +293,7 @@ describe('v1.ConfidentialComputingClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.confidentialcomputing.v1.CreateChallengeRequest()
       );
@@ -323,7 +325,7 @@ describe('v1.ConfidentialComputingClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.confidentialcomputing.v1.CreateChallengeRequest()
       );
@@ -371,7 +373,7 @@ describe('v1.ConfidentialComputingClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.confidentialcomputing.v1.CreateChallengeRequest()
       );
@@ -403,7 +405,7 @@ describe('v1.ConfidentialComputingClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.confidentialcomputing.v1.CreateChallengeRequest()
       );
@@ -425,7 +427,7 @@ describe('v1.ConfidentialComputingClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.confidentialcomputing.v1.VerifyAttestationRequest()
       );
@@ -457,7 +459,7 @@ describe('v1.ConfidentialComputingClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.confidentialcomputing.v1.VerifyAttestationRequest()
       );
@@ -505,7 +507,7 @@ describe('v1.ConfidentialComputingClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.confidentialcomputing.v1.VerifyAttestationRequest()
       );
@@ -537,7 +539,7 @@ describe('v1.ConfidentialComputingClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.confidentialcomputing.v1.VerifyAttestationRequest()
       );
@@ -558,7 +560,7 @@ describe('v1.ConfidentialComputingClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -589,7 +591,7 @@ describe('v1.ConfidentialComputingClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -634,7 +636,7 @@ describe('v1.ConfidentialComputingClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -670,7 +672,7 @@ describe('v1.ConfidentialComputingClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -719,7 +721,7 @@ describe('v1.ConfidentialComputingClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -756,7 +758,7 @@ describe('v1.ConfidentialComputingClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('challenge', () => {
+    describe('challenge', async () => {
       const fakePath = '/rendered/path/challenge';
       const expectedParameters = {
         project: 'projectValue',
@@ -768,7 +770,7 @@ describe('v1.ConfidentialComputingClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.challengePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -821,7 +823,7 @@ describe('v1.ConfidentialComputingClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -832,7 +834,7 @@ describe('v1.ConfidentialComputingClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

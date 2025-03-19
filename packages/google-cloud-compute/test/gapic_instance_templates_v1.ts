@@ -266,7 +266,9 @@ describe('v1.InstanceTemplatesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.instanceTemplatesStub);
       client.close().then(() => {
         done();
@@ -325,7 +327,7 @@ describe('v1.InstanceTemplatesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteInstanceTemplateRequest()
       );
@@ -361,7 +363,7 @@ describe('v1.InstanceTemplatesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteInstanceTemplateRequest()
       );
@@ -413,7 +415,7 @@ describe('v1.InstanceTemplatesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteInstanceTemplateRequest()
       );
@@ -446,7 +448,7 @@ describe('v1.InstanceTemplatesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteInstanceTemplateRequest()
       );
@@ -472,7 +474,7 @@ describe('v1.InstanceTemplatesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInstanceTemplateRequest()
       );
@@ -507,7 +509,7 @@ describe('v1.InstanceTemplatesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInstanceTemplateRequest()
       );
@@ -557,7 +559,7 @@ describe('v1.InstanceTemplatesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInstanceTemplateRequest()
       );
@@ -589,7 +591,7 @@ describe('v1.InstanceTemplatesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInstanceTemplateRequest()
       );
@@ -615,7 +617,7 @@ describe('v1.InstanceTemplatesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyInstanceTemplateRequest()
       );
@@ -651,7 +653,7 @@ describe('v1.InstanceTemplatesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyInstanceTemplateRequest()
       );
@@ -703,7 +705,7 @@ describe('v1.InstanceTemplatesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyInstanceTemplateRequest()
       );
@@ -739,7 +741,7 @@ describe('v1.InstanceTemplatesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyInstanceTemplateRequest()
       );
@@ -765,7 +767,7 @@ describe('v1.InstanceTemplatesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertInstanceTemplateRequest()
       );
@@ -796,7 +798,7 @@ describe('v1.InstanceTemplatesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertInstanceTemplateRequest()
       );
@@ -843,7 +845,7 @@ describe('v1.InstanceTemplatesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertInstanceTemplateRequest()
       );
@@ -871,7 +873,7 @@ describe('v1.InstanceTemplatesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertInstanceTemplateRequest()
       );
@@ -892,7 +894,7 @@ describe('v1.InstanceTemplatesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyInstanceTemplateRequest()
       );
@@ -928,7 +930,7 @@ describe('v1.InstanceTemplatesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyInstanceTemplateRequest()
       );
@@ -980,7 +982,7 @@ describe('v1.InstanceTemplatesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyInstanceTemplateRequest()
       );
@@ -1016,7 +1018,7 @@ describe('v1.InstanceTemplatesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyInstanceTemplateRequest()
       );
@@ -1042,7 +1044,7 @@ describe('v1.InstanceTemplatesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsInstanceTemplateRequest()
       );
@@ -1079,7 +1081,7 @@ describe('v1.InstanceTemplatesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsInstanceTemplateRequest()
       );
@@ -1131,7 +1133,7 @@ describe('v1.InstanceTemplatesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsInstanceTemplateRequest()
       );
@@ -1167,7 +1169,7 @@ describe('v1.InstanceTemplatesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsInstanceTemplateRequest()
       );
@@ -1193,7 +1195,7 @@ describe('v1.InstanceTemplatesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AggregatedListInstanceTemplatesRequest()
       );
@@ -1253,7 +1255,7 @@ describe('v1.InstanceTemplatesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AggregatedListInstanceTemplatesRequest()
       );
@@ -1297,7 +1299,7 @@ describe('v1.InstanceTemplatesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInstanceTemplatesRequest()
       );
@@ -1335,7 +1337,7 @@ describe('v1.InstanceTemplatesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInstanceTemplatesRequest()
       );
@@ -1388,7 +1390,7 @@ describe('v1.InstanceTemplatesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInstanceTemplatesRequest()
       );
@@ -1415,7 +1417,7 @@ describe('v1.InstanceTemplatesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInstanceTemplatesRequest()
       );
@@ -1475,7 +1477,7 @@ describe('v1.InstanceTemplatesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInstanceTemplatesRequest()
       );
@@ -1526,7 +1528,7 @@ describe('v1.InstanceTemplatesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInstanceTemplatesRequest()
       );
@@ -1574,7 +1576,7 @@ describe('v1.InstanceTemplatesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInstanceTemplatesRequest()
       );

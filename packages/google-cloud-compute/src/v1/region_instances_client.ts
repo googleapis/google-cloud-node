@@ -461,7 +461,9 @@ export class RegionInstancesClient {
         project: request.project ?? '',
         region: request.region ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('bulkInsert request %j', request);
     const wrappedCallback:
       | Callback<

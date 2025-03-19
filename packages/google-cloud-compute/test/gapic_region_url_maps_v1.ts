@@ -265,7 +265,9 @@ describe('v1.RegionUrlMapsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.regionUrlMapsStub);
       client.close().then(() => {
         done();
@@ -324,7 +326,7 @@ describe('v1.RegionUrlMapsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionUrlMapRequest()
       );
@@ -365,7 +367,7 @@ describe('v1.RegionUrlMapsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionUrlMapRequest()
       );
@@ -422,7 +424,7 @@ describe('v1.RegionUrlMapsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionUrlMapRequest()
       );
@@ -460,7 +462,7 @@ describe('v1.RegionUrlMapsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionUrlMapRequest()
       );
@@ -491,7 +493,7 @@ describe('v1.RegionUrlMapsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionUrlMapRequest()
       );
@@ -531,7 +533,7 @@ describe('v1.RegionUrlMapsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionUrlMapRequest()
       );
@@ -586,7 +588,7 @@ describe('v1.RegionUrlMapsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionUrlMapRequest()
       );
@@ -623,7 +625,7 @@ describe('v1.RegionUrlMapsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionUrlMapRequest()
       );
@@ -654,7 +656,7 @@ describe('v1.RegionUrlMapsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionUrlMapRequest()
       );
@@ -690,7 +692,7 @@ describe('v1.RegionUrlMapsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionUrlMapRequest()
       );
@@ -742,7 +744,7 @@ describe('v1.RegionUrlMapsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionUrlMapRequest()
       );
@@ -775,7 +777,7 @@ describe('v1.RegionUrlMapsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionUrlMapRequest()
       );
@@ -801,7 +803,7 @@ describe('v1.RegionUrlMapsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRegionUrlMapRequest()
       );
@@ -841,7 +843,7 @@ describe('v1.RegionUrlMapsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRegionUrlMapRequest()
       );
@@ -896,7 +898,7 @@ describe('v1.RegionUrlMapsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRegionUrlMapRequest()
       );
@@ -933,7 +935,7 @@ describe('v1.RegionUrlMapsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRegionUrlMapRequest()
       );
@@ -964,7 +966,7 @@ describe('v1.RegionUrlMapsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateRegionUrlMapRequest()
       );
@@ -1005,7 +1007,7 @@ describe('v1.RegionUrlMapsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateRegionUrlMapRequest()
       );
@@ -1062,7 +1064,7 @@ describe('v1.RegionUrlMapsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateRegionUrlMapRequest()
       );
@@ -1100,7 +1102,7 @@ describe('v1.RegionUrlMapsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateRegionUrlMapRequest()
       );
@@ -1131,7 +1133,7 @@ describe('v1.RegionUrlMapsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ValidateRegionUrlMapRequest()
       );
@@ -1172,7 +1174,7 @@ describe('v1.RegionUrlMapsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ValidateRegionUrlMapRequest()
       );
@@ -1229,7 +1231,7 @@ describe('v1.RegionUrlMapsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ValidateRegionUrlMapRequest()
       );
@@ -1267,7 +1269,7 @@ describe('v1.RegionUrlMapsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ValidateRegionUrlMapRequest()
       );
@@ -1298,7 +1300,7 @@ describe('v1.RegionUrlMapsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionUrlMapsRequest()
       );
@@ -1335,7 +1337,7 @@ describe('v1.RegionUrlMapsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionUrlMapsRequest()
       );
@@ -1387,7 +1389,7 @@ describe('v1.RegionUrlMapsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionUrlMapsRequest()
       );
@@ -1419,7 +1421,7 @@ describe('v1.RegionUrlMapsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionUrlMapsRequest()
       );
@@ -1475,7 +1477,7 @@ describe('v1.RegionUrlMapsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionUrlMapsRequest()
       );
@@ -1528,7 +1530,7 @@ describe('v1.RegionUrlMapsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionUrlMapsRequest()
       );
@@ -1575,7 +1577,7 @@ describe('v1.RegionUrlMapsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionUrlMapsRequest()
       );

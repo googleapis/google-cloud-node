@@ -1,6 +1,0 @@
-[
-  "../../protos/google/cloud/binaryauthorization/v1/resources.proto",
-  "../../protos/google/cloud/binaryauthorization/v1/service.proto",
-  "../../protos/grafeas/v1/attestation.proto",
-  "../../protos/grafeas/v1/common.proto"
-]

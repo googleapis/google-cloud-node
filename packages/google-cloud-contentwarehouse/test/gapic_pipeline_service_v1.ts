@@ -238,7 +238,9 @@ describe('v1.PipelineServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.pipelineServiceStub);
       client.close().then(() => {
         done();
@@ -297,7 +299,7 @@ describe('v1.PipelineServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.RunPipelineRequest()
       );
@@ -329,7 +331,7 @@ describe('v1.PipelineServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.RunPipelineRequest()
       );
@@ -383,7 +385,7 @@ describe('v1.PipelineServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.RunPipelineRequest()
       );
@@ -414,7 +416,7 @@ describe('v1.PipelineServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.contentwarehouse.v1.RunPipelineRequest()
       );
@@ -447,7 +449,7 @@ describe('v1.PipelineServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -469,7 +471,7 @@ describe('v1.PipelineServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -486,7 +488,7 @@ describe('v1.PipelineServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -565,7 +567,7 @@ describe('v1.PipelineServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -645,7 +647,7 @@ describe('v1.PipelineServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -741,8 +743,7 @@ describe('v1.PipelineServiceClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -761,7 +762,7 @@ describe('v1.PipelineServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -770,8 +771,7 @@ describe('v1.PipelineServiceClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -787,7 +787,7 @@ describe('v1.PipelineServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('documentLink', () => {
+    describe('documentLink', async () => {
       const fakePath = '/rendered/path/documentLink';
       const expectedParameters = {
         project: 'projectValue',
@@ -799,7 +799,7 @@ describe('v1.PipelineServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.documentLinkPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -863,7 +863,7 @@ describe('v1.PipelineServiceClient', () => {
       });
     });
 
-    describe('documentSchema', () => {
+    describe('documentSchema', async () => {
       const fakePath = '/rendered/path/documentSchema';
       const expectedParameters = {
         project: 'projectValue',
@@ -874,7 +874,7 @@ describe('v1.PipelineServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.documentSchemaPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -928,7 +928,7 @@ describe('v1.PipelineServiceClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -938,7 +938,7 @@ describe('v1.PipelineServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -977,7 +977,7 @@ describe('v1.PipelineServiceClient', () => {
       });
     });
 
-    describe('projectLocationDocument', () => {
+    describe('projectLocationDocument', async () => {
       const fakePath = '/rendered/path/projectLocationDocument';
       const expectedParameters = {
         project: 'projectValue',
@@ -988,7 +988,7 @@ describe('v1.PipelineServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationDocumentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1056,7 +1056,7 @@ describe('v1.PipelineServiceClient', () => {
       });
     });
 
-    describe('projectLocationDocumentsReferenceId', () => {
+    describe('projectLocationDocumentsReferenceId', async () => {
       const fakePath = '/rendered/path/projectLocationDocumentsReferenceId';
       const expectedParameters = {
         project: 'projectValue',
@@ -1067,7 +1067,7 @@ describe('v1.PipelineServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationDocumentsReferenceIdPathTemplate.match =
@@ -1139,7 +1139,7 @@ describe('v1.PipelineServiceClient', () => {
       });
     });
 
-    describe('ruleSet', () => {
+    describe('ruleSet', async () => {
       const fakePath = '/rendered/path/ruleSet';
       const expectedParameters = {
         project: 'projectValue',
@@ -1150,7 +1150,7 @@ describe('v1.PipelineServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.ruleSetPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1203,7 +1203,7 @@ describe('v1.PipelineServiceClient', () => {
       });
     });
 
-    describe('synonymSet', () => {
+    describe('synonymSet', async () => {
       const fakePath = '/rendered/path/synonymSet';
       const expectedParameters = {
         project: 'projectValue',
@@ -1214,7 +1214,7 @@ describe('v1.PipelineServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.synonymSetPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

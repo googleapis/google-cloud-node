@@ -215,7 +215,9 @@ describe('v1.InstanceSettingsServiceClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.instanceSettingsServiceStub);
       client.close().then(() => {
         done();
@@ -278,7 +280,7 @@ describe('v1.InstanceSettingsServiceClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInstanceSettingRequest()
       );
@@ -314,7 +316,7 @@ describe('v1.InstanceSettingsServiceClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInstanceSettingRequest()
       );
@@ -365,7 +367,7 @@ describe('v1.InstanceSettingsServiceClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInstanceSettingRequest()
       );
@@ -398,7 +400,7 @@ describe('v1.InstanceSettingsServiceClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInstanceSettingRequest()
       );
@@ -425,7 +427,7 @@ describe('v1.InstanceSettingsServiceClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchInstanceSettingRequest()
       );
@@ -461,7 +463,7 @@ describe('v1.InstanceSettingsServiceClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchInstanceSettingRequest()
       );
@@ -512,7 +514,7 @@ describe('v1.InstanceSettingsServiceClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchInstanceSettingRequest()
       );
@@ -545,7 +547,7 @@ describe('v1.InstanceSettingsServiceClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchInstanceSettingRequest()
       );

@@ -263,7 +263,9 @@ describe('v1.NodeTypesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.nodeTypesStub);
       client.close().then(() => {
         done();
@@ -322,7 +324,7 @@ describe('v1.NodeTypesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetNodeTypeRequest()
       );
@@ -362,7 +364,7 @@ describe('v1.NodeTypesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetNodeTypeRequest()
       );
@@ -417,7 +419,7 @@ describe('v1.NodeTypesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetNodeTypeRequest()
       );
@@ -454,7 +456,7 @@ describe('v1.NodeTypesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetNodeTypeRequest()
       );
@@ -485,7 +487,7 @@ describe('v1.NodeTypesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AggregatedListNodeTypesRequest()
       );
@@ -545,7 +547,7 @@ describe('v1.NodeTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AggregatedListNodeTypesRequest()
       );
@@ -589,7 +591,7 @@ describe('v1.NodeTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNodeTypesRequest()
       );
@@ -626,7 +628,7 @@ describe('v1.NodeTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNodeTypesRequest()
       );
@@ -678,7 +680,7 @@ describe('v1.NodeTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNodeTypesRequest()
       );
@@ -710,7 +712,7 @@ describe('v1.NodeTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNodeTypesRequest()
       );
@@ -769,7 +771,7 @@ describe('v1.NodeTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNodeTypesRequest()
       );
@@ -825,7 +827,7 @@ describe('v1.NodeTypesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNodeTypesRequest()
       );
@@ -872,7 +874,7 @@ describe('v1.NodeTypesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNodeTypesRequest()
       );
