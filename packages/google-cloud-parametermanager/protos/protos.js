@@ -510,6 +510,7 @@
                          * @property {Object.<string,string>|null} [labels] Parameter labels
                          * @property {google.cloud.parametermanager.v1.ParameterFormat|null} [format] Parameter format
                          * @property {google.iam.v1.IResourcePolicyMember|null} [policyMember] Parameter policyMember
+                         * @property {string|null} [kmsKey] Parameter kmsKey
                          */
     
                         /**
@@ -577,6 +578,28 @@
                         Parameter.prototype.policyMember = null;
     
                         /**
+                         * Parameter kmsKey.
+                         * @member {string|null|undefined} kmsKey
+                         * @memberof google.cloud.parametermanager.v1.Parameter
+                         * @instance
+                         */
+                        Parameter.prototype.kmsKey = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * Parameter _kmsKey.
+                         * @member {"kmsKey"|undefined} _kmsKey
+                         * @memberof google.cloud.parametermanager.v1.Parameter
+                         * @instance
+                         */
+                        Object.defineProperty(Parameter.prototype, "_kmsKey", {
+                            get: $util.oneOfGetter($oneOfFields = ["kmsKey"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new Parameter instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.parametermanager.v1.Parameter
@@ -613,6 +636,8 @@
                                 writer.uint32(/* id 5, wireType 0 =*/40).int32(message.format);
                             if (message.policyMember != null && Object.hasOwnProperty.call(message, "policyMember"))
                                 $root.google.iam.v1.ResourcePolicyMember.encode(message.policyMember, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.kmsKey != null && Object.hasOwnProperty.call(message, "kmsKey"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.kmsKey);
                             return writer;
                         };
     
@@ -690,6 +715,10 @@
                                         message.policyMember = $root.google.iam.v1.ResourcePolicyMember.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 7: {
+                                        message.kmsKey = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -725,6 +754,7 @@
                         Parameter.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -760,6 +790,11 @@
                                 var error = $root.google.iam.v1.ResourcePolicyMember.verify(message.policyMember);
                                 if (error)
                                     return "policyMember." + error;
+                            }
+                            if (message.kmsKey != null && message.hasOwnProperty("kmsKey")) {
+                                properties._kmsKey = 1;
+                                if (!$util.isString(message.kmsKey))
+                                    return "kmsKey: string expected";
                             }
                             return null;
                         };
@@ -824,6 +859,8 @@
                                     throw TypeError(".google.cloud.parametermanager.v1.Parameter.policyMember: object expected");
                                 message.policyMember = $root.google.iam.v1.ResourcePolicyMember.fromObject(object.policyMember);
                             }
+                            if (object.kmsKey != null)
+                                message.kmsKey = String(object.kmsKey);
                             return message;
                         };
     
@@ -865,6 +902,11 @@
                                 object.format = options.enums === String ? $root.google.cloud.parametermanager.v1.ParameterFormat[message.format] === undefined ? message.format : $root.google.cloud.parametermanager.v1.ParameterFormat[message.format] : message.format;
                             if (message.policyMember != null && message.hasOwnProperty("policyMember"))
                                 object.policyMember = $root.google.iam.v1.ResourcePolicyMember.toObject(message.policyMember, options);
+                            if (message.kmsKey != null && message.hasOwnProperty("kmsKey")) {
+                                object.kmsKey = message.kmsKey;
+                                if (options.oneofs)
+                                    object._kmsKey = "kmsKey";
+                            }
                             return object;
                         };
     
@@ -2460,6 +2502,7 @@
                          * @property {google.protobuf.ITimestamp|null} [updateTime] ParameterVersion updateTime
                          * @property {boolean|null} [disabled] ParameterVersion disabled
                          * @property {google.cloud.parametermanager.v1.IParameterVersionPayload|null} [payload] ParameterVersion payload
+                         * @property {string|null} [kmsKeyVersion] ParameterVersion kmsKeyVersion
                          */
     
                         /**
@@ -2518,6 +2561,28 @@
                         ParameterVersion.prototype.payload = null;
     
                         /**
+                         * ParameterVersion kmsKeyVersion.
+                         * @member {string|null|undefined} kmsKeyVersion
+                         * @memberof google.cloud.parametermanager.v1.ParameterVersion
+                         * @instance
+                         */
+                        ParameterVersion.prototype.kmsKeyVersion = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ParameterVersion _kmsKeyVersion.
+                         * @member {"kmsKeyVersion"|undefined} _kmsKeyVersion
+                         * @memberof google.cloud.parametermanager.v1.ParameterVersion
+                         * @instance
+                         */
+                        Object.defineProperty(ParameterVersion.prototype, "_kmsKeyVersion", {
+                            get: $util.oneOfGetter($oneOfFields = ["kmsKeyVersion"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new ParameterVersion instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.parametermanager.v1.ParameterVersion
@@ -2551,6 +2616,8 @@
                                 writer.uint32(/* id 4, wireType 0 =*/32).bool(message.disabled);
                             if (message.payload != null && Object.hasOwnProperty.call(message, "payload"))
                                 $root.google.cloud.parametermanager.v1.ParameterVersionPayload.encode(message.payload, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.kmsKeyVersion != null && Object.hasOwnProperty.call(message, "kmsKeyVersion"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.kmsKeyVersion);
                             return writer;
                         };
     
@@ -2605,6 +2672,10 @@
                                         message.payload = $root.google.cloud.parametermanager.v1.ParameterVersionPayload.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 6: {
+                                        message.kmsKeyVersion = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -2640,6 +2711,7 @@
                         ParameterVersion.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
@@ -2660,6 +2732,11 @@
                                 var error = $root.google.cloud.parametermanager.v1.ParameterVersionPayload.verify(message.payload);
                                 if (error)
                                     return "payload." + error;
+                            }
+                            if (message.kmsKeyVersion != null && message.hasOwnProperty("kmsKeyVersion")) {
+                                properties._kmsKeyVersion = 1;
+                                if (!$util.isString(message.kmsKeyVersion))
+                                    return "kmsKeyVersion: string expected";
                             }
                             return null;
                         };
@@ -2695,6 +2772,8 @@
                                     throw TypeError(".google.cloud.parametermanager.v1.ParameterVersion.payload: object expected");
                                 message.payload = $root.google.cloud.parametermanager.v1.ParameterVersionPayload.fromObject(object.payload);
                             }
+                            if (object.kmsKeyVersion != null)
+                                message.kmsKeyVersion = String(object.kmsKeyVersion);
                             return message;
                         };
     
@@ -2728,6 +2807,11 @@
                                 object.disabled = message.disabled;
                             if (message.payload != null && message.hasOwnProperty("payload"))
                                 object.payload = $root.google.cloud.parametermanager.v1.ParameterVersionPayload.toObject(message.payload, options);
+                            if (message.kmsKeyVersion != null && message.hasOwnProperty("kmsKeyVersion")) {
+                                object.kmsKeyVersion = message.kmsKeyVersion;
+                                if (options.oneofs)
+                                    object._kmsKeyVersion = "kmsKeyVersion";
+                            }
                             return object;
                         };
     

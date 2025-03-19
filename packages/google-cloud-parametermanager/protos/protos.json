@@ -253,6 +253,13 @@
                         "(google.api.resource).plural": "parameters",
                         "(google.api.resource).singular": "parameter"
                       },
+                      "oneofs": {
+                        "_kmsKey": {
+                          "oneof": [
+                            "kmsKey"
+                          ]
+                        }
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -295,6 +302,14 @@
                           "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "kmsKey": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -459,6 +474,13 @@
                         "(google.api.resource).plural": "parameterVersions",
                         "(google.api.resource).singular": "parameterVersion"
                       },
+                      "oneofs": {
+                        "_kmsKeyVersion": {
+                          "oneof": [
+                            "kmsKeyVersion"
+                          ]
+                        }
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -493,6 +515,14 @@
                           "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "kmsKeyVersion": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         }
                       }
