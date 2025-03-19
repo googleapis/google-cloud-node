@@ -44,7 +44,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 1.  [Select or create a Cloud Platform project][projects].
 1.  [Enable billing for your project][billing].
 1.  [Enable the Essential Contacts API API][enable_api].
-1.  [Set up authentication][auth] so you can access the
+1.  [Set up authentication with a service account][auth] so you can access the
     API from your local workstation.
 
 ### Installing the client library
@@ -88,14 +88,14 @@ Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| Essential_contacts_service.compute_contacts | [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.compute_contacts.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.compute_contacts.js,packages/google-cloud-essentialcontacts/samples/README.md) |
-| Essential_contacts_service.create_contact | [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.create_contact.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.create_contact.js,packages/google-cloud-essentialcontacts/samples/README.md) |
-| Essential_contacts_service.delete_contact | [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.delete_contact.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.delete_contact.js,packages/google-cloud-essentialcontacts/samples/README.md) |
-| Essential_contacts_service.get_contact | [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.get_contact.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.get_contact.js,packages/google-cloud-essentialcontacts/samples/README.md) |
-| Essential_contacts_service.list_contacts | [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.list_contacts.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.list_contacts.js,packages/google-cloud-essentialcontacts/samples/README.md) |
-| Essential_contacts_service.send_test_message | [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.send_test_message.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.send_test_message.js,packages/google-cloud-essentialcontacts/samples/README.md) |
-| Essential_contacts_service.update_contact | [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.update_contact.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.update_contact.js,packages/google-cloud-essentialcontacts/samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-essentialcontacts/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-essentialcontacts/samples/quickstart.js,packages/google-cloud-essentialcontacts/samples/README.md) |
+| Essential_contacts_service.compute_contacts | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.compute_contacts.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.compute_contacts.js,packages/google-cloud-essentialcontacts/samples/README.md) |
+| Essential_contacts_service.create_contact | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.create_contact.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.create_contact.js,packages/google-cloud-essentialcontacts/samples/README.md) |
+| Essential_contacts_service.delete_contact | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.delete_contact.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.delete_contact.js,packages/google-cloud-essentialcontacts/samples/README.md) |
+| Essential_contacts_service.get_contact | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.get_contact.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.get_contact.js,packages/google-cloud-essentialcontacts/samples/README.md) |
+| Essential_contacts_service.list_contacts | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.list_contacts.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.list_contacts.js,packages/google-cloud-essentialcontacts/samples/README.md) |
+| Essential_contacts_service.send_test_message | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.send_test_message.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.send_test_message.js,packages/google-cloud-essentialcontacts/samples/README.md) |
+| Essential_contacts_service.update_contact | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.update_contact.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-essentialcontacts/samples/generated/v1/essential_contacts_service.update_contact.js,packages/google-cloud-essentialcontacts/samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-essentialcontacts/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-essentialcontacts/samples/quickstart.js,packages/google-cloud-essentialcontacts/samples/README.md) |
 
 
 
@@ -145,7 +145,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/master/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -157,7 +157,7 @@ to its templates in
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/master/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/essential-contacts/latest
 [product-docs]: https://cloud.google.com/resource-manager/docs/managing-notification-contacts/
@@ -165,4 +165,4 @@ See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/master/LICENS
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
 [enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=essentialcontacts.googleapis.com
-[auth]: https://cloud.google.com/docs/authentication/external/set-up-adc-local
+[auth]: https://cloud.google.com/docs/authentication/getting-started

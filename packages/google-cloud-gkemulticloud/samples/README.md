@@ -75,7 +75,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Attached_clusters.create_attached_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.create_attached_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.create_attached_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.create_attached_cluster.js,samples/README.md)
 
@@ -92,7 +92,7 @@ __Usage:__
 
 ### Attached_clusters.delete_attached_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.delete_attached_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.delete_attached_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.delete_attached_cluster.js,samples/README.md)
 
@@ -109,7 +109,7 @@ __Usage:__
 
 ### Attached_clusters.generate_attached_cluster_agent_token
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.generate_attached_cluster_agent_token.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.generate_attached_cluster_agent_token.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.generate_attached_cluster_agent_token.js,samples/README.md)
 
@@ -126,7 +126,7 @@ __Usage:__
 
 ### Attached_clusters.generate_attached_cluster_install_manifest
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.generate_attached_cluster_install_manifest.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.generate_attached_cluster_install_manifest.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.generate_attached_cluster_install_manifest.js,samples/README.md)
 
@@ -143,7 +143,7 @@ __Usage:__
 
 ### Attached_clusters.get_attached_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.get_attached_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.get_attached_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.get_attached_cluster.js,samples/README.md)
 
@@ -160,7 +160,7 @@ __Usage:__
 
 ### Attached_clusters.get_attached_server_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.get_attached_server_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.get_attached_server_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.get_attached_server_config.js,samples/README.md)
 
@@ -177,7 +177,7 @@ __Usage:__
 
 ### Attached_clusters.import_attached_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.import_attached_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.import_attached_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.import_attached_cluster.js,samples/README.md)
 
@@ -194,7 +194,7 @@ __Usage:__
 
 ### Attached_clusters.list_attached_clusters
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.list_attached_clusters.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.list_attached_clusters.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.list_attached_clusters.js,samples/README.md)
 
@@ -211,7 +211,7 @@ __Usage:__
 
 ### Attached_clusters.update_attached_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.update_attached_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.update_attached_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.update_attached_cluster.js,samples/README.md)
 
@@ -228,7 +228,7 @@ __Usage:__
 
 ### Aws_clusters.create_aws_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.create_aws_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.create_aws_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.create_aws_cluster.js,samples/README.md)
 
@@ -245,7 +245,7 @@ __Usage:__
 
 ### Aws_clusters.create_aws_node_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.create_aws_node_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.create_aws_node_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.create_aws_node_pool.js,samples/README.md)
 
@@ -262,7 +262,7 @@ __Usage:__
 
 ### Aws_clusters.delete_aws_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.delete_aws_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.delete_aws_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.delete_aws_cluster.js,samples/README.md)
 
@@ -279,7 +279,7 @@ __Usage:__
 
 ### Aws_clusters.delete_aws_node_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.delete_aws_node_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.delete_aws_node_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.delete_aws_node_pool.js,samples/README.md)
 
@@ -296,7 +296,7 @@ __Usage:__
 
 ### Aws_clusters.generate_aws_access_token
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.generate_aws_access_token.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.generate_aws_access_token.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.generate_aws_access_token.js,samples/README.md)
 
@@ -313,7 +313,7 @@ __Usage:__
 
 ### Aws_clusters.generate_aws_cluster_agent_token
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.generate_aws_cluster_agent_token.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.generate_aws_cluster_agent_token.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.generate_aws_cluster_agent_token.js,samples/README.md)
 
@@ -330,7 +330,7 @@ __Usage:__
 
 ### Aws_clusters.get_aws_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.get_aws_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.get_aws_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.get_aws_cluster.js,samples/README.md)
 
@@ -347,7 +347,7 @@ __Usage:__
 
 ### Aws_clusters.get_aws_json_web_keys
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.get_aws_json_web_keys.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.get_aws_json_web_keys.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.get_aws_json_web_keys.js,samples/README.md)
 
@@ -364,7 +364,7 @@ __Usage:__
 
 ### Aws_clusters.get_aws_node_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.get_aws_node_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.get_aws_node_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.get_aws_node_pool.js,samples/README.md)
 
@@ -381,7 +381,7 @@ __Usage:__
 
 ### Aws_clusters.get_aws_open_id_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.get_aws_open_id_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.get_aws_open_id_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.get_aws_open_id_config.js,samples/README.md)
 
@@ -398,7 +398,7 @@ __Usage:__
 
 ### Aws_clusters.get_aws_server_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.get_aws_server_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.get_aws_server_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.get_aws_server_config.js,samples/README.md)
 
@@ -415,7 +415,7 @@ __Usage:__
 
 ### Aws_clusters.list_aws_clusters
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.list_aws_clusters.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.list_aws_clusters.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.list_aws_clusters.js,samples/README.md)
 
@@ -432,7 +432,7 @@ __Usage:__
 
 ### Aws_clusters.list_aws_node_pools
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.list_aws_node_pools.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.list_aws_node_pools.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.list_aws_node_pools.js,samples/README.md)
 
@@ -449,7 +449,7 @@ __Usage:__
 
 ### Aws_clusters.rollback_aws_node_pool_update
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.rollback_aws_node_pool_update.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.rollback_aws_node_pool_update.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.rollback_aws_node_pool_update.js,samples/README.md)
 
@@ -466,7 +466,7 @@ __Usage:__
 
 ### Aws_clusters.update_aws_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.update_aws_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.update_aws_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.update_aws_cluster.js,samples/README.md)
 
@@ -483,7 +483,7 @@ __Usage:__
 
 ### Aws_clusters.update_aws_node_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.update_aws_node_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.update_aws_node_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.update_aws_node_pool.js,samples/README.md)
 
@@ -500,7 +500,7 @@ __Usage:__
 
 ### Azure_clusters.create_azure_client
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.create_azure_client.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.create_azure_client.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.create_azure_client.js,samples/README.md)
 
@@ -517,7 +517,7 @@ __Usage:__
 
 ### Azure_clusters.create_azure_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.create_azure_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.create_azure_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.create_azure_cluster.js,samples/README.md)
 
@@ -534,7 +534,7 @@ __Usage:__
 
 ### Azure_clusters.create_azure_node_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.create_azure_node_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.create_azure_node_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.create_azure_node_pool.js,samples/README.md)
 
@@ -551,7 +551,7 @@ __Usage:__
 
 ### Azure_clusters.delete_azure_client
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.delete_azure_client.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.delete_azure_client.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.delete_azure_client.js,samples/README.md)
 
@@ -568,7 +568,7 @@ __Usage:__
 
 ### Azure_clusters.delete_azure_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.delete_azure_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.delete_azure_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.delete_azure_cluster.js,samples/README.md)
 
@@ -585,7 +585,7 @@ __Usage:__
 
 ### Azure_clusters.delete_azure_node_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.delete_azure_node_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.delete_azure_node_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.delete_azure_node_pool.js,samples/README.md)
 
@@ -602,7 +602,7 @@ __Usage:__
 
 ### Azure_clusters.generate_azure_access_token
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.generate_azure_access_token.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.generate_azure_access_token.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.generate_azure_access_token.js,samples/README.md)
 
@@ -619,7 +619,7 @@ __Usage:__
 
 ### Azure_clusters.generate_azure_cluster_agent_token
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.generate_azure_cluster_agent_token.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.generate_azure_cluster_agent_token.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.generate_azure_cluster_agent_token.js,samples/README.md)
 
@@ -636,7 +636,7 @@ __Usage:__
 
 ### Azure_clusters.get_azure_client
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.get_azure_client.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.get_azure_client.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.get_azure_client.js,samples/README.md)
 
@@ -653,7 +653,7 @@ __Usage:__
 
 ### Azure_clusters.get_azure_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.get_azure_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.get_azure_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.get_azure_cluster.js,samples/README.md)
 
@@ -670,7 +670,7 @@ __Usage:__
 
 ### Azure_clusters.get_azure_json_web_keys
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.get_azure_json_web_keys.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.get_azure_json_web_keys.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.get_azure_json_web_keys.js,samples/README.md)
 
@@ -687,7 +687,7 @@ __Usage:__
 
 ### Azure_clusters.get_azure_node_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.get_azure_node_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.get_azure_node_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.get_azure_node_pool.js,samples/README.md)
 
@@ -704,7 +704,7 @@ __Usage:__
 
 ### Azure_clusters.get_azure_open_id_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.get_azure_open_id_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.get_azure_open_id_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.get_azure_open_id_config.js,samples/README.md)
 
@@ -721,7 +721,7 @@ __Usage:__
 
 ### Azure_clusters.get_azure_server_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.get_azure_server_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.get_azure_server_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.get_azure_server_config.js,samples/README.md)
 
@@ -738,7 +738,7 @@ __Usage:__
 
 ### Azure_clusters.list_azure_clients
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.list_azure_clients.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.list_azure_clients.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.list_azure_clients.js,samples/README.md)
 
@@ -755,7 +755,7 @@ __Usage:__
 
 ### Azure_clusters.list_azure_clusters
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.list_azure_clusters.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.list_azure_clusters.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.list_azure_clusters.js,samples/README.md)
 
@@ -772,7 +772,7 @@ __Usage:__
 
 ### Azure_clusters.list_azure_node_pools
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.list_azure_node_pools.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.list_azure_node_pools.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.list_azure_node_pools.js,samples/README.md)
 
@@ -789,7 +789,7 @@ __Usage:__
 
 ### Azure_clusters.update_azure_cluster
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.update_azure_cluster.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.update_azure_cluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.update_azure_cluster.js,samples/README.md)
 
@@ -806,7 +806,7 @@ __Usage:__
 
 ### Azure_clusters.update_azure_node_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.update_azure_node_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.update_azure_node_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.update_azure_node_pool.js,samples/README.md)
 
@@ -823,7 +823,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-gkemulticloud/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/quickstart.js,samples/README.md)
 
