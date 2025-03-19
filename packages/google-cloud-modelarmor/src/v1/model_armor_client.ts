@@ -31,6 +31,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,6 +56,8 @@ export class ModelArmorClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('modelarmor');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -90,7 +93,7 @@ export class ModelArmorClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -492,8 +495,36 @@ export class ModelArmorClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getTemplate(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getTemplate request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.modelarmor.v1.ITemplate,
+          | protos.google.cloud.modelarmor.v1.IGetTemplateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getTemplate response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getTemplate(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.modelarmor.v1.ITemplate,
+          protos.google.cloud.modelarmor.v1.IGetTemplateRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getTemplate response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a new Template in a given project and location.
@@ -602,8 +633,36 @@ export class ModelArmorClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createTemplate(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createTemplate request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.modelarmor.v1.ITemplate,
+          | protos.google.cloud.modelarmor.v1.ICreateTemplateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createTemplate response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createTemplate(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.modelarmor.v1.ITemplate,
+          protos.google.cloud.modelarmor.v1.ICreateTemplateRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createTemplate response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the parameters of a single Template.
@@ -712,8 +771,36 @@ export class ModelArmorClient {
       this._gaxModule.routingHeader.fromParams({
         'template.name': request.template!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateTemplate(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateTemplate request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.modelarmor.v1.ITemplate,
+          | protos.google.cloud.modelarmor.v1.IUpdateTemplateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateTemplate response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateTemplate(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.modelarmor.v1.ITemplate,
+          protos.google.cloud.modelarmor.v1.IUpdateTemplateRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateTemplate response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Deletes a single Template.
@@ -816,8 +903,36 @@ export class ModelArmorClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteTemplate(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteTemplate request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.modelarmor.v1.IDeleteTemplateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteTemplate response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteTemplate(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.modelarmor.v1.IDeleteTemplateRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteTemplate response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets details of a single floor setting of a project
@@ -907,8 +1022,36 @@ export class ModelArmorClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getFloorSetting(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getFloorSetting request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.modelarmor.v1.IFloorSetting,
+          | protos.google.cloud.modelarmor.v1.IGetFloorSettingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getFloorSetting response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getFloorSetting(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.modelarmor.v1.IFloorSetting,
+          protos.google.cloud.modelarmor.v1.IGetFloorSettingRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getFloorSetting response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates the parameters of a single floor setting of a project
@@ -1003,8 +1146,39 @@ export class ModelArmorClient {
       this._gaxModule.routingHeader.fromParams({
         'floor_setting.name': request.floorSetting!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateFloorSetting(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateFloorSetting request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.modelarmor.v1.IFloorSetting,
+          | protos.google.cloud.modelarmor.v1.IUpdateFloorSettingRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateFloorSetting response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateFloorSetting(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.modelarmor.v1.IFloorSetting,
+          (
+            | protos.google.cloud.modelarmor.v1.IUpdateFloorSettingRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateFloorSetting response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Sanitizes User Prompt.
@@ -1096,8 +1270,39 @@ export class ModelArmorClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.sanitizeUserPrompt(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('sanitizeUserPrompt request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.modelarmor.v1.ISanitizeUserPromptResponse,
+          | protos.google.cloud.modelarmor.v1.ISanitizeUserPromptRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('sanitizeUserPrompt response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .sanitizeUserPrompt(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.modelarmor.v1.ISanitizeUserPromptResponse,
+          (
+            | protos.google.cloud.modelarmor.v1.ISanitizeUserPromptRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('sanitizeUserPrompt response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Sanitizes Model Response.
@@ -1197,8 +1402,39 @@ export class ModelArmorClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.sanitizeModelResponse(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('sanitizeModelResponse request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.modelarmor.v1.ISanitizeModelResponseResponse,
+          | protos.google.cloud.modelarmor.v1.ISanitizeModelResponseRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('sanitizeModelResponse response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .sanitizeModelResponse(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.modelarmor.v1.ISanitizeModelResponseResponse,
+          (
+            | protos.google.cloud.modelarmor.v1.ISanitizeModelResponseRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('sanitizeModelResponse response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -1300,8 +1536,36 @@ export class ModelArmorClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listTemplates(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.modelarmor.v1.IListTemplatesRequest,
+          | protos.google.cloud.modelarmor.v1.IListTemplatesResponse
+          | null
+          | undefined,
+          protos.google.cloud.modelarmor.v1.ITemplate
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listTemplates values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listTemplates request %j', request);
+    return this.innerApiCalls
+      .listTemplates(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.modelarmor.v1.ITemplate[],
+          protos.google.cloud.modelarmor.v1.IListTemplatesRequest | null,
+          protos.google.cloud.modelarmor.v1.IListTemplatesResponse,
+        ]) => {
+          this._log.info('listTemplates values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -1344,7 +1608,10 @@ export class ModelArmorClient {
       });
     const defaultCallSettings = this._defaults['listTemplates'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listTemplates stream %j', request);
     return this.descriptors.page.listTemplates.createStream(
       this.innerApiCalls.listTemplates as GaxCall,
       request,
@@ -1395,7 +1662,10 @@ export class ModelArmorClient {
       });
     const defaultCallSettings = this._defaults['listTemplates'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listTemplates iterate %j', request);
     return this.descriptors.page.listTemplates.asyncIterate(
       this.innerApiCalls['listTemplates'] as GaxCall,
       request as {},
@@ -1735,6 +2005,7 @@ export class ModelArmorClient {
   close(): Promise<void> {
     if (this.modelArmorStub && !this._terminated) {
       return this.modelArmorStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.locationsClient.close();

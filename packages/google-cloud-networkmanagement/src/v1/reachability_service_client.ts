@@ -631,7 +631,9 @@ export class ReachabilityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getConnectivityTest request %j', request);
     const wrappedCallback:
       | Callback<
@@ -787,7 +789,9 @@ export class ReachabilityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -970,7 +974,9 @@ export class ReachabilityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'resource.name': request.resource!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1149,7 +1155,9 @@ export class ReachabilityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1317,7 +1325,9 @@ export class ReachabilityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1501,7 +1511,9 @@ export class ReachabilityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.networkmanagement.v1.IListConnectivityTestsRequest,
@@ -1588,7 +1600,9 @@ export class ReachabilityServiceClient {
       });
     const defaultCallSettings = this._defaults['listConnectivityTests'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listConnectivityTests stream %j', request);
     return this.descriptors.page.listConnectivityTests.createStream(
       this.innerApiCalls.listConnectivityTests as GaxCall,
@@ -1657,7 +1671,9 @@ export class ReachabilityServiceClient {
       });
     const defaultCallSettings = this._defaults['listConnectivityTests'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listConnectivityTests iterate %j', request);
     return this.descriptors.page.listConnectivityTests.asyncIterate(
       this.innerApiCalls['listConnectivityTests'] as GaxCall,
@@ -1975,7 +1991,7 @@ export class ReachabilityServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

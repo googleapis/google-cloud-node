@@ -287,7 +287,9 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.netAppStub);
       client.close().then(() => {
         done();
@@ -346,7 +348,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.GetStoragePoolRequest()
       );
@@ -377,7 +379,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.GetStoragePoolRequest()
       );
@@ -424,7 +426,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.GetStoragePoolRequest()
       );
@@ -455,7 +457,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.GetStoragePoolRequest()
       );
@@ -476,7 +478,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.GetVolumeRequest()
       );
@@ -507,7 +509,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.GetVolumeRequest()
       );
@@ -554,7 +556,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.GetVolumeRequest()
       );
@@ -582,7 +584,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.GetVolumeRequest()
       );
@@ -603,7 +605,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.GetSnapshotRequest()
       );
@@ -634,7 +636,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.GetSnapshotRequest()
       );
@@ -681,7 +683,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.GetSnapshotRequest()
       );
@@ -712,7 +714,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.GetSnapshotRequest()
       );
@@ -733,7 +735,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.GetActiveDirectoryRequest()
       );
@@ -765,7 +767,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.GetActiveDirectoryRequest()
       );
@@ -812,7 +814,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.GetActiveDirectoryRequest()
       );
@@ -843,7 +845,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.GetActiveDirectoryRequest()
       );
@@ -864,7 +866,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.GetKmsConfigRequest()
       );
@@ -895,7 +897,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.GetKmsConfigRequest()
       );
@@ -942,7 +944,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.GetKmsConfigRequest()
       );
@@ -973,7 +975,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.GetKmsConfigRequest()
       );
@@ -994,7 +996,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.VerifyKmsConfigRequest()
       );
@@ -1025,7 +1027,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.VerifyKmsConfigRequest()
       );
@@ -1072,7 +1074,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.VerifyKmsConfigRequest()
       );
@@ -1103,7 +1105,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.VerifyKmsConfigRequest()
       );
@@ -1124,7 +1126,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.GetReplicationRequest()
       );
@@ -1155,7 +1157,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.GetReplicationRequest()
       );
@@ -1202,7 +1204,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.GetReplicationRequest()
       );
@@ -1233,7 +1235,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.GetReplicationRequest()
       );
@@ -1254,7 +1256,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.GetBackupVaultRequest()
       );
@@ -1285,7 +1287,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.GetBackupVaultRequest()
       );
@@ -1332,7 +1334,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.GetBackupVaultRequest()
       );
@@ -1363,7 +1365,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.GetBackupVaultRequest()
       );
@@ -1384,7 +1386,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.GetBackupRequest()
       );
@@ -1415,7 +1417,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.GetBackupRequest()
       );
@@ -1462,7 +1464,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.GetBackupRequest()
       );
@@ -1490,7 +1492,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.GetBackupRequest()
       );
@@ -1511,7 +1513,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.GetBackupPolicyRequest()
       );
@@ -1542,7 +1544,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.GetBackupPolicyRequest()
       );
@@ -1589,7 +1591,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.GetBackupPolicyRequest()
       );
@@ -1620,7 +1622,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.GetBackupPolicyRequest()
       );
@@ -1641,7 +1643,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.GetQuotaRuleRequest()
       );
@@ -1672,7 +1674,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.GetQuotaRuleRequest()
       );
@@ -1719,7 +1721,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.GetQuotaRuleRequest()
       );
@@ -1750,7 +1752,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.GetQuotaRuleRequest()
       );
@@ -1771,7 +1773,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.CreateStoragePoolRequest()
       );
@@ -1804,7 +1806,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.CreateStoragePoolRequest()
       );
@@ -1858,7 +1860,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.CreateStoragePoolRequest()
       );
@@ -1889,7 +1891,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.CreateStoragePoolRequest()
       );
@@ -1922,7 +1924,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1944,7 +1946,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1965,7 +1967,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.UpdateStoragePoolRequest()
       );
@@ -1999,7 +2001,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.UpdateStoragePoolRequest()
       );
@@ -2054,7 +2056,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.UpdateStoragePoolRequest()
       );
@@ -2086,7 +2088,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.UpdateStoragePoolRequest()
       );
@@ -2120,7 +2122,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2142,7 +2144,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2163,7 +2165,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.DeleteStoragePoolRequest()
       );
@@ -2196,7 +2198,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.DeleteStoragePoolRequest()
       );
@@ -2250,7 +2252,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.DeleteStoragePoolRequest()
       );
@@ -2281,7 +2283,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.DeleteStoragePoolRequest()
       );
@@ -2314,7 +2316,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2336,7 +2338,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2357,7 +2359,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ValidateDirectoryServiceRequest()
       );
@@ -2390,7 +2392,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ValidateDirectoryServiceRequest()
       );
@@ -2444,7 +2446,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ValidateDirectoryServiceRequest()
       );
@@ -2478,7 +2480,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ValidateDirectoryServiceRequest()
       );
@@ -2511,7 +2513,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2534,7 +2536,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2555,7 +2557,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.SwitchActiveReplicaZoneRequest()
       );
@@ -2588,7 +2590,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.SwitchActiveReplicaZoneRequest()
       );
@@ -2642,7 +2644,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.SwitchActiveReplicaZoneRequest()
       );
@@ -2676,7 +2678,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.SwitchActiveReplicaZoneRequest()
       );
@@ -2709,7 +2711,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2732,7 +2734,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2753,7 +2755,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.CreateVolumeRequest()
       );
@@ -2785,7 +2787,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.CreateVolumeRequest()
       );
@@ -2839,7 +2841,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.CreateVolumeRequest()
       );
@@ -2870,7 +2872,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.CreateVolumeRequest()
       );
@@ -2903,7 +2905,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2925,7 +2927,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2943,7 +2945,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.UpdateVolumeRequest()
       );
@@ -2976,7 +2978,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.UpdateVolumeRequest()
       );
@@ -3031,7 +3033,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.UpdateVolumeRequest()
       );
@@ -3063,7 +3065,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.UpdateVolumeRequest()
       );
@@ -3097,7 +3099,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3119,7 +3121,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3137,7 +3139,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.DeleteVolumeRequest()
       );
@@ -3169,7 +3171,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.DeleteVolumeRequest()
       );
@@ -3223,7 +3225,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.DeleteVolumeRequest()
       );
@@ -3254,7 +3256,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.DeleteVolumeRequest()
       );
@@ -3287,7 +3289,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3309,7 +3311,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3327,7 +3329,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.RevertVolumeRequest()
       );
@@ -3359,7 +3361,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.RevertVolumeRequest()
       );
@@ -3413,7 +3415,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.RevertVolumeRequest()
       );
@@ -3444,7 +3446,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.RevertVolumeRequest()
       );
@@ -3477,7 +3479,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3499,7 +3501,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3517,7 +3519,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.CreateSnapshotRequest()
       );
@@ -3550,7 +3552,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.CreateSnapshotRequest()
       );
@@ -3604,7 +3606,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.CreateSnapshotRequest()
       );
@@ -3635,7 +3637,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.CreateSnapshotRequest()
       );
@@ -3668,7 +3670,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3690,7 +3692,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3711,7 +3713,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.DeleteSnapshotRequest()
       );
@@ -3744,7 +3746,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.DeleteSnapshotRequest()
       );
@@ -3798,7 +3800,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.DeleteSnapshotRequest()
       );
@@ -3829,7 +3831,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.DeleteSnapshotRequest()
       );
@@ -3862,7 +3864,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3884,7 +3886,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3905,7 +3907,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.UpdateSnapshotRequest()
       );
@@ -3939,7 +3941,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.UpdateSnapshotRequest()
       );
@@ -3994,7 +3996,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.UpdateSnapshotRequest()
       );
@@ -4026,7 +4028,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.UpdateSnapshotRequest()
       );
@@ -4060,7 +4062,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4082,7 +4084,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4103,7 +4105,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.CreateActiveDirectoryRequest()
       );
@@ -4136,7 +4138,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.CreateActiveDirectoryRequest()
       );
@@ -4190,7 +4192,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.CreateActiveDirectoryRequest()
       );
@@ -4224,7 +4226,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.CreateActiveDirectoryRequest()
       );
@@ -4257,7 +4259,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4279,7 +4281,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4300,7 +4302,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.UpdateActiveDirectoryRequest()
       );
@@ -4334,7 +4336,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.UpdateActiveDirectoryRequest()
       );
@@ -4389,7 +4391,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.UpdateActiveDirectoryRequest()
       );
@@ -4424,7 +4426,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.UpdateActiveDirectoryRequest()
       );
@@ -4458,7 +4460,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4480,7 +4482,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4501,7 +4503,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.DeleteActiveDirectoryRequest()
       );
@@ -4534,7 +4536,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.DeleteActiveDirectoryRequest()
       );
@@ -4588,7 +4590,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.DeleteActiveDirectoryRequest()
       );
@@ -4622,7 +4624,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.DeleteActiveDirectoryRequest()
       );
@@ -4655,7 +4657,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4677,7 +4679,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4698,7 +4700,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.CreateKmsConfigRequest()
       );
@@ -4731,7 +4733,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.CreateKmsConfigRequest()
       );
@@ -4785,7 +4787,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.CreateKmsConfigRequest()
       );
@@ -4816,7 +4818,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.CreateKmsConfigRequest()
       );
@@ -4849,7 +4851,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4871,7 +4873,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4892,7 +4894,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.UpdateKmsConfigRequest()
       );
@@ -4926,7 +4928,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.UpdateKmsConfigRequest()
       );
@@ -4981,7 +4983,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.UpdateKmsConfigRequest()
       );
@@ -5013,7 +5015,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.UpdateKmsConfigRequest()
       );
@@ -5047,7 +5049,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -5069,7 +5071,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -5090,7 +5092,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.EncryptVolumesRequest()
       );
@@ -5123,7 +5125,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.EncryptVolumesRequest()
       );
@@ -5177,7 +5179,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.EncryptVolumesRequest()
       );
@@ -5208,7 +5210,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.EncryptVolumesRequest()
       );
@@ -5241,7 +5243,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -5263,7 +5265,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -5284,7 +5286,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.DeleteKmsConfigRequest()
       );
@@ -5317,7 +5319,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.DeleteKmsConfigRequest()
       );
@@ -5371,7 +5373,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.DeleteKmsConfigRequest()
       );
@@ -5402,7 +5404,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.DeleteKmsConfigRequest()
       );
@@ -5435,7 +5437,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -5457,7 +5459,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -5478,7 +5480,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.CreateReplicationRequest()
       );
@@ -5511,7 +5513,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.CreateReplicationRequest()
       );
@@ -5565,7 +5567,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.CreateReplicationRequest()
       );
@@ -5596,7 +5598,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.CreateReplicationRequest()
       );
@@ -5629,7 +5631,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -5651,7 +5653,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -5672,7 +5674,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.DeleteReplicationRequest()
       );
@@ -5705,7 +5707,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.DeleteReplicationRequest()
       );
@@ -5759,7 +5761,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.DeleteReplicationRequest()
       );
@@ -5790,7 +5792,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.DeleteReplicationRequest()
       );
@@ -5823,7 +5825,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -5845,7 +5847,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -5866,7 +5868,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.UpdateReplicationRequest()
       );
@@ -5900,7 +5902,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.UpdateReplicationRequest()
       );
@@ -5955,7 +5957,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.UpdateReplicationRequest()
       );
@@ -5987,7 +5989,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.UpdateReplicationRequest()
       );
@@ -6021,7 +6023,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -6043,7 +6045,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -6064,7 +6066,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.StopReplicationRequest()
       );
@@ -6097,7 +6099,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.StopReplicationRequest()
       );
@@ -6151,7 +6153,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.StopReplicationRequest()
       );
@@ -6182,7 +6184,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.StopReplicationRequest()
       );
@@ -6215,7 +6217,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -6237,7 +6239,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -6258,7 +6260,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ResumeReplicationRequest()
       );
@@ -6291,7 +6293,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ResumeReplicationRequest()
       );
@@ -6345,7 +6347,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ResumeReplicationRequest()
       );
@@ -6376,7 +6378,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ResumeReplicationRequest()
       );
@@ -6409,7 +6411,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -6431,7 +6433,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -6452,7 +6454,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ReverseReplicationDirectionRequest()
       );
@@ -6485,7 +6487,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ReverseReplicationDirectionRequest()
       );
@@ -6539,7 +6541,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ReverseReplicationDirectionRequest()
       );
@@ -6573,7 +6575,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ReverseReplicationDirectionRequest()
       );
@@ -6606,7 +6608,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -6629,7 +6631,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -6650,7 +6652,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.EstablishPeeringRequest()
       );
@@ -6683,7 +6685,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.EstablishPeeringRequest()
       );
@@ -6737,7 +6739,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.EstablishPeeringRequest()
       );
@@ -6768,7 +6770,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.EstablishPeeringRequest()
       );
@@ -6801,7 +6803,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -6823,7 +6825,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -6844,7 +6846,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.SyncReplicationRequest()
       );
@@ -6877,7 +6879,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.SyncReplicationRequest()
       );
@@ -6931,7 +6933,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.SyncReplicationRequest()
       );
@@ -6962,7 +6964,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.SyncReplicationRequest()
       );
@@ -6995,7 +6997,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -7017,7 +7019,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -7038,7 +7040,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.CreateBackupVaultRequest()
       );
@@ -7071,7 +7073,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.CreateBackupVaultRequest()
       );
@@ -7125,7 +7127,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.CreateBackupVaultRequest()
       );
@@ -7156,7 +7158,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.CreateBackupVaultRequest()
       );
@@ -7189,7 +7191,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -7211,7 +7213,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -7232,7 +7234,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.UpdateBackupVaultRequest()
       );
@@ -7266,7 +7268,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.UpdateBackupVaultRequest()
       );
@@ -7321,7 +7323,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.UpdateBackupVaultRequest()
       );
@@ -7353,7 +7355,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.UpdateBackupVaultRequest()
       );
@@ -7387,7 +7389,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -7409,7 +7411,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -7430,7 +7432,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.DeleteBackupVaultRequest()
       );
@@ -7463,7 +7465,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.DeleteBackupVaultRequest()
       );
@@ -7517,7 +7519,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.DeleteBackupVaultRequest()
       );
@@ -7548,7 +7550,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.DeleteBackupVaultRequest()
       );
@@ -7581,7 +7583,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -7603,7 +7605,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -7624,7 +7626,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.CreateBackupRequest()
       );
@@ -7656,7 +7658,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.CreateBackupRequest()
       );
@@ -7710,7 +7712,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.CreateBackupRequest()
       );
@@ -7741,7 +7743,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.CreateBackupRequest()
       );
@@ -7774,7 +7776,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -7796,7 +7798,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -7814,7 +7816,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.DeleteBackupRequest()
       );
@@ -7846,7 +7848,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.DeleteBackupRequest()
       );
@@ -7900,7 +7902,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.DeleteBackupRequest()
       );
@@ -7931,7 +7933,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.DeleteBackupRequest()
       );
@@ -7964,7 +7966,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -7986,7 +7988,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -8004,7 +8006,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.UpdateBackupRequest()
       );
@@ -8037,7 +8039,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.UpdateBackupRequest()
       );
@@ -8092,7 +8094,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.UpdateBackupRequest()
       );
@@ -8124,7 +8126,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.UpdateBackupRequest()
       );
@@ -8158,7 +8160,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -8180,7 +8182,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -8198,7 +8200,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.CreateBackupPolicyRequest()
       );
@@ -8231,7 +8233,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.CreateBackupPolicyRequest()
       );
@@ -8285,7 +8287,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.CreateBackupPolicyRequest()
       );
@@ -8316,7 +8318,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.CreateBackupPolicyRequest()
       );
@@ -8349,7 +8351,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -8371,7 +8373,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -8392,7 +8394,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.UpdateBackupPolicyRequest()
       );
@@ -8426,7 +8428,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.UpdateBackupPolicyRequest()
       );
@@ -8481,7 +8483,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.UpdateBackupPolicyRequest()
       );
@@ -8513,7 +8515,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.UpdateBackupPolicyRequest()
       );
@@ -8547,7 +8549,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -8569,7 +8571,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -8590,7 +8592,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.DeleteBackupPolicyRequest()
       );
@@ -8623,7 +8625,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.DeleteBackupPolicyRequest()
       );
@@ -8677,7 +8679,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.DeleteBackupPolicyRequest()
       );
@@ -8708,7 +8710,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.DeleteBackupPolicyRequest()
       );
@@ -8741,7 +8743,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -8763,7 +8765,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -8784,7 +8786,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.CreateQuotaRuleRequest()
       );
@@ -8817,7 +8819,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.CreateQuotaRuleRequest()
       );
@@ -8871,7 +8873,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.CreateQuotaRuleRequest()
       );
@@ -8902,7 +8904,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.CreateQuotaRuleRequest()
       );
@@ -8935,7 +8937,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -8957,7 +8959,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -8978,7 +8980,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.UpdateQuotaRuleRequest()
       );
@@ -9012,7 +9014,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.UpdateQuotaRuleRequest()
       );
@@ -9067,7 +9069,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.UpdateQuotaRuleRequest()
       );
@@ -9099,7 +9101,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.UpdateQuotaRuleRequest()
       );
@@ -9133,7 +9135,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -9155,7 +9157,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -9176,7 +9178,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.DeleteQuotaRuleRequest()
       );
@@ -9209,7 +9211,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.DeleteQuotaRuleRequest()
       );
@@ -9263,7 +9265,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.DeleteQuotaRuleRequest()
       );
@@ -9294,7 +9296,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.DeleteQuotaRuleRequest()
       );
@@ -9327,7 +9329,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -9349,7 +9351,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -9370,7 +9372,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListStoragePoolsRequest()
       );
@@ -9403,7 +9405,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListStoragePoolsRequest()
       );
@@ -9452,7 +9454,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListStoragePoolsRequest()
       );
@@ -9483,7 +9485,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListStoragePoolsRequest()
       );
@@ -9537,7 +9539,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListStoragePoolsRequest()
       );
@@ -9586,7 +9588,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListStoragePoolsRequest()
       );
@@ -9629,7 +9631,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListStoragePoolsRequest()
       );
@@ -9671,7 +9673,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListVolumesRequest()
       );
@@ -9704,7 +9706,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListVolumesRequest()
       );
@@ -9753,7 +9755,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListVolumesRequest()
       );
@@ -9784,7 +9786,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListVolumesRequest()
       );
@@ -9835,7 +9837,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListVolumesRequest()
       );
@@ -9883,7 +9885,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListVolumesRequest()
       );
@@ -9926,7 +9928,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListVolumesRequest()
       );
@@ -9970,7 +9972,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListSnapshotsRequest()
       );
@@ -10003,7 +10005,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListSnapshotsRequest()
       );
@@ -10052,7 +10054,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListSnapshotsRequest()
       );
@@ -10083,7 +10085,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListSnapshotsRequest()
       );
@@ -10137,7 +10139,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListSnapshotsRequest()
       );
@@ -10186,7 +10188,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListSnapshotsRequest()
       );
@@ -10229,7 +10231,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListSnapshotsRequest()
       );
@@ -10271,7 +10273,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListActiveDirectoriesRequest()
       );
@@ -10311,7 +10313,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListActiveDirectoriesRequest()
       );
@@ -10366,7 +10368,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListActiveDirectoriesRequest()
       );
@@ -10400,7 +10402,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListActiveDirectoriesRequest()
       );
@@ -10466,7 +10468,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListActiveDirectoriesRequest()
       );
@@ -10521,7 +10523,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListActiveDirectoriesRequest()
       );
@@ -10574,7 +10576,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListActiveDirectoriesRequest()
       );
@@ -10620,7 +10622,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListKmsConfigsRequest()
       );
@@ -10653,7 +10655,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListKmsConfigsRequest()
       );
@@ -10702,7 +10704,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListKmsConfigsRequest()
       );
@@ -10733,7 +10735,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListKmsConfigsRequest()
       );
@@ -10787,7 +10789,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListKmsConfigsRequest()
       );
@@ -10836,7 +10838,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListKmsConfigsRequest()
       );
@@ -10879,7 +10881,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListKmsConfigsRequest()
       );
@@ -10921,7 +10923,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListReplicationsRequest()
       );
@@ -10954,7 +10956,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListReplicationsRequest()
       );
@@ -11003,7 +11005,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListReplicationsRequest()
       );
@@ -11034,7 +11036,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListReplicationsRequest()
       );
@@ -11088,7 +11090,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListReplicationsRequest()
       );
@@ -11137,7 +11139,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListReplicationsRequest()
       );
@@ -11180,7 +11182,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListReplicationsRequest()
       );
@@ -11222,7 +11224,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListBackupVaultsRequest()
       );
@@ -11255,7 +11257,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListBackupVaultsRequest()
       );
@@ -11304,7 +11306,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListBackupVaultsRequest()
       );
@@ -11335,7 +11337,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListBackupVaultsRequest()
       );
@@ -11389,7 +11391,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListBackupVaultsRequest()
       );
@@ -11438,7 +11440,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListBackupVaultsRequest()
       );
@@ -11481,7 +11483,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListBackupVaultsRequest()
       );
@@ -11523,7 +11525,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListBackupsRequest()
       );
@@ -11556,7 +11558,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListBackupsRequest()
       );
@@ -11605,7 +11607,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListBackupsRequest()
       );
@@ -11636,7 +11638,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListBackupsRequest()
       );
@@ -11687,7 +11689,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListBackupsRequest()
       );
@@ -11735,7 +11737,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListBackupsRequest()
       );
@@ -11778,7 +11780,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListBackupsRequest()
       );
@@ -11822,7 +11824,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListBackupPoliciesRequest()
       );
@@ -11856,7 +11858,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListBackupPoliciesRequest()
       );
@@ -11905,7 +11907,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListBackupPoliciesRequest()
       );
@@ -11936,7 +11938,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListBackupPoliciesRequest()
       );
@@ -11990,7 +11992,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListBackupPoliciesRequest()
       );
@@ -12039,7 +12041,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListBackupPoliciesRequest()
       );
@@ -12082,7 +12084,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListBackupPoliciesRequest()
       );
@@ -12124,7 +12126,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListQuotaRulesRequest()
       );
@@ -12157,7 +12159,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListQuotaRulesRequest()
       );
@@ -12206,7 +12208,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListQuotaRulesRequest()
       );
@@ -12237,7 +12239,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListQuotaRulesRequest()
       );
@@ -12291,7 +12293,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListQuotaRulesRequest()
       );
@@ -12340,7 +12342,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListQuotaRulesRequest()
       );
@@ -12383,7 +12385,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.netapp.v1.ListQuotaRulesRequest()
       );
@@ -12424,7 +12426,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -12454,7 +12456,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -12498,7 +12500,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -12533,7 +12535,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -12581,7 +12583,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -12622,7 +12624,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -12701,7 +12703,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -12781,7 +12783,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -12877,8 +12879,7 @@ describe('v1.NetAppClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -12897,7 +12898,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -12906,8 +12907,7 @@ describe('v1.NetAppClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -12923,7 +12923,7 @@ describe('v1.NetAppClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('activeDirectory', () => {
+    describe('activeDirectory', async () => {
       const fakePath = '/rendered/path/activeDirectory';
       const expectedParameters = {
         project: 'projectValue',
@@ -12934,7 +12934,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.activeDirectoryPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -12988,7 +12988,7 @@ describe('v1.NetAppClient', () => {
       });
     });
 
-    describe('backup', () => {
+    describe('backup', async () => {
       const fakePath = '/rendered/path/backup';
       const expectedParameters = {
         project: 'projectValue',
@@ -13000,7 +13000,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.backupPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -13064,7 +13064,7 @@ describe('v1.NetAppClient', () => {
       });
     });
 
-    describe('backupPolicy', () => {
+    describe('backupPolicy', async () => {
       const fakePath = '/rendered/path/backupPolicy';
       const expectedParameters = {
         project: 'projectValue',
@@ -13075,7 +13075,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.backupPolicyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -13128,7 +13128,7 @@ describe('v1.NetAppClient', () => {
       });
     });
 
-    describe('backupVault', () => {
+    describe('backupVault', async () => {
       const fakePath = '/rendered/path/backupVault';
       const expectedParameters = {
         project: 'projectValue',
@@ -13139,7 +13139,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.backupVaultPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -13192,7 +13192,7 @@ describe('v1.NetAppClient', () => {
       });
     });
 
-    describe('kmsConfig', () => {
+    describe('kmsConfig', async () => {
       const fakePath = '/rendered/path/kmsConfig';
       const expectedParameters = {
         project: 'projectValue',
@@ -13203,7 +13203,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.kmsConfigPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -13256,7 +13256,7 @@ describe('v1.NetAppClient', () => {
       });
     });
 
-    describe('quotaRule', () => {
+    describe('quotaRule', async () => {
       const fakePath = '/rendered/path/quotaRule';
       const expectedParameters = {
         project: 'projectValue',
@@ -13268,7 +13268,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.quotaRulePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -13332,7 +13332,7 @@ describe('v1.NetAppClient', () => {
       });
     });
 
-    describe('replication', () => {
+    describe('replication', async () => {
       const fakePath = '/rendered/path/replication';
       const expectedParameters = {
         project: 'projectValue',
@@ -13344,7 +13344,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.replicationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -13408,7 +13408,7 @@ describe('v1.NetAppClient', () => {
       });
     });
 
-    describe('snapshot', () => {
+    describe('snapshot', async () => {
       const fakePath = '/rendered/path/snapshot';
       const expectedParameters = {
         project: 'projectValue',
@@ -13420,7 +13420,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.snapshotPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -13484,7 +13484,7 @@ describe('v1.NetAppClient', () => {
       });
     });
 
-    describe('storagePool', () => {
+    describe('storagePool', async () => {
       const fakePath = '/rendered/path/storagePool';
       const expectedParameters = {
         project: 'projectValue',
@@ -13495,7 +13495,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.storagePoolPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -13548,7 +13548,7 @@ describe('v1.NetAppClient', () => {
       });
     });
 
-    describe('volume', () => {
+    describe('volume', async () => {
       const fakePath = '/rendered/path/volume';
       const expectedParameters = {
         project: 'projectValue',
@@ -13559,7 +13559,7 @@ describe('v1.NetAppClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.volumePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
