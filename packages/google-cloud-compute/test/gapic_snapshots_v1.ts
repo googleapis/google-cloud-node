@@ -263,7 +263,9 @@ describe('v1.SnapshotsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.snapshotsStub);
       client.close().then(() => {
         done();
@@ -322,7 +324,7 @@ describe('v1.SnapshotsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteSnapshotRequest()
       );
@@ -358,7 +360,7 @@ describe('v1.SnapshotsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteSnapshotRequest()
       );
@@ -410,7 +412,7 @@ describe('v1.SnapshotsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteSnapshotRequest()
       );
@@ -443,7 +445,7 @@ describe('v1.SnapshotsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteSnapshotRequest()
       );
@@ -469,7 +471,7 @@ describe('v1.SnapshotsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetSnapshotRequest()
       );
@@ -504,7 +506,7 @@ describe('v1.SnapshotsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetSnapshotRequest()
       );
@@ -554,7 +556,7 @@ describe('v1.SnapshotsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetSnapshotRequest()
       );
@@ -586,7 +588,7 @@ describe('v1.SnapshotsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetSnapshotRequest()
       );
@@ -612,7 +614,7 @@ describe('v1.SnapshotsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicySnapshotRequest()
       );
@@ -648,7 +650,7 @@ describe('v1.SnapshotsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicySnapshotRequest()
       );
@@ -700,7 +702,7 @@ describe('v1.SnapshotsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicySnapshotRequest()
       );
@@ -736,7 +738,7 @@ describe('v1.SnapshotsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicySnapshotRequest()
       );
@@ -762,7 +764,7 @@ describe('v1.SnapshotsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertSnapshotRequest()
       );
@@ -793,7 +795,7 @@ describe('v1.SnapshotsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertSnapshotRequest()
       );
@@ -840,7 +842,7 @@ describe('v1.SnapshotsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertSnapshotRequest()
       );
@@ -868,7 +870,7 @@ describe('v1.SnapshotsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertSnapshotRequest()
       );
@@ -889,7 +891,7 @@ describe('v1.SnapshotsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicySnapshotRequest()
       );
@@ -925,7 +927,7 @@ describe('v1.SnapshotsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicySnapshotRequest()
       );
@@ -977,7 +979,7 @@ describe('v1.SnapshotsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicySnapshotRequest()
       );
@@ -1013,7 +1015,7 @@ describe('v1.SnapshotsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicySnapshotRequest()
       );
@@ -1039,7 +1041,7 @@ describe('v1.SnapshotsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsSnapshotRequest()
       );
@@ -1075,7 +1077,7 @@ describe('v1.SnapshotsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsSnapshotRequest()
       );
@@ -1127,7 +1129,7 @@ describe('v1.SnapshotsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsSnapshotRequest()
       );
@@ -1160,7 +1162,7 @@ describe('v1.SnapshotsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsSnapshotRequest()
       );
@@ -1186,7 +1188,7 @@ describe('v1.SnapshotsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsSnapshotRequest()
       );
@@ -1223,7 +1225,7 @@ describe('v1.SnapshotsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsSnapshotRequest()
       );
@@ -1275,7 +1277,7 @@ describe('v1.SnapshotsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsSnapshotRequest()
       );
@@ -1311,7 +1313,7 @@ describe('v1.SnapshotsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsSnapshotRequest()
       );
@@ -1337,7 +1339,7 @@ describe('v1.SnapshotsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSnapshotsRequest()
       );
@@ -1369,7 +1371,7 @@ describe('v1.SnapshotsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSnapshotsRequest()
       );
@@ -1416,7 +1418,7 @@ describe('v1.SnapshotsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSnapshotsRequest()
       );
@@ -1443,7 +1445,7 @@ describe('v1.SnapshotsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSnapshotsRequest()
       );
@@ -1497,7 +1499,7 @@ describe('v1.SnapshotsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSnapshotsRequest()
       );
@@ -1548,7 +1550,7 @@ describe('v1.SnapshotsClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSnapshotsRequest()
       );
@@ -1590,7 +1592,7 @@ describe('v1.SnapshotsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSnapshotsRequest()
       );

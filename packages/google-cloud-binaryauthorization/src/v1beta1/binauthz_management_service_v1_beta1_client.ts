@@ -506,7 +506,9 @@ export class BinauthzManagementServiceV1Beta1Client {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -637,7 +639,9 @@ export class BinauthzManagementServiceV1Beta1Client {
       this._gaxModule.routingHeader.fromParams({
         'policy.name': request.policy!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updatePolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -771,7 +775,9 @@ export class BinauthzManagementServiceV1Beta1Client {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createAttestor request %j', request);
     const wrappedCallback:
       | Callback<
@@ -898,7 +904,9 @@ export class BinauthzManagementServiceV1Beta1Client {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAttestor request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1026,7 +1034,9 @@ export class BinauthzManagementServiceV1Beta1Client {
       this._gaxModule.routingHeader.fromParams({
         'attestor.name': request.attestor!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateAttestor request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1153,7 +1163,9 @@ export class BinauthzManagementServiceV1Beta1Client {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteAttestor request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1285,7 +1297,9 @@ export class BinauthzManagementServiceV1Beta1Client {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.binaryauthorization.v1beta1.IListAttestorsRequest,
@@ -1354,7 +1368,9 @@ export class BinauthzManagementServiceV1Beta1Client {
       });
     const defaultCallSettings = this._defaults['listAttestors'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAttestors stream %j', request);
     return this.descriptors.page.listAttestors.createStream(
       this.innerApiCalls.listAttestors as GaxCall,
@@ -1405,7 +1421,9 @@ export class BinauthzManagementServiceV1Beta1Client {
       });
     const defaultCallSettings = this._defaults['listAttestors'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAttestors iterate %j', request);
     return this.descriptors.page.listAttestors.asyncIterate(
       this.innerApiCalls['listAttestors'] as GaxCall,

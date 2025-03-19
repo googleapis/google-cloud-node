@@ -278,7 +278,9 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.regionTargetHttpsProxiesStub);
       client.close().then(() => {
         done();
@@ -341,7 +343,7 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionTargetHttpsProxyRequest()
       );
@@ -383,7 +385,7 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionTargetHttpsProxyRequest()
       );
@@ -441,7 +443,7 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionTargetHttpsProxyRequest()
       );
@@ -480,7 +482,7 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionTargetHttpsProxyRequest()
       );
@@ -512,7 +514,7 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionTargetHttpsProxyRequest()
       );
@@ -553,7 +555,7 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionTargetHttpsProxyRequest()
       );
@@ -609,7 +611,7 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionTargetHttpsProxyRequest()
       );
@@ -647,7 +649,7 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionTargetHttpsProxyRequest()
       );
@@ -679,7 +681,7 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionTargetHttpsProxyRequest()
       );
@@ -716,7 +718,7 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionTargetHttpsProxyRequest()
       );
@@ -769,7 +771,7 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionTargetHttpsProxyRequest()
       );
@@ -803,7 +805,7 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionTargetHttpsProxyRequest()
       );
@@ -830,7 +832,7 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRegionTargetHttpsProxyRequest()
       );
@@ -871,7 +873,7 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRegionTargetHttpsProxyRequest()
       );
@@ -927,7 +929,7 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRegionTargetHttpsProxyRequest()
       );
@@ -965,7 +967,7 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRegionTargetHttpsProxyRequest()
       );
@@ -997,7 +999,7 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetSslCertificatesRegionTargetHttpsProxyRequest()
       );
@@ -1040,7 +1042,7 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetSslCertificatesRegionTargetHttpsProxyRequest()
       );
@@ -1098,7 +1100,7 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetSslCertificatesRegionTargetHttpsProxyRequest()
       );
@@ -1140,7 +1142,7 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetSslCertificatesRegionTargetHttpsProxyRequest()
       );
@@ -1172,7 +1174,7 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetUrlMapRegionTargetHttpsProxyRequest()
       );
@@ -1214,7 +1216,7 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetUrlMapRegionTargetHttpsProxyRequest()
       );
@@ -1272,7 +1274,7 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetUrlMapRegionTargetHttpsProxyRequest()
       );
@@ -1311,7 +1313,7 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetUrlMapRegionTargetHttpsProxyRequest()
       );
@@ -1343,7 +1345,7 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionTargetHttpsProxiesRequest()
       );
@@ -1387,7 +1389,7 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionTargetHttpsProxiesRequest()
       );
@@ -1446,7 +1448,7 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionTargetHttpsProxiesRequest()
       );
@@ -1479,7 +1481,7 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionTargetHttpsProxiesRequest()
       );
@@ -1545,7 +1547,7 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionTargetHttpsProxiesRequest()
       );
@@ -1602,7 +1604,7 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionTargetHttpsProxiesRequest()
       );
@@ -1656,7 +1658,7 @@ describe('v1.RegionTargetHttpsProxiesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionTargetHttpsProxiesRequest()
       );

@@ -496,7 +496,9 @@ export class StoragePoolsClient {
         zone: request.zone ?? '',
         storage_pool: request.storagePool ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('delete request %j', request);
     const wrappedCallback:
       | Callback<
@@ -621,7 +623,9 @@ export class StoragePoolsClient {
         zone: request.zone ?? '',
         storage_pool: request.storagePool ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('get request %j', request);
     const wrappedCallback:
       | Callback<
@@ -751,7 +755,9 @@ export class StoragePoolsClient {
         zone: request.zone ?? '',
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -882,7 +888,9 @@ export class StoragePoolsClient {
         project: request.project ?? '',
         zone: request.zone ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('insert request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1021,7 +1029,9 @@ export class StoragePoolsClient {
         zone: request.zone ?? '',
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1154,7 +1164,9 @@ export class StoragePoolsClient {
         zone: request.zone ?? '',
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('testIamPermissions request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1290,7 +1302,9 @@ export class StoragePoolsClient {
         zone: request.zone ?? '',
         storage_pool: request.storagePool ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('update request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1379,7 +1393,9 @@ export class StoragePoolsClient {
       });
     const defaultCallSettings = this._defaults['aggregatedList'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('aggregatedList iterate %j', request);
     return this.descriptors.page.aggregatedList.asyncIterate(
       this.innerApiCalls['aggregatedList'] as GaxCall,
@@ -1484,7 +1500,9 @@ export class StoragePoolsClient {
         project: request.project ?? '',
         zone: request.zone ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.compute.v1.IListStoragePoolsRequest,
@@ -1556,7 +1574,9 @@ export class StoragePoolsClient {
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('list stream %j', request);
     return this.descriptors.page.list.createStream(
       this.innerApiCalls.list as GaxCall,
@@ -1612,7 +1632,9 @@ export class StoragePoolsClient {
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('list iterate %j', request);
     return this.descriptors.page.list.asyncIterate(
       this.innerApiCalls['list'] as GaxCall,
@@ -1720,7 +1742,9 @@ export class StoragePoolsClient {
         zone: request.zone ?? '',
         storage_pool: request.storagePool ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.compute.v1.IListDisksStoragePoolsRequest,
@@ -1797,7 +1821,9 @@ export class StoragePoolsClient {
       });
     const defaultCallSettings = this._defaults['listDisks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDisks stream %j', request);
     return this.descriptors.page.listDisks.createStream(
       this.innerApiCalls.listDisks as GaxCall,
@@ -1856,7 +1882,9 @@ export class StoragePoolsClient {
       });
     const defaultCallSettings = this._defaults['listDisks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDisks iterate %j', request);
     return this.descriptors.page.listDisks.asyncIterate(
       this.innerApiCalls['listDisks'] as GaxCall,

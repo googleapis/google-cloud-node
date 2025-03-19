@@ -513,7 +513,9 @@ export class SessionTemplateControllerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createSessionTemplate request %j', request);
     const wrappedCallback:
       | Callback<
@@ -632,7 +634,9 @@ export class SessionTemplateControllerClient {
       this._gaxModule.routingHeader.fromParams({
         'session_template.name': request.sessionTemplate!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateSessionTemplate request %j', request);
     const wrappedCallback:
       | Callback<
@@ -751,7 +755,9 @@ export class SessionTemplateControllerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getSessionTemplate request %j', request);
     const wrappedCallback:
       | Callback<
@@ -870,7 +876,9 @@ export class SessionTemplateControllerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteSessionTemplate request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1004,7 +1012,9 @@ export class SessionTemplateControllerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dataproc.v1.IListSessionTemplatesRequest,
@@ -1076,7 +1086,9 @@ export class SessionTemplateControllerClient {
       });
     const defaultCallSettings = this._defaults['listSessionTemplates'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSessionTemplates stream %j', request);
     return this.descriptors.page.listSessionTemplates.createStream(
       this.innerApiCalls.listSessionTemplates as GaxCall,
@@ -1130,7 +1142,9 @@ export class SessionTemplateControllerClient {
       });
     const defaultCallSettings = this._defaults['listSessionTemplates'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSessionTemplates iterate %j', request);
     return this.descriptors.page.listSessionTemplates.asyncIterate(
       this.innerApiCalls['listSessionTemplates'] as GaxCall,

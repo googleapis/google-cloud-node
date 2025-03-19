@@ -278,7 +278,9 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.publicDelegatedPrefixesStub);
       client.close().then(() => {
         done();
@@ -341,7 +343,7 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AnnouncePublicDelegatedPrefixeRequest()
       );
@@ -383,7 +385,7 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AnnouncePublicDelegatedPrefixeRequest()
       );
@@ -441,7 +443,7 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AnnouncePublicDelegatedPrefixeRequest()
       );
@@ -480,7 +482,7 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AnnouncePublicDelegatedPrefixeRequest()
       );
@@ -512,7 +514,7 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeletePublicDelegatedPrefixeRequest()
       );
@@ -554,7 +556,7 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeletePublicDelegatedPrefixeRequest()
       );
@@ -612,7 +614,7 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeletePublicDelegatedPrefixeRequest()
       );
@@ -651,7 +653,7 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeletePublicDelegatedPrefixeRequest()
       );
@@ -683,7 +685,7 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetPublicDelegatedPrefixeRequest()
       );
@@ -724,7 +726,7 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetPublicDelegatedPrefixeRequest()
       );
@@ -780,7 +782,7 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetPublicDelegatedPrefixeRequest()
       );
@@ -818,7 +820,7 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetPublicDelegatedPrefixeRequest()
       );
@@ -850,7 +852,7 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertPublicDelegatedPrefixeRequest()
       );
@@ -887,7 +889,7 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertPublicDelegatedPrefixeRequest()
       );
@@ -940,7 +942,7 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertPublicDelegatedPrefixeRequest()
       );
@@ -974,7 +976,7 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertPublicDelegatedPrefixeRequest()
       );
@@ -1001,7 +1003,7 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchPublicDelegatedPrefixeRequest()
       );
@@ -1042,7 +1044,7 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchPublicDelegatedPrefixeRequest()
       );
@@ -1098,7 +1100,7 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchPublicDelegatedPrefixeRequest()
       );
@@ -1136,7 +1138,7 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchPublicDelegatedPrefixeRequest()
       );
@@ -1168,7 +1170,7 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.WithdrawPublicDelegatedPrefixeRequest()
       );
@@ -1210,7 +1212,7 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.WithdrawPublicDelegatedPrefixeRequest()
       );
@@ -1268,7 +1270,7 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.WithdrawPublicDelegatedPrefixeRequest()
       );
@@ -1307,7 +1309,7 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.WithdrawPublicDelegatedPrefixeRequest()
       );
@@ -1339,7 +1341,7 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AggregatedListPublicDelegatedPrefixesRequest()
       );
@@ -1403,7 +1405,7 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AggregatedListPublicDelegatedPrefixesRequest()
       );
@@ -1451,7 +1453,7 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListPublicDelegatedPrefixesRequest()
       );
@@ -1495,7 +1497,7 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListPublicDelegatedPrefixesRequest()
       );
@@ -1556,7 +1558,7 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListPublicDelegatedPrefixesRequest()
       );
@@ -1589,7 +1591,7 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListPublicDelegatedPrefixesRequest()
       );
@@ -1656,7 +1658,7 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListPublicDelegatedPrefixesRequest()
       );
@@ -1714,7 +1716,7 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListPublicDelegatedPrefixesRequest()
       );
@@ -1769,7 +1771,7 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListPublicDelegatedPrefixesRequest()
       );

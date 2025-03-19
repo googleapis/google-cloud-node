@@ -287,7 +287,9 @@ describe('v1.InstanceGroupManagerResizeRequestsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.instanceGroupManagerResizeRequestsStub);
       client.close().then(() => {
         done();
@@ -361,7 +363,7 @@ describe('v1.InstanceGroupManagerResizeRequestsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.CancelInstanceGroupManagerResizeRequestRequest()
       );
@@ -410,7 +412,7 @@ describe('v1.InstanceGroupManagerResizeRequestsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.CancelInstanceGroupManagerResizeRequestRequest()
       );
@@ -475,7 +477,7 @@ describe('v1.InstanceGroupManagerResizeRequestsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.CancelInstanceGroupManagerResizeRequestRequest()
       );
@@ -521,7 +523,7 @@ describe('v1.InstanceGroupManagerResizeRequestsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.CancelInstanceGroupManagerResizeRequestRequest()
       );
@@ -560,7 +562,7 @@ describe('v1.InstanceGroupManagerResizeRequestsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteInstanceGroupManagerResizeRequestRequest()
       );
@@ -609,7 +611,7 @@ describe('v1.InstanceGroupManagerResizeRequestsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteInstanceGroupManagerResizeRequestRequest()
       );
@@ -674,7 +676,7 @@ describe('v1.InstanceGroupManagerResizeRequestsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteInstanceGroupManagerResizeRequestRequest()
       );
@@ -720,7 +722,7 @@ describe('v1.InstanceGroupManagerResizeRequestsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteInstanceGroupManagerResizeRequestRequest()
       );
@@ -759,7 +761,7 @@ describe('v1.InstanceGroupManagerResizeRequestsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInstanceGroupManagerResizeRequestRequest()
       );
@@ -807,7 +809,7 @@ describe('v1.InstanceGroupManagerResizeRequestsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInstanceGroupManagerResizeRequestRequest()
       );
@@ -870,7 +872,7 @@ describe('v1.InstanceGroupManagerResizeRequestsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInstanceGroupManagerResizeRequestRequest()
       );
@@ -915,7 +917,7 @@ describe('v1.InstanceGroupManagerResizeRequestsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInstanceGroupManagerResizeRequestRequest()
       );
@@ -954,7 +956,7 @@ describe('v1.InstanceGroupManagerResizeRequestsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertInstanceGroupManagerResizeRequestRequest()
       );
@@ -998,7 +1000,7 @@ describe('v1.InstanceGroupManagerResizeRequestsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertInstanceGroupManagerResizeRequestRequest()
       );
@@ -1058,7 +1060,7 @@ describe('v1.InstanceGroupManagerResizeRequestsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertInstanceGroupManagerResizeRequestRequest()
       );
@@ -1099,7 +1101,7 @@ describe('v1.InstanceGroupManagerResizeRequestsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertInstanceGroupManagerResizeRequestRequest()
       );
@@ -1133,7 +1135,7 @@ describe('v1.InstanceGroupManagerResizeRequestsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInstanceGroupManagerResizeRequestsRequest()
       );
@@ -1184,7 +1186,7 @@ describe('v1.InstanceGroupManagerResizeRequestsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInstanceGroupManagerResizeRequestsRequest()
       );
@@ -1252,7 +1254,7 @@ describe('v1.InstanceGroupManagerResizeRequestsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInstanceGroupManagerResizeRequestsRequest()
       );
@@ -1292,7 +1294,7 @@ describe('v1.InstanceGroupManagerResizeRequestsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInstanceGroupManagerResizeRequestsRequest()
       );
@@ -1368,7 +1370,7 @@ describe('v1.InstanceGroupManagerResizeRequestsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInstanceGroupManagerResizeRequestsRequest()
       );
@@ -1435,7 +1437,7 @@ describe('v1.InstanceGroupManagerResizeRequestsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInstanceGroupManagerResizeRequestsRequest()
       );
@@ -1497,7 +1499,7 @@ describe('v1.InstanceGroupManagerResizeRequestsClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInstanceGroupManagerResizeRequestsRequest()
       );

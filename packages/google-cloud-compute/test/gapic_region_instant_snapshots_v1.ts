@@ -278,7 +278,9 @@ describe('v1.RegionInstantSnapshotsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.regionInstantSnapshotsStub);
       client.close().then(() => {
         done();
@@ -341,7 +343,7 @@ describe('v1.RegionInstantSnapshotsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionInstantSnapshotRequest()
       );
@@ -383,7 +385,7 @@ describe('v1.RegionInstantSnapshotsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionInstantSnapshotRequest()
       );
@@ -441,7 +443,7 @@ describe('v1.RegionInstantSnapshotsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionInstantSnapshotRequest()
       );
@@ -480,7 +482,7 @@ describe('v1.RegionInstantSnapshotsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionInstantSnapshotRequest()
       );
@@ -512,7 +514,7 @@ describe('v1.RegionInstantSnapshotsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionInstantSnapshotRequest()
       );
@@ -553,7 +555,7 @@ describe('v1.RegionInstantSnapshotsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionInstantSnapshotRequest()
       );
@@ -609,7 +611,7 @@ describe('v1.RegionInstantSnapshotsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionInstantSnapshotRequest()
       );
@@ -647,7 +649,7 @@ describe('v1.RegionInstantSnapshotsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionInstantSnapshotRequest()
       );
@@ -679,7 +681,7 @@ describe('v1.RegionInstantSnapshotsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyRegionInstantSnapshotRequest()
       );
@@ -721,7 +723,7 @@ describe('v1.RegionInstantSnapshotsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyRegionInstantSnapshotRequest()
       );
@@ -779,7 +781,7 @@ describe('v1.RegionInstantSnapshotsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyRegionInstantSnapshotRequest()
       );
@@ -821,7 +823,7 @@ describe('v1.RegionInstantSnapshotsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyRegionInstantSnapshotRequest()
       );
@@ -853,7 +855,7 @@ describe('v1.RegionInstantSnapshotsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionInstantSnapshotRequest()
       );
@@ -890,7 +892,7 @@ describe('v1.RegionInstantSnapshotsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionInstantSnapshotRequest()
       );
@@ -943,7 +945,7 @@ describe('v1.RegionInstantSnapshotsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionInstantSnapshotRequest()
       );
@@ -977,7 +979,7 @@ describe('v1.RegionInstantSnapshotsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionInstantSnapshotRequest()
       );
@@ -1004,7 +1006,7 @@ describe('v1.RegionInstantSnapshotsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyRegionInstantSnapshotRequest()
       );
@@ -1046,7 +1048,7 @@ describe('v1.RegionInstantSnapshotsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyRegionInstantSnapshotRequest()
       );
@@ -1104,7 +1106,7 @@ describe('v1.RegionInstantSnapshotsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyRegionInstantSnapshotRequest()
       );
@@ -1146,7 +1148,7 @@ describe('v1.RegionInstantSnapshotsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyRegionInstantSnapshotRequest()
       );
@@ -1178,7 +1180,7 @@ describe('v1.RegionInstantSnapshotsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsRegionInstantSnapshotRequest()
       );
@@ -1220,7 +1222,7 @@ describe('v1.RegionInstantSnapshotsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsRegionInstantSnapshotRequest()
       );
@@ -1278,7 +1280,7 @@ describe('v1.RegionInstantSnapshotsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsRegionInstantSnapshotRequest()
       );
@@ -1317,7 +1319,7 @@ describe('v1.RegionInstantSnapshotsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsRegionInstantSnapshotRequest()
       );
@@ -1349,7 +1351,7 @@ describe('v1.RegionInstantSnapshotsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsRegionInstantSnapshotRequest()
       );
@@ -1392,7 +1394,7 @@ describe('v1.RegionInstantSnapshotsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsRegionInstantSnapshotRequest()
       );
@@ -1450,7 +1452,7 @@ describe('v1.RegionInstantSnapshotsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsRegionInstantSnapshotRequest()
       );
@@ -1492,7 +1494,7 @@ describe('v1.RegionInstantSnapshotsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsRegionInstantSnapshotRequest()
       );
@@ -1524,7 +1526,7 @@ describe('v1.RegionInstantSnapshotsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionInstantSnapshotsRequest()
       );
@@ -1568,7 +1570,7 @@ describe('v1.RegionInstantSnapshotsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionInstantSnapshotsRequest()
       );
@@ -1627,7 +1629,7 @@ describe('v1.RegionInstantSnapshotsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionInstantSnapshotsRequest()
       );
@@ -1660,7 +1662,7 @@ describe('v1.RegionInstantSnapshotsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionInstantSnapshotsRequest()
       );
@@ -1726,7 +1728,7 @@ describe('v1.RegionInstantSnapshotsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionInstantSnapshotsRequest()
       );
@@ -1783,7 +1785,7 @@ describe('v1.RegionInstantSnapshotsClient', () => {
           auth: googleAuth,
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionInstantSnapshotsRequest()
       );
@@ -1837,7 +1839,7 @@ describe('v1.RegionInstantSnapshotsClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionInstantSnapshotsRequest()
       );

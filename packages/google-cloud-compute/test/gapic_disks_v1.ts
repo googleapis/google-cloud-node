@@ -263,7 +263,9 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.disksStub);
       client.close().then(() => {
         done();
@@ -322,7 +324,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddResourcePoliciesDiskRequest()
       );
@@ -364,7 +366,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddResourcePoliciesDiskRequest()
       );
@@ -421,7 +423,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddResourcePoliciesDiskRequest()
       );
@@ -462,7 +464,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddResourcePoliciesDiskRequest()
       );
@@ -493,7 +495,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.BulkInsertDiskRequest()
       );
@@ -529,7 +531,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.BulkInsertDiskRequest()
       );
@@ -581,7 +583,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.BulkInsertDiskRequest()
       );
@@ -617,7 +619,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.BulkInsertDiskRequest()
       );
@@ -643,7 +645,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.CreateSnapshotDiskRequest()
       );
@@ -684,7 +686,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.CreateSnapshotDiskRequest()
       );
@@ -741,7 +743,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.CreateSnapshotDiskRequest()
       );
@@ -782,7 +784,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.CreateSnapshotDiskRequest()
       );
@@ -813,7 +815,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteDiskRequest()
       );
@@ -854,7 +856,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteDiskRequest()
       );
@@ -911,7 +913,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteDiskRequest()
       );
@@ -949,7 +951,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteDiskRequest()
       );
@@ -980,7 +982,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetDiskRequest()
       );
@@ -1020,7 +1022,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetDiskRequest()
       );
@@ -1075,7 +1077,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetDiskRequest()
       );
@@ -1112,7 +1114,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetDiskRequest()
       );
@@ -1143,7 +1145,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyDiskRequest()
       );
@@ -1184,7 +1186,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyDiskRequest()
       );
@@ -1241,7 +1243,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyDiskRequest()
       );
@@ -1282,7 +1284,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyDiskRequest()
       );
@@ -1313,7 +1315,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertDiskRequest()
       );
@@ -1349,7 +1351,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertDiskRequest()
       );
@@ -1401,7 +1403,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertDiskRequest()
       );
@@ -1434,7 +1436,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertDiskRequest()
       );
@@ -1460,7 +1462,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.RemoveResourcePoliciesDiskRequest()
       );
@@ -1502,7 +1504,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.RemoveResourcePoliciesDiskRequest()
       );
@@ -1559,7 +1561,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.RemoveResourcePoliciesDiskRequest()
       );
@@ -1603,7 +1605,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.RemoveResourcePoliciesDiskRequest()
       );
@@ -1637,7 +1639,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ResizeDiskRequest()
       );
@@ -1678,7 +1680,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ResizeDiskRequest()
       );
@@ -1735,7 +1737,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ResizeDiskRequest()
       );
@@ -1773,7 +1775,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ResizeDiskRequest()
       );
@@ -1804,7 +1806,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyDiskRequest()
       );
@@ -1845,7 +1847,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyDiskRequest()
       );
@@ -1902,7 +1904,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyDiskRequest()
       );
@@ -1943,7 +1945,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyDiskRequest()
       );
@@ -1974,7 +1976,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsDiskRequest()
       );
@@ -2015,7 +2017,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsDiskRequest()
       );
@@ -2072,7 +2074,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsDiskRequest()
       );
@@ -2110,7 +2112,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsDiskRequest()
       );
@@ -2141,7 +2143,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.StartAsyncReplicationDiskRequest()
       );
@@ -2183,7 +2185,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.StartAsyncReplicationDiskRequest()
       );
@@ -2240,7 +2242,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.StartAsyncReplicationDiskRequest()
       );
@@ -2284,7 +2286,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.StartAsyncReplicationDiskRequest()
       );
@@ -2318,7 +2320,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.StopAsyncReplicationDiskRequest()
       );
@@ -2360,7 +2362,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.StopAsyncReplicationDiskRequest()
       );
@@ -2417,7 +2419,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.StopAsyncReplicationDiskRequest()
       );
@@ -2458,7 +2460,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.StopAsyncReplicationDiskRequest()
       );
@@ -2489,7 +2491,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.StopGroupAsyncReplicationDiskRequest()
       );
@@ -2526,7 +2528,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.StopGroupAsyncReplicationDiskRequest()
       );
@@ -2578,7 +2580,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.StopGroupAsyncReplicationDiskRequest()
       );
@@ -2617,7 +2619,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.StopGroupAsyncReplicationDiskRequest()
       );
@@ -2646,7 +2648,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsDiskRequest()
       );
@@ -2688,7 +2690,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsDiskRequest()
       );
@@ -2745,7 +2747,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsDiskRequest()
       );
@@ -2786,7 +2788,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsDiskRequest()
       );
@@ -2817,7 +2819,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateDiskRequest()
       );
@@ -2858,7 +2860,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateDiskRequest()
       );
@@ -2915,7 +2917,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateDiskRequest()
       );
@@ -2953,7 +2955,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateDiskRequest()
       );
@@ -2984,7 +2986,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AggregatedListDisksRequest()
       );
@@ -3044,7 +3046,7 @@ describe('v1.DisksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AggregatedListDisksRequest()
       );
@@ -3088,7 +3090,7 @@ describe('v1.DisksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListDisksRequest()
       );
@@ -3125,7 +3127,7 @@ describe('v1.DisksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListDisksRequest()
       );
@@ -3177,7 +3179,7 @@ describe('v1.DisksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListDisksRequest()
       );
@@ -3209,7 +3211,7 @@ describe('v1.DisksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListDisksRequest()
       );
@@ -3265,7 +3267,7 @@ describe('v1.DisksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListDisksRequest()
       );
@@ -3318,7 +3320,7 @@ describe('v1.DisksClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListDisksRequest()
       );
@@ -3365,7 +3367,7 @@ describe('v1.DisksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListDisksRequest()
       );
