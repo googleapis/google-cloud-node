@@ -288,7 +288,9 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.backupDRStub);
       client.close().then(() => {
         done();
@@ -347,7 +349,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.GetManagementServerRequest()
       );
@@ -379,7 +381,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.GetManagementServerRequest()
       );
@@ -426,7 +428,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.GetManagementServerRequest()
       );
@@ -457,7 +459,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.GetManagementServerRequest()
       );
@@ -478,7 +480,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.GetBackupVaultRequest()
       );
@@ -509,7 +511,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.GetBackupVaultRequest()
       );
@@ -556,7 +558,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.GetBackupVaultRequest()
       );
@@ -587,7 +589,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.GetBackupVaultRequest()
       );
@@ -608,7 +610,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.GetDataSourceRequest()
       );
@@ -639,7 +641,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.GetDataSourceRequest()
       );
@@ -686,7 +688,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.GetDataSourceRequest()
       );
@@ -717,7 +719,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.GetDataSourceRequest()
       );
@@ -738,7 +740,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.GetBackupRequest()
       );
@@ -769,7 +771,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.GetBackupRequest()
       );
@@ -816,7 +818,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.GetBackupRequest()
       );
@@ -844,7 +846,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.GetBackupRequest()
       );
@@ -865,7 +867,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.GetBackupPlanRequest()
       );
@@ -896,7 +898,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.GetBackupPlanRequest()
       );
@@ -943,7 +945,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.GetBackupPlanRequest()
       );
@@ -974,7 +976,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.GetBackupPlanRequest()
       );
@@ -995,7 +997,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.GetBackupPlanAssociationRequest()
       );
@@ -1027,7 +1029,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.GetBackupPlanAssociationRequest()
       );
@@ -1074,7 +1076,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.GetBackupPlanAssociationRequest()
       );
@@ -1108,7 +1110,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.GetBackupPlanAssociationRequest()
       );
@@ -1132,7 +1134,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.CreateManagementServerRequest()
       );
@@ -1165,7 +1167,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.CreateManagementServerRequest()
       );
@@ -1219,7 +1221,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.CreateManagementServerRequest()
       );
@@ -1253,7 +1255,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.CreateManagementServerRequest()
       );
@@ -1286,7 +1288,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1308,7 +1310,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1329,7 +1331,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.DeleteManagementServerRequest()
       );
@@ -1362,7 +1364,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.DeleteManagementServerRequest()
       );
@@ -1416,7 +1418,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.DeleteManagementServerRequest()
       );
@@ -1450,7 +1452,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.DeleteManagementServerRequest()
       );
@@ -1483,7 +1485,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1505,7 +1507,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1526,7 +1528,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.CreateBackupVaultRequest()
       );
@@ -1559,7 +1561,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.CreateBackupVaultRequest()
       );
@@ -1613,7 +1615,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.CreateBackupVaultRequest()
       );
@@ -1644,7 +1646,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.CreateBackupVaultRequest()
       );
@@ -1677,7 +1679,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1699,7 +1701,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1720,7 +1722,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.UpdateBackupVaultRequest()
       );
@@ -1754,7 +1756,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.UpdateBackupVaultRequest()
       );
@@ -1809,7 +1811,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.UpdateBackupVaultRequest()
       );
@@ -1841,7 +1843,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.UpdateBackupVaultRequest()
       );
@@ -1875,7 +1877,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1897,7 +1899,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1918,7 +1920,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.DeleteBackupVaultRequest()
       );
@@ -1951,7 +1953,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.DeleteBackupVaultRequest()
       );
@@ -2005,7 +2007,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.DeleteBackupVaultRequest()
       );
@@ -2036,7 +2038,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.DeleteBackupVaultRequest()
       );
@@ -2069,7 +2071,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2091,7 +2093,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2112,7 +2114,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.UpdateDataSourceRequest()
       );
@@ -2146,7 +2148,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.UpdateDataSourceRequest()
       );
@@ -2201,7 +2203,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.UpdateDataSourceRequest()
       );
@@ -2233,7 +2235,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.UpdateDataSourceRequest()
       );
@@ -2267,7 +2269,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2289,7 +2291,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2310,7 +2312,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.UpdateBackupRequest()
       );
@@ -2343,7 +2345,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.UpdateBackupRequest()
       );
@@ -2398,7 +2400,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.UpdateBackupRequest()
       );
@@ -2430,7 +2432,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.UpdateBackupRequest()
       );
@@ -2464,7 +2466,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2486,7 +2488,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2504,7 +2506,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.DeleteBackupRequest()
       );
@@ -2536,7 +2538,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.DeleteBackupRequest()
       );
@@ -2590,7 +2592,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.DeleteBackupRequest()
       );
@@ -2621,7 +2623,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.DeleteBackupRequest()
       );
@@ -2654,7 +2656,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2676,7 +2678,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2694,7 +2696,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.RestoreBackupRequest()
       );
@@ -2727,7 +2729,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.RestoreBackupRequest()
       );
@@ -2781,7 +2783,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.RestoreBackupRequest()
       );
@@ -2812,7 +2814,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.RestoreBackupRequest()
       );
@@ -2845,7 +2847,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2867,7 +2869,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2888,7 +2890,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.CreateBackupPlanRequest()
       );
@@ -2921,7 +2923,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.CreateBackupPlanRequest()
       );
@@ -2975,7 +2977,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.CreateBackupPlanRequest()
       );
@@ -3006,7 +3008,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.CreateBackupPlanRequest()
       );
@@ -3039,7 +3041,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3061,7 +3063,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3082,7 +3084,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.DeleteBackupPlanRequest()
       );
@@ -3115,7 +3117,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.DeleteBackupPlanRequest()
       );
@@ -3169,7 +3171,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.DeleteBackupPlanRequest()
       );
@@ -3200,7 +3202,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.DeleteBackupPlanRequest()
       );
@@ -3233,7 +3235,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3255,7 +3257,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3276,7 +3278,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.CreateBackupPlanAssociationRequest()
       );
@@ -3309,7 +3311,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.CreateBackupPlanAssociationRequest()
       );
@@ -3363,7 +3365,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.CreateBackupPlanAssociationRequest()
       );
@@ -3397,7 +3399,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.CreateBackupPlanAssociationRequest()
       );
@@ -3430,7 +3432,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3453,7 +3455,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3474,7 +3476,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.DeleteBackupPlanAssociationRequest()
       );
@@ -3507,7 +3509,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.DeleteBackupPlanAssociationRequest()
       );
@@ -3561,7 +3563,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.DeleteBackupPlanAssociationRequest()
       );
@@ -3595,7 +3597,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.DeleteBackupPlanAssociationRequest()
       );
@@ -3628,7 +3630,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3651,7 +3653,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3672,7 +3674,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.TriggerBackupRequest()
       );
@@ -3705,7 +3707,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.TriggerBackupRequest()
       );
@@ -3759,7 +3761,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.TriggerBackupRequest()
       );
@@ -3790,7 +3792,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.TriggerBackupRequest()
       );
@@ -3823,7 +3825,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3845,7 +3847,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3866,7 +3868,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.InitializeServiceRequest()
       );
@@ -3899,7 +3901,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.InitializeServiceRequest()
       );
@@ -3953,7 +3955,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.InitializeServiceRequest()
       );
@@ -3984,7 +3986,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.InitializeServiceRequest()
       );
@@ -4017,7 +4019,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4039,7 +4041,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4060,7 +4062,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.ListManagementServersRequest()
       );
@@ -4100,7 +4102,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.ListManagementServersRequest()
       );
@@ -4155,7 +4157,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.ListManagementServersRequest()
       );
@@ -4189,7 +4191,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.ListManagementServersRequest()
       );
@@ -4256,7 +4258,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.ListManagementServersRequest()
       );
@@ -4312,7 +4314,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.ListManagementServersRequest()
       );
@@ -4365,7 +4367,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.ListManagementServersRequest()
       );
@@ -4412,7 +4414,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.ListBackupVaultsRequest()
       );
@@ -4451,7 +4453,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.ListBackupVaultsRequest()
       );
@@ -4506,7 +4508,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.ListBackupVaultsRequest()
       );
@@ -4537,7 +4539,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.ListBackupVaultsRequest()
       );
@@ -4597,7 +4599,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.ListBackupVaultsRequest()
       );
@@ -4646,7 +4648,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.ListBackupVaultsRequest()
       );
@@ -4695,7 +4697,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.ListBackupVaultsRequest()
       );
@@ -4737,7 +4739,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.FetchUsableBackupVaultsRequest()
       );
@@ -4777,7 +4779,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.FetchUsableBackupVaultsRequest()
       );
@@ -4832,7 +4834,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.FetchUsableBackupVaultsRequest()
       );
@@ -4866,7 +4868,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.FetchUsableBackupVaultsRequest()
       );
@@ -4932,7 +4934,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.FetchUsableBackupVaultsRequest()
       );
@@ -4987,7 +4989,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.FetchUsableBackupVaultsRequest()
       );
@@ -5040,7 +5042,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.FetchUsableBackupVaultsRequest()
       );
@@ -5086,7 +5088,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.ListDataSourcesRequest()
       );
@@ -5119,7 +5121,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.ListDataSourcesRequest()
       );
@@ -5168,7 +5170,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.ListDataSourcesRequest()
       );
@@ -5199,7 +5201,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.ListDataSourcesRequest()
       );
@@ -5253,7 +5255,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.ListDataSourcesRequest()
       );
@@ -5302,7 +5304,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.ListDataSourcesRequest()
       );
@@ -5345,7 +5347,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.ListDataSourcesRequest()
       );
@@ -5387,7 +5389,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.ListBackupsRequest()
       );
@@ -5420,7 +5422,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.ListBackupsRequest()
       );
@@ -5469,7 +5471,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.ListBackupsRequest()
       );
@@ -5500,7 +5502,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.ListBackupsRequest()
       );
@@ -5554,7 +5556,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.ListBackupsRequest()
       );
@@ -5605,7 +5607,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.ListBackupsRequest()
       );
@@ -5648,7 +5650,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.ListBackupsRequest()
       );
@@ -5692,7 +5694,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.ListBackupPlansRequest()
       );
@@ -5725,7 +5727,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.ListBackupPlansRequest()
       );
@@ -5774,7 +5776,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.ListBackupPlansRequest()
       );
@@ -5805,7 +5807,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.ListBackupPlansRequest()
       );
@@ -5859,7 +5861,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.ListBackupPlansRequest()
       );
@@ -5908,7 +5910,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.ListBackupPlansRequest()
       );
@@ -5951,7 +5953,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.ListBackupPlansRequest()
       );
@@ -5993,7 +5995,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.ListBackupPlanAssociationsRequest()
       );
@@ -6033,7 +6035,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.ListBackupPlanAssociationsRequest()
       );
@@ -6090,7 +6092,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.ListBackupPlanAssociationsRequest()
       );
@@ -6124,7 +6126,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.ListBackupPlanAssociationsRequest()
       );
@@ -6191,7 +6193,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.ListBackupPlanAssociationsRequest()
       );
@@ -6247,7 +6249,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.ListBackupPlanAssociationsRequest()
       );
@@ -6301,7 +6303,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.backupdr.v1.ListBackupPlanAssociationsRequest()
       );
@@ -6347,7 +6349,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -6377,7 +6379,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -6421,7 +6423,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -6453,7 +6455,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -6483,7 +6485,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -6527,7 +6529,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -6559,7 +6561,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -6592,7 +6594,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -6636,7 +6638,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -6671,7 +6673,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -6701,7 +6703,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -6745,7 +6747,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -6780,7 +6782,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -6828,7 +6830,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -6869,7 +6871,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -6948,7 +6950,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -7028,7 +7030,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -7124,8 +7126,7 @@ describe('v1.BackupDRClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -7144,7 +7145,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -7153,8 +7154,7 @@ describe('v1.BackupDRClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -7170,7 +7170,7 @@ describe('v1.BackupDRClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('backup', () => {
+    describe('backup', async () => {
       const fakePath = '/rendered/path/backup';
       const expectedParameters = {
         project: 'projectValue',
@@ -7183,7 +7183,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.backupPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7258,7 +7258,7 @@ describe('v1.BackupDRClient', () => {
       });
     });
 
-    describe('backupPlan', () => {
+    describe('backupPlan', async () => {
       const fakePath = '/rendered/path/backupPlan';
       const expectedParameters = {
         project: 'projectValue',
@@ -7269,7 +7269,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.backupPlanPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7322,7 +7322,7 @@ describe('v1.BackupDRClient', () => {
       });
     });
 
-    describe('backupPlanAssociation', () => {
+    describe('backupPlanAssociation', async () => {
       const fakePath = '/rendered/path/backupPlanAssociation';
       const expectedParameters = {
         project: 'projectValue',
@@ -7333,7 +7333,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.backupPlanAssociationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7403,7 +7403,7 @@ describe('v1.BackupDRClient', () => {
       });
     });
 
-    describe('backupVault', () => {
+    describe('backupVault', async () => {
       const fakePath = '/rendered/path/backupVault';
       const expectedParameters = {
         project: 'projectValue',
@@ -7414,7 +7414,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.backupVaultPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7467,7 +7467,7 @@ describe('v1.BackupDRClient', () => {
       });
     });
 
-    describe('dataSource', () => {
+    describe('dataSource', async () => {
       const fakePath = '/rendered/path/dataSource';
       const expectedParameters = {
         project: 'projectValue',
@@ -7479,7 +7479,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.dataSourcePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7543,7 +7543,7 @@ describe('v1.BackupDRClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -7553,7 +7553,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7592,7 +7592,7 @@ describe('v1.BackupDRClient', () => {
       });
     });
 
-    describe('managementServer', () => {
+    describe('managementServer', async () => {
       const fakePath = '/rendered/path/managementServer';
       const expectedParameters = {
         project: 'projectValue',
@@ -7603,7 +7603,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.managementServerPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7660,7 +7660,7 @@ describe('v1.BackupDRClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -7669,7 +7669,7 @@ describe('v1.BackupDRClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

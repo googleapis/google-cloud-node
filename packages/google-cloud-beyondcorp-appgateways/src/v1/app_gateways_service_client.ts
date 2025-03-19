@@ -649,7 +649,9 @@ export class AppGatewaysServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAppGateway request %j', request);
     const wrappedCallback:
       | Callback<
@@ -806,7 +808,9 @@ export class AppGatewaysServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -991,7 +995,9 @@ export class AppGatewaysServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1167,7 +1173,9 @@ export class AppGatewaysServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.beyondcorp.appgateways.v1.IListAppGatewaysRequest,
@@ -1246,7 +1254,9 @@ export class AppGatewaysServiceClient {
       });
     const defaultCallSettings = this._defaults['listAppGateways'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAppGateways stream %j', request);
     return this.descriptors.page.listAppGateways.createStream(
       this.innerApiCalls.listAppGateways as GaxCall,
@@ -1307,7 +1317,9 @@ export class AppGatewaysServiceClient {
       });
     const defaultCallSettings = this._defaults['listAppGateways'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAppGateways iterate %j', request);
     return this.descriptors.page.listAppGateways.asyncIterate(
       this.innerApiCalls['listAppGateways'] as GaxCall,
@@ -1625,7 +1637,7 @@ export class AppGatewaysServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

@@ -300,7 +300,9 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.assuredWorkloadsServiceStub);
       client.close().then(() => {
         done();
@@ -363,7 +365,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1.UpdateWorkloadRequest()
       );
@@ -396,7 +398,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1.UpdateWorkloadRequest()
       );
@@ -445,7 +447,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1.UpdateWorkloadRequest()
       );
@@ -478,7 +480,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1.UpdateWorkloadRequest()
       );
@@ -501,7 +503,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest()
       );
@@ -534,7 +536,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest()
       );
@@ -582,7 +584,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest()
       );
@@ -617,7 +619,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest()
       );
@@ -642,7 +644,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1.DeleteWorkloadRequest()
       );
@@ -674,7 +676,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1.DeleteWorkloadRequest()
       );
@@ -722,7 +724,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1.DeleteWorkloadRequest()
       );
@@ -754,7 +756,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1.DeleteWorkloadRequest()
       );
@@ -776,7 +778,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1.GetWorkloadRequest()
       );
@@ -808,7 +810,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1.GetWorkloadRequest()
       );
@@ -856,7 +858,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1.GetWorkloadRequest()
       );
@@ -888,7 +890,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1.GetWorkloadRequest()
       );
@@ -910,7 +912,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1.GetViolationRequest()
       );
@@ -928,7 +930,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1.GetViolationRequest()
       );
@@ -962,7 +964,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1.GetViolationRequest()
       );
@@ -980,7 +982,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1.GetViolationRequest()
       );
@@ -997,7 +999,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1.AcknowledgeViolationRequest()
       );
@@ -1016,7 +1018,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1.AcknowledgeViolationRequest()
       );
@@ -1050,7 +1052,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1.AcknowledgeViolationRequest()
       );
@@ -1068,7 +1070,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1.AcknowledgeViolationRequest()
       );
@@ -1085,7 +1087,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1.CreateWorkloadRequest()
       );
@@ -1119,7 +1121,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1.CreateWorkloadRequest()
       );
@@ -1174,7 +1176,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1.CreateWorkloadRequest()
       );
@@ -1206,7 +1208,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1.CreateWorkloadRequest()
       );
@@ -1240,7 +1242,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1263,7 +1265,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1285,7 +1287,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1.ListWorkloadsRequest()
       );
@@ -1325,7 +1327,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1.ListWorkloadsRequest()
       );
@@ -1381,7 +1383,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1.ListWorkloadsRequest()
       );
@@ -1413,7 +1415,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1.ListWorkloadsRequest()
       );
@@ -1475,7 +1477,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1.ListWorkloadsRequest()
       );
@@ -1526,7 +1528,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1.ListWorkloadsRequest()
       );
@@ -1576,7 +1578,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1.ListWorkloadsRequest()
       );
@@ -1620,7 +1622,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1.ListViolationsRequest()
       );
@@ -1646,7 +1648,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1.ListViolationsRequest()
       );
@@ -1688,7 +1690,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1.ListViolationsRequest()
       );
@@ -1706,7 +1708,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1.ListViolationsRequest()
       );
@@ -1755,7 +1757,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1.ListViolationsRequest()
       );
@@ -1793,7 +1795,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1.ListViolationsRequest()
       );
@@ -1831,7 +1833,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1.ListViolationsRequest()
       );
@@ -1861,7 +1863,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -1943,7 +1945,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -2026,7 +2028,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -2125,8 +2127,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -2146,7 +2147,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -2155,8 +2156,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -2172,7 +2172,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -2183,7 +2183,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2225,7 +2225,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
       });
     });
 
-    describe('organization', () => {
+    describe('organization', async () => {
       const fakePath = '/rendered/path/organization';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -2235,7 +2235,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2264,7 +2264,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
       });
     });
 
-    describe('violation', () => {
+    describe('violation', async () => {
       const fakePath = '/rendered/path/violation';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -2277,7 +2277,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.violationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2341,7 +2341,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
       });
     });
 
-    describe('workload', () => {
+    describe('workload', async () => {
       const fakePath = '/rendered/path/workload';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -2353,7 +2353,7 @@ describe('v1.AssuredWorkloadsServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.workloadPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

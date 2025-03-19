@@ -189,7 +189,9 @@ describe('v1p2beta1.AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.assetServiceStub);
       client.close().then(() => {
         done();
@@ -248,7 +250,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1p2beta1.CreateFeedRequest()
       );
@@ -279,7 +281,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1p2beta1.CreateFeedRequest()
       );
@@ -326,7 +328,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1p2beta1.CreateFeedRequest()
       );
@@ -357,7 +359,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1p2beta1.CreateFeedRequest()
       );
@@ -378,7 +380,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1p2beta1.GetFeedRequest()
       );
@@ -409,7 +411,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1p2beta1.GetFeedRequest()
       );
@@ -456,7 +458,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1p2beta1.GetFeedRequest()
       );
@@ -484,7 +486,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1p2beta1.GetFeedRequest()
       );
@@ -505,7 +507,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1p2beta1.ListFeedsRequest()
       );
@@ -536,7 +538,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1p2beta1.ListFeedsRequest()
       );
@@ -583,7 +585,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1p2beta1.ListFeedsRequest()
       );
@@ -611,7 +613,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1p2beta1.ListFeedsRequest()
       );
@@ -632,7 +634,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1p2beta1.UpdateFeedRequest()
       );
@@ -664,7 +666,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1p2beta1.UpdateFeedRequest()
       );
@@ -712,7 +714,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1p2beta1.UpdateFeedRequest()
       );
@@ -744,7 +746,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1p2beta1.UpdateFeedRequest()
       );
@@ -766,7 +768,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1p2beta1.DeleteFeedRequest()
       );
@@ -797,7 +799,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1p2beta1.DeleteFeedRequest()
       );
@@ -844,7 +846,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1p2beta1.DeleteFeedRequest()
       );
@@ -875,7 +877,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1p2beta1.DeleteFeedRequest()
       );
@@ -891,7 +893,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('accessLevel', () => {
+    describe('accessLevel', async () => {
       const fakePath = '/rendered/path/accessLevel';
       const expectedParameters = {
         access_policy: 'accessPolicyValue',
@@ -901,7 +903,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.accessLevelPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -943,7 +945,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
       });
     });
 
-    describe('accessPolicy', () => {
+    describe('accessPolicy', async () => {
       const fakePath = '/rendered/path/accessPolicy';
       const expectedParameters = {
         access_policy: 'accessPolicyValue',
@@ -952,7 +954,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.accessPolicyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -981,7 +983,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
       });
     });
 
-    describe('folderFeed', () => {
+    describe('folderFeed', async () => {
       const fakePath = '/rendered/path/folderFeed';
       const expectedParameters = {
         folder: 'folderValue',
@@ -991,7 +993,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderFeedPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1030,7 +1032,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
       });
     });
 
-    describe('organizationFeed', () => {
+    describe('organizationFeed', async () => {
       const fakePath = '/rendered/path/organizationFeed';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -1040,7 +1042,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationFeedPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1086,7 +1088,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
       });
     });
 
-    describe('projectFeed', () => {
+    describe('projectFeed', async () => {
       const fakePath = '/rendered/path/projectFeed';
       const expectedParameters = {
         project: 'projectValue',
@@ -1096,7 +1098,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectFeedPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1135,7 +1137,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
       });
     });
 
-    describe('servicePerimeter', () => {
+    describe('servicePerimeter', async () => {
       const fakePath = '/rendered/path/servicePerimeter';
       const expectedParameters = {
         access_policy: 'accessPolicyValue',
@@ -1145,7 +1147,7 @@ describe('v1p2beta1.AssetServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.servicePerimeterPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

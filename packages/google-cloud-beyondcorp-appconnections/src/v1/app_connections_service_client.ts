@@ -671,7 +671,9 @@ export class AppConnectionsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAppConnection request %j', request);
     const wrappedCallback:
       | Callback<
@@ -828,7 +830,9 @@ export class AppConnectionsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1023,7 +1027,9 @@ export class AppConnectionsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'app_connection.name': request.appConnection!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1208,7 +1214,9 @@ export class AppConnectionsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1384,7 +1392,9 @@ export class AppConnectionsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.beyondcorp.appconnections.v1.IListAppConnectionsRequest,
@@ -1463,7 +1473,9 @@ export class AppConnectionsServiceClient {
       });
     const defaultCallSettings = this._defaults['listAppConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAppConnections stream %j', request);
     return this.descriptors.page.listAppConnections.createStream(
       this.innerApiCalls.listAppConnections as GaxCall,
@@ -1524,7 +1536,9 @@ export class AppConnectionsServiceClient {
       });
     const defaultCallSettings = this._defaults['listAppConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAppConnections iterate %j', request);
     return this.descriptors.page.listAppConnections.asyncIterate(
       this.innerApiCalls['listAppConnections'] as GaxCall,
@@ -1639,7 +1653,9 @@ export class AppConnectionsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.beyondcorp.appconnections.v1.IResolveAppConnectionsRequest,
@@ -1715,7 +1731,9 @@ export class AppConnectionsServiceClient {
       });
     const defaultCallSettings = this._defaults['resolveAppConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('resolveAppConnections stream %j', request);
     return this.descriptors.page.resolveAppConnections.createStream(
       this.innerApiCalls.resolveAppConnections as GaxCall,
@@ -1773,7 +1791,9 @@ export class AppConnectionsServiceClient {
       });
     const defaultCallSettings = this._defaults['resolveAppConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('resolveAppConnections iterate %j', request);
     return this.descriptors.page.resolveAppConnections.asyncIterate(
       this.innerApiCalls['resolveAppConnections'] as GaxCall,
@@ -2091,7 +2111,7 @@ export class AppConnectionsServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

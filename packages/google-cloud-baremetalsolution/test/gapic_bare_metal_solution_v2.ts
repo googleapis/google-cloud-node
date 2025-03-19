@@ -294,7 +294,9 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.bareMetalSolutionStub);
       client.close().then(() => {
         done();
@@ -353,7 +355,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.GetInstanceRequest()
       );
@@ -384,7 +386,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.GetInstanceRequest()
       );
@@ -431,7 +433,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.GetInstanceRequest()
       );
@@ -462,7 +464,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.GetInstanceRequest()
       );
@@ -483,7 +485,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.RenameInstanceRequest()
       );
@@ -514,7 +516,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.RenameInstanceRequest()
       );
@@ -561,7 +563,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.RenameInstanceRequest()
       );
@@ -592,7 +594,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.RenameInstanceRequest()
       );
@@ -613,7 +615,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.CreateSSHKeyRequest()
       );
@@ -644,7 +646,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.CreateSSHKeyRequest()
       );
@@ -691,7 +693,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.CreateSSHKeyRequest()
       );
@@ -722,7 +724,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.CreateSSHKeyRequest()
       );
@@ -743,7 +745,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.DeleteSSHKeyRequest()
       );
@@ -774,7 +776,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.DeleteSSHKeyRequest()
       );
@@ -821,7 +823,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.DeleteSSHKeyRequest()
       );
@@ -852,7 +854,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.DeleteSSHKeyRequest()
       );
@@ -873,7 +875,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.GetVolumeRequest()
       );
@@ -904,7 +906,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.GetVolumeRequest()
       );
@@ -951,7 +953,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.GetVolumeRequest()
       );
@@ -979,7 +981,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.GetVolumeRequest()
       );
@@ -1000,7 +1002,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.RenameVolumeRequest()
       );
@@ -1031,7 +1033,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.RenameVolumeRequest()
       );
@@ -1078,7 +1080,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.RenameVolumeRequest()
       );
@@ -1109,7 +1111,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.RenameVolumeRequest()
       );
@@ -1130,7 +1132,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListNetworkUsageRequest()
       );
@@ -1161,7 +1163,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListNetworkUsageRequest()
       );
@@ -1208,7 +1210,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListNetworkUsageRequest()
       );
@@ -1239,7 +1241,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListNetworkUsageRequest()
       );
@@ -1260,7 +1262,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.GetNetworkRequest()
       );
@@ -1291,7 +1293,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.GetNetworkRequest()
       );
@@ -1338,7 +1340,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.GetNetworkRequest()
       );
@@ -1369,7 +1371,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.GetNetworkRequest()
       );
@@ -1390,7 +1392,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.CreateVolumeSnapshotRequest()
       );
@@ -1422,7 +1424,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.CreateVolumeSnapshotRequest()
       );
@@ -1469,7 +1471,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.CreateVolumeSnapshotRequest()
       );
@@ -1500,7 +1502,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.CreateVolumeSnapshotRequest()
       );
@@ -1521,7 +1523,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.DeleteVolumeSnapshotRequest()
       );
@@ -1553,7 +1555,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.DeleteVolumeSnapshotRequest()
       );
@@ -1600,7 +1602,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.DeleteVolumeSnapshotRequest()
       );
@@ -1631,7 +1633,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.DeleteVolumeSnapshotRequest()
       );
@@ -1652,7 +1654,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.GetVolumeSnapshotRequest()
       );
@@ -1683,7 +1685,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.GetVolumeSnapshotRequest()
       );
@@ -1730,7 +1732,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.GetVolumeSnapshotRequest()
       );
@@ -1761,7 +1763,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.GetVolumeSnapshotRequest()
       );
@@ -1782,7 +1784,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.GetLunRequest()
       );
@@ -1813,7 +1815,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.GetLunRequest()
       );
@@ -1860,7 +1862,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.GetLunRequest()
       );
@@ -1888,7 +1890,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.GetLunRequest()
       );
@@ -1909,7 +1911,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.GetNfsShareRequest()
       );
@@ -1940,7 +1942,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.GetNfsShareRequest()
       );
@@ -1987,7 +1989,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.GetNfsShareRequest()
       );
@@ -2018,7 +2020,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.GetNfsShareRequest()
       );
@@ -2039,7 +2041,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.RenameNfsShareRequest()
       );
@@ -2070,7 +2072,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.RenameNfsShareRequest()
       );
@@ -2117,7 +2119,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.RenameNfsShareRequest()
       );
@@ -2148,7 +2150,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.RenameNfsShareRequest()
       );
@@ -2169,7 +2171,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.SubmitProvisioningConfigRequest()
       );
@@ -2201,7 +2203,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.SubmitProvisioningConfigRequest()
       );
@@ -2248,7 +2250,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.SubmitProvisioningConfigRequest()
       );
@@ -2282,7 +2284,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.SubmitProvisioningConfigRequest()
       );
@@ -2306,7 +2308,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.GetProvisioningConfigRequest()
       );
@@ -2338,7 +2340,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.GetProvisioningConfigRequest()
       );
@@ -2385,7 +2387,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.GetProvisioningConfigRequest()
       );
@@ -2419,7 +2421,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.GetProvisioningConfigRequest()
       );
@@ -2443,7 +2445,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.CreateProvisioningConfigRequest()
       );
@@ -2475,7 +2477,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.CreateProvisioningConfigRequest()
       );
@@ -2522,7 +2524,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.CreateProvisioningConfigRequest()
       );
@@ -2556,7 +2558,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.CreateProvisioningConfigRequest()
       );
@@ -2580,7 +2582,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.UpdateProvisioningConfigRequest()
       );
@@ -2613,7 +2615,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.UpdateProvisioningConfigRequest()
       );
@@ -2661,7 +2663,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.UpdateProvisioningConfigRequest()
       );
@@ -2696,7 +2698,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.UpdateProvisioningConfigRequest()
       );
@@ -2721,7 +2723,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.RenameNetworkRequest()
       );
@@ -2752,7 +2754,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.RenameNetworkRequest()
       );
@@ -2799,7 +2801,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.RenameNetworkRequest()
       );
@@ -2830,7 +2832,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.RenameNetworkRequest()
       );
@@ -2851,7 +2853,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.UpdateInstanceRequest()
       );
@@ -2885,7 +2887,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.UpdateInstanceRequest()
       );
@@ -2940,7 +2942,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.UpdateInstanceRequest()
       );
@@ -2972,7 +2974,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.UpdateInstanceRequest()
       );
@@ -3006,7 +3008,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3028,7 +3030,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3049,7 +3051,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ResetInstanceRequest()
       );
@@ -3082,7 +3084,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ResetInstanceRequest()
       );
@@ -3136,7 +3138,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ResetInstanceRequest()
       );
@@ -3167,7 +3169,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ResetInstanceRequest()
       );
@@ -3200,7 +3202,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3222,7 +3224,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3243,7 +3245,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.StartInstanceRequest()
       );
@@ -3276,7 +3278,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.StartInstanceRequest()
       );
@@ -3330,7 +3332,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.StartInstanceRequest()
       );
@@ -3361,7 +3363,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.StartInstanceRequest()
       );
@@ -3394,7 +3396,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3416,7 +3418,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3437,7 +3439,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.StopInstanceRequest()
       );
@@ -3469,7 +3471,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.StopInstanceRequest()
       );
@@ -3523,7 +3525,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.StopInstanceRequest()
       );
@@ -3554,7 +3556,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.StopInstanceRequest()
       );
@@ -3587,7 +3589,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3609,7 +3611,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3627,7 +3629,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.EnableInteractiveSerialConsoleRequest()
       );
@@ -3660,7 +3662,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.EnableInteractiveSerialConsoleRequest()
       );
@@ -3714,7 +3716,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.EnableInteractiveSerialConsoleRequest()
       );
@@ -3748,7 +3750,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.EnableInteractiveSerialConsoleRequest()
       );
@@ -3781,7 +3783,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3804,7 +3806,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3825,7 +3827,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.DisableInteractiveSerialConsoleRequest()
       );
@@ -3858,7 +3860,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.DisableInteractiveSerialConsoleRequest()
       );
@@ -3912,7 +3914,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.DisableInteractiveSerialConsoleRequest()
       );
@@ -3944,7 +3946,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.DisableInteractiveSerialConsoleRequest()
       );
@@ -3974,7 +3976,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3997,7 +3999,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4018,7 +4020,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.DetachLunRequest()
       );
@@ -4050,7 +4052,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.DetachLunRequest()
       );
@@ -4104,7 +4106,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.DetachLunRequest()
       );
@@ -4135,7 +4137,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.DetachLunRequest()
       );
@@ -4168,7 +4170,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4190,7 +4192,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4208,7 +4210,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.UpdateVolumeRequest()
       );
@@ -4241,7 +4243,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.UpdateVolumeRequest()
       );
@@ -4296,7 +4298,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.UpdateVolumeRequest()
       );
@@ -4328,7 +4330,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.UpdateVolumeRequest()
       );
@@ -4362,7 +4364,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4384,7 +4386,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4402,7 +4404,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.EvictVolumeRequest()
       );
@@ -4434,7 +4436,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.EvictVolumeRequest()
       );
@@ -4488,7 +4490,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.EvictVolumeRequest()
       );
@@ -4519,7 +4521,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.EvictVolumeRequest()
       );
@@ -4552,7 +4554,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4574,7 +4576,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4592,7 +4594,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ResizeVolumeRequest()
       );
@@ -4624,7 +4626,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ResizeVolumeRequest()
       );
@@ -4678,7 +4680,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ResizeVolumeRequest()
       );
@@ -4709,7 +4711,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ResizeVolumeRequest()
       );
@@ -4742,7 +4744,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4764,7 +4766,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4782,7 +4784,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.UpdateNetworkRequest()
       );
@@ -4816,7 +4818,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.UpdateNetworkRequest()
       );
@@ -4871,7 +4873,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.UpdateNetworkRequest()
       );
@@ -4903,7 +4905,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.UpdateNetworkRequest()
       );
@@ -4937,7 +4939,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4959,7 +4961,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4980,7 +4982,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.RestoreVolumeSnapshotRequest()
       );
@@ -5013,7 +5015,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.RestoreVolumeSnapshotRequest()
       );
@@ -5067,7 +5069,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.RestoreVolumeSnapshotRequest()
       );
@@ -5101,7 +5103,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.RestoreVolumeSnapshotRequest()
       );
@@ -5134,7 +5136,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -5156,7 +5158,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -5177,7 +5179,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.EvictLunRequest()
       );
@@ -5209,7 +5211,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.EvictLunRequest()
       );
@@ -5263,7 +5265,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.EvictLunRequest()
       );
@@ -5294,7 +5296,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.EvictLunRequest()
       );
@@ -5327,7 +5329,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -5349,7 +5351,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -5367,7 +5369,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.UpdateNfsShareRequest()
       );
@@ -5401,7 +5403,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.UpdateNfsShareRequest()
       );
@@ -5456,7 +5458,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.UpdateNfsShareRequest()
       );
@@ -5488,7 +5490,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.UpdateNfsShareRequest()
       );
@@ -5522,7 +5524,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -5544,7 +5546,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -5565,7 +5567,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.CreateNfsShareRequest()
       );
@@ -5598,7 +5600,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.CreateNfsShareRequest()
       );
@@ -5652,7 +5654,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.CreateNfsShareRequest()
       );
@@ -5683,7 +5685,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.CreateNfsShareRequest()
       );
@@ -5716,7 +5718,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -5738,7 +5740,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -5759,7 +5761,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.DeleteNfsShareRequest()
       );
@@ -5792,7 +5794,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.DeleteNfsShareRequest()
       );
@@ -5846,7 +5848,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.DeleteNfsShareRequest()
       );
@@ -5877,7 +5879,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.DeleteNfsShareRequest()
       );
@@ -5910,7 +5912,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -5932,7 +5934,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -5953,7 +5955,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListInstancesRequest()
       );
@@ -5992,7 +5994,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListInstancesRequest()
       );
@@ -6047,7 +6049,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListInstancesRequest()
       );
@@ -6078,7 +6080,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListInstancesRequest()
       );
@@ -6139,7 +6141,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListInstancesRequest()
       );
@@ -6189,7 +6191,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListInstancesRequest()
       );
@@ -6239,7 +6241,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListInstancesRequest()
       );
@@ -6282,7 +6284,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListSSHKeysRequest()
       );
@@ -6321,7 +6323,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListSSHKeysRequest()
       );
@@ -6376,7 +6378,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListSSHKeysRequest()
       );
@@ -6407,7 +6409,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListSSHKeysRequest()
       );
@@ -6467,7 +6469,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListSSHKeysRequest()
       );
@@ -6518,7 +6520,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListSSHKeysRequest()
       );
@@ -6567,7 +6569,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListSSHKeysRequest()
       );
@@ -6612,7 +6614,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListVolumesRequest()
       );
@@ -6651,7 +6653,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListVolumesRequest()
       );
@@ -6706,7 +6708,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListVolumesRequest()
       );
@@ -6737,7 +6739,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListVolumesRequest()
       );
@@ -6797,7 +6799,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListVolumesRequest()
       );
@@ -6848,7 +6850,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListVolumesRequest()
       );
@@ -6897,7 +6899,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListVolumesRequest()
       );
@@ -6942,7 +6944,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListNetworksRequest()
       );
@@ -6981,7 +6983,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListNetworksRequest()
       );
@@ -7036,7 +7038,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListNetworksRequest()
       );
@@ -7067,7 +7069,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListNetworksRequest()
       );
@@ -7128,7 +7130,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListNetworksRequest()
       );
@@ -7180,7 +7182,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListNetworksRequest()
       );
@@ -7229,7 +7231,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListNetworksRequest()
       );
@@ -7272,7 +7274,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListVolumeSnapshotsRequest()
       );
@@ -7312,7 +7314,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListVolumeSnapshotsRequest()
       );
@@ -7369,7 +7371,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListVolumeSnapshotsRequest()
       );
@@ -7400,7 +7402,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListVolumeSnapshotsRequest()
       );
@@ -7463,7 +7465,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListVolumeSnapshotsRequest()
       );
@@ -7515,7 +7517,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListVolumeSnapshotsRequest()
       );
@@ -7565,7 +7567,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListVolumeSnapshotsRequest()
       );
@@ -7608,7 +7610,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListLunsRequest()
       );
@@ -7647,7 +7649,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListLunsRequest()
       );
@@ -7702,7 +7704,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListLunsRequest()
       );
@@ -7730,7 +7732,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListLunsRequest()
       );
@@ -7790,7 +7792,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListLunsRequest()
       );
@@ -7841,7 +7843,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListLunsRequest()
       );
@@ -7889,7 +7891,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListLunsRequest()
       );
@@ -7932,7 +7934,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListNfsSharesRequest()
       );
@@ -7971,7 +7973,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListNfsSharesRequest()
       );
@@ -8026,7 +8028,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListNfsSharesRequest()
       );
@@ -8057,7 +8059,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListNfsSharesRequest()
       );
@@ -8118,7 +8120,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListNfsSharesRequest()
       );
@@ -8168,7 +8170,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListNfsSharesRequest()
       );
@@ -8218,7 +8220,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListNfsSharesRequest()
       );
@@ -8261,7 +8263,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListProvisioningQuotasRequest()
       );
@@ -8301,7 +8303,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListProvisioningQuotasRequest()
       );
@@ -8358,7 +8360,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListProvisioningQuotasRequest()
       );
@@ -8392,7 +8394,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListProvisioningQuotasRequest()
       );
@@ -8461,7 +8463,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListProvisioningQuotasRequest()
       );
@@ -8519,7 +8521,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListProvisioningQuotasRequest()
       );
@@ -8573,7 +8575,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListProvisioningQuotasRequest()
       );
@@ -8620,7 +8622,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListOSImagesRequest()
       );
@@ -8659,7 +8661,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListOSImagesRequest()
       );
@@ -8714,7 +8716,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListOSImagesRequest()
       );
@@ -8745,7 +8747,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListOSImagesRequest()
       );
@@ -8806,7 +8808,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListOSImagesRequest()
       );
@@ -8858,7 +8860,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListOSImagesRequest()
       );
@@ -8907,7 +8909,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.baremetalsolution.v2.ListOSImagesRequest()
       );
@@ -8949,7 +8951,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -8979,7 +8981,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -9023,7 +9025,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -9055,7 +9057,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -9085,7 +9087,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -9129,7 +9131,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -9161,7 +9163,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -9194,7 +9196,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -9238,7 +9240,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -9273,7 +9275,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -9303,7 +9305,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -9347,7 +9349,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -9382,7 +9384,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -9430,7 +9432,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -9471,7 +9473,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -9550,7 +9552,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -9630,7 +9632,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -9726,8 +9728,7 @@ describe('v2.BareMetalSolutionClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -9746,7 +9747,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -9755,8 +9756,7 @@ describe('v2.BareMetalSolutionClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -9772,7 +9772,7 @@ describe('v2.BareMetalSolutionClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('instance', () => {
+    describe('instance', async () => {
       const fakePath = '/rendered/path/instance';
       const expectedParameters = {
         project: 'projectValue',
@@ -9783,7 +9783,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.instancePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -9836,7 +9836,7 @@ describe('v2.BareMetalSolutionClient', () => {
       });
     });
 
-    describe('instanceConfig', () => {
+    describe('instanceConfig', async () => {
       const fakePath = '/rendered/path/instanceConfig';
       const expectedParameters = {
         project: 'projectValue',
@@ -9847,7 +9847,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.instanceConfigPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -9901,7 +9901,7 @@ describe('v2.BareMetalSolutionClient', () => {
       });
     });
 
-    describe('instanceQuota', () => {
+    describe('instanceQuota', async () => {
       const fakePath = '/rendered/path/instanceQuota';
       const expectedParameters = {
         project: 'projectValue',
@@ -9912,7 +9912,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.instanceQuotaPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -9965,7 +9965,7 @@ describe('v2.BareMetalSolutionClient', () => {
       });
     });
 
-    describe('lun', () => {
+    describe('lun', async () => {
       const fakePath = '/rendered/path/lun';
       const expectedParameters = {
         project: 'projectValue',
@@ -9977,7 +9977,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.lunPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10041,7 +10041,7 @@ describe('v2.BareMetalSolutionClient', () => {
       });
     });
 
-    describe('nFSShare', () => {
+    describe('nFSShare', async () => {
       const fakePath = '/rendered/path/nFSShare';
       const expectedParameters = {
         project: 'projectValue',
@@ -10052,7 +10052,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.nFSSharePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10105,7 +10105,7 @@ describe('v2.BareMetalSolutionClient', () => {
       });
     });
 
-    describe('network', () => {
+    describe('network', async () => {
       const fakePath = '/rendered/path/network';
       const expectedParameters = {
         project: 'projectValue',
@@ -10116,7 +10116,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.networkPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10169,7 +10169,7 @@ describe('v2.BareMetalSolutionClient', () => {
       });
     });
 
-    describe('networkConfig', () => {
+    describe('networkConfig', async () => {
       const fakePath = '/rendered/path/networkConfig';
       const expectedParameters = {
         project: 'projectValue',
@@ -10180,7 +10180,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.networkConfigPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10233,7 +10233,7 @@ describe('v2.BareMetalSolutionClient', () => {
       });
     });
 
-    describe('osImage', () => {
+    describe('osImage', async () => {
       const fakePath = '/rendered/path/osImage';
       const expectedParameters = {
         project: 'projectValue',
@@ -10244,7 +10244,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.osImagePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10297,7 +10297,7 @@ describe('v2.BareMetalSolutionClient', () => {
       });
     });
 
-    describe('provisioningConfig', () => {
+    describe('provisioningConfig', async () => {
       const fakePath = '/rendered/path/provisioningConfig';
       const expectedParameters = {
         project: 'projectValue',
@@ -10308,7 +10308,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.provisioningConfigPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10374,7 +10374,7 @@ describe('v2.BareMetalSolutionClient', () => {
       });
     });
 
-    describe('provisioningQuota', () => {
+    describe('provisioningQuota', async () => {
       const fakePath = '/rendered/path/provisioningQuota';
       const expectedParameters = {
         project: 'projectValue',
@@ -10385,7 +10385,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.provisioningQuotaPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10451,7 +10451,7 @@ describe('v2.BareMetalSolutionClient', () => {
       });
     });
 
-    describe('serverNetworkTemplate', () => {
+    describe('serverNetworkTemplate', async () => {
       const fakePath = '/rendered/path/serverNetworkTemplate';
       const expectedParameters = {
         project: 'projectValue',
@@ -10462,7 +10462,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.serverNetworkTemplatePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10532,7 +10532,7 @@ describe('v2.BareMetalSolutionClient', () => {
       });
     });
 
-    describe('sshKey', () => {
+    describe('sshKey', async () => {
       const fakePath = '/rendered/path/sshKey';
       const expectedParameters = {
         project: 'projectValue',
@@ -10543,7 +10543,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.sshKeyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10596,7 +10596,7 @@ describe('v2.BareMetalSolutionClient', () => {
       });
     });
 
-    describe('volume', () => {
+    describe('volume', async () => {
       const fakePath = '/rendered/path/volume';
       const expectedParameters = {
         project: 'projectValue',
@@ -10607,7 +10607,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.volumePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10660,7 +10660,7 @@ describe('v2.BareMetalSolutionClient', () => {
       });
     });
 
-    describe('volumeConfig', () => {
+    describe('volumeConfig', async () => {
       const fakePath = '/rendered/path/volumeConfig';
       const expectedParameters = {
         project: 'projectValue',
@@ -10671,7 +10671,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.volumeConfigPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10724,7 +10724,7 @@ describe('v2.BareMetalSolutionClient', () => {
       });
     });
 
-    describe('volumeSnapshot', () => {
+    describe('volumeSnapshot', async () => {
       const fakePath = '/rendered/path/volumeSnapshot';
       const expectedParameters = {
         project: 'projectValue',
@@ -10736,7 +10736,7 @@ describe('v2.BareMetalSolutionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.volumeSnapshotPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
