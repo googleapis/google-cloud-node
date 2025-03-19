@@ -189,7 +189,9 @@ describe('v4beta1.CompletionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.completionStub);
       client.close().then(() => {
         done();
@@ -248,7 +250,7 @@ describe('v4beta1.CompletionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.CompleteQueryRequest()
       );
@@ -279,7 +281,7 @@ describe('v4beta1.CompletionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.CompleteQueryRequest()
       );
@@ -326,7 +328,7 @@ describe('v4beta1.CompletionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.CompleteQueryRequest()
       );
@@ -357,7 +359,7 @@ describe('v4beta1.CompletionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.CompleteQueryRequest()
       );
@@ -373,7 +375,7 @@ describe('v4beta1.CompletionClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -382,7 +384,7 @@ describe('v4beta1.CompletionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -411,7 +413,7 @@ describe('v4beta1.CompletionClient', () => {
       });
     });
 
-    describe('projectCompany', () => {
+    describe('projectCompany', async () => {
       const fakePath = '/rendered/path/projectCompany';
       const expectedParameters = {
         project: 'projectValue',
@@ -421,7 +423,7 @@ describe('v4beta1.CompletionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectCompanyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -463,7 +465,7 @@ describe('v4beta1.CompletionClient', () => {
       });
     });
 
-    describe('projectJob', () => {
+    describe('projectJob', async () => {
       const fakePath = '/rendered/path/projectJob';
       const expectedParameters = {
         project: 'projectValue',
@@ -473,7 +475,7 @@ describe('v4beta1.CompletionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectJobPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -512,7 +514,7 @@ describe('v4beta1.CompletionClient', () => {
       });
     });
 
-    describe('projectTenantCompany', () => {
+    describe('projectTenantCompany', async () => {
       const fakePath = '/rendered/path/projectTenantCompany';
       const expectedParameters = {
         project: 'projectValue',
@@ -523,7 +525,7 @@ describe('v4beta1.CompletionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectTenantCompanyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -590,7 +592,7 @@ describe('v4beta1.CompletionClient', () => {
       });
     });
 
-    describe('projectTenantJob', () => {
+    describe('projectTenantJob', async () => {
       const fakePath = '/rendered/path/projectTenantJob';
       const expectedParameters = {
         project: 'projectValue',
@@ -601,7 +603,7 @@ describe('v4beta1.CompletionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectTenantJobPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -657,7 +659,7 @@ describe('v4beta1.CompletionClient', () => {
       });
     });
 
-    describe('tenant', () => {
+    describe('tenant', async () => {
       const fakePath = '/rendered/path/tenant';
       const expectedParameters = {
         project: 'projectValue',
@@ -667,7 +669,7 @@ describe('v4beta1.CompletionClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.tenantPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

@@ -261,7 +261,9 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.cloudTasksStub);
       client.close().then(() => {
         done();
@@ -320,7 +322,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.GetQueueRequest()
       );
@@ -351,7 +353,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.GetQueueRequest()
       );
@@ -398,7 +400,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.GetQueueRequest()
       );
@@ -426,7 +428,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.GetQueueRequest()
       );
@@ -447,7 +449,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.CreateQueueRequest()
       );
@@ -478,7 +480,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.CreateQueueRequest()
       );
@@ -525,7 +527,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.CreateQueueRequest()
       );
@@ -556,7 +558,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.CreateQueueRequest()
       );
@@ -577,7 +579,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.UpdateQueueRequest()
       );
@@ -609,7 +611,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.UpdateQueueRequest()
       );
@@ -657,7 +659,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.UpdateQueueRequest()
       );
@@ -689,7 +691,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.UpdateQueueRequest()
       );
@@ -711,7 +713,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.DeleteQueueRequest()
       );
@@ -742,7 +744,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.DeleteQueueRequest()
       );
@@ -789,7 +791,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.DeleteQueueRequest()
       );
@@ -820,7 +822,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.DeleteQueueRequest()
       );
@@ -841,7 +843,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.PurgeQueueRequest()
       );
@@ -872,7 +874,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.PurgeQueueRequest()
       );
@@ -919,7 +921,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.PurgeQueueRequest()
       );
@@ -950,7 +952,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.PurgeQueueRequest()
       );
@@ -971,7 +973,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.PauseQueueRequest()
       );
@@ -1002,7 +1004,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.PauseQueueRequest()
       );
@@ -1049,7 +1051,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.PauseQueueRequest()
       );
@@ -1080,7 +1082,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.PauseQueueRequest()
       );
@@ -1101,7 +1103,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.ResumeQueueRequest()
       );
@@ -1132,7 +1134,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.ResumeQueueRequest()
       );
@@ -1179,7 +1181,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.ResumeQueueRequest()
       );
@@ -1210,7 +1212,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.ResumeQueueRequest()
       );
@@ -1231,7 +1233,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -1262,7 +1264,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -1309,7 +1311,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -1340,7 +1342,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -1361,7 +1363,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -1392,7 +1394,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -1439,7 +1441,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -1470,7 +1472,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -1491,7 +1493,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -1523,7 +1525,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -1570,7 +1572,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -1601,7 +1603,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -1622,7 +1624,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.GetTaskRequest()
       );
@@ -1653,7 +1655,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.GetTaskRequest()
       );
@@ -1700,7 +1702,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.GetTaskRequest()
       );
@@ -1728,7 +1730,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.GetTaskRequest()
       );
@@ -1749,7 +1751,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.CreateTaskRequest()
       );
@@ -1780,7 +1782,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.CreateTaskRequest()
       );
@@ -1827,7 +1829,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.CreateTaskRequest()
       );
@@ -1858,7 +1860,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.CreateTaskRequest()
       );
@@ -1879,7 +1881,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.DeleteTaskRequest()
       );
@@ -1910,7 +1912,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.DeleteTaskRequest()
       );
@@ -1957,7 +1959,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.DeleteTaskRequest()
       );
@@ -1988,7 +1990,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.DeleteTaskRequest()
       );
@@ -2009,7 +2011,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.RunTaskRequest()
       );
@@ -2040,7 +2042,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.RunTaskRequest()
       );
@@ -2087,7 +2089,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.RunTaskRequest()
       );
@@ -2115,7 +2117,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.RunTaskRequest()
       );
@@ -2136,7 +2138,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.ListQueuesRequest()
       );
@@ -2169,7 +2171,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.ListQueuesRequest()
       );
@@ -2218,7 +2220,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.ListQueuesRequest()
       );
@@ -2249,7 +2251,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.ListQueuesRequest()
       );
@@ -2300,7 +2302,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.ListQueuesRequest()
       );
@@ -2348,7 +2350,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.ListQueuesRequest()
       );
@@ -2391,7 +2393,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.ListQueuesRequest()
       );
@@ -2435,7 +2437,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.ListTasksRequest()
       );
@@ -2468,7 +2470,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.ListTasksRequest()
       );
@@ -2517,7 +2519,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.ListTasksRequest()
       );
@@ -2545,7 +2547,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.ListTasksRequest()
       );
@@ -2596,7 +2598,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.ListTasksRequest()
       );
@@ -2644,7 +2646,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.ListTasksRequest()
       );
@@ -2686,7 +2688,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2.ListTasksRequest()
       );
@@ -2728,7 +2730,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -2758,7 +2760,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -2802,7 +2804,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -2837,7 +2839,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -2885,7 +2887,7 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -2932,7 +2934,9 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2980,7 +2984,9 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3020,7 +3026,9 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       client.pathTemplates.queuePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3085,7 +3093,9 @@ describe('v2.CloudTasksClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       client.pathTemplates.taskPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

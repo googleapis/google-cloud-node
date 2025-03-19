@@ -464,7 +464,9 @@ export class SqlConnectServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getConnectSettings request %j', request);
     const wrappedCallback:
       | Callback<
@@ -598,7 +600,9 @@ export class SqlConnectServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('generateEphemeralCert request %j', request);
     const wrappedCallback:
       | Callback<

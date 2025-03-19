@@ -294,7 +294,9 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.telcoAutomationStub);
       client.close().then(() => {
         done();
@@ -353,7 +355,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.GetOrchestrationClusterRequest()
       );
@@ -385,7 +387,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.GetOrchestrationClusterRequest()
       );
@@ -432,7 +434,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.GetOrchestrationClusterRequest()
       );
@@ -466,7 +468,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.GetOrchestrationClusterRequest()
       );
@@ -490,7 +492,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.GetEdgeSlmRequest()
       );
@@ -521,7 +523,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.GetEdgeSlmRequest()
       );
@@ -568,7 +570,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.GetEdgeSlmRequest()
       );
@@ -599,7 +601,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.GetEdgeSlmRequest()
       );
@@ -620,7 +622,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.CreateBlueprintRequest()
       );
@@ -651,7 +653,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.CreateBlueprintRequest()
       );
@@ -698,7 +700,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.CreateBlueprintRequest()
       );
@@ -729,7 +731,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.CreateBlueprintRequest()
       );
@@ -750,7 +752,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.UpdateBlueprintRequest()
       );
@@ -782,7 +784,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.UpdateBlueprintRequest()
       );
@@ -830,7 +832,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.UpdateBlueprintRequest()
       );
@@ -862,7 +864,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.UpdateBlueprintRequest()
       );
@@ -884,7 +886,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.GetBlueprintRequest()
       );
@@ -915,7 +917,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.GetBlueprintRequest()
       );
@@ -962,7 +964,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.GetBlueprintRequest()
       );
@@ -993,7 +995,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.GetBlueprintRequest()
       );
@@ -1014,7 +1016,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.DeleteBlueprintRequest()
       );
@@ -1045,7 +1047,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.DeleteBlueprintRequest()
       );
@@ -1092,7 +1094,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.DeleteBlueprintRequest()
       );
@@ -1123,7 +1125,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.DeleteBlueprintRequest()
       );
@@ -1144,7 +1146,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ApproveBlueprintRequest()
       );
@@ -1175,7 +1177,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ApproveBlueprintRequest()
       );
@@ -1222,7 +1224,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ApproveBlueprintRequest()
       );
@@ -1253,7 +1255,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ApproveBlueprintRequest()
       );
@@ -1274,7 +1276,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ProposeBlueprintRequest()
       );
@@ -1305,7 +1307,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ProposeBlueprintRequest()
       );
@@ -1352,7 +1354,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ProposeBlueprintRequest()
       );
@@ -1383,7 +1385,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ProposeBlueprintRequest()
       );
@@ -1404,7 +1406,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.RejectBlueprintRequest()
       );
@@ -1435,7 +1437,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.RejectBlueprintRequest()
       );
@@ -1482,7 +1484,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.RejectBlueprintRequest()
       );
@@ -1513,7 +1515,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.RejectBlueprintRequest()
       );
@@ -1534,7 +1536,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.DiscardBlueprintChangesRequest()
       );
@@ -1566,7 +1568,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.DiscardBlueprintChangesRequest()
       );
@@ -1613,7 +1615,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.DiscardBlueprintChangesRequest()
       );
@@ -1647,7 +1649,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.DiscardBlueprintChangesRequest()
       );
@@ -1671,7 +1673,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.GetPublicBlueprintRequest()
       );
@@ -1703,7 +1705,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.GetPublicBlueprintRequest()
       );
@@ -1750,7 +1752,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.GetPublicBlueprintRequest()
       );
@@ -1781,7 +1783,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.GetPublicBlueprintRequest()
       );
@@ -1802,7 +1804,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.CreateDeploymentRequest()
       );
@@ -1833,7 +1835,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.CreateDeploymentRequest()
       );
@@ -1880,7 +1882,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.CreateDeploymentRequest()
       );
@@ -1911,7 +1913,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.CreateDeploymentRequest()
       );
@@ -1932,7 +1934,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.UpdateDeploymentRequest()
       );
@@ -1964,7 +1966,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.UpdateDeploymentRequest()
       );
@@ -2012,7 +2014,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.UpdateDeploymentRequest()
       );
@@ -2044,7 +2046,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.UpdateDeploymentRequest()
       );
@@ -2066,7 +2068,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.GetDeploymentRequest()
       );
@@ -2097,7 +2099,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.GetDeploymentRequest()
       );
@@ -2144,7 +2146,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.GetDeploymentRequest()
       );
@@ -2175,7 +2177,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.GetDeploymentRequest()
       );
@@ -2196,7 +2198,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.RemoveDeploymentRequest()
       );
@@ -2227,7 +2229,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.RemoveDeploymentRequest()
       );
@@ -2274,7 +2276,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.RemoveDeploymentRequest()
       );
@@ -2305,7 +2307,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.RemoveDeploymentRequest()
       );
@@ -2326,7 +2328,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.DiscardDeploymentChangesRequest()
       );
@@ -2358,7 +2360,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.DiscardDeploymentChangesRequest()
       );
@@ -2405,7 +2407,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.DiscardDeploymentChangesRequest()
       );
@@ -2439,7 +2441,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.DiscardDeploymentChangesRequest()
       );
@@ -2463,7 +2465,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ApplyDeploymentRequest()
       );
@@ -2494,7 +2496,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ApplyDeploymentRequest()
       );
@@ -2541,7 +2543,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ApplyDeploymentRequest()
       );
@@ -2572,7 +2574,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ApplyDeploymentRequest()
       );
@@ -2593,7 +2595,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ComputeDeploymentStatusRequest()
       );
@@ -2625,7 +2627,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ComputeDeploymentStatusRequest()
       );
@@ -2672,7 +2674,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ComputeDeploymentStatusRequest()
       );
@@ -2706,7 +2708,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ComputeDeploymentStatusRequest()
       );
@@ -2730,7 +2732,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.RollbackDeploymentRequest()
       );
@@ -2762,7 +2764,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.RollbackDeploymentRequest()
       );
@@ -2809,7 +2811,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.RollbackDeploymentRequest()
       );
@@ -2840,7 +2842,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.RollbackDeploymentRequest()
       );
@@ -2861,7 +2863,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.GetHydratedDeploymentRequest()
       );
@@ -2893,7 +2895,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.GetHydratedDeploymentRequest()
       );
@@ -2940,7 +2942,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.GetHydratedDeploymentRequest()
       );
@@ -2974,7 +2976,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.GetHydratedDeploymentRequest()
       );
@@ -2998,7 +3000,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.UpdateHydratedDeploymentRequest()
       );
@@ -3031,7 +3033,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.UpdateHydratedDeploymentRequest()
       );
@@ -3079,7 +3081,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.UpdateHydratedDeploymentRequest()
       );
@@ -3114,7 +3116,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.UpdateHydratedDeploymentRequest()
       );
@@ -3139,7 +3141,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ApplyHydratedDeploymentRequest()
       );
@@ -3171,7 +3173,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ApplyHydratedDeploymentRequest()
       );
@@ -3218,7 +3220,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ApplyHydratedDeploymentRequest()
       );
@@ -3252,7 +3254,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ApplyHydratedDeploymentRequest()
       );
@@ -3276,7 +3278,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.CreateOrchestrationClusterRequest()
       );
@@ -3309,7 +3311,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.CreateOrchestrationClusterRequest()
       );
@@ -3363,7 +3365,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.CreateOrchestrationClusterRequest()
       );
@@ -3397,7 +3399,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.CreateOrchestrationClusterRequest()
       );
@@ -3430,7 +3432,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3453,7 +3455,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3474,7 +3476,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.DeleteOrchestrationClusterRequest()
       );
@@ -3507,7 +3509,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.DeleteOrchestrationClusterRequest()
       );
@@ -3561,7 +3563,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.DeleteOrchestrationClusterRequest()
       );
@@ -3595,7 +3597,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.DeleteOrchestrationClusterRequest()
       );
@@ -3628,7 +3630,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3651,7 +3653,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3672,7 +3674,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.CreateEdgeSlmRequest()
       );
@@ -3705,7 +3707,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.CreateEdgeSlmRequest()
       );
@@ -3759,7 +3761,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.CreateEdgeSlmRequest()
       );
@@ -3790,7 +3792,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.CreateEdgeSlmRequest()
       );
@@ -3823,7 +3825,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3845,7 +3847,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3866,7 +3868,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.DeleteEdgeSlmRequest()
       );
@@ -3899,7 +3901,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.DeleteEdgeSlmRequest()
       );
@@ -3953,7 +3955,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.DeleteEdgeSlmRequest()
       );
@@ -3984,7 +3986,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.DeleteEdgeSlmRequest()
       );
@@ -4017,7 +4019,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4039,7 +4041,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4060,7 +4062,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListOrchestrationClustersRequest()
       );
@@ -4100,7 +4102,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListOrchestrationClustersRequest()
       );
@@ -4157,7 +4159,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListOrchestrationClustersRequest()
       );
@@ -4191,7 +4193,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListOrchestrationClustersRequest()
       );
@@ -4260,7 +4262,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListOrchestrationClustersRequest()
       );
@@ -4318,7 +4320,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListOrchestrationClustersRequest()
       );
@@ -4372,7 +4374,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListOrchestrationClustersRequest()
       );
@@ -4419,7 +4421,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListEdgeSlmsRequest()
       );
@@ -4458,7 +4460,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListEdgeSlmsRequest()
       );
@@ -4515,7 +4517,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListEdgeSlmsRequest()
       );
@@ -4546,7 +4548,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListEdgeSlmsRequest()
       );
@@ -4607,7 +4609,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListEdgeSlmsRequest()
       );
@@ -4659,7 +4661,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListEdgeSlmsRequest()
       );
@@ -4709,7 +4711,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListEdgeSlmsRequest()
       );
@@ -4752,7 +4754,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListBlueprintsRequest()
       );
@@ -4791,7 +4793,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListBlueprintsRequest()
       );
@@ -4848,7 +4850,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListBlueprintsRequest()
       );
@@ -4879,7 +4881,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListBlueprintsRequest()
       );
@@ -4942,7 +4944,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListBlueprintsRequest()
       );
@@ -4994,7 +4996,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListBlueprintsRequest()
       );
@@ -5044,7 +5046,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListBlueprintsRequest()
       );
@@ -5087,7 +5089,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListBlueprintRevisionsRequest()
       );
@@ -5127,7 +5129,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListBlueprintRevisionsRequest()
       );
@@ -5184,7 +5186,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListBlueprintRevisionsRequest()
       );
@@ -5218,7 +5220,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListBlueprintRevisionsRequest()
       );
@@ -5287,7 +5289,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListBlueprintRevisionsRequest()
       );
@@ -5345,7 +5347,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListBlueprintRevisionsRequest()
       );
@@ -5399,7 +5401,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListBlueprintRevisionsRequest()
       );
@@ -5446,7 +5448,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.SearchBlueprintRevisionsRequest()
       );
@@ -5486,7 +5488,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.SearchBlueprintRevisionsRequest()
       );
@@ -5543,7 +5545,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.SearchBlueprintRevisionsRequest()
       );
@@ -5577,7 +5579,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.SearchBlueprintRevisionsRequest()
       );
@@ -5646,7 +5648,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.SearchBlueprintRevisionsRequest()
       );
@@ -5704,7 +5706,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.SearchBlueprintRevisionsRequest()
       );
@@ -5758,7 +5760,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.SearchBlueprintRevisionsRequest()
       );
@@ -5805,7 +5807,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.SearchDeploymentRevisionsRequest()
       );
@@ -5845,7 +5847,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.SearchDeploymentRevisionsRequest()
       );
@@ -5902,7 +5904,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.SearchDeploymentRevisionsRequest()
       );
@@ -5936,7 +5938,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.SearchDeploymentRevisionsRequest()
       );
@@ -6005,7 +6007,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.SearchDeploymentRevisionsRequest()
       );
@@ -6063,7 +6065,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.SearchDeploymentRevisionsRequest()
       );
@@ -6117,7 +6119,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.SearchDeploymentRevisionsRequest()
       );
@@ -6164,7 +6166,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListPublicBlueprintsRequest()
       );
@@ -6204,7 +6206,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListPublicBlueprintsRequest()
       );
@@ -6261,7 +6263,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListPublicBlueprintsRequest()
       );
@@ -6292,7 +6294,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListPublicBlueprintsRequest()
       );
@@ -6355,7 +6357,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListPublicBlueprintsRequest()
       );
@@ -6407,7 +6409,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListPublicBlueprintsRequest()
       );
@@ -6457,7 +6459,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListPublicBlueprintsRequest()
       );
@@ -6500,7 +6502,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListDeploymentsRequest()
       );
@@ -6539,7 +6541,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListDeploymentsRequest()
       );
@@ -6596,7 +6598,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListDeploymentsRequest()
       );
@@ -6627,7 +6629,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListDeploymentsRequest()
       );
@@ -6690,7 +6692,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListDeploymentsRequest()
       );
@@ -6742,7 +6744,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListDeploymentsRequest()
       );
@@ -6792,7 +6794,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListDeploymentsRequest()
       );
@@ -6835,7 +6837,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListDeploymentRevisionsRequest()
       );
@@ -6875,7 +6877,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListDeploymentRevisionsRequest()
       );
@@ -6932,7 +6934,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListDeploymentRevisionsRequest()
       );
@@ -6966,7 +6968,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListDeploymentRevisionsRequest()
       );
@@ -7035,7 +7037,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListDeploymentRevisionsRequest()
       );
@@ -7093,7 +7095,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListDeploymentRevisionsRequest()
       );
@@ -7147,7 +7149,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListDeploymentRevisionsRequest()
       );
@@ -7194,7 +7196,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListHydratedDeploymentsRequest()
       );
@@ -7234,7 +7236,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListHydratedDeploymentsRequest()
       );
@@ -7291,7 +7293,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListHydratedDeploymentsRequest()
       );
@@ -7325,7 +7327,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListHydratedDeploymentsRequest()
       );
@@ -7394,7 +7396,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListHydratedDeploymentsRequest()
       );
@@ -7452,7 +7454,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListHydratedDeploymentsRequest()
       );
@@ -7506,7 +7508,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.telcoautomation.v1alpha1.ListHydratedDeploymentsRequest()
       );
@@ -7552,7 +7554,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -7582,7 +7584,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -7626,7 +7628,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -7661,7 +7663,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -7709,7 +7711,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -7750,7 +7752,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -7829,7 +7831,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -7909,7 +7911,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -8005,8 +8007,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -8025,7 +8026,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -8034,8 +8035,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -8051,7 +8051,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('blueprint', () => {
+    describe('blueprint', async () => {
       const fakePath = '/rendered/path/blueprint';
       const expectedParameters = {
         project: 'projectValue',
@@ -8063,7 +8063,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.blueprintPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -8128,7 +8128,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
       });
     });
 
-    describe('deployment', () => {
+    describe('deployment', async () => {
       const fakePath = '/rendered/path/deployment';
       const expectedParameters = {
         project: 'projectValue',
@@ -8140,7 +8140,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.deploymentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -8205,7 +8205,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
       });
     });
 
-    describe('edgeSlm', () => {
+    describe('edgeSlm', async () => {
       const fakePath = '/rendered/path/edgeSlm';
       const expectedParameters = {
         project: 'projectValue',
@@ -8216,7 +8216,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.edgeSlmPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -8269,7 +8269,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
       });
     });
 
-    describe('hydratedDeployment', () => {
+    describe('hydratedDeployment', async () => {
       const fakePath = '/rendered/path/hydratedDeployment';
       const expectedParameters = {
         project: 'projectValue',
@@ -8282,7 +8282,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.hydratedDeploymentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -8378,7 +8378,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -8388,7 +8388,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -8427,7 +8427,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
       });
     });
 
-    describe('orchestrationCluster', () => {
+    describe('orchestrationCluster', async () => {
       const fakePath = '/rendered/path/orchestrationCluster';
       const expectedParameters = {
         project: 'projectValue',
@@ -8438,7 +8438,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.orchestrationClusterPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -8508,7 +8508,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -8517,7 +8517,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -8546,7 +8546,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
       });
     });
 
-    describe('publicBlueprint', () => {
+    describe('publicBlueprint', async () => {
       const fakePath = '/rendered/path/publicBlueprint';
       const expectedParameters = {
         project: 'projectValue',
@@ -8557,7 +8557,7 @@ describe('v1alpha1.TelcoAutomationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.publicBlueprintPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

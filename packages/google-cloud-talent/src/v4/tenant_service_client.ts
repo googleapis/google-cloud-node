@@ -483,7 +483,9 @@ export class TenantServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createTenant request %j', request);
     const wrappedCallback:
       | Callback<
@@ -592,7 +594,9 @@ export class TenantServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getTenant request %j', request);
     const wrappedCallback:
       | Callback<
@@ -709,7 +713,9 @@ export class TenantServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'tenant.name': request.tenant!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateTenant request %j', request);
     const wrappedCallback:
       | Callback<
@@ -818,7 +824,9 @@ export class TenantServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteTenant request %j', request);
     const wrappedCallback:
       | Callback<
@@ -936,7 +944,9 @@ export class TenantServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.talent.v4.IListTenantsRequest,
@@ -1003,7 +1013,9 @@ export class TenantServiceClient {
       });
     const defaultCallSettings = this._defaults['listTenants'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTenants stream %j', request);
     return this.descriptors.page.listTenants.createStream(
       this.innerApiCalls.listTenants as GaxCall,
@@ -1054,7 +1066,9 @@ export class TenantServiceClient {
       });
     const defaultCallSettings = this._defaults['listTenants'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTenants iterate %j', request);
     return this.descriptors.page.listTenants.asyncIterate(
       this.innerApiCalls['listTenants'] as GaxCall,
