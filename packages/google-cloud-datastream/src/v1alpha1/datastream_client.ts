@@ -723,7 +723,9 @@ export class DatastreamClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getConnectionProfile request %j', request);
     const wrappedCallback:
       | Callback<
@@ -865,7 +867,9 @@ export class DatastreamClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('discoverConnectionProfile request %j', request);
     const wrappedCallback:
       | Callback<
@@ -984,7 +988,9 @@ export class DatastreamClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getStream request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1106,7 +1112,9 @@ export class DatastreamClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getPrivateConnection request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1225,7 +1233,9 @@ export class DatastreamClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getRoute request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1372,7 +1382,9 @@ export class DatastreamClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1559,7 +1571,9 @@ export class DatastreamClient {
       this._gaxModule.routingHeader.fromParams({
         'connection_profile.name': request.connectionProfile!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1740,7 +1754,9 @@ export class DatastreamClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1930,7 +1946,9 @@ export class DatastreamClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2122,7 +2140,9 @@ export class DatastreamClient {
       this._gaxModule.routingHeader.fromParams({
         'stream.name': request.stream!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2303,7 +2323,9 @@ export class DatastreamClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2470,7 +2492,9 @@ export class DatastreamClient {
       this._gaxModule.routingHeader.fromParams({
         stream: request.stream ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2655,7 +2679,9 @@ export class DatastreamClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2839,7 +2865,9 @@ export class DatastreamClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3025,7 +3053,9 @@ export class DatastreamClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3206,7 +3236,9 @@ export class DatastreamClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3379,7 +3411,9 @@ export class DatastreamClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.datastream.v1alpha1.IListConnectionProfilesRequest,
@@ -3454,7 +3488,9 @@ export class DatastreamClient {
       });
     const defaultCallSettings = this._defaults['listConnectionProfiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listConnectionProfiles stream %j', request);
     return this.descriptors.page.listConnectionProfiles.createStream(
       this.innerApiCalls.listConnectionProfiles as GaxCall,
@@ -3511,7 +3547,9 @@ export class DatastreamClient {
       });
     const defaultCallSettings = this._defaults['listConnectionProfiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listConnectionProfiles iterate %j', request);
     return this.descriptors.page.listConnectionProfiles.asyncIterate(
       this.innerApiCalls['listConnectionProfiles'] as GaxCall,
@@ -3623,7 +3661,9 @@ export class DatastreamClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.datastream.v1alpha1.IListStreamsRequest,
@@ -3698,7 +3738,9 @@ export class DatastreamClient {
       });
     const defaultCallSettings = this._defaults['listStreams'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listStreams stream %j', request);
     return this.descriptors.page.listStreams.createStream(
       this.innerApiCalls.listStreams as GaxCall,
@@ -3755,7 +3797,9 @@ export class DatastreamClient {
       });
     const defaultCallSettings = this._defaults['listStreams'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listStreams iterate %j', request);
     return this.descriptors.page.listStreams.asyncIterate(
       this.innerApiCalls['listStreams'] as GaxCall,
@@ -3861,7 +3905,9 @@ export class DatastreamClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.datastream.v1alpha1.IFetchStaticIpsRequest,
@@ -3928,7 +3974,9 @@ export class DatastreamClient {
       });
     const defaultCallSettings = this._defaults['fetchStaticIps'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('fetchStaticIps stream %j', request);
     return this.descriptors.page.fetchStaticIps.createStream(
       this.innerApiCalls.fetchStaticIps as GaxCall,
@@ -3977,7 +4025,9 @@ export class DatastreamClient {
       });
     const defaultCallSettings = this._defaults['fetchStaticIps'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('fetchStaticIps iterate %j', request);
     return this.descriptors.page.fetchStaticIps.asyncIterate(
       this.innerApiCalls['fetchStaticIps'] as GaxCall,
@@ -4092,7 +4142,9 @@ export class DatastreamClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.datastream.v1alpha1.IListPrivateConnectionsRequest,
@@ -4169,7 +4221,9 @@ export class DatastreamClient {
       });
     const defaultCallSettings = this._defaults['listPrivateConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listPrivateConnections stream %j', request);
     return this.descriptors.page.listPrivateConnections.createStream(
       this.innerApiCalls.listPrivateConnections as GaxCall,
@@ -4228,7 +4282,9 @@ export class DatastreamClient {
       });
     const defaultCallSettings = this._defaults['listPrivateConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listPrivateConnections iterate %j', request);
     return this.descriptors.page.listPrivateConnections.asyncIterate(
       this.innerApiCalls['listPrivateConnections'] as GaxCall,
@@ -4343,7 +4399,9 @@ export class DatastreamClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.datastream.v1alpha1.IListRoutesRequest,
@@ -4420,7 +4478,9 @@ export class DatastreamClient {
       });
     const defaultCallSettings = this._defaults['listRoutes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRoutes stream %j', request);
     return this.descriptors.page.listRoutes.createStream(
       this.innerApiCalls.listRoutes as GaxCall,
@@ -4479,7 +4539,9 @@ export class DatastreamClient {
       });
     const defaultCallSettings = this._defaults['listRoutes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRoutes iterate %j', request);
     return this.descriptors.page.listRoutes.asyncIterate(
       this.innerApiCalls['listRoutes'] as GaxCall,

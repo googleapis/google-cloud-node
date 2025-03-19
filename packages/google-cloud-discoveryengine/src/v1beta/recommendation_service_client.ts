@@ -724,7 +724,9 @@ export class RecommendationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         serving_config: request.servingConfig ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('recommend request %j', request);
     const wrappedCallback:
       | Callback<

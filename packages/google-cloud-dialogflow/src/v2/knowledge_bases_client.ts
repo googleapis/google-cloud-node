@@ -630,7 +630,9 @@ export class KnowledgeBasesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getKnowledgeBase request %j', request);
     const wrappedCallback:
       | Callback<
@@ -752,7 +754,9 @@ export class KnowledgeBasesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createKnowledgeBase request %j', request);
     const wrappedCallback:
       | Callback<
@@ -876,7 +880,9 @@ export class KnowledgeBasesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteKnowledgeBase request %j', request);
     const wrappedCallback:
       | Callback<
@@ -999,7 +1005,9 @@ export class KnowledgeBasesClient {
       this._gaxModule.routingHeader.fromParams({
         'knowledge_base.name': request.knowledgeBase!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateKnowledgeBase request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1155,7 +1163,9 @@ export class KnowledgeBasesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dialogflow.v2.IListKnowledgeBasesRequest,
@@ -1249,7 +1259,9 @@ export class KnowledgeBasesClient {
       });
     const defaultCallSettings = this._defaults['listKnowledgeBases'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listKnowledgeBases stream %j', request);
     return this.descriptors.page.listKnowledgeBases.createStream(
       this.innerApiCalls.listKnowledgeBases as GaxCall,
@@ -1325,7 +1337,9 @@ export class KnowledgeBasesClient {
       });
     const defaultCallSettings = this._defaults['listKnowledgeBases'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listKnowledgeBases iterate %j', request);
     return this.descriptors.page.listKnowledgeBases.asyncIterate(
       this.innerApiCalls['listKnowledgeBases'] as GaxCall,

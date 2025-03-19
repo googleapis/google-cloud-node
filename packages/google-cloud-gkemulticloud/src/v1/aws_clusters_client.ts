@@ -651,7 +651,9 @@ export class AwsClustersClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAwsCluster request %j', request);
     const wrappedCallback:
       | Callback<
@@ -794,7 +796,9 @@ export class AwsClustersClient {
       this._gaxModule.routingHeader.fromParams({
         aws_cluster: request.awsCluster ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('generateAwsClusterAgentToken request %j', request);
     const wrappedCallback:
       | Callback<
@@ -928,7 +932,9 @@ export class AwsClustersClient {
       this._gaxModule.routingHeader.fromParams({
         aws_cluster: request.awsCluster ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('generateAwsAccessToken request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1056,7 +1062,9 @@ export class AwsClustersClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAwsNodePool request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1187,7 +1195,9 @@ export class AwsClustersClient {
       this._gaxModule.routingHeader.fromParams({
         aws_cluster: request.awsCluster ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAwsOpenIdConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1315,7 +1325,9 @@ export class AwsClustersClient {
       this._gaxModule.routingHeader.fromParams({
         aws_cluster: request.awsCluster ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAwsJsonWebKeys request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1449,7 +1461,9 @@ export class AwsClustersClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAwsServerConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1608,7 +1622,9 @@ export class AwsClustersClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1810,7 +1826,9 @@ export class AwsClustersClient {
       this._gaxModule.routingHeader.fromParams({
         'aws_cluster.name': request.awsCluster!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2014,7 +2032,9 @@ export class AwsClustersClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2209,7 +2229,9 @@ export class AwsClustersClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2414,7 +2436,9 @@ export class AwsClustersClient {
       this._gaxModule.routingHeader.fromParams({
         'aws_node_pool.name': request.awsNodePool!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2597,7 +2621,9 @@ export class AwsClustersClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2799,7 +2825,9 @@ export class AwsClustersClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2976,7 +3004,9 @@ export class AwsClustersClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.gkemulticloud.v1.IListAwsClustersRequest,
@@ -3055,7 +3085,9 @@ export class AwsClustersClient {
       });
     const defaultCallSettings = this._defaults['listAwsClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAwsClusters stream %j', request);
     return this.descriptors.page.listAwsClusters.createStream(
       this.innerApiCalls.listAwsClusters as GaxCall,
@@ -3116,7 +3148,9 @@ export class AwsClustersClient {
       });
     const defaultCallSettings = this._defaults['listAwsClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAwsClusters iterate %j', request);
     return this.descriptors.page.listAwsClusters.asyncIterate(
       this.innerApiCalls['listAwsClusters'] as GaxCall,
@@ -3235,7 +3269,9 @@ export class AwsClustersClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.gkemulticloud.v1.IListAwsNodePoolsRequest,
@@ -3315,7 +3351,9 @@ export class AwsClustersClient {
       });
     const defaultCallSettings = this._defaults['listAwsNodePools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAwsNodePools stream %j', request);
     return this.descriptors.page.listAwsNodePools.createStream(
       this.innerApiCalls.listAwsNodePools as GaxCall,
@@ -3377,7 +3415,9 @@ export class AwsClustersClient {
       });
     const defaultCallSettings = this._defaults['listAwsNodePools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAwsNodePools iterate %j', request);
     return this.descriptors.page.listAwsNodePools.asyncIterate(
       this.innerApiCalls['listAwsNodePools'] as GaxCall,
@@ -3479,7 +3519,7 @@ export class AwsClustersClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

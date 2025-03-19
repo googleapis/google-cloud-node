@@ -677,7 +677,9 @@ export class EdgeContainerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getCluster request %j', request);
     const wrappedCallback:
       | Callback<
@@ -799,7 +801,9 @@ export class EdgeContainerClient {
       this._gaxModule.routingHeader.fromParams({
         cluster: request.cluster ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('generateAccessToken request %j', request);
     const wrappedCallback:
       | Callback<
@@ -924,7 +928,9 @@ export class EdgeContainerClient {
       this._gaxModule.routingHeader.fromParams({
         cluster: request.cluster ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('generateOfflineCredential request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1043,7 +1049,9 @@ export class EdgeContainerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getNodePool request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1159,7 +1167,9 @@ export class EdgeContainerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getMachine request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1275,7 +1285,9 @@ export class EdgeContainerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getVpnConnection request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1395,7 +1407,9 @@ export class EdgeContainerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getServerConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1535,7 +1549,9 @@ export class EdgeContainerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1712,7 +1728,9 @@ export class EdgeContainerClient {
       this._gaxModule.routingHeader.fromParams({
         'cluster.name': request.cluster!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1887,7 +1905,9 @@ export class EdgeContainerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2058,7 +2078,9 @@ export class EdgeContainerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2233,7 +2255,9 @@ export class EdgeContainerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2410,7 +2434,9 @@ export class EdgeContainerClient {
       this._gaxModule.routingHeader.fromParams({
         'node_pool.name': request.nodePool!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2581,7 +2607,9 @@ export class EdgeContainerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2756,7 +2784,9 @@ export class EdgeContainerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2927,7 +2957,9 @@ export class EdgeContainerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3094,7 +3126,9 @@ export class EdgeContainerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.edgecontainer.v1.IListClustersRequest,
@@ -3164,7 +3198,9 @@ export class EdgeContainerClient {
       });
     const defaultCallSettings = this._defaults['listClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listClusters stream %j', request);
     return this.descriptors.page.listClusters.createStream(
       this.innerApiCalls.listClusters as GaxCall,
@@ -3216,7 +3252,9 @@ export class EdgeContainerClient {
       });
     const defaultCallSettings = this._defaults['listClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listClusters iterate %j', request);
     return this.descriptors.page.listClusters.asyncIterate(
       this.innerApiCalls['listClusters'] as GaxCall,
@@ -3322,7 +3360,9 @@ export class EdgeContainerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.edgecontainer.v1.IListNodePoolsRequest,
@@ -3391,7 +3431,9 @@ export class EdgeContainerClient {
       });
     const defaultCallSettings = this._defaults['listNodePools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listNodePools stream %j', request);
     return this.descriptors.page.listNodePools.createStream(
       this.innerApiCalls.listNodePools as GaxCall,
@@ -3442,7 +3484,9 @@ export class EdgeContainerClient {
       });
     const defaultCallSettings = this._defaults['listNodePools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listNodePools iterate %j', request);
     return this.descriptors.page.listNodePools.asyncIterate(
       this.innerApiCalls['listNodePools'] as GaxCall,
@@ -3548,7 +3592,9 @@ export class EdgeContainerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.edgecontainer.v1.IListMachinesRequest,
@@ -3617,7 +3663,9 @@ export class EdgeContainerClient {
       });
     const defaultCallSettings = this._defaults['listMachines'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listMachines stream %j', request);
     return this.descriptors.page.listMachines.createStream(
       this.innerApiCalls.listMachines as GaxCall,
@@ -3668,7 +3716,9 @@ export class EdgeContainerClient {
       });
     const defaultCallSettings = this._defaults['listMachines'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listMachines iterate %j', request);
     return this.descriptors.page.listMachines.asyncIterate(
       this.innerApiCalls['listMachines'] as GaxCall,
@@ -3775,7 +3825,9 @@ export class EdgeContainerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.edgecontainer.v1.IListVpnConnectionsRequest,
@@ -3845,7 +3897,9 @@ export class EdgeContainerClient {
       });
     const defaultCallSettings = this._defaults['listVpnConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listVpnConnections stream %j', request);
     return this.descriptors.page.listVpnConnections.createStream(
       this.innerApiCalls.listVpnConnections as GaxCall,
@@ -3897,7 +3951,9 @@ export class EdgeContainerClient {
       });
     const defaultCallSettings = this._defaults['listVpnConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listVpnConnections iterate %j', request);
     return this.descriptors.page.listVpnConnections.asyncIterate(
       this.innerApiCalls['listVpnConnections'] as GaxCall,
@@ -4077,7 +4133,7 @@ export class EdgeContainerClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

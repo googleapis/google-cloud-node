@@ -673,7 +673,9 @@ export class FlowsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createFlow request %j', request);
     const wrappedCallback:
       | Callback<
@@ -802,7 +804,9 @@ export class FlowsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteFlow request %j', request);
     const wrappedCallback:
       | Callback<
@@ -928,7 +932,9 @@ export class FlowsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getFlow request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1064,7 +1070,9 @@ export class FlowsClient {
       this._gaxModule.routingHeader.fromParams({
         'flow.name': request.flow!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateFlow request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1186,7 +1194,9 @@ export class FlowsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('validateFlow request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1313,7 +1323,9 @@ export class FlowsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getFlowValidationResult request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1461,7 +1473,9 @@ export class FlowsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1656,7 +1670,9 @@ export class FlowsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1850,7 +1866,9 @@ export class FlowsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2028,7 +2046,9 @@ export class FlowsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dialogflow.cx.v3.IListFlowsRequest,
@@ -2109,7 +2129,9 @@ export class FlowsClient {
       });
     const defaultCallSettings = this._defaults['listFlows'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listFlows stream %j', request);
     return this.descriptors.page.listFlows.createStream(
       this.innerApiCalls.listFlows as GaxCall,
@@ -2172,7 +2194,9 @@ export class FlowsClient {
       });
     const defaultCallSettings = this._defaults['listFlows'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listFlows iterate %j', request);
     return this.descriptors.page.listFlows.asyncIterate(
       this.innerApiCalls['listFlows'] as GaxCall,
@@ -2352,7 +2376,7 @@ export class FlowsClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

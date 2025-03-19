@@ -606,7 +606,9 @@ export class TransitionRouteGroupsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getTransitionRouteGroup request %j', request);
     const wrappedCallback:
       | Callback<
@@ -756,7 +758,9 @@ export class TransitionRouteGroupsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createTransitionRouteGroup request %j', request);
     const wrappedCallback:
       | Callback<
@@ -900,7 +904,9 @@ export class TransitionRouteGroupsClient {
       this._gaxModule.routingHeader.fromParams({
         'transition_route_group.name': request.transitionRouteGroup!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateTransitionRouteGroup request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1043,7 +1049,9 @@ export class TransitionRouteGroupsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteTransitionRouteGroup request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1187,7 +1195,9 @@ export class TransitionRouteGroupsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dialogflow.cx.v3beta1.IListTransitionRouteGroupsRequest,
@@ -1269,7 +1279,9 @@ export class TransitionRouteGroupsClient {
       });
     const defaultCallSettings = this._defaults['listTransitionRouteGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTransitionRouteGroups stream %j', request);
     return this.descriptors.page.listTransitionRouteGroups.createStream(
       this.innerApiCalls.listTransitionRouteGroups as GaxCall,
@@ -1333,7 +1345,9 @@ export class TransitionRouteGroupsClient {
       });
     const defaultCallSettings = this._defaults['listTransitionRouteGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTransitionRouteGroups iterate %j', request);
     return this.descriptors.page.listTransitionRouteGroups.asyncIterate(
       this.innerApiCalls['listTransitionRouteGroups'] as GaxCall,

@@ -622,7 +622,9 @@ export class VersionsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getVersion request %j', request);
     const wrappedCallback:
       | Callback<
@@ -745,7 +747,9 @@ export class VersionsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createVersion request %j', request);
     const wrappedCallback:
       | Callback<
@@ -874,7 +878,9 @@ export class VersionsClient {
       this._gaxModule.routingHeader.fromParams({
         'version.name': request.version!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateVersion request %j', request);
     const wrappedCallback:
       | Callback<
@@ -997,7 +1003,9 @@ export class VersionsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteVersion request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1128,7 +1136,9 @@ export class VersionsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dialogflow.v2beta1.IListVersionsRequest,
@@ -1197,7 +1207,9 @@ export class VersionsClient {
       });
     const defaultCallSettings = this._defaults['listVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listVersions stream %j', request);
     return this.descriptors.page.listVersions.createStream(
       this.innerApiCalls.listVersions as GaxCall,
@@ -1248,7 +1260,9 @@ export class VersionsClient {
       });
     const defaultCallSettings = this._defaults['listVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listVersions iterate %j', request);
     return this.descriptors.page.listVersions.asyncIterate(
       this.innerApiCalls['listVersions'] as GaxCall,

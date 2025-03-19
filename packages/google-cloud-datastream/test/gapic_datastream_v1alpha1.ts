@@ -284,7 +284,9 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.datastreamStub);
       client.close().then(() => {
         done();
@@ -343,7 +345,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.GetConnectionProfileRequest()
       );
@@ -375,7 +377,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.GetConnectionProfileRequest()
       );
@@ -422,7 +424,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.GetConnectionProfileRequest()
       );
@@ -453,7 +455,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.GetConnectionProfileRequest()
       );
@@ -474,7 +476,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.DiscoverConnectionProfileRequest()
       );
@@ -506,7 +508,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.DiscoverConnectionProfileRequest()
       );
@@ -553,7 +555,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.DiscoverConnectionProfileRequest()
       );
@@ -587,7 +589,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.DiscoverConnectionProfileRequest()
       );
@@ -611,7 +613,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.GetStreamRequest()
       );
@@ -642,7 +644,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.GetStreamRequest()
       );
@@ -689,7 +691,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.GetStreamRequest()
       );
@@ -717,7 +719,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.GetStreamRequest()
       );
@@ -738,7 +740,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.GetPrivateConnectionRequest()
       );
@@ -770,7 +772,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.GetPrivateConnectionRequest()
       );
@@ -817,7 +819,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.GetPrivateConnectionRequest()
       );
@@ -848,7 +850,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.GetPrivateConnectionRequest()
       );
@@ -869,7 +871,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.GetRouteRequest()
       );
@@ -900,7 +902,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.GetRouteRequest()
       );
@@ -947,7 +949,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.GetRouteRequest()
       );
@@ -975,7 +977,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.GetRouteRequest()
       );
@@ -996,7 +998,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.CreateConnectionProfileRequest()
       );
@@ -1029,7 +1031,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.CreateConnectionProfileRequest()
       );
@@ -1083,7 +1085,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.CreateConnectionProfileRequest()
       );
@@ -1117,7 +1119,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.CreateConnectionProfileRequest()
       );
@@ -1150,7 +1152,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1173,7 +1175,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1194,7 +1196,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.UpdateConnectionProfileRequest()
       );
@@ -1228,7 +1230,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.UpdateConnectionProfileRequest()
       );
@@ -1283,7 +1285,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.UpdateConnectionProfileRequest()
       );
@@ -1318,7 +1320,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.UpdateConnectionProfileRequest()
       );
@@ -1352,7 +1354,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1375,7 +1377,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1396,7 +1398,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.DeleteConnectionProfileRequest()
       );
@@ -1429,7 +1431,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.DeleteConnectionProfileRequest()
       );
@@ -1483,7 +1485,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.DeleteConnectionProfileRequest()
       );
@@ -1517,7 +1519,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.DeleteConnectionProfileRequest()
       );
@@ -1550,7 +1552,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1573,7 +1575,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1594,7 +1596,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.CreateStreamRequest()
       );
@@ -1626,7 +1628,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.CreateStreamRequest()
       );
@@ -1680,7 +1682,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.CreateStreamRequest()
       );
@@ -1711,7 +1713,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.CreateStreamRequest()
       );
@@ -1744,7 +1746,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1766,7 +1768,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1784,7 +1786,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.UpdateStreamRequest()
       );
@@ -1817,7 +1819,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.UpdateStreamRequest()
       );
@@ -1872,7 +1874,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.UpdateStreamRequest()
       );
@@ -1904,7 +1906,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.UpdateStreamRequest()
       );
@@ -1938,7 +1940,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1960,7 +1962,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1978,7 +1980,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.DeleteStreamRequest()
       );
@@ -2010,7 +2012,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.DeleteStreamRequest()
       );
@@ -2064,7 +2066,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.DeleteStreamRequest()
       );
@@ -2095,7 +2097,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.DeleteStreamRequest()
       );
@@ -2128,7 +2130,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2150,7 +2152,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2168,7 +2170,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.FetchErrorsRequest()
       );
@@ -2200,7 +2202,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.FetchErrorsRequest()
       );
@@ -2254,7 +2256,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.FetchErrorsRequest()
       );
@@ -2285,7 +2287,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.FetchErrorsRequest()
       );
@@ -2318,7 +2320,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2340,7 +2342,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2358,7 +2360,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.CreatePrivateConnectionRequest()
       );
@@ -2391,7 +2393,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.CreatePrivateConnectionRequest()
       );
@@ -2445,7 +2447,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.CreatePrivateConnectionRequest()
       );
@@ -2479,7 +2481,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.CreatePrivateConnectionRequest()
       );
@@ -2512,7 +2514,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2535,7 +2537,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2556,7 +2558,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.DeletePrivateConnectionRequest()
       );
@@ -2589,7 +2591,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.DeletePrivateConnectionRequest()
       );
@@ -2643,7 +2645,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.DeletePrivateConnectionRequest()
       );
@@ -2677,7 +2679,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.DeletePrivateConnectionRequest()
       );
@@ -2710,7 +2712,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2733,7 +2735,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2754,7 +2756,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.CreateRouteRequest()
       );
@@ -2786,7 +2788,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.CreateRouteRequest()
       );
@@ -2840,7 +2842,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.CreateRouteRequest()
       );
@@ -2871,7 +2873,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.CreateRouteRequest()
       );
@@ -2904,7 +2906,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2926,7 +2928,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2944,7 +2946,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.DeleteRouteRequest()
       );
@@ -2976,7 +2978,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.DeleteRouteRequest()
       );
@@ -3030,7 +3032,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.DeleteRouteRequest()
       );
@@ -3061,7 +3063,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.DeleteRouteRequest()
       );
@@ -3094,7 +3096,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3116,7 +3118,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3134,7 +3136,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.ListConnectionProfilesRequest()
       );
@@ -3174,7 +3176,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.ListConnectionProfilesRequest()
       );
@@ -3231,7 +3233,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.ListConnectionProfilesRequest()
       );
@@ -3265,7 +3267,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.ListConnectionProfilesRequest()
       );
@@ -3334,7 +3336,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.ListConnectionProfilesRequest()
       );
@@ -3392,7 +3394,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.ListConnectionProfilesRequest()
       );
@@ -3446,7 +3448,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.ListConnectionProfilesRequest()
       );
@@ -3493,7 +3495,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.ListStreamsRequest()
       );
@@ -3532,7 +3534,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.ListStreamsRequest()
       );
@@ -3587,7 +3589,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.ListStreamsRequest()
       );
@@ -3618,7 +3620,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.ListStreamsRequest()
       );
@@ -3678,7 +3680,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.ListStreamsRequest()
       );
@@ -3729,7 +3731,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.ListStreamsRequest()
       );
@@ -3778,7 +3780,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.ListStreamsRequest()
       );
@@ -3822,7 +3824,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.FetchStaticIpsRequest()
       );
@@ -3851,7 +3853,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.FetchStaticIpsRequest()
       );
@@ -3893,7 +3895,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.FetchStaticIpsRequest()
       );
@@ -3924,7 +3926,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.FetchStaticIpsRequest()
       );
@@ -3971,7 +3973,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.FetchStaticIpsRequest()
       );
@@ -4017,7 +4019,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.FetchStaticIpsRequest()
       );
@@ -4056,7 +4058,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.FetchStaticIpsRequest()
       );
@@ -4098,7 +4100,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.ListPrivateConnectionsRequest()
       );
@@ -4138,7 +4140,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.ListPrivateConnectionsRequest()
       );
@@ -4195,7 +4197,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.ListPrivateConnectionsRequest()
       );
@@ -4229,7 +4231,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.ListPrivateConnectionsRequest()
       );
@@ -4298,7 +4300,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.ListPrivateConnectionsRequest()
       );
@@ -4356,7 +4358,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.ListPrivateConnectionsRequest()
       );
@@ -4410,7 +4412,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.ListPrivateConnectionsRequest()
       );
@@ -4457,7 +4459,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.ListRoutesRequest()
       );
@@ -4496,7 +4498,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.ListRoutesRequest()
       );
@@ -4551,7 +4553,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.ListRoutesRequest()
       );
@@ -4582,7 +4584,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.ListRoutesRequest()
       );
@@ -4642,7 +4644,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.ListRoutesRequest()
       );
@@ -4693,7 +4695,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.ListRoutesRequest()
       );
@@ -4742,7 +4744,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datastream.v1alpha1.ListRoutesRequest()
       );
@@ -4781,7 +4783,7 @@ describe('v1alpha1.DatastreamClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('connectionProfile', () => {
+    describe('connectionProfile', async () => {
       const fakePath = '/rendered/path/connectionProfile';
       const expectedParameters = {
         project: 'projectValue',
@@ -4792,7 +4794,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.connectionProfilePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4858,7 +4860,7 @@ describe('v1alpha1.DatastreamClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -4868,7 +4870,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4907,7 +4909,7 @@ describe('v1alpha1.DatastreamClient', () => {
       });
     });
 
-    describe('privateConnection', () => {
+    describe('privateConnection', async () => {
       const fakePath = '/rendered/path/privateConnection';
       const expectedParameters = {
         project: 'projectValue',
@@ -4918,7 +4920,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.privateConnectionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4984,7 +4986,7 @@ describe('v1alpha1.DatastreamClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -4993,7 +4995,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5022,7 +5024,7 @@ describe('v1alpha1.DatastreamClient', () => {
       });
     });
 
-    describe('route', () => {
+    describe('route', async () => {
       const fakePath = '/rendered/path/route';
       const expectedParameters = {
         project: 'projectValue',
@@ -5034,7 +5036,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.routePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -5098,7 +5100,7 @@ describe('v1alpha1.DatastreamClient', () => {
       });
     });
 
-    describe('stream', () => {
+    describe('stream', async () => {
       const fakePath = '/rendered/path/stream';
       const expectedParameters = {
         project: 'projectValue',
@@ -5109,7 +5111,7 @@ describe('v1alpha1.DatastreamClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.streamPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

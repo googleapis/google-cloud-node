@@ -670,7 +670,9 @@ export class ClientConnectorServicesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getClientConnectorService request %j', request);
     const wrappedCallback:
       | Callback<
@@ -829,7 +831,9 @@ export class ClientConnectorServicesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1030,7 +1034,9 @@ export class ClientConnectorServicesServiceClient {
         'client_connector_service.name':
           request.clientConnectorService!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1220,7 +1226,9 @@ export class ClientConnectorServicesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1393,7 +1401,9 @@ export class ClientConnectorServicesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.beyondcorp.clientconnectorservices.v1.IListClientConnectorServicesRequest,
@@ -1463,7 +1473,9 @@ export class ClientConnectorServicesServiceClient {
       });
     const defaultCallSettings = this._defaults['listClientConnectorServices'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listClientConnectorServices stream %j', request);
     return this.descriptors.page.listClientConnectorServices.createStream(
       this.innerApiCalls.listClientConnectorServices as GaxCall,
@@ -1515,7 +1527,9 @@ export class ClientConnectorServicesServiceClient {
       });
     const defaultCallSettings = this._defaults['listClientConnectorServices'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listClientConnectorServices iterate %j', request);
     return this.descriptors.page.listClientConnectorServices.asyncIterate(
       this.innerApiCalls['listClientConnectorServices'] as GaxCall,
@@ -1833,7 +1847,7 @@ export class ClientConnectorServicesServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

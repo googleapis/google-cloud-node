@@ -741,7 +741,9 @@ export class ConversationDatasetsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getConversationDataset request %j', request);
     const wrappedCallback:
       | Callback<
@@ -885,7 +887,9 @@ export class ConversationDatasetsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1063,7 +1067,9 @@ export class ConversationDatasetsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1245,7 +1251,9 @@ export class ConversationDatasetsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1410,7 +1418,9 @@ export class ConversationDatasetsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dialogflow.v2.IListConversationDatasetsRequest,
@@ -1477,7 +1487,9 @@ export class ConversationDatasetsClient {
       });
     const defaultCallSettings = this._defaults['listConversationDatasets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listConversationDatasets stream %j', request);
     return this.descriptors.page.listConversationDatasets.createStream(
       this.innerApiCalls.listConversationDatasets as GaxCall,
@@ -1526,7 +1538,9 @@ export class ConversationDatasetsClient {
       });
     const defaultCallSettings = this._defaults['listConversationDatasets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listConversationDatasets iterate %j', request);
     return this.descriptors.page.listConversationDatasets.asyncIterate(
       this.innerApiCalls['listConversationDatasets'] as GaxCall,
@@ -1706,7 +1720,7 @@ export class ConversationDatasetsClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

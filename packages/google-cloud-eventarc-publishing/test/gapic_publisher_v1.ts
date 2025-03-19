@@ -190,7 +190,9 @@ describe('v1.PublisherClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.publisherStub);
       client.close().then(() => {
         done();
@@ -249,7 +251,7 @@ describe('v1.PublisherClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.publishing.v1.PublishChannelConnectionEventsRequest()
       );
@@ -281,7 +283,7 @@ describe('v1.PublisherClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.publishing.v1.PublishChannelConnectionEventsRequest()
       );
@@ -328,7 +330,7 @@ describe('v1.PublisherClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.publishing.v1.PublishChannelConnectionEventsRequest()
       );
@@ -362,7 +364,7 @@ describe('v1.PublisherClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.publishing.v1.PublishChannelConnectionEventsRequest()
       );
@@ -386,7 +388,7 @@ describe('v1.PublisherClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.publishing.v1.PublishEventsRequest()
       );
@@ -417,7 +419,7 @@ describe('v1.PublisherClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.publishing.v1.PublishEventsRequest()
       );
@@ -464,7 +466,7 @@ describe('v1.PublisherClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.publishing.v1.PublishEventsRequest()
       );
@@ -495,7 +497,7 @@ describe('v1.PublisherClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.publishing.v1.PublishEventsRequest()
       );
@@ -516,7 +518,7 @@ describe('v1.PublisherClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.publishing.v1.PublishRequest()
       );
@@ -547,7 +549,7 @@ describe('v1.PublisherClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.publishing.v1.PublishRequest()
       );
@@ -594,7 +596,7 @@ describe('v1.PublisherClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.publishing.v1.PublishRequest()
       );
@@ -622,7 +624,7 @@ describe('v1.PublisherClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.publishing.v1.PublishRequest()
       );

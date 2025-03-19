@@ -836,7 +836,9 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getInstance request %j', request);
     const wrappedCallback:
       | Callback<
@@ -965,7 +967,9 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('renameInstance request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1093,7 +1097,9 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createSSHKey request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1213,7 +1219,9 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteSSHKey request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1332,7 +1340,9 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getVolume request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1455,7 +1465,9 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('renameVolume request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1581,7 +1593,9 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         location: request.location ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listNetworkUsage request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1700,7 +1714,9 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getNetwork request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1828,7 +1844,9 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createVolumeSnapshot request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1954,7 +1972,9 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteVolumeSnapshot request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2080,7 +2100,9 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getVolumeSnapshot request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2199,7 +2221,9 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getLun request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2315,7 +2339,9 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getNfsShare request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2444,7 +2470,9 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('renameNfsShare request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2575,7 +2603,9 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('submitProvisioningConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2700,7 +2730,9 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getProvisioningConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2831,7 +2863,9 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createProvisioningConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2961,7 +2995,9 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         'provisioning_config.name': request.provisioningConfig!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateProvisioningConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3090,7 +3126,9 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('renameNetwork request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3231,7 +3269,9 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         'instance.name': request.instance!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3399,7 +3439,9 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3566,7 +3608,9 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3733,7 +3777,9 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3900,7 +3946,9 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4073,7 +4121,9 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4250,7 +4300,9 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         instance: request.instance ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4424,7 +4476,9 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         'volume.name': request.volume!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4592,7 +4646,9 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4761,7 +4817,9 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         volume: request.volume ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -4935,7 +4993,9 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         'network.name': request.network!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5104,7 +5164,9 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         volume_snapshot: request.volumeSnapshot ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5272,7 +5334,9 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5447,7 +5511,9 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         'nfs_share.name': request.nfsShare!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5616,7 +5682,9 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5783,7 +5851,9 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -5948,7 +6018,9 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.baremetalsolution.v2.IListInstancesRequest,
@@ -6016,7 +6088,9 @@ export class BareMetalSolutionClient {
       });
     const defaultCallSettings = this._defaults['listInstances'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listInstances stream %j', request);
     return this.descriptors.page.listInstances.createStream(
       this.innerApiCalls.listInstances as GaxCall,
@@ -6066,7 +6140,9 @@ export class BareMetalSolutionClient {
       });
     const defaultCallSettings = this._defaults['listInstances'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listInstances iterate %j', request);
     return this.descriptors.page.listInstances.asyncIterate(
       this.innerApiCalls['listInstances'] as GaxCall,
@@ -6170,7 +6246,9 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.baremetalsolution.v2.IListSSHKeysRequest,
@@ -6236,7 +6314,9 @@ export class BareMetalSolutionClient {
       });
     const defaultCallSettings = this._defaults['listSshKeys'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSSHKeys stream %j', request);
     return this.descriptors.page.listSSHKeys.createStream(
       this.innerApiCalls.listSshKeys as GaxCall,
@@ -6284,7 +6364,9 @@ export class BareMetalSolutionClient {
       });
     const defaultCallSettings = this._defaults['listSshKeys'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSSHKeys iterate %j', request);
     return this.descriptors.page.listSSHKeys.asyncIterate(
       this.innerApiCalls['listSshKeys'] as GaxCall,
@@ -6389,7 +6471,9 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.baremetalsolution.v2.IListVolumesRequest,
@@ -6457,7 +6541,9 @@ export class BareMetalSolutionClient {
       });
     const defaultCallSettings = this._defaults['listVolumes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listVolumes stream %j', request);
     return this.descriptors.page.listVolumes.createStream(
       this.innerApiCalls.listVolumes as GaxCall,
@@ -6507,7 +6593,9 @@ export class BareMetalSolutionClient {
       });
     const defaultCallSettings = this._defaults['listVolumes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listVolumes iterate %j', request);
     return this.descriptors.page.listVolumes.asyncIterate(
       this.innerApiCalls['listVolumes'] as GaxCall,
@@ -6612,7 +6700,9 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.baremetalsolution.v2.IListNetworksRequest,
@@ -6680,7 +6770,9 @@ export class BareMetalSolutionClient {
       });
     const defaultCallSettings = this._defaults['listNetworks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listNetworks stream %j', request);
     return this.descriptors.page.listNetworks.createStream(
       this.innerApiCalls.listNetworks as GaxCall,
@@ -6730,7 +6822,9 @@ export class BareMetalSolutionClient {
       });
     const defaultCallSettings = this._defaults['listNetworks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listNetworks iterate %j', request);
     return this.descriptors.page.listNetworks.asyncIterate(
       this.innerApiCalls['listNetworks'] as GaxCall,
@@ -6835,7 +6929,9 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.baremetalsolution.v2.IListVolumeSnapshotsRequest,
@@ -6901,7 +6997,9 @@ export class BareMetalSolutionClient {
       });
     const defaultCallSettings = this._defaults['listVolumeSnapshots'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listVolumeSnapshots stream %j', request);
     return this.descriptors.page.listVolumeSnapshots.createStream(
       this.innerApiCalls.listVolumeSnapshots as GaxCall,
@@ -6949,7 +7047,9 @@ export class BareMetalSolutionClient {
       });
     const defaultCallSettings = this._defaults['listVolumeSnapshots'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listVolumeSnapshots iterate %j', request);
     return this.descriptors.page.listVolumeSnapshots.asyncIterate(
       this.innerApiCalls['listVolumeSnapshots'] as GaxCall,
@@ -7052,7 +7152,9 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.baremetalsolution.v2.IListLunsRequest,
@@ -7118,7 +7220,9 @@ export class BareMetalSolutionClient {
       });
     const defaultCallSettings = this._defaults['listLuns'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listLuns stream %j', request);
     return this.descriptors.page.listLuns.createStream(
       this.innerApiCalls.listLuns as GaxCall,
@@ -7166,7 +7270,9 @@ export class BareMetalSolutionClient {
       });
     const defaultCallSettings = this._defaults['listLuns'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listLuns iterate %j', request);
     return this.descriptors.page.listLuns.asyncIterate(
       this.innerApiCalls['listLuns'] as GaxCall,
@@ -7271,7 +7377,9 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.baremetalsolution.v2.IListNfsSharesRequest,
@@ -7339,7 +7447,9 @@ export class BareMetalSolutionClient {
       });
     const defaultCallSettings = this._defaults['listNfsShares'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listNfsShares stream %j', request);
     return this.descriptors.page.listNfsShares.createStream(
       this.innerApiCalls.listNfsShares as GaxCall,
@@ -7389,7 +7499,9 @@ export class BareMetalSolutionClient {
       });
     const defaultCallSettings = this._defaults['listNfsShares'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listNfsShares iterate %j', request);
     return this.descriptors.page.listNfsShares.asyncIterate(
       this.innerApiCalls['listNfsShares'] as GaxCall,
@@ -7494,7 +7606,9 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.baremetalsolution.v2.IListProvisioningQuotasRequest,
@@ -7562,7 +7676,9 @@ export class BareMetalSolutionClient {
       });
     const defaultCallSettings = this._defaults['listProvisioningQuotas'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listProvisioningQuotas stream %j', request);
     return this.descriptors.page.listProvisioningQuotas.createStream(
       this.innerApiCalls.listProvisioningQuotas as GaxCall,
@@ -7612,7 +7728,9 @@ export class BareMetalSolutionClient {
       });
     const defaultCallSettings = this._defaults['listProvisioningQuotas'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listProvisioningQuotas iterate %j', request);
     return this.descriptors.page.listProvisioningQuotas.asyncIterate(
       this.innerApiCalls['listProvisioningQuotas'] as GaxCall,
@@ -7717,7 +7835,9 @@ export class BareMetalSolutionClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.baremetalsolution.v2.IListOSImagesRequest,
@@ -7785,7 +7905,9 @@ export class BareMetalSolutionClient {
       });
     const defaultCallSettings = this._defaults['listOsImages'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listOSImages stream %j', request);
     return this.descriptors.page.listOSImages.createStream(
       this.innerApiCalls.listOsImages as GaxCall,
@@ -7835,7 +7957,9 @@ export class BareMetalSolutionClient {
       });
     const defaultCallSettings = this._defaults['listOsImages'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listOSImages iterate %j', request);
     return this.descriptors.page.listOSImages.asyncIterate(
       this.innerApiCalls['listOsImages'] as GaxCall,
@@ -8153,7 +8277,7 @@ export class BareMetalSolutionClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

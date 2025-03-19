@@ -288,7 +288,9 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.cloudDeployStub);
       client.close().then(() => {
         done();
@@ -347,7 +349,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetDeliveryPipelineRequest()
       );
@@ -379,7 +381,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetDeliveryPipelineRequest()
       );
@@ -426,7 +428,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetDeliveryPipelineRequest()
       );
@@ -457,7 +459,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetDeliveryPipelineRequest()
       );
@@ -478,7 +480,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.RollbackTargetRequest()
       );
@@ -509,7 +511,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.RollbackTargetRequest()
       );
@@ -556,7 +558,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.RollbackTargetRequest()
       );
@@ -587,7 +589,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.RollbackTargetRequest()
       );
@@ -608,7 +610,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetTargetRequest()
       );
@@ -639,7 +641,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetTargetRequest()
       );
@@ -686,7 +688,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetTargetRequest()
       );
@@ -714,7 +716,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetTargetRequest()
       );
@@ -735,7 +737,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetCustomTargetTypeRequest()
       );
@@ -767,7 +769,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetCustomTargetTypeRequest()
       );
@@ -814,7 +816,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetCustomTargetTypeRequest()
       );
@@ -845,7 +847,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetCustomTargetTypeRequest()
       );
@@ -866,7 +868,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetReleaseRequest()
       );
@@ -897,7 +899,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetReleaseRequest()
       );
@@ -944,7 +946,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetReleaseRequest()
       );
@@ -975,7 +977,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetReleaseRequest()
       );
@@ -996,7 +998,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.AbandonReleaseRequest()
       );
@@ -1027,7 +1029,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.AbandonReleaseRequest()
       );
@@ -1074,7 +1076,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.AbandonReleaseRequest()
       );
@@ -1105,7 +1107,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.AbandonReleaseRequest()
       );
@@ -1126,7 +1128,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetDeployPolicyRequest()
       );
@@ -1157,7 +1159,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetDeployPolicyRequest()
       );
@@ -1204,7 +1206,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetDeployPolicyRequest()
       );
@@ -1235,7 +1237,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetDeployPolicyRequest()
       );
@@ -1256,7 +1258,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ApproveRolloutRequest()
       );
@@ -1287,7 +1289,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ApproveRolloutRequest()
       );
@@ -1334,7 +1336,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ApproveRolloutRequest()
       );
@@ -1365,7 +1367,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ApproveRolloutRequest()
       );
@@ -1386,7 +1388,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.AdvanceRolloutRequest()
       );
@@ -1417,7 +1419,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.AdvanceRolloutRequest()
       );
@@ -1464,7 +1466,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.AdvanceRolloutRequest()
       );
@@ -1495,7 +1497,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.AdvanceRolloutRequest()
       );
@@ -1516,7 +1518,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CancelRolloutRequest()
       );
@@ -1547,7 +1549,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CancelRolloutRequest()
       );
@@ -1594,7 +1596,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CancelRolloutRequest()
       );
@@ -1625,7 +1627,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CancelRolloutRequest()
       );
@@ -1646,7 +1648,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetRolloutRequest()
       );
@@ -1677,7 +1679,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetRolloutRequest()
       );
@@ -1724,7 +1726,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetRolloutRequest()
       );
@@ -1755,7 +1757,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetRolloutRequest()
       );
@@ -1776,7 +1778,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.IgnoreJobRequest()
       );
@@ -1807,7 +1809,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.IgnoreJobRequest()
       );
@@ -1854,7 +1856,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.IgnoreJobRequest()
       );
@@ -1882,7 +1884,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.IgnoreJobRequest()
       );
@@ -1903,7 +1905,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.RetryJobRequest()
       );
@@ -1934,7 +1936,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.RetryJobRequest()
       );
@@ -1981,7 +1983,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.RetryJobRequest()
       );
@@ -2009,7 +2011,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.RetryJobRequest()
       );
@@ -2030,7 +2032,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetJobRunRequest()
       );
@@ -2061,7 +2063,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetJobRunRequest()
       );
@@ -2108,7 +2110,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetJobRunRequest()
       );
@@ -2136,7 +2138,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetJobRunRequest()
       );
@@ -2157,7 +2159,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.TerminateJobRunRequest()
       );
@@ -2188,7 +2190,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.TerminateJobRunRequest()
       );
@@ -2235,7 +2237,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.TerminateJobRunRequest()
       );
@@ -2266,7 +2268,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.TerminateJobRunRequest()
       );
@@ -2287,7 +2289,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetConfigRequest()
       );
@@ -2318,7 +2320,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetConfigRequest()
       );
@@ -2365,7 +2367,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetConfigRequest()
       );
@@ -2393,7 +2395,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetConfigRequest()
       );
@@ -2414,7 +2416,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetAutomationRequest()
       );
@@ -2445,7 +2447,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetAutomationRequest()
       );
@@ -2492,7 +2494,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetAutomationRequest()
       );
@@ -2523,7 +2525,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetAutomationRequest()
       );
@@ -2544,7 +2546,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetAutomationRunRequest()
       );
@@ -2575,7 +2577,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetAutomationRunRequest()
       );
@@ -2622,7 +2624,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetAutomationRunRequest()
       );
@@ -2653,7 +2655,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetAutomationRunRequest()
       );
@@ -2674,7 +2676,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CancelAutomationRunRequest()
       );
@@ -2706,7 +2708,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CancelAutomationRunRequest()
       );
@@ -2753,7 +2755,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CancelAutomationRunRequest()
       );
@@ -2784,7 +2786,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CancelAutomationRunRequest()
       );
@@ -2805,7 +2807,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateDeliveryPipelineRequest()
       );
@@ -2838,7 +2840,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateDeliveryPipelineRequest()
       );
@@ -2892,7 +2894,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateDeliveryPipelineRequest()
       );
@@ -2926,7 +2928,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateDeliveryPipelineRequest()
       );
@@ -2959,7 +2961,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2981,7 +2983,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3002,7 +3004,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.UpdateDeliveryPipelineRequest()
       );
@@ -3036,7 +3038,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.UpdateDeliveryPipelineRequest()
       );
@@ -3091,7 +3093,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.UpdateDeliveryPipelineRequest()
       );
@@ -3126,7 +3128,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.UpdateDeliveryPipelineRequest()
       );
@@ -3160,7 +3162,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3182,7 +3184,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3203,7 +3205,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteDeliveryPipelineRequest()
       );
@@ -3236,7 +3238,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteDeliveryPipelineRequest()
       );
@@ -3290,7 +3292,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteDeliveryPipelineRequest()
       );
@@ -3324,7 +3326,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteDeliveryPipelineRequest()
       );
@@ -3357,7 +3359,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3379,7 +3381,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3400,7 +3402,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateTargetRequest()
       );
@@ -3432,7 +3434,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateTargetRequest()
       );
@@ -3486,7 +3488,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateTargetRequest()
       );
@@ -3517,7 +3519,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateTargetRequest()
       );
@@ -3550,7 +3552,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3572,7 +3574,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3590,7 +3592,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.UpdateTargetRequest()
       );
@@ -3623,7 +3625,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.UpdateTargetRequest()
       );
@@ -3678,7 +3680,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.UpdateTargetRequest()
       );
@@ -3710,7 +3712,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.UpdateTargetRequest()
       );
@@ -3744,7 +3746,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3766,7 +3768,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3784,7 +3786,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteTargetRequest()
       );
@@ -3816,7 +3818,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteTargetRequest()
       );
@@ -3870,7 +3872,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteTargetRequest()
       );
@@ -3901,7 +3903,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteTargetRequest()
       );
@@ -3934,7 +3936,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3956,7 +3958,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3974,7 +3976,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateCustomTargetTypeRequest()
       );
@@ -4007,7 +4009,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateCustomTargetTypeRequest()
       );
@@ -4061,7 +4063,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateCustomTargetTypeRequest()
       );
@@ -4095,7 +4097,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateCustomTargetTypeRequest()
       );
@@ -4128,7 +4130,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4150,7 +4152,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4171,7 +4173,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.UpdateCustomTargetTypeRequest()
       );
@@ -4205,7 +4207,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.UpdateCustomTargetTypeRequest()
       );
@@ -4260,7 +4262,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.UpdateCustomTargetTypeRequest()
       );
@@ -4295,7 +4297,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.UpdateCustomTargetTypeRequest()
       );
@@ -4329,7 +4331,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4351,7 +4353,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4372,7 +4374,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteCustomTargetTypeRequest()
       );
@@ -4405,7 +4407,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteCustomTargetTypeRequest()
       );
@@ -4459,7 +4461,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteCustomTargetTypeRequest()
       );
@@ -4493,7 +4495,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteCustomTargetTypeRequest()
       );
@@ -4526,7 +4528,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4548,7 +4550,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4569,7 +4571,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateReleaseRequest()
       );
@@ -4602,7 +4604,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateReleaseRequest()
       );
@@ -4656,7 +4658,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateReleaseRequest()
       );
@@ -4687,7 +4689,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateReleaseRequest()
       );
@@ -4720,7 +4722,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4742,7 +4744,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4763,7 +4765,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateDeployPolicyRequest()
       );
@@ -4796,7 +4798,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateDeployPolicyRequest()
       );
@@ -4850,7 +4852,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateDeployPolicyRequest()
       );
@@ -4881,7 +4883,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateDeployPolicyRequest()
       );
@@ -4914,7 +4916,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4936,7 +4938,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4957,7 +4959,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.UpdateDeployPolicyRequest()
       );
@@ -4991,7 +4993,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.UpdateDeployPolicyRequest()
       );
@@ -5046,7 +5048,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.UpdateDeployPolicyRequest()
       );
@@ -5078,7 +5080,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.UpdateDeployPolicyRequest()
       );
@@ -5112,7 +5114,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -5134,7 +5136,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -5155,7 +5157,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteDeployPolicyRequest()
       );
@@ -5188,7 +5190,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteDeployPolicyRequest()
       );
@@ -5242,7 +5244,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteDeployPolicyRequest()
       );
@@ -5273,7 +5275,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteDeployPolicyRequest()
       );
@@ -5306,7 +5308,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -5328,7 +5330,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -5349,7 +5351,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateRolloutRequest()
       );
@@ -5382,7 +5384,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateRolloutRequest()
       );
@@ -5436,7 +5438,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateRolloutRequest()
       );
@@ -5467,7 +5469,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateRolloutRequest()
       );
@@ -5500,7 +5502,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -5522,7 +5524,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -5543,7 +5545,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateAutomationRequest()
       );
@@ -5576,7 +5578,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateAutomationRequest()
       );
@@ -5630,7 +5632,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateAutomationRequest()
       );
@@ -5661,7 +5663,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateAutomationRequest()
       );
@@ -5694,7 +5696,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -5716,7 +5718,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -5737,7 +5739,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.UpdateAutomationRequest()
       );
@@ -5771,7 +5773,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.UpdateAutomationRequest()
       );
@@ -5826,7 +5828,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.UpdateAutomationRequest()
       );
@@ -5858,7 +5860,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.UpdateAutomationRequest()
       );
@@ -5892,7 +5894,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -5914,7 +5916,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -5935,7 +5937,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteAutomationRequest()
       );
@@ -5968,7 +5970,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteAutomationRequest()
       );
@@ -6022,7 +6024,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteAutomationRequest()
       );
@@ -6053,7 +6055,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteAutomationRequest()
       );
@@ -6086,7 +6088,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -6108,7 +6110,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -6129,7 +6131,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListDeliveryPipelinesRequest()
       );
@@ -6169,7 +6171,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListDeliveryPipelinesRequest()
       );
@@ -6224,7 +6226,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListDeliveryPipelinesRequest()
       );
@@ -6258,7 +6260,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListDeliveryPipelinesRequest()
       );
@@ -6324,7 +6326,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListDeliveryPipelinesRequest()
       );
@@ -6379,7 +6381,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListDeliveryPipelinesRequest()
       );
@@ -6432,7 +6434,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListDeliveryPipelinesRequest()
       );
@@ -6478,7 +6480,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListTargetsRequest()
       );
@@ -6511,7 +6513,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListTargetsRequest()
       );
@@ -6560,7 +6562,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListTargetsRequest()
       );
@@ -6591,7 +6593,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListTargetsRequest()
       );
@@ -6642,7 +6644,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListTargetsRequest()
       );
@@ -6690,7 +6692,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListTargetsRequest()
       );
@@ -6733,7 +6735,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListTargetsRequest()
       );
@@ -6777,7 +6779,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListCustomTargetTypesRequest()
       );
@@ -6817,7 +6819,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListCustomTargetTypesRequest()
       );
@@ -6872,7 +6874,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListCustomTargetTypesRequest()
       );
@@ -6906,7 +6908,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListCustomTargetTypesRequest()
       );
@@ -6972,7 +6974,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListCustomTargetTypesRequest()
       );
@@ -7027,7 +7029,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListCustomTargetTypesRequest()
       );
@@ -7080,7 +7082,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListCustomTargetTypesRequest()
       );
@@ -7126,7 +7128,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListReleasesRequest()
       );
@@ -7159,7 +7161,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListReleasesRequest()
       );
@@ -7208,7 +7210,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListReleasesRequest()
       );
@@ -7239,7 +7241,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListReleasesRequest()
       );
@@ -7290,7 +7292,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListReleasesRequest()
       );
@@ -7338,7 +7340,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListReleasesRequest()
       );
@@ -7381,7 +7383,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListReleasesRequest()
       );
@@ -7423,7 +7425,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListDeployPoliciesRequest()
       );
@@ -7457,7 +7459,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListDeployPoliciesRequest()
       );
@@ -7506,7 +7508,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListDeployPoliciesRequest()
       );
@@ -7537,7 +7539,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListDeployPoliciesRequest()
       );
@@ -7591,7 +7593,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListDeployPoliciesRequest()
       );
@@ -7640,7 +7642,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListDeployPoliciesRequest()
       );
@@ -7683,7 +7685,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListDeployPoliciesRequest()
       );
@@ -7725,7 +7727,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListRolloutsRequest()
       );
@@ -7758,7 +7760,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListRolloutsRequest()
       );
@@ -7807,7 +7809,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListRolloutsRequest()
       );
@@ -7838,7 +7840,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListRolloutsRequest()
       );
@@ -7889,7 +7891,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListRolloutsRequest()
       );
@@ -7937,7 +7939,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListRolloutsRequest()
       );
@@ -7980,7 +7982,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListRolloutsRequest()
       );
@@ -8022,7 +8024,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListJobRunsRequest()
       );
@@ -8055,7 +8057,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListJobRunsRequest()
       );
@@ -8104,7 +8106,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListJobRunsRequest()
       );
@@ -8135,7 +8137,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListJobRunsRequest()
       );
@@ -8186,7 +8188,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListJobRunsRequest()
       );
@@ -8234,7 +8236,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListJobRunsRequest()
       );
@@ -8277,7 +8279,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListJobRunsRequest()
       );
@@ -8321,7 +8323,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListAutomationsRequest()
       );
@@ -8354,7 +8356,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListAutomationsRequest()
       );
@@ -8403,7 +8405,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListAutomationsRequest()
       );
@@ -8434,7 +8436,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListAutomationsRequest()
       );
@@ -8488,7 +8490,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListAutomationsRequest()
       );
@@ -8537,7 +8539,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListAutomationsRequest()
       );
@@ -8580,7 +8582,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListAutomationsRequest()
       );
@@ -8622,7 +8624,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListAutomationRunsRequest()
       );
@@ -8662,7 +8664,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListAutomationRunsRequest()
       );
@@ -8717,7 +8719,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListAutomationRunsRequest()
       );
@@ -8748,7 +8750,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListAutomationRunsRequest()
       );
@@ -8808,7 +8810,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListAutomationRunsRequest()
       );
@@ -8857,7 +8859,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListAutomationRunsRequest()
       );
@@ -8906,7 +8908,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListAutomationRunsRequest()
       );
@@ -8947,7 +8949,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -8977,7 +8979,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -9021,7 +9023,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -9053,7 +9055,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -9083,7 +9085,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -9127,7 +9129,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -9159,7 +9161,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -9192,7 +9194,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -9236,7 +9238,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -9271,7 +9273,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -9301,7 +9303,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -9345,7 +9347,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -9380,7 +9382,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -9428,7 +9430,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -9469,7 +9471,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -9548,7 +9550,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -9628,7 +9630,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -9724,8 +9726,7 @@ describe('v1.CloudDeployClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -9744,7 +9745,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -9753,8 +9754,7 @@ describe('v1.CloudDeployClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -9770,7 +9770,7 @@ describe('v1.CloudDeployClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('automation', () => {
+    describe('automation', async () => {
       const fakePath = '/rendered/path/automation';
       const expectedParameters = {
         project: 'projectValue',
@@ -9782,7 +9782,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.automationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -9846,7 +9846,7 @@ describe('v1.CloudDeployClient', () => {
       });
     });
 
-    describe('automationRun', () => {
+    describe('automationRun', async () => {
       const fakePath = '/rendered/path/automationRun';
       const expectedParameters = {
         project: 'projectValue',
@@ -9858,7 +9858,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.automationRunPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -9923,7 +9923,7 @@ describe('v1.CloudDeployClient', () => {
       });
     });
 
-    describe('build', () => {
+    describe('build', async () => {
       const fakePath = '/rendered/path/build';
       const expectedParameters = {
         project: 'projectValue',
@@ -9934,7 +9934,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.buildPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -9987,7 +9987,7 @@ describe('v1.CloudDeployClient', () => {
       });
     });
 
-    describe('cluster', () => {
+    describe('cluster', async () => {
       const fakePath = '/rendered/path/cluster';
       const expectedParameters = {
         project: 'projectValue',
@@ -9998,7 +9998,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.clusterPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10051,7 +10051,7 @@ describe('v1.CloudDeployClient', () => {
       });
     });
 
-    describe('config', () => {
+    describe('config', async () => {
       const fakePath = '/rendered/path/config';
       const expectedParameters = {
         project: 'projectValue',
@@ -10061,7 +10061,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.configPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10100,7 +10100,7 @@ describe('v1.CloudDeployClient', () => {
       });
     });
 
-    describe('customTargetType', () => {
+    describe('customTargetType', async () => {
       const fakePath = '/rendered/path/customTargetType';
       const expectedParameters = {
         project: 'projectValue',
@@ -10111,7 +10111,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.customTargetTypePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10168,7 +10168,7 @@ describe('v1.CloudDeployClient', () => {
       });
     });
 
-    describe('deliveryPipeline', () => {
+    describe('deliveryPipeline', async () => {
       const fakePath = '/rendered/path/deliveryPipeline';
       const expectedParameters = {
         project: 'projectValue',
@@ -10179,7 +10179,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.deliveryPipelinePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10236,7 +10236,7 @@ describe('v1.CloudDeployClient', () => {
       });
     });
 
-    describe('deployPolicy', () => {
+    describe('deployPolicy', async () => {
       const fakePath = '/rendered/path/deployPolicy';
       const expectedParameters = {
         project: 'projectValue',
@@ -10247,7 +10247,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.deployPolicyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10300,7 +10300,7 @@ describe('v1.CloudDeployClient', () => {
       });
     });
 
-    describe('job', () => {
+    describe('job', async () => {
       const fakePath = '/rendered/path/job';
       const expectedParameters = {
         project: 'projectValue',
@@ -10311,7 +10311,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.jobPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10364,7 +10364,7 @@ describe('v1.CloudDeployClient', () => {
       });
     });
 
-    describe('jobRun', () => {
+    describe('jobRun', async () => {
       const fakePath = '/rendered/path/jobRun';
       const expectedParameters = {
         project: 'projectValue',
@@ -10378,7 +10378,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.jobRunPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10464,7 +10464,7 @@ describe('v1.CloudDeployClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -10474,7 +10474,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10513,7 +10513,7 @@ describe('v1.CloudDeployClient', () => {
       });
     });
 
-    describe('membership', () => {
+    describe('membership', async () => {
       const fakePath = '/rendered/path/membership';
       const expectedParameters = {
         project: 'projectValue',
@@ -10524,7 +10524,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.membershipPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10577,7 +10577,7 @@ describe('v1.CloudDeployClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -10586,7 +10586,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10615,7 +10615,7 @@ describe('v1.CloudDeployClient', () => {
       });
     });
 
-    describe('release', () => {
+    describe('release', async () => {
       const fakePath = '/rendered/path/release';
       const expectedParameters = {
         project: 'projectValue',
@@ -10627,7 +10627,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.releasePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10691,7 +10691,7 @@ describe('v1.CloudDeployClient', () => {
       });
     });
 
-    describe('rollout', () => {
+    describe('rollout', async () => {
       const fakePath = '/rendered/path/rollout';
       const expectedParameters = {
         project: 'projectValue',
@@ -10704,7 +10704,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.rolloutPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10779,7 +10779,7 @@ describe('v1.CloudDeployClient', () => {
       });
     });
 
-    describe('service', () => {
+    describe('service', async () => {
       const fakePath = '/rendered/path/service';
       const expectedParameters = {
         project: 'projectValue',
@@ -10790,7 +10790,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.servicePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10843,7 +10843,7 @@ describe('v1.CloudDeployClient', () => {
       });
     });
 
-    describe('target', () => {
+    describe('target', async () => {
       const fakePath = '/rendered/path/target';
       const expectedParameters = {
         project: 'projectValue',
@@ -10854,7 +10854,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.targetPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10907,7 +10907,7 @@ describe('v1.CloudDeployClient', () => {
       });
     });
 
-    describe('workerPool', () => {
+    describe('workerPool', async () => {
       const fakePath = '/rendered/path/workerPool';
       const expectedParameters = {
         project: 'projectValue',
@@ -10918,7 +10918,7 @@ describe('v1.CloudDeployClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.workerPoolPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

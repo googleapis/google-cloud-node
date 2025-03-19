@@ -582,7 +582,9 @@ export class DeploymentsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getDeployment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -713,7 +715,9 @@ export class DeploymentsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dialogflow.cx.v3beta1.IListDeploymentsRequest,
@@ -781,7 +785,9 @@ export class DeploymentsClient {
       });
     const defaultCallSettings = this._defaults['listDeployments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDeployments stream %j', request);
     return this.descriptors.page.listDeployments.createStream(
       this.innerApiCalls.listDeployments as GaxCall,
@@ -831,7 +837,9 @@ export class DeploymentsClient {
       });
     const defaultCallSettings = this._defaults['listDeployments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDeployments iterate %j', request);
     return this.descriptors.page.listDeployments.asyncIterate(
       this.innerApiCalls['listDeployments'] as GaxCall,

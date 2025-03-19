@@ -811,7 +811,9 @@ export class EngineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'engine.name': request.engine!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateEngine request %j', request);
     const wrappedCallback:
       | Callback<
@@ -932,7 +934,9 @@ export class EngineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getEngine request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1061,7 +1065,9 @@ export class EngineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('pauseEngine request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1190,7 +1196,9 @@ export class EngineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('resumeEngine request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1335,7 +1343,9 @@ export class EngineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1511,7 +1521,9 @@ export class EngineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1682,7 +1694,9 @@ export class EngineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1849,7 +1863,9 @@ export class EngineServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.discoveryengine.v1alpha.IListEnginesRequest,
@@ -1918,7 +1934,9 @@ export class EngineServiceClient {
       });
     const defaultCallSettings = this._defaults['listEngines'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listEngines stream %j', request);
     return this.descriptors.page.listEngines.createStream(
       this.innerApiCalls.listEngines as GaxCall,
@@ -1969,7 +1987,9 @@ export class EngineServiceClient {
       });
     const defaultCallSettings = this._defaults['listEngines'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listEngines iterate %j', request);
     return this.descriptors.page.listEngines.asyncIterate(
       this.innerApiCalls['listEngines'] as GaxCall,
@@ -2149,7 +2169,7 @@ export class EngineServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

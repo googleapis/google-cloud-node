@@ -495,7 +495,9 @@ export class DataPolicyServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createDataPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -631,7 +633,9 @@ export class DataPolicyServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'data_policy.name': request.dataPolicy!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateDataPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -757,7 +761,9 @@ export class DataPolicyServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteDataPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -883,7 +889,9 @@ export class DataPolicyServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getDataPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -998,7 +1006,9 @@ export class DataPolicyServiceClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1116,7 +1126,9 @@ export class DataPolicyServiceClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('setIamPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1228,7 +1240,9 @@ export class DataPolicyServiceClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('testIamPermissions request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1354,7 +1368,9 @@ export class DataPolicyServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.bigquery.datapolicies.v1beta1.IListDataPoliciesRequest,
@@ -1423,7 +1439,9 @@ export class DataPolicyServiceClient {
       });
     const defaultCallSettings = this._defaults['listDataPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDataPolicies stream %j', request);
     return this.descriptors.page.listDataPolicies.createStream(
       this.innerApiCalls.listDataPolicies as GaxCall,
@@ -1474,7 +1492,9 @@ export class DataPolicyServiceClient {
       });
     const defaultCallSettings = this._defaults['listDataPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDataPolicies iterate %j', request);
     return this.descriptors.page.listDataPolicies.asyncIterate(
       this.innerApiCalls['listDataPolicies'] as GaxCall,

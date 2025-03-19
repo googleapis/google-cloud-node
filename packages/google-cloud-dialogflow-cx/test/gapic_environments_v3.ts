@@ -289,7 +289,9 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.environmentsStub);
       client.close().then(() => {
         done();
@@ -348,7 +350,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetEnvironmentRequest()
       );
@@ -379,7 +381,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetEnvironmentRequest()
       );
@@ -426,7 +428,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetEnvironmentRequest()
       );
@@ -457,7 +459,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.GetEnvironmentRequest()
       );
@@ -478,7 +480,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.DeleteEnvironmentRequest()
       );
@@ -509,7 +511,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.DeleteEnvironmentRequest()
       );
@@ -556,7 +558,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.DeleteEnvironmentRequest()
       );
@@ -587,7 +589,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.DeleteEnvironmentRequest()
       );
@@ -608,7 +610,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.CreateEnvironmentRequest()
       );
@@ -641,7 +643,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.CreateEnvironmentRequest()
       );
@@ -695,7 +697,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.CreateEnvironmentRequest()
       );
@@ -726,7 +728,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.CreateEnvironmentRequest()
       );
@@ -759,7 +761,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -781,7 +783,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -802,7 +804,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.UpdateEnvironmentRequest()
       );
@@ -836,7 +838,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.UpdateEnvironmentRequest()
       );
@@ -891,7 +893,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.UpdateEnvironmentRequest()
       );
@@ -923,7 +925,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.UpdateEnvironmentRequest()
       );
@@ -957,7 +959,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -979,7 +981,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1000,7 +1002,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.RunContinuousTestRequest()
       );
@@ -1033,7 +1035,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.RunContinuousTestRequest()
       );
@@ -1087,7 +1089,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.RunContinuousTestRequest()
       );
@@ -1118,7 +1120,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.RunContinuousTestRequest()
       );
@@ -1151,7 +1153,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1173,7 +1175,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1194,7 +1196,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.DeployFlowRequest()
       );
@@ -1226,7 +1228,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.DeployFlowRequest()
       );
@@ -1280,7 +1282,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.DeployFlowRequest()
       );
@@ -1311,7 +1313,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.DeployFlowRequest()
       );
@@ -1344,7 +1346,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1366,7 +1368,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1384,7 +1386,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListEnvironmentsRequest()
       );
@@ -1423,7 +1425,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListEnvironmentsRequest()
       );
@@ -1478,7 +1480,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListEnvironmentsRequest()
       );
@@ -1509,7 +1511,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListEnvironmentsRequest()
       );
@@ -1570,7 +1572,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListEnvironmentsRequest()
       );
@@ -1620,7 +1622,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListEnvironmentsRequest()
       );
@@ -1669,7 +1671,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListEnvironmentsRequest()
       );
@@ -1712,7 +1714,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.LookupEnvironmentHistoryRequest()
       );
@@ -1752,7 +1754,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.LookupEnvironmentHistoryRequest()
       );
@@ -1807,7 +1809,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.LookupEnvironmentHistoryRequest()
       );
@@ -1841,7 +1843,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.LookupEnvironmentHistoryRequest()
       );
@@ -1908,7 +1910,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.LookupEnvironmentHistoryRequest()
       );
@@ -1964,7 +1966,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.LookupEnvironmentHistoryRequest()
       );
@@ -2017,7 +2019,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.LookupEnvironmentHistoryRequest()
       );
@@ -2064,7 +2066,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListContinuousTestResultsRequest()
       );
@@ -2104,7 +2106,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListContinuousTestResultsRequest()
       );
@@ -2161,7 +2163,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListContinuousTestResultsRequest()
       );
@@ -2195,7 +2197,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListContinuousTestResultsRequest()
       );
@@ -2264,7 +2266,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListContinuousTestResultsRequest()
       );
@@ -2322,7 +2324,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListContinuousTestResultsRequest()
       );
@@ -2376,7 +2378,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.ListContinuousTestResultsRequest()
       );
@@ -2422,7 +2424,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -2452,7 +2454,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -2496,7 +2498,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -2531,7 +2533,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -2579,7 +2581,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -2620,7 +2622,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -2699,7 +2701,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -2779,7 +2781,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -2875,8 +2877,7 @@ describe('v3.EnvironmentsClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -2895,7 +2896,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -2904,8 +2905,7 @@ describe('v3.EnvironmentsClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -2921,7 +2921,7 @@ describe('v3.EnvironmentsClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('agent', () => {
+    describe('agent', async () => {
       const fakePath = '/rendered/path/agent';
       const expectedParameters = {
         project: 'projectValue',
@@ -2932,7 +2932,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.agentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2985,7 +2985,7 @@ describe('v3.EnvironmentsClient', () => {
       });
     });
 
-    describe('agentGenerativeSettings', () => {
+    describe('agentGenerativeSettings', async () => {
       const fakePath = '/rendered/path/agentGenerativeSettings';
       const expectedParameters = {
         project: 'projectValue',
@@ -2996,7 +2996,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.agentGenerativeSettingsPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3064,7 +3064,7 @@ describe('v3.EnvironmentsClient', () => {
       });
     });
 
-    describe('agentValidationResult', () => {
+    describe('agentValidationResult', async () => {
       const fakePath = '/rendered/path/agentValidationResult';
       const expectedParameters = {
         project: 'projectValue',
@@ -3075,7 +3075,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.agentValidationResultPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3142,7 +3142,7 @@ describe('v3.EnvironmentsClient', () => {
       });
     });
 
-    describe('changelog', () => {
+    describe('changelog', async () => {
       const fakePath = '/rendered/path/changelog';
       const expectedParameters = {
         project: 'projectValue',
@@ -3154,7 +3154,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.changelogPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3218,7 +3218,7 @@ describe('v3.EnvironmentsClient', () => {
       });
     });
 
-    describe('continuousTestResult', () => {
+    describe('continuousTestResult', async () => {
       const fakePath = '/rendered/path/continuousTestResult';
       const expectedParameters = {
         project: 'projectValue',
@@ -3231,7 +3231,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.continuousTestResultPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3330,7 +3330,7 @@ describe('v3.EnvironmentsClient', () => {
       });
     });
 
-    describe('deployment', () => {
+    describe('deployment', async () => {
       const fakePath = '/rendered/path/deployment';
       const expectedParameters = {
         project: 'projectValue',
@@ -3343,7 +3343,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.deploymentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3418,7 +3418,7 @@ describe('v3.EnvironmentsClient', () => {
       });
     });
 
-    describe('entityType', () => {
+    describe('entityType', async () => {
       const fakePath = '/rendered/path/entityType';
       const expectedParameters = {
         project: 'projectValue',
@@ -3430,7 +3430,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.entityTypePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3494,7 +3494,7 @@ describe('v3.EnvironmentsClient', () => {
       });
     });
 
-    describe('environment', () => {
+    describe('environment', async () => {
       const fakePath = '/rendered/path/environment';
       const expectedParameters = {
         project: 'projectValue',
@@ -3506,7 +3506,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.environmentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3570,7 +3570,7 @@ describe('v3.EnvironmentsClient', () => {
       });
     });
 
-    describe('experiment', () => {
+    describe('experiment', async () => {
       const fakePath = '/rendered/path/experiment';
       const expectedParameters = {
         project: 'projectValue',
@@ -3583,7 +3583,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.experimentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3658,7 +3658,7 @@ describe('v3.EnvironmentsClient', () => {
       });
     });
 
-    describe('flow', () => {
+    describe('flow', async () => {
       const fakePath = '/rendered/path/flow';
       const expectedParameters = {
         project: 'projectValue',
@@ -3670,7 +3670,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.flowPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3734,7 +3734,7 @@ describe('v3.EnvironmentsClient', () => {
       });
     });
 
-    describe('flowValidationResult', () => {
+    describe('flowValidationResult', async () => {
       const fakePath = '/rendered/path/flowValidationResult';
       const expectedParameters = {
         project: 'projectValue',
@@ -3746,7 +3746,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.flowValidationResultPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3827,7 +3827,7 @@ describe('v3.EnvironmentsClient', () => {
       });
     });
 
-    describe('generator', () => {
+    describe('generator', async () => {
       const fakePath = '/rendered/path/generator';
       const expectedParameters = {
         project: 'projectValue',
@@ -3839,7 +3839,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.generatorPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3903,7 +3903,7 @@ describe('v3.EnvironmentsClient', () => {
       });
     });
 
-    describe('intent', () => {
+    describe('intent', async () => {
       const fakePath = '/rendered/path/intent';
       const expectedParameters = {
         project: 'projectValue',
@@ -3915,7 +3915,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.intentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3979,7 +3979,7 @@ describe('v3.EnvironmentsClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -3989,7 +3989,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4028,7 +4028,7 @@ describe('v3.EnvironmentsClient', () => {
       });
     });
 
-    describe('page', () => {
+    describe('page', async () => {
       const fakePath = '/rendered/path/page';
       const expectedParameters = {
         project: 'projectValue',
@@ -4041,7 +4041,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.pagePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4116,7 +4116,7 @@ describe('v3.EnvironmentsClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -4125,7 +4125,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4154,7 +4154,7 @@ describe('v3.EnvironmentsClient', () => {
       });
     });
 
-    describe('projectLocationAgentEnvironmentSessionEntityType', () => {
+    describe('projectLocationAgentEnvironmentSessionEntityType', async () => {
       const fakePath =
         '/rendered/path/projectLocationAgentEnvironmentSessionEntityType';
       const expectedParameters = {
@@ -4169,7 +4169,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match =
@@ -4300,7 +4300,7 @@ describe('v3.EnvironmentsClient', () => {
       });
     });
 
-    describe('projectLocationAgentFlowTransitionRouteGroup', () => {
+    describe('projectLocationAgentFlowTransitionRouteGroup', async () => {
       const fakePath =
         '/rendered/path/projectLocationAgentFlowTransitionRouteGroup';
       const expectedParameters = {
@@ -4314,7 +4314,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationAgentFlowTransitionRouteGroupPathTemplate.match =
@@ -4426,7 +4426,7 @@ describe('v3.EnvironmentsClient', () => {
       });
     });
 
-    describe('projectLocationAgentSessionEntityType', () => {
+    describe('projectLocationAgentSessionEntityType', async () => {
       const fakePath = '/rendered/path/projectLocationAgentSessionEntityType';
       const expectedParameters = {
         project: 'projectValue',
@@ -4439,7 +4439,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match =
@@ -4551,7 +4551,7 @@ describe('v3.EnvironmentsClient', () => {
       });
     });
 
-    describe('projectLocationAgentTransitionRouteGroup', () => {
+    describe('projectLocationAgentTransitionRouteGroup', async () => {
       const fakePath =
         '/rendered/path/projectLocationAgentTransitionRouteGroup';
       const expectedParameters = {
@@ -4564,7 +4564,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationAgentTransitionRouteGroupPathTemplate.match =
@@ -4658,7 +4658,7 @@ describe('v3.EnvironmentsClient', () => {
       });
     });
 
-    describe('securitySettings', () => {
+    describe('securitySettings', async () => {
       const fakePath = '/rendered/path/securitySettings';
       const expectedParameters = {
         project: 'projectValue',
@@ -4669,7 +4669,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.securitySettingsPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4726,7 +4726,7 @@ describe('v3.EnvironmentsClient', () => {
       });
     });
 
-    describe('testCase', () => {
+    describe('testCase', async () => {
       const fakePath = '/rendered/path/testCase';
       const expectedParameters = {
         project: 'projectValue',
@@ -4738,7 +4738,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.testCasePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4802,7 +4802,7 @@ describe('v3.EnvironmentsClient', () => {
       });
     });
 
-    describe('testCaseResult', () => {
+    describe('testCaseResult', async () => {
       const fakePath = '/rendered/path/testCaseResult';
       const expectedParameters = {
         project: 'projectValue',
@@ -4815,7 +4815,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.testCaseResultPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4890,7 +4890,7 @@ describe('v3.EnvironmentsClient', () => {
       });
     });
 
-    describe('version', () => {
+    describe('version', async () => {
       const fakePath = '/rendered/path/version';
       const expectedParameters = {
         project: 'projectValue',
@@ -4903,7 +4903,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.versionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4978,7 +4978,7 @@ describe('v3.EnvironmentsClient', () => {
       });
     });
 
-    describe('webhook', () => {
+    describe('webhook', async () => {
       const fakePath = '/rendered/path/webhook';
       const expectedParameters = {
         project: 'projectValue',
@@ -4990,7 +4990,7 @@ describe('v3.EnvironmentsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.webhookPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

@@ -661,7 +661,9 @@ export class ToolsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createTool request %j', request);
     const wrappedCallback:
       | Callback<
@@ -782,7 +784,9 @@ export class ToolsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getTool request %j', request);
     const wrappedCallback:
       | Callback<
@@ -901,7 +905,9 @@ export class ToolsClient {
       this._gaxModule.routingHeader.fromParams({
         'tool.name': request.tool!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateTool request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1030,7 +1036,9 @@ export class ToolsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteTool request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1160,7 +1168,9 @@ export class ToolsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createToolVersion request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1288,7 +1298,9 @@ export class ToolsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getToolVersion request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1424,7 +1436,9 @@ export class ToolsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteToolVersion request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1552,7 +1566,9 @@ export class ToolsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('restoreToolVersion request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1704,7 +1720,9 @@ export class ToolsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1869,7 +1887,9 @@ export class ToolsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dialogflow.cx.v3beta1.IListToolsRequest,
@@ -1936,7 +1956,9 @@ export class ToolsClient {
       });
     const defaultCallSettings = this._defaults['listTools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTools stream %j', request);
     return this.descriptors.page.listTools.createStream(
       this.innerApiCalls.listTools as GaxCall,
@@ -1985,7 +2007,9 @@ export class ToolsClient {
       });
     const defaultCallSettings = this._defaults['listTools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTools iterate %j', request);
     return this.descriptors.page.listTools.asyncIterate(
       this.innerApiCalls['listTools'] as GaxCall,
@@ -2091,7 +2115,9 @@ export class ToolsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dialogflow.cx.v3beta1.IListToolVersionsRequest,
@@ -2159,7 +2185,9 @@ export class ToolsClient {
       });
     const defaultCallSettings = this._defaults['listToolVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listToolVersions stream %j', request);
     return this.descriptors.page.listToolVersions.createStream(
       this.innerApiCalls.listToolVersions as GaxCall,
@@ -2209,7 +2237,9 @@ export class ToolsClient {
       });
     const defaultCallSettings = this._defaults['listToolVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listToolVersions iterate %j', request);
     return this.descriptors.page.listToolVersions.asyncIterate(
       this.innerApiCalls['listToolVersions'] as GaxCall,
@@ -2389,7 +2419,7 @@ export class ToolsClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

@@ -255,7 +255,9 @@ describe('v2.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.migrationServiceStub);
       client.close().then(() => {
         done();
@@ -314,7 +316,7 @@ describe('v2.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2.CreateMigrationWorkflowRequest()
       );
@@ -346,7 +348,7 @@ describe('v2.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2.CreateMigrationWorkflowRequest()
       );
@@ -393,7 +395,7 @@ describe('v2.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2.CreateMigrationWorkflowRequest()
       );
@@ -427,7 +429,7 @@ describe('v2.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2.CreateMigrationWorkflowRequest()
       );
@@ -451,7 +453,7 @@ describe('v2.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2.GetMigrationWorkflowRequest()
       );
@@ -483,7 +485,7 @@ describe('v2.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2.GetMigrationWorkflowRequest()
       );
@@ -530,7 +532,7 @@ describe('v2.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2.GetMigrationWorkflowRequest()
       );
@@ -561,7 +563,7 @@ describe('v2.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2.GetMigrationWorkflowRequest()
       );
@@ -582,7 +584,7 @@ describe('v2.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2.DeleteMigrationWorkflowRequest()
       );
@@ -614,7 +616,7 @@ describe('v2.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2.DeleteMigrationWorkflowRequest()
       );
@@ -661,7 +663,7 @@ describe('v2.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2.DeleteMigrationWorkflowRequest()
       );
@@ -695,7 +697,7 @@ describe('v2.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2.DeleteMigrationWorkflowRequest()
       );
@@ -719,7 +721,7 @@ describe('v2.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2.StartMigrationWorkflowRequest()
       );
@@ -751,7 +753,7 @@ describe('v2.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2.StartMigrationWorkflowRequest()
       );
@@ -798,7 +800,7 @@ describe('v2.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2.StartMigrationWorkflowRequest()
       );
@@ -832,7 +834,7 @@ describe('v2.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2.StartMigrationWorkflowRequest()
       );
@@ -856,7 +858,7 @@ describe('v2.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2.GetMigrationSubtaskRequest()
       );
@@ -888,7 +890,7 @@ describe('v2.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2.GetMigrationSubtaskRequest()
       );
@@ -935,7 +937,7 @@ describe('v2.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2.GetMigrationSubtaskRequest()
       );
@@ -966,7 +968,7 @@ describe('v2.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2.GetMigrationSubtaskRequest()
       );
@@ -987,7 +989,7 @@ describe('v2.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2.ListMigrationWorkflowsRequest()
       );
@@ -1027,7 +1029,7 @@ describe('v2.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2.ListMigrationWorkflowsRequest()
       );
@@ -1084,7 +1086,7 @@ describe('v2.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2.ListMigrationWorkflowsRequest()
       );
@@ -1118,7 +1120,7 @@ describe('v2.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2.ListMigrationWorkflowsRequest()
       );
@@ -1187,7 +1189,7 @@ describe('v2.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2.ListMigrationWorkflowsRequest()
       );
@@ -1245,7 +1247,7 @@ describe('v2.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2.ListMigrationWorkflowsRequest()
       );
@@ -1299,7 +1301,7 @@ describe('v2.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2.ListMigrationWorkflowsRequest()
       );
@@ -1346,7 +1348,7 @@ describe('v2.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2.ListMigrationSubtasksRequest()
       );
@@ -1386,7 +1388,7 @@ describe('v2.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2.ListMigrationSubtasksRequest()
       );
@@ -1443,7 +1445,7 @@ describe('v2.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2.ListMigrationSubtasksRequest()
       );
@@ -1477,7 +1479,7 @@ describe('v2.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2.ListMigrationSubtasksRequest()
       );
@@ -1546,7 +1548,7 @@ describe('v2.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2.ListMigrationSubtasksRequest()
       );
@@ -1604,7 +1606,7 @@ describe('v2.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2.ListMigrationSubtasksRequest()
       );
@@ -1658,7 +1660,7 @@ describe('v2.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2.ListMigrationSubtasksRequest()
       );
@@ -1700,7 +1702,7 @@ describe('v2.MigrationServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -1710,7 +1712,7 @@ describe('v2.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1749,7 +1751,7 @@ describe('v2.MigrationServiceClient', () => {
       });
     });
 
-    describe('migrationSubtask', () => {
+    describe('migrationSubtask', async () => {
       const fakePath = '/rendered/path/migrationSubtask';
       const expectedParameters = {
         project: 'projectValue',
@@ -1761,7 +1763,7 @@ describe('v2.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.migrationSubtaskPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1828,7 +1830,7 @@ describe('v2.MigrationServiceClient', () => {
       });
     });
 
-    describe('migrationWorkflow', () => {
+    describe('migrationWorkflow', async () => {
       const fakePath = '/rendered/path/migrationWorkflow';
       const expectedParameters = {
         project: 'projectValue',
@@ -1839,7 +1841,7 @@ describe('v2.MigrationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.migrationWorkflowPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

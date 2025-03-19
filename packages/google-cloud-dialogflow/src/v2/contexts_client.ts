@@ -630,7 +630,9 @@ export class ContextsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getContext request %j', request);
     const wrappedCallback:
       | Callback<
@@ -755,7 +757,9 @@ export class ContextsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createContext request %j', request);
     const wrappedCallback:
       | Callback<
@@ -873,7 +877,9 @@ export class ContextsClient {
       this._gaxModule.routingHeader.fromParams({
         'context.name': request.context!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateContext request %j', request);
     const wrappedCallback:
       | Callback<
@@ -994,7 +1000,9 @@ export class ContextsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteContext request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1115,7 +1123,9 @@ export class ContextsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteAllContexts request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1248,7 +1258,9 @@ export class ContextsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dialogflow.v2.IListContextsRequest,
@@ -1319,7 +1331,9 @@ export class ContextsClient {
       });
     const defaultCallSettings = this._defaults['listContexts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listContexts stream %j', request);
     return this.descriptors.page.listContexts.createStream(
       this.innerApiCalls.listContexts as GaxCall,
@@ -1372,7 +1386,9 @@ export class ContextsClient {
       });
     const defaultCallSettings = this._defaults['listContexts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listContexts iterate %j', request);
     return this.descriptors.page.listContexts.asyncIterate(
       this.innerApiCalls['listContexts'] as GaxCall,
