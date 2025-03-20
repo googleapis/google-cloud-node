@@ -134,7 +134,7 @@
                           "type": "string",
                           "id": 9,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.field_behavior)": "OPTIONAL",
                             "(google.api.resource_reference).type": "compute.googleapis.com/Network"
                           }
                         },
@@ -142,7 +142,7 @@
                           "type": "string",
                           "id": 10,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "createTime": {
