@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.0.0](https://github.com/googleapis/google-cloud-node/compare/notifications-v0.3.0...notifications-v1.0.0) (2025-03-12)
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/notifications-v0.3.0...notifications-v0.4.0) (2025-03-18)
 
 
 ### ⚠ BREAKING CHANGES

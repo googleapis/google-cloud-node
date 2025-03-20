@@ -263,7 +263,9 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.routersStub);
       client.close().then(() => {
         done();
@@ -322,7 +324,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRouterRequest()
       );
@@ -363,7 +365,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRouterRequest()
       );
@@ -420,7 +422,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRouterRequest()
       );
@@ -458,7 +460,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRouterRequest()
       );
@@ -489,7 +491,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRoutePolicyRouterRequest()
       );
@@ -530,7 +532,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRoutePolicyRouterRequest()
       );
@@ -587,7 +589,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRoutePolicyRouterRequest()
       );
@@ -628,7 +630,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRoutePolicyRouterRequest()
       );
@@ -659,7 +661,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRouterRequest()
       );
@@ -699,7 +701,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRouterRequest()
       );
@@ -754,7 +756,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRouterRequest()
       );
@@ -791,7 +793,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRouterRequest()
       );
@@ -822,7 +824,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetNatIpInfoRouterRequest()
       );
@@ -863,7 +865,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetNatIpInfoRouterRequest()
       );
@@ -920,7 +922,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetNatIpInfoRouterRequest()
       );
@@ -961,7 +963,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetNatIpInfoRouterRequest()
       );
@@ -992,7 +994,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRoutePolicyRouterRequest()
       );
@@ -1033,7 +1035,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRoutePolicyRouterRequest()
       );
@@ -1090,7 +1092,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRoutePolicyRouterRequest()
       );
@@ -1131,7 +1133,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRoutePolicyRouterRequest()
       );
@@ -1162,7 +1164,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRouterStatusRouterRequest()
       );
@@ -1203,7 +1205,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRouterStatusRouterRequest()
       );
@@ -1260,7 +1262,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRouterStatusRouterRequest()
       );
@@ -1301,7 +1303,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRouterStatusRouterRequest()
       );
@@ -1332,7 +1334,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRouterRequest()
       );
@@ -1368,7 +1370,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRouterRequest()
       );
@@ -1420,7 +1422,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRouterRequest()
       );
@@ -1453,7 +1455,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRouterRequest()
       );
@@ -1479,7 +1481,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRouterRequest()
       );
@@ -1519,7 +1521,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRouterRequest()
       );
@@ -1574,7 +1576,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRouterRequest()
       );
@@ -1611,7 +1613,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRouterRequest()
       );
@@ -1642,7 +1644,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRoutePolicyRouterRequest()
       );
@@ -1683,7 +1685,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRoutePolicyRouterRequest()
       );
@@ -1740,7 +1742,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRoutePolicyRouterRequest()
       );
@@ -1781,7 +1783,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRoutePolicyRouterRequest()
       );
@@ -1812,7 +1814,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PreviewRouterRequest()
       );
@@ -1853,7 +1855,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PreviewRouterRequest()
       );
@@ -1910,7 +1912,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PreviewRouterRequest()
       );
@@ -1948,7 +1950,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PreviewRouterRequest()
       );
@@ -1979,7 +1981,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateRouterRequest()
       );
@@ -2020,7 +2022,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateRouterRequest()
       );
@@ -2077,7 +2079,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateRouterRequest()
       );
@@ -2115,7 +2117,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateRouterRequest()
       );
@@ -2146,7 +2148,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateRoutePolicyRouterRequest()
       );
@@ -2187,7 +2189,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateRoutePolicyRouterRequest()
       );
@@ -2244,7 +2246,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateRoutePolicyRouterRequest()
       );
@@ -2285,7 +2287,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateRoutePolicyRouterRequest()
       );
@@ -2316,7 +2318,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AggregatedListRoutersRequest()
       );
@@ -2376,7 +2378,7 @@ describe('v1.RoutersClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AggregatedListRoutersRequest()
       );
@@ -2420,7 +2422,7 @@ describe('v1.RoutersClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetNatMappingInfoRoutersRequest()
       );
@@ -2469,7 +2471,7 @@ describe('v1.RoutersClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetNatMappingInfoRoutersRequest()
       );
@@ -2536,7 +2538,7 @@ describe('v1.RoutersClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetNatMappingInfoRoutersRequest()
       );
@@ -2577,7 +2579,7 @@ describe('v1.RoutersClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetNatMappingInfoRoutersRequest()
       );
@@ -2648,7 +2650,7 @@ describe('v1.RoutersClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetNatMappingInfoRoutersRequest()
       );
@@ -2708,7 +2710,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetNatMappingInfoRoutersRequest()
       );
@@ -2768,7 +2770,7 @@ describe('v1.RoutersClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetNatMappingInfoRoutersRequest()
       );
@@ -2821,7 +2823,7 @@ describe('v1.RoutersClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRoutersRequest()
       );
@@ -2858,7 +2860,7 @@ describe('v1.RoutersClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRoutersRequest()
       );
@@ -2910,7 +2912,7 @@ describe('v1.RoutersClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRoutersRequest()
       );
@@ -2942,7 +2944,7 @@ describe('v1.RoutersClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRoutersRequest()
       );
@@ -2998,7 +3000,7 @@ describe('v1.RoutersClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRoutersRequest()
       );
@@ -3051,7 +3053,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRoutersRequest()
       );
@@ -3098,7 +3100,7 @@ describe('v1.RoutersClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRoutersRequest()
       );
@@ -3146,7 +3148,7 @@ describe('v1.RoutersClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListBgpRoutesRoutersRequest()
       );
@@ -3189,7 +3191,7 @@ describe('v1.RoutersClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListBgpRoutesRoutersRequest()
       );
@@ -3248,7 +3250,7 @@ describe('v1.RoutersClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListBgpRoutesRoutersRequest()
       );
@@ -3289,7 +3291,7 @@ describe('v1.RoutersClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListBgpRoutesRoutersRequest()
       );
@@ -3353,7 +3355,7 @@ describe('v1.RoutersClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListBgpRoutesRoutersRequest()
       );
@@ -3412,7 +3414,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListBgpRoutesRoutersRequest()
       );
@@ -3465,7 +3467,7 @@ describe('v1.RoutersClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListBgpRoutesRoutersRequest()
       );
@@ -3517,7 +3519,7 @@ describe('v1.RoutersClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRoutePoliciesRoutersRequest()
       );
@@ -3560,7 +3562,7 @@ describe('v1.RoutersClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRoutePoliciesRoutersRequest()
       );
@@ -3619,7 +3621,7 @@ describe('v1.RoutersClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRoutePoliciesRoutersRequest()
       );
@@ -3660,7 +3662,7 @@ describe('v1.RoutersClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRoutePoliciesRoutersRequest()
       );
@@ -3724,7 +3726,7 @@ describe('v1.RoutersClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRoutePoliciesRoutersRequest()
       );
@@ -3783,7 +3785,7 @@ describe('v1.RoutersClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRoutePoliciesRoutersRequest()
       );
@@ -3836,7 +3838,7 @@ describe('v1.RoutersClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRoutePoliciesRoutersRequest()
       );

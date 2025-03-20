@@ -490,7 +490,9 @@ export class ExportServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.devtools.cloudprofiler.v2.IListProfilesRequest,
@@ -560,7 +562,9 @@ export class ExportServiceClient {
       });
     const defaultCallSettings = this._defaults['listProfiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listProfiles stream %j', request);
     return this.descriptors.page.listProfiles.createStream(
       this.innerApiCalls.listProfiles as GaxCall,
@@ -612,7 +616,9 @@ export class ExportServiceClient {
       });
     const defaultCallSettings = this._defaults['listProfiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listProfiles iterate %j', request);
     return this.descriptors.page.listProfiles.asyncIterate(
       this.innerApiCalls['listProfiles'] as GaxCall,

@@ -486,7 +486,9 @@ export class InstanceGroupManagerResizeRequestsClient {
         instance_group_manager: request.instanceGroupManager ?? '',
         resize_request: request.resizeRequest ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('cancel request %j', request);
     const wrappedCallback:
       | Callback<
@@ -627,7 +629,9 @@ export class InstanceGroupManagerResizeRequestsClient {
         instance_group_manager: request.instanceGroupManager ?? '',
         resize_request: request.resizeRequest ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('delete request %j', request);
     const wrappedCallback:
       | Callback<
@@ -767,7 +771,9 @@ export class InstanceGroupManagerResizeRequestsClient {
         instance_group_manager: request.instanceGroupManager ?? '',
         resize_request: request.resizeRequest ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('get request %j', request);
     const wrappedCallback:
       | Callback<
@@ -901,7 +907,9 @@ export class InstanceGroupManagerResizeRequestsClient {
         zone: request.zone ?? '',
         instance_group_manager: request.instanceGroupManager ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('insert request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1046,7 +1054,9 @@ export class InstanceGroupManagerResizeRequestsClient {
         zone: request.zone ?? '',
         instance_group_manager: request.instanceGroupManager ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.compute.v1.IListInstanceGroupManagerResizeRequestsRequest,
@@ -1123,7 +1133,9 @@ export class InstanceGroupManagerResizeRequestsClient {
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('list stream %j', request);
     return this.descriptors.page.list.createStream(
       this.innerApiCalls.list as GaxCall,
@@ -1182,7 +1194,9 @@ export class InstanceGroupManagerResizeRequestsClient {
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('list iterate %j', request);
     return this.descriptors.page.list.asyncIterate(
       this.innerApiCalls['list'] as GaxCall,

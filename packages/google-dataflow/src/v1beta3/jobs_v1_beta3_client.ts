@@ -486,7 +486,9 @@ export class JobsV1Beta3Client {
         project_id: request.projectId ?? '',
         location: request.location ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -608,7 +610,9 @@ export class JobsV1Beta3Client {
         location: request.location ?? '',
         job_id: request.jobId ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -731,7 +735,9 @@ export class JobsV1Beta3Client {
         location: request.location ?? '',
         job_id: request.jobId ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -835,7 +841,9 @@ export class JobsV1Beta3Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('checkActiveJobs request %j', request);
     const wrappedCallback:
       | Callback<
@@ -955,7 +963,9 @@ export class JobsV1Beta3Client {
         location: request.location ?? '',
         job_id: request.jobId ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('snapshotJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1089,7 +1099,9 @@ export class JobsV1Beta3Client {
         project_id: request.projectId ?? '',
         location: request.location ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.dataflow.v1beta3.IListJobsRequest,
@@ -1165,7 +1177,9 @@ export class JobsV1Beta3Client {
       });
     const defaultCallSettings = this._defaults['listJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listJobs stream %j', request);
     return this.descriptors.page.listJobs.createStream(
       this.innerApiCalls.listJobs as GaxCall,
@@ -1225,7 +1239,9 @@ export class JobsV1Beta3Client {
       });
     const defaultCallSettings = this._defaults['listJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listJobs iterate %j', request);
     return this.descriptors.page.listJobs.asyncIterate(
       this.innerApiCalls['listJobs'] as GaxCall,
@@ -1331,7 +1347,9 @@ export class JobsV1Beta3Client {
       this._gaxModule.routingHeader.fromParams({
         project_id: request.projectId ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.dataflow.v1beta3.IListJobsRequest,
@@ -1406,7 +1424,9 @@ export class JobsV1Beta3Client {
       });
     const defaultCallSettings = this._defaults['aggregatedListJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('aggregatedListJobs stream %j', request);
     return this.descriptors.page.aggregatedListJobs.createStream(
       this.innerApiCalls.aggregatedListJobs as GaxCall,
@@ -1465,7 +1485,9 @@ export class JobsV1Beta3Client {
       });
     const defaultCallSettings = this._defaults['aggregatedListJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('aggregatedListJobs iterate %j', request);
     return this.descriptors.page.aggregatedListJobs.asyncIterate(
       this.innerApiCalls['aggregatedListJobs'] as GaxCall,

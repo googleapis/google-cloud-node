@@ -217,6 +217,9 @@ export class WorkflowsClient {
       cryptoKeyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/keyRings/{keyRing}/cryptoKeys/{cryptoKey}'
       ),
+      cryptoKeyVersionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/keyRings/{keyRing}/cryptoKeys/{cryptoKey}/cryptoKeyVersions/{cryptoKeyVersion}'
+      ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
@@ -230,6 +233,11 @@ export class WorkflowsClient {
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
       listWorkflows: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'workflows'
+      ),
+      listWorkflowRevisions: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'workflows'
@@ -364,6 +372,7 @@ export class WorkflowsClient {
       'createWorkflow',
       'deleteWorkflow',
       'updateWorkflow',
+      'listWorkflowRevisions',
     ];
     for (const methodName of workflowsStubMethods) {
       const callPromise = this.workflowsStub.then(
@@ -569,7 +578,9 @@ export class WorkflowsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('getWorkflow request %j', request);
     const wrappedCallback:
       | Callback<
@@ -712,7 +723,9 @@ export class WorkflowsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch((err) => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -882,7 +895,9 @@ export class WorkflowsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch((err) => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1056,7 +1071,9 @@ export class WorkflowsClient {
       this._gaxModule.routingHeader.fromParams({
         'workflow.name': request.workflow!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch((err) => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1146,6 +1163,16 @@ export class WorkflowsClient {
    *   match the call that provided the page token.
    * @param {string} request.filter
    *   Filter to restrict results to specific workflows.
+   *   For details, see <a href="https://google.aip.dev/160"
+   *   class="external">AIP-160</a>.
+   *
+   *   For example, if you are using the Google APIs Explorer:
+   *
+   *   `state="SUCCEEDED"`
+   *
+   *   or
+   *
+   *   `createTime>"2023-08-01" AND state="FAILED"`
    * @param {string} request.orderBy
    *   Comma-separated list of fields that specify the order of the results.
    *   Default sorting order for a field is ascending. To specify descending order
@@ -1234,7 +1261,9 @@ export class WorkflowsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch((err) => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.workflows.v1.IListWorkflowsRequest,
@@ -1284,6 +1313,16 @@ export class WorkflowsClient {
    *   match the call that provided the page token.
    * @param {string} request.filter
    *   Filter to restrict results to specific workflows.
+   *   For details, see <a href="https://google.aip.dev/160"
+   *   class="external">AIP-160</a>.
+   *
+   *   For example, if you are using the Google APIs Explorer:
+   *
+   *   `state="SUCCEEDED"`
+   *
+   *   or
+   *
+   *   `createTime>"2023-08-01" AND state="FAILED"`
    * @param {string} request.orderBy
    *   Comma-separated list of fields that specify the order of the results.
    *   Default sorting order for a field is ascending. To specify descending order
@@ -1314,7 +1353,9 @@ export class WorkflowsClient {
       });
     const defaultCallSettings = this._defaults['listWorkflows'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listWorkflows stream %j', request);
     return this.descriptors.page.listWorkflows.createStream(
       this.innerApiCalls.listWorkflows as GaxCall,
@@ -1345,6 +1386,16 @@ export class WorkflowsClient {
    *   match the call that provided the page token.
    * @param {string} request.filter
    *   Filter to restrict results to specific workflows.
+   *   For details, see <a href="https://google.aip.dev/160"
+   *   class="external">AIP-160</a>.
+   *
+   *   For example, if you are using the Google APIs Explorer:
+   *
+   *   `state="SUCCEEDED"`
+   *
+   *   or
+   *
+   *   `createTime>"2023-08-01" AND state="FAILED"`
    * @param {string} request.orderBy
    *   Comma-separated list of fields that specify the order of the results.
    *   Default sorting order for a field is ascending. To specify descending order
@@ -1376,10 +1427,244 @@ export class WorkflowsClient {
       });
     const defaultCallSettings = this._defaults['listWorkflows'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listWorkflows iterate %j', request);
     return this.descriptors.page.listWorkflows.asyncIterate(
       this.innerApiCalls['listWorkflows'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.workflows.v1.IWorkflow>;
+  }
+  /**
+   * Lists revisions for a given workflow.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Workflow for which the revisions should be listed.
+   *   Format: projects/{project}/locations/{location}/workflows/{workflow}
+   * @param {number} request.pageSize
+   *   The maximum number of revisions to return per page. If a value is not
+   *   specified, a default value of 20 is used. The maximum permitted value is
+   *   100. Values greater than 100 are coerced down to 100.
+   * @param {string} request.pageToken
+   *   The page token, received from a previous ListWorkflowRevisions call.
+   *   Provide this to retrieve the subsequent page.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.workflows.v1.Workflow|Workflow}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listWorkflowRevisionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listWorkflowRevisions(
+    request?: protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.workflows.v1.IWorkflow[],
+      protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest | null,
+      protos.google.cloud.workflows.v1.IListWorkflowRevisionsResponse,
+    ]
+  >;
+  listWorkflowRevisions(
+    request: protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest,
+      | protos.google.cloud.workflows.v1.IListWorkflowRevisionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.workflows.v1.IWorkflow
+    >
+  ): void;
+  listWorkflowRevisions(
+    request: protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest,
+      | protos.google.cloud.workflows.v1.IListWorkflowRevisionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.workflows.v1.IWorkflow
+    >
+  ): void;
+  listWorkflowRevisions(
+    request?: protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest,
+          | protos.google.cloud.workflows.v1.IListWorkflowRevisionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.workflows.v1.IWorkflow
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest,
+      | protos.google.cloud.workflows.v1.IListWorkflowRevisionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.workflows.v1.IWorkflow
+    >
+  ): Promise<
+    [
+      protos.google.cloud.workflows.v1.IWorkflow[],
+      protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest | null,
+      protos.google.cloud.workflows.v1.IListWorkflowRevisionsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest,
+          | protos.google.cloud.workflows.v1.IListWorkflowRevisionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.workflows.v1.IWorkflow
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listWorkflowRevisions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listWorkflowRevisions request %j', request);
+    return this.innerApiCalls
+      .listWorkflowRevisions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.workflows.v1.IWorkflow[],
+          protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest | null,
+          protos.google.cloud.workflows.v1.IListWorkflowRevisionsResponse,
+        ]) => {
+          this._log.info('listWorkflowRevisions values %j', response);
+          return [response, input, output];
+        }
+      );
+  }
+
+  /**
+   * Equivalent to `listWorkflowRevisions`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Workflow for which the revisions should be listed.
+   *   Format: projects/{project}/locations/{location}/workflows/{workflow}
+   * @param {number} request.pageSize
+   *   The maximum number of revisions to return per page. If a value is not
+   *   specified, a default value of 20 is used. The maximum permitted value is
+   *   100. Values greater than 100 are coerced down to 100.
+   * @param {string} request.pageToken
+   *   The page token, received from a previous ListWorkflowRevisions call.
+   *   Provide this to retrieve the subsequent page.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.workflows.v1.Workflow|Workflow} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listWorkflowRevisionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listWorkflowRevisionsStream(
+    request?: protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    const defaultCallSettings = this._defaults['listWorkflowRevisions'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('listWorkflowRevisions stream %j', request);
+    return this.descriptors.page.listWorkflowRevisions.createStream(
+      this.innerApiCalls.listWorkflowRevisions as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listWorkflowRevisions`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Workflow for which the revisions should be listed.
+   *   Format: projects/{project}/locations/{location}/workflows/{workflow}
+   * @param {number} request.pageSize
+   *   The maximum number of revisions to return per page. If a value is not
+   *   specified, a default value of 20 is used. The maximum permitted value is
+   *   100. Values greater than 100 are coerced down to 100.
+   * @param {string} request.pageToken
+   *   The page token, received from a previous ListWorkflowRevisions call.
+   *   Provide this to retrieve the subsequent page.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.workflows.v1.Workflow|Workflow}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/workflows.list_workflow_revisions.js</caption>
+   * region_tag:workflows_v1_generated_Workflows_ListWorkflowRevisions_async
+   */
+  listWorkflowRevisionsAsync(
+    request?: protos.google.cloud.workflows.v1.IListWorkflowRevisionsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.workflows.v1.IWorkflow> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    const defaultCallSettings = this._defaults['listWorkflowRevisions'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('listWorkflowRevisions iterate %j', request);
+    return this.descriptors.page.listWorkflowRevisions.asyncIterate(
+      this.innerApiCalls['listWorkflowRevisions'] as GaxCall,
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.workflows.v1.IWorkflow>;
@@ -1556,7 +1841,7 @@ export class WorkflowsClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -1759,6 +2044,97 @@ export class WorkflowsClient {
   matchCryptoKeyFromCryptoKeyName(cryptoKeyName: string) {
     return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
       .cryptoKey;
+  }
+
+  /**
+   * Return a fully-qualified cryptoKeyVersion resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} keyRing
+   * @param {string} cryptoKey
+   * @param {string} cryptoKeyVersion
+   * @returns {string} Resource name string.
+   */
+  cryptoKeyVersionPath(
+    project: string,
+    location: string,
+    keyRing: string,
+    cryptoKey: string,
+    cryptoKeyVersion: string
+  ) {
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.render({
+      project: project,
+      location: location,
+      keyRing: keyRing,
+      cryptoKey: cryptoKey,
+      cryptoKeyVersion: cryptoKeyVersion,
+    });
+  }
+
+  /**
+   * Parse the project from CryptoKeyVersion resource.
+   *
+   * @param {string} cryptoKeyVersionName
+   *   A fully-qualified path representing CryptoKeyVersion resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
+      cryptoKeyVersionName
+    ).project;
+  }
+
+  /**
+   * Parse the location from CryptoKeyVersion resource.
+   *
+   * @param {string} cryptoKeyVersionName
+   *   A fully-qualified path representing CryptoKeyVersion resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
+      cryptoKeyVersionName
+    ).location;
+  }
+
+  /**
+   * Parse the keyRing from CryptoKeyVersion resource.
+   *
+   * @param {string} cryptoKeyVersionName
+   *   A fully-qualified path representing CryptoKeyVersion resource.
+   * @returns {string} A string representing the keyRing.
+   */
+  matchKeyRingFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
+      cryptoKeyVersionName
+    ).keyRing;
+  }
+
+  /**
+   * Parse the cryptoKey from CryptoKeyVersion resource.
+   *
+   * @param {string} cryptoKeyVersionName
+   *   A fully-qualified path representing CryptoKeyVersion resource.
+   * @returns {string} A string representing the cryptoKey.
+   */
+  matchCryptoKeyFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
+      cryptoKeyVersionName
+    ).cryptoKey;
+  }
+
+  /**
+   * Parse the cryptoKeyVersion from CryptoKeyVersion resource.
+   *
+   * @param {string} cryptoKeyVersionName
+   *   A fully-qualified path representing CryptoKeyVersion resource.
+   * @returns {string} A string representing the cryptoKeyVersion.
+   */
+  matchCryptoKeyVersionFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
+      cryptoKeyVersionName
+    ).cryptoKeyVersion;
   }
 
   /**

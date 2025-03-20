@@ -284,7 +284,9 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.networkEdgeSecurityServicesStub);
       client.close().then(() => {
         done();
@@ -355,7 +357,7 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteNetworkEdgeSecurityServiceRequest()
       );
@@ -399,7 +401,7 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteNetworkEdgeSecurityServiceRequest()
       );
@@ -459,7 +461,7 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteNetworkEdgeSecurityServiceRequest()
       );
@@ -500,7 +502,7 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteNetworkEdgeSecurityServiceRequest()
       );
@@ -534,7 +536,7 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetNetworkEdgeSecurityServiceRequest()
       );
@@ -577,7 +579,7 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetNetworkEdgeSecurityServiceRequest()
       );
@@ -635,7 +637,7 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetNetworkEdgeSecurityServiceRequest()
       );
@@ -675,7 +677,7 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetNetworkEdgeSecurityServiceRequest()
       );
@@ -709,7 +711,7 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertNetworkEdgeSecurityServiceRequest()
       );
@@ -748,7 +750,7 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertNetworkEdgeSecurityServiceRequest()
       );
@@ -803,7 +805,7 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertNetworkEdgeSecurityServiceRequest()
       );
@@ -839,7 +841,7 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertNetworkEdgeSecurityServiceRequest()
       );
@@ -868,7 +870,7 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchNetworkEdgeSecurityServiceRequest()
       );
@@ -911,7 +913,7 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchNetworkEdgeSecurityServiceRequest()
       );
@@ -969,7 +971,7 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchNetworkEdgeSecurityServiceRequest()
       );
@@ -1009,7 +1011,7 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchNetworkEdgeSecurityServiceRequest()
       );
@@ -1043,7 +1045,7 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AggregatedListNetworkEdgeSecurityServicesRequest()
       );
@@ -1109,7 +1111,7 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AggregatedListNetworkEdgeSecurityServicesRequest()
       );

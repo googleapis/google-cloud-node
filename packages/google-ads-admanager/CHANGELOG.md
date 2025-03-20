@@ -1,6 +1,13 @@
 # Changelog
 
-## [1.0.0](https://github.com/googleapis/google-cloud-node/compare/admanager-v0.1.1...admanager-v1.0.0) (2025-03-12)
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/admanager-v0.2.0...admanager-v0.3.0) (2025-03-19)
+
+
+### Features
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6182](https://github.com/googleapis/google-cloud-node/issues/6182)) ([c41ff07](https://github.com/googleapis/google-cloud-node/commit/c41ff0729b65a1207978b4029d6369cc0552e0bf))
+
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/admanager-v0.1.1...admanager-v0.2.0) (2025-03-18)
 
 
 ### ⚠ BREAKING CHANGES

@@ -252,7 +252,9 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.deviceManagerStub);
       client.close().then(() => {
         done();
@@ -311,7 +313,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.CreateDeviceRegistryRequest()
       );
@@ -343,7 +345,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.CreateDeviceRegistryRequest()
       );
@@ -390,7 +392,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.CreateDeviceRegistryRequest()
       );
@@ -421,7 +423,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.CreateDeviceRegistryRequest()
       );
@@ -442,7 +444,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.GetDeviceRegistryRequest()
       );
@@ -473,7 +475,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.GetDeviceRegistryRequest()
       );
@@ -520,7 +522,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.GetDeviceRegistryRequest()
       );
@@ -551,7 +553,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.GetDeviceRegistryRequest()
       );
@@ -572,7 +574,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.UpdateDeviceRegistryRequest()
       );
@@ -605,7 +607,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.UpdateDeviceRegistryRequest()
       );
@@ -653,7 +655,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.UpdateDeviceRegistryRequest()
       );
@@ -685,7 +687,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.UpdateDeviceRegistryRequest()
       );
@@ -707,7 +709,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.DeleteDeviceRegistryRequest()
       );
@@ -739,7 +741,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.DeleteDeviceRegistryRequest()
       );
@@ -786,7 +788,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.DeleteDeviceRegistryRequest()
       );
@@ -817,7 +819,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.DeleteDeviceRegistryRequest()
       );
@@ -838,7 +840,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.CreateDeviceRequest()
       );
@@ -869,7 +871,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.CreateDeviceRequest()
       );
@@ -916,7 +918,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.CreateDeviceRequest()
       );
@@ -947,7 +949,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.CreateDeviceRequest()
       );
@@ -968,7 +970,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.GetDeviceRequest()
       );
@@ -999,7 +1001,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.GetDeviceRequest()
       );
@@ -1046,7 +1048,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.GetDeviceRequest()
       );
@@ -1074,7 +1076,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.GetDeviceRequest()
       );
@@ -1095,7 +1097,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.UpdateDeviceRequest()
       );
@@ -1127,7 +1129,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.UpdateDeviceRequest()
       );
@@ -1175,7 +1177,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.UpdateDeviceRequest()
       );
@@ -1207,7 +1209,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.UpdateDeviceRequest()
       );
@@ -1229,7 +1231,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.DeleteDeviceRequest()
       );
@@ -1260,7 +1262,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.DeleteDeviceRequest()
       );
@@ -1307,7 +1309,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.DeleteDeviceRequest()
       );
@@ -1338,7 +1340,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.DeleteDeviceRequest()
       );
@@ -1359,7 +1361,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ModifyCloudToDeviceConfigRequest()
       );
@@ -1391,7 +1393,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ModifyCloudToDeviceConfigRequest()
       );
@@ -1438,7 +1440,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ModifyCloudToDeviceConfigRequest()
       );
@@ -1472,7 +1474,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ModifyCloudToDeviceConfigRequest()
       );
@@ -1496,7 +1498,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceConfigVersionsRequest()
       );
@@ -1528,7 +1530,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceConfigVersionsRequest()
       );
@@ -1575,7 +1577,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceConfigVersionsRequest()
       );
@@ -1609,7 +1611,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceConfigVersionsRequest()
       );
@@ -1633,7 +1635,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceStatesRequest()
       );
@@ -1664,7 +1666,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceStatesRequest()
       );
@@ -1711,7 +1713,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceStatesRequest()
       );
@@ -1742,7 +1744,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceStatesRequest()
       );
@@ -1763,7 +1765,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -1794,7 +1796,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -1841,7 +1843,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -1872,7 +1874,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -1893,7 +1895,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -1924,7 +1926,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -1971,7 +1973,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -2002,7 +2004,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -2023,7 +2025,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -2055,7 +2057,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -2102,7 +2104,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -2133,7 +2135,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -2154,7 +2156,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.SendCommandToDeviceRequest()
       );
@@ -2186,7 +2188,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.SendCommandToDeviceRequest()
       );
@@ -2233,7 +2235,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.SendCommandToDeviceRequest()
       );
@@ -2264,7 +2266,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.SendCommandToDeviceRequest()
       );
@@ -2285,7 +2287,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.BindDeviceToGatewayRequest()
       );
@@ -2317,7 +2319,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.BindDeviceToGatewayRequest()
       );
@@ -2364,7 +2366,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.BindDeviceToGatewayRequest()
       );
@@ -2395,7 +2397,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.BindDeviceToGatewayRequest()
       );
@@ -2416,7 +2418,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.UnbindDeviceFromGatewayRequest()
       );
@@ -2448,7 +2450,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.UnbindDeviceFromGatewayRequest()
       );
@@ -2495,7 +2497,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.UnbindDeviceFromGatewayRequest()
       );
@@ -2529,7 +2531,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.UnbindDeviceFromGatewayRequest()
       );
@@ -2553,7 +2555,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceRegistriesRequest()
       );
@@ -2587,7 +2589,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceRegistriesRequest()
       );
@@ -2636,7 +2638,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceRegistriesRequest()
       );
@@ -2667,7 +2669,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceRegistriesRequest()
       );
@@ -2721,7 +2723,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceRegistriesRequest()
       );
@@ -2770,7 +2772,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceRegistriesRequest()
       );
@@ -2813,7 +2815,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceRegistriesRequest()
       );
@@ -2855,7 +2857,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDevicesRequest()
       );
@@ -2888,7 +2890,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDevicesRequest()
       );
@@ -2937,7 +2939,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDevicesRequest()
       );
@@ -2968,7 +2970,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDevicesRequest()
       );
@@ -3019,7 +3021,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDevicesRequest()
       );
@@ -3067,7 +3069,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDevicesRequest()
       );
@@ -3110,7 +3112,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDevicesRequest()
       );
@@ -3149,7 +3151,7 @@ describe('v1.DeviceManagerClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('device', () => {
+    describe('device', async () => {
       const fakePath = '/rendered/path/device';
       const expectedParameters = {
         project: 'projectValue',
@@ -3161,7 +3163,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.devicePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3225,7 +3227,7 @@ describe('v1.DeviceManagerClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -3235,7 +3237,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3274,7 +3276,7 @@ describe('v1.DeviceManagerClient', () => {
       });
     });
 
-    describe('registry', () => {
+    describe('registry', async () => {
       const fakePath = '/rendered/path/registry';
       const expectedParameters = {
         project: 'projectValue',
@@ -3285,7 +3287,7 @@ describe('v1.DeviceManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.registryPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

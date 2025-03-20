@@ -255,7 +255,9 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.tablesServiceStub);
       client.close().then(() => {
         done();
@@ -314,7 +316,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.GetTableRequest()
       );
@@ -345,7 +347,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.GetTableRequest()
       );
@@ -392,7 +394,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.GetTableRequest()
       );
@@ -420,7 +422,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.GetTableRequest()
       );
@@ -441,7 +443,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.GetWorkspaceRequest()
       );
@@ -472,7 +474,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.GetWorkspaceRequest()
       );
@@ -519,7 +521,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.GetWorkspaceRequest()
       );
@@ -550,7 +552,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.GetWorkspaceRequest()
       );
@@ -571,7 +573,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.GetRowRequest()
       );
@@ -602,7 +604,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.GetRowRequest()
       );
@@ -649,7 +651,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.GetRowRequest()
       );
@@ -677,7 +679,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.GetRowRequest()
       );
@@ -698,7 +700,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.CreateRowRequest()
       );
@@ -729,7 +731,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.CreateRowRequest()
       );
@@ -776,7 +778,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.CreateRowRequest()
       );
@@ -804,7 +806,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.CreateRowRequest()
       );
@@ -825,7 +827,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.BatchCreateRowsRequest()
       );
@@ -856,7 +858,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.BatchCreateRowsRequest()
       );
@@ -903,7 +905,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.BatchCreateRowsRequest()
       );
@@ -934,7 +936,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.BatchCreateRowsRequest()
       );
@@ -955,7 +957,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.UpdateRowRequest()
       );
@@ -987,7 +989,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.UpdateRowRequest()
       );
@@ -1035,7 +1037,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.UpdateRowRequest()
       );
@@ -1064,7 +1066,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.UpdateRowRequest()
       );
@@ -1086,7 +1088,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.BatchUpdateRowsRequest()
       );
@@ -1117,7 +1119,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.BatchUpdateRowsRequest()
       );
@@ -1164,7 +1166,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.BatchUpdateRowsRequest()
       );
@@ -1195,7 +1197,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.BatchUpdateRowsRequest()
       );
@@ -1216,7 +1218,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.DeleteRowRequest()
       );
@@ -1247,7 +1249,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.DeleteRowRequest()
       );
@@ -1294,7 +1296,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.DeleteRowRequest()
       );
@@ -1322,7 +1324,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.DeleteRowRequest()
       );
@@ -1343,7 +1345,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.BatchDeleteRowsRequest()
       );
@@ -1374,7 +1376,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.BatchDeleteRowsRequest()
       );
@@ -1421,7 +1423,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.BatchDeleteRowsRequest()
       );
@@ -1452,7 +1454,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.BatchDeleteRowsRequest()
       );
@@ -1473,7 +1475,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.ListTablesRequest()
       );
@@ -1498,7 +1500,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.ListTablesRequest()
       );
@@ -1539,7 +1541,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.ListTablesRequest()
       );
@@ -1556,7 +1558,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.ListTablesRequest()
       );
@@ -1603,7 +1605,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.ListTablesRequest()
       );
@@ -1641,7 +1643,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.ListTablesRequest()
       );
@@ -1677,7 +1679,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.ListTablesRequest()
       );
@@ -1708,7 +1710,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.ListWorkspacesRequest()
       );
@@ -1733,7 +1735,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.ListWorkspacesRequest()
       );
@@ -1774,7 +1776,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.ListWorkspacesRequest()
       );
@@ -1791,7 +1793,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.ListWorkspacesRequest()
       );
@@ -1838,7 +1840,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.ListWorkspacesRequest()
       );
@@ -1874,7 +1876,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.ListWorkspacesRequest()
       );
@@ -1910,7 +1912,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.ListWorkspacesRequest()
       );
@@ -1940,7 +1942,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.ListRowsRequest()
       );
@@ -1973,7 +1975,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.ListRowsRequest()
       );
@@ -2022,7 +2024,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.ListRowsRequest()
       );
@@ -2050,7 +2052,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.ListRowsRequest()
       );
@@ -2104,7 +2106,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.ListRowsRequest()
       );
@@ -2155,7 +2157,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.ListRowsRequest()
       );
@@ -2197,7 +2199,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.ListRowsRequest()
       );
@@ -2235,7 +2237,7 @@ describe('v1alpha1.TablesServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('row', () => {
+    describe('row', async () => {
       const fakePath = '/rendered/path/row';
       const expectedParameters = {
         table: 'tableValue',
@@ -2245,7 +2247,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.rowPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2284,7 +2286,7 @@ describe('v1alpha1.TablesServiceClient', () => {
       });
     });
 
-    describe('table', () => {
+    describe('table', async () => {
       const fakePath = '/rendered/path/table';
       const expectedParameters = {
         table: 'tableValue',
@@ -2293,7 +2295,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.tablePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2322,7 +2324,7 @@ describe('v1alpha1.TablesServiceClient', () => {
       });
     });
 
-    describe('workspace', () => {
+    describe('workspace', async () => {
       const fakePath = '/rendered/path/workspace';
       const expectedParameters = {
         workspace: 'workspaceValue',
@@ -2331,7 +2333,7 @@ describe('v1alpha1.TablesServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.workspacePathTemplate.render = sinon
         .stub()
         .returns(fakePath);

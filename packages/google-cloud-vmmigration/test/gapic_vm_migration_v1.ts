@@ -288,7 +288,9 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.vmMigrationStub);
       client.close().then(() => {
         done();
@@ -347,7 +349,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetSourceRequest()
       );
@@ -378,7 +380,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetSourceRequest()
       );
@@ -425,7 +427,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetSourceRequest()
       );
@@ -453,7 +455,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetSourceRequest()
       );
@@ -474,7 +476,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.FetchInventoryRequest()
       );
@@ -505,7 +507,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.FetchInventoryRequest()
       );
@@ -552,7 +554,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.FetchInventoryRequest()
       );
@@ -583,7 +585,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.FetchInventoryRequest()
       );
@@ -604,7 +606,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetUtilizationReportRequest()
       );
@@ -636,7 +638,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetUtilizationReportRequest()
       );
@@ -683,7 +685,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetUtilizationReportRequest()
       );
@@ -714,7 +716,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetUtilizationReportRequest()
       );
@@ -735,7 +737,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetDatacenterConnectorRequest()
       );
@@ -767,7 +769,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetDatacenterConnectorRequest()
       );
@@ -814,7 +816,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetDatacenterConnectorRequest()
       );
@@ -848,7 +850,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetDatacenterConnectorRequest()
       );
@@ -872,7 +874,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetMigratingVmRequest()
       );
@@ -903,7 +905,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetMigratingVmRequest()
       );
@@ -950,7 +952,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetMigratingVmRequest()
       );
@@ -981,7 +983,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetMigratingVmRequest()
       );
@@ -1002,7 +1004,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetCloneJobRequest()
       );
@@ -1033,7 +1035,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetCloneJobRequest()
       );
@@ -1080,7 +1082,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetCloneJobRequest()
       );
@@ -1111,7 +1113,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetCloneJobRequest()
       );
@@ -1132,7 +1134,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetCutoverJobRequest()
       );
@@ -1163,7 +1165,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetCutoverJobRequest()
       );
@@ -1210,7 +1212,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetCutoverJobRequest()
       );
@@ -1241,7 +1243,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetCutoverJobRequest()
       );
@@ -1262,7 +1264,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetGroupRequest()
       );
@@ -1293,7 +1295,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetGroupRequest()
       );
@@ -1340,7 +1342,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetGroupRequest()
       );
@@ -1368,7 +1370,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetGroupRequest()
       );
@@ -1389,7 +1391,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetTargetProjectRequest()
       );
@@ -1420,7 +1422,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetTargetProjectRequest()
       );
@@ -1467,7 +1469,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetTargetProjectRequest()
       );
@@ -1498,7 +1500,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetTargetProjectRequest()
       );
@@ -1519,7 +1521,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetReplicationCycleRequest()
       );
@@ -1551,7 +1553,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetReplicationCycleRequest()
       );
@@ -1598,7 +1600,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetReplicationCycleRequest()
       );
@@ -1629,7 +1631,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetReplicationCycleRequest()
       );
@@ -1650,7 +1652,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateSourceRequest()
       );
@@ -1682,7 +1684,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateSourceRequest()
       );
@@ -1736,7 +1738,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateSourceRequest()
       );
@@ -1767,7 +1769,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateSourceRequest()
       );
@@ -1800,7 +1802,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1822,7 +1824,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1840,7 +1842,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.UpdateSourceRequest()
       );
@@ -1873,7 +1875,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.UpdateSourceRequest()
       );
@@ -1928,7 +1930,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.UpdateSourceRequest()
       );
@@ -1960,7 +1962,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.UpdateSourceRequest()
       );
@@ -1994,7 +1996,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2016,7 +2018,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2034,7 +2036,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteSourceRequest()
       );
@@ -2066,7 +2068,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteSourceRequest()
       );
@@ -2120,7 +2122,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteSourceRequest()
       );
@@ -2151,7 +2153,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteSourceRequest()
       );
@@ -2184,7 +2186,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2206,7 +2208,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2224,7 +2226,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateUtilizationReportRequest()
       );
@@ -2257,7 +2259,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateUtilizationReportRequest()
       );
@@ -2311,7 +2313,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateUtilizationReportRequest()
       );
@@ -2345,7 +2347,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateUtilizationReportRequest()
       );
@@ -2378,7 +2380,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2401,7 +2403,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2422,7 +2424,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteUtilizationReportRequest()
       );
@@ -2455,7 +2457,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteUtilizationReportRequest()
       );
@@ -2509,7 +2511,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteUtilizationReportRequest()
       );
@@ -2543,7 +2545,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteUtilizationReportRequest()
       );
@@ -2576,7 +2578,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2599,7 +2601,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2620,7 +2622,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateDatacenterConnectorRequest()
       );
@@ -2653,7 +2655,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateDatacenterConnectorRequest()
       );
@@ -2707,7 +2709,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateDatacenterConnectorRequest()
       );
@@ -2741,7 +2743,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateDatacenterConnectorRequest()
       );
@@ -2774,7 +2776,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2797,7 +2799,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2818,7 +2820,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteDatacenterConnectorRequest()
       );
@@ -2851,7 +2853,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteDatacenterConnectorRequest()
       );
@@ -2905,7 +2907,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteDatacenterConnectorRequest()
       );
@@ -2939,7 +2941,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteDatacenterConnectorRequest()
       );
@@ -2972,7 +2974,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2995,7 +2997,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3016,7 +3018,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.UpgradeApplianceRequest()
       );
@@ -3049,7 +3051,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.UpgradeApplianceRequest()
       );
@@ -3103,7 +3105,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.UpgradeApplianceRequest()
       );
@@ -3134,7 +3136,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.UpgradeApplianceRequest()
       );
@@ -3167,7 +3169,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3189,7 +3191,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3210,7 +3212,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateMigratingVmRequest()
       );
@@ -3243,7 +3245,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateMigratingVmRequest()
       );
@@ -3297,7 +3299,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateMigratingVmRequest()
       );
@@ -3328,7 +3330,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateMigratingVmRequest()
       );
@@ -3361,7 +3363,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3383,7 +3385,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3404,7 +3406,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.UpdateMigratingVmRequest()
       );
@@ -3438,7 +3440,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.UpdateMigratingVmRequest()
       );
@@ -3493,7 +3495,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.UpdateMigratingVmRequest()
       );
@@ -3525,7 +3527,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.UpdateMigratingVmRequest()
       );
@@ -3559,7 +3561,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3581,7 +3583,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3602,7 +3604,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteMigratingVmRequest()
       );
@@ -3635,7 +3637,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteMigratingVmRequest()
       );
@@ -3689,7 +3691,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteMigratingVmRequest()
       );
@@ -3720,7 +3722,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteMigratingVmRequest()
       );
@@ -3753,7 +3755,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3775,7 +3777,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3796,7 +3798,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.StartMigrationRequest()
       );
@@ -3829,7 +3831,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.StartMigrationRequest()
       );
@@ -3883,7 +3885,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.StartMigrationRequest()
       );
@@ -3914,7 +3916,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.StartMigrationRequest()
       );
@@ -3947,7 +3949,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3969,7 +3971,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3990,7 +3992,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ResumeMigrationRequest()
       );
@@ -4023,7 +4025,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ResumeMigrationRequest()
       );
@@ -4077,7 +4079,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ResumeMigrationRequest()
       );
@@ -4108,7 +4110,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ResumeMigrationRequest()
       );
@@ -4141,7 +4143,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4163,7 +4165,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4184,7 +4186,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.PauseMigrationRequest()
       );
@@ -4217,7 +4219,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.PauseMigrationRequest()
       );
@@ -4271,7 +4273,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.PauseMigrationRequest()
       );
@@ -4302,7 +4304,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.PauseMigrationRequest()
       );
@@ -4335,7 +4337,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4357,7 +4359,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4378,7 +4380,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.FinalizeMigrationRequest()
       );
@@ -4411,7 +4413,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.FinalizeMigrationRequest()
       );
@@ -4465,7 +4467,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.FinalizeMigrationRequest()
       );
@@ -4496,7 +4498,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.FinalizeMigrationRequest()
       );
@@ -4529,7 +4531,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4551,7 +4553,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4572,7 +4574,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateCloneJobRequest()
       );
@@ -4605,7 +4607,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateCloneJobRequest()
       );
@@ -4659,7 +4661,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateCloneJobRequest()
       );
@@ -4690,7 +4692,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateCloneJobRequest()
       );
@@ -4723,7 +4725,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4745,7 +4747,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4766,7 +4768,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CancelCloneJobRequest()
       );
@@ -4799,7 +4801,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CancelCloneJobRequest()
       );
@@ -4853,7 +4855,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CancelCloneJobRequest()
       );
@@ -4884,7 +4886,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CancelCloneJobRequest()
       );
@@ -4917,7 +4919,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4939,7 +4941,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4960,7 +4962,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateCutoverJobRequest()
       );
@@ -4993,7 +4995,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateCutoverJobRequest()
       );
@@ -5047,7 +5049,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateCutoverJobRequest()
       );
@@ -5078,7 +5080,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateCutoverJobRequest()
       );
@@ -5111,7 +5113,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -5133,7 +5135,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -5154,7 +5156,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CancelCutoverJobRequest()
       );
@@ -5187,7 +5189,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CancelCutoverJobRequest()
       );
@@ -5241,7 +5243,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CancelCutoverJobRequest()
       );
@@ -5272,7 +5274,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CancelCutoverJobRequest()
       );
@@ -5305,7 +5307,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -5327,7 +5329,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -5348,7 +5350,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateGroupRequest()
       );
@@ -5380,7 +5382,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateGroupRequest()
       );
@@ -5434,7 +5436,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateGroupRequest()
       );
@@ -5465,7 +5467,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateGroupRequest()
       );
@@ -5498,7 +5500,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -5520,7 +5522,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -5538,7 +5540,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.UpdateGroupRequest()
       );
@@ -5571,7 +5573,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.UpdateGroupRequest()
       );
@@ -5626,7 +5628,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.UpdateGroupRequest()
       );
@@ -5658,7 +5660,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.UpdateGroupRequest()
       );
@@ -5692,7 +5694,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -5714,7 +5716,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -5732,7 +5734,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteGroupRequest()
       );
@@ -5764,7 +5766,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteGroupRequest()
       );
@@ -5818,7 +5820,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteGroupRequest()
       );
@@ -5849,7 +5851,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteGroupRequest()
       );
@@ -5882,7 +5884,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -5904,7 +5906,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -5922,7 +5924,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.AddGroupMigrationRequest()
       );
@@ -5955,7 +5957,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.AddGroupMigrationRequest()
       );
@@ -6009,7 +6011,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.AddGroupMigrationRequest()
       );
@@ -6040,7 +6042,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.AddGroupMigrationRequest()
       );
@@ -6073,7 +6075,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -6095,7 +6097,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -6116,7 +6118,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.RemoveGroupMigrationRequest()
       );
@@ -6149,7 +6151,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.RemoveGroupMigrationRequest()
       );
@@ -6203,7 +6205,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.RemoveGroupMigrationRequest()
       );
@@ -6234,7 +6236,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.RemoveGroupMigrationRequest()
       );
@@ -6267,7 +6269,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -6289,7 +6291,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -6310,7 +6312,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateTargetProjectRequest()
       );
@@ -6343,7 +6345,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateTargetProjectRequest()
       );
@@ -6397,7 +6399,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateTargetProjectRequest()
       );
@@ -6428,7 +6430,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateTargetProjectRequest()
       );
@@ -6461,7 +6463,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -6483,7 +6485,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -6504,7 +6506,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.UpdateTargetProjectRequest()
       );
@@ -6538,7 +6540,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.UpdateTargetProjectRequest()
       );
@@ -6593,7 +6595,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.UpdateTargetProjectRequest()
       );
@@ -6625,7 +6627,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.UpdateTargetProjectRequest()
       );
@@ -6659,7 +6661,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -6681,7 +6683,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -6702,7 +6704,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteTargetProjectRequest()
       );
@@ -6735,7 +6737,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteTargetProjectRequest()
       );
@@ -6789,7 +6791,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteTargetProjectRequest()
       );
@@ -6820,7 +6822,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteTargetProjectRequest()
       );
@@ -6853,7 +6855,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -6875,7 +6877,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -6896,7 +6898,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListSourcesRequest()
       );
@@ -6929,7 +6931,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListSourcesRequest()
       );
@@ -6978,7 +6980,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListSourcesRequest()
       );
@@ -7009,7 +7011,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListSourcesRequest()
       );
@@ -7063,7 +7065,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListSourcesRequest()
       );
@@ -7114,7 +7116,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListSourcesRequest()
       );
@@ -7157,7 +7159,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListSourcesRequest()
       );
@@ -7201,7 +7203,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListUtilizationReportsRequest()
       );
@@ -7241,7 +7243,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListUtilizationReportsRequest()
       );
@@ -7298,7 +7300,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListUtilizationReportsRequest()
       );
@@ -7332,7 +7334,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListUtilizationReportsRequest()
       );
@@ -7399,7 +7401,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListUtilizationReportsRequest()
       );
@@ -7455,7 +7457,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListUtilizationReportsRequest()
       );
@@ -7509,7 +7511,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListUtilizationReportsRequest()
       );
@@ -7556,7 +7558,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListDatacenterConnectorsRequest()
       );
@@ -7596,7 +7598,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListDatacenterConnectorsRequest()
       );
@@ -7653,7 +7655,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListDatacenterConnectorsRequest()
       );
@@ -7687,7 +7689,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListDatacenterConnectorsRequest()
       );
@@ -7756,7 +7758,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListDatacenterConnectorsRequest()
       );
@@ -7814,7 +7816,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListDatacenterConnectorsRequest()
       );
@@ -7868,7 +7870,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListDatacenterConnectorsRequest()
       );
@@ -7915,7 +7917,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListMigratingVmsRequest()
       );
@@ -7954,7 +7956,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListMigratingVmsRequest()
       );
@@ -8009,7 +8011,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListMigratingVmsRequest()
       );
@@ -8040,7 +8042,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListMigratingVmsRequest()
       );
@@ -8100,7 +8102,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListMigratingVmsRequest()
       );
@@ -8149,7 +8151,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListMigratingVmsRequest()
       );
@@ -8198,7 +8200,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListMigratingVmsRequest()
       );
@@ -8240,7 +8242,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListCloneJobsRequest()
       );
@@ -8279,7 +8281,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListCloneJobsRequest()
       );
@@ -8334,7 +8336,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListCloneJobsRequest()
       );
@@ -8365,7 +8367,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListCloneJobsRequest()
       );
@@ -8425,7 +8427,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListCloneJobsRequest()
       );
@@ -8474,7 +8476,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListCloneJobsRequest()
       );
@@ -8523,7 +8525,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListCloneJobsRequest()
       );
@@ -8565,7 +8567,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListCutoverJobsRequest()
       );
@@ -8604,7 +8606,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListCutoverJobsRequest()
       );
@@ -8659,7 +8661,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListCutoverJobsRequest()
       );
@@ -8690,7 +8692,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListCutoverJobsRequest()
       );
@@ -8750,7 +8752,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListCutoverJobsRequest()
       );
@@ -8799,7 +8801,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListCutoverJobsRequest()
       );
@@ -8848,7 +8850,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListCutoverJobsRequest()
       );
@@ -8890,7 +8892,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListGroupsRequest()
       );
@@ -8923,7 +8925,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListGroupsRequest()
       );
@@ -8972,7 +8974,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListGroupsRequest()
       );
@@ -9003,7 +9005,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListGroupsRequest()
       );
@@ -9057,7 +9059,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListGroupsRequest()
       );
@@ -9108,7 +9110,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListGroupsRequest()
       );
@@ -9151,7 +9153,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListGroupsRequest()
       );
@@ -9195,7 +9197,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListTargetProjectsRequest()
       );
@@ -9235,7 +9237,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListTargetProjectsRequest()
       );
@@ -9290,7 +9292,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListTargetProjectsRequest()
       );
@@ -9321,7 +9323,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListTargetProjectsRequest()
       );
@@ -9382,7 +9384,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListTargetProjectsRequest()
       );
@@ -9432,7 +9434,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListTargetProjectsRequest()
       );
@@ -9481,7 +9483,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListTargetProjectsRequest()
       );
@@ -9524,7 +9526,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListReplicationCyclesRequest()
       );
@@ -9564,7 +9566,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListReplicationCyclesRequest()
       );
@@ -9621,7 +9623,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListReplicationCyclesRequest()
       );
@@ -9655,7 +9657,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListReplicationCyclesRequest()
       );
@@ -9722,7 +9724,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListReplicationCyclesRequest()
       );
@@ -9778,7 +9780,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListReplicationCyclesRequest()
       );
@@ -9832,7 +9834,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListReplicationCyclesRequest()
       );
@@ -9878,7 +9880,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -9908,7 +9910,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -9952,7 +9954,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -9984,7 +9986,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -10014,7 +10016,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -10058,7 +10060,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -10090,7 +10092,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -10123,7 +10125,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -10167,7 +10169,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -10202,7 +10204,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -10232,7 +10234,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -10276,7 +10278,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -10311,7 +10313,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -10359,7 +10361,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -10400,7 +10402,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -10479,7 +10481,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -10559,7 +10561,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -10655,8 +10657,7 @@ describe('v1.VmMigrationClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -10675,7 +10676,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -10684,8 +10685,7 @@ describe('v1.VmMigrationClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -10701,7 +10701,7 @@ describe('v1.VmMigrationClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('cloneJob', () => {
+    describe('cloneJob', async () => {
       const fakePath = '/rendered/path/cloneJob';
       const expectedParameters = {
         project: 'projectValue',
@@ -10714,7 +10714,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.cloneJobPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10789,7 +10789,7 @@ describe('v1.VmMigrationClient', () => {
       });
     });
 
-    describe('cutoverJob', () => {
+    describe('cutoverJob', async () => {
       const fakePath = '/rendered/path/cutoverJob';
       const expectedParameters = {
         project: 'projectValue',
@@ -10802,7 +10802,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.cutoverJobPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10877,7 +10877,7 @@ describe('v1.VmMigrationClient', () => {
       });
     });
 
-    describe('datacenterConnector', () => {
+    describe('datacenterConnector', async () => {
       const fakePath = '/rendered/path/datacenterConnector';
       const expectedParameters = {
         project: 'projectValue',
@@ -10889,7 +10889,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.datacenterConnectorPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10970,7 +10970,7 @@ describe('v1.VmMigrationClient', () => {
       });
     });
 
-    describe('group', () => {
+    describe('group', async () => {
       const fakePath = '/rendered/path/group';
       const expectedParameters = {
         project: 'projectValue',
@@ -10981,7 +10981,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.groupPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -11034,7 +11034,7 @@ describe('v1.VmMigrationClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -11044,7 +11044,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -11083,7 +11083,7 @@ describe('v1.VmMigrationClient', () => {
       });
     });
 
-    describe('migratingVm', () => {
+    describe('migratingVm', async () => {
       const fakePath = '/rendered/path/migratingVm';
       const expectedParameters = {
         project: 'projectValue',
@@ -11095,7 +11095,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.migratingVmPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -11159,7 +11159,7 @@ describe('v1.VmMigrationClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -11168,7 +11168,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -11197,7 +11197,7 @@ describe('v1.VmMigrationClient', () => {
       });
     });
 
-    describe('replicationCycle', () => {
+    describe('replicationCycle', async () => {
       const fakePath = '/rendered/path/replicationCycle';
       const expectedParameters = {
         project: 'projectValue',
@@ -11210,7 +11210,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.replicationCyclePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -11290,7 +11290,7 @@ describe('v1.VmMigrationClient', () => {
       });
     });
 
-    describe('source', () => {
+    describe('source', async () => {
       const fakePath = '/rendered/path/source';
       const expectedParameters = {
         project: 'projectValue',
@@ -11301,7 +11301,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.sourcePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -11354,7 +11354,7 @@ describe('v1.VmMigrationClient', () => {
       });
     });
 
-    describe('targetProject', () => {
+    describe('targetProject', async () => {
       const fakePath = '/rendered/path/targetProject';
       const expectedParameters = {
         project: 'projectValue',
@@ -11365,7 +11365,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.targetProjectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -11418,7 +11418,7 @@ describe('v1.VmMigrationClient', () => {
       });
     });
 
-    describe('utilizationReport', () => {
+    describe('utilizationReport', async () => {
       const fakePath = '/rendered/path/utilizationReport';
       const expectedParameters = {
         project: 'projectValue',
@@ -11430,7 +11430,7 @@ describe('v1.VmMigrationClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.utilizationReportPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

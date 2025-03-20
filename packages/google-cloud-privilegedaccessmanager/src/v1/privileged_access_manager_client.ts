@@ -674,7 +674,9 @@ export class PrivilegedAccessManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('checkOnboardingStatus request %j', request);
     const wrappedCallback:
       | Callback<
@@ -799,7 +801,9 @@ export class PrivilegedAccessManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getEntitlement request %j', request);
     const wrappedCallback:
       | Callback<
@@ -924,7 +928,9 @@ export class PrivilegedAccessManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getGrant request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1067,7 +1073,9 @@ export class PrivilegedAccessManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createGrant request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1198,7 +1206,9 @@ export class PrivilegedAccessManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('approveGrant request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1329,7 +1339,9 @@ export class PrivilegedAccessManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('denyGrant request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1493,7 +1505,9 @@ export class PrivilegedAccessManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1679,7 +1693,9 @@ export class PrivilegedAccessManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1875,7 +1891,9 @@ export class PrivilegedAccessManagerClient {
       this._gaxModule.routingHeader.fromParams({
         'entitlement.name': request.entitlement!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2045,7 +2063,9 @@ export class PrivilegedAccessManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2212,7 +2232,9 @@ export class PrivilegedAccessManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.privilegedaccessmanager.v1.IListEntitlementsRequest,
@@ -2282,7 +2304,9 @@ export class PrivilegedAccessManagerClient {
       });
     const defaultCallSettings = this._defaults['listEntitlements'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listEntitlements stream %j', request);
     return this.descriptors.page.listEntitlements.createStream(
       this.innerApiCalls.listEntitlements as GaxCall,
@@ -2334,7 +2358,9 @@ export class PrivilegedAccessManagerClient {
       });
     const defaultCallSettings = this._defaults['listEntitlements'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listEntitlements iterate %j', request);
     return this.descriptors.page.listEntitlements.asyncIterate(
       this.innerApiCalls['listEntitlements'] as GaxCall,
@@ -2444,7 +2470,9 @@ export class PrivilegedAccessManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.privilegedaccessmanager.v1.ISearchEntitlementsRequest,
@@ -2516,7 +2544,9 @@ export class PrivilegedAccessManagerClient {
       });
     const defaultCallSettings = this._defaults['searchEntitlements'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchEntitlements stream %j', request);
     return this.descriptors.page.searchEntitlements.createStream(
       this.innerApiCalls.searchEntitlements as GaxCall,
@@ -2570,7 +2600,9 @@ export class PrivilegedAccessManagerClient {
       });
     const defaultCallSettings = this._defaults['searchEntitlements'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchEntitlements iterate %j', request);
     return this.descriptors.page.searchEntitlements.asyncIterate(
       this.innerApiCalls['searchEntitlements'] as GaxCall,
@@ -2677,7 +2709,9 @@ export class PrivilegedAccessManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.privilegedaccessmanager.v1.IListGrantsRequest,
@@ -2747,7 +2781,9 @@ export class PrivilegedAccessManagerClient {
       });
     const defaultCallSettings = this._defaults['listGrants'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listGrants stream %j', request);
     return this.descriptors.page.listGrants.createStream(
       this.innerApiCalls.listGrants as GaxCall,
@@ -2799,7 +2835,9 @@ export class PrivilegedAccessManagerClient {
       });
     const defaultCallSettings = this._defaults['listGrants'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listGrants iterate %j', request);
     return this.descriptors.page.listGrants.asyncIterate(
       this.innerApiCalls['listGrants'] as GaxCall,
@@ -2908,7 +2946,9 @@ export class PrivilegedAccessManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.privilegedaccessmanager.v1.ISearchGrantsRequest,
@@ -2979,7 +3019,9 @@ export class PrivilegedAccessManagerClient {
       });
     const defaultCallSettings = this._defaults['searchGrants'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchGrants stream %j', request);
     return this.descriptors.page.searchGrants.createStream(
       this.innerApiCalls.searchGrants as GaxCall,
@@ -3032,7 +3074,9 @@ export class PrivilegedAccessManagerClient {
       });
     const defaultCallSettings = this._defaults['searchGrants'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchGrants iterate %j', request);
     return this.descriptors.page.searchGrants.asyncIterate(
       this.innerApiCalls['searchGrants'] as GaxCall,
@@ -3212,7 +3256,7 @@ export class PrivilegedAccessManagerClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

@@ -1,6 +1,13 @@
 # Changelog
 
-## [1.0.0](https://github.com/googleapis/google-cloud-node/compare/products-v0.1.1...products-v1.0.0) (2025-03-12)
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/products-v0.2.0...products-v0.3.0) (2025-03-19)
+
+
+### Features
+
+* [merchantapi] add an update method ([#6163](https://github.com/googleapis/google-cloud-node/issues/6163)) ([99028ab](https://github.com/googleapis/google-cloud-node/commit/99028ab3ca6487acf9df82e4d013ffa40d0aebf6))
+
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/products-v0.1.1...products-v0.2.0) (2025-03-18)
 
 
 ### ⚠ BREAKING CHANGES

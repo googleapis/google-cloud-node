@@ -234,7 +234,9 @@ describe('v1p3beta1.VideoIntelligenceServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.videoIntelligenceServiceStub);
       client.close().then(() => {
         done();
@@ -305,7 +307,7 @@ describe('v1p3beta1.VideoIntelligenceServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.videointelligence.v1p3beta1.AnnotateVideoRequest()
       );
@@ -327,7 +329,7 @@ describe('v1p3beta1.VideoIntelligenceServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.videointelligence.v1p3beta1.AnnotateVideoRequest()
       );
@@ -370,7 +372,7 @@ describe('v1p3beta1.VideoIntelligenceServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.videointelligence.v1p3beta1.AnnotateVideoRequest()
       );
@@ -390,7 +392,7 @@ describe('v1p3beta1.VideoIntelligenceServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.videointelligence.v1p3beta1.AnnotateVideoRequest()
       );
@@ -412,7 +414,7 @@ describe('v1p3beta1.VideoIntelligenceServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -437,7 +439,7 @@ describe('v1p3beta1.VideoIntelligenceServiceClient', () => {
             projectId: 'bogus',
           }
         );
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(

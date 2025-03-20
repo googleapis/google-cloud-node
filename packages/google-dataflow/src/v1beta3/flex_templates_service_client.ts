@@ -460,7 +460,9 @@ export class FlexTemplatesServiceClient {
         project_id: request.projectId ?? '',
         location: request.location ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('launchFlexTemplate request %j', request);
     const wrappedCallback:
       | Callback<

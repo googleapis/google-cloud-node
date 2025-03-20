@@ -676,7 +676,9 @@ export class ConversationsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createConversation request %j', request);
     const wrappedCallback:
       | Callback<
@@ -797,7 +799,9 @@ export class ConversationsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getConversation request %j', request);
     const wrappedCallback:
       | Callback<
@@ -922,7 +926,9 @@ export class ConversationsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('completeConversation request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1055,7 +1061,9 @@ export class ConversationsClient {
       this._gaxModule.routingHeader.fromParams({
         conversation: request.conversation ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('ingestContextReferences request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1198,7 +1206,9 @@ export class ConversationsClient {
       this._gaxModule.routingHeader.fromParams({
         conversation: request.conversation ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('suggestConversationSummary request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1339,7 +1349,9 @@ export class ConversationsClient {
         'stateless_conversation.parent':
           request.statelessConversation!.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('generateStatelessSummary request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1482,7 +1494,9 @@ export class ConversationsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('generateStatelessSuggestion request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1651,7 +1665,9 @@ export class ConversationsClient {
         parent: request.parent ?? '',
         conversation: request.conversation ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchKnowledge request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1781,7 +1797,9 @@ export class ConversationsClient {
       this._gaxModule.routingHeader.fromParams({
         conversation: request.conversation ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('generateSuggestions request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1919,7 +1937,9 @@ export class ConversationsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dialogflow.v2.IListConversationsRequest,
@@ -1995,7 +2015,9 @@ export class ConversationsClient {
       });
     const defaultCallSettings = this._defaults['listConversations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listConversations stream %j', request);
     return this.descriptors.page.listConversations.createStream(
       this.innerApiCalls.listConversations as GaxCall,
@@ -2053,7 +2075,9 @@ export class ConversationsClient {
       });
     const defaultCallSettings = this._defaults['listConversations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listConversations iterate %j', request);
     return this.descriptors.page.listConversations.asyncIterate(
       this.innerApiCalls['listConversations'] as GaxCall,
@@ -2171,7 +2195,9 @@ export class ConversationsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dialogflow.v2.IListMessagesRequest,
@@ -2248,7 +2274,9 @@ export class ConversationsClient {
       });
     const defaultCallSettings = this._defaults['listMessages'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listMessages stream %j', request);
     return this.descriptors.page.listMessages.createStream(
       this.innerApiCalls.listMessages as GaxCall,
@@ -2307,7 +2335,9 @@ export class ConversationsClient {
       });
     const defaultCallSettings = this._defaults['listMessages'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listMessages iterate %j', request);
     return this.descriptors.page.listMessages.asyncIterate(
       this.innerApiCalls['listMessages'] as GaxCall,

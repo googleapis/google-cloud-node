@@ -633,7 +633,9 @@ export class AlphaAnalyticsDataClient {
       this._gaxModule.routingHeader.fromParams({
         property: request.property ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('runFunnelReport request %j', request);
     const wrappedCallback:
       | Callback<
@@ -797,7 +799,9 @@ export class AlphaAnalyticsDataClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('queryAudienceList request %j', request);
     const wrappedCallback:
       | Callback<
@@ -962,7 +966,9 @@ export class AlphaAnalyticsDataClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('sheetExportAudienceList request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1093,7 +1099,9 @@ export class AlphaAnalyticsDataClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAudienceList request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1238,7 +1246,9 @@ export class AlphaAnalyticsDataClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createRecurringAudienceList request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1375,7 +1385,9 @@ export class AlphaAnalyticsDataClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getRecurringAudienceList request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1502,7 +1514,9 @@ export class AlphaAnalyticsDataClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getPropertyQuotasSnapshot request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1652,7 +1666,9 @@ export class AlphaAnalyticsDataClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('queryReportTask request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1774,7 +1790,9 @@ export class AlphaAnalyticsDataClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getReportTask request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1932,7 +1950,9 @@ export class AlphaAnalyticsDataClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2111,7 +2131,9 @@ export class AlphaAnalyticsDataClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2294,7 +2316,9 @@ export class AlphaAnalyticsDataClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.analytics.data.v1alpha.IListAudienceListsRequest,
@@ -2367,7 +2391,9 @@ export class AlphaAnalyticsDataClient {
       });
     const defaultCallSettings = this._defaults['listAudienceLists'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAudienceLists stream %j', request);
     return this.descriptors.page.listAudienceLists.createStream(
       this.innerApiCalls.listAudienceLists as GaxCall,
@@ -2422,7 +2448,9 @@ export class AlphaAnalyticsDataClient {
       });
     const defaultCallSettings = this._defaults['listAudienceLists'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAudienceLists iterate %j', request);
     return this.descriptors.page.listAudienceLists.asyncIterate(
       this.innerApiCalls['listAudienceLists'] as GaxCall,
@@ -2545,7 +2573,9 @@ export class AlphaAnalyticsDataClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.analytics.data.v1alpha.IListRecurringAudienceListsRequest,
@@ -2620,7 +2650,9 @@ export class AlphaAnalyticsDataClient {
       });
     const defaultCallSettings = this._defaults['listRecurringAudienceLists'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRecurringAudienceLists stream %j', request);
     return this.descriptors.page.listRecurringAudienceLists.createStream(
       this.innerApiCalls.listRecurringAudienceLists as GaxCall,
@@ -2677,7 +2709,9 @@ export class AlphaAnalyticsDataClient {
       });
     const defaultCallSettings = this._defaults['listRecurringAudienceLists'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRecurringAudienceLists iterate %j', request);
     return this.descriptors.page.listRecurringAudienceLists.asyncIterate(
       this.innerApiCalls['listRecurringAudienceLists'] as GaxCall,
@@ -2781,7 +2815,9 @@ export class AlphaAnalyticsDataClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.analytics.data.v1alpha.IListReportTasksRequest,
@@ -2848,7 +2884,9 @@ export class AlphaAnalyticsDataClient {
       });
     const defaultCallSettings = this._defaults['listReportTasks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listReportTasks stream %j', request);
     return this.descriptors.page.listReportTasks.createStream(
       this.innerApiCalls.listReportTasks as GaxCall,
@@ -2897,7 +2935,9 @@ export class AlphaAnalyticsDataClient {
       });
     const defaultCallSettings = this._defaults['listReportTasks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listReportTasks iterate %j', request);
     return this.descriptors.page.listReportTasks.asyncIterate(
       this.innerApiCalls['listReportTasks'] as GaxCall,
@@ -2999,7 +3039,7 @@ export class AlphaAnalyticsDataClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

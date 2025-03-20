@@ -531,7 +531,9 @@ export class OrgPolicyClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -651,7 +653,9 @@ export class OrgPolicyClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getEffectivePolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -777,7 +781,9 @@ export class OrgPolicyClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createPolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -899,7 +905,9 @@ export class OrgPolicyClient {
       this._gaxModule.routingHeader.fromParams({
         'policy.name': request.policy!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updatePolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1017,7 +1025,9 @@ export class OrgPolicyClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deletePolicy request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1148,7 +1158,9 @@ export class OrgPolicyClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createCustomConstraint request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1279,7 +1291,9 @@ export class OrgPolicyClient {
       this._gaxModule.routingHeader.fromParams({
         'custom_constraint.name': request.customConstraint!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateCustomConstraint request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1402,7 +1416,9 @@ export class OrgPolicyClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getCustomConstraint request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1531,7 +1547,9 @@ export class OrgPolicyClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteCustomConstraint request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1667,7 +1685,9 @@ export class OrgPolicyClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.orgpolicy.v2.IListConstraintsRequest,
@@ -1741,7 +1761,9 @@ export class OrgPolicyClient {
       });
     const defaultCallSettings = this._defaults['listConstraints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listConstraints stream %j', request);
     return this.descriptors.page.listConstraints.createStream(
       this.innerApiCalls.listConstraints as GaxCall,
@@ -1797,7 +1819,9 @@ export class OrgPolicyClient {
       });
     const defaultCallSettings = this._defaults['listConstraints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listConstraints iterate %j', request);
     return this.descriptors.page.listConstraints.asyncIterate(
       this.innerApiCalls['listConstraints'] as GaxCall,
@@ -1903,7 +1927,9 @@ export class OrgPolicyClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.orgpolicy.v2.IListPoliciesRequest,
@@ -1978,7 +2004,9 @@ export class OrgPolicyClient {
       });
     const defaultCallSettings = this._defaults['listPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listPolicies stream %j', request);
     return this.descriptors.page.listPolicies.createStream(
       this.innerApiCalls.listPolicies as GaxCall,
@@ -2035,7 +2063,9 @@ export class OrgPolicyClient {
       });
     const defaultCallSettings = this._defaults['listPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listPolicies iterate %j', request);
     return this.descriptors.page.listPolicies.asyncIterate(
       this.innerApiCalls['listPolicies'] as GaxCall,
@@ -2145,7 +2175,9 @@ export class OrgPolicyClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.orgpolicy.v2.IListCustomConstraintsRequest,
@@ -2217,7 +2249,9 @@ export class OrgPolicyClient {
       });
     const defaultCallSettings = this._defaults['listCustomConstraints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCustomConstraints stream %j', request);
     return this.descriptors.page.listCustomConstraints.createStream(
       this.innerApiCalls.listCustomConstraints as GaxCall,
@@ -2271,7 +2305,9 @@ export class OrgPolicyClient {
       });
     const defaultCallSettings = this._defaults['listCustomConstraints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCustomConstraints iterate %j', request);
     return this.descriptors.page.listCustomConstraints.asyncIterate(
       this.innerApiCalls['listCustomConstraints'] as GaxCall,

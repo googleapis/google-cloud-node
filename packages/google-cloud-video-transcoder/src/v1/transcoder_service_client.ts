@@ -497,7 +497,9 @@ export class TranscoderServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -608,7 +610,9 @@ export class TranscoderServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -728,7 +732,9 @@ export class TranscoderServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteJob request %j', request);
     const wrappedCallback:
       | Callback<
@@ -859,7 +865,9 @@ export class TranscoderServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createJobTemplate request %j', request);
     const wrappedCallback:
       | Callback<
@@ -986,7 +994,9 @@ export class TranscoderServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getJobTemplate request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1115,7 +1125,9 @@ export class TranscoderServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteJobTemplate request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1249,7 +1261,9 @@ export class TranscoderServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.video.transcoder.v1.IListJobsRequest,
@@ -1321,7 +1335,9 @@ export class TranscoderServiceClient {
       });
     const defaultCallSettings = this._defaults['listJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listJobs stream %j', request);
     return this.descriptors.page.listJobs.createStream(
       this.innerApiCalls.listJobs as GaxCall,
@@ -1375,7 +1391,9 @@ export class TranscoderServiceClient {
       });
     const defaultCallSettings = this._defaults['listJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listJobs iterate %j', request);
     return this.descriptors.page.listJobs.asyncIterate(
       this.innerApiCalls['listJobs'] as GaxCall,
@@ -1485,7 +1503,9 @@ export class TranscoderServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.video.transcoder.v1.IListJobTemplatesRequest,
@@ -1558,7 +1578,9 @@ export class TranscoderServiceClient {
       });
     const defaultCallSettings = this._defaults['listJobTemplates'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listJobTemplates stream %j', request);
     return this.descriptors.page.listJobTemplates.createStream(
       this.innerApiCalls.listJobTemplates as GaxCall,
@@ -1613,7 +1635,9 @@ export class TranscoderServiceClient {
       });
     const defaultCallSettings = this._defaults['listJobTemplates'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listJobTemplates iterate %j', request);
     return this.descriptors.page.listJobTemplates.asyncIterate(
       this.innerApiCalls['listJobTemplates'] as GaxCall,

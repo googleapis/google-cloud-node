@@ -619,7 +619,9 @@ export class FunctionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getFunction request %j', request);
     const wrappedCallback:
       | Callback<
@@ -785,7 +787,9 @@ export class FunctionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('generateUploadUrl request %j', request);
     const wrappedCallback:
       | Callback<
@@ -915,7 +919,9 @@ export class FunctionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('generateDownloadUrl request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1038,7 +1044,9 @@ export class FunctionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRuntimes request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1178,7 +1186,9 @@ export class FunctionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1348,7 +1358,9 @@ export class FunctionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'function.name': request.function!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1517,7 +1529,9 @@ export class FunctionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1697,7 +1711,9 @@ export class FunctionServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.functions.v2beta.IListFunctionsRequest,
@@ -1780,7 +1796,9 @@ export class FunctionServiceClient {
       });
     const defaultCallSettings = this._defaults['listFunctions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listFunctions stream %j', request);
     return this.descriptors.page.listFunctions.createStream(
       this.innerApiCalls.listFunctions as GaxCall,
@@ -1845,7 +1863,9 @@ export class FunctionServiceClient {
       });
     const defaultCallSettings = this._defaults['listFunctions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listFunctions iterate %j', request);
     return this.descriptors.page.listFunctions.asyncIterate(
       this.innerApiCalls['listFunctions'] as GaxCall,
@@ -2163,7 +2183,7 @@ export class FunctionServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

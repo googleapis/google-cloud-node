@@ -788,7 +788,9 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getEvaluation request %j', request);
     const wrappedCallback:
       | Callback<
@@ -927,7 +929,9 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1110,7 +1114,9 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.discoveryengine.v1beta.IListEvaluationsRequest,
@@ -1195,7 +1201,9 @@ export class EvaluationServiceClient {
       });
     const defaultCallSettings = this._defaults['listEvaluations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listEvaluations stream %j', request);
     return this.descriptors.page.listEvaluations.createStream(
       this.innerApiCalls.listEvaluations as GaxCall,
@@ -1262,7 +1270,9 @@ export class EvaluationServiceClient {
       });
     const defaultCallSettings = this._defaults['listEvaluations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listEvaluations iterate %j', request);
     return this.descriptors.page.listEvaluations.asyncIterate(
       this.innerApiCalls['listEvaluations'] as GaxCall,
@@ -1383,7 +1393,9 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         evaluation: request.evaluation ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.discoveryengine.v1beta.IListEvaluationResultsRequest,
@@ -1466,7 +1478,9 @@ export class EvaluationServiceClient {
       });
     const defaultCallSettings = this._defaults['listEvaluationResults'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listEvaluationResults stream %j', request);
     return this.descriptors.page.listEvaluationResults.createStream(
       this.innerApiCalls.listEvaluationResults as GaxCall,
@@ -1531,7 +1545,9 @@ export class EvaluationServiceClient {
       });
     const defaultCallSettings = this._defaults['listEvaluationResults'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listEvaluationResults iterate %j', request);
     return this.descriptors.page.listEvaluationResults.asyncIterate(
       this.innerApiCalls['listEvaluationResults'] as GaxCall,
@@ -1711,7 +1727,7 @@ export class EvaluationServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

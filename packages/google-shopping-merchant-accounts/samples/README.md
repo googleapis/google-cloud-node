@@ -24,6 +24,8 @@
   * [Accounts_service.update_account](#accounts_service.update_account)
   * [Autofeed_settings_service.get_autofeed_settings](#autofeed_settings_service.get_autofeed_settings)
   * [Autofeed_settings_service.update_autofeed_settings](#autofeed_settings_service.update_autofeed_settings)
+  * [Automatic_improvements_service.get_automatic_improvements](#automatic_improvements_service.get_automatic_improvements)
+  * [Automatic_improvements_service.update_automatic_improvements](#automatic_improvements_service.update_automatic_improvements)
   * [Business_identity_service.get_business_identity](#business_identity_service.get_business_identity)
   * [Business_identity_service.update_business_identity](#business_identity_service.update_business_identity)
   * [Business_info_service.get_business_info](#business_info_service.get_business_info)
@@ -271,6 +273,40 @@ __Usage:__
 
 
 `node packages/google-shopping-merchant-accounts/samples/generated/v1beta/autofeed_settings_service.update_autofeed_settings.js`
+
+
+-----
+
+
+
+
+### Automatic_improvements_service.get_automatic_improvements
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1beta/automatic_improvements_service.get_automatic_improvements.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1beta/automatic_improvements_service.get_automatic_improvements.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1beta/automatic_improvements_service.get_automatic_improvements.js`
+
+
+-----
+
+
+
+
+### Automatic_improvements_service.update_automatic_improvements
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1beta/automatic_improvements_service.update_automatic_improvements.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1beta/automatic_improvements_service.update_automatic_improvements.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1beta/automatic_improvements_service.update_automatic_improvements.js`
 
 
 -----

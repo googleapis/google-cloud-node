@@ -621,7 +621,9 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAccount request %j', request);
     const wrappedCallback:
       | Callback<
@@ -749,7 +751,9 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteAccount request %j', request);
     const wrappedCallback:
       | Callback<
@@ -874,7 +878,9 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'account.name': request.account!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateAccount request %j', request);
     const wrappedCallback:
       | Callback<
@@ -998,7 +1004,9 @@ export class AnalyticsAdminServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('provisionAccountTicket request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1119,7 +1127,9 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getProperty request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1233,7 +1243,9 @@ export class AnalyticsAdminServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createProperty request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1364,7 +1376,9 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteProperty request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1490,7 +1504,9 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'property.name': request.property!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateProperty request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1621,7 +1637,9 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createFirebaseLink request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1748,7 +1766,9 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteFirebaseLink request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1875,7 +1895,9 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createGoogleAdsLink request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2005,7 +2027,9 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'google_ads_link.name': request.googleAdsLink!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateGoogleAdsLink request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2130,7 +2154,9 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteGoogleAdsLink request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2259,7 +2285,9 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getDataSharingSettings request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2386,7 +2414,9 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getMeasurementProtocolSecret request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2514,7 +2544,9 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createMeasurementProtocolSecret request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2647,7 +2679,9 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteMeasurementProtocolSecret request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2782,7 +2816,9 @@ export class AnalyticsAdminServiceClient {
         'measurement_protocol_secret.name':
           request.measurementProtocolSecret!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateMeasurementProtocolSecret request %j', request);
     const wrappedCallback:
       | Callback<
@@ -2926,7 +2962,9 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         property: request.property ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('acknowledgeUserDataCollection request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3056,7 +3094,9 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$AnalyticsAdminService-$CreateConversionEvent',
       'CreateConversionEvent is deprecated and may be removed in a future version.',
@@ -3194,7 +3234,9 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'conversion_event.name': request.conversionEvent!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$AnalyticsAdminService-$UpdateConversionEvent',
       'UpdateConversionEvent is deprecated and may be removed in a future version.',
@@ -3328,7 +3370,9 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$AnalyticsAdminService-$GetConversionEvent',
       'GetConversionEvent is deprecated and may be removed in a future version.',
@@ -3462,7 +3506,9 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$AnalyticsAdminService-$DeleteConversionEvent',
       'DeleteConversionEvent is deprecated and may be removed in a future version.',
@@ -3589,7 +3635,9 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createKeyEvent request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3714,7 +3762,9 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'key_event.name': request.keyEvent!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateKeyEvent request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3835,7 +3885,9 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getKeyEvent request %j', request);
     const wrappedCallback:
       | Callback<
@@ -3953,7 +4005,9 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteKeyEvent request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4080,7 +4134,9 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createCustomDimension request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4209,7 +4265,9 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'custom_dimension.name': request.customDimension!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateCustomDimension request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4335,7 +4393,9 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('archiveCustomDimension request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4461,7 +4521,9 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getCustomDimension request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4588,7 +4650,9 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createCustomMetric request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4717,7 +4781,9 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'custom_metric.name': request.customMetric!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateCustomMetric request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4843,7 +4909,9 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('archiveCustomMetric request %j', request);
     const wrappedCallback:
       | Callback<
@@ -4963,7 +5031,9 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getCustomMetric request %j', request);
     const wrappedCallback:
       | Callback<
@@ -5091,7 +5161,9 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getDataRetentionSettings request %j', request);
     const wrappedCallback:
       | Callback<
@@ -5223,7 +5295,9 @@ export class AnalyticsAdminServiceClient {
         'data_retention_settings.name':
           request.dataRetentionSettings!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateDataRetentionSettings request %j', request);
     const wrappedCallback:
       | Callback<
@@ -5344,7 +5418,9 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createDataStream request %j', request);
     const wrappedCallback:
       | Callback<
@@ -5464,7 +5540,9 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteDataStream request %j', request);
     const wrappedCallback:
       | Callback<
@@ -5587,7 +5665,9 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'data_stream.name': request.dataStream!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateDataStream request %j', request);
     const wrappedCallback:
       | Callback<
@@ -5707,7 +5787,9 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getDataStream request %j', request);
     const wrappedCallback:
       | Callback<
@@ -5920,7 +6002,9 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         entity: request.entity ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('runAccessReport request %j', request);
     const wrappedCallback:
       | Callback<
@@ -6055,7 +6139,9 @@ export class AnalyticsAdminServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.analytics.admin.v1beta.IListAccountsRequest,
@@ -6124,7 +6210,9 @@ export class AnalyticsAdminServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listAccounts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAccounts stream %j', request);
     return this.descriptors.page.listAccounts.createStream(
       this.innerApiCalls.listAccounts as GaxCall,
@@ -6175,7 +6263,9 @@ export class AnalyticsAdminServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listAccounts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAccounts iterate %j', request);
     return this.descriptors.page.listAccounts.asyncIterate(
       this.innerApiCalls['listAccounts'] as GaxCall,
@@ -6277,7 +6367,9 @@ export class AnalyticsAdminServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.analytics.admin.v1beta.IListAccountSummariesRequest,
@@ -6342,7 +6434,9 @@ export class AnalyticsAdminServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listAccountSummaries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAccountSummaries stream %j', request);
     return this.descriptors.page.listAccountSummaries.createStream(
       this.innerApiCalls.listAccountSummaries as GaxCall,
@@ -6389,7 +6483,9 @@ export class AnalyticsAdminServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listAccountSummaries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAccountSummaries iterate %j', request);
     return this.descriptors.page.listAccountSummaries.asyncIterate(
       this.innerApiCalls['listAccountSummaries'] as GaxCall,
@@ -6516,7 +6612,9 @@ export class AnalyticsAdminServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.analytics.admin.v1beta.IListPropertiesRequest,
@@ -6602,7 +6700,9 @@ export class AnalyticsAdminServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listProperties'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listProperties stream %j', request);
     return this.descriptors.page.listProperties.createStream(
       this.innerApiCalls.listProperties as GaxCall,
@@ -6670,7 +6770,9 @@ export class AnalyticsAdminServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listProperties'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listProperties iterate %j', request);
     return this.descriptors.page.listProperties.asyncIterate(
       this.innerApiCalls['listProperties'] as GaxCall,
@@ -6781,7 +6883,9 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.analytics.admin.v1beta.IListFirebaseLinksRequest,
@@ -6854,7 +6958,9 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listFirebaseLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listFirebaseLinks stream %j', request);
     return this.descriptors.page.listFirebaseLinks.createStream(
       this.innerApiCalls.listFirebaseLinks as GaxCall,
@@ -6909,7 +7015,9 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listFirebaseLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listFirebaseLinks iterate %j', request);
     return this.descriptors.page.listFirebaseLinks.asyncIterate(
       this.innerApiCalls['listFirebaseLinks'] as GaxCall,
@@ -7017,7 +7125,9 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.analytics.admin.v1beta.IListGoogleAdsLinksRequest,
@@ -7088,7 +7198,9 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listGoogleAdsLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listGoogleAdsLinks stream %j', request);
     return this.descriptors.page.listGoogleAdsLinks.createStream(
       this.innerApiCalls.listGoogleAdsLinks as GaxCall,
@@ -7141,7 +7253,9 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listGoogleAdsLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listGoogleAdsLinks iterate %j', request);
     return this.descriptors.page.listGoogleAdsLinks.asyncIterate(
       this.innerApiCalls['listGoogleAdsLinks'] as GaxCall,
@@ -7251,7 +7365,9 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.analytics.admin.v1beta.IListMeasurementProtocolSecretsRequest,
@@ -7324,7 +7440,9 @@ export class AnalyticsAdminServiceClient {
     const defaultCallSettings =
       this._defaults['listMeasurementProtocolSecrets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listMeasurementProtocolSecrets stream %j', request);
     return this.descriptors.page.listMeasurementProtocolSecrets.createStream(
       this.innerApiCalls.listMeasurementProtocolSecrets as GaxCall,
@@ -7379,7 +7497,9 @@ export class AnalyticsAdminServiceClient {
     const defaultCallSettings =
       this._defaults['listMeasurementProtocolSecrets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listMeasurementProtocolSecrets iterate %j', request);
     return this.descriptors.page.listMeasurementProtocolSecrets.asyncIterate(
       this.innerApiCalls['listMeasurementProtocolSecrets'] as GaxCall,
@@ -7519,7 +7639,9 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         account: request.account ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.analytics.admin.v1beta.ISearchChangeHistoryEventsRequest,
@@ -7618,7 +7740,9 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['searchChangeHistoryEvents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchChangeHistoryEvents stream %j', request);
     return this.descriptors.page.searchChangeHistoryEvents.createStream(
       this.innerApiCalls.searchChangeHistoryEvents as GaxCall,
@@ -7699,7 +7823,9 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['searchChangeHistoryEvents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('searchChangeHistoryEvents iterate %j', request);
     return this.descriptors.page.searchChangeHistoryEvents.asyncIterate(
       this.innerApiCalls['searchChangeHistoryEvents'] as GaxCall,
@@ -7811,7 +7937,9 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$AnalyticsAdminService-$ListConversionEvents',
       'ListConversionEvents is deprecated and may be removed in a future version.',
@@ -7888,7 +8016,9 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listConversionEvents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$AnalyticsAdminService-$ListConversionEvents',
       'ListConversionEvents is deprecated and may be removed in a future version.',
@@ -7947,7 +8077,9 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listConversionEvents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$AnalyticsAdminService-$ListConversionEvents',
       'ListConversionEvents is deprecated and may be removed in a future version.',
@@ -8061,7 +8193,9 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.analytics.admin.v1beta.IListKeyEventsRequest,
@@ -8132,7 +8266,9 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listKeyEvents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listKeyEvents stream %j', request);
     return this.descriptors.page.listKeyEvents.createStream(
       this.innerApiCalls.listKeyEvents as GaxCall,
@@ -8185,7 +8321,9 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listKeyEvents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listKeyEvents iterate %j', request);
     return this.descriptors.page.listKeyEvents.asyncIterate(
       this.innerApiCalls['listKeyEvents'] as GaxCall,
@@ -8293,7 +8431,9 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.analytics.admin.v1beta.IListCustomDimensionsRequest,
@@ -8364,7 +8504,9 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listCustomDimensions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCustomDimensions stream %j', request);
     return this.descriptors.page.listCustomDimensions.createStream(
       this.innerApiCalls.listCustomDimensions as GaxCall,
@@ -8417,7 +8559,9 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listCustomDimensions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCustomDimensions iterate %j', request);
     return this.descriptors.page.listCustomDimensions.asyncIterate(
       this.innerApiCalls['listCustomDimensions'] as GaxCall,
@@ -8525,7 +8669,9 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.analytics.admin.v1beta.IListCustomMetricsRequest,
@@ -8596,7 +8742,9 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listCustomMetrics'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCustomMetrics stream %j', request);
     return this.descriptors.page.listCustomMetrics.createStream(
       this.innerApiCalls.listCustomMetrics as GaxCall,
@@ -8649,7 +8797,9 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listCustomMetrics'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCustomMetrics iterate %j', request);
     return this.descriptors.page.listCustomMetrics.asyncIterate(
       this.innerApiCalls['listCustomMetrics'] as GaxCall,
@@ -8757,7 +8907,9 @@ export class AnalyticsAdminServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.analytics.admin.v1beta.IListDataStreamsRequest,
@@ -8828,7 +8980,9 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listDataStreams'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDataStreams stream %j', request);
     return this.descriptors.page.listDataStreams.createStream(
       this.innerApiCalls.listDataStreams as GaxCall,
@@ -8881,7 +9035,9 @@ export class AnalyticsAdminServiceClient {
       });
     const defaultCallSettings = this._defaults['listDataStreams'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDataStreams iterate %j', request);
     return this.descriptors.page.listDataStreams.asyncIterate(
       this.innerApiCalls['listDataStreams'] as GaxCall,

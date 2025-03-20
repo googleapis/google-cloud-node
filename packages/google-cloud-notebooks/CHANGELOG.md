@@ -1,6 +1,6 @@
 # Changelog
 
-## [4.0.0](https://github.com/googleapis/google-cloud-node/compare/notebooks-v3.4.1...notebooks-v4.0.0) (2025-03-12)
+## [4.0.0](https://github.com/googleapis/google-cloud-node/compare/notebooks-v3.4.1...notebooks-v4.0.0) (2025-03-18)
 
 
 ### ⚠ BREAKING CHANGES

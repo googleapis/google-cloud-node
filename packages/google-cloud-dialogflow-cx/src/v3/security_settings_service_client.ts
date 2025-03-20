@@ -638,7 +638,9 @@ export class SecuritySettingsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createSecuritySettings request %j', request);
     const wrappedCallback:
       | Callback<
@@ -767,7 +769,9 @@ export class SecuritySettingsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getSecuritySettings request %j', request);
     const wrappedCallback:
       | Callback<
@@ -897,7 +901,9 @@ export class SecuritySettingsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'security_settings.name': request.securitySettings!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateSecuritySettings request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1026,7 +1032,9 @@ export class SecuritySettingsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteSecuritySettings request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1155,7 +1163,9 @@ export class SecuritySettingsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dialogflow.cx.v3.IListSecuritySettingsRequest,
@@ -1222,7 +1232,9 @@ export class SecuritySettingsServiceClient {
       });
     const defaultCallSettings = this._defaults['listSecuritySettings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSecuritySettings stream %j', request);
     return this.descriptors.page.listSecuritySettings.createStream(
       this.innerApiCalls.listSecuritySettings as GaxCall,
@@ -1271,7 +1283,9 @@ export class SecuritySettingsServiceClient {
       });
     const defaultCallSettings = this._defaults['listSecuritySettings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSecuritySettings iterate %j', request);
     return this.descriptors.page.listSecuritySettings.asyncIterate(
       this.innerApiCalls['listSecuritySettings'] as GaxCall,
@@ -1451,7 +1465,7 @@ export class SecuritySettingsServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

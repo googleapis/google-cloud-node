@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/compute",
   "description": "Google Compute Engine Client Library for Node.js",
-  "version": "5.0.0",
+  "version": "5.1.0",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {
@@ -125,7 +125,7 @@
     "test": "c8 node build/test/run.js"
   },
   "dependencies": {
-    "google-gax": "^5.0.0-rc.0"
+    "google-gax": "^5.0.1-rc.0"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",

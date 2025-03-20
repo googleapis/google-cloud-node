@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/modelarmor",
-  "version": "0.0.0",
+  "version": "0.1.1",
   "description": "Model Armor API client for Node.js",
   "repository": {
     "type": "git",
@@ -45,7 +45,7 @@
     "prelint": "cd samples; npm link ../; npm i"
   },
   "dependencies": {
-    "google-gax": "^4.0.3"
+    "google-gax": "^5.0.1-rc.0"
   },
   "devDependencies": {
     "@types/mocha": "^9.0.0",

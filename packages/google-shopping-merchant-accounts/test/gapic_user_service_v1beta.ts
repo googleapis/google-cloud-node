@@ -252,7 +252,9 @@ describe('v1beta.UserServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.userServiceStub);
       client.close().then(() => {
         done();
@@ -311,7 +313,7 @@ describe('v1beta.UserServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.GetUserRequest()
       );
@@ -342,7 +344,7 @@ describe('v1beta.UserServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.GetUserRequest()
       );
@@ -389,7 +391,7 @@ describe('v1beta.UserServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.GetUserRequest()
       );
@@ -417,7 +419,7 @@ describe('v1beta.UserServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.GetUserRequest()
       );
@@ -438,7 +440,7 @@ describe('v1beta.UserServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.CreateUserRequest()
       );
@@ -469,7 +471,7 @@ describe('v1beta.UserServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.CreateUserRequest()
       );
@@ -516,7 +518,7 @@ describe('v1beta.UserServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.CreateUserRequest()
       );
@@ -547,7 +549,7 @@ describe('v1beta.UserServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.CreateUserRequest()
       );
@@ -568,7 +570,7 @@ describe('v1beta.UserServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.DeleteUserRequest()
       );
@@ -599,7 +601,7 @@ describe('v1beta.UserServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.DeleteUserRequest()
       );
@@ -646,7 +648,7 @@ describe('v1beta.UserServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.DeleteUserRequest()
       );
@@ -677,7 +679,7 @@ describe('v1beta.UserServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.DeleteUserRequest()
       );
@@ -698,7 +700,7 @@ describe('v1beta.UserServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.UpdateUserRequest()
       );
@@ -730,7 +732,7 @@ describe('v1beta.UserServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.UpdateUserRequest()
       );
@@ -778,7 +780,7 @@ describe('v1beta.UserServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.UpdateUserRequest()
       );
@@ -810,7 +812,7 @@ describe('v1beta.UserServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.UpdateUserRequest()
       );
@@ -832,7 +834,7 @@ describe('v1beta.UserServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.ListUsersRequest()
       );
@@ -871,7 +873,7 @@ describe('v1beta.UserServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.ListUsersRequest()
       );
@@ -928,7 +930,7 @@ describe('v1beta.UserServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.ListUsersRequest()
       );
@@ -956,7 +958,7 @@ describe('v1beta.UserServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.ListUsersRequest()
       );
@@ -1017,7 +1019,7 @@ describe('v1beta.UserServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.ListUsersRequest()
       );
@@ -1069,7 +1071,7 @@ describe('v1beta.UserServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.ListUsersRequest()
       );
@@ -1118,7 +1120,7 @@ describe('v1beta.UserServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.accounts.v1beta.ListUsersRequest()
       );
@@ -1157,7 +1159,7 @@ describe('v1beta.UserServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('account', () => {
+    describe('account', async () => {
       const fakePath = '/rendered/path/account';
       const expectedParameters = {
         account: 'accountValue',
@@ -1166,7 +1168,7 @@ describe('v1beta.UserServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.accountPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1195,7 +1197,7 @@ describe('v1beta.UserServiceClient', () => {
       });
     });
 
-    describe('accountIssue', () => {
+    describe('accountIssue', async () => {
       const fakePath = '/rendered/path/accountIssue';
       const expectedParameters = {
         account: 'accountValue',
@@ -1205,7 +1207,7 @@ describe('v1beta.UserServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.accountIssuePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1244,7 +1246,7 @@ describe('v1beta.UserServiceClient', () => {
       });
     });
 
-    describe('accountTax', () => {
+    describe('accountTax', async () => {
       const fakePath = '/rendered/path/accountTax';
       const expectedParameters = {
         account: 'accountValue',
@@ -1254,7 +1256,7 @@ describe('v1beta.UserServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.accountTaxPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1293,7 +1295,7 @@ describe('v1beta.UserServiceClient', () => {
       });
     });
 
-    describe('autofeedSettings', () => {
+    describe('autofeedSettings', async () => {
       const fakePath = '/rendered/path/autofeedSettings';
       const expectedParameters = {
         account: 'accountValue',
@@ -1302,7 +1304,7 @@ describe('v1beta.UserServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.autofeedSettingsPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1334,7 +1336,52 @@ describe('v1beta.UserServiceClient', () => {
       });
     });
 
-    describe('businessIdentity', () => {
+    describe('automaticImprovements', async () => {
+      const fakePath = '/rendered/path/automaticImprovements';
+      const expectedParameters = {
+        account: 'accountValue',
+      };
+      const client = new userserviceModule.v1beta.UserServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.automaticImprovementsPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.automaticImprovementsPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('automaticImprovementsPath', () => {
+        const result = client.automaticImprovementsPath('accountValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.automaticImprovementsPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchAccountFromAutomaticImprovementsName', () => {
+        const result =
+          client.matchAccountFromAutomaticImprovementsName(fakePath);
+        assert.strictEqual(result, 'accountValue');
+        assert(
+          (
+            client.pathTemplates.automaticImprovementsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('businessIdentity', async () => {
       const fakePath = '/rendered/path/businessIdentity';
       const expectedParameters = {
         account: 'accountValue',
@@ -1343,7 +1390,7 @@ describe('v1beta.UserServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.businessIdentityPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1375,7 +1422,7 @@ describe('v1beta.UserServiceClient', () => {
       });
     });
 
-    describe('businessInfo', () => {
+    describe('businessInfo', async () => {
       const fakePath = '/rendered/path/businessInfo';
       const expectedParameters = {
         account: 'accountValue',
@@ -1384,7 +1431,7 @@ describe('v1beta.UserServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.businessInfoPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1413,7 +1460,7 @@ describe('v1beta.UserServiceClient', () => {
       });
     });
 
-    describe('emailPreferences', () => {
+    describe('emailPreferences', async () => {
       const fakePath = '/rendered/path/emailPreferences';
       const expectedParameters = {
         account: 'accountValue',
@@ -1423,7 +1470,7 @@ describe('v1beta.UserServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.emailPreferencesPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1468,7 +1515,7 @@ describe('v1beta.UserServiceClient', () => {
       });
     });
 
-    describe('homepage', () => {
+    describe('homepage', async () => {
       const fakePath = '/rendered/path/homepage';
       const expectedParameters = {
         account: 'accountValue',
@@ -1477,7 +1524,7 @@ describe('v1beta.UserServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.homepagePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1506,7 +1553,7 @@ describe('v1beta.UserServiceClient', () => {
       });
     });
 
-    describe('onlineReturnPolicy', () => {
+    describe('onlineReturnPolicy', async () => {
       const fakePath = '/rendered/path/onlineReturnPolicy';
       const expectedParameters = {
         account: 'accountValue',
@@ -1516,7 +1563,7 @@ describe('v1beta.UserServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.onlineReturnPolicyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1568,7 +1615,7 @@ describe('v1beta.UserServiceClient', () => {
       });
     });
 
-    describe('program', () => {
+    describe('program', async () => {
       const fakePath = '/rendered/path/program';
       const expectedParameters = {
         account: 'accountValue',
@@ -1578,7 +1625,7 @@ describe('v1beta.UserServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.programPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1617,7 +1664,7 @@ describe('v1beta.UserServiceClient', () => {
       });
     });
 
-    describe('region', () => {
+    describe('region', async () => {
       const fakePath = '/rendered/path/region';
       const expectedParameters = {
         account: 'accountValue',
@@ -1627,7 +1674,7 @@ describe('v1beta.UserServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.regionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1666,7 +1713,7 @@ describe('v1beta.UserServiceClient', () => {
       });
     });
 
-    describe('shippingSettings', () => {
+    describe('shippingSettings', async () => {
       const fakePath = '/rendered/path/shippingSettings';
       const expectedParameters = {
         account: 'accountValue',
@@ -1675,7 +1722,7 @@ describe('v1beta.UserServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.shippingSettingsPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1707,7 +1754,7 @@ describe('v1beta.UserServiceClient', () => {
       });
     });
 
-    describe('termsOfService', () => {
+    describe('termsOfService', async () => {
       const fakePath = '/rendered/path/termsOfService';
       const expectedParameters = {
         version: 'versionValue',
@@ -1716,7 +1763,7 @@ describe('v1beta.UserServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.termsOfServicePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1745,7 +1792,7 @@ describe('v1beta.UserServiceClient', () => {
       });
     });
 
-    describe('termsOfServiceAgreementState', () => {
+    describe('termsOfServiceAgreementState', async () => {
       const fakePath = '/rendered/path/termsOfServiceAgreementState';
       const expectedParameters = {
         account: 'accountValue',
@@ -1755,7 +1802,7 @@ describe('v1beta.UserServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.termsOfServiceAgreementStatePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.termsOfServiceAgreementStatePathTemplate.match =
@@ -1806,7 +1853,7 @@ describe('v1beta.UserServiceClient', () => {
       });
     });
 
-    describe('user', () => {
+    describe('user', async () => {
       const fakePath = '/rendered/path/user';
       const expectedParameters = {
         account: 'accountValue',
@@ -1816,7 +1863,7 @@ describe('v1beta.UserServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.userPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

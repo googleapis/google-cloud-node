@@ -587,7 +587,9 @@ export class WebhooksClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getWebhook request %j', request);
     const wrappedCallback:
       | Callback<
@@ -715,7 +717,9 @@ export class WebhooksClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createWebhook request %j', request);
     const wrappedCallback:
       | Callback<
@@ -843,7 +847,9 @@ export class WebhooksClient {
       this._gaxModule.routingHeader.fromParams({
         'webhook.name': request.webhook!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateWebhook request %j', request);
     const wrappedCallback:
       | Callback<
@@ -981,7 +987,9 @@ export class WebhooksClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteWebhook request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1110,7 +1118,9 @@ export class WebhooksClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dialogflow.cx.v3beta1.IListWebhooksRequest,
@@ -1177,7 +1187,9 @@ export class WebhooksClient {
       });
     const defaultCallSettings = this._defaults['listWebhooks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listWebhooks stream %j', request);
     return this.descriptors.page.listWebhooks.createStream(
       this.innerApiCalls.listWebhooks as GaxCall,
@@ -1226,7 +1238,9 @@ export class WebhooksClient {
       });
     const defaultCallSettings = this._defaults['listWebhooks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listWebhooks iterate %j', request);
     return this.descriptors.page.listWebhooks.asyncIterate(
       this.innerApiCalls['listWebhooks'] as GaxCall,

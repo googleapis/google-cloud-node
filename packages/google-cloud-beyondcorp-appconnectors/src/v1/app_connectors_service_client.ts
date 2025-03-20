@@ -673,7 +673,9 @@ export class AppConnectorsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAppConnector request %j', request);
     const wrappedCallback:
       | Callback<
@@ -831,7 +833,9 @@ export class AppConnectorsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1022,7 +1026,9 @@ export class AppConnectorsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'app_connector.name': request.appConnector!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1207,7 +1213,9 @@ export class AppConnectorsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1394,7 +1402,9 @@ export class AppConnectorsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         app_connector: request.appConnector ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1570,7 +1580,9 @@ export class AppConnectorsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.beyondcorp.appconnectors.v1.IListAppConnectorsRequest,
@@ -1649,7 +1661,9 @@ export class AppConnectorsServiceClient {
       });
     const defaultCallSettings = this._defaults['listAppConnectors'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAppConnectors stream %j', request);
     return this.descriptors.page.listAppConnectors.createStream(
       this.innerApiCalls.listAppConnectors as GaxCall,
@@ -1710,7 +1724,9 @@ export class AppConnectorsServiceClient {
       });
     const defaultCallSettings = this._defaults['listAppConnectors'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAppConnectors iterate %j', request);
     return this.descriptors.page.listAppConnectors.asyncIterate(
       this.innerApiCalls['listAppConnectors'] as GaxCall,
@@ -2028,7 +2044,7 @@ export class AppConnectorsServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

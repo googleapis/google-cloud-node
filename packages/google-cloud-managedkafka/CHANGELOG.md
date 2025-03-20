@@ -1,11 +1,28 @@
 # Changelog
 
-## [1.0.0](https://github.com/googleapis/google-cloud-node/compare/managedkafka-v0.3.1...managedkafka-v1.0.0) (2025-03-12)
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/managedkafka-v0.4.0...managedkafka-v0.5.0) (2025-03-19)
+
+
+### Features
+
+* [managedkafka] add Managed Kafka Connect API ([#6176](https://github.com/googleapis/google-cloud-node/issues/6176)) ([63b6187](https://github.com/googleapis/google-cloud-node/commit/63b6187b833648213cff66adc29bebb6e3beb1e5))
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6186](https://github.com/googleapis/google-cloud-node/issues/6186)) ([dcfc7b4](https://github.com/googleapis/google-cloud-node/commit/dcfc7b492a2ac3fb86b93ae1375bac1c5153d049))
+
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/managedkafka-v0.3.1...managedkafka-v0.4.0) (2025-03-18)
 
 
 ### ⚠ BREAKING CHANGES
 
 * upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Features
+
+* [managedkafka] add request/response debug logging to gapics, update templates to gax 5 and node 18 ([8b6b9bc](https://github.com/googleapis/google-cloud-node/commit/8b6b9bcc04dbf1b5891a55e3bda0db28f6ecde93))
+
 
 ### Miscellaneous Chores
 

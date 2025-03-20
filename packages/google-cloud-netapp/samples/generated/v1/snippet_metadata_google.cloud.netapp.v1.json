@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-netapp",
-        "version": "1.0.0",
+        "version": "0.10.1",
         "language": "TYPESCRIPT",
         "apis": [
             {

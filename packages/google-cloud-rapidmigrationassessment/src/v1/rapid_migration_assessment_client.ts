@@ -628,7 +628,9 @@ export class RapidMigrationAssessmentClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAnnotation request %j', request);
     const wrappedCallback:
       | Callback<
@@ -753,7 +755,9 @@ export class RapidMigrationAssessmentClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getCollector request %j', request);
     const wrappedCallback:
       | Callback<
@@ -892,7 +896,9 @@ export class RapidMigrationAssessmentClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1063,7 +1069,9 @@ export class RapidMigrationAssessmentClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1250,7 +1258,9 @@ export class RapidMigrationAssessmentClient {
       this._gaxModule.routingHeader.fromParams({
         'collector.name': request.collector!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1432,7 +1442,9 @@ export class RapidMigrationAssessmentClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1613,7 +1625,9 @@ export class RapidMigrationAssessmentClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1794,7 +1808,9 @@ export class RapidMigrationAssessmentClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1975,7 +1991,9 @@ export class RapidMigrationAssessmentClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2142,7 +2160,9 @@ export class RapidMigrationAssessmentClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.rapidmigrationassessment.v1.IListCollectorsRequest,
@@ -2212,7 +2232,9 @@ export class RapidMigrationAssessmentClient {
       });
     const defaultCallSettings = this._defaults['listCollectors'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCollectors stream %j', request);
     return this.descriptors.page.listCollectors.createStream(
       this.innerApiCalls.listCollectors as GaxCall,
@@ -2264,7 +2286,9 @@ export class RapidMigrationAssessmentClient {
       });
     const defaultCallSettings = this._defaults['listCollectors'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCollectors iterate %j', request);
     return this.descriptors.page.listCollectors.asyncIterate(
       this.innerApiCalls['listCollectors'] as GaxCall,
@@ -2444,7 +2468,7 @@ export class RapidMigrationAssessmentClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

@@ -187,7 +187,9 @@ describe('v1.SolarClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.solarStub);
       client.close().then(() => {
         done();
@@ -246,7 +248,7 @@ describe('v1.SolarClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.solar.v1.FindClosestBuildingInsightsRequest()
       );
@@ -264,7 +266,7 @@ describe('v1.SolarClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.solar.v1.FindClosestBuildingInsightsRequest()
       );
@@ -297,7 +299,7 @@ describe('v1.SolarClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.solar.v1.FindClosestBuildingInsightsRequest()
       );
@@ -317,7 +319,7 @@ describe('v1.SolarClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.solar.v1.FindClosestBuildingInsightsRequest()
       );
@@ -336,7 +338,7 @@ describe('v1.SolarClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.solar.v1.GetDataLayersRequest()
       );
@@ -353,7 +355,7 @@ describe('v1.SolarClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.solar.v1.GetDataLayersRequest()
       );
@@ -386,7 +388,7 @@ describe('v1.SolarClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.solar.v1.GetDataLayersRequest()
       );
@@ -403,7 +405,7 @@ describe('v1.SolarClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.solar.v1.GetDataLayersRequest()
       );
@@ -419,7 +421,7 @@ describe('v1.SolarClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.solar.v1.GetGeoTiffRequest()
       );
@@ -436,7 +438,7 @@ describe('v1.SolarClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.solar.v1.GetGeoTiffRequest()
       );
@@ -466,7 +468,7 @@ describe('v1.SolarClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.solar.v1.GetGeoTiffRequest()
       );
@@ -483,7 +485,7 @@ describe('v1.SolarClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.maps.solar.v1.GetGeoTiffRequest()
       );

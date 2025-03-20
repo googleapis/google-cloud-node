@@ -266,7 +266,9 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.webSecurityScannerStub);
       client.close().then(() => {
         done();
@@ -329,7 +331,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.CreateScanConfigRequest()
       );
@@ -361,7 +363,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.CreateScanConfigRequest()
       );
@@ -409,7 +411,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.CreateScanConfigRequest()
       );
@@ -441,7 +443,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.CreateScanConfigRequest()
       );
@@ -463,7 +465,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.DeleteScanConfigRequest()
       );
@@ -495,7 +497,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.DeleteScanConfigRequest()
       );
@@ -543,7 +545,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.DeleteScanConfigRequest()
       );
@@ -575,7 +577,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.DeleteScanConfigRequest()
       );
@@ -597,7 +599,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.GetScanConfigRequest()
       );
@@ -629,7 +631,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.GetScanConfigRequest()
       );
@@ -677,7 +679,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.GetScanConfigRequest()
       );
@@ -709,7 +711,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.GetScanConfigRequest()
       );
@@ -731,7 +733,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.UpdateScanConfigRequest()
       );
@@ -764,7 +766,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.UpdateScanConfigRequest()
       );
@@ -813,7 +815,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.UpdateScanConfigRequest()
       );
@@ -846,7 +848,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.UpdateScanConfigRequest()
       );
@@ -869,7 +871,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.StartScanRunRequest()
       );
@@ -901,7 +903,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.StartScanRunRequest()
       );
@@ -949,7 +951,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.StartScanRunRequest()
       );
@@ -981,7 +983,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.StartScanRunRequest()
       );
@@ -1003,7 +1005,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.GetScanRunRequest()
       );
@@ -1035,7 +1037,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.GetScanRunRequest()
       );
@@ -1083,7 +1085,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.GetScanRunRequest()
       );
@@ -1115,7 +1117,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.GetScanRunRequest()
       );
@@ -1137,7 +1139,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.StopScanRunRequest()
       );
@@ -1169,7 +1171,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.StopScanRunRequest()
       );
@@ -1217,7 +1219,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.StopScanRunRequest()
       );
@@ -1249,7 +1251,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.StopScanRunRequest()
       );
@@ -1271,7 +1273,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.GetFindingRequest()
       );
@@ -1303,7 +1305,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.GetFindingRequest()
       );
@@ -1351,7 +1353,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.GetFindingRequest()
       );
@@ -1383,7 +1385,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.GetFindingRequest()
       );
@@ -1405,7 +1407,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListFindingTypeStatsRequest()
       );
@@ -1438,7 +1440,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListFindingTypeStatsRequest()
       );
@@ -1486,7 +1488,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListFindingTypeStatsRequest()
       );
@@ -1518,7 +1520,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListFindingTypeStatsRequest()
       );
@@ -1540,7 +1542,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListScanConfigsRequest()
       );
@@ -1580,7 +1582,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListScanConfigsRequest()
       );
@@ -1638,7 +1640,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListScanConfigsRequest()
       );
@@ -1670,7 +1672,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListScanConfigsRequest()
       );
@@ -1734,7 +1736,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListScanConfigsRequest()
       );
@@ -1787,7 +1789,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListScanConfigsRequest()
       );
@@ -1838,7 +1840,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListScanConfigsRequest()
       );
@@ -1882,7 +1884,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListScanRunsRequest()
       );
@@ -1922,7 +1924,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListScanRunsRequest()
       );
@@ -1980,7 +1982,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListScanRunsRequest()
       );
@@ -2012,7 +2014,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListScanRunsRequest()
       );
@@ -2076,7 +2078,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListScanRunsRequest()
       );
@@ -2131,7 +2133,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListScanRunsRequest()
       );
@@ -2182,7 +2184,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListScanRunsRequest()
       );
@@ -2226,7 +2228,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListCrawledUrlsRequest()
       );
@@ -2266,7 +2268,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListCrawledUrlsRequest()
       );
@@ -2324,7 +2326,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListCrawledUrlsRequest()
       );
@@ -2356,7 +2358,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListCrawledUrlsRequest()
       );
@@ -2420,7 +2422,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListCrawledUrlsRequest()
       );
@@ -2473,7 +2475,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListCrawledUrlsRequest()
       );
@@ -2524,7 +2526,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListCrawledUrlsRequest()
       );
@@ -2568,7 +2570,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListFindingsRequest()
       );
@@ -2608,7 +2610,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListFindingsRequest()
       );
@@ -2666,7 +2668,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListFindingsRequest()
       );
@@ -2698,7 +2700,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListFindingsRequest()
       );
@@ -2762,7 +2764,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListFindingsRequest()
       );
@@ -2817,7 +2819,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListFindingsRequest()
       );
@@ -2868,7 +2870,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListFindingsRequest()
       );
@@ -2906,7 +2908,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('finding', () => {
+    describe('finding', async () => {
       const fakePath = '/rendered/path/finding';
       const expectedParameters = {
         project: 'projectValue',
@@ -2919,7 +2921,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.findingPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -2983,7 +2985,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -2993,7 +2995,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3022,7 +3024,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       });
     });
 
-    describe('scanConfig', () => {
+    describe('scanConfig', async () => {
       const fakePath = '/rendered/path/scanConfig';
       const expectedParameters = {
         project: 'projectValue',
@@ -3033,7 +3035,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.scanConfigPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3072,7 +3074,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       });
     });
 
-    describe('scanRun', () => {
+    describe('scanRun', async () => {
       const fakePath = '/rendered/path/scanRun';
       const expectedParameters = {
         project: 'projectValue',
@@ -3084,7 +3086,7 @@ describe('v1alpha.WebSecurityScannerClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.scanRunPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

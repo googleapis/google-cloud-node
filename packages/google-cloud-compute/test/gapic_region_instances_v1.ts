@@ -202,7 +202,9 @@ describe('v1.RegionInstancesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.regionInstancesStub);
       client.close().then(() => {
         done();
@@ -261,7 +263,7 @@ describe('v1.RegionInstancesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.BulkInsertRegionInstanceRequest()
       );
@@ -297,7 +299,7 @@ describe('v1.RegionInstancesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.BulkInsertRegionInstanceRequest()
       );
@@ -349,7 +351,7 @@ describe('v1.RegionInstancesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.BulkInsertRegionInstanceRequest()
       );
@@ -385,7 +387,7 @@ describe('v1.RegionInstancesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.BulkInsertRegionInstanceRequest()
       );

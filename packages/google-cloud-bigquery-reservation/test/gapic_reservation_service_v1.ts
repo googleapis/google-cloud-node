@@ -257,7 +257,9 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.reservationServiceStub);
       client.close().then(() => {
         done();
@@ -316,7 +318,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.CreateReservationRequest()
       );
@@ -347,7 +349,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.CreateReservationRequest()
       );
@@ -394,7 +396,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.CreateReservationRequest()
       );
@@ -425,7 +427,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.CreateReservationRequest()
       );
@@ -446,7 +448,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.GetReservationRequest()
       );
@@ -477,7 +479,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.GetReservationRequest()
       );
@@ -524,7 +526,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.GetReservationRequest()
       );
@@ -555,7 +557,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.GetReservationRequest()
       );
@@ -576,7 +578,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.DeleteReservationRequest()
       );
@@ -607,7 +609,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.DeleteReservationRequest()
       );
@@ -654,7 +656,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.DeleteReservationRequest()
       );
@@ -685,7 +687,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.DeleteReservationRequest()
       );
@@ -706,7 +708,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.UpdateReservationRequest()
       );
@@ -738,7 +740,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.UpdateReservationRequest()
       );
@@ -786,7 +788,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.UpdateReservationRequest()
       );
@@ -818,7 +820,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.UpdateReservationRequest()
       );
@@ -840,7 +842,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.FailoverReservationRequest()
       );
@@ -872,7 +874,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.FailoverReservationRequest()
       );
@@ -919,7 +921,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.FailoverReservationRequest()
       );
@@ -950,7 +952,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.FailoverReservationRequest()
       );
@@ -971,7 +973,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.CreateCapacityCommitmentRequest()
       );
@@ -1003,7 +1005,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.CreateCapacityCommitmentRequest()
       );
@@ -1050,7 +1052,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.CreateCapacityCommitmentRequest()
       );
@@ -1084,7 +1086,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.CreateCapacityCommitmentRequest()
       );
@@ -1108,7 +1110,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.GetCapacityCommitmentRequest()
       );
@@ -1140,7 +1142,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.GetCapacityCommitmentRequest()
       );
@@ -1187,7 +1189,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.GetCapacityCommitmentRequest()
       );
@@ -1221,7 +1223,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.GetCapacityCommitmentRequest()
       );
@@ -1245,7 +1247,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.DeleteCapacityCommitmentRequest()
       );
@@ -1277,7 +1279,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.DeleteCapacityCommitmentRequest()
       );
@@ -1324,7 +1326,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.DeleteCapacityCommitmentRequest()
       );
@@ -1358,7 +1360,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.DeleteCapacityCommitmentRequest()
       );
@@ -1382,7 +1384,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.UpdateCapacityCommitmentRequest()
       );
@@ -1415,7 +1417,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.UpdateCapacityCommitmentRequest()
       );
@@ -1463,7 +1465,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.UpdateCapacityCommitmentRequest()
       );
@@ -1498,7 +1500,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.UpdateCapacityCommitmentRequest()
       );
@@ -1523,7 +1525,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.SplitCapacityCommitmentRequest()
       );
@@ -1555,7 +1557,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.SplitCapacityCommitmentRequest()
       );
@@ -1602,7 +1604,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.SplitCapacityCommitmentRequest()
       );
@@ -1636,7 +1638,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.SplitCapacityCommitmentRequest()
       );
@@ -1660,7 +1662,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.MergeCapacityCommitmentsRequest()
       );
@@ -1692,7 +1694,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.MergeCapacityCommitmentsRequest()
       );
@@ -1739,7 +1741,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.MergeCapacityCommitmentsRequest()
       );
@@ -1773,7 +1775,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.MergeCapacityCommitmentsRequest()
       );
@@ -1797,7 +1799,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.CreateAssignmentRequest()
       );
@@ -1828,7 +1830,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.CreateAssignmentRequest()
       );
@@ -1875,7 +1877,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.CreateAssignmentRequest()
       );
@@ -1906,7 +1908,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.CreateAssignmentRequest()
       );
@@ -1927,7 +1929,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.DeleteAssignmentRequest()
       );
@@ -1958,7 +1960,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.DeleteAssignmentRequest()
       );
@@ -2005,7 +2007,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.DeleteAssignmentRequest()
       );
@@ -2036,7 +2038,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.DeleteAssignmentRequest()
       );
@@ -2057,7 +2059,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.MoveAssignmentRequest()
       );
@@ -2088,7 +2090,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.MoveAssignmentRequest()
       );
@@ -2135,7 +2137,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.MoveAssignmentRequest()
       );
@@ -2166,7 +2168,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.MoveAssignmentRequest()
       );
@@ -2187,7 +2189,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest()
       );
@@ -2219,7 +2221,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest()
       );
@@ -2267,7 +2269,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest()
       );
@@ -2299,7 +2301,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest()
       );
@@ -2321,7 +2323,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.GetBiReservationRequest()
       );
@@ -2352,7 +2354,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.GetBiReservationRequest()
       );
@@ -2399,7 +2401,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.GetBiReservationRequest()
       );
@@ -2430,7 +2432,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.GetBiReservationRequest()
       );
@@ -2451,7 +2453,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.UpdateBiReservationRequest()
       );
@@ -2484,7 +2486,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.UpdateBiReservationRequest()
       );
@@ -2532,7 +2534,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.UpdateBiReservationRequest()
       );
@@ -2564,7 +2566,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.UpdateBiReservationRequest()
       );
@@ -2586,7 +2588,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.ListReservationsRequest()
       );
@@ -2625,7 +2627,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.ListReservationsRequest()
       );
@@ -2682,7 +2684,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.ListReservationsRequest()
       );
@@ -2713,7 +2715,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.ListReservationsRequest()
       );
@@ -2776,7 +2778,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.ListReservationsRequest()
       );
@@ -2828,7 +2830,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.ListReservationsRequest()
       );
@@ -2878,7 +2880,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.ListReservationsRequest()
       );
@@ -2921,7 +2923,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.ListCapacityCommitmentsRequest()
       );
@@ -2961,7 +2963,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.ListCapacityCommitmentsRequest()
       );
@@ -3018,7 +3020,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.ListCapacityCommitmentsRequest()
       );
@@ -3052,7 +3054,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.ListCapacityCommitmentsRequest()
       );
@@ -3121,7 +3123,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.ListCapacityCommitmentsRequest()
       );
@@ -3179,7 +3181,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.ListCapacityCommitmentsRequest()
       );
@@ -3233,7 +3235,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.ListCapacityCommitmentsRequest()
       );
@@ -3280,7 +3282,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.ListAssignmentsRequest()
       );
@@ -3319,7 +3321,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.ListAssignmentsRequest()
       );
@@ -3376,7 +3378,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.ListAssignmentsRequest()
       );
@@ -3407,7 +3409,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.ListAssignmentsRequest()
       );
@@ -3470,7 +3472,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.ListAssignmentsRequest()
       );
@@ -3522,7 +3524,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.ListAssignmentsRequest()
       );
@@ -3572,7 +3574,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.ListAssignmentsRequest()
       );
@@ -3616,7 +3618,7 @@ describe('v1.ReservationServiceClient', () => {
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest()
       );
@@ -3657,7 +3659,7 @@ describe('v1.ReservationServiceClient', () => {
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest()
       );
@@ -3716,7 +3718,7 @@ describe('v1.ReservationServiceClient', () => {
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest()
       );
@@ -3749,7 +3751,7 @@ describe('v1.ReservationServiceClient', () => {
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest()
       );
@@ -3814,7 +3816,7 @@ describe('v1.ReservationServiceClient', () => {
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest()
       );
@@ -3868,7 +3870,7 @@ describe('v1.ReservationServiceClient', () => {
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest()
       );
@@ -3920,7 +3922,7 @@ describe('v1.ReservationServiceClient', () => {
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest()
       );
@@ -3964,7 +3966,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest()
       );
@@ -4004,7 +4006,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest()
       );
@@ -4061,7 +4063,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest()
       );
@@ -4092,7 +4094,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest()
       );
@@ -4155,7 +4157,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest()
       );
@@ -4207,7 +4209,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest()
       );
@@ -4257,7 +4259,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest()
       );
@@ -4295,7 +4297,7 @@ describe('v1.ReservationServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('assignment', () => {
+    describe('assignment', async () => {
       const fakePath = '/rendered/path/assignment';
       const expectedParameters = {
         project: 'projectValue',
@@ -4307,7 +4309,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.assignmentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4371,7 +4373,7 @@ describe('v1.ReservationServiceClient', () => {
       });
     });
 
-    describe('biReservation', () => {
+    describe('biReservation', async () => {
       const fakePath = '/rendered/path/biReservation';
       const expectedParameters = {
         project: 'projectValue',
@@ -4381,7 +4383,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.biReservationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4423,7 +4425,7 @@ describe('v1.ReservationServiceClient', () => {
       });
     });
 
-    describe('capacityCommitment', () => {
+    describe('capacityCommitment', async () => {
       const fakePath = '/rendered/path/capacityCommitment';
       const expectedParameters = {
         project: 'projectValue',
@@ -4434,7 +4436,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.capacityCommitmentPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4500,7 +4502,7 @@ describe('v1.ReservationServiceClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -4510,7 +4512,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4549,7 +4551,7 @@ describe('v1.ReservationServiceClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -4558,7 +4560,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4587,7 +4589,7 @@ describe('v1.ReservationServiceClient', () => {
       });
     });
 
-    describe('reservation', () => {
+    describe('reservation', async () => {
       const fakePath = '/rendered/path/reservation';
       const expectedParameters = {
         project: 'projectValue',
@@ -4598,7 +4600,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.reservationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

@@ -1,6 +1,6 @@
 # Changelog
 
-## [7.0.0](https://github.com/googleapis/google-cloud-node/compare/recommender-v6.4.0...recommender-v7.0.0) (2025-03-12)
+## [7.0.0](https://github.com/googleapis/google-cloud-node/compare/recommender-v6.4.0...recommender-v7.0.0) (2025-03-18)
 
 
 ### ⚠ BREAKING CHANGES

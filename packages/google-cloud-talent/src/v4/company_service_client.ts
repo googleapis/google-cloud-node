@@ -482,7 +482,9 @@ export class CompanyServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createCompany request %j', request);
     const wrappedCallback:
       | Callback<
@@ -594,7 +596,9 @@ export class CompanyServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getCompany request %j', request);
     const wrappedCallback:
       | Callback<
@@ -714,7 +718,9 @@ export class CompanyServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'company.name': request.company!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateCompany request %j', request);
     const wrappedCallback:
       | Callback<
@@ -829,7 +835,9 @@ export class CompanyServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteCompany request %j', request);
     const wrappedCallback:
       | Callback<
@@ -959,7 +967,9 @@ export class CompanyServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.talent.v4.IListCompaniesRequest,
@@ -1036,7 +1046,9 @@ export class CompanyServiceClient {
       });
     const defaultCallSettings = this._defaults['listCompanies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCompanies stream %j', request);
     return this.descriptors.page.listCompanies.createStream(
       this.innerApiCalls.listCompanies as GaxCall,
@@ -1095,7 +1107,9 @@ export class CompanyServiceClient {
       });
     const defaultCallSettings = this._defaults['listCompanies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listCompanies iterate %j', request);
     return this.descriptors.page.listCompanies.asyncIterate(
       this.innerApiCalls['listCompanies'] as GaxCall,

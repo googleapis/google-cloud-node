@@ -491,7 +491,9 @@ export class DataSourcesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getDataSource request %j', request);
     const wrappedCallback:
       | Callback<
@@ -619,7 +621,9 @@ export class DataSourcesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createDataSource request %j', request);
     const wrappedCallback:
       | Callback<
@@ -753,7 +757,9 @@ export class DataSourcesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'data_source.name': request.dataSource!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateDataSource request %j', request);
     const wrappedCallback:
       | Callback<
@@ -879,7 +885,9 @@ export class DataSourcesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteDataSource request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1009,7 +1017,9 @@ export class DataSourcesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('fetchDataSource request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1144,7 +1154,9 @@ export class DataSourcesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.shopping.merchant.datasources.v1beta.IListDataSourcesRequest,
@@ -1217,7 +1229,9 @@ export class DataSourcesServiceClient {
       });
     const defaultCallSettings = this._defaults['listDataSources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDataSources stream %j', request);
     return this.descriptors.page.listDataSources.createStream(
       this.innerApiCalls.listDataSources as GaxCall,
@@ -1272,7 +1286,9 @@ export class DataSourcesServiceClient {
       });
     const defaultCallSettings = this._defaults['listDataSources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDataSources iterate %j', request);
     return this.descriptors.page.listDataSources.asyncIterate(
       this.innerApiCalls['listDataSources'] as GaxCall,

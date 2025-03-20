@@ -250,7 +250,9 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.recommenderStub);
       client.close().then(() => {
         done();
@@ -309,7 +311,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.GetInsightRequest()
       );
@@ -340,7 +342,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.GetInsightRequest()
       );
@@ -387,7 +389,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.GetInsightRequest()
       );
@@ -418,7 +420,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.GetInsightRequest()
       );
@@ -439,7 +441,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.MarkInsightAcceptedRequest()
       );
@@ -471,7 +473,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.MarkInsightAcceptedRequest()
       );
@@ -518,7 +520,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.MarkInsightAcceptedRequest()
       );
@@ -549,7 +551,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.MarkInsightAcceptedRequest()
       );
@@ -570,7 +572,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.GetRecommendationRequest()
       );
@@ -601,7 +603,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.GetRecommendationRequest()
       );
@@ -648,7 +650,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.GetRecommendationRequest()
       );
@@ -679,7 +681,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.GetRecommendationRequest()
       );
@@ -700,7 +702,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.MarkRecommendationDismissedRequest()
       );
@@ -732,7 +734,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.MarkRecommendationDismissedRequest()
       );
@@ -779,7 +781,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.MarkRecommendationDismissedRequest()
       );
@@ -813,7 +815,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.MarkRecommendationDismissedRequest()
       );
@@ -837,7 +839,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.MarkRecommendationClaimedRequest()
       );
@@ -869,7 +871,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.MarkRecommendationClaimedRequest()
       );
@@ -916,7 +918,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.MarkRecommendationClaimedRequest()
       );
@@ -950,7 +952,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.MarkRecommendationClaimedRequest()
       );
@@ -974,7 +976,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.MarkRecommendationSucceededRequest()
       );
@@ -1006,7 +1008,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.MarkRecommendationSucceededRequest()
       );
@@ -1053,7 +1055,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.MarkRecommendationSucceededRequest()
       );
@@ -1087,7 +1089,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.MarkRecommendationSucceededRequest()
       );
@@ -1111,7 +1113,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.MarkRecommendationFailedRequest()
       );
@@ -1143,7 +1145,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.MarkRecommendationFailedRequest()
       );
@@ -1190,7 +1192,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.MarkRecommendationFailedRequest()
       );
@@ -1224,7 +1226,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.MarkRecommendationFailedRequest()
       );
@@ -1248,7 +1250,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.GetRecommenderConfigRequest()
       );
@@ -1280,7 +1282,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.GetRecommenderConfigRequest()
       );
@@ -1327,7 +1329,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.GetRecommenderConfigRequest()
       );
@@ -1358,7 +1360,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.GetRecommenderConfigRequest()
       );
@@ -1379,7 +1381,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.UpdateRecommenderConfigRequest()
       );
@@ -1412,7 +1414,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.UpdateRecommenderConfigRequest()
       );
@@ -1460,7 +1462,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.UpdateRecommenderConfigRequest()
       );
@@ -1495,7 +1497,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.UpdateRecommenderConfigRequest()
       );
@@ -1520,7 +1522,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.GetInsightTypeConfigRequest()
       );
@@ -1552,7 +1554,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.GetInsightTypeConfigRequest()
       );
@@ -1599,7 +1601,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.GetInsightTypeConfigRequest()
       );
@@ -1630,7 +1632,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.GetInsightTypeConfigRequest()
       );
@@ -1651,7 +1653,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.UpdateInsightTypeConfigRequest()
       );
@@ -1684,7 +1686,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.UpdateInsightTypeConfigRequest()
       );
@@ -1732,7 +1734,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.UpdateInsightTypeConfigRequest()
       );
@@ -1767,7 +1769,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.UpdateInsightTypeConfigRequest()
       );
@@ -1792,7 +1794,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.ListInsightsRequest()
       );
@@ -1825,7 +1827,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.ListInsightsRequest()
       );
@@ -1874,7 +1876,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.ListInsightsRequest()
       );
@@ -1905,7 +1907,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.ListInsightsRequest()
       );
@@ -1959,7 +1961,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.ListInsightsRequest()
       );
@@ -2010,7 +2012,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.ListInsightsRequest()
       );
@@ -2053,7 +2055,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.ListInsightsRequest()
       );
@@ -2095,7 +2097,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.ListRecommendationsRequest()
       );
@@ -2135,7 +2137,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.ListRecommendationsRequest()
       );
@@ -2190,7 +2192,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.ListRecommendationsRequest()
       );
@@ -2221,7 +2223,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.ListRecommendationsRequest()
       );
@@ -2282,7 +2284,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.ListRecommendationsRequest()
       );
@@ -2332,7 +2334,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.ListRecommendationsRequest()
       );
@@ -2382,7 +2384,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.recommender.v1.ListRecommendationsRequest()
       );
@@ -2420,7 +2422,7 @@ describe('v1.RecommenderClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('billingAccountLocationInsightType', () => {
+    describe('billingAccountLocationInsightType', async () => {
       const fakePath = '/rendered/path/billingAccountLocationInsightType';
       const expectedParameters = {
         billing_account: 'billingAccountValue',
@@ -2431,7 +2433,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.billingAccountLocationInsightTypePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.billingAccountLocationInsightTypePathTemplate.match =
@@ -2503,7 +2505,7 @@ describe('v1.RecommenderClient', () => {
       });
     });
 
-    describe('billingAccountLocationInsightTypeConfig', () => {
+    describe('billingAccountLocationInsightTypeConfig', async () => {
       const fakePath = '/rendered/path/billingAccountLocationInsightTypeConfig';
       const expectedParameters = {
         billing_account: 'billingAccountValue',
@@ -2514,7 +2516,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.billingAccountLocationInsightTypeConfigPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.billingAccountLocationInsightTypeConfigPathTemplate.match =
@@ -2590,7 +2592,7 @@ describe('v1.RecommenderClient', () => {
       });
     });
 
-    describe('billingAccountLocationInsightTypeInsight', () => {
+    describe('billingAccountLocationInsightTypeInsight', async () => {
       const fakePath =
         '/rendered/path/billingAccountLocationInsightTypeInsight';
       const expectedParameters = {
@@ -2603,7 +2605,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.billingAccountLocationInsightTypeInsightPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.billingAccountLocationInsightTypeInsightPathTemplate.match =
@@ -2697,7 +2699,7 @@ describe('v1.RecommenderClient', () => {
       });
     });
 
-    describe('billingAccountLocationRecommender', () => {
+    describe('billingAccountLocationRecommender', async () => {
       const fakePath = '/rendered/path/billingAccountLocationRecommender';
       const expectedParameters = {
         billing_account: 'billingAccountValue',
@@ -2708,7 +2710,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.billingAccountLocationRecommenderPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.billingAccountLocationRecommenderPathTemplate.match =
@@ -2780,7 +2782,7 @@ describe('v1.RecommenderClient', () => {
       });
     });
 
-    describe('billingAccountLocationRecommenderConfig', () => {
+    describe('billingAccountLocationRecommenderConfig', async () => {
       const fakePath = '/rendered/path/billingAccountLocationRecommenderConfig';
       const expectedParameters = {
         billing_account: 'billingAccountValue',
@@ -2791,7 +2793,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.billingAccountLocationRecommenderConfigPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.billingAccountLocationRecommenderConfigPathTemplate.match =
@@ -2867,7 +2869,7 @@ describe('v1.RecommenderClient', () => {
       });
     });
 
-    describe('billingAccountLocationRecommenderRecommendation', () => {
+    describe('billingAccountLocationRecommenderRecommendation', async () => {
       const fakePath =
         '/rendered/path/billingAccountLocationRecommenderRecommendation';
       const expectedParameters = {
@@ -2880,7 +2882,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.billingAccountLocationRecommenderRecommendationPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.billingAccountLocationRecommenderRecommendationPathTemplate.match =
@@ -2975,7 +2977,7 @@ describe('v1.RecommenderClient', () => {
       });
     });
 
-    describe('folderLocationInsightType', () => {
+    describe('folderLocationInsightType', async () => {
       const fakePath = '/rendered/path/folderLocationInsightType';
       const expectedParameters = {
         folder: 'folderValue',
@@ -2986,7 +2988,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderLocationInsightTypePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3054,7 +3056,7 @@ describe('v1.RecommenderClient', () => {
       });
     });
 
-    describe('folderLocationInsightTypeInsight', () => {
+    describe('folderLocationInsightTypeInsight', async () => {
       const fakePath = '/rendered/path/folderLocationInsightTypeInsight';
       const expectedParameters = {
         folder: 'folderValue',
@@ -3066,7 +3068,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderLocationInsightTypeInsightPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.folderLocationInsightTypeInsightPathTemplate.match =
@@ -3151,7 +3153,7 @@ describe('v1.RecommenderClient', () => {
       });
     });
 
-    describe('folderLocationRecommender', () => {
+    describe('folderLocationRecommender', async () => {
       const fakePath = '/rendered/path/folderLocationRecommender';
       const expectedParameters = {
         folder: 'folderValue',
@@ -3162,7 +3164,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderLocationRecommenderPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3230,7 +3232,7 @@ describe('v1.RecommenderClient', () => {
       });
     });
 
-    describe('folderLocationRecommenderRecommendation', () => {
+    describe('folderLocationRecommenderRecommendation', async () => {
       const fakePath = '/rendered/path/folderLocationRecommenderRecommendation';
       const expectedParameters = {
         folder: 'folderValue',
@@ -3242,7 +3244,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.folderLocationRecommenderRecommendationPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.folderLocationRecommenderRecommendationPathTemplate.match =
@@ -3336,7 +3338,7 @@ describe('v1.RecommenderClient', () => {
       });
     });
 
-    describe('organizationLocationInsightType', () => {
+    describe('organizationLocationInsightType', async () => {
       const fakePath = '/rendered/path/organizationLocationInsightType';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -3347,7 +3349,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationLocationInsightTypePathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationLocationInsightTypePathTemplate.match =
@@ -3417,7 +3419,7 @@ describe('v1.RecommenderClient', () => {
       });
     });
 
-    describe('organizationLocationInsightTypeConfig', () => {
+    describe('organizationLocationInsightTypeConfig', async () => {
       const fakePath = '/rendered/path/organizationLocationInsightTypeConfig';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -3428,7 +3430,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationLocationInsightTypeConfigPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationLocationInsightTypeConfigPathTemplate.match =
@@ -3504,7 +3506,7 @@ describe('v1.RecommenderClient', () => {
       });
     });
 
-    describe('organizationLocationInsightTypeInsight', () => {
+    describe('organizationLocationInsightTypeInsight', async () => {
       const fakePath = '/rendered/path/organizationLocationInsightTypeInsight';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -3516,7 +3518,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationLocationInsightTypeInsightPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationLocationInsightTypeInsightPathTemplate.match =
@@ -3610,7 +3612,7 @@ describe('v1.RecommenderClient', () => {
       });
     });
 
-    describe('organizationLocationRecommender', () => {
+    describe('organizationLocationRecommender', async () => {
       const fakePath = '/rendered/path/organizationLocationRecommender';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -3621,7 +3623,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationLocationRecommenderPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationLocationRecommenderPathTemplate.match =
@@ -3691,7 +3693,7 @@ describe('v1.RecommenderClient', () => {
       });
     });
 
-    describe('organizationLocationRecommenderConfig', () => {
+    describe('organizationLocationRecommenderConfig', async () => {
       const fakePath = '/rendered/path/organizationLocationRecommenderConfig';
       const expectedParameters = {
         organization: 'organizationValue',
@@ -3702,7 +3704,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationLocationRecommenderConfigPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationLocationRecommenderConfigPathTemplate.match =
@@ -3778,7 +3780,7 @@ describe('v1.RecommenderClient', () => {
       });
     });
 
-    describe('organizationLocationRecommenderRecommendation', () => {
+    describe('organizationLocationRecommenderRecommendation', async () => {
       const fakePath =
         '/rendered/path/organizationLocationRecommenderRecommendation';
       const expectedParameters = {
@@ -3791,7 +3793,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.organizationLocationRecommenderRecommendationPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.organizationLocationRecommenderRecommendationPathTemplate.match =
@@ -3885,7 +3887,7 @@ describe('v1.RecommenderClient', () => {
       });
     });
 
-    describe('projectLocationInsightType', () => {
+    describe('projectLocationInsightType', async () => {
       const fakePath = '/rendered/path/projectLocationInsightType';
       const expectedParameters = {
         project: 'projectValue',
@@ -3896,7 +3898,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationInsightTypePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3964,7 +3966,7 @@ describe('v1.RecommenderClient', () => {
       });
     });
 
-    describe('projectLocationInsightTypeConfig', () => {
+    describe('projectLocationInsightTypeConfig', async () => {
       const fakePath = '/rendered/path/projectLocationInsightTypeConfig';
       const expectedParameters = {
         project: 'projectValue',
@@ -3975,7 +3977,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationInsightTypeConfigPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationInsightTypeConfigPathTemplate.match =
@@ -4045,7 +4047,7 @@ describe('v1.RecommenderClient', () => {
       });
     });
 
-    describe('projectLocationInsightTypeInsight', () => {
+    describe('projectLocationInsightTypeInsight', async () => {
       const fakePath = '/rendered/path/projectLocationInsightTypeInsight';
       const expectedParameters = {
         project: 'projectValue',
@@ -4057,7 +4059,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationInsightTypeInsightPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationInsightTypeInsightPathTemplate.match =
@@ -4146,7 +4148,7 @@ describe('v1.RecommenderClient', () => {
       });
     });
 
-    describe('projectLocationRecommender', () => {
+    describe('projectLocationRecommender', async () => {
       const fakePath = '/rendered/path/projectLocationRecommender';
       const expectedParameters = {
         project: 'projectValue',
@@ -4157,7 +4159,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationRecommenderPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -4225,7 +4227,7 @@ describe('v1.RecommenderClient', () => {
       });
     });
 
-    describe('projectLocationRecommenderConfig', () => {
+    describe('projectLocationRecommenderConfig', async () => {
       const fakePath = '/rendered/path/projectLocationRecommenderConfig';
       const expectedParameters = {
         project: 'projectValue',
@@ -4236,7 +4238,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationRecommenderConfigPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationRecommenderConfigPathTemplate.match =
@@ -4306,7 +4308,7 @@ describe('v1.RecommenderClient', () => {
       });
     });
 
-    describe('projectLocationRecommenderRecommendation', () => {
+    describe('projectLocationRecommenderRecommendation', async () => {
       const fakePath =
         '/rendered/path/projectLocationRecommenderRecommendation';
       const expectedParameters = {
@@ -4319,7 +4321,7 @@ describe('v1.RecommenderClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectLocationRecommenderRecommendationPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.projectLocationRecommenderRecommendationPathTemplate.match =

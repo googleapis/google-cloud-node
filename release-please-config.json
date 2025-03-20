@@ -205,5 +205,6 @@
       "type": "sentence-case"
     }
   ],
+  "bump-minor-pre-major": true,
   "release-type": "node"
 }

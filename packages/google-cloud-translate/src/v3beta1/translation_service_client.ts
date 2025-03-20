@@ -650,7 +650,9 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('translateText request %j', request);
     const wrappedCallback:
       | Callback<
@@ -809,7 +811,9 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('detectLanguage request %j', request);
     const wrappedCallback:
       | Callback<
@@ -964,7 +968,9 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getSupportedLanguages request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1161,7 +1167,9 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('translateDocument request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1281,7 +1289,9 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getGlossary request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1468,7 +1478,9 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1706,7 +1718,9 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1876,7 +1890,9 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2045,7 +2061,9 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2229,7 +2247,9 @@ export class TranslationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.translation.v3beta1.IListGlossariesRequest,
@@ -2315,7 +2335,9 @@ export class TranslationServiceClient {
       });
     const defaultCallSettings = this._defaults['listGlossaries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listGlossaries stream %j', request);
     return this.descriptors.page.listGlossaries.createStream(
       this.innerApiCalls.listGlossaries as GaxCall,
@@ -2383,7 +2405,9 @@ export class TranslationServiceClient {
       });
     const defaultCallSettings = this._defaults['listGlossaries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listGlossaries iterate %j', request);
     return this.descriptors.page.listGlossaries.asyncIterate(
       this.innerApiCalls['listGlossaries'] as GaxCall,

@@ -484,7 +484,9 @@ export class ExecutionsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('createExecution request %j', request);
     const wrappedCallback:
       | Callback<
@@ -614,7 +616,9 @@ export class ExecutionsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('getExecution request %j', request);
     const wrappedCallback:
       | Callback<
@@ -741,7 +745,9 @@ export class ExecutionsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('cancelExecution request %j', request);
     const wrappedCallback:
       | Callback<
@@ -896,7 +902,9 @@ export class ExecutionsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch((err) => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.workflows.executions.v1.IListExecutionsRequest,
@@ -986,7 +994,9 @@ export class ExecutionsClient {
       });
     const defaultCallSettings = this._defaults['listExecutions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listExecutions stream %j', request);
     return this.descriptors.page.listExecutions.createStream(
       this.innerApiCalls.listExecutions as GaxCall,
@@ -1058,7 +1068,9 @@ export class ExecutionsClient {
       });
     const defaultCallSettings = this._defaults['listExecutions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listExecutions iterate %j', request);
     return this.descriptors.page.listExecutions.asyncIterate(
       this.innerApiCalls['listExecutions'] as GaxCall,

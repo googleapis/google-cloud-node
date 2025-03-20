@@ -218,6 +218,9 @@ export class AccountTaxServiceClient {
       autofeedSettingsPathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}/autofeedSettings'
       ),
+      automaticImprovementsPathTemplate: new this._gaxModule.PathTemplate(
+        'accounts/{account}/automaticImprovements'
+      ),
       businessIdentityPathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}/businessIdentity'
       ),
@@ -526,7 +529,9 @@ export class AccountTaxServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAccountTax request %j', request);
     const wrappedCallback:
       | Callback<
@@ -653,7 +658,9 @@ export class AccountTaxServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'account_tax.name': request.accountTax!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateAccountTax request %j', request);
     const wrappedCallback:
       | Callback<
@@ -785,7 +792,9 @@ export class AccountTaxServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.shopping.merchant.accounts.v1beta.IListAccountTaxRequest,
@@ -852,7 +861,9 @@ export class AccountTaxServiceClient {
       });
     const defaultCallSettings = this._defaults['listAccountTax'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAccountTax stream %j', request);
     return this.descriptors.page.listAccountTax.createStream(
       this.innerApiCalls.listAccountTax as GaxCall,
@@ -901,7 +912,9 @@ export class AccountTaxServiceClient {
       });
     const defaultCallSettings = this._defaults['listAccountTax'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAccountTax iterate %j', request);
     return this.descriptors.page.listAccountTax.asyncIterate(
       this.innerApiCalls['listAccountTax'] as GaxCall,
@@ -1033,6 +1046,31 @@ export class AccountTaxServiceClient {
   matchAccountFromAutofeedSettingsName(autofeedSettingsName: string) {
     return this.pathTemplates.autofeedSettingsPathTemplate.match(
       autofeedSettingsName
+    ).account;
+  }
+
+  /**
+   * Return a fully-qualified automaticImprovements resource name string.
+   *
+   * @param {string} account
+   * @returns {string} Resource name string.
+   */
+  automaticImprovementsPath(account: string) {
+    return this.pathTemplates.automaticImprovementsPathTemplate.render({
+      account: account,
+    });
+  }
+
+  /**
+   * Parse the account from AutomaticImprovements resource.
+   *
+   * @param {string} automaticImprovementsName
+   *   A fully-qualified path representing AutomaticImprovements resource.
+   * @returns {string} A string representing the account.
+   */
+  matchAccountFromAutomaticImprovementsName(automaticImprovementsName: string) {
+    return this.pathTemplates.automaticImprovementsPathTemplate.match(
+      automaticImprovementsName
     ).account;
   }
 

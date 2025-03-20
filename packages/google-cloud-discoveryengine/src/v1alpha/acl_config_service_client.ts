@@ -608,7 +608,9 @@ export class AclConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'acl_config.name': request.aclConfig!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateAclConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -739,7 +741,9 @@ export class AclConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAclConfig request %j', request);
     const wrappedCallback:
       | Callback<

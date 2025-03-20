@@ -1,6 +1,13 @@
 # Changelog
 
-## [4.0.0](https://github.com/googleapis/google-cloud-node/compare/network-management-v3.11.1...network-management-v4.0.0) (2025-03-12)
+## [4.0.1](https://github.com/googleapis/google-cloud-node/compare/network-management-v4.0.0...network-management-v4.0.1) (2025-03-19)
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6186](https://github.com/googleapis/google-cloud-node/issues/6186)) ([dcfc7b4](https://github.com/googleapis/google-cloud-node/commit/dcfc7b492a2ac3fb86b93ae1375bac1c5153d049))
+
+## [4.0.0](https://github.com/googleapis/google-cloud-node/compare/network-management-v3.11.1...network-management-v4.0.0) (2025-03-18)
 
 
 ### ⚠ BREAKING CHANGES

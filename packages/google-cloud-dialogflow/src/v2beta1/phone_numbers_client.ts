@@ -626,7 +626,9 @@ export class PhoneNumbersClient {
       this._gaxModule.routingHeader.fromParams({
         'phone_number.name': request.phoneNumber!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updatePhoneNumber request %j', request);
     const wrappedCallback:
       | Callback<
@@ -759,7 +761,9 @@ export class PhoneNumbersClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deletePhoneNumber request %j', request);
     const wrappedCallback:
       | Callback<
@@ -890,7 +894,9 @@ export class PhoneNumbersClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('undeletePhoneNumber request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1024,7 +1030,9 @@ export class PhoneNumbersClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dialogflow.v2beta1.IListPhoneNumbersRequest,
@@ -1096,7 +1104,9 @@ export class PhoneNumbersClient {
       });
     const defaultCallSettings = this._defaults['listPhoneNumbers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listPhoneNumbers stream %j', request);
     return this.descriptors.page.listPhoneNumbers.createStream(
       this.innerApiCalls.listPhoneNumbers as GaxCall,
@@ -1150,7 +1160,9 @@ export class PhoneNumbersClient {
       });
     const defaultCallSettings = this._defaults['listPhoneNumbers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listPhoneNumbers iterate %j', request);
     return this.descriptors.page.listPhoneNumbers.asyncIterate(
       this.innerApiCalls['listPhoneNumbers'] as GaxCall,

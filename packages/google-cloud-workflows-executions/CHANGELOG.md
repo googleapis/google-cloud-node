@@ -1,11 +1,33 @@
 # Changelog
 
-## [4.0.0](https://github.com/googleapis/google-cloud-node/compare/workflows-v3.4.1...workflows-v4.0.0) (2025-03-12)
+## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/workflows-v4.0.0...workflows-v4.1.0) (2025-03-19)
+
+
+### Features
+
+* [workflows] add ListWorkflowRevisions method ([#6165](https://github.com/googleapis/google-cloud-node/issues/6165)) ([9930467](https://github.com/googleapis/google-cloud-node/commit/9930467ade72fb91b7933b8fb343131009e40d84))
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6189](https://github.com/googleapis/google-cloud-node/issues/6189)) ([0eab6d4](https://github.com/googleapis/google-cloud-node/commit/0eab6d40a12aa7f387a4621c6611aa4cbc86e178))
+
+## [4.0.0](https://github.com/googleapis/google-cloud-node/compare/workflows-v3.4.1...workflows-v4.0.0) (2025-03-18)
 
 
 ### ⚠ BREAKING CHANGES
 
 * upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Features
+
+* Add request/response debug logging to gapics, update templates to gax 5 and node 18 ([#1671](https://github.com/googleapis/google-cloud-node/issues/1671)) ([7a23322](https://github.com/googleapis/google-cloud-node/commit/7a23322530b610eec2fe4c18fe1854048f31c811))
+
+
+### Bug Fixes
+
+* Add json files to tsconfig templates ([#1692](https://github.com/googleapis/google-cloud-node/issues/1692)) (ba6be1d) ([7a23322](https://github.com/googleapis/google-cloud-node/commit/7a23322530b610eec2fe4c18fe1854048f31c811))
+
 
 ### Miscellaneous Chores
 

@@ -216,6 +216,9 @@ export class EmailPreferencesServiceClient {
       autofeedSettingsPathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}/autofeedSettings'
       ),
+      automaticImprovementsPathTemplate: new this._gaxModule.PathTemplate(
+        'accounts/{account}/automaticImprovements'
+      ),
       businessIdentityPathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}/businessIdentity'
       ),
@@ -516,7 +519,9 @@ export class EmailPreferencesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getEmailPreferences request %j', request);
     const wrappedCallback:
       | Callback<
@@ -653,7 +658,9 @@ export class EmailPreferencesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'email_preferences.name': request.emailPreferences!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateEmailPreferences request %j', request);
     const wrappedCallback:
       | Callback<
@@ -810,6 +817,31 @@ export class EmailPreferencesServiceClient {
   matchAccountFromAutofeedSettingsName(autofeedSettingsName: string) {
     return this.pathTemplates.autofeedSettingsPathTemplate.match(
       autofeedSettingsName
+    ).account;
+  }
+
+  /**
+   * Return a fully-qualified automaticImprovements resource name string.
+   *
+   * @param {string} account
+   * @returns {string} Resource name string.
+   */
+  automaticImprovementsPath(account: string) {
+    return this.pathTemplates.automaticImprovementsPathTemplate.render({
+      account: account,
+    });
+  }
+
+  /**
+   * Parse the account from AutomaticImprovements resource.
+   *
+   * @param {string} automaticImprovementsName
+   *   A fully-qualified path representing AutomaticImprovements resource.
+   * @returns {string} A string representing the account.
+   */
+  matchAccountFromAutomaticImprovementsName(automaticImprovementsName: string) {
+    return this.pathTemplates.automaticImprovementsPathTemplate.match(
+      automaticImprovementsName
     ).account;
   }
 

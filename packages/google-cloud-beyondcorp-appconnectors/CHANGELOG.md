@@ -1,6 +1,13 @@
 # Changelog
 
-## [2.0.0](https://github.com/googleapis/google-cloud-node/compare/appconnectors-v1.3.1...appconnectors-v2.0.0) (2025-03-12)
+## [2.0.1](https://github.com/googleapis/google-cloud-node/compare/appconnectors-v2.0.0...appconnectors-v2.0.1) (2025-03-19)
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6183](https://github.com/googleapis/google-cloud-node/issues/6183)) ([f91c71f](https://github.com/googleapis/google-cloud-node/commit/f91c71f71c7a08ac17a15b7bb2233cbc041ee69b))
+
+## [2.0.0](https://github.com/googleapis/google-cloud-node/compare/appconnectors-v1.3.1...appconnectors-v2.0.0) (2025-03-18)
 
 
 ### ⚠ BREAKING CHANGES

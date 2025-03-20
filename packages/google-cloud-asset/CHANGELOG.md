@@ -4,7 +4,20 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
-## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/asset-v5.7.1...asset-v6.0.0) (2025-03-12)
+## [6.1.0](https://github.com/googleapis/google-cloud-node/compare/asset-v6.0.0...asset-v6.1.0) (2025-03-19)
+
+
+### Features
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6182](https://github.com/googleapis/google-cloud-node/issues/6182)) ([c41ff07](https://github.com/googleapis/google-cloud-node/commit/c41ff0729b65a1207978b4029d6369cc0552e0bf))
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6183](https://github.com/googleapis/google-cloud-node/issues/6183)) ([f91c71f](https://github.com/googleapis/google-cloud-node/commit/f91c71f71c7a08ac17a15b7bb2233cbc041ee69b))
+* **deps:** Update dependency @google-cloud/compute to v5 ([#6171](https://github.com/googleapis/google-cloud-node/issues/6171)) ([b3b30b8](https://github.com/googleapis/google-cloud-node/commit/b3b30b8483e222116f488ed313c02901601b75f3))
+
+## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/asset-v5.7.1...asset-v6.0.0) (2025-03-18)
 
 
 ### ⚠ BREAKING CHANGES

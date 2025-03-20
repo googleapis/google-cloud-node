@@ -252,7 +252,9 @@ describe('v1beta.QuotaServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.quotaServiceStub);
       client.close().then(() => {
         done();
@@ -311,7 +313,7 @@ describe('v1beta.QuotaServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.quota.v1beta.ListQuotaGroupsRequest()
       );
@@ -350,7 +352,7 @@ describe('v1beta.QuotaServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.quota.v1beta.ListQuotaGroupsRequest()
       );
@@ -407,7 +409,7 @@ describe('v1beta.QuotaServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.quota.v1beta.ListQuotaGroupsRequest()
       );
@@ -438,7 +440,7 @@ describe('v1beta.QuotaServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.quota.v1beta.ListQuotaGroupsRequest()
       );
@@ -501,7 +503,7 @@ describe('v1beta.QuotaServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.quota.v1beta.ListQuotaGroupsRequest()
       );
@@ -553,7 +555,7 @@ describe('v1beta.QuotaServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.quota.v1beta.ListQuotaGroupsRequest()
       );
@@ -603,7 +605,7 @@ describe('v1beta.QuotaServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.quota.v1beta.ListQuotaGroupsRequest()
       );
@@ -641,7 +643,7 @@ describe('v1beta.QuotaServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('account', () => {
+    describe('account', async () => {
       const fakePath = '/rendered/path/account';
       const expectedParameters = {
         account: 'accountValue',
@@ -650,7 +652,7 @@ describe('v1beta.QuotaServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.accountPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -679,7 +681,7 @@ describe('v1beta.QuotaServiceClient', () => {
       });
     });
 
-    describe('quotaGroup', () => {
+    describe('quotaGroup', async () => {
       const fakePath = '/rendered/path/quotaGroup';
       const expectedParameters = {
         account: 'accountValue',
@@ -689,7 +691,7 @@ describe('v1beta.QuotaServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.quotaGroupPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

@@ -266,7 +266,9 @@ describe('v1.RegionSslPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.regionSslPoliciesStub);
       client.close().then(() => {
         done();
@@ -325,7 +327,7 @@ describe('v1.RegionSslPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionSslPolicyRequest()
       );
@@ -366,7 +368,7 @@ describe('v1.RegionSslPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionSslPolicyRequest()
       );
@@ -423,7 +425,7 @@ describe('v1.RegionSslPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionSslPolicyRequest()
       );
@@ -461,7 +463,7 @@ describe('v1.RegionSslPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionSslPolicyRequest()
       );
@@ -492,7 +494,7 @@ describe('v1.RegionSslPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionSslPolicyRequest()
       );
@@ -532,7 +534,7 @@ describe('v1.RegionSslPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionSslPolicyRequest()
       );
@@ -587,7 +589,7 @@ describe('v1.RegionSslPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionSslPolicyRequest()
       );
@@ -624,7 +626,7 @@ describe('v1.RegionSslPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionSslPolicyRequest()
       );
@@ -655,7 +657,7 @@ describe('v1.RegionSslPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionSslPolicyRequest()
       );
@@ -691,7 +693,7 @@ describe('v1.RegionSslPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionSslPolicyRequest()
       );
@@ -743,7 +745,7 @@ describe('v1.RegionSslPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionSslPolicyRequest()
       );
@@ -776,7 +778,7 @@ describe('v1.RegionSslPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionSslPolicyRequest()
       );
@@ -802,7 +804,7 @@ describe('v1.RegionSslPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListAvailableFeaturesRegionSslPoliciesRequest()
       );
@@ -839,7 +841,7 @@ describe('v1.RegionSslPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListAvailableFeaturesRegionSslPoliciesRequest()
       );
@@ -891,7 +893,7 @@ describe('v1.RegionSslPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListAvailableFeaturesRegionSslPoliciesRequest()
       );
@@ -930,7 +932,7 @@ describe('v1.RegionSslPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListAvailableFeaturesRegionSslPoliciesRequest()
       );
@@ -959,7 +961,7 @@ describe('v1.RegionSslPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRegionSslPolicyRequest()
       );
@@ -999,7 +1001,7 @@ describe('v1.RegionSslPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRegionSslPolicyRequest()
       );
@@ -1054,7 +1056,7 @@ describe('v1.RegionSslPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRegionSslPolicyRequest()
       );
@@ -1091,7 +1093,7 @@ describe('v1.RegionSslPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRegionSslPolicyRequest()
       );
@@ -1122,7 +1124,7 @@ describe('v1.RegionSslPoliciesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionSslPoliciesRequest()
       );
@@ -1159,7 +1161,7 @@ describe('v1.RegionSslPoliciesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionSslPoliciesRequest()
       );
@@ -1211,7 +1213,7 @@ describe('v1.RegionSslPoliciesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionSslPoliciesRequest()
       );
@@ -1243,7 +1245,7 @@ describe('v1.RegionSslPoliciesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionSslPoliciesRequest()
       );
@@ -1302,7 +1304,7 @@ describe('v1.RegionSslPoliciesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionSslPoliciesRequest()
       );
@@ -1358,7 +1360,7 @@ describe('v1.RegionSslPoliciesClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionSslPoliciesRequest()
       );
@@ -1405,7 +1407,7 @@ describe('v1.RegionSslPoliciesClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionSslPoliciesRequest()
       );

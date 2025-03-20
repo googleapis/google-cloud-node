@@ -193,7 +193,9 @@ describe('v1.ContainerAnalysisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.containerAnalysisStub);
       client.close().then(() => {
         done();
@@ -252,7 +254,7 @@ describe('v1.ContainerAnalysisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -283,7 +285,7 @@ describe('v1.ContainerAnalysisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -330,7 +332,7 @@ describe('v1.ContainerAnalysisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -361,7 +363,7 @@ describe('v1.ContainerAnalysisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -382,7 +384,7 @@ describe('v1.ContainerAnalysisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -413,7 +415,7 @@ describe('v1.ContainerAnalysisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -460,7 +462,7 @@ describe('v1.ContainerAnalysisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -491,7 +493,7 @@ describe('v1.ContainerAnalysisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -512,7 +514,7 @@ describe('v1.ContainerAnalysisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -544,7 +546,7 @@ describe('v1.ContainerAnalysisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -591,7 +593,7 @@ describe('v1.ContainerAnalysisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -622,7 +624,7 @@ describe('v1.ContainerAnalysisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -643,7 +645,7 @@ describe('v1.ContainerAnalysisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.containeranalysis.v1.GetVulnerabilityOccurrencesSummaryRequest()
       );
@@ -676,7 +678,7 @@ describe('v1.ContainerAnalysisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.containeranalysis.v1.GetVulnerabilityOccurrencesSummaryRequest()
       );
@@ -723,7 +725,7 @@ describe('v1.ContainerAnalysisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.containeranalysis.v1.GetVulnerabilityOccurrencesSummaryRequest()
       );
@@ -757,7 +759,7 @@ describe('v1.ContainerAnalysisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.devtools.containeranalysis.v1.GetVulnerabilityOccurrencesSummaryRequest()
       );
@@ -776,7 +778,7 @@ describe('v1.ContainerAnalysisClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('note', () => {
+    describe('note', async () => {
       const fakePath = '/rendered/path/note';
       const expectedParameters = {
         project: 'projectValue',
@@ -786,7 +788,7 @@ describe('v1.ContainerAnalysisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.notePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -825,7 +827,7 @@ describe('v1.ContainerAnalysisClient', () => {
       });
     });
 
-    describe('occurrence', () => {
+    describe('occurrence', async () => {
       const fakePath = '/rendered/path/occurrence';
       const expectedParameters = {
         project: 'projectValue',
@@ -835,7 +837,7 @@ describe('v1.ContainerAnalysisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.occurrencePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -874,7 +876,7 @@ describe('v1.ContainerAnalysisClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -883,7 +885,7 @@ describe('v1.ContainerAnalysisClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

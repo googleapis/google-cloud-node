@@ -21,6 +21,8 @@ const managedkafka = require('@google-cloud/managedkafka');
 
 function main() {
   const managedKafkaClient = new managedkafka.ManagedKafkaClient();
+  const managedKafkaConnectClient =
+    new managedkafka.ManagedKafkaConnectClient();
 }
 
 main();

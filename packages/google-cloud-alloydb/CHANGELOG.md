@@ -1,6 +1,14 @@
 # Changelog
 
-## [2.0.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v1.10.2...alloydb-v2.0.0) (2025-03-12)
+## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v2.0.0...alloydb-v2.1.0) (2025-03-19)
+
+
+### Features
+
+* [alloydb] A new method `ExportCluster` is added to service `AlloyDBAdmin` ([#6170](https://github.com/googleapis/google-cloud-node/issues/6170)) ([4569e91](https://github.com/googleapis/google-cloud-node/commit/4569e91b5f4c888cd52dd795dbe27cddf0801f51))
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6182](https://github.com/googleapis/google-cloud-node/issues/6182)) ([c41ff07](https://github.com/googleapis/google-cloud-node/commit/c41ff0729b65a1207978b4029d6369cc0552e0bf))
+
+## [2.0.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v1.10.2...alloydb-v2.0.0) (2025-03-18)
 
 
 ### ⚠ BREAKING CHANGES

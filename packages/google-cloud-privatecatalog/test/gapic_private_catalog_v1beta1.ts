@@ -256,7 +256,9 @@ describe('v1beta1.PrivateCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.privateCatalogStub);
       client.close().then(() => {
         done();
@@ -315,7 +317,7 @@ describe('v1beta1.PrivateCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privatecatalog.v1beta1.SearchCatalogsRequest()
       );
@@ -354,7 +356,7 @@ describe('v1beta1.PrivateCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privatecatalog.v1beta1.SearchCatalogsRequest()
       );
@@ -411,7 +413,7 @@ describe('v1beta1.PrivateCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privatecatalog.v1beta1.SearchCatalogsRequest()
       );
@@ -442,7 +444,7 @@ describe('v1beta1.PrivateCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privatecatalog.v1beta1.SearchCatalogsRequest()
       );
@@ -503,7 +505,7 @@ describe('v1beta1.PrivateCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privatecatalog.v1beta1.SearchCatalogsRequest()
       );
@@ -553,7 +555,7 @@ describe('v1beta1.PrivateCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privatecatalog.v1beta1.SearchCatalogsRequest()
       );
@@ -603,7 +605,7 @@ describe('v1beta1.PrivateCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privatecatalog.v1beta1.SearchCatalogsRequest()
       );
@@ -646,7 +648,7 @@ describe('v1beta1.PrivateCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privatecatalog.v1beta1.SearchProductsRequest()
       );
@@ -685,7 +687,7 @@ describe('v1beta1.PrivateCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privatecatalog.v1beta1.SearchProductsRequest()
       );
@@ -742,7 +744,7 @@ describe('v1beta1.PrivateCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privatecatalog.v1beta1.SearchProductsRequest()
       );
@@ -773,7 +775,7 @@ describe('v1beta1.PrivateCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privatecatalog.v1beta1.SearchProductsRequest()
       );
@@ -834,7 +836,7 @@ describe('v1beta1.PrivateCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privatecatalog.v1beta1.SearchProductsRequest()
       );
@@ -884,7 +886,7 @@ describe('v1beta1.PrivateCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privatecatalog.v1beta1.SearchProductsRequest()
       );
@@ -934,7 +936,7 @@ describe('v1beta1.PrivateCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privatecatalog.v1beta1.SearchProductsRequest()
       );
@@ -977,7 +979,7 @@ describe('v1beta1.PrivateCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privatecatalog.v1beta1.SearchVersionsRequest()
       );
@@ -1016,7 +1018,7 @@ describe('v1beta1.PrivateCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privatecatalog.v1beta1.SearchVersionsRequest()
       );
@@ -1073,7 +1075,7 @@ describe('v1beta1.PrivateCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privatecatalog.v1beta1.SearchVersionsRequest()
       );
@@ -1104,7 +1106,7 @@ describe('v1beta1.PrivateCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privatecatalog.v1beta1.SearchVersionsRequest()
       );
@@ -1165,7 +1167,7 @@ describe('v1beta1.PrivateCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privatecatalog.v1beta1.SearchVersionsRequest()
       );
@@ -1215,7 +1217,7 @@ describe('v1beta1.PrivateCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privatecatalog.v1beta1.SearchVersionsRequest()
       );
@@ -1265,7 +1267,7 @@ describe('v1beta1.PrivateCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.privatecatalog.v1beta1.SearchVersionsRequest()
       );
@@ -1303,7 +1305,7 @@ describe('v1beta1.PrivateCatalogClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('catalog', () => {
+    describe('catalog', async () => {
       const fakePath = '/rendered/path/catalog';
       const expectedParameters = {
         catalog: 'catalogValue',
@@ -1312,7 +1314,7 @@ describe('v1beta1.PrivateCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.catalogPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1341,7 +1343,7 @@ describe('v1beta1.PrivateCatalogClient', () => {
       });
     });
 
-    describe('product', () => {
+    describe('product', async () => {
       const fakePath = '/rendered/path/product';
       const expectedParameters = {
         product: 'productValue',
@@ -1350,7 +1352,7 @@ describe('v1beta1.PrivateCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.productPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -1379,7 +1381,7 @@ describe('v1beta1.PrivateCatalogClient', () => {
       });
     });
 
-    describe('version', () => {
+    describe('version', async () => {
       const fakePath = '/rendered/path/version';
       const expectedParameters = {
         catalog: 'catalogValue',
@@ -1390,7 +1392,7 @@ describe('v1beta1.PrivateCatalogClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.versionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

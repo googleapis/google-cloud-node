@@ -4,7 +4,20 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
-## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/compute-v4.12.0...compute-v5.0.0) (2025-03-12)
+## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/compute-v5.0.0...compute-v5.1.0) (2025-03-19)
+
+
+### Features
+
+* [compute] Update Compute Engine API to revision 20250302 ([#987](https://github.com/googleapis/google-cloud-node/issues/987)) ([#6155](https://github.com/googleapis/google-cloud-node/issues/6155)) ([dfab9f0](https://github.com/googleapis/google-cloud-node/commit/dfab9f0902564fee15fdcff914851ebab07c4c9d))
+* [compute] Update Compute Engine API to revision 20250302 ([#995](https://github.com/googleapis/google-cloud-node/issues/995)) ([#6178](https://github.com/googleapis/google-cloud-node/issues/6178)) ([2be675d](https://github.com/googleapis/google-cloud-node/commit/2be675d236ff0fa1bdf634f6959b1f260d66f77c))
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6184](https://github.com/googleapis/google-cloud-node/issues/6184)) ([2fcd202](https://github.com/googleapis/google-cloud-node/commit/2fcd2029c35e8fb2199d03ac6e61e2d821ddf72e))
+
+## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/compute-v4.12.0...compute-v5.0.0) (2025-03-18)
 
 
 ### ⚠ BREAKING CHANGES

@@ -508,7 +508,9 @@ export class TablesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getTable request %j', request);
     const wrappedCallback:
       | Callback<
@@ -625,7 +627,9 @@ export class TablesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getWorkspace request %j', request);
     const wrappedCallback:
       | Callback<
@@ -742,7 +746,9 @@ export class TablesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getRow request %j', request);
     const wrappedCallback:
       | Callback<
@@ -864,7 +870,9 @@ export class TablesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createRow request %j', request);
     const wrappedCallback:
       | Callback<
@@ -985,7 +993,9 @@ export class TablesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('batchCreateRows request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1109,7 +1119,9 @@ export class TablesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'row.name': request.row!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateRow request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1230,7 +1242,9 @@ export class TablesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('batchUpdateRows request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1350,7 +1364,9 @@ export class TablesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteRow request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1472,7 +1488,9 @@ export class TablesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('batchDeleteRows request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1601,7 +1619,9 @@ export class TablesServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.area120.tables.v1alpha1.IListTablesRequest,
@@ -1668,7 +1688,9 @@ export class TablesServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listTables'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTables stream %j', request);
     return this.descriptors.page.listTables.createStream(
       this.innerApiCalls.listTables as GaxCall,
@@ -1717,7 +1739,9 @@ export class TablesServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listTables'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTables iterate %j', request);
     return this.descriptors.page.listTables.asyncIterate(
       this.innerApiCalls['listTables'] as GaxCall,
@@ -1821,7 +1845,9 @@ export class TablesServiceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.area120.tables.v1alpha1.IListWorkspacesRequest,
@@ -1888,7 +1914,9 @@ export class TablesServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listWorkspaces'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listWorkspaces stream %j', request);
     return this.descriptors.page.listWorkspaces.createStream(
       this.innerApiCalls.listWorkspaces as GaxCall,
@@ -1937,7 +1965,9 @@ export class TablesServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listWorkspaces'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listWorkspaces iterate %j', request);
     return this.descriptors.page.listWorkspaces.asyncIterate(
       this.innerApiCalls['listWorkspaces'] as GaxCall,
@@ -2055,7 +2085,9 @@ export class TablesServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.area120.tables.v1alpha1.IListRowsRequest,
@@ -2136,7 +2168,9 @@ export class TablesServiceClient {
       });
     const defaultCallSettings = this._defaults['listRows'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRows stream %j', request);
     return this.descriptors.page.listRows.createStream(
       this.innerApiCalls.listRows as GaxCall,
@@ -2199,7 +2233,9 @@ export class TablesServiceClient {
       });
     const defaultCallSettings = this._defaults['listRows'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRows iterate %j', request);
     return this.descriptors.page.listRows.asyncIterate(
       this.innerApiCalls['listRows'] as GaxCall,

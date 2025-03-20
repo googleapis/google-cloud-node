@@ -304,7 +304,9 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.dataMigrationServiceStub);
       client.close().then(() => {
         done();
@@ -367,7 +369,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.GetMigrationJobRequest()
       );
@@ -399,7 +401,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.GetMigrationJobRequest()
       );
@@ -447,7 +449,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.GetMigrationJobRequest()
       );
@@ -479,7 +481,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.GetMigrationJobRequest()
       );
@@ -501,7 +503,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.GenerateSshScriptRequest()
       );
@@ -533,7 +535,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.GenerateSshScriptRequest()
       );
@@ -581,7 +583,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.GenerateSshScriptRequest()
       );
@@ -613,7 +615,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.GenerateSshScriptRequest()
       );
@@ -635,7 +637,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.GenerateTcpProxyScriptRequest()
       );
@@ -668,7 +670,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.GenerateTcpProxyScriptRequest()
       );
@@ -716,7 +718,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.GenerateTcpProxyScriptRequest()
       );
@@ -751,7 +753,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.GenerateTcpProxyScriptRequest()
       );
@@ -776,7 +778,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.GetConnectionProfileRequest()
       );
@@ -809,7 +811,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.GetConnectionProfileRequest()
       );
@@ -857,7 +859,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.GetConnectionProfileRequest()
       );
@@ -889,7 +891,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.GetConnectionProfileRequest()
       );
@@ -911,7 +913,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.GetPrivateConnectionRequest()
       );
@@ -944,7 +946,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.GetPrivateConnectionRequest()
       );
@@ -992,7 +994,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.GetPrivateConnectionRequest()
       );
@@ -1024,7 +1026,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.GetPrivateConnectionRequest()
       );
@@ -1046,7 +1048,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.GetConversionWorkspaceRequest()
       );
@@ -1079,7 +1081,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.GetConversionWorkspaceRequest()
       );
@@ -1127,7 +1129,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.GetConversionWorkspaceRequest()
       );
@@ -1162,7 +1164,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.GetConversionWorkspaceRequest()
       );
@@ -1187,7 +1189,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.CreateMappingRuleRequest()
       );
@@ -1219,7 +1221,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.CreateMappingRuleRequest()
       );
@@ -1267,7 +1269,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.CreateMappingRuleRequest()
       );
@@ -1299,7 +1301,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.CreateMappingRuleRequest()
       );
@@ -1321,7 +1323,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.DeleteMappingRuleRequest()
       );
@@ -1353,7 +1355,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.DeleteMappingRuleRequest()
       );
@@ -1401,7 +1403,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.DeleteMappingRuleRequest()
       );
@@ -1433,7 +1435,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.DeleteMappingRuleRequest()
       );
@@ -1455,7 +1457,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.GetMappingRuleRequest()
       );
@@ -1487,7 +1489,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.GetMappingRuleRequest()
       );
@@ -1535,7 +1537,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.GetMappingRuleRequest()
       );
@@ -1567,7 +1569,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.GetMappingRuleRequest()
       );
@@ -1589,7 +1591,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.SearchBackgroundJobsRequest()
       );
@@ -1622,7 +1624,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.SearchBackgroundJobsRequest()
       );
@@ -1670,7 +1672,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.SearchBackgroundJobsRequest()
       );
@@ -1702,7 +1704,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.SearchBackgroundJobsRequest()
       );
@@ -1724,7 +1726,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.DescribeConversionWorkspaceRevisionsRequest()
       );
@@ -1758,7 +1760,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.DescribeConversionWorkspaceRevisionsRequest()
       );
@@ -1806,7 +1808,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.DescribeConversionWorkspaceRevisionsRequest()
       );
@@ -1839,7 +1841,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.DescribeConversionWorkspaceRevisionsRequest()
       );
@@ -1864,7 +1866,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.CreateMigrationJobRequest()
       );
@@ -1898,7 +1900,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.CreateMigrationJobRequest()
       );
@@ -1953,7 +1955,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.CreateMigrationJobRequest()
       );
@@ -1985,7 +1987,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.CreateMigrationJobRequest()
       );
@@ -2019,7 +2021,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2042,7 +2044,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2064,7 +2066,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.UpdateMigrationJobRequest()
       );
@@ -2099,7 +2101,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.UpdateMigrationJobRequest()
       );
@@ -2155,7 +2157,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.UpdateMigrationJobRequest()
       );
@@ -2188,7 +2190,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.UpdateMigrationJobRequest()
       );
@@ -2223,7 +2225,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2246,7 +2248,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2268,7 +2270,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.DeleteMigrationJobRequest()
       );
@@ -2302,7 +2304,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.DeleteMigrationJobRequest()
       );
@@ -2357,7 +2359,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.DeleteMigrationJobRequest()
       );
@@ -2389,7 +2391,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.DeleteMigrationJobRequest()
       );
@@ -2423,7 +2425,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2446,7 +2448,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2468,7 +2470,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.StartMigrationJobRequest()
       );
@@ -2502,7 +2504,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.StartMigrationJobRequest()
       );
@@ -2557,7 +2559,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.StartMigrationJobRequest()
       );
@@ -2589,7 +2591,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.StartMigrationJobRequest()
       );
@@ -2623,7 +2625,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2646,7 +2648,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2668,7 +2670,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.StopMigrationJobRequest()
       );
@@ -2702,7 +2704,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.StopMigrationJobRequest()
       );
@@ -2757,7 +2759,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.StopMigrationJobRequest()
       );
@@ -2789,7 +2791,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.StopMigrationJobRequest()
       );
@@ -2823,7 +2825,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2846,7 +2848,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2868,7 +2870,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ResumeMigrationJobRequest()
       );
@@ -2902,7 +2904,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ResumeMigrationJobRequest()
       );
@@ -2957,7 +2959,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ResumeMigrationJobRequest()
       );
@@ -2989,7 +2991,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ResumeMigrationJobRequest()
       );
@@ -3023,7 +3025,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3046,7 +3048,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3068,7 +3070,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.PromoteMigrationJobRequest()
       );
@@ -3102,7 +3104,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.PromoteMigrationJobRequest()
       );
@@ -3157,7 +3159,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.PromoteMigrationJobRequest()
       );
@@ -3189,7 +3191,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.PromoteMigrationJobRequest()
       );
@@ -3223,7 +3225,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3246,7 +3248,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3268,7 +3270,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.VerifyMigrationJobRequest()
       );
@@ -3302,7 +3304,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.VerifyMigrationJobRequest()
       );
@@ -3357,7 +3359,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.VerifyMigrationJobRequest()
       );
@@ -3389,7 +3391,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.VerifyMigrationJobRequest()
       );
@@ -3423,7 +3425,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3446,7 +3448,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3468,7 +3470,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.RestartMigrationJobRequest()
       );
@@ -3502,7 +3504,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.RestartMigrationJobRequest()
       );
@@ -3557,7 +3559,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.RestartMigrationJobRequest()
       );
@@ -3589,7 +3591,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.RestartMigrationJobRequest()
       );
@@ -3623,7 +3625,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3646,7 +3648,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3668,7 +3670,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.CreateConnectionProfileRequest()
       );
@@ -3702,7 +3704,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.CreateConnectionProfileRequest()
       );
@@ -3757,7 +3759,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.CreateConnectionProfileRequest()
       );
@@ -3792,7 +3794,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.CreateConnectionProfileRequest()
       );
@@ -3826,7 +3828,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3850,7 +3852,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3872,7 +3874,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.UpdateConnectionProfileRequest()
       );
@@ -3907,7 +3909,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.UpdateConnectionProfileRequest()
       );
@@ -3963,7 +3965,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.UpdateConnectionProfileRequest()
       );
@@ -3999,7 +4001,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.UpdateConnectionProfileRequest()
       );
@@ -4034,7 +4036,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4058,7 +4060,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4080,7 +4082,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.DeleteConnectionProfileRequest()
       );
@@ -4114,7 +4116,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.DeleteConnectionProfileRequest()
       );
@@ -4169,7 +4171,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.DeleteConnectionProfileRequest()
       );
@@ -4204,7 +4206,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.DeleteConnectionProfileRequest()
       );
@@ -4238,7 +4240,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4262,7 +4264,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4284,7 +4286,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.CreatePrivateConnectionRequest()
       );
@@ -4318,7 +4320,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.CreatePrivateConnectionRequest()
       );
@@ -4373,7 +4375,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.CreatePrivateConnectionRequest()
       );
@@ -4408,7 +4410,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.CreatePrivateConnectionRequest()
       );
@@ -4442,7 +4444,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4466,7 +4468,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4488,7 +4490,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.DeletePrivateConnectionRequest()
       );
@@ -4522,7 +4524,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.DeletePrivateConnectionRequest()
       );
@@ -4577,7 +4579,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.DeletePrivateConnectionRequest()
       );
@@ -4612,7 +4614,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.DeletePrivateConnectionRequest()
       );
@@ -4646,7 +4648,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4670,7 +4672,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4692,7 +4694,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.CreateConversionWorkspaceRequest()
       );
@@ -4726,7 +4728,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.CreateConversionWorkspaceRequest()
       );
@@ -4781,7 +4783,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.CreateConversionWorkspaceRequest()
       );
@@ -4816,7 +4818,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.CreateConversionWorkspaceRequest()
       );
@@ -4850,7 +4852,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4874,7 +4876,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4896,7 +4898,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.UpdateConversionWorkspaceRequest()
       );
@@ -4931,7 +4933,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.UpdateConversionWorkspaceRequest()
       );
@@ -4987,7 +4989,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.UpdateConversionWorkspaceRequest()
       );
@@ -5023,7 +5025,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.UpdateConversionWorkspaceRequest()
       );
@@ -5058,7 +5060,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -5082,7 +5084,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -5104,7 +5106,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.DeleteConversionWorkspaceRequest()
       );
@@ -5138,7 +5140,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.DeleteConversionWorkspaceRequest()
       );
@@ -5193,7 +5195,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.DeleteConversionWorkspaceRequest()
       );
@@ -5228,7 +5230,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.DeleteConversionWorkspaceRequest()
       );
@@ -5262,7 +5264,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -5286,7 +5288,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -5308,7 +5310,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.SeedConversionWorkspaceRequest()
       );
@@ -5342,7 +5344,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.SeedConversionWorkspaceRequest()
       );
@@ -5397,7 +5399,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.SeedConversionWorkspaceRequest()
       );
@@ -5432,7 +5434,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.SeedConversionWorkspaceRequest()
       );
@@ -5466,7 +5468,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -5490,7 +5492,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -5512,7 +5514,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ImportMappingRulesRequest()
       );
@@ -5546,7 +5548,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ImportMappingRulesRequest()
       );
@@ -5601,7 +5603,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ImportMappingRulesRequest()
       );
@@ -5633,7 +5635,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ImportMappingRulesRequest()
       );
@@ -5667,7 +5669,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -5690,7 +5692,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -5712,7 +5714,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ConvertConversionWorkspaceRequest()
       );
@@ -5746,7 +5748,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ConvertConversionWorkspaceRequest()
       );
@@ -5801,7 +5803,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ConvertConversionWorkspaceRequest()
       );
@@ -5836,7 +5838,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ConvertConversionWorkspaceRequest()
       );
@@ -5870,7 +5872,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -5894,7 +5896,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -5916,7 +5918,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.CommitConversionWorkspaceRequest()
       );
@@ -5950,7 +5952,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.CommitConversionWorkspaceRequest()
       );
@@ -6005,7 +6007,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.CommitConversionWorkspaceRequest()
       );
@@ -6040,7 +6042,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.CommitConversionWorkspaceRequest()
       );
@@ -6074,7 +6076,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -6098,7 +6100,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -6120,7 +6122,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.RollbackConversionWorkspaceRequest()
       );
@@ -6154,7 +6156,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.RollbackConversionWorkspaceRequest()
       );
@@ -6209,7 +6211,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.RollbackConversionWorkspaceRequest()
       );
@@ -6244,7 +6246,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.RollbackConversionWorkspaceRequest()
       );
@@ -6278,7 +6280,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -6302,7 +6304,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -6324,7 +6326,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ApplyConversionWorkspaceRequest()
       );
@@ -6358,7 +6360,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ApplyConversionWorkspaceRequest()
       );
@@ -6413,7 +6415,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ApplyConversionWorkspaceRequest()
       );
@@ -6448,7 +6450,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ApplyConversionWorkspaceRequest()
       );
@@ -6482,7 +6484,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -6506,7 +6508,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -6528,7 +6530,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ListMigrationJobsRequest()
       );
@@ -6568,7 +6570,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ListMigrationJobsRequest()
       );
@@ -6624,7 +6626,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ListMigrationJobsRequest()
       );
@@ -6656,7 +6658,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ListMigrationJobsRequest()
       );
@@ -6717,7 +6719,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ListMigrationJobsRequest()
       );
@@ -6767,7 +6769,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ListMigrationJobsRequest()
       );
@@ -6817,7 +6819,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ListMigrationJobsRequest()
       );
@@ -6860,7 +6862,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ListConnectionProfilesRequest()
       );
@@ -6901,7 +6903,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ListConnectionProfilesRequest()
       );
@@ -6957,7 +6959,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ListConnectionProfilesRequest()
       );
@@ -6992,7 +6994,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ListConnectionProfilesRequest()
       );
@@ -7060,7 +7062,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ListConnectionProfilesRequest()
       );
@@ -7117,7 +7119,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ListConnectionProfilesRequest()
       );
@@ -7172,7 +7174,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ListConnectionProfilesRequest()
       );
@@ -7220,7 +7222,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ListPrivateConnectionsRequest()
       );
@@ -7261,7 +7263,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ListPrivateConnectionsRequest()
       );
@@ -7317,7 +7319,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ListPrivateConnectionsRequest()
       );
@@ -7352,7 +7354,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ListPrivateConnectionsRequest()
       );
@@ -7420,7 +7422,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ListPrivateConnectionsRequest()
       );
@@ -7477,7 +7479,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ListPrivateConnectionsRequest()
       );
@@ -7532,7 +7534,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ListPrivateConnectionsRequest()
       );
@@ -7580,7 +7582,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ListConversionWorkspacesRequest()
       );
@@ -7621,7 +7623,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ListConversionWorkspacesRequest()
       );
@@ -7679,7 +7681,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ListConversionWorkspacesRequest()
       );
@@ -7714,7 +7716,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ListConversionWorkspacesRequest()
       );
@@ -7782,7 +7784,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ListConversionWorkspacesRequest()
       );
@@ -7839,7 +7841,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ListConversionWorkspacesRequest()
       );
@@ -7894,7 +7896,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ListConversionWorkspacesRequest()
       );
@@ -7942,7 +7944,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ListMappingRulesRequest()
       );
@@ -7982,7 +7984,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ListMappingRulesRequest()
       );
@@ -8038,7 +8040,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ListMappingRulesRequest()
       );
@@ -8070,7 +8072,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ListMappingRulesRequest()
       );
@@ -8131,7 +8133,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ListMappingRulesRequest()
       );
@@ -8181,7 +8183,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ListMappingRulesRequest()
       );
@@ -8231,7 +8233,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ListMappingRulesRequest()
       );
@@ -8274,7 +8276,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.DescribeDatabaseEntitiesRequest()
       );
@@ -8315,7 +8317,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.DescribeDatabaseEntitiesRequest()
       );
@@ -8371,7 +8373,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.DescribeDatabaseEntitiesRequest()
       );
@@ -8406,7 +8408,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.DescribeDatabaseEntitiesRequest()
       );
@@ -8473,7 +8475,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.DescribeDatabaseEntitiesRequest()
       );
@@ -8529,7 +8531,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.DescribeDatabaseEntitiesRequest()
       );
@@ -8583,7 +8585,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.DescribeDatabaseEntitiesRequest()
       );
@@ -8630,7 +8632,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.FetchStaticIpsRequest()
       );
@@ -8660,7 +8662,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.FetchStaticIpsRequest()
       );
@@ -8703,7 +8705,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.FetchStaticIpsRequest()
       );
@@ -8735,7 +8737,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.FetchStaticIpsRequest()
       );
@@ -8783,7 +8785,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.FetchStaticIpsRequest()
       );
@@ -8830,7 +8832,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.FetchStaticIpsRequest()
       );
@@ -8870,7 +8872,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.FetchStaticIpsRequest()
       );
@@ -8912,7 +8914,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -8943,7 +8945,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -8988,7 +8990,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -9021,7 +9023,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -9052,7 +9054,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -9097,7 +9099,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -9130,7 +9132,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -9164,7 +9166,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -9209,7 +9211,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -9245,7 +9247,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -9276,7 +9278,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -9321,7 +9323,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -9357,7 +9359,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -9406,7 +9408,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -9448,7 +9450,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -9530,7 +9532,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -9613,7 +9615,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -9712,8 +9714,7 @@ describe('v1.DataMigrationServiceClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -9733,7 +9734,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -9742,8 +9743,7 @@ describe('v1.DataMigrationServiceClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -9759,7 +9759,7 @@ describe('v1.DataMigrationServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('connectionProfile', () => {
+    describe('connectionProfile', async () => {
       const fakePath = '/rendered/path/connectionProfile';
       const expectedParameters = {
         project: 'projectValue',
@@ -9771,7 +9771,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.connectionProfilePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -9837,7 +9837,7 @@ describe('v1.DataMigrationServiceClient', () => {
       });
     });
 
-    describe('conversionWorkspace', () => {
+    describe('conversionWorkspace', async () => {
       const fakePath = '/rendered/path/conversionWorkspace';
       const expectedParameters = {
         project: 'projectValue',
@@ -9849,7 +9849,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.conversionWorkspacePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -9916,7 +9916,7 @@ describe('v1.DataMigrationServiceClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -9927,7 +9927,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -9966,7 +9966,7 @@ describe('v1.DataMigrationServiceClient', () => {
       });
     });
 
-    describe('mappingRule', () => {
+    describe('mappingRule', async () => {
       const fakePath = '/rendered/path/mappingRule';
       const expectedParameters = {
         project: 'projectValue',
@@ -9979,7 +9979,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.mappingRulePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10044,7 +10044,7 @@ describe('v1.DataMigrationServiceClient', () => {
       });
     });
 
-    describe('migrationJob', () => {
+    describe('migrationJob', async () => {
       const fakePath = '/rendered/path/migrationJob';
       const expectedParameters = {
         project: 'projectValue',
@@ -10056,7 +10056,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.migrationJobPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10109,7 +10109,7 @@ describe('v1.DataMigrationServiceClient', () => {
       });
     });
 
-    describe('privateConnection', () => {
+    describe('privateConnection', async () => {
       const fakePath = '/rendered/path/privateConnection';
       const expectedParameters = {
         project: 'projectValue',
@@ -10121,7 +10121,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.privateConnectionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -10187,7 +10187,7 @@ describe('v1.DataMigrationServiceClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -10197,7 +10197,7 @@ describe('v1.DataMigrationServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

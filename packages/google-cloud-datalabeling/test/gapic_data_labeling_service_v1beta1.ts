@@ -300,7 +300,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.dataLabelingServiceStub);
       client.close().then(() => {
         done();
@@ -363,7 +365,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateDatasetRequest()
       );
@@ -395,7 +397,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateDatasetRequest()
       );
@@ -443,7 +445,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateDatasetRequest()
       );
@@ -475,7 +477,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateDatasetRequest()
       );
@@ -497,7 +499,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetDatasetRequest()
       );
@@ -529,7 +531,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetDatasetRequest()
       );
@@ -577,7 +579,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetDatasetRequest()
       );
@@ -609,7 +611,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetDatasetRequest()
       );
@@ -631,7 +633,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteDatasetRequest()
       );
@@ -663,7 +665,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteDatasetRequest()
       );
@@ -711,7 +713,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteDatasetRequest()
       );
@@ -743,7 +745,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteDatasetRequest()
       );
@@ -765,7 +767,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetDataItemRequest()
       );
@@ -797,7 +799,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetDataItemRequest()
       );
@@ -845,7 +847,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetDataItemRequest()
       );
@@ -877,7 +879,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetDataItemRequest()
       );
@@ -899,7 +901,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetAnnotatedDatasetRequest()
       );
@@ -932,7 +934,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetAnnotatedDatasetRequest()
       );
@@ -980,7 +982,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetAnnotatedDatasetRequest()
       );
@@ -1012,7 +1014,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetAnnotatedDatasetRequest()
       );
@@ -1034,7 +1036,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteAnnotatedDatasetRequest()
       );
@@ -1067,7 +1069,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteAnnotatedDatasetRequest()
       );
@@ -1115,7 +1117,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteAnnotatedDatasetRequest()
       );
@@ -1150,7 +1152,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteAnnotatedDatasetRequest()
       );
@@ -1175,7 +1177,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetExampleRequest()
       );
@@ -1207,7 +1209,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetExampleRequest()
       );
@@ -1255,7 +1257,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetExampleRequest()
       );
@@ -1287,7 +1289,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetExampleRequest()
       );
@@ -1309,7 +1311,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateAnnotationSpecSetRequest()
       );
@@ -1342,7 +1344,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateAnnotationSpecSetRequest()
       );
@@ -1390,7 +1392,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateAnnotationSpecSetRequest()
       );
@@ -1425,7 +1427,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateAnnotationSpecSetRequest()
       );
@@ -1450,7 +1452,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetAnnotationSpecSetRequest()
       );
@@ -1483,7 +1485,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetAnnotationSpecSetRequest()
       );
@@ -1531,7 +1533,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetAnnotationSpecSetRequest()
       );
@@ -1563,7 +1565,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetAnnotationSpecSetRequest()
       );
@@ -1585,7 +1587,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteAnnotationSpecSetRequest()
       );
@@ -1618,7 +1620,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteAnnotationSpecSetRequest()
       );
@@ -1666,7 +1668,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteAnnotationSpecSetRequest()
       );
@@ -1701,7 +1703,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteAnnotationSpecSetRequest()
       );
@@ -1726,7 +1728,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetInstructionRequest()
       );
@@ -1758,7 +1760,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetInstructionRequest()
       );
@@ -1806,7 +1808,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetInstructionRequest()
       );
@@ -1838,7 +1840,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetInstructionRequest()
       );
@@ -1860,7 +1862,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteInstructionRequest()
       );
@@ -1892,7 +1894,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteInstructionRequest()
       );
@@ -1940,7 +1942,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteInstructionRequest()
       );
@@ -1972,7 +1974,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteInstructionRequest()
       );
@@ -1994,7 +1996,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetEvaluationRequest()
       );
@@ -2026,7 +2028,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetEvaluationRequest()
       );
@@ -2074,7 +2076,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetEvaluationRequest()
       );
@@ -2106,7 +2108,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetEvaluationRequest()
       );
@@ -2128,7 +2130,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateEvaluationJobRequest()
       );
@@ -2161,7 +2163,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateEvaluationJobRequest()
       );
@@ -2209,7 +2211,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateEvaluationJobRequest()
       );
@@ -2241,7 +2243,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateEvaluationJobRequest()
       );
@@ -2263,7 +2265,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.UpdateEvaluationJobRequest()
       );
@@ -2297,7 +2299,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.UpdateEvaluationJobRequest()
       );
@@ -2346,7 +2348,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.UpdateEvaluationJobRequest()
       );
@@ -2379,7 +2381,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.UpdateEvaluationJobRequest()
       );
@@ -2402,7 +2404,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetEvaluationJobRequest()
       );
@@ -2434,7 +2436,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetEvaluationJobRequest()
       );
@@ -2482,7 +2484,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetEvaluationJobRequest()
       );
@@ -2514,7 +2516,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetEvaluationJobRequest()
       );
@@ -2536,7 +2538,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.PauseEvaluationJobRequest()
       );
@@ -2569,7 +2571,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.PauseEvaluationJobRequest()
       );
@@ -2617,7 +2619,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.PauseEvaluationJobRequest()
       );
@@ -2649,7 +2651,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.PauseEvaluationJobRequest()
       );
@@ -2671,7 +2673,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ResumeEvaluationJobRequest()
       );
@@ -2704,7 +2706,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ResumeEvaluationJobRequest()
       );
@@ -2752,7 +2754,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ResumeEvaluationJobRequest()
       );
@@ -2784,7 +2786,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ResumeEvaluationJobRequest()
       );
@@ -2806,7 +2808,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteEvaluationJobRequest()
       );
@@ -2839,7 +2841,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteEvaluationJobRequest()
       );
@@ -2887,7 +2889,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteEvaluationJobRequest()
       );
@@ -2919,7 +2921,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteEvaluationJobRequest()
       );
@@ -2941,7 +2943,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ImportDataRequest()
       );
@@ -2974,7 +2976,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ImportDataRequest()
       );
@@ -3029,7 +3031,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ImportDataRequest()
       );
@@ -3061,7 +3063,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ImportDataRequest()
       );
@@ -3095,7 +3097,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3118,7 +3120,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3137,7 +3139,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ExportDataRequest()
       );
@@ -3170,7 +3172,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ExportDataRequest()
       );
@@ -3225,7 +3227,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ExportDataRequest()
       );
@@ -3257,7 +3259,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ExportDataRequest()
       );
@@ -3291,7 +3293,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3314,7 +3316,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3333,7 +3335,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.LabelImageRequest()
       );
@@ -3366,7 +3368,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.LabelImageRequest()
       );
@@ -3421,7 +3423,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.LabelImageRequest()
       );
@@ -3453,7 +3455,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.LabelImageRequest()
       );
@@ -3487,7 +3489,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3510,7 +3512,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3529,7 +3531,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.LabelVideoRequest()
       );
@@ -3562,7 +3564,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.LabelVideoRequest()
       );
@@ -3617,7 +3619,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.LabelVideoRequest()
       );
@@ -3649,7 +3651,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.LabelVideoRequest()
       );
@@ -3683,7 +3685,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3706,7 +3708,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3725,7 +3727,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.LabelTextRequest()
       );
@@ -3758,7 +3760,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.LabelTextRequest()
       );
@@ -3813,7 +3815,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.LabelTextRequest()
       );
@@ -3845,7 +3847,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.LabelTextRequest()
       );
@@ -3879,7 +3881,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3902,7 +3904,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3921,7 +3923,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateInstructionRequest()
       );
@@ -3955,7 +3957,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateInstructionRequest()
       );
@@ -4010,7 +4012,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateInstructionRequest()
       );
@@ -4042,7 +4044,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateInstructionRequest()
       );
@@ -4076,7 +4078,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4099,7 +4101,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4121,7 +4123,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDatasetsRequest()
       );
@@ -4161,7 +4163,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDatasetsRequest()
       );
@@ -4217,7 +4219,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDatasetsRequest()
       );
@@ -4249,7 +4251,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDatasetsRequest()
       );
@@ -4311,7 +4313,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDatasetsRequest()
       );
@@ -4364,7 +4366,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDatasetsRequest()
       );
@@ -4414,7 +4416,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDatasetsRequest()
       );
@@ -4458,7 +4460,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDataItemsRequest()
       );
@@ -4498,7 +4500,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDataItemsRequest()
       );
@@ -4554,7 +4556,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDataItemsRequest()
       );
@@ -4586,7 +4588,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDataItemsRequest()
       );
@@ -4648,7 +4650,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDataItemsRequest()
       );
@@ -4699,7 +4701,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDataItemsRequest()
       );
@@ -4750,7 +4752,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDataItemsRequest()
       );
@@ -4794,7 +4796,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotatedDatasetsRequest()
       );
@@ -4835,7 +4837,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotatedDatasetsRequest()
       );
@@ -4893,7 +4895,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotatedDatasetsRequest()
       );
@@ -4928,7 +4930,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotatedDatasetsRequest()
       );
@@ -4998,7 +5000,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotatedDatasetsRequest()
       );
@@ -5057,7 +5059,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotatedDatasetsRequest()
       );
@@ -5112,7 +5114,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotatedDatasetsRequest()
       );
@@ -5160,7 +5162,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListExamplesRequest()
       );
@@ -5200,7 +5202,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListExamplesRequest()
       );
@@ -5256,7 +5258,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListExamplesRequest()
       );
@@ -5288,7 +5290,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListExamplesRequest()
       );
@@ -5350,7 +5352,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListExamplesRequest()
       );
@@ -5403,7 +5405,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListExamplesRequest()
       );
@@ -5453,7 +5455,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListExamplesRequest()
       );
@@ -5497,7 +5499,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotationSpecSetsRequest()
       );
@@ -5538,7 +5540,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotationSpecSetsRequest()
       );
@@ -5596,7 +5598,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotationSpecSetsRequest()
       );
@@ -5631,7 +5633,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotationSpecSetsRequest()
       );
@@ -5701,7 +5703,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotationSpecSetsRequest()
       );
@@ -5760,7 +5762,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotationSpecSetsRequest()
       );
@@ -5815,7 +5817,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotationSpecSetsRequest()
       );
@@ -5863,7 +5865,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListInstructionsRequest()
       );
@@ -5903,7 +5905,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListInstructionsRequest()
       );
@@ -5961,7 +5963,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListInstructionsRequest()
       );
@@ -5993,7 +5995,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListInstructionsRequest()
       );
@@ -6055,7 +6057,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListInstructionsRequest()
       );
@@ -6106,7 +6108,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListInstructionsRequest()
       );
@@ -6157,7 +6159,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListInstructionsRequest()
       );
@@ -6201,7 +6203,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.SearchEvaluationsRequest()
       );
@@ -6241,7 +6243,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.SearchEvaluationsRequest()
       );
@@ -6299,7 +6301,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.SearchEvaluationsRequest()
       );
@@ -6331,7 +6333,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.SearchEvaluationsRequest()
       );
@@ -6393,7 +6395,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.SearchEvaluationsRequest()
       );
@@ -6444,7 +6446,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.SearchEvaluationsRequest()
       );
@@ -6495,7 +6497,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.SearchEvaluationsRequest()
       );
@@ -6539,7 +6541,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsRequest()
       );
@@ -6580,7 +6582,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsRequest()
       );
@@ -6638,7 +6640,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsRequest()
       );
@@ -6673,7 +6675,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsRequest()
       );
@@ -6743,7 +6745,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsRequest()
       );
@@ -6802,7 +6804,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsRequest()
       );
@@ -6857,7 +6859,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsRequest()
       );
@@ -6905,7 +6907,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListEvaluationJobsRequest()
       );
@@ -6946,7 +6948,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListEvaluationJobsRequest()
       );
@@ -7004,7 +7006,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListEvaluationJobsRequest()
       );
@@ -7036,7 +7038,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListEvaluationJobsRequest()
       );
@@ -7100,7 +7102,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListEvaluationJobsRequest()
       );
@@ -7153,7 +7155,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListEvaluationJobsRequest()
       );
@@ -7204,7 +7206,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListEvaluationJobsRequest()
       );
@@ -7242,7 +7244,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('annotatedDataset', () => {
+    describe('annotatedDataset', async () => {
       const fakePath = '/rendered/path/annotatedDataset';
       const expectedParameters = {
         project: 'projectValue',
@@ -7254,7 +7256,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.annotatedDatasetPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7311,7 +7313,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       });
     });
 
-    describe('annotationSpecSet', () => {
+    describe('annotationSpecSet', async () => {
       const fakePath = '/rendered/path/annotationSpecSet';
       const expectedParameters = {
         project: 'projectValue',
@@ -7322,7 +7324,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.annotationSpecSetPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7374,7 +7376,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       });
     });
 
-    describe('dataItem', () => {
+    describe('dataItem', async () => {
       const fakePath = '/rendered/path/dataItem';
       const expectedParameters = {
         project: 'projectValue',
@@ -7386,7 +7388,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.dataItemPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7439,7 +7441,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       });
     });
 
-    describe('dataset', () => {
+    describe('dataset', async () => {
       const fakePath = '/rendered/path/dataset';
       const expectedParameters = {
         project: 'projectValue',
@@ -7450,7 +7452,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.datasetPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7489,7 +7491,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       });
     });
 
-    describe('evaluation', () => {
+    describe('evaluation', async () => {
       const fakePath = '/rendered/path/evaluation';
       const expectedParameters = {
         project: 'projectValue',
@@ -7501,7 +7503,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.evaluationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7554,7 +7556,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       });
     });
 
-    describe('evaluationJob', () => {
+    describe('evaluationJob', async () => {
       const fakePath = '/rendered/path/evaluationJob';
       const expectedParameters = {
         project: 'projectValue',
@@ -7565,7 +7567,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.evaluationJobPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7607,7 +7609,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       });
     });
 
-    describe('example', () => {
+    describe('example', async () => {
       const fakePath = '/rendered/path/example';
       const expectedParameters = {
         project: 'projectValue',
@@ -7620,7 +7622,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.examplePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7684,7 +7686,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       });
     });
 
-    describe('instruction', () => {
+    describe('instruction', async () => {
       const fakePath = '/rendered/path/instruction';
       const expectedParameters = {
         project: 'projectValue',
@@ -7695,7 +7697,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.instructionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7737,7 +7739,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -7747,7 +7749,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

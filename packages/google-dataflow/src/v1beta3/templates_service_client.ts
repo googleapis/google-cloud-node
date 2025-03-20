@@ -469,7 +469,9 @@ export class TemplatesServiceClient {
         project_id: request.projectId ?? '',
         location: request.location ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createJobFromTemplate request %j', request);
     const wrappedCallback:
       | Callback<
@@ -599,7 +601,9 @@ export class TemplatesServiceClient {
         project_id: request.projectId ?? '',
         location: request.location ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('launchTemplate request %j', request);
     const wrappedCallback:
       | Callback<
@@ -718,7 +722,9 @@ export class TemplatesServiceClient {
         project_id: request.projectId ?? '',
         location: request.location ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getTemplate request %j', request);
     const wrappedCallback:
       | Callback<

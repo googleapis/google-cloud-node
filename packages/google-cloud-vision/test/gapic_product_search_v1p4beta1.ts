@@ -285,7 +285,9 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.productSearchStub);
       client.close().then(() => {
         done();
@@ -344,7 +346,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.CreateProductSetRequest()
       );
@@ -375,7 +377,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.CreateProductSetRequest()
       );
@@ -422,7 +424,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.CreateProductSetRequest()
       );
@@ -453,7 +455,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.CreateProductSetRequest()
       );
@@ -474,7 +476,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.GetProductSetRequest()
       );
@@ -505,7 +507,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.GetProductSetRequest()
       );
@@ -552,7 +554,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.GetProductSetRequest()
       );
@@ -583,7 +585,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.GetProductSetRequest()
       );
@@ -604,7 +606,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.UpdateProductSetRequest()
       );
@@ -636,7 +638,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.UpdateProductSetRequest()
       );
@@ -684,7 +686,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.UpdateProductSetRequest()
       );
@@ -716,7 +718,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.UpdateProductSetRequest()
       );
@@ -738,7 +740,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.DeleteProductSetRequest()
       );
@@ -769,7 +771,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.DeleteProductSetRequest()
       );
@@ -816,7 +818,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.DeleteProductSetRequest()
       );
@@ -847,7 +849,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.DeleteProductSetRequest()
       );
@@ -868,7 +870,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.CreateProductRequest()
       );
@@ -899,7 +901,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.CreateProductRequest()
       );
@@ -946,7 +948,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.CreateProductRequest()
       );
@@ -977,7 +979,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.CreateProductRequest()
       );
@@ -998,7 +1000,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.GetProductRequest()
       );
@@ -1029,7 +1031,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.GetProductRequest()
       );
@@ -1076,7 +1078,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.GetProductRequest()
       );
@@ -1107,7 +1109,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.GetProductRequest()
       );
@@ -1128,7 +1130,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.UpdateProductRequest()
       );
@@ -1160,7 +1162,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.UpdateProductRequest()
       );
@@ -1208,7 +1210,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.UpdateProductRequest()
       );
@@ -1240,7 +1242,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.UpdateProductRequest()
       );
@@ -1262,7 +1264,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.DeleteProductRequest()
       );
@@ -1293,7 +1295,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.DeleteProductRequest()
       );
@@ -1340,7 +1342,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.DeleteProductRequest()
       );
@@ -1371,7 +1373,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.DeleteProductRequest()
       );
@@ -1392,7 +1394,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.CreateReferenceImageRequest()
       );
@@ -1424,7 +1426,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.CreateReferenceImageRequest()
       );
@@ -1471,7 +1473,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.CreateReferenceImageRequest()
       );
@@ -1502,7 +1504,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.CreateReferenceImageRequest()
       );
@@ -1523,7 +1525,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.DeleteReferenceImageRequest()
       );
@@ -1555,7 +1557,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.DeleteReferenceImageRequest()
       );
@@ -1602,7 +1604,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.DeleteReferenceImageRequest()
       );
@@ -1633,7 +1635,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.DeleteReferenceImageRequest()
       );
@@ -1654,7 +1656,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.GetReferenceImageRequest()
       );
@@ -1685,7 +1687,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.GetReferenceImageRequest()
       );
@@ -1732,7 +1734,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.GetReferenceImageRequest()
       );
@@ -1763,7 +1765,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.GetReferenceImageRequest()
       );
@@ -1784,7 +1786,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.AddProductToProductSetRequest()
       );
@@ -1816,7 +1818,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.AddProductToProductSetRequest()
       );
@@ -1863,7 +1865,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.AddProductToProductSetRequest()
       );
@@ -1897,7 +1899,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.AddProductToProductSetRequest()
       );
@@ -1921,7 +1923,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.RemoveProductFromProductSetRequest()
       );
@@ -1953,7 +1955,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.RemoveProductFromProductSetRequest()
       );
@@ -2000,7 +2002,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.RemoveProductFromProductSetRequest()
       );
@@ -2034,7 +2036,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.RemoveProductFromProductSetRequest()
       );
@@ -2058,7 +2060,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.ImportProductSetsRequest()
       );
@@ -2091,7 +2093,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.ImportProductSetsRequest()
       );
@@ -2145,7 +2147,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.ImportProductSetsRequest()
       );
@@ -2176,7 +2178,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.ImportProductSetsRequest()
       );
@@ -2209,7 +2211,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2231,7 +2233,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2252,7 +2254,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.PurgeProductsRequest()
       );
@@ -2285,7 +2287,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.PurgeProductsRequest()
       );
@@ -2339,7 +2341,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.PurgeProductsRequest()
       );
@@ -2370,7 +2372,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.PurgeProductsRequest()
       );
@@ -2403,7 +2405,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2425,7 +2427,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2446,7 +2448,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.ListProductSetsRequest()
       );
@@ -2485,7 +2487,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.ListProductSetsRequest()
       );
@@ -2540,7 +2542,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.ListProductSetsRequest()
       );
@@ -2571,7 +2573,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.ListProductSetsRequest()
       );
@@ -2631,7 +2633,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.ListProductSetsRequest()
       );
@@ -2680,7 +2682,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.ListProductSetsRequest()
       );
@@ -2729,7 +2731,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.ListProductSetsRequest()
       );
@@ -2772,7 +2774,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.ListProductsRequest()
       );
@@ -2811,7 +2813,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.ListProductsRequest()
       );
@@ -2866,7 +2868,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.ListProductsRequest()
       );
@@ -2897,7 +2899,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.ListProductsRequest()
       );
@@ -2957,7 +2959,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.ListProductsRequest()
       );
@@ -3008,7 +3010,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.ListProductsRequest()
       );
@@ -3057,7 +3059,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.ListProductsRequest()
       );
@@ -3099,7 +3101,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.ListReferenceImagesRequest()
       );
@@ -3139,7 +3141,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.ListReferenceImagesRequest()
       );
@@ -3196,7 +3198,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.ListReferenceImagesRequest()
       );
@@ -3227,7 +3229,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.ListReferenceImagesRequest()
       );
@@ -3288,7 +3290,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.ListReferenceImagesRequest()
       );
@@ -3338,7 +3340,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.ListReferenceImagesRequest()
       );
@@ -3388,7 +3390,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.ListReferenceImagesRequest()
       );
@@ -3431,7 +3433,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.ListProductsInProductSetRequest()
       );
@@ -3471,7 +3473,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.ListProductsInProductSetRequest()
       );
@@ -3526,7 +3528,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.ListProductsInProductSetRequest()
       );
@@ -3560,7 +3562,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.ListProductsInProductSetRequest()
       );
@@ -3626,7 +3628,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.ListProductsInProductSetRequest()
       );
@@ -3681,7 +3683,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.ListProductsInProductSetRequest()
       );
@@ -3734,7 +3736,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p4beta1.ListProductsInProductSetRequest()
       );
@@ -3775,7 +3777,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -3785,7 +3787,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3824,7 +3826,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
       });
     });
 
-    describe('product', () => {
+    describe('product', async () => {
       const fakePath = '/rendered/path/product';
       const expectedParameters = {
         project: 'projectValue',
@@ -3835,7 +3837,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.productPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3888,7 +3890,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
       });
     });
 
-    describe('productSet', () => {
+    describe('productSet', async () => {
       const fakePath = '/rendered/path/productSet';
       const expectedParameters = {
         project: 'projectValue',
@@ -3899,7 +3901,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.productSetPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -3952,7 +3954,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
       });
     });
 
-    describe('referenceImage', () => {
+    describe('referenceImage', async () => {
       const fakePath = '/rendered/path/referenceImage';
       const expectedParameters = {
         project: 'projectValue',
@@ -3964,7 +3966,7 @@ describe('v1p4beta1.ProductSearchClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.referenceImagePathTemplate.render = sinon
         .stub()
         .returns(fakePath);

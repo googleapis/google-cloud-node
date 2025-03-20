@@ -524,7 +524,9 @@ export class TaxonomyCategoryServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getTaxonomyCategory request %j', request);
     const wrappedCallback:
       | Callback<
@@ -669,7 +671,9 @@ export class TaxonomyCategoryServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.ads.admanager.v1.IListTaxonomyCategoriesRequest,
@@ -752,7 +756,9 @@ export class TaxonomyCategoryServiceClient {
       });
     const defaultCallSettings = this._defaults['listTaxonomyCategories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTaxonomyCategories stream %j', request);
     return this.descriptors.page.listTaxonomyCategories.createStream(
       this.innerApiCalls.listTaxonomyCategories as GaxCall,
@@ -817,7 +823,9 @@ export class TaxonomyCategoryServiceClient {
       });
     const defaultCallSettings = this._defaults['listTaxonomyCategories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listTaxonomyCategories iterate %j', request);
     return this.descriptors.page.listTaxonomyCategories.asyncIterate(
       this.innerApiCalls['listTaxonomyCategories'] as GaxCall,

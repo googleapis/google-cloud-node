@@ -696,7 +696,9 @@ export class SessionsClient {
       this._gaxModule.routingHeader.fromParams({
         session: request.session ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('detectIntent request %j', request);
     const wrappedCallback:
       | Callback<
@@ -754,7 +756,9 @@ export class SessionsClient {
    * region_tag:dialogflow_v2_generated_Sessions_StreamingDetectIntent_async
    */
   streamingDetectIntent(options?: CallOptions): gax.CancellableStream {
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('streamingDetectIntent stream %j', options);
     return this.innerApiCalls.streamingDetectIntent(null, options);
   }

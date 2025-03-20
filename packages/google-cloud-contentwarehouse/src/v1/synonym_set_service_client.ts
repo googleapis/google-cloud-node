@@ -502,7 +502,9 @@ export class SynonymSetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createSynonymSet request %j', request);
     const wrappedCallback:
       | Callback<
@@ -625,7 +627,9 @@ export class SynonymSetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getSynonymSet request %j', request);
     const wrappedCallback:
       | Callback<
@@ -756,7 +760,9 @@ export class SynonymSetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateSynonymSet request %j', request);
     const wrappedCallback:
       | Callback<
@@ -884,7 +890,9 @@ export class SynonymSetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteSynonymSet request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1019,7 +1027,9 @@ export class SynonymSetServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.contentwarehouse.v1.IListSynonymSetsRequest,
@@ -1092,7 +1102,9 @@ export class SynonymSetServiceClient {
       });
     const defaultCallSettings = this._defaults['listSynonymSets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSynonymSets stream %j', request);
     return this.descriptors.page.listSynonymSets.createStream(
       this.innerApiCalls.listSynonymSets as GaxCall,
@@ -1147,7 +1159,9 @@ export class SynonymSetServiceClient {
       });
     const defaultCallSettings = this._defaults['listSynonymSets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSynonymSets iterate %j', request);
     return this.descriptors.page.listSynonymSets.asyncIterate(
       this.innerApiCalls['listSynonymSets'] as GaxCall,

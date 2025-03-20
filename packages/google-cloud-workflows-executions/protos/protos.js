@@ -6232,6 +6232,39 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.workflows.v1.Workflows|listWorkflowRevisions}.
+                         * @memberof google.cloud.workflows.v1.Workflows
+                         * @typedef ListWorkflowRevisionsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.workflows.v1.ListWorkflowRevisionsResponse} [response] ListWorkflowRevisionsResponse
+                         */
+    
+                        /**
+                         * Calls ListWorkflowRevisions.
+                         * @function listWorkflowRevisions
+                         * @memberof google.cloud.workflows.v1.Workflows
+                         * @instance
+                         * @param {google.cloud.workflows.v1.IListWorkflowRevisionsRequest} request ListWorkflowRevisionsRequest message or plain object
+                         * @param {google.cloud.workflows.v1.Workflows.ListWorkflowRevisionsCallback} callback Node-style callback called with the error, if any, and ListWorkflowRevisionsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Workflows.prototype.listWorkflowRevisions = function listWorkflowRevisions(request, callback) {
+                            return this.rpcCall(listWorkflowRevisions, $root.google.cloud.workflows.v1.ListWorkflowRevisionsRequest, $root.google.cloud.workflows.v1.ListWorkflowRevisionsResponse, request, callback);
+                        }, "name", { value: "ListWorkflowRevisions" });
+    
+                        /**
+                         * Calls ListWorkflowRevisions.
+                         * @function listWorkflowRevisions
+                         * @memberof google.cloud.workflows.v1.Workflows
+                         * @instance
+                         * @param {google.cloud.workflows.v1.IListWorkflowRevisionsRequest} request ListWorkflowRevisionsRequest message or plain object
+                         * @returns {Promise<google.cloud.workflows.v1.ListWorkflowRevisionsResponse>} Promise
+                         * @variation 2
+                         */
+    
                         return Workflows;
                     })();
     
@@ -6255,6 +6288,11 @@
                          * @property {google.cloud.workflows.v1.Workflow.IStateError|null} [stateError] Workflow stateError
                          * @property {google.cloud.workflows.v1.Workflow.CallLogLevel|null} [callLogLevel] Workflow callLogLevel
                          * @property {Object.<string,string>|null} [userEnvVars] Workflow userEnvVars
+                         * @property {google.cloud.workflows.v1.ExecutionHistoryLevel|null} [executionHistoryLevel] Workflow executionHistoryLevel
+                         * @property {Array.<string>|null} [allKmsKeys] Workflow allKmsKeys
+                         * @property {Array.<string>|null} [allKmsKeysVersions] Workflow allKmsKeysVersions
+                         * @property {string|null} [cryptoKeyVersion] Workflow cryptoKeyVersion
+                         * @property {Object.<string,string>|null} [tags] Workflow tags
                          */
     
                         /**
@@ -6268,6 +6306,9 @@
                         function Workflow(properties) {
                             this.labels = {};
                             this.userEnvVars = {};
+                            this.allKmsKeys = [];
+                            this.allKmsKeysVersions = [];
+                            this.tags = {};
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -6386,6 +6427,46 @@
                          */
                         Workflow.prototype.userEnvVars = $util.emptyObject;
     
+                        /**
+                         * Workflow executionHistoryLevel.
+                         * @member {google.cloud.workflows.v1.ExecutionHistoryLevel} executionHistoryLevel
+                         * @memberof google.cloud.workflows.v1.Workflow
+                         * @instance
+                         */
+                        Workflow.prototype.executionHistoryLevel = 0;
+    
+                        /**
+                         * Workflow allKmsKeys.
+                         * @member {Array.<string>} allKmsKeys
+                         * @memberof google.cloud.workflows.v1.Workflow
+                         * @instance
+                         */
+                        Workflow.prototype.allKmsKeys = $util.emptyArray;
+    
+                        /**
+                         * Workflow allKmsKeysVersions.
+                         * @member {Array.<string>} allKmsKeysVersions
+                         * @memberof google.cloud.workflows.v1.Workflow
+                         * @instance
+                         */
+                        Workflow.prototype.allKmsKeysVersions = $util.emptyArray;
+    
+                        /**
+                         * Workflow cryptoKeyVersion.
+                         * @member {string} cryptoKeyVersion
+                         * @memberof google.cloud.workflows.v1.Workflow
+                         * @instance
+                         */
+                        Workflow.prototype.cryptoKeyVersion = "";
+    
+                        /**
+                         * Workflow tags.
+                         * @member {Object.<string,string>} tags
+                         * @memberof google.cloud.workflows.v1.Workflow
+                         * @instance
+                         */
+                        Workflow.prototype.tags = $util.emptyObject;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -6454,6 +6535,19 @@
                             if (message.userEnvVars != null && Object.hasOwnProperty.call(message, "userEnvVars"))
                                 for (var keys = Object.keys(message.userEnvVars), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 14, wireType 2 =*/114).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.userEnvVars[keys[i]]).ldelim();
+                            if (message.executionHistoryLevel != null && Object.hasOwnProperty.call(message, "executionHistoryLevel"))
+                                writer.uint32(/* id 15, wireType 0 =*/120).int32(message.executionHistoryLevel);
+                            if (message.allKmsKeys != null && message.allKmsKeys.length)
+                                for (var i = 0; i < message.allKmsKeys.length; ++i)
+                                    writer.uint32(/* id 16, wireType 2 =*/130).string(message.allKmsKeys[i]);
+                            if (message.allKmsKeysVersions != null && message.allKmsKeysVersions.length)
+                                for (var i = 0; i < message.allKmsKeysVersions.length; ++i)
+                                    writer.uint32(/* id 17, wireType 2 =*/138).string(message.allKmsKeysVersions[i]);
+                            if (message.cryptoKeyVersion != null && Object.hasOwnProperty.call(message, "cryptoKeyVersion"))
+                                writer.uint32(/* id 18, wireType 2 =*/146).string(message.cryptoKeyVersion);
+                            if (message.tags != null && Object.hasOwnProperty.call(message, "tags"))
+                                for (var keys = Object.keys(message.tags), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 19, wireType 2 =*/154).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.tags[keys[i]]).ldelim();
                             return writer;
                         };
     
@@ -6582,6 +6676,49 @@
                                         message.userEnvVars[key] = value;
                                         break;
                                     }
+                                case 15: {
+                                        message.executionHistoryLevel = reader.int32();
+                                        break;
+                                    }
+                                case 16: {
+                                        if (!(message.allKmsKeys && message.allKmsKeys.length))
+                                            message.allKmsKeys = [];
+                                        message.allKmsKeys.push(reader.string());
+                                        break;
+                                    }
+                                case 17: {
+                                        if (!(message.allKmsKeysVersions && message.allKmsKeysVersions.length))
+                                            message.allKmsKeysVersions = [];
+                                        message.allKmsKeysVersions.push(reader.string());
+                                        break;
+                                    }
+                                case 18: {
+                                        message.cryptoKeyVersion = reader.string();
+                                        break;
+                                    }
+                                case 19: {
+                                        if (message.tags === $util.emptyObject)
+                                            message.tags = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.tags[key] = value;
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -6693,6 +6830,40 @@
                                     if (!$util.isString(message.userEnvVars[key[i]]))
                                         return "userEnvVars: string{k:string} expected";
                             }
+                            if (message.executionHistoryLevel != null && message.hasOwnProperty("executionHistoryLevel"))
+                                switch (message.executionHistoryLevel) {
+                                default:
+                                    return "executionHistoryLevel: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.allKmsKeys != null && message.hasOwnProperty("allKmsKeys")) {
+                                if (!Array.isArray(message.allKmsKeys))
+                                    return "allKmsKeys: array expected";
+                                for (var i = 0; i < message.allKmsKeys.length; ++i)
+                                    if (!$util.isString(message.allKmsKeys[i]))
+                                        return "allKmsKeys: string[] expected";
+                            }
+                            if (message.allKmsKeysVersions != null && message.hasOwnProperty("allKmsKeysVersions")) {
+                                if (!Array.isArray(message.allKmsKeysVersions))
+                                    return "allKmsKeysVersions: array expected";
+                                for (var i = 0; i < message.allKmsKeysVersions.length; ++i)
+                                    if (!$util.isString(message.allKmsKeysVersions[i]))
+                                        return "allKmsKeysVersions: string[] expected";
+                            }
+                            if (message.cryptoKeyVersion != null && message.hasOwnProperty("cryptoKeyVersion"))
+                                if (!$util.isString(message.cryptoKeyVersion))
+                                    return "cryptoKeyVersion: string expected";
+                            if (message.tags != null && message.hasOwnProperty("tags")) {
+                                if (!$util.isObject(message.tags))
+                                    return "tags: object expected";
+                                var key = Object.keys(message.tags);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.tags[key[i]]))
+                                        return "tags: string{k:string} expected";
+                            }
                             return null;
                         };
     
@@ -6798,6 +6969,49 @@
                                 for (var keys = Object.keys(object.userEnvVars), i = 0; i < keys.length; ++i)
                                     message.userEnvVars[keys[i]] = String(object.userEnvVars[keys[i]]);
                             }
+                            switch (object.executionHistoryLevel) {
+                            default:
+                                if (typeof object.executionHistoryLevel === "number") {
+                                    message.executionHistoryLevel = object.executionHistoryLevel;
+                                    break;
+                                }
+                                break;
+                            case "EXECUTION_HISTORY_LEVEL_UNSPECIFIED":
+                            case 0:
+                                message.executionHistoryLevel = 0;
+                                break;
+                            case "EXECUTION_HISTORY_BASIC":
+                            case 1:
+                                message.executionHistoryLevel = 1;
+                                break;
+                            case "EXECUTION_HISTORY_DETAILED":
+                            case 2:
+                                message.executionHistoryLevel = 2;
+                                break;
+                            }
+                            if (object.allKmsKeys) {
+                                if (!Array.isArray(object.allKmsKeys))
+                                    throw TypeError(".google.cloud.workflows.v1.Workflow.allKmsKeys: array expected");
+                                message.allKmsKeys = [];
+                                for (var i = 0; i < object.allKmsKeys.length; ++i)
+                                    message.allKmsKeys[i] = String(object.allKmsKeys[i]);
+                            }
+                            if (object.allKmsKeysVersions) {
+                                if (!Array.isArray(object.allKmsKeysVersions))
+                                    throw TypeError(".google.cloud.workflows.v1.Workflow.allKmsKeysVersions: array expected");
+                                message.allKmsKeysVersions = [];
+                                for (var i = 0; i < object.allKmsKeysVersions.length; ++i)
+                                    message.allKmsKeysVersions[i] = String(object.allKmsKeysVersions[i]);
+                            }
+                            if (object.cryptoKeyVersion != null)
+                                message.cryptoKeyVersion = String(object.cryptoKeyVersion);
+                            if (object.tags) {
+                                if (typeof object.tags !== "object")
+                                    throw TypeError(".google.cloud.workflows.v1.Workflow.tags: object expected");
+                                message.tags = {};
+                                for (var keys = Object.keys(object.tags), i = 0; i < keys.length; ++i)
+                                    message.tags[keys[i]] = String(object.tags[keys[i]]);
+                            }
                             return message;
                         };
     
@@ -6814,9 +7028,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.allKmsKeys = [];
+                                object.allKmsKeysVersions = [];
+                            }
                             if (options.objects || options.defaults) {
                                 object.labels = {};
                                 object.userEnvVars = {};
+                                object.tags = {};
                             }
                             if (options.defaults) {
                                 object.name = "";
@@ -6830,6 +7049,8 @@
                                 object.cryptoKeyName = "";
                                 object.stateError = null;
                                 object.callLogLevel = options.enums === String ? "CALL_LOG_LEVEL_UNSPECIFIED" : 0;
+                                object.executionHistoryLevel = options.enums === String ? "EXECUTION_HISTORY_LEVEL_UNSPECIFIED" : 0;
+                                object.cryptoKeyVersion = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -6868,6 +7089,25 @@
                                 object.userEnvVars = {};
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.userEnvVars[keys2[j]] = message.userEnvVars[keys2[j]];
+                            }
+                            if (message.executionHistoryLevel != null && message.hasOwnProperty("executionHistoryLevel"))
+                                object.executionHistoryLevel = options.enums === String ? $root.google.cloud.workflows.v1.ExecutionHistoryLevel[message.executionHistoryLevel] === undefined ? message.executionHistoryLevel : $root.google.cloud.workflows.v1.ExecutionHistoryLevel[message.executionHistoryLevel] : message.executionHistoryLevel;
+                            if (message.allKmsKeys && message.allKmsKeys.length) {
+                                object.allKmsKeys = [];
+                                for (var j = 0; j < message.allKmsKeys.length; ++j)
+                                    object.allKmsKeys[j] = message.allKmsKeys[j];
+                            }
+                            if (message.allKmsKeysVersions && message.allKmsKeysVersions.length) {
+                                object.allKmsKeysVersions = [];
+                                for (var j = 0; j < message.allKmsKeysVersions.length; ++j)
+                                    object.allKmsKeysVersions[j] = message.allKmsKeysVersions[j];
+                            }
+                            if (message.cryptoKeyVersion != null && message.hasOwnProperty("cryptoKeyVersion"))
+                                object.cryptoKeyVersion = message.cryptoKeyVersion;
+                            if (message.tags && (keys2 = Object.keys(message.tags)).length) {
+                                object.tags = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.tags[keys2[j]] = message.tags[keys2[j]];
                             }
                             return object;
                         };
@@ -9005,6 +9245,520 @@
                         };
     
                         return OperationMetadata;
+                    })();
+    
+                    v1.ListWorkflowRevisionsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListWorkflowRevisionsRequest.
+                         * @memberof google.cloud.workflows.v1
+                         * @interface IListWorkflowRevisionsRequest
+                         * @property {string|null} [name] ListWorkflowRevisionsRequest name
+                         * @property {number|null} [pageSize] ListWorkflowRevisionsRequest pageSize
+                         * @property {string|null} [pageToken] ListWorkflowRevisionsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListWorkflowRevisionsRequest.
+                         * @memberof google.cloud.workflows.v1
+                         * @classdesc Represents a ListWorkflowRevisionsRequest.
+                         * @implements IListWorkflowRevisionsRequest
+                         * @constructor
+                         * @param {google.cloud.workflows.v1.IListWorkflowRevisionsRequest=} [properties] Properties to set
+                         */
+                        function ListWorkflowRevisionsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListWorkflowRevisionsRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.workflows.v1.ListWorkflowRevisionsRequest
+                         * @instance
+                         */
+                        ListWorkflowRevisionsRequest.prototype.name = "";
+    
+                        /**
+                         * ListWorkflowRevisionsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.workflows.v1.ListWorkflowRevisionsRequest
+                         * @instance
+                         */
+                        ListWorkflowRevisionsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListWorkflowRevisionsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.workflows.v1.ListWorkflowRevisionsRequest
+                         * @instance
+                         */
+                        ListWorkflowRevisionsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListWorkflowRevisionsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.workflows.v1.ListWorkflowRevisionsRequest
+                         * @static
+                         * @param {google.cloud.workflows.v1.IListWorkflowRevisionsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.workflows.v1.ListWorkflowRevisionsRequest} ListWorkflowRevisionsRequest instance
+                         */
+                        ListWorkflowRevisionsRequest.create = function create(properties) {
+                            return new ListWorkflowRevisionsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListWorkflowRevisionsRequest message. Does not implicitly {@link google.cloud.workflows.v1.ListWorkflowRevisionsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.workflows.v1.ListWorkflowRevisionsRequest
+                         * @static
+                         * @param {google.cloud.workflows.v1.IListWorkflowRevisionsRequest} message ListWorkflowRevisionsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListWorkflowRevisionsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListWorkflowRevisionsRequest message, length delimited. Does not implicitly {@link google.cloud.workflows.v1.ListWorkflowRevisionsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.workflows.v1.ListWorkflowRevisionsRequest
+                         * @static
+                         * @param {google.cloud.workflows.v1.IListWorkflowRevisionsRequest} message ListWorkflowRevisionsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListWorkflowRevisionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListWorkflowRevisionsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.workflows.v1.ListWorkflowRevisionsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.workflows.v1.ListWorkflowRevisionsRequest} ListWorkflowRevisionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListWorkflowRevisionsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workflows.v1.ListWorkflowRevisionsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListWorkflowRevisionsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.workflows.v1.ListWorkflowRevisionsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.workflows.v1.ListWorkflowRevisionsRequest} ListWorkflowRevisionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListWorkflowRevisionsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListWorkflowRevisionsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.workflows.v1.ListWorkflowRevisionsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListWorkflowRevisionsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListWorkflowRevisionsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.workflows.v1.ListWorkflowRevisionsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.workflows.v1.ListWorkflowRevisionsRequest} ListWorkflowRevisionsRequest
+                         */
+                        ListWorkflowRevisionsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.workflows.v1.ListWorkflowRevisionsRequest)
+                                return object;
+                            var message = new $root.google.cloud.workflows.v1.ListWorkflowRevisionsRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListWorkflowRevisionsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.workflows.v1.ListWorkflowRevisionsRequest
+                         * @static
+                         * @param {google.cloud.workflows.v1.ListWorkflowRevisionsRequest} message ListWorkflowRevisionsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListWorkflowRevisionsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListWorkflowRevisionsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.workflows.v1.ListWorkflowRevisionsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListWorkflowRevisionsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListWorkflowRevisionsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.workflows.v1.ListWorkflowRevisionsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListWorkflowRevisionsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.workflows.v1.ListWorkflowRevisionsRequest";
+                        };
+    
+                        return ListWorkflowRevisionsRequest;
+                    })();
+    
+                    v1.ListWorkflowRevisionsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListWorkflowRevisionsResponse.
+                         * @memberof google.cloud.workflows.v1
+                         * @interface IListWorkflowRevisionsResponse
+                         * @property {Array.<google.cloud.workflows.v1.IWorkflow>|null} [workflows] ListWorkflowRevisionsResponse workflows
+                         * @property {string|null} [nextPageToken] ListWorkflowRevisionsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListWorkflowRevisionsResponse.
+                         * @memberof google.cloud.workflows.v1
+                         * @classdesc Represents a ListWorkflowRevisionsResponse.
+                         * @implements IListWorkflowRevisionsResponse
+                         * @constructor
+                         * @param {google.cloud.workflows.v1.IListWorkflowRevisionsResponse=} [properties] Properties to set
+                         */
+                        function ListWorkflowRevisionsResponse(properties) {
+                            this.workflows = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListWorkflowRevisionsResponse workflows.
+                         * @member {Array.<google.cloud.workflows.v1.IWorkflow>} workflows
+                         * @memberof google.cloud.workflows.v1.ListWorkflowRevisionsResponse
+                         * @instance
+                         */
+                        ListWorkflowRevisionsResponse.prototype.workflows = $util.emptyArray;
+    
+                        /**
+                         * ListWorkflowRevisionsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.workflows.v1.ListWorkflowRevisionsResponse
+                         * @instance
+                         */
+                        ListWorkflowRevisionsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListWorkflowRevisionsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.workflows.v1.ListWorkflowRevisionsResponse
+                         * @static
+                         * @param {google.cloud.workflows.v1.IListWorkflowRevisionsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.workflows.v1.ListWorkflowRevisionsResponse} ListWorkflowRevisionsResponse instance
+                         */
+                        ListWorkflowRevisionsResponse.create = function create(properties) {
+                            return new ListWorkflowRevisionsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListWorkflowRevisionsResponse message. Does not implicitly {@link google.cloud.workflows.v1.ListWorkflowRevisionsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.workflows.v1.ListWorkflowRevisionsResponse
+                         * @static
+                         * @param {google.cloud.workflows.v1.IListWorkflowRevisionsResponse} message ListWorkflowRevisionsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListWorkflowRevisionsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.workflows != null && message.workflows.length)
+                                for (var i = 0; i < message.workflows.length; ++i)
+                                    $root.google.cloud.workflows.v1.Workflow.encode(message.workflows[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListWorkflowRevisionsResponse message, length delimited. Does not implicitly {@link google.cloud.workflows.v1.ListWorkflowRevisionsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.workflows.v1.ListWorkflowRevisionsResponse
+                         * @static
+                         * @param {google.cloud.workflows.v1.IListWorkflowRevisionsResponse} message ListWorkflowRevisionsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListWorkflowRevisionsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListWorkflowRevisionsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.workflows.v1.ListWorkflowRevisionsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.workflows.v1.ListWorkflowRevisionsResponse} ListWorkflowRevisionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListWorkflowRevisionsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.workflows.v1.ListWorkflowRevisionsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.workflows && message.workflows.length))
+                                            message.workflows = [];
+                                        message.workflows.push($root.google.cloud.workflows.v1.Workflow.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListWorkflowRevisionsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.workflows.v1.ListWorkflowRevisionsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.workflows.v1.ListWorkflowRevisionsResponse} ListWorkflowRevisionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListWorkflowRevisionsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListWorkflowRevisionsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.workflows.v1.ListWorkflowRevisionsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListWorkflowRevisionsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.workflows != null && message.hasOwnProperty("workflows")) {
+                                if (!Array.isArray(message.workflows))
+                                    return "workflows: array expected";
+                                for (var i = 0; i < message.workflows.length; ++i) {
+                                    var error = $root.google.cloud.workflows.v1.Workflow.verify(message.workflows[i]);
+                                    if (error)
+                                        return "workflows." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListWorkflowRevisionsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.workflows.v1.ListWorkflowRevisionsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.workflows.v1.ListWorkflowRevisionsResponse} ListWorkflowRevisionsResponse
+                         */
+                        ListWorkflowRevisionsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.workflows.v1.ListWorkflowRevisionsResponse)
+                                return object;
+                            var message = new $root.google.cloud.workflows.v1.ListWorkflowRevisionsResponse();
+                            if (object.workflows) {
+                                if (!Array.isArray(object.workflows))
+                                    throw TypeError(".google.cloud.workflows.v1.ListWorkflowRevisionsResponse.workflows: array expected");
+                                message.workflows = [];
+                                for (var i = 0; i < object.workflows.length; ++i) {
+                                    if (typeof object.workflows[i] !== "object")
+                                        throw TypeError(".google.cloud.workflows.v1.ListWorkflowRevisionsResponse.workflows: object expected");
+                                    message.workflows[i] = $root.google.cloud.workflows.v1.Workflow.fromObject(object.workflows[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListWorkflowRevisionsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.workflows.v1.ListWorkflowRevisionsResponse
+                         * @static
+                         * @param {google.cloud.workflows.v1.ListWorkflowRevisionsResponse} message ListWorkflowRevisionsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListWorkflowRevisionsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.workflows = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.workflows && message.workflows.length) {
+                                object.workflows = [];
+                                for (var j = 0; j < message.workflows.length; ++j)
+                                    object.workflows[j] = $root.google.cloud.workflows.v1.Workflow.toObject(message.workflows[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListWorkflowRevisionsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.workflows.v1.ListWorkflowRevisionsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListWorkflowRevisionsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListWorkflowRevisionsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.workflows.v1.ListWorkflowRevisionsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListWorkflowRevisionsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.workflows.v1.ListWorkflowRevisionsResponse";
+                        };
+    
+                        return ListWorkflowRevisionsResponse;
+                    })();
+    
+                    /**
+                     * ExecutionHistoryLevel enum.
+                     * @name google.cloud.workflows.v1.ExecutionHistoryLevel
+                     * @enum {number}
+                     * @property {number} EXECUTION_HISTORY_LEVEL_UNSPECIFIED=0 EXECUTION_HISTORY_LEVEL_UNSPECIFIED value
+                     * @property {number} EXECUTION_HISTORY_BASIC=1 EXECUTION_HISTORY_BASIC value
+                     * @property {number} EXECUTION_HISTORY_DETAILED=2 EXECUTION_HISTORY_DETAILED value
+                     */
+                    v1.ExecutionHistoryLevel = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "EXECUTION_HISTORY_LEVEL_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "EXECUTION_HISTORY_BASIC"] = 1;
+                        values[valuesById[2] = "EXECUTION_HISTORY_DETAILED"] = 2;
+                        return values;
                     })();
     
                     return v1;

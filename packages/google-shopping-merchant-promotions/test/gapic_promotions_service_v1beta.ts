@@ -263,7 +263,9 @@ describe('v1beta.PromotionsServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.promotionsServiceStub);
       client.close().then(() => {
         done();
@@ -330,7 +332,7 @@ describe('v1beta.PromotionsServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.promotions.v1beta.InsertPromotionRequest()
       );
@@ -363,7 +365,7 @@ describe('v1beta.PromotionsServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.promotions.v1beta.InsertPromotionRequest()
       );
@@ -412,7 +414,7 @@ describe('v1beta.PromotionsServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.promotions.v1beta.InsertPromotionRequest()
       );
@@ -445,7 +447,7 @@ describe('v1beta.PromotionsServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.promotions.v1beta.InsertPromotionRequest()
       );
@@ -468,7 +470,7 @@ describe('v1beta.PromotionsServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.promotions.v1beta.GetPromotionRequest()
       );
@@ -501,7 +503,7 @@ describe('v1beta.PromotionsServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.promotions.v1beta.GetPromotionRequest()
       );
@@ -550,7 +552,7 @@ describe('v1beta.PromotionsServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.promotions.v1beta.GetPromotionRequest()
       );
@@ -583,7 +585,7 @@ describe('v1beta.PromotionsServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.promotions.v1beta.GetPromotionRequest()
       );
@@ -606,7 +608,7 @@ describe('v1beta.PromotionsServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.promotions.v1beta.ListPromotionsRequest()
       );
@@ -647,7 +649,7 @@ describe('v1beta.PromotionsServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.promotions.v1beta.ListPromotionsRequest()
       );
@@ -706,7 +708,7 @@ describe('v1beta.PromotionsServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.promotions.v1beta.ListPromotionsRequest()
       );
@@ -739,7 +741,7 @@ describe('v1beta.PromotionsServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.promotions.v1beta.ListPromotionsRequest()
       );
@@ -804,7 +806,7 @@ describe('v1beta.PromotionsServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.promotions.v1beta.ListPromotionsRequest()
       );
@@ -858,7 +860,7 @@ describe('v1beta.PromotionsServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.promotions.v1beta.ListPromotionsRequest()
       );
@@ -910,7 +912,7 @@ describe('v1beta.PromotionsServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.shopping.merchant.promotions.v1beta.ListPromotionsRequest()
       );
@@ -948,7 +950,7 @@ describe('v1beta.PromotionsServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('promotion', () => {
+    describe('promotion', async () => {
       const fakePath = '/rendered/path/promotion';
       const expectedParameters = {
         account: 'accountValue',
@@ -960,7 +962,7 @@ describe('v1beta.PromotionsServiceClient', () => {
           projectId: 'bogus',
         }
       );
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.promotionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

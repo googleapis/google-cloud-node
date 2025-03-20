@@ -38572,6 +38572,15 @@ export namespace google {
 
                         /** LayoutConfig chunkingConfig */
                         chunkingConfig?: (google.cloud.documentai.v1beta3.ProcessOptions.LayoutConfig.IChunkingConfig|null);
+
+                        /** LayoutConfig returnImages */
+                        returnImages?: (boolean|null);
+
+                        /** LayoutConfig returnBoundingBoxes */
+                        returnBoundingBoxes?: (boolean|null);
+
+                        /** LayoutConfig enableLlmLayoutParsing */
+                        enableLlmLayoutParsing?: (boolean|null);
                     }
 
                     /** Represents a LayoutConfig. */
@@ -38585,6 +38594,15 @@ export namespace google {
 
                         /** LayoutConfig chunkingConfig. */
                         public chunkingConfig?: (google.cloud.documentai.v1beta3.ProcessOptions.LayoutConfig.IChunkingConfig|null);
+
+                        /** LayoutConfig returnImages. */
+                        public returnImages: boolean;
+
+                        /** LayoutConfig returnBoundingBoxes. */
+                        public returnBoundingBoxes: boolean;
+
+                        /** LayoutConfig enableLlmLayoutParsing. */
+                        public enableLlmLayoutParsing: boolean;
 
                         /**
                          * Creates a new LayoutConfig instance using the specified properties.

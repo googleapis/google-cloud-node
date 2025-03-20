@@ -483,7 +483,9 @@ export class AuthorizedCertificatesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getAuthorizedCertificate request %j', request);
     const wrappedCallback:
       | Callback<
@@ -610,7 +612,9 @@ export class AuthorizedCertificatesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createAuthorizedCertificate request %j', request);
     const wrappedCallback:
       | Callback<
@@ -746,7 +750,9 @@ export class AuthorizedCertificatesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateAuthorizedCertificate request %j', request);
     const wrappedCallback:
       | Callback<
@@ -872,7 +878,9 @@ export class AuthorizedCertificatesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteAuthorizedCertificate request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1001,7 +1009,9 @@ export class AuthorizedCertificatesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.appengine.v1.IListAuthorizedCertificatesRequest,
@@ -1068,7 +1078,9 @@ export class AuthorizedCertificatesClient {
       });
     const defaultCallSettings = this._defaults['listAuthorizedCertificates'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAuthorizedCertificates stream %j', request);
     return this.descriptors.page.listAuthorizedCertificates.createStream(
       this.innerApiCalls.listAuthorizedCertificates as GaxCall,
@@ -1117,7 +1129,9 @@ export class AuthorizedCertificatesClient {
       });
     const defaultCallSettings = this._defaults['listAuthorizedCertificates'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAuthorizedCertificates iterate %j', request);
     return this.descriptors.page.listAuthorizedCertificates.asyncIterate(
       this.innerApiCalls['listAuthorizedCertificates'] as GaxCall,

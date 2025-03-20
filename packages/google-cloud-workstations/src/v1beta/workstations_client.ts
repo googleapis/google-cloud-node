@@ -758,7 +758,9 @@ export class WorkstationsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getWorkstationCluster request %j', request);
     const wrappedCallback:
       | Callback<
@@ -883,7 +885,9 @@ export class WorkstationsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getWorkstationConfig request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1008,7 +1012,9 @@ export class WorkstationsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getWorkstation request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1144,7 +1150,9 @@ export class WorkstationsClient {
       this._gaxModule.routingHeader.fromParams({
         workstation: request.workstation ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('generateAccessToken request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1283,7 +1291,9 @@ export class WorkstationsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1460,7 +1470,9 @@ export class WorkstationsClient {
       this._gaxModule.routingHeader.fromParams({
         'workstation_cluster.name': request.workstationCluster!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1637,7 +1649,9 @@ export class WorkstationsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1811,7 +1825,9 @@ export class WorkstationsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1988,7 +2004,9 @@ export class WorkstationsClient {
       this._gaxModule.routingHeader.fromParams({
         'workstation_config.name': request.workstationConfig!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2165,7 +2183,9 @@ export class WorkstationsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2339,7 +2359,9 @@ export class WorkstationsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2516,7 +2538,9 @@ export class WorkstationsClient {
       this._gaxModule.routingHeader.fromParams({
         'workstation.name': request.workstation!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2689,7 +2713,9 @@ export class WorkstationsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2862,7 +2888,9 @@ export class WorkstationsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3035,7 +3063,9 @@ export class WorkstationsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3198,7 +3228,9 @@ export class WorkstationsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.workstations.v1beta.IListWorkstationClustersRequest,
@@ -3264,7 +3296,9 @@ export class WorkstationsClient {
       });
     const defaultCallSettings = this._defaults['listWorkstationClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listWorkstationClusters stream %j', request);
     return this.descriptors.page.listWorkstationClusters.createStream(
       this.innerApiCalls.listWorkstationClusters as GaxCall,
@@ -3312,7 +3346,9 @@ export class WorkstationsClient {
       });
     const defaultCallSettings = this._defaults['listWorkstationClusters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listWorkstationClusters iterate %j', request);
     return this.descriptors.page.listWorkstationClusters.asyncIterate(
       this.innerApiCalls['listWorkstationClusters'] as GaxCall,
@@ -3415,7 +3451,9 @@ export class WorkstationsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.workstations.v1beta.IListWorkstationConfigsRequest,
@@ -3481,7 +3519,9 @@ export class WorkstationsClient {
       });
     const defaultCallSettings = this._defaults['listWorkstationConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listWorkstationConfigs stream %j', request);
     return this.descriptors.page.listWorkstationConfigs.createStream(
       this.innerApiCalls.listWorkstationConfigs as GaxCall,
@@ -3529,7 +3569,9 @@ export class WorkstationsClient {
       });
     const defaultCallSettings = this._defaults['listWorkstationConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listWorkstationConfigs iterate %j', request);
     return this.descriptors.page.listWorkstationConfigs.asyncIterate(
       this.innerApiCalls['listWorkstationConfigs'] as GaxCall,
@@ -3633,7 +3675,9 @@ export class WorkstationsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.workstations.v1beta.IListUsableWorkstationConfigsRequest,
@@ -3699,7 +3743,9 @@ export class WorkstationsClient {
       });
     const defaultCallSettings = this._defaults['listUsableWorkstationConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listUsableWorkstationConfigs stream %j', request);
     return this.descriptors.page.listUsableWorkstationConfigs.createStream(
       this.innerApiCalls.listUsableWorkstationConfigs as GaxCall,
@@ -3747,7 +3793,9 @@ export class WorkstationsClient {
       });
     const defaultCallSettings = this._defaults['listUsableWorkstationConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listUsableWorkstationConfigs iterate %j', request);
     return this.descriptors.page.listUsableWorkstationConfigs.asyncIterate(
       this.innerApiCalls['listUsableWorkstationConfigs'] as GaxCall,
@@ -3850,7 +3898,9 @@ export class WorkstationsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.workstations.v1beta.IListWorkstationsRequest,
@@ -3916,7 +3966,9 @@ export class WorkstationsClient {
       });
     const defaultCallSettings = this._defaults['listWorkstations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listWorkstations stream %j', request);
     return this.descriptors.page.listWorkstations.createStream(
       this.innerApiCalls.listWorkstations as GaxCall,
@@ -3964,7 +4016,9 @@ export class WorkstationsClient {
       });
     const defaultCallSettings = this._defaults['listWorkstations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listWorkstations iterate %j', request);
     return this.descriptors.page.listWorkstations.asyncIterate(
       this.innerApiCalls['listWorkstations'] as GaxCall,
@@ -4068,7 +4122,9 @@ export class WorkstationsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.workstations.v1beta.IListUsableWorkstationsRequest,
@@ -4134,7 +4190,9 @@ export class WorkstationsClient {
       });
     const defaultCallSettings = this._defaults['listUsableWorkstations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listUsableWorkstations stream %j', request);
     return this.descriptors.page.listUsableWorkstations.createStream(
       this.innerApiCalls.listUsableWorkstations as GaxCall,
@@ -4182,7 +4240,9 @@ export class WorkstationsClient {
       });
     const defaultCallSettings = this._defaults['listUsableWorkstations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listUsableWorkstations iterate %j', request);
     return this.descriptors.page.listUsableWorkstations.asyncIterate(
       this.innerApiCalls['listUsableWorkstations'] as GaxCall,
@@ -4500,7 +4560,7 @@ export class WorkstationsClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

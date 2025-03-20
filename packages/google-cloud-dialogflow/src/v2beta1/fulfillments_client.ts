@@ -601,7 +601,9 @@ export class FulfillmentsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getFulfillment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -729,7 +731,9 @@ export class FulfillmentsClient {
       this._gaxModule.routingHeader.fromParams({
         'fulfillment.name': request.fulfillment!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateFulfillment request %j', request);
     const wrappedCallback:
       | Callback<

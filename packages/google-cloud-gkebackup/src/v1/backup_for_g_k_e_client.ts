@@ -803,7 +803,9 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getBackupPlan request %j', request);
     const wrappedCallback:
       | Callback<
@@ -912,7 +914,9 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getBackup request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1027,7 +1031,9 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getVolumeBackup request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1144,7 +1150,9 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getRestorePlan request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1255,7 +1263,9 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getRestore request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1372,7 +1382,9 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getVolumeRestore request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1496,7 +1508,9 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         backup: request.backup ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getBackupIndexDownloadUrl request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1640,7 +1654,9 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1818,7 +1834,9 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         'backup_plan.name': request.backupPlan!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1990,7 +2008,9 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2169,7 +2189,9 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2346,7 +2368,9 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         'backup.name': request.backup!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2522,7 +2546,9 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2701,7 +2727,9 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2878,7 +2906,9 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         'restore_plan.name': request.restorePlan!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3054,7 +3084,9 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3233,7 +3265,9 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3410,7 +3444,9 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         'restore.name': request.restore!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3586,7 +3622,9 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3763,7 +3801,9 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.gkebackup.v1.IListBackupPlansRequest,
@@ -3843,7 +3883,9 @@ export class BackupForGKEClient {
       });
     const defaultCallSettings = this._defaults['listBackupPlans'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listBackupPlans stream %j', request);
     return this.descriptors.page.listBackupPlans.createStream(
       this.innerApiCalls.listBackupPlans as GaxCall,
@@ -3905,7 +3947,9 @@ export class BackupForGKEClient {
       });
     const defaultCallSettings = this._defaults['listBackupPlans'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listBackupPlans iterate %j', request);
     return this.descriptors.page.listBackupPlans.asyncIterate(
       this.innerApiCalls['listBackupPlans'] as GaxCall,
@@ -4016,7 +4060,9 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.gkebackup.v1.IListBackupsRequest,
@@ -4096,7 +4142,9 @@ export class BackupForGKEClient {
       });
     const defaultCallSettings = this._defaults['listBackups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listBackups stream %j', request);
     return this.descriptors.page.listBackups.createStream(
       this.innerApiCalls.listBackups as GaxCall,
@@ -4158,7 +4206,9 @@ export class BackupForGKEClient {
       });
     const defaultCallSettings = this._defaults['listBackups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listBackups iterate %j', request);
     return this.descriptors.page.listBackups.asyncIterate(
       this.innerApiCalls['listBackups'] as GaxCall,
@@ -4275,7 +4325,9 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.gkebackup.v1.IListVolumeBackupsRequest,
@@ -4355,7 +4407,9 @@ export class BackupForGKEClient {
       });
     const defaultCallSettings = this._defaults['listVolumeBackups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listVolumeBackups stream %j', request);
     return this.descriptors.page.listVolumeBackups.createStream(
       this.innerApiCalls.listVolumeBackups as GaxCall,
@@ -4417,7 +4471,9 @@ export class BackupForGKEClient {
       });
     const defaultCallSettings = this._defaults['listVolumeBackups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listVolumeBackups iterate %j', request);
     return this.descriptors.page.listVolumeBackups.asyncIterate(
       this.innerApiCalls['listVolumeBackups'] as GaxCall,
@@ -4534,7 +4590,9 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.gkebackup.v1.IListRestorePlansRequest,
@@ -4614,7 +4672,9 @@ export class BackupForGKEClient {
       });
     const defaultCallSettings = this._defaults['listRestorePlans'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRestorePlans stream %j', request);
     return this.descriptors.page.listRestorePlans.createStream(
       this.innerApiCalls.listRestorePlans as GaxCall,
@@ -4676,7 +4736,9 @@ export class BackupForGKEClient {
       });
     const defaultCallSettings = this._defaults['listRestorePlans'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRestorePlans iterate %j', request);
     return this.descriptors.page.listRestorePlans.asyncIterate(
       this.innerApiCalls['listRestorePlans'] as GaxCall,
@@ -4787,7 +4849,9 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.gkebackup.v1.IListRestoresRequest,
@@ -4867,7 +4931,9 @@ export class BackupForGKEClient {
       });
     const defaultCallSettings = this._defaults['listRestores'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRestores stream %j', request);
     return this.descriptors.page.listRestores.createStream(
       this.innerApiCalls.listRestores as GaxCall,
@@ -4929,7 +4995,9 @@ export class BackupForGKEClient {
       });
     const defaultCallSettings = this._defaults['listRestores'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRestores iterate %j', request);
     return this.descriptors.page.listRestores.asyncIterate(
       this.innerApiCalls['listRestores'] as GaxCall,
@@ -5046,7 +5114,9 @@ export class BackupForGKEClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.gkebackup.v1.IListVolumeRestoresRequest,
@@ -5126,7 +5196,9 @@ export class BackupForGKEClient {
       });
     const defaultCallSettings = this._defaults['listVolumeRestores'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listVolumeRestores stream %j', request);
     return this.descriptors.page.listVolumeRestores.createStream(
       this.innerApiCalls.listVolumeRestores as GaxCall,
@@ -5188,7 +5260,9 @@ export class BackupForGKEClient {
       });
     const defaultCallSettings = this._defaults['listVolumeRestores'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listVolumeRestores iterate %j', request);
     return this.descriptors.page.listVolumeRestores.asyncIterate(
       this.innerApiCalls['listVolumeRestores'] as GaxCall,
@@ -5506,7 +5580,7 @@ export class BackupForGKEClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

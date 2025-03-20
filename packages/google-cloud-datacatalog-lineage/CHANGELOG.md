@@ -1,6 +1,13 @@
 # Changelog
 
-## [2.0.0](https://github.com/googleapis/google-cloud-node/compare/lineage-v1.3.0...lineage-v2.0.0) (2025-03-12)
+## [2.0.1](https://github.com/googleapis/google-cloud-node/compare/lineage-v2.0.0...lineage-v2.0.1) (2025-03-19)
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6184](https://github.com/googleapis/google-cloud-node/issues/6184)) ([2fcd202](https://github.com/googleapis/google-cloud-node/commit/2fcd2029c35e8fb2199d03ac6e61e2d821ddf72e))
+
+## [2.0.0](https://github.com/googleapis/google-cloud-node/compare/lineage-v1.3.0...lineage-v2.0.0) (2025-03-18)
 
 
 ### ⚠ BREAKING CHANGES

@@ -4,7 +4,15 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/language?activeTab=versions
 
-## [7.0.0](https://github.com/googleapis/google-cloud-node/compare/language-v6.5.0...language-v7.0.0) (2025-03-12)
+## [7.0.1](https://github.com/googleapis/google-cloud-node/compare/language-v7.0.0...language-v7.0.1) (2025-03-19)
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6186](https://github.com/googleapis/google-cloud-node/issues/6186)) ([dcfc7b4](https://github.com/googleapis/google-cloud-node/commit/dcfc7b492a2ac3fb86b93ae1375bac1c5153d049))
+* **deps:** Update dependency mathjs to v14 ([#6130](https://github.com/googleapis/google-cloud-node/issues/6130)) ([24d9d0e](https://github.com/googleapis/google-cloud-node/commit/24d9d0e4372c1bd2bbc4815bcc2fe60f74b93c71))
+
+## [7.0.0](https://github.com/googleapis/google-cloud-node/compare/language-v6.5.0...language-v7.0.0) (2025-03-18)
 
 
 ### ⚠ BREAKING CHANGES

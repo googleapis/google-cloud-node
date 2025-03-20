@@ -4,12 +4,30 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
-## [7.0.0](https://github.com/googleapis/google-cloud-node/compare/speech-v6.7.1...speech-v7.0.0) (2025-03-12)
+## [7.0.1](https://github.com/googleapis/google-cloud-node/compare/speech-v7.0.0...speech-v7.0.1) (2025-03-19)
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6188](https://github.com/googleapis/google-cloud-node/issues/6188)) ([a73cdbf](https://github.com/googleapis/google-cloud-node/commit/a73cdbfe33d5ba9952f0c87cb9d5d12ee8753dd2))
+* **deps:** Update dependency proto3-json-serializer to v3 ([#6131](https://github.com/googleapis/google-cloud-node/issues/6131)) ([73110e2](https://github.com/googleapis/google-cloud-node/commit/73110e21283ed2e54ae2ae721497a98caa9b8df0))
+
+## [7.0.0](https://github.com/googleapis/google-cloud-node/compare/speech-v6.7.1...speech-v7.0.0) (2025-03-18)
 
 
 ### ⚠ BREAKING CHANGES
 
 * upgrade to Node 18 ([#6096](https://github.com/googleapis/google-cloud-node/issues/6096))
+
+### Features
+
+* Add request/response debug logging to gapics, update templates to gax 5 and node 18 ([#1671](https://github.com/googleapis/google-cloud-node/issues/1671)) ([eed00f4](https://github.com/googleapis/google-cloud-node/commit/eed00f4e4de22392db3a440a20486c3eeb9d33a6))
+
+
+### Bug Fixes
+
+* Add json files to tsconfig templates ([#1692](https://github.com/googleapis/google-cloud-node/issues/1692)) (ba6be1d) ([eed00f4](https://github.com/googleapis/google-cloud-node/commit/eed00f4e4de22392db3a440a20486c3eeb9d33a6))
+
 
 ### Miscellaneous Chores
 

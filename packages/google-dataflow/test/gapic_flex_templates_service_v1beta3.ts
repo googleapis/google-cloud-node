@@ -202,7 +202,9 @@ describe('v1beta3.FlexTemplatesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.flexTemplatesServiceStub);
       client.close().then(() => {
         done();
@@ -265,7 +267,7 @@ describe('v1beta3.FlexTemplatesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.LaunchFlexTemplateRequest()
       );
@@ -303,7 +305,7 @@ describe('v1beta3.FlexTemplatesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.LaunchFlexTemplateRequest()
       );
@@ -356,7 +358,7 @@ describe('v1beta3.FlexTemplatesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.LaunchFlexTemplateRequest()
       );
@@ -393,7 +395,7 @@ describe('v1beta3.FlexTemplatesServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.LaunchFlexTemplateRequest()
       );

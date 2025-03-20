@@ -14,7 +14,7 @@
     "publish": "echo 'sample test; do not publish'"
   },
   "dependencies": {
-    "@google-cloud/modelarmor": "0.0.0"
+    "@google-cloud/modelarmor": "^0.1.1"
   },
   "devDependencies": {
     "c8": "^9.0.0",

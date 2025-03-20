@@ -4184,6 +4184,956 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Represents an AutomaticImprovementsService */
+                    class AutomaticImprovementsService extends $protobuf.rpc.Service {
+
+                        /**
+                         * Constructs a new AutomaticImprovementsService service.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                        /**
+                         * Creates new AutomaticImprovementsService service using the specified rpc implementation.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         * @returns RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): AutomaticImprovementsService;
+
+                        /**
+                         * Calls GetAutomaticImprovements.
+                         * @param request GetAutomaticImprovementsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and AutomaticImprovements
+                         */
+                        public getAutomaticImprovements(request: google.shopping.merchant.accounts.v1beta.IGetAutomaticImprovementsRequest, callback: google.shopping.merchant.accounts.v1beta.AutomaticImprovementsService.GetAutomaticImprovementsCallback): void;
+
+                        /**
+                         * Calls GetAutomaticImprovements.
+                         * @param request GetAutomaticImprovementsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getAutomaticImprovements(request: google.shopping.merchant.accounts.v1beta.IGetAutomaticImprovementsRequest): Promise<google.shopping.merchant.accounts.v1beta.AutomaticImprovements>;
+
+                        /**
+                         * Calls UpdateAutomaticImprovements.
+                         * @param request UpdateAutomaticImprovementsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and AutomaticImprovements
+                         */
+                        public updateAutomaticImprovements(request: google.shopping.merchant.accounts.v1beta.IUpdateAutomaticImprovementsRequest, callback: google.shopping.merchant.accounts.v1beta.AutomaticImprovementsService.UpdateAutomaticImprovementsCallback): void;
+
+                        /**
+                         * Calls UpdateAutomaticImprovements.
+                         * @param request UpdateAutomaticImprovementsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public updateAutomaticImprovements(request: google.shopping.merchant.accounts.v1beta.IUpdateAutomaticImprovementsRequest): Promise<google.shopping.merchant.accounts.v1beta.AutomaticImprovements>;
+                    }
+
+                    namespace AutomaticImprovementsService {
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.accounts.v1beta.AutomaticImprovementsService|getAutomaticImprovements}.
+                         * @param error Error, if any
+                         * @param [response] AutomaticImprovements
+                         */
+                        type GetAutomaticImprovementsCallback = (error: (Error|null), response?: google.shopping.merchant.accounts.v1beta.AutomaticImprovements) => void;
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.accounts.v1beta.AutomaticImprovementsService|updateAutomaticImprovements}.
+                         * @param error Error, if any
+                         * @param [response] AutomaticImprovements
+                         */
+                        type UpdateAutomaticImprovementsCallback = (error: (Error|null), response?: google.shopping.merchant.accounts.v1beta.AutomaticImprovements) => void;
+                    }
+
+                    /** Properties of an AutomaticImprovements. */
+                    interface IAutomaticImprovements {
+
+                        /** AutomaticImprovements name */
+                        name?: (string|null);
+
+                        /** AutomaticImprovements itemUpdates */
+                        itemUpdates?: (google.shopping.merchant.accounts.v1beta.IAutomaticItemUpdates|null);
+
+                        /** AutomaticImprovements imageImprovements */
+                        imageImprovements?: (google.shopping.merchant.accounts.v1beta.IAutomaticImageImprovements|null);
+
+                        /** AutomaticImprovements shippingImprovements */
+                        shippingImprovements?: (google.shopping.merchant.accounts.v1beta.IAutomaticShippingImprovements|null);
+                    }
+
+                    /** Represents an AutomaticImprovements. */
+                    class AutomaticImprovements implements IAutomaticImprovements {
+
+                        /**
+                         * Constructs a new AutomaticImprovements.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1beta.IAutomaticImprovements);
+
+                        /** AutomaticImprovements name. */
+                        public name: string;
+
+                        /** AutomaticImprovements itemUpdates. */
+                        public itemUpdates?: (google.shopping.merchant.accounts.v1beta.IAutomaticItemUpdates|null);
+
+                        /** AutomaticImprovements imageImprovements. */
+                        public imageImprovements?: (google.shopping.merchant.accounts.v1beta.IAutomaticImageImprovements|null);
+
+                        /** AutomaticImprovements shippingImprovements. */
+                        public shippingImprovements?: (google.shopping.merchant.accounts.v1beta.IAutomaticShippingImprovements|null);
+
+                        /** AutomaticImprovements _itemUpdates. */
+                        public _itemUpdates?: "itemUpdates";
+
+                        /** AutomaticImprovements _imageImprovements. */
+                        public _imageImprovements?: "imageImprovements";
+
+                        /** AutomaticImprovements _shippingImprovements. */
+                        public _shippingImprovements?: "shippingImprovements";
+
+                        /**
+                         * Creates a new AutomaticImprovements instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AutomaticImprovements instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1beta.IAutomaticImprovements): google.shopping.merchant.accounts.v1beta.AutomaticImprovements;
+
+                        /**
+                         * Encodes the specified AutomaticImprovements message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.AutomaticImprovements.verify|verify} messages.
+                         * @param message AutomaticImprovements message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1beta.IAutomaticImprovements, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AutomaticImprovements message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.AutomaticImprovements.verify|verify} messages.
+                         * @param message AutomaticImprovements message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.IAutomaticImprovements, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AutomaticImprovements message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AutomaticImprovements
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.AutomaticImprovements;
+
+                        /**
+                         * Decodes an AutomaticImprovements message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AutomaticImprovements
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.AutomaticImprovements;
+
+                        /**
+                         * Verifies an AutomaticImprovements message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AutomaticImprovements message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AutomaticImprovements
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.AutomaticImprovements;
+
+                        /**
+                         * Creates a plain object from an AutomaticImprovements message. Also converts values to other types if specified.
+                         * @param message AutomaticImprovements
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1beta.AutomaticImprovements, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AutomaticImprovements to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AutomaticImprovements
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an AutomaticItemUpdates. */
+                    interface IAutomaticItemUpdates {
+
+                        /** AutomaticItemUpdates accountItemUpdatesSettings */
+                        accountItemUpdatesSettings?: (google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.IItemUpdatesAccountLevelSettings|null);
+
+                        /** AutomaticItemUpdates effectiveAllowPriceUpdates */
+                        effectiveAllowPriceUpdates?: (boolean|null);
+
+                        /** AutomaticItemUpdates effectiveAllowAvailabilityUpdates */
+                        effectiveAllowAvailabilityUpdates?: (boolean|null);
+
+                        /** AutomaticItemUpdates effectiveAllowStrictAvailabilityUpdates */
+                        effectiveAllowStrictAvailabilityUpdates?: (boolean|null);
+
+                        /** AutomaticItemUpdates effectiveAllowConditionUpdates */
+                        effectiveAllowConditionUpdates?: (boolean|null);
+                    }
+
+                    /** Represents an AutomaticItemUpdates. */
+                    class AutomaticItemUpdates implements IAutomaticItemUpdates {
+
+                        /**
+                         * Constructs a new AutomaticItemUpdates.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1beta.IAutomaticItemUpdates);
+
+                        /** AutomaticItemUpdates accountItemUpdatesSettings. */
+                        public accountItemUpdatesSettings?: (google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.IItemUpdatesAccountLevelSettings|null);
+
+                        /** AutomaticItemUpdates effectiveAllowPriceUpdates. */
+                        public effectiveAllowPriceUpdates: boolean;
+
+                        /** AutomaticItemUpdates effectiveAllowAvailabilityUpdates. */
+                        public effectiveAllowAvailabilityUpdates: boolean;
+
+                        /** AutomaticItemUpdates effectiveAllowStrictAvailabilityUpdates. */
+                        public effectiveAllowStrictAvailabilityUpdates: boolean;
+
+                        /** AutomaticItemUpdates effectiveAllowConditionUpdates. */
+                        public effectiveAllowConditionUpdates: boolean;
+
+                        /**
+                         * Creates a new AutomaticItemUpdates instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AutomaticItemUpdates instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1beta.IAutomaticItemUpdates): google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates;
+
+                        /**
+                         * Encodes the specified AutomaticItemUpdates message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.verify|verify} messages.
+                         * @param message AutomaticItemUpdates message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1beta.IAutomaticItemUpdates, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AutomaticItemUpdates message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.verify|verify} messages.
+                         * @param message AutomaticItemUpdates message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.IAutomaticItemUpdates, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AutomaticItemUpdates message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AutomaticItemUpdates
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates;
+
+                        /**
+                         * Decodes an AutomaticItemUpdates message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AutomaticItemUpdates
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates;
+
+                        /**
+                         * Verifies an AutomaticItemUpdates message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AutomaticItemUpdates message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AutomaticItemUpdates
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates;
+
+                        /**
+                         * Creates a plain object from an AutomaticItemUpdates message. Also converts values to other types if specified.
+                         * @param message AutomaticItemUpdates
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AutomaticItemUpdates to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AutomaticItemUpdates
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace AutomaticItemUpdates {
+
+                        /** Properties of an ItemUpdatesAccountLevelSettings. */
+                        interface IItemUpdatesAccountLevelSettings {
+
+                            /** ItemUpdatesAccountLevelSettings allowPriceUpdates */
+                            allowPriceUpdates?: (boolean|null);
+
+                            /** ItemUpdatesAccountLevelSettings allowAvailabilityUpdates */
+                            allowAvailabilityUpdates?: (boolean|null);
+
+                            /** ItemUpdatesAccountLevelSettings allowStrictAvailabilityUpdates */
+                            allowStrictAvailabilityUpdates?: (boolean|null);
+
+                            /** ItemUpdatesAccountLevelSettings allowConditionUpdates */
+                            allowConditionUpdates?: (boolean|null);
+                        }
+
+                        /** Represents an ItemUpdatesAccountLevelSettings. */
+                        class ItemUpdatesAccountLevelSettings implements IItemUpdatesAccountLevelSettings {
+
+                            /**
+                             * Constructs a new ItemUpdatesAccountLevelSettings.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.IItemUpdatesAccountLevelSettings);
+
+                            /** ItemUpdatesAccountLevelSettings allowPriceUpdates. */
+                            public allowPriceUpdates?: (boolean|null);
+
+                            /** ItemUpdatesAccountLevelSettings allowAvailabilityUpdates. */
+                            public allowAvailabilityUpdates?: (boolean|null);
+
+                            /** ItemUpdatesAccountLevelSettings allowStrictAvailabilityUpdates. */
+                            public allowStrictAvailabilityUpdates?: (boolean|null);
+
+                            /** ItemUpdatesAccountLevelSettings allowConditionUpdates. */
+                            public allowConditionUpdates?: (boolean|null);
+
+                            /** ItemUpdatesAccountLevelSettings _allowPriceUpdates. */
+                            public _allowPriceUpdates?: "allowPriceUpdates";
+
+                            /** ItemUpdatesAccountLevelSettings _allowAvailabilityUpdates. */
+                            public _allowAvailabilityUpdates?: "allowAvailabilityUpdates";
+
+                            /** ItemUpdatesAccountLevelSettings _allowStrictAvailabilityUpdates. */
+                            public _allowStrictAvailabilityUpdates?: "allowStrictAvailabilityUpdates";
+
+                            /** ItemUpdatesAccountLevelSettings _allowConditionUpdates. */
+                            public _allowConditionUpdates?: "allowConditionUpdates";
+
+                            /**
+                             * Creates a new ItemUpdatesAccountLevelSettings instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ItemUpdatesAccountLevelSettings instance
+                             */
+                            public static create(properties?: google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.IItemUpdatesAccountLevelSettings): google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.ItemUpdatesAccountLevelSettings;
+
+                            /**
+                             * Encodes the specified ItemUpdatesAccountLevelSettings message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.ItemUpdatesAccountLevelSettings.verify|verify} messages.
+                             * @param message ItemUpdatesAccountLevelSettings message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.IItemUpdatesAccountLevelSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ItemUpdatesAccountLevelSettings message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.ItemUpdatesAccountLevelSettings.verify|verify} messages.
+                             * @param message ItemUpdatesAccountLevelSettings message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.IItemUpdatesAccountLevelSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an ItemUpdatesAccountLevelSettings message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ItemUpdatesAccountLevelSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.ItemUpdatesAccountLevelSettings;
+
+                            /**
+                             * Decodes an ItemUpdatesAccountLevelSettings message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ItemUpdatesAccountLevelSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.ItemUpdatesAccountLevelSettings;
+
+                            /**
+                             * Verifies an ItemUpdatesAccountLevelSettings message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an ItemUpdatesAccountLevelSettings message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ItemUpdatesAccountLevelSettings
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.ItemUpdatesAccountLevelSettings;
+
+                            /**
+                             * Creates a plain object from an ItemUpdatesAccountLevelSettings message. Also converts values to other types if specified.
+                             * @param message ItemUpdatesAccountLevelSettings
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.accounts.v1beta.AutomaticItemUpdates.ItemUpdatesAccountLevelSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ItemUpdatesAccountLevelSettings to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ItemUpdatesAccountLevelSettings
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** Properties of an AutomaticImageImprovements. */
+                    interface IAutomaticImageImprovements {
+
+                        /** AutomaticImageImprovements accountImageImprovementsSettings */
+                        accountImageImprovementsSettings?: (google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.IImageImprovementsAccountLevelSettings|null);
+
+                        /** AutomaticImageImprovements effectiveAllowAutomaticImageImprovements */
+                        effectiveAllowAutomaticImageImprovements?: (boolean|null);
+                    }
+
+                    /** Represents an AutomaticImageImprovements. */
+                    class AutomaticImageImprovements implements IAutomaticImageImprovements {
+
+                        /**
+                         * Constructs a new AutomaticImageImprovements.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1beta.IAutomaticImageImprovements);
+
+                        /** AutomaticImageImprovements accountImageImprovementsSettings. */
+                        public accountImageImprovementsSettings?: (google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.IImageImprovementsAccountLevelSettings|null);
+
+                        /** AutomaticImageImprovements effectiveAllowAutomaticImageImprovements. */
+                        public effectiveAllowAutomaticImageImprovements: boolean;
+
+                        /** AutomaticImageImprovements _accountImageImprovementsSettings. */
+                        public _accountImageImprovementsSettings?: "accountImageImprovementsSettings";
+
+                        /**
+                         * Creates a new AutomaticImageImprovements instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AutomaticImageImprovements instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1beta.IAutomaticImageImprovements): google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements;
+
+                        /**
+                         * Encodes the specified AutomaticImageImprovements message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.verify|verify} messages.
+                         * @param message AutomaticImageImprovements message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1beta.IAutomaticImageImprovements, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AutomaticImageImprovements message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.verify|verify} messages.
+                         * @param message AutomaticImageImprovements message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.IAutomaticImageImprovements, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AutomaticImageImprovements message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AutomaticImageImprovements
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements;
+
+                        /**
+                         * Decodes an AutomaticImageImprovements message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AutomaticImageImprovements
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements;
+
+                        /**
+                         * Verifies an AutomaticImageImprovements message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AutomaticImageImprovements message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AutomaticImageImprovements
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements;
+
+                        /**
+                         * Creates a plain object from an AutomaticImageImprovements message. Also converts values to other types if specified.
+                         * @param message AutomaticImageImprovements
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AutomaticImageImprovements to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AutomaticImageImprovements
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace AutomaticImageImprovements {
+
+                        /** Properties of an ImageImprovementsAccountLevelSettings. */
+                        interface IImageImprovementsAccountLevelSettings {
+
+                            /** ImageImprovementsAccountLevelSettings allowAutomaticImageImprovements */
+                            allowAutomaticImageImprovements?: (boolean|null);
+                        }
+
+                        /** Represents an ImageImprovementsAccountLevelSettings. */
+                        class ImageImprovementsAccountLevelSettings implements IImageImprovementsAccountLevelSettings {
+
+                            /**
+                             * Constructs a new ImageImprovementsAccountLevelSettings.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.IImageImprovementsAccountLevelSettings);
+
+                            /** ImageImprovementsAccountLevelSettings allowAutomaticImageImprovements. */
+                            public allowAutomaticImageImprovements?: (boolean|null);
+
+                            /** ImageImprovementsAccountLevelSettings _allowAutomaticImageImprovements. */
+                            public _allowAutomaticImageImprovements?: "allowAutomaticImageImprovements";
+
+                            /**
+                             * Creates a new ImageImprovementsAccountLevelSettings instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ImageImprovementsAccountLevelSettings instance
+                             */
+                            public static create(properties?: google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.IImageImprovementsAccountLevelSettings): google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.ImageImprovementsAccountLevelSettings;
+
+                            /**
+                             * Encodes the specified ImageImprovementsAccountLevelSettings message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.ImageImprovementsAccountLevelSettings.verify|verify} messages.
+                             * @param message ImageImprovementsAccountLevelSettings message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.IImageImprovementsAccountLevelSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ImageImprovementsAccountLevelSettings message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.ImageImprovementsAccountLevelSettings.verify|verify} messages.
+                             * @param message ImageImprovementsAccountLevelSettings message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.IImageImprovementsAccountLevelSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an ImageImprovementsAccountLevelSettings message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ImageImprovementsAccountLevelSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.ImageImprovementsAccountLevelSettings;
+
+                            /**
+                             * Decodes an ImageImprovementsAccountLevelSettings message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ImageImprovementsAccountLevelSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.ImageImprovementsAccountLevelSettings;
+
+                            /**
+                             * Verifies an ImageImprovementsAccountLevelSettings message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an ImageImprovementsAccountLevelSettings message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ImageImprovementsAccountLevelSettings
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.ImageImprovementsAccountLevelSettings;
+
+                            /**
+                             * Creates a plain object from an ImageImprovementsAccountLevelSettings message. Also converts values to other types if specified.
+                             * @param message ImageImprovementsAccountLevelSettings
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.accounts.v1beta.AutomaticImageImprovements.ImageImprovementsAccountLevelSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ImageImprovementsAccountLevelSettings to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ImageImprovementsAccountLevelSettings
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** Properties of an AutomaticShippingImprovements. */
+                    interface IAutomaticShippingImprovements {
+
+                        /** AutomaticShippingImprovements allowShippingImprovements */
+                        allowShippingImprovements?: (boolean|null);
+                    }
+
+                    /** Represents an AutomaticShippingImprovements. */
+                    class AutomaticShippingImprovements implements IAutomaticShippingImprovements {
+
+                        /**
+                         * Constructs a new AutomaticShippingImprovements.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1beta.IAutomaticShippingImprovements);
+
+                        /** AutomaticShippingImprovements allowShippingImprovements. */
+                        public allowShippingImprovements?: (boolean|null);
+
+                        /** AutomaticShippingImprovements _allowShippingImprovements. */
+                        public _allowShippingImprovements?: "allowShippingImprovements";
+
+                        /**
+                         * Creates a new AutomaticShippingImprovements instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AutomaticShippingImprovements instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1beta.IAutomaticShippingImprovements): google.shopping.merchant.accounts.v1beta.AutomaticShippingImprovements;
+
+                        /**
+                         * Encodes the specified AutomaticShippingImprovements message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.AutomaticShippingImprovements.verify|verify} messages.
+                         * @param message AutomaticShippingImprovements message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1beta.IAutomaticShippingImprovements, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AutomaticShippingImprovements message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.AutomaticShippingImprovements.verify|verify} messages.
+                         * @param message AutomaticShippingImprovements message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.IAutomaticShippingImprovements, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AutomaticShippingImprovements message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AutomaticShippingImprovements
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.AutomaticShippingImprovements;
+
+                        /**
+                         * Decodes an AutomaticShippingImprovements message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AutomaticShippingImprovements
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.AutomaticShippingImprovements;
+
+                        /**
+                         * Verifies an AutomaticShippingImprovements message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AutomaticShippingImprovements message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AutomaticShippingImprovements
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.AutomaticShippingImprovements;
+
+                        /**
+                         * Creates a plain object from an AutomaticShippingImprovements message. Also converts values to other types if specified.
+                         * @param message AutomaticShippingImprovements
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1beta.AutomaticShippingImprovements, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AutomaticShippingImprovements to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AutomaticShippingImprovements
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a GetAutomaticImprovementsRequest. */
+                    interface IGetAutomaticImprovementsRequest {
+
+                        /** GetAutomaticImprovementsRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a GetAutomaticImprovementsRequest. */
+                    class GetAutomaticImprovementsRequest implements IGetAutomaticImprovementsRequest {
+
+                        /**
+                         * Constructs a new GetAutomaticImprovementsRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1beta.IGetAutomaticImprovementsRequest);
+
+                        /** GetAutomaticImprovementsRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new GetAutomaticImprovementsRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetAutomaticImprovementsRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1beta.IGetAutomaticImprovementsRequest): google.shopping.merchant.accounts.v1beta.GetAutomaticImprovementsRequest;
+
+                        /**
+                         * Encodes the specified GetAutomaticImprovementsRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.GetAutomaticImprovementsRequest.verify|verify} messages.
+                         * @param message GetAutomaticImprovementsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1beta.IGetAutomaticImprovementsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetAutomaticImprovementsRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.GetAutomaticImprovementsRequest.verify|verify} messages.
+                         * @param message GetAutomaticImprovementsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.IGetAutomaticImprovementsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetAutomaticImprovementsRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetAutomaticImprovementsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.GetAutomaticImprovementsRequest;
+
+                        /**
+                         * Decodes a GetAutomaticImprovementsRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetAutomaticImprovementsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.GetAutomaticImprovementsRequest;
+
+                        /**
+                         * Verifies a GetAutomaticImprovementsRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetAutomaticImprovementsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetAutomaticImprovementsRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.GetAutomaticImprovementsRequest;
+
+                        /**
+                         * Creates a plain object from a GetAutomaticImprovementsRequest message. Also converts values to other types if specified.
+                         * @param message GetAutomaticImprovementsRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1beta.GetAutomaticImprovementsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetAutomaticImprovementsRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetAutomaticImprovementsRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an UpdateAutomaticImprovementsRequest. */
+                    interface IUpdateAutomaticImprovementsRequest {
+
+                        /** UpdateAutomaticImprovementsRequest automaticImprovements */
+                        automaticImprovements?: (google.shopping.merchant.accounts.v1beta.IAutomaticImprovements|null);
+
+                        /** UpdateAutomaticImprovementsRequest updateMask */
+                        updateMask?: (google.protobuf.IFieldMask|null);
+                    }
+
+                    /** Represents an UpdateAutomaticImprovementsRequest. */
+                    class UpdateAutomaticImprovementsRequest implements IUpdateAutomaticImprovementsRequest {
+
+                        /**
+                         * Constructs a new UpdateAutomaticImprovementsRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.accounts.v1beta.IUpdateAutomaticImprovementsRequest);
+
+                        /** UpdateAutomaticImprovementsRequest automaticImprovements. */
+                        public automaticImprovements?: (google.shopping.merchant.accounts.v1beta.IAutomaticImprovements|null);
+
+                        /** UpdateAutomaticImprovementsRequest updateMask. */
+                        public updateMask?: (google.protobuf.IFieldMask|null);
+
+                        /**
+                         * Creates a new UpdateAutomaticImprovementsRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UpdateAutomaticImprovementsRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.accounts.v1beta.IUpdateAutomaticImprovementsRequest): google.shopping.merchant.accounts.v1beta.UpdateAutomaticImprovementsRequest;
+
+                        /**
+                         * Encodes the specified UpdateAutomaticImprovementsRequest message. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.UpdateAutomaticImprovementsRequest.verify|verify} messages.
+                         * @param message UpdateAutomaticImprovementsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.accounts.v1beta.IUpdateAutomaticImprovementsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UpdateAutomaticImprovementsRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.accounts.v1beta.UpdateAutomaticImprovementsRequest.verify|verify} messages.
+                         * @param message UpdateAutomaticImprovementsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.accounts.v1beta.IUpdateAutomaticImprovementsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an UpdateAutomaticImprovementsRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UpdateAutomaticImprovementsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.accounts.v1beta.UpdateAutomaticImprovementsRequest;
+
+                        /**
+                         * Decodes an UpdateAutomaticImprovementsRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UpdateAutomaticImprovementsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.accounts.v1beta.UpdateAutomaticImprovementsRequest;
+
+                        /**
+                         * Verifies an UpdateAutomaticImprovementsRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an UpdateAutomaticImprovementsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UpdateAutomaticImprovementsRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.accounts.v1beta.UpdateAutomaticImprovementsRequest;
+
+                        /**
+                         * Creates a plain object from an UpdateAutomaticImprovementsRequest message. Also converts values to other types if specified.
+                         * @param message UpdateAutomaticImprovementsRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.accounts.v1beta.UpdateAutomaticImprovementsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UpdateAutomaticImprovementsRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UpdateAutomaticImprovementsRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Represents a BusinessIdentityService */
                     class BusinessIdentityService extends $protobuf.rpc.Service {
 

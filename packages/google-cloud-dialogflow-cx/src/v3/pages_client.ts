@@ -628,7 +628,9 @@ export class PagesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getPage request %j', request);
     const wrappedCallback:
       | Callback<
@@ -773,7 +775,9 @@ export class PagesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createPage request %j', request);
     const wrappedCallback:
       | Callback<
@@ -917,7 +921,9 @@ export class PagesClient {
       this._gaxModule.routingHeader.fromParams({
         'page.name': request.page!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updatePage request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1050,7 +1056,9 @@ export class PagesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deletePage request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1199,7 +1207,9 @@ export class PagesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dialogflow.cx.v3.IListPagesRequest,
@@ -1289,7 +1299,9 @@ export class PagesClient {
       });
     const defaultCallSettings = this._defaults['listPages'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listPages stream %j', request);
     return this.descriptors.page.listPages.createStream(
       this.innerApiCalls.listPages as GaxCall,
@@ -1361,7 +1373,9 @@ export class PagesClient {
       });
     const defaultCallSettings = this._defaults['listPages'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listPages iterate %j', request);
     return this.descriptors.page.listPages.asyncIterate(
       this.innerApiCalls['listPages'] as GaxCall,
@@ -1541,7 +1555,7 @@ export class PagesClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

@@ -1,6 +1,13 @@
 # Changelog
 
-## [1.0.0](https://github.com/googleapis/google-cloud-node/compare/storage-control-v0.2.1...storage-control-v1.0.0) (2025-03-12)
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/storage-control-v0.3.0...storage-control-v0.4.0) (2025-03-19)
+
+
+### Features
+
+* [storage] Add Anywhere cache control APIs ([#6151](https://github.com/googleapis/google-cloud-node/issues/6151)) ([6f0340d](https://github.com/googleapis/google-cloud-node/commit/6f0340dc21027b6c66bcf77e8cb1cd30fc7d4ea3))
+
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/storage-control-v0.2.1...storage-control-v0.3.0) (2025-03-18)
 
 
 ### ⚠ BREAKING CHANGES

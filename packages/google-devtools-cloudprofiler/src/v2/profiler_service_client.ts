@@ -493,7 +493,9 @@ export class ProfilerServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createProfile request %j', request);
     const wrappedCallback:
       | Callback<
@@ -627,7 +629,9 @@ export class ProfilerServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createOfflineProfile request %j', request);
     const wrappedCallback:
       | Callback<
@@ -759,7 +763,9 @@ export class ProfilerServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'profile.name': request.profile!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateProfile request %j', request);
     const wrappedCallback:
       | Callback<

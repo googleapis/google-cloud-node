@@ -490,7 +490,9 @@ export class MapsPlatformDatasetsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createDataset request %j', request);
     const wrappedCallback:
       | Callback<
@@ -620,7 +622,9 @@ export class MapsPlatformDatasetsClient {
       this._gaxModule.routingHeader.fromParams({
         'dataset.name': request.dataset!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateDatasetMetadata request %j', request);
     const wrappedCallback:
       | Callback<
@@ -747,7 +751,9 @@ export class MapsPlatformDatasetsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getDataset request %j', request);
     const wrappedCallback:
       | Callback<
@@ -873,7 +879,9 @@ export class MapsPlatformDatasetsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('deleteDataset request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1006,7 +1014,9 @@ export class MapsPlatformDatasetsClient {
       this._gaxModule.routingHeader.fromParams({
         dataset: request.dataset ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest,
@@ -1077,7 +1087,9 @@ export class MapsPlatformDatasetsClient {
       });
     const defaultCallSettings = this._defaults['fetchDatasetErrors'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('fetchDatasetErrors stream %j', request);
     return this.descriptors.page.fetchDatasetErrors.createStream(
       this.innerApiCalls.fetchDatasetErrors as GaxCall,
@@ -1130,7 +1142,9 @@ export class MapsPlatformDatasetsClient {
       });
     const defaultCallSettings = this._defaults['fetchDatasetErrors'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('fetchDatasetErrors iterate %j', request);
     return this.descriptors.page.fetchDatasetErrors.asyncIterate(
       this.innerApiCalls['fetchDatasetErrors'] as GaxCall,
@@ -1246,7 +1260,9 @@ export class MapsPlatformDatasetsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.maps.mapsplatformdatasets.v1.IListDatasetsRequest,
@@ -1325,7 +1341,9 @@ export class MapsPlatformDatasetsClient {
       });
     const defaultCallSettings = this._defaults['listDatasets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDatasets stream %j', request);
     return this.descriptors.page.listDatasets.createStream(
       this.innerApiCalls.listDatasets as GaxCall,
@@ -1386,7 +1404,9 @@ export class MapsPlatformDatasetsClient {
       });
     const defaultCallSettings = this._defaults['listDatasets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listDatasets iterate %j', request);
     return this.descriptors.page.listDatasets.asyncIterate(
       this.innerApiCalls['listDatasets'] as GaxCall,

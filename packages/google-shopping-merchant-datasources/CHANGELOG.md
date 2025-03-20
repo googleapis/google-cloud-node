@@ -1,6 +1,18 @@
 # Changelog
 
-## [1.0.0](https://github.com/googleapis/google-cloud-node/compare/datasources-v0.3.0...datasources-v1.0.0) (2025-03-12)
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/datasources-v0.4.0...datasources-v0.5.0) (2025-03-19)
+
+
+### Features
+
+* [merchantapi] Add a new destinations field ([#6154](https://github.com/googleapis/google-cloud-node/issues/6154)) ([153866c](https://github.com/googleapis/google-cloud-node/commit/153866c5ec36b7c7740b77d6a1a18b89afccb9f8))
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6190](https://github.com/googleapis/google-cloud-node/issues/6190)) ([f4866df](https://github.com/googleapis/google-cloud-node/commit/f4866dfa6ab481163150f54928a9857d2dfef948))
+
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/datasources-v0.3.0...datasources-v0.4.0) (2025-03-18)
 
 
 ### ⚠ BREAKING CHANGES

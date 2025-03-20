@@ -1,6 +1,13 @@
 # Changelog
 
-## [1.0.0](https://github.com/googleapis/google-cloud-node/compare/conversions-v0.2.0...conversions-v1.0.0) (2025-03-12)
+## [0.3.1](https://github.com/googleapis/google-cloud-node/compare/conversions-v0.3.0...conversions-v0.3.1) (2025-03-19)
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6190](https://github.com/googleapis/google-cloud-node/issues/6190)) ([f4866df](https://github.com/googleapis/google-cloud-node/commit/f4866dfa6ab481163150f54928a9857d2dfef948))
+
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/conversions-v0.2.0...conversions-v0.3.0) (2025-03-18)
 
 
 ### ⚠ BREAKING CHANGES

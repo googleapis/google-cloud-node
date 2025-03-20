@@ -502,7 +502,9 @@ export class UserServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getUser request %j', request);
     const wrappedCallback:
       | Callback<

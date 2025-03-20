@@ -720,7 +720,9 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('initializeZone request %j', request);
     const wrappedCallback:
       | Callback<
@@ -830,7 +832,9 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$EdgeNetwork-$GetZone',
       'GetZone is deprecated and may be removed in a future version.',
@@ -943,7 +947,9 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getNetwork request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1059,7 +1065,9 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('diagnoseNetwork request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1172,7 +1180,9 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getSubnet request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1288,7 +1298,9 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getInterconnect request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1413,7 +1425,9 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('diagnoseInterconnect request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1538,7 +1552,9 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getInterconnectAttachment request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1651,7 +1667,9 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getRouter request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1767,7 +1785,9 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('diagnoseRouter request %j', request);
     const wrappedCallback:
       | Callback<
@@ -1916,7 +1936,9 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2097,7 +2119,9 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2284,7 +2308,9 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2471,7 +2497,9 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         'subnet.name': request.subnet!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2652,7 +2680,9 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -2839,7 +2869,9 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3026,7 +3058,9 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3219,7 +3253,9 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3406,7 +3442,9 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         'router.name': request.router!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3587,7 +3625,9 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -3750,7 +3790,9 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$EdgeNetwork-$ListZones',
       'ListZones is deprecated and may be removed in a future version.',
@@ -3826,7 +3868,9 @@ export class EdgeNetworkClient {
       });
     const defaultCallSettings = this._defaults['listZones'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$EdgeNetwork-$ListZones',
       'ListZones is deprecated and may be removed in a future version.',
@@ -3884,7 +3928,9 @@ export class EdgeNetworkClient {
       });
     const defaultCallSettings = this._defaults['listZones'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$EdgeNetwork-$ListZones',
       'ListZones is deprecated and may be removed in a future version.',
@@ -3996,7 +4042,9 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.edgenetwork.v1.IListNetworksRequest,
@@ -4066,7 +4114,9 @@ export class EdgeNetworkClient {
       });
     const defaultCallSettings = this._defaults['listNetworks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listNetworks stream %j', request);
     return this.descriptors.page.listNetworks.createStream(
       this.innerApiCalls.listNetworks as GaxCall,
@@ -4118,7 +4168,9 @@ export class EdgeNetworkClient {
       });
     const defaultCallSettings = this._defaults['listNetworks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listNetworks iterate %j', request);
     return this.descriptors.page.listNetworks.asyncIterate(
       this.innerApiCalls['listNetworks'] as GaxCall,
@@ -4225,7 +4277,9 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.edgenetwork.v1.IListSubnetsRequest,
@@ -4295,7 +4349,9 @@ export class EdgeNetworkClient {
       });
     const defaultCallSettings = this._defaults['listSubnets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSubnets stream %j', request);
     return this.descriptors.page.listSubnets.createStream(
       this.innerApiCalls.listSubnets as GaxCall,
@@ -4347,7 +4403,9 @@ export class EdgeNetworkClient {
       });
     const defaultCallSettings = this._defaults['listSubnets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listSubnets iterate %j', request);
     return this.descriptors.page.listSubnets.asyncIterate(
       this.innerApiCalls['listSubnets'] as GaxCall,
@@ -4454,7 +4512,9 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.edgenetwork.v1.IListInterconnectsRequest,
@@ -4524,7 +4584,9 @@ export class EdgeNetworkClient {
       });
     const defaultCallSettings = this._defaults['listInterconnects'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listInterconnects stream %j', request);
     return this.descriptors.page.listInterconnects.createStream(
       this.innerApiCalls.listInterconnects as GaxCall,
@@ -4576,7 +4638,9 @@ export class EdgeNetworkClient {
       });
     const defaultCallSettings = this._defaults['listInterconnects'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listInterconnects iterate %j', request);
     return this.descriptors.page.listInterconnects.asyncIterate(
       this.innerApiCalls['listInterconnects'] as GaxCall,
@@ -4683,7 +4747,9 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.edgenetwork.v1.IListInterconnectAttachmentsRequest,
@@ -4753,7 +4819,9 @@ export class EdgeNetworkClient {
       });
     const defaultCallSettings = this._defaults['listInterconnectAttachments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listInterconnectAttachments stream %j', request);
     return this.descriptors.page.listInterconnectAttachments.createStream(
       this.innerApiCalls.listInterconnectAttachments as GaxCall,
@@ -4805,7 +4873,9 @@ export class EdgeNetworkClient {
       });
     const defaultCallSettings = this._defaults['listInterconnectAttachments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listInterconnectAttachments iterate %j', request);
     return this.descriptors.page.listInterconnectAttachments.asyncIterate(
       this.innerApiCalls['listInterconnectAttachments'] as GaxCall,
@@ -4912,7 +4982,9 @@ export class EdgeNetworkClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.edgenetwork.v1.IListRoutersRequest,
@@ -4982,7 +5054,9 @@ export class EdgeNetworkClient {
       });
     const defaultCallSettings = this._defaults['listRouters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRouters stream %j', request);
     return this.descriptors.page.listRouters.createStream(
       this.innerApiCalls.listRouters as GaxCall,
@@ -5034,7 +5108,9 @@ export class EdgeNetworkClient {
       });
     const defaultCallSettings = this._defaults['listRouters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listRouters iterate %j', request);
     return this.descriptors.page.listRouters.asyncIterate(
       this.innerApiCalls['listRouters'] as GaxCall,
@@ -5214,7 +5290,7 @@ export class EdgeNetworkClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};

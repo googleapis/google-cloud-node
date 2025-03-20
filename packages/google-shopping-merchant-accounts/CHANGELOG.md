@@ -1,6 +1,18 @@
 # Changelog
 
-## [2.0.0](https://github.com/googleapis/google-cloud-node/compare/accounts-v1.0.0...accounts-v2.0.0) (2025-03-12)
+## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/accounts-v2.0.0...accounts-v2.1.0) (2025-03-19)
+
+
+### Features
+
+* [merchantapi] Add AutomaticImprovements service ([#6153](https://github.com/googleapis/google-cloud-node/issues/6153)) ([cf56106](https://github.com/googleapis/google-cloud-node/commit/cf561061ead8557fe41b6458ddf2778ced92b36d))
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6190](https://github.com/googleapis/google-cloud-node/issues/6190)) ([f4866df](https://github.com/googleapis/google-cloud-node/commit/f4866dfa6ab481163150f54928a9857d2dfef948))
+
+## [2.0.0](https://github.com/googleapis/google-cloud-node/compare/accounts-v1.0.0...accounts-v2.0.0) (2025-03-18)
 
 
 ### ⚠ BREAKING CHANGES

@@ -306,7 +306,9 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.oracleDatabaseStub);
       client.close().then(() => {
         done();
@@ -365,7 +367,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.GetCloudExadataInfrastructureRequest()
       );
@@ -397,7 +399,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.GetCloudExadataInfrastructureRequest()
       );
@@ -444,7 +446,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.GetCloudExadataInfrastructureRequest()
       );
@@ -478,7 +480,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.GetCloudExadataInfrastructureRequest()
       );
@@ -502,7 +504,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.GetCloudVmClusterRequest()
       );
@@ -533,7 +535,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.GetCloudVmClusterRequest()
       );
@@ -580,7 +582,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.GetCloudVmClusterRequest()
       );
@@ -611,7 +613,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.GetCloudVmClusterRequest()
       );
@@ -632,7 +634,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.GetAutonomousDatabaseRequest()
       );
@@ -664,7 +666,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.GetAutonomousDatabaseRequest()
       );
@@ -711,7 +713,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.GetAutonomousDatabaseRequest()
       );
@@ -745,7 +747,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.GetAutonomousDatabaseRequest()
       );
@@ -769,7 +771,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.GenerateAutonomousDatabaseWalletRequest()
       );
@@ -801,7 +803,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.GenerateAutonomousDatabaseWalletRequest()
       );
@@ -848,7 +850,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.GenerateAutonomousDatabaseWalletRequest()
       );
@@ -882,7 +884,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.GenerateAutonomousDatabaseWalletRequest()
       );
@@ -906,7 +908,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.CreateCloudExadataInfrastructureRequest()
       );
@@ -940,7 +942,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.CreateCloudExadataInfrastructureRequest()
       );
@@ -994,7 +996,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.CreateCloudExadataInfrastructureRequest()
       );
@@ -1026,7 +1028,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.CreateCloudExadataInfrastructureRequest()
       );
@@ -1057,7 +1059,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1080,7 +1082,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1101,7 +1103,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.DeleteCloudExadataInfrastructureRequest()
       );
@@ -1135,7 +1137,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.DeleteCloudExadataInfrastructureRequest()
       );
@@ -1189,7 +1191,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.DeleteCloudExadataInfrastructureRequest()
       );
@@ -1221,7 +1223,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.DeleteCloudExadataInfrastructureRequest()
       );
@@ -1252,7 +1254,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1275,7 +1277,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1296,7 +1298,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.CreateCloudVmClusterRequest()
       );
@@ -1329,7 +1331,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.CreateCloudVmClusterRequest()
       );
@@ -1383,7 +1385,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.CreateCloudVmClusterRequest()
       );
@@ -1414,7 +1416,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.CreateCloudVmClusterRequest()
       );
@@ -1447,7 +1449,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1469,7 +1471,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1490,7 +1492,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.DeleteCloudVmClusterRequest()
       );
@@ -1523,7 +1525,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.DeleteCloudVmClusterRequest()
       );
@@ -1577,7 +1579,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.DeleteCloudVmClusterRequest()
       );
@@ -1608,7 +1610,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.DeleteCloudVmClusterRequest()
       );
@@ -1641,7 +1643,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1663,7 +1665,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1684,7 +1686,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.CreateAutonomousDatabaseRequest()
       );
@@ -1717,7 +1719,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.CreateAutonomousDatabaseRequest()
       );
@@ -1771,7 +1773,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.CreateAutonomousDatabaseRequest()
       );
@@ -1805,7 +1807,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.CreateAutonomousDatabaseRequest()
       );
@@ -1838,7 +1840,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -1861,7 +1863,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -1882,7 +1884,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.DeleteAutonomousDatabaseRequest()
       );
@@ -1915,7 +1917,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.DeleteAutonomousDatabaseRequest()
       );
@@ -1969,7 +1971,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.DeleteAutonomousDatabaseRequest()
       );
@@ -2003,7 +2005,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.DeleteAutonomousDatabaseRequest()
       );
@@ -2036,7 +2038,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2059,7 +2061,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2080,7 +2082,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.RestoreAutonomousDatabaseRequest()
       );
@@ -2113,7 +2115,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.RestoreAutonomousDatabaseRequest()
       );
@@ -2167,7 +2169,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.RestoreAutonomousDatabaseRequest()
       );
@@ -2201,7 +2203,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.RestoreAutonomousDatabaseRequest()
       );
@@ -2234,7 +2236,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2257,7 +2259,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2278,7 +2280,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListCloudExadataInfrastructuresRequest()
       );
@@ -2318,7 +2320,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListCloudExadataInfrastructuresRequest()
       );
@@ -2375,7 +2377,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListCloudExadataInfrastructuresRequest()
       );
@@ -2409,7 +2411,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListCloudExadataInfrastructuresRequest()
       );
@@ -2481,7 +2483,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListCloudExadataInfrastructuresRequest()
       );
@@ -2542,7 +2544,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListCloudExadataInfrastructuresRequest()
       );
@@ -2596,7 +2598,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListCloudExadataInfrastructuresRequest()
       );
@@ -2643,7 +2645,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListCloudVmClustersRequest()
       );
@@ -2683,7 +2685,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListCloudVmClustersRequest()
       );
@@ -2740,7 +2742,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListCloudVmClustersRequest()
       );
@@ -2771,7 +2773,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListCloudVmClustersRequest()
       );
@@ -2832,7 +2834,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListCloudVmClustersRequest()
       );
@@ -2882,7 +2884,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListCloudVmClustersRequest()
       );
@@ -2932,7 +2934,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListCloudVmClustersRequest()
       );
@@ -2975,7 +2977,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListEntitlementsRequest()
       );
@@ -3014,7 +3016,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListEntitlementsRequest()
       );
@@ -3069,7 +3071,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListEntitlementsRequest()
       );
@@ -3100,7 +3102,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListEntitlementsRequest()
       );
@@ -3161,7 +3163,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListEntitlementsRequest()
       );
@@ -3211,7 +3213,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListEntitlementsRequest()
       );
@@ -3261,7 +3263,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListEntitlementsRequest()
       );
@@ -3304,7 +3306,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListDbServersRequest()
       );
@@ -3343,7 +3345,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListDbServersRequest()
       );
@@ -3398,7 +3400,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListDbServersRequest()
       );
@@ -3429,7 +3431,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListDbServersRequest()
       );
@@ -3489,7 +3491,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListDbServersRequest()
       );
@@ -3538,7 +3540,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListDbServersRequest()
       );
@@ -3587,7 +3589,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListDbServersRequest()
       );
@@ -3629,7 +3631,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListDbNodesRequest()
       );
@@ -3668,7 +3670,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListDbNodesRequest()
       );
@@ -3723,7 +3725,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListDbNodesRequest()
       );
@@ -3754,7 +3756,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListDbNodesRequest()
       );
@@ -3814,7 +3816,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListDbNodesRequest()
       );
@@ -3865,7 +3867,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListDbNodesRequest()
       );
@@ -3914,7 +3916,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListDbNodesRequest()
       );
@@ -3958,7 +3960,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListGiVersionsRequest()
       );
@@ -3997,7 +3999,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListGiVersionsRequest()
       );
@@ -4052,7 +4054,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListGiVersionsRequest()
       );
@@ -4083,7 +4085,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListGiVersionsRequest()
       );
@@ -4143,7 +4145,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListGiVersionsRequest()
       );
@@ -4192,7 +4194,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListGiVersionsRequest()
       );
@@ -4241,7 +4243,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListGiVersionsRequest()
       );
@@ -4284,7 +4286,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListDbSystemShapesRequest()
       );
@@ -4324,7 +4326,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListDbSystemShapesRequest()
       );
@@ -4381,7 +4383,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListDbSystemShapesRequest()
       );
@@ -4412,7 +4414,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListDbSystemShapesRequest()
       );
@@ -4473,7 +4475,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListDbSystemShapesRequest()
       );
@@ -4523,7 +4525,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListDbSystemShapesRequest()
       );
@@ -4573,7 +4575,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListDbSystemShapesRequest()
       );
@@ -4616,7 +4618,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListAutonomousDatabasesRequest()
       );
@@ -4656,7 +4658,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListAutonomousDatabasesRequest()
       );
@@ -4713,7 +4715,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListAutonomousDatabasesRequest()
       );
@@ -4747,7 +4749,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListAutonomousDatabasesRequest()
       );
@@ -4816,7 +4818,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListAutonomousDatabasesRequest()
       );
@@ -4874,7 +4876,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListAutonomousDatabasesRequest()
       );
@@ -4928,7 +4930,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListAutonomousDatabasesRequest()
       );
@@ -4975,7 +4977,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListAutonomousDbVersionsRequest()
       );
@@ -5015,7 +5017,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListAutonomousDbVersionsRequest()
       );
@@ -5072,7 +5074,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListAutonomousDbVersionsRequest()
       );
@@ -5106,7 +5108,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListAutonomousDbVersionsRequest()
       );
@@ -5175,7 +5177,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListAutonomousDbVersionsRequest()
       );
@@ -5233,7 +5235,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListAutonomousDbVersionsRequest()
       );
@@ -5287,7 +5289,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListAutonomousDbVersionsRequest()
       );
@@ -5334,7 +5336,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListAutonomousDatabaseCharacterSetsRequest()
       );
@@ -5375,7 +5377,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListAutonomousDatabaseCharacterSetsRequest()
       );
@@ -5432,7 +5434,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListAutonomousDatabaseCharacterSetsRequest()
       );
@@ -5466,7 +5468,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListAutonomousDatabaseCharacterSetsRequest()
       );
@@ -5538,7 +5540,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListAutonomousDatabaseCharacterSetsRequest()
       );
@@ -5599,7 +5601,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListAutonomousDatabaseCharacterSetsRequest()
       );
@@ -5653,7 +5655,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListAutonomousDatabaseCharacterSetsRequest()
       );
@@ -5700,7 +5702,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListAutonomousDatabaseBackupsRequest()
       );
@@ -5740,7 +5742,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListAutonomousDatabaseBackupsRequest()
       );
@@ -5797,7 +5799,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListAutonomousDatabaseBackupsRequest()
       );
@@ -5831,7 +5833,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListAutonomousDatabaseBackupsRequest()
       );
@@ -5903,7 +5905,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListAutonomousDatabaseBackupsRequest()
       );
@@ -5964,7 +5966,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListAutonomousDatabaseBackupsRequest()
       );
@@ -6018,7 +6020,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.oracledatabase.v1.ListAutonomousDatabaseBackupsRequest()
       );
@@ -6064,7 +6066,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -6094,7 +6096,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -6138,7 +6140,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -6173,7 +6175,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -6221,7 +6223,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -6262,7 +6264,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -6341,7 +6343,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -6421,7 +6423,7 @@ describe('v1.OracleDatabaseClient', () => {
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -6517,8 +6519,7 @@ describe('v1.OracleDatabaseClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -6537,7 +6538,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -6546,8 +6547,7 @@ describe('v1.OracleDatabaseClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -6563,7 +6563,7 @@ describe('v1.OracleDatabaseClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('autonomousDatabase', () => {
+    describe('autonomousDatabase', async () => {
       const fakePath = '/rendered/path/autonomousDatabase';
       const expectedParameters = {
         project: 'projectValue',
@@ -6574,7 +6574,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.autonomousDatabasePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6640,7 +6640,7 @@ describe('v1.OracleDatabaseClient', () => {
       });
     });
 
-    describe('autonomousDatabaseBackup', () => {
+    describe('autonomousDatabaseBackup', async () => {
       const fakePath = '/rendered/path/autonomousDatabaseBackup';
       const expectedParameters = {
         project: 'projectValue',
@@ -6651,7 +6651,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.autonomousDatabaseBackupPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6721,7 +6721,7 @@ describe('v1.OracleDatabaseClient', () => {
       });
     });
 
-    describe('autonomousDatabaseCharacterSet', () => {
+    describe('autonomousDatabaseCharacterSet', async () => {
       const fakePath = '/rendered/path/autonomousDatabaseCharacterSet';
       const expectedParameters = {
         project: 'projectValue',
@@ -6733,7 +6733,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.autonomousDatabaseCharacterSetPathTemplate.render =
         sinon.stub().returns(fakePath);
       client.pathTemplates.autonomousDatabaseCharacterSetPathTemplate.match =
@@ -6801,7 +6801,7 @@ describe('v1.OracleDatabaseClient', () => {
       });
     });
 
-    describe('autonomousDbVersion', () => {
+    describe('autonomousDbVersion', async () => {
       const fakePath = '/rendered/path/autonomousDbVersion';
       const expectedParameters = {
         project: 'projectValue',
@@ -6812,7 +6812,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.autonomousDbVersionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6879,7 +6879,7 @@ describe('v1.OracleDatabaseClient', () => {
       });
     });
 
-    describe('cloudExadataInfrastructure', () => {
+    describe('cloudExadataInfrastructure', async () => {
       const fakePath = '/rendered/path/cloudExadataInfrastructure';
       const expectedParameters = {
         project: 'projectValue',
@@ -6890,7 +6890,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.cloudExadataInfrastructurePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -6960,7 +6960,7 @@ describe('v1.OracleDatabaseClient', () => {
       });
     });
 
-    describe('cloudVmCluster', () => {
+    describe('cloudVmCluster', async () => {
       const fakePath = '/rendered/path/cloudVmCluster';
       const expectedParameters = {
         project: 'projectValue',
@@ -6971,7 +6971,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.cloudVmClusterPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7025,7 +7025,7 @@ describe('v1.OracleDatabaseClient', () => {
       });
     });
 
-    describe('dbNode', () => {
+    describe('dbNode', async () => {
       const fakePath = '/rendered/path/dbNode';
       const expectedParameters = {
         project: 'projectValue',
@@ -7037,7 +7037,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.dbNodePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7101,7 +7101,7 @@ describe('v1.OracleDatabaseClient', () => {
       });
     });
 
-    describe('dbServer', () => {
+    describe('dbServer', async () => {
       const fakePath = '/rendered/path/dbServer';
       const expectedParameters = {
         project: 'projectValue',
@@ -7113,7 +7113,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.dbServerPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7178,7 +7178,7 @@ describe('v1.OracleDatabaseClient', () => {
       });
     });
 
-    describe('dbSystemShape', () => {
+    describe('dbSystemShape', async () => {
       const fakePath = '/rendered/path/dbSystemShape';
       const expectedParameters = {
         project: 'projectValue',
@@ -7189,7 +7189,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.dbSystemShapePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7242,7 +7242,7 @@ describe('v1.OracleDatabaseClient', () => {
       });
     });
 
-    describe('entitlement', () => {
+    describe('entitlement', async () => {
       const fakePath = '/rendered/path/entitlement';
       const expectedParameters = {
         project: 'projectValue',
@@ -7253,7 +7253,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.entitlementPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7306,7 +7306,7 @@ describe('v1.OracleDatabaseClient', () => {
       });
     });
 
-    describe('giVersion', () => {
+    describe('giVersion', async () => {
       const fakePath = '/rendered/path/giVersion';
       const expectedParameters = {
         project: 'projectValue',
@@ -7317,7 +7317,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.giVersionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7370,7 +7370,7 @@ describe('v1.OracleDatabaseClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -7380,7 +7380,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -7419,7 +7419,7 @@ describe('v1.OracleDatabaseClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -7428,7 +7428,7 @@ describe('v1.OracleDatabaseClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

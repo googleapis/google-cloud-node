@@ -502,7 +502,9 @@ export class QuotaAdjusterSettingsManagerClient {
         'quota_adjuster_settings.name':
           request.quotaAdjusterSettings!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateQuotaAdjusterSettings request %j', request);
     const wrappedCallback:
       | Callback<
@@ -628,7 +630,9 @@ export class QuotaAdjusterSettingsManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('getQuotaAdjusterSettings request %j', request);
     const wrappedCallback:
       | Callback<

@@ -293,7 +293,9 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      client.initialize().catch(err => {
+        throw err;
+      });
       assert(client.vmwareEngineStub);
       client.close().then(() => {
         done();
@@ -352,7 +354,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetPrivateCloudRequest()
       );
@@ -383,7 +385,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetPrivateCloudRequest()
       );
@@ -430,7 +432,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetPrivateCloudRequest()
       );
@@ -461,7 +463,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetPrivateCloudRequest()
       );
@@ -482,7 +484,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetClusterRequest()
       );
@@ -513,7 +515,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetClusterRequest()
       );
@@ -560,7 +562,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetClusterRequest()
       );
@@ -591,7 +593,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetClusterRequest()
       );
@@ -612,7 +614,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetNodeRequest()
       );
@@ -643,7 +645,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetNodeRequest()
       );
@@ -690,7 +692,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetNodeRequest()
       );
@@ -718,7 +720,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetNodeRequest()
       );
@@ -739,7 +741,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetExternalAddressRequest()
       );
@@ -771,7 +773,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetExternalAddressRequest()
       );
@@ -818,7 +820,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetExternalAddressRequest()
       );
@@ -849,7 +851,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetExternalAddressRequest()
       );
@@ -870,7 +872,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetSubnetRequest()
       );
@@ -901,7 +903,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetSubnetRequest()
       );
@@ -948,7 +950,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetSubnetRequest()
       );
@@ -976,7 +978,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetSubnetRequest()
       );
@@ -997,7 +999,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetExternalAccessRuleRequest()
       );
@@ -1029,7 +1031,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetExternalAccessRuleRequest()
       );
@@ -1076,7 +1078,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetExternalAccessRuleRequest()
       );
@@ -1110,7 +1112,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetExternalAccessRuleRequest()
       );
@@ -1134,7 +1136,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetLoggingServerRequest()
       );
@@ -1165,7 +1167,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetLoggingServerRequest()
       );
@@ -1212,7 +1214,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetLoggingServerRequest()
       );
@@ -1243,7 +1245,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetLoggingServerRequest()
       );
@@ -1264,7 +1266,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetNodeTypeRequest()
       );
@@ -1295,7 +1297,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetNodeTypeRequest()
       );
@@ -1342,7 +1344,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetNodeTypeRequest()
       );
@@ -1373,7 +1375,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetNodeTypeRequest()
       );
@@ -1394,7 +1396,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ShowNsxCredentialsRequest()
       );
@@ -1426,7 +1428,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ShowNsxCredentialsRequest()
       );
@@ -1473,7 +1475,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ShowNsxCredentialsRequest()
       );
@@ -1504,7 +1506,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ShowNsxCredentialsRequest()
       );
@@ -1525,7 +1527,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ShowVcenterCredentialsRequest()
       );
@@ -1557,7 +1559,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ShowVcenterCredentialsRequest()
       );
@@ -1604,7 +1606,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ShowVcenterCredentialsRequest()
       );
@@ -1638,7 +1640,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ShowVcenterCredentialsRequest()
       );
@@ -1662,7 +1664,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetDnsForwardingRequest()
       );
@@ -1693,7 +1695,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetDnsForwardingRequest()
       );
@@ -1740,7 +1742,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetDnsForwardingRequest()
       );
@@ -1771,7 +1773,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetDnsForwardingRequest()
       );
@@ -1792,7 +1794,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetNetworkPeeringRequest()
       );
@@ -1823,7 +1825,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetNetworkPeeringRequest()
       );
@@ -1870,7 +1872,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetNetworkPeeringRequest()
       );
@@ -1901,7 +1903,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetNetworkPeeringRequest()
       );
@@ -1922,7 +1924,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetHcxActivationKeyRequest()
       );
@@ -1954,7 +1956,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetHcxActivationKeyRequest()
       );
@@ -2001,7 +2003,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetHcxActivationKeyRequest()
       );
@@ -2032,7 +2034,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetHcxActivationKeyRequest()
       );
@@ -2053,7 +2055,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetNetworkPolicyRequest()
       );
@@ -2084,7 +2086,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetNetworkPolicyRequest()
       );
@@ -2131,7 +2133,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetNetworkPolicyRequest()
       );
@@ -2162,7 +2164,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetNetworkPolicyRequest()
       );
@@ -2183,7 +2185,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetManagementDnsZoneBindingRequest()
       );
@@ -2215,7 +2217,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetManagementDnsZoneBindingRequest()
       );
@@ -2262,7 +2264,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetManagementDnsZoneBindingRequest()
       );
@@ -2296,7 +2298,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetManagementDnsZoneBindingRequest()
       );
@@ -2320,7 +2322,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetVmwareEngineNetworkRequest()
       );
@@ -2352,7 +2354,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetVmwareEngineNetworkRequest()
       );
@@ -2399,7 +2401,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetVmwareEngineNetworkRequest()
       );
@@ -2433,7 +2435,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetVmwareEngineNetworkRequest()
       );
@@ -2457,7 +2459,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetPrivateConnectionRequest()
       );
@@ -2489,7 +2491,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetPrivateConnectionRequest()
       );
@@ -2536,7 +2538,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetPrivateConnectionRequest()
       );
@@ -2567,7 +2569,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetPrivateConnectionRequest()
       );
@@ -2588,7 +2590,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetDnsBindPermissionRequest()
       );
@@ -2620,7 +2622,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetDnsBindPermissionRequest()
       );
@@ -2667,7 +2669,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetDnsBindPermissionRequest()
       );
@@ -2698,7 +2700,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GetDnsBindPermissionRequest()
       );
@@ -2719,7 +2721,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.CreatePrivateCloudRequest()
       );
@@ -2752,7 +2754,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.CreatePrivateCloudRequest()
       );
@@ -2806,7 +2808,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.CreatePrivateCloudRequest()
       );
@@ -2837,7 +2839,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.CreatePrivateCloudRequest()
       );
@@ -2870,7 +2872,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -2892,7 +2894,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -2913,7 +2915,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UpdatePrivateCloudRequest()
       );
@@ -2947,7 +2949,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UpdatePrivateCloudRequest()
       );
@@ -3002,7 +3004,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UpdatePrivateCloudRequest()
       );
@@ -3034,7 +3036,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UpdatePrivateCloudRequest()
       );
@@ -3068,7 +3070,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3090,7 +3092,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3111,7 +3113,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.DeletePrivateCloudRequest()
       );
@@ -3144,7 +3146,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.DeletePrivateCloudRequest()
       );
@@ -3198,7 +3200,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.DeletePrivateCloudRequest()
       );
@@ -3229,7 +3231,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.DeletePrivateCloudRequest()
       );
@@ -3262,7 +3264,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3284,7 +3286,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3305,7 +3307,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UndeletePrivateCloudRequest()
       );
@@ -3338,7 +3340,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UndeletePrivateCloudRequest()
       );
@@ -3392,7 +3394,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UndeletePrivateCloudRequest()
       );
@@ -3423,7 +3425,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UndeletePrivateCloudRequest()
       );
@@ -3456,7 +3458,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3478,7 +3480,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3499,7 +3501,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.CreateClusterRequest()
       );
@@ -3532,7 +3534,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.CreateClusterRequest()
       );
@@ -3586,7 +3588,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.CreateClusterRequest()
       );
@@ -3617,7 +3619,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.CreateClusterRequest()
       );
@@ -3650,7 +3652,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3672,7 +3674,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3693,7 +3695,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UpdateClusterRequest()
       );
@@ -3727,7 +3729,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UpdateClusterRequest()
       );
@@ -3782,7 +3784,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UpdateClusterRequest()
       );
@@ -3814,7 +3816,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UpdateClusterRequest()
       );
@@ -3848,7 +3850,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -3870,7 +3872,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -3891,7 +3893,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.DeleteClusterRequest()
       );
@@ -3924,7 +3926,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.DeleteClusterRequest()
       );
@@ -3978,7 +3980,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.DeleteClusterRequest()
       );
@@ -4009,7 +4011,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.DeleteClusterRequest()
       );
@@ -4042,7 +4044,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4064,7 +4066,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4085,7 +4087,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.CreateExternalAddressRequest()
       );
@@ -4118,7 +4120,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.CreateExternalAddressRequest()
       );
@@ -4172,7 +4174,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.CreateExternalAddressRequest()
       );
@@ -4206,7 +4208,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.CreateExternalAddressRequest()
       );
@@ -4239,7 +4241,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4261,7 +4263,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4282,7 +4284,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UpdateExternalAddressRequest()
       );
@@ -4316,7 +4318,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UpdateExternalAddressRequest()
       );
@@ -4371,7 +4373,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UpdateExternalAddressRequest()
       );
@@ -4406,7 +4408,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UpdateExternalAddressRequest()
       );
@@ -4440,7 +4442,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4462,7 +4464,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4483,7 +4485,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.DeleteExternalAddressRequest()
       );
@@ -4516,7 +4518,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.DeleteExternalAddressRequest()
       );
@@ -4570,7 +4572,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.DeleteExternalAddressRequest()
       );
@@ -4604,7 +4606,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.DeleteExternalAddressRequest()
       );
@@ -4637,7 +4639,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4659,7 +4661,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4680,7 +4682,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UpdateSubnetRequest()
       );
@@ -4713,7 +4715,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UpdateSubnetRequest()
       );
@@ -4768,7 +4770,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UpdateSubnetRequest()
       );
@@ -4800,7 +4802,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UpdateSubnetRequest()
       );
@@ -4834,7 +4836,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -4856,7 +4858,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -4874,7 +4876,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.CreateExternalAccessRuleRequest()
       );
@@ -4907,7 +4909,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.CreateExternalAccessRuleRequest()
       );
@@ -4961,7 +4963,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.CreateExternalAccessRuleRequest()
       );
@@ -4995,7 +4997,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.CreateExternalAccessRuleRequest()
       );
@@ -5028,7 +5030,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -5051,7 +5053,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -5072,7 +5074,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UpdateExternalAccessRuleRequest()
       );
@@ -5106,7 +5108,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UpdateExternalAccessRuleRequest()
       );
@@ -5161,7 +5163,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UpdateExternalAccessRuleRequest()
       );
@@ -5196,7 +5198,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UpdateExternalAccessRuleRequest()
       );
@@ -5230,7 +5232,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -5253,7 +5255,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -5274,7 +5276,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.DeleteExternalAccessRuleRequest()
       );
@@ -5307,7 +5309,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.DeleteExternalAccessRuleRequest()
       );
@@ -5361,7 +5363,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.DeleteExternalAccessRuleRequest()
       );
@@ -5395,7 +5397,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.DeleteExternalAccessRuleRequest()
       );
@@ -5428,7 +5430,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -5451,7 +5453,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -5472,7 +5474,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.CreateLoggingServerRequest()
       );
@@ -5505,7 +5507,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.CreateLoggingServerRequest()
       );
@@ -5559,7 +5561,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.CreateLoggingServerRequest()
       );
@@ -5590,7 +5592,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.CreateLoggingServerRequest()
       );
@@ -5623,7 +5625,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -5645,7 +5647,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -5666,7 +5668,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UpdateLoggingServerRequest()
       );
@@ -5700,7 +5702,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UpdateLoggingServerRequest()
       );
@@ -5755,7 +5757,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UpdateLoggingServerRequest()
       );
@@ -5787,7 +5789,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UpdateLoggingServerRequest()
       );
@@ -5821,7 +5823,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -5843,7 +5845,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -5864,7 +5866,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.DeleteLoggingServerRequest()
       );
@@ -5897,7 +5899,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.DeleteLoggingServerRequest()
       );
@@ -5951,7 +5953,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.DeleteLoggingServerRequest()
       );
@@ -5982,7 +5984,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.DeleteLoggingServerRequest()
       );
@@ -6015,7 +6017,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -6037,7 +6039,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -6058,7 +6060,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ResetNsxCredentialsRequest()
       );
@@ -6091,7 +6093,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ResetNsxCredentialsRequest()
       );
@@ -6145,7 +6147,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ResetNsxCredentialsRequest()
       );
@@ -6176,7 +6178,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ResetNsxCredentialsRequest()
       );
@@ -6209,7 +6211,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -6231,7 +6233,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -6252,7 +6254,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ResetVcenterCredentialsRequest()
       );
@@ -6285,7 +6287,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ResetVcenterCredentialsRequest()
       );
@@ -6339,7 +6341,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ResetVcenterCredentialsRequest()
       );
@@ -6373,7 +6375,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ResetVcenterCredentialsRequest()
       );
@@ -6406,7 +6408,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -6429,7 +6431,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -6450,7 +6452,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UpdateDnsForwardingRequest()
       );
@@ -6484,7 +6486,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UpdateDnsForwardingRequest()
       );
@@ -6539,7 +6541,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UpdateDnsForwardingRequest()
       );
@@ -6571,7 +6573,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UpdateDnsForwardingRequest()
       );
@@ -6605,7 +6607,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -6627,7 +6629,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -6648,7 +6650,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.CreateNetworkPeeringRequest()
       );
@@ -6681,7 +6683,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.CreateNetworkPeeringRequest()
       );
@@ -6735,7 +6737,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.CreateNetworkPeeringRequest()
       );
@@ -6766,7 +6768,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.CreateNetworkPeeringRequest()
       );
@@ -6799,7 +6801,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -6821,7 +6823,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -6842,7 +6844,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.DeleteNetworkPeeringRequest()
       );
@@ -6875,7 +6877,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.DeleteNetworkPeeringRequest()
       );
@@ -6929,7 +6931,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.DeleteNetworkPeeringRequest()
       );
@@ -6960,7 +6962,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.DeleteNetworkPeeringRequest()
       );
@@ -6993,7 +6995,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -7015,7 +7017,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -7036,7 +7038,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UpdateNetworkPeeringRequest()
       );
@@ -7070,7 +7072,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UpdateNetworkPeeringRequest()
       );
@@ -7125,7 +7127,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UpdateNetworkPeeringRequest()
       );
@@ -7157,7 +7159,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UpdateNetworkPeeringRequest()
       );
@@ -7191,7 +7193,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -7213,7 +7215,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -7234,7 +7236,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.CreateHcxActivationKeyRequest()
       );
@@ -7267,7 +7269,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.CreateHcxActivationKeyRequest()
       );
@@ -7321,7 +7323,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.CreateHcxActivationKeyRequest()
       );
@@ -7355,7 +7357,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.CreateHcxActivationKeyRequest()
       );
@@ -7388,7 +7390,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -7410,7 +7412,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -7431,7 +7433,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest()
       );
@@ -7464,7 +7466,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest()
       );
@@ -7518,7 +7520,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest()
       );
@@ -7549,7 +7551,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.CreateNetworkPolicyRequest()
       );
@@ -7582,7 +7584,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -7604,7 +7606,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -7625,7 +7627,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest()
       );
@@ -7659,7 +7661,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest()
       );
@@ -7714,7 +7716,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest()
       );
@@ -7746,7 +7748,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UpdateNetworkPolicyRequest()
       );
@@ -7780,7 +7782,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -7802,7 +7804,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -7823,7 +7825,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.DeleteNetworkPolicyRequest()
       );
@@ -7856,7 +7858,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.DeleteNetworkPolicyRequest()
       );
@@ -7910,7 +7912,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.DeleteNetworkPolicyRequest()
       );
@@ -7941,7 +7943,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.DeleteNetworkPolicyRequest()
       );
@@ -7974,7 +7976,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -7996,7 +7998,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -8017,7 +8019,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.CreateManagementDnsZoneBindingRequest()
       );
@@ -8050,7 +8052,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.CreateManagementDnsZoneBindingRequest()
       );
@@ -8104,7 +8106,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.CreateManagementDnsZoneBindingRequest()
       );
@@ -8138,7 +8140,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.CreateManagementDnsZoneBindingRequest()
       );
@@ -8171,7 +8173,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -8194,7 +8196,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -8215,7 +8217,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UpdateManagementDnsZoneBindingRequest()
       );
@@ -8249,7 +8251,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UpdateManagementDnsZoneBindingRequest()
       );
@@ -8304,7 +8306,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UpdateManagementDnsZoneBindingRequest()
       );
@@ -8339,7 +8341,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UpdateManagementDnsZoneBindingRequest()
       );
@@ -8373,7 +8375,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -8396,7 +8398,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -8417,7 +8419,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.DeleteManagementDnsZoneBindingRequest()
       );
@@ -8450,7 +8452,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.DeleteManagementDnsZoneBindingRequest()
       );
@@ -8504,7 +8506,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.DeleteManagementDnsZoneBindingRequest()
       );
@@ -8538,7 +8540,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.DeleteManagementDnsZoneBindingRequest()
       );
@@ -8571,7 +8573,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -8594,7 +8596,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -8615,7 +8617,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.RepairManagementDnsZoneBindingRequest()
       );
@@ -8648,7 +8650,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.RepairManagementDnsZoneBindingRequest()
       );
@@ -8702,7 +8704,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.RepairManagementDnsZoneBindingRequest()
       );
@@ -8736,7 +8738,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.RepairManagementDnsZoneBindingRequest()
       );
@@ -8769,7 +8771,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -8792,7 +8794,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -8813,7 +8815,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest()
       );
@@ -8846,7 +8848,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest()
       );
@@ -8900,7 +8902,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest()
       );
@@ -8934,7 +8936,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.CreateVmwareEngineNetworkRequest()
       );
@@ -8967,7 +8969,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -8990,7 +8992,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -9011,7 +9013,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest()
       );
@@ -9045,7 +9047,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest()
       );
@@ -9100,7 +9102,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest()
       );
@@ -9135,7 +9137,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UpdateVmwareEngineNetworkRequest()
       );
@@ -9169,7 +9171,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -9192,7 +9194,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -9213,7 +9215,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest()
       );
@@ -9246,7 +9248,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest()
       );
@@ -9300,7 +9302,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest()
       );
@@ -9334,7 +9336,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.DeleteVmwareEngineNetworkRequest()
       );
@@ -9367,7 +9369,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -9390,7 +9392,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -9411,7 +9413,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.CreatePrivateConnectionRequest()
       );
@@ -9444,7 +9446,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.CreatePrivateConnectionRequest()
       );
@@ -9498,7 +9500,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.CreatePrivateConnectionRequest()
       );
@@ -9532,7 +9534,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.CreatePrivateConnectionRequest()
       );
@@ -9565,7 +9567,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -9588,7 +9590,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -9609,7 +9611,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UpdatePrivateConnectionRequest()
       );
@@ -9643,7 +9645,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UpdatePrivateConnectionRequest()
       );
@@ -9698,7 +9700,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UpdatePrivateConnectionRequest()
       );
@@ -9733,7 +9735,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.UpdatePrivateConnectionRequest()
       );
@@ -9767,7 +9769,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -9790,7 +9792,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -9811,7 +9813,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.DeletePrivateConnectionRequest()
       );
@@ -9844,7 +9846,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.DeletePrivateConnectionRequest()
       );
@@ -9898,7 +9900,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.DeletePrivateConnectionRequest()
       );
@@ -9932,7 +9934,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.DeletePrivateConnectionRequest()
       );
@@ -9965,7 +9967,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -9988,7 +9990,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -10009,7 +10011,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GrantDnsBindPermissionRequest()
       );
@@ -10042,7 +10044,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GrantDnsBindPermissionRequest()
       );
@@ -10096,7 +10098,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GrantDnsBindPermissionRequest()
       );
@@ -10130,7 +10132,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.GrantDnsBindPermissionRequest()
       );
@@ -10163,7 +10165,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -10185,7 +10187,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -10206,7 +10208,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.RevokeDnsBindPermissionRequest()
       );
@@ -10239,7 +10241,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.RevokeDnsBindPermissionRequest()
       );
@@ -10293,7 +10295,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.RevokeDnsBindPermissionRequest()
       );
@@ -10327,7 +10329,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.RevokeDnsBindPermissionRequest()
       );
@@ -10360,7 +10362,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
       );
@@ -10383,7 +10385,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const expectedError = new Error('expected');
 
       client.operationsClient.getOperation = stubSimpleCall(
@@ -10404,7 +10406,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListPrivateCloudsRequest()
       );
@@ -10443,7 +10445,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListPrivateCloudsRequest()
       );
@@ -10498,7 +10500,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListPrivateCloudsRequest()
       );
@@ -10529,7 +10531,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListPrivateCloudsRequest()
       );
@@ -10590,7 +10592,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListPrivateCloudsRequest()
       );
@@ -10640,7 +10642,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListPrivateCloudsRequest()
       );
@@ -10689,7 +10691,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListPrivateCloudsRequest()
       );
@@ -10732,7 +10734,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListClustersRequest()
       );
@@ -10771,7 +10773,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListClustersRequest()
       );
@@ -10826,7 +10828,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListClustersRequest()
       );
@@ -10857,7 +10859,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListClustersRequest()
       );
@@ -10917,7 +10919,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListClustersRequest()
       );
@@ -10968,7 +10970,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListClustersRequest()
       );
@@ -11017,7 +11019,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListClustersRequest()
       );
@@ -11059,7 +11061,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListNodesRequest()
       );
@@ -11092,7 +11094,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListNodesRequest()
       );
@@ -11141,7 +11143,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListNodesRequest()
       );
@@ -11169,7 +11171,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListNodesRequest()
       );
@@ -11223,7 +11225,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListNodesRequest()
       );
@@ -11274,7 +11276,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListNodesRequest()
       );
@@ -11316,7 +11318,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListNodesRequest()
       );
@@ -11359,7 +11361,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListExternalAddressesRequest()
       );
@@ -11399,7 +11401,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListExternalAddressesRequest()
       );
@@ -11456,7 +11458,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListExternalAddressesRequest()
       );
@@ -11490,7 +11492,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListExternalAddressesRequest()
       );
@@ -11557,7 +11559,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListExternalAddressesRequest()
       );
@@ -11613,7 +11615,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListExternalAddressesRequest()
       );
@@ -11667,7 +11669,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListExternalAddressesRequest()
       );
@@ -11714,7 +11716,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.FetchNetworkPolicyExternalAddressesRequest()
       );
@@ -11755,7 +11757,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.FetchNetworkPolicyExternalAddressesRequest()
       );
@@ -11812,7 +11814,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.FetchNetworkPolicyExternalAddressesRequest()
       );
@@ -11846,7 +11848,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.FetchNetworkPolicyExternalAddressesRequest()
       );
@@ -11916,7 +11918,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.FetchNetworkPolicyExternalAddressesRequest()
       );
@@ -11975,7 +11977,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.FetchNetworkPolicyExternalAddressesRequest()
       );
@@ -12029,7 +12031,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.FetchNetworkPolicyExternalAddressesRequest()
       );
@@ -12076,7 +12078,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListSubnetsRequest()
       );
@@ -12109,7 +12111,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListSubnetsRequest()
       );
@@ -12158,7 +12160,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListSubnetsRequest()
       );
@@ -12189,7 +12191,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListSubnetsRequest()
       );
@@ -12243,7 +12245,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListSubnetsRequest()
       );
@@ -12294,7 +12296,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListSubnetsRequest()
       );
@@ -12337,7 +12339,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListSubnetsRequest()
       );
@@ -12381,7 +12383,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListExternalAccessRulesRequest()
       );
@@ -12421,7 +12423,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListExternalAccessRulesRequest()
       );
@@ -12478,7 +12480,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListExternalAccessRulesRequest()
       );
@@ -12512,7 +12514,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListExternalAccessRulesRequest()
       );
@@ -12581,7 +12583,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListExternalAccessRulesRequest()
       );
@@ -12639,7 +12641,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListExternalAccessRulesRequest()
       );
@@ -12693,7 +12695,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListExternalAccessRulesRequest()
       );
@@ -12740,7 +12742,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListLoggingServersRequest()
       );
@@ -12780,7 +12782,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListLoggingServersRequest()
       );
@@ -12835,7 +12837,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListLoggingServersRequest()
       );
@@ -12866,7 +12868,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListLoggingServersRequest()
       );
@@ -12927,7 +12929,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListLoggingServersRequest()
       );
@@ -12977,7 +12979,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListLoggingServersRequest()
       );
@@ -13027,7 +13029,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListLoggingServersRequest()
       );
@@ -13070,7 +13072,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListNodeTypesRequest()
       );
@@ -13109,7 +13111,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListNodeTypesRequest()
       );
@@ -13164,7 +13166,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListNodeTypesRequest()
       );
@@ -13195,7 +13197,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListNodeTypesRequest()
       );
@@ -13255,7 +13257,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListNodeTypesRequest()
       );
@@ -13304,7 +13306,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListNodeTypesRequest()
       );
@@ -13353,7 +13355,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListNodeTypesRequest()
       );
@@ -13395,7 +13397,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListNetworkPeeringsRequest()
       );
@@ -13435,7 +13437,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListNetworkPeeringsRequest()
       );
@@ -13492,7 +13494,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListNetworkPeeringsRequest()
       );
@@ -13523,7 +13525,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListNetworkPeeringsRequest()
       );
@@ -13584,7 +13586,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListNetworkPeeringsRequest()
       );
@@ -13634,7 +13636,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListNetworkPeeringsRequest()
       );
@@ -13684,7 +13686,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListNetworkPeeringsRequest()
       );
@@ -13727,7 +13729,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListPeeringRoutesRequest()
       );
@@ -13766,7 +13768,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListPeeringRoutesRequest()
       );
@@ -13821,7 +13823,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListPeeringRoutesRequest()
       );
@@ -13852,7 +13854,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListPeeringRoutesRequest()
       );
@@ -13913,7 +13915,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListPeeringRoutesRequest()
       );
@@ -13963,7 +13965,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListPeeringRoutesRequest()
       );
@@ -14012,7 +14014,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListPeeringRoutesRequest()
       );
@@ -14055,7 +14057,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListHcxActivationKeysRequest()
       );
@@ -14095,7 +14097,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListHcxActivationKeysRequest()
       );
@@ -14152,7 +14154,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListHcxActivationKeysRequest()
       );
@@ -14186,7 +14188,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListHcxActivationKeysRequest()
       );
@@ -14253,7 +14255,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListHcxActivationKeysRequest()
       );
@@ -14309,7 +14311,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListHcxActivationKeysRequest()
       );
@@ -14363,7 +14365,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListHcxActivationKeysRequest()
       );
@@ -14410,7 +14412,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest()
       );
@@ -14450,7 +14452,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest()
       );
@@ -14505,7 +14507,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest()
       );
@@ -14536,7 +14538,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest()
       );
@@ -14597,7 +14599,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest()
       );
@@ -14647,7 +14649,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest()
       );
@@ -14697,7 +14699,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListNetworkPoliciesRequest()
       );
@@ -14740,7 +14742,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListManagementDnsZoneBindingsRequest()
       );
@@ -14780,7 +14782,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListManagementDnsZoneBindingsRequest()
       );
@@ -14837,7 +14839,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListManagementDnsZoneBindingsRequest()
       );
@@ -14871,7 +14873,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListManagementDnsZoneBindingsRequest()
       );
@@ -14943,7 +14945,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListManagementDnsZoneBindingsRequest()
       );
@@ -15004,7 +15006,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListManagementDnsZoneBindingsRequest()
       );
@@ -15058,7 +15060,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListManagementDnsZoneBindingsRequest()
       );
@@ -15105,7 +15107,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest()
       );
@@ -15145,7 +15147,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest()
       );
@@ -15202,7 +15204,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest()
       );
@@ -15236,7 +15238,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest()
       );
@@ -15305,7 +15307,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest()
       );
@@ -15363,7 +15365,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest()
       );
@@ -15417,7 +15419,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListVmwareEngineNetworksRequest()
       );
@@ -15464,7 +15466,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest()
       );
@@ -15504,7 +15506,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest()
       );
@@ -15561,7 +15563,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest()
       );
@@ -15595,7 +15597,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest()
       );
@@ -15662,7 +15664,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest()
       );
@@ -15718,7 +15720,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest()
       );
@@ -15772,7 +15774,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListPrivateConnectionsRequest()
       );
@@ -15819,7 +15821,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest()
       );
@@ -15860,7 +15862,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest()
       );
@@ -15915,7 +15917,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest()
       );
@@ -15949,7 +15951,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest()
       );
@@ -16019,7 +16021,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest()
       );
@@ -16078,7 +16080,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest()
       );
@@ -16131,7 +16133,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.vmwareengine.v1.ListPrivateConnectionPeeringRoutesRequest()
       );
@@ -16177,7 +16179,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -16207,7 +16209,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -16251,7 +16253,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.GetIamPolicyRequest()
       );
@@ -16283,7 +16285,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -16313,7 +16315,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -16357,7 +16359,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.SetIamPolicyRequest()
       );
@@ -16389,7 +16391,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -16422,7 +16424,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -16466,7 +16468,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new IamProtos.google.iam.v1.TestIamPermissionsRequest()
       );
@@ -16501,7 +16503,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -16531,7 +16533,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -16575,7 +16577,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
       );
@@ -16610,7 +16612,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -16658,7 +16660,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
       );
@@ -16699,7 +16701,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -16778,7 +16780,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -16858,7 +16860,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -16954,8 +16956,7 @@ describe('v1.VmwareEngineClient', () => {
       ];
       client.operationsClient.descriptor.listOperations.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
       const iterable = client.operationsClient.listOperationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -16974,7 +16975,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -16983,8 +16984,7 @@ describe('v1.VmwareEngineClient', () => {
         stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.operationsClient.listOperationsAsync(request);
       await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -17000,7 +17000,7 @@ describe('v1.VmwareEngineClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('cluster', () => {
+    describe('cluster', async () => {
       const fakePath = '/rendered/path/cluster';
       const expectedParameters = {
         project: 'projectValue',
@@ -17012,7 +17012,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.clusterPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -17076,7 +17076,7 @@ describe('v1.VmwareEngineClient', () => {
       });
     });
 
-    describe('dnsBindPermission', () => {
+    describe('dnsBindPermission', async () => {
       const fakePath = '/rendered/path/dnsBindPermission';
       const expectedParameters = {
         project: 'projectValue',
@@ -17086,7 +17086,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.dnsBindPermissionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -17137,7 +17137,7 @@ describe('v1.VmwareEngineClient', () => {
       });
     });
 
-    describe('dnsForwarding', () => {
+    describe('dnsForwarding', async () => {
       const fakePath = '/rendered/path/dnsForwarding';
       const expectedParameters = {
         project: 'projectValue',
@@ -17148,7 +17148,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.dnsForwardingPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -17201,7 +17201,7 @@ describe('v1.VmwareEngineClient', () => {
       });
     });
 
-    describe('externalAccessRule', () => {
+    describe('externalAccessRule', async () => {
       const fakePath = '/rendered/path/externalAccessRule';
       const expectedParameters = {
         project: 'projectValue',
@@ -17213,7 +17213,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.externalAccessRulePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -17294,7 +17294,7 @@ describe('v1.VmwareEngineClient', () => {
       });
     });
 
-    describe('externalAddress', () => {
+    describe('externalAddress', async () => {
       const fakePath = '/rendered/path/externalAddress';
       const expectedParameters = {
         project: 'projectValue',
@@ -17306,7 +17306,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.externalAddressPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -17372,7 +17372,7 @@ describe('v1.VmwareEngineClient', () => {
       });
     });
 
-    describe('hcxActivationKey', () => {
+    describe('hcxActivationKey', async () => {
       const fakePath = '/rendered/path/hcxActivationKey';
       const expectedParameters = {
         project: 'projectValue',
@@ -17384,7 +17384,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.hcxActivationKeyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -17453,7 +17453,7 @@ describe('v1.VmwareEngineClient', () => {
       });
     });
 
-    describe('location', () => {
+    describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
         project: 'projectValue',
@@ -17463,7 +17463,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -17502,7 +17502,7 @@ describe('v1.VmwareEngineClient', () => {
       });
     });
 
-    describe('loggingServer', () => {
+    describe('loggingServer', async () => {
       const fakePath = '/rendered/path/loggingServer';
       const expectedParameters = {
         project: 'projectValue',
@@ -17514,7 +17514,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.loggingServerPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -17578,7 +17578,7 @@ describe('v1.VmwareEngineClient', () => {
       });
     });
 
-    describe('managementDnsZoneBinding', () => {
+    describe('managementDnsZoneBinding', async () => {
       const fakePath = '/rendered/path/managementDnsZoneBinding';
       const expectedParameters = {
         project: 'projectValue',
@@ -17590,7 +17590,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.managementDnsZoneBindingPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -17675,7 +17675,7 @@ describe('v1.VmwareEngineClient', () => {
       });
     });
 
-    describe('networkPeering', () => {
+    describe('networkPeering', async () => {
       const fakePath = '/rendered/path/networkPeering';
       const expectedParameters = {
         project: 'projectValue',
@@ -17686,7 +17686,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.networkPeeringPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -17740,7 +17740,7 @@ describe('v1.VmwareEngineClient', () => {
       });
     });
 
-    describe('networkPolicy', () => {
+    describe('networkPolicy', async () => {
       const fakePath = '/rendered/path/networkPolicy';
       const expectedParameters = {
         project: 'projectValue',
@@ -17751,7 +17751,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.networkPolicyPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -17804,7 +17804,7 @@ describe('v1.VmwareEngineClient', () => {
       });
     });
 
-    describe('node', () => {
+    describe('node', async () => {
       const fakePath = '/rendered/path/node';
       const expectedParameters = {
         project: 'projectValue',
@@ -17817,7 +17817,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.nodePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -17892,7 +17892,7 @@ describe('v1.VmwareEngineClient', () => {
       });
     });
 
-    describe('nodeType', () => {
+    describe('nodeType', async () => {
       const fakePath = '/rendered/path/nodeType';
       const expectedParameters = {
         project: 'projectValue',
@@ -17903,7 +17903,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.nodeTypePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -17956,7 +17956,7 @@ describe('v1.VmwareEngineClient', () => {
       });
     });
 
-    describe('privateCloud', () => {
+    describe('privateCloud', async () => {
       const fakePath = '/rendered/path/privateCloud';
       const expectedParameters = {
         project: 'projectValue',
@@ -17967,7 +17967,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.privateCloudPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -18020,7 +18020,7 @@ describe('v1.VmwareEngineClient', () => {
       });
     });
 
-    describe('privateConnection', () => {
+    describe('privateConnection', async () => {
       const fakePath = '/rendered/path/privateConnection';
       const expectedParameters = {
         project: 'projectValue',
@@ -18031,7 +18031,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.privateConnectionPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -18097,7 +18097,7 @@ describe('v1.VmwareEngineClient', () => {
       });
     });
 
-    describe('project', () => {
+    describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
@@ -18106,7 +18106,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -18135,7 +18135,7 @@ describe('v1.VmwareEngineClient', () => {
       });
     });
 
-    describe('subnet', () => {
+    describe('subnet', async () => {
       const fakePath = '/rendered/path/subnet';
       const expectedParameters = {
         project: 'projectValue',
@@ -18147,7 +18147,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.subnetPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
@@ -18211,7 +18211,7 @@ describe('v1.VmwareEngineClient', () => {
       });
     });
 
-    describe('vmwareEngineNetwork', () => {
+    describe('vmwareEngineNetwork', async () => {
       const fakePath = '/rendered/path/vmwareEngineNetwork';
       const expectedParameters = {
         project: 'projectValue',
@@ -18222,7 +18222,7 @@ describe('v1.VmwareEngineClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize();
+      await client.initialize();
       client.pathTemplates.vmwareEngineNetworkPathTemplate.render = sinon
         .stub()
         .returns(fakePath);

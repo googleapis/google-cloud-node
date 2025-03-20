@@ -627,7 +627,9 @@ export class AnswerRecordsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this.warn(
       'DEP$AnswerRecords-$GetAnswerRecord',
       'GetAnswerRecord is deprecated and may be removed in a future version.',
@@ -759,7 +761,9 @@ export class AnswerRecordsClient {
       this._gaxModule.routingHeader.fromParams({
         'answer_record.name': request.answerRecord!.name ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('updateAnswerRecord request %j', request);
     const wrappedCallback:
       | Callback<
@@ -911,7 +915,9 @@ export class AnswerRecordsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.dialogflow.v2beta1.IListAnswerRecordsRequest,
@@ -1000,7 +1006,9 @@ export class AnswerRecordsClient {
       });
     const defaultCallSettings = this._defaults['listAnswerRecords'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAnswerRecords stream %j', request);
     return this.descriptors.page.listAnswerRecords.createStream(
       this.innerApiCalls.listAnswerRecords as GaxCall,
@@ -1071,7 +1079,9 @@ export class AnswerRecordsClient {
       });
     const defaultCallSettings = this._defaults['listAnswerRecords'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listAnswerRecords iterate %j', request);
     return this.descriptors.page.listAnswerRecords.asyncIterate(
       this.innerApiCalls['listAnswerRecords'] as GaxCall,
