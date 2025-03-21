@@ -6497,6 +6497,9 @@ export namespace google {
 
                     /** InfoTypeDescription sensitivityScore */
                     sensitivityScore?: (google.privacy.dlp.v2.ISensitivityScore|null);
+
+                    /** InfoTypeDescription specificInfoTypes */
+                    specificInfoTypes?: (string[]|null);
                 }
 
                 /** Represents an InfoTypeDescription. */
@@ -6531,6 +6534,9 @@ export namespace google {
 
                     /** InfoTypeDescription sensitivityScore. */
                     public sensitivityScore?: (google.privacy.dlp.v2.ISensitivityScore|null);
+
+                    /** InfoTypeDescription specificInfoTypes. */
+                    public specificInfoTypes: string[];
 
                     /**
                      * Creates a new InfoTypeDescription instance using the specified properties.
@@ -6740,6 +6746,7 @@ export namespace google {
                         CHINA = 8,
                         COLOMBIA = 9,
                         CROATIA = 42,
+                        CZECHIA = 52,
                         DENMARK = 10,
                         FRANCE = 11,
                         FINLAND = 12,
@@ -20241,6 +20248,9 @@ export namespace google {
 
                         /** Export profileTable */
                         profileTable?: (google.privacy.dlp.v2.IBigQueryTable|null);
+
+                        /** Export sampleFindingsTable */
+                        sampleFindingsTable?: (google.privacy.dlp.v2.IBigQueryTable|null);
                     }
 
                     /** Represents an Export. */
@@ -20254,6 +20264,9 @@ export namespace google {
 
                         /** Export profileTable. */
                         public profileTable?: (google.privacy.dlp.v2.IBigQueryTable|null);
+
+                        /** Export sampleFindingsTable. */
+                        public sampleFindingsTable?: (google.privacy.dlp.v2.IBigQueryTable|null);
 
                         /**
                          * Creates a new Export instance using the specified properties.
@@ -20967,6 +20980,348 @@ export namespace google {
                             public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
                     }
+                }
+
+                /** Properties of a DataProfileFinding. */
+                interface IDataProfileFinding {
+
+                    /** DataProfileFinding quote */
+                    quote?: (string|null);
+
+                    /** DataProfileFinding infotype */
+                    infotype?: (google.privacy.dlp.v2.IInfoType|null);
+
+                    /** DataProfileFinding quoteInfo */
+                    quoteInfo?: (google.privacy.dlp.v2.IQuoteInfo|null);
+
+                    /** DataProfileFinding dataProfileResourceName */
+                    dataProfileResourceName?: (string|null);
+
+                    /** DataProfileFinding findingId */
+                    findingId?: (string|null);
+
+                    /** DataProfileFinding timestamp */
+                    timestamp?: (google.protobuf.ITimestamp|null);
+
+                    /** DataProfileFinding location */
+                    location?: (google.privacy.dlp.v2.IDataProfileFindingLocation|null);
+
+                    /** DataProfileFinding resourceVisibility */
+                    resourceVisibility?: (google.privacy.dlp.v2.ResourceVisibility|keyof typeof google.privacy.dlp.v2.ResourceVisibility|null);
+                }
+
+                /** Represents a DataProfileFinding. */
+                class DataProfileFinding implements IDataProfileFinding {
+
+                    /**
+                     * Constructs a new DataProfileFinding.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IDataProfileFinding);
+
+                    /** DataProfileFinding quote. */
+                    public quote: string;
+
+                    /** DataProfileFinding infotype. */
+                    public infotype?: (google.privacy.dlp.v2.IInfoType|null);
+
+                    /** DataProfileFinding quoteInfo. */
+                    public quoteInfo?: (google.privacy.dlp.v2.IQuoteInfo|null);
+
+                    /** DataProfileFinding dataProfileResourceName. */
+                    public dataProfileResourceName: string;
+
+                    /** DataProfileFinding findingId. */
+                    public findingId: string;
+
+                    /** DataProfileFinding timestamp. */
+                    public timestamp?: (google.protobuf.ITimestamp|null);
+
+                    /** DataProfileFinding location. */
+                    public location?: (google.privacy.dlp.v2.IDataProfileFindingLocation|null);
+
+                    /** DataProfileFinding resourceVisibility. */
+                    public resourceVisibility: (google.privacy.dlp.v2.ResourceVisibility|keyof typeof google.privacy.dlp.v2.ResourceVisibility);
+
+                    /**
+                     * Creates a new DataProfileFinding instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DataProfileFinding instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IDataProfileFinding): google.privacy.dlp.v2.DataProfileFinding;
+
+                    /**
+                     * Encodes the specified DataProfileFinding message. Does not implicitly {@link google.privacy.dlp.v2.DataProfileFinding.verify|verify} messages.
+                     * @param message DataProfileFinding message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IDataProfileFinding, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DataProfileFinding message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.DataProfileFinding.verify|verify} messages.
+                     * @param message DataProfileFinding message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IDataProfileFinding, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DataProfileFinding message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DataProfileFinding
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.DataProfileFinding;
+
+                    /**
+                     * Decodes a DataProfileFinding message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DataProfileFinding
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.DataProfileFinding;
+
+                    /**
+                     * Verifies a DataProfileFinding message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DataProfileFinding message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DataProfileFinding
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.DataProfileFinding;
+
+                    /**
+                     * Creates a plain object from a DataProfileFinding message. Also converts values to other types if specified.
+                     * @param message DataProfileFinding
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.DataProfileFinding, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DataProfileFinding to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DataProfileFinding
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DataProfileFindingLocation. */
+                interface IDataProfileFindingLocation {
+
+                    /** DataProfileFindingLocation containerName */
+                    containerName?: (string|null);
+
+                    /** DataProfileFindingLocation dataProfileFindingRecordLocation */
+                    dataProfileFindingRecordLocation?: (google.privacy.dlp.v2.IDataProfileFindingRecordLocation|null);
+                }
+
+                /** Represents a DataProfileFindingLocation. */
+                class DataProfileFindingLocation implements IDataProfileFindingLocation {
+
+                    /**
+                     * Constructs a new DataProfileFindingLocation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IDataProfileFindingLocation);
+
+                    /** DataProfileFindingLocation containerName. */
+                    public containerName: string;
+
+                    /** DataProfileFindingLocation dataProfileFindingRecordLocation. */
+                    public dataProfileFindingRecordLocation?: (google.privacy.dlp.v2.IDataProfileFindingRecordLocation|null);
+
+                    /** DataProfileFindingLocation locationExtraDetails. */
+                    public locationExtraDetails?: "dataProfileFindingRecordLocation";
+
+                    /**
+                     * Creates a new DataProfileFindingLocation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DataProfileFindingLocation instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IDataProfileFindingLocation): google.privacy.dlp.v2.DataProfileFindingLocation;
+
+                    /**
+                     * Encodes the specified DataProfileFindingLocation message. Does not implicitly {@link google.privacy.dlp.v2.DataProfileFindingLocation.verify|verify} messages.
+                     * @param message DataProfileFindingLocation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IDataProfileFindingLocation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DataProfileFindingLocation message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.DataProfileFindingLocation.verify|verify} messages.
+                     * @param message DataProfileFindingLocation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IDataProfileFindingLocation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DataProfileFindingLocation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DataProfileFindingLocation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.DataProfileFindingLocation;
+
+                    /**
+                     * Decodes a DataProfileFindingLocation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DataProfileFindingLocation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.DataProfileFindingLocation;
+
+                    /**
+                     * Verifies a DataProfileFindingLocation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DataProfileFindingLocation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DataProfileFindingLocation
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.DataProfileFindingLocation;
+
+                    /**
+                     * Creates a plain object from a DataProfileFindingLocation message. Also converts values to other types if specified.
+                     * @param message DataProfileFindingLocation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.DataProfileFindingLocation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DataProfileFindingLocation to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DataProfileFindingLocation
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DataProfileFindingRecordLocation. */
+                interface IDataProfileFindingRecordLocation {
+
+                    /** DataProfileFindingRecordLocation field */
+                    field?: (google.privacy.dlp.v2.IFieldId|null);
+                }
+
+                /** Represents a DataProfileFindingRecordLocation. */
+                class DataProfileFindingRecordLocation implements IDataProfileFindingRecordLocation {
+
+                    /**
+                     * Constructs a new DataProfileFindingRecordLocation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IDataProfileFindingRecordLocation);
+
+                    /** DataProfileFindingRecordLocation field. */
+                    public field?: (google.privacy.dlp.v2.IFieldId|null);
+
+                    /**
+                     * Creates a new DataProfileFindingRecordLocation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DataProfileFindingRecordLocation instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IDataProfileFindingRecordLocation): google.privacy.dlp.v2.DataProfileFindingRecordLocation;
+
+                    /**
+                     * Encodes the specified DataProfileFindingRecordLocation message. Does not implicitly {@link google.privacy.dlp.v2.DataProfileFindingRecordLocation.verify|verify} messages.
+                     * @param message DataProfileFindingRecordLocation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IDataProfileFindingRecordLocation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DataProfileFindingRecordLocation message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.DataProfileFindingRecordLocation.verify|verify} messages.
+                     * @param message DataProfileFindingRecordLocation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IDataProfileFindingRecordLocation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DataProfileFindingRecordLocation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DataProfileFindingRecordLocation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.DataProfileFindingRecordLocation;
+
+                    /**
+                     * Decodes a DataProfileFindingRecordLocation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DataProfileFindingRecordLocation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.DataProfileFindingRecordLocation;
+
+                    /**
+                     * Verifies a DataProfileFindingRecordLocation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DataProfileFindingRecordLocation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DataProfileFindingRecordLocation
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.DataProfileFindingRecordLocation;
+
+                    /**
+                     * Creates a plain object from a DataProfileFindingRecordLocation message. Also converts values to other types if specified.
+                     * @param message DataProfileFindingRecordLocation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.DataProfileFindingRecordLocation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DataProfileFindingRecordLocation to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DataProfileFindingRecordLocation
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a DataProfileJobConfig. */
@@ -32420,6 +32775,12 @@ export namespace google {
                     /** TableDataProfile createTime */
                     createTime?: (google.protobuf.ITimestamp|null);
 
+                    /** TableDataProfile sampleFindingsTable */
+                    sampleFindingsTable?: (google.privacy.dlp.v2.IBigQueryTable|null);
+
+                    /** TableDataProfile tags */
+                    tags?: (google.privacy.dlp.v2.ITag[]|null);
+
                     /** TableDataProfile relatedResources */
                     relatedResources?: (google.privacy.dlp.v2.IRelatedResource[]|null);
                 }
@@ -32510,6 +32871,12 @@ export namespace google {
 
                     /** TableDataProfile createTime. */
                     public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** TableDataProfile sampleFindingsTable. */
+                    public sampleFindingsTable?: (google.privacy.dlp.v2.IBigQueryTable|null);
+
+                    /** TableDataProfile tags. */
+                    public tags: google.privacy.dlp.v2.ITag[];
 
                     /** TableDataProfile relatedResources. */
                     public relatedResources: google.privacy.dlp.v2.IRelatedResource[];
@@ -33260,8 +33627,14 @@ export namespace google {
                     /** FileStoreDataProfile fileStoreInfoTypeSummaries */
                     fileStoreInfoTypeSummaries?: (google.privacy.dlp.v2.IFileStoreInfoTypeSummary[]|null);
 
+                    /** FileStoreDataProfile sampleFindingsTable */
+                    sampleFindingsTable?: (google.privacy.dlp.v2.IBigQueryTable|null);
+
                     /** FileStoreDataProfile fileStoreIsEmpty */
                     fileStoreIsEmpty?: (boolean|null);
+
+                    /** FileStoreDataProfile tags */
+                    tags?: (google.privacy.dlp.v2.ITag[]|null);
 
                     /** FileStoreDataProfile relatedResources */
                     relatedResources?: (google.privacy.dlp.v2.IRelatedResource[]|null);
@@ -33342,8 +33715,14 @@ export namespace google {
                     /** FileStoreDataProfile fileStoreInfoTypeSummaries. */
                     public fileStoreInfoTypeSummaries: google.privacy.dlp.v2.IFileStoreInfoTypeSummary[];
 
+                    /** FileStoreDataProfile sampleFindingsTable. */
+                    public sampleFindingsTable?: (google.privacy.dlp.v2.IBigQueryTable|null);
+
                     /** FileStoreDataProfile fileStoreIsEmpty. */
                     public fileStoreIsEmpty: boolean;
+
+                    /** FileStoreDataProfile tags. */
+                    public tags: google.privacy.dlp.v2.ITag[];
 
                     /** FileStoreDataProfile relatedResources. */
                     public relatedResources: google.privacy.dlp.v2.IRelatedResource[];
@@ -33434,6 +33813,115 @@ export namespace google {
                         RUNNING = 1,
                         DONE = 2
                     }
+                }
+
+                /** Properties of a Tag. */
+                interface ITag {
+
+                    /** Tag namespacedTagValue */
+                    namespacedTagValue?: (string|null);
+
+                    /** Tag key */
+                    key?: (string|null);
+
+                    /** Tag value */
+                    value?: (string|null);
+                }
+
+                /** Represents a Tag. */
+                class Tag implements ITag {
+
+                    /**
+                     * Constructs a new Tag.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.ITag);
+
+                    /** Tag namespacedTagValue. */
+                    public namespacedTagValue: string;
+
+                    /** Tag key. */
+                    public key: string;
+
+                    /** Tag value. */
+                    public value: string;
+
+                    /**
+                     * Creates a new Tag instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Tag instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.ITag): google.privacy.dlp.v2.Tag;
+
+                    /**
+                     * Encodes the specified Tag message. Does not implicitly {@link google.privacy.dlp.v2.Tag.verify|verify} messages.
+                     * @param message Tag message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.ITag, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Tag message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.Tag.verify|verify} messages.
+                     * @param message Tag message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.ITag, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Tag message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Tag
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.Tag;
+
+                    /**
+                     * Decodes a Tag message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Tag
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.Tag;
+
+                    /**
+                     * Verifies a Tag message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Tag message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Tag
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.Tag;
+
+                    /**
+                     * Creates a plain object from a Tag message. Also converts values to other types if specified.
+                     * @param message Tag
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.Tag, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Tag to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Tag
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a RelatedResource. */

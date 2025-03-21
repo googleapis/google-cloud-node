@@ -776,6 +776,9 @@ export class DlpServiceClient {
    * system will automatically choose what detectors to run. By default this may
    * be all types, but may change over time as detectors are updated.
    *
+   * Only the first frame of each multiframe image is redacted. Metadata and
+   * other frames are omitted in the response.
+   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
