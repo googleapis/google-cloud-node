@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## [6.1.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v6.0.1...dlp-v6.1.0) (2025-03-21)
+
+
+### Features
+
+* [dlp] add sample findings for data profiles ([#6192](https://github.com/googleapis/google-cloud-node/issues/6192)) ([3f39c49](https://github.com/googleapis/google-cloud-node/commit/3f39c49a0bd9cc9ee7544ae0dba60bf7d5c69805))
+* List tags on resources for data profiles ([3f39c49](https://github.com/googleapis/google-cloud-node/commit/3f39c49a0bd9cc9ee7544ae0dba60bf7d5c69805))
+
 ## [6.0.1](https://github.com/googleapis/google-cloud-node/compare/dlp-v6.0.0...dlp-v6.0.1) (2025-03-19)
 
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/googleapis/google-cloud-node/compare/gke-backup-v2.0.0...gke-backup-v2.0.1) (2025-03-21)
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6185](https://github.com/googleapis/google-cloud-node/issues/6185)) ([ab30412](https://github.com/googleapis/google-cloud-node/commit/ab304122e3e825c9a76af7d6b0ef4ddc9aa6e906))
+
 ## [2.0.0](https://github.com/googleapis/google-cloud-node/compare/gke-backup-v1.4.1...gke-backup-v2.0.0) (2025-03-18)
 
 

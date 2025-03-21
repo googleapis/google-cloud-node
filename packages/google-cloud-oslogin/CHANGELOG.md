@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/os-login?activeTab=versions
 
+## [6.0.1](https://github.com/googleapis/google-cloud-node/compare/os-login-v6.0.0...os-login-v6.0.1) (2025-03-21)
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6187](https://github.com/googleapis/google-cloud-node/issues/6187)) ([b33692d](https://github.com/googleapis/google-cloud-node/commit/b33692d64bd42b99f37d0f919f2b0c06a673ab7f))
+
 ## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/os-login-v5.7.0...os-login-v6.0.0) (2025-03-18)
 
 
