@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.0.1](https://github.com/googleapis/google-cloud-node/compare/os-config-v4.0.0...os-config-v4.0.1) (2025-03-21)
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6187](https://github.com/googleapis/google-cloud-node/issues/6187)) ([b33692d](https://github.com/googleapis/google-cloud-node/commit/b33692d64bd42b99f37d0f919f2b0c06a673ab7f))
+
 ## [4.0.0](https://github.com/googleapis/google-cloud-node/compare/os-config-v3.3.0...os-config-v4.0.0) (2025-03-18)
 
 

@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/parametermanager-v0.2.0...parametermanager-v0.3.0) (2025-03-21)
+
+
+### Features
+
+* [parametermanager] add CMEK support ([#6196](https://github.com/googleapis/google-cloud-node/issues/6196)) ([83d590e](https://github.com/googleapis/google-cloud-node/commit/83d590ec19b702c63850edccac9bc7a4a51f2c8d))
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6187](https://github.com/googleapis/google-cloud-node/issues/6187)) ([b33692d](https://github.com/googleapis/google-cloud-node/commit/b33692d64bd42b99f37d0f919f2b0c06a673ab7f))
+
 ## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/parametermanager-v0.1.0...parametermanager-v0.2.0) (2025-03-18)
 
 
