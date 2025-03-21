@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/grafeas?activeTab=versions
 
+## [6.0.1](https://github.com/googleapis/google-cloud-node/compare/grafeas-v6.0.0...grafeas-v6.0.1) (2025-03-21)
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6191](https://github.com/googleapis/google-cloud-node/issues/6191)) ([c9adc61](https://github.com/googleapis/google-cloud-node/commit/c9adc6150ad09630854554c2ed7e558fb3e04315))
+
 ## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/grafeas-v5.5.0...grafeas-v6.0.0) (2025-03-18)
 
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.1](https://github.com/googleapis/google-cloud-node/compare/inventories-v0.7.0...inventories-v0.7.1) (2025-03-21)
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6191](https://github.com/googleapis/google-cloud-node/issues/6191)) ([c9adc61](https://github.com/googleapis/google-cloud-node/commit/c9adc6150ad09630854554c2ed7e558fb3e04315))
+
 ## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/inventories-v0.6.0...inventories-v0.7.0) (2025-03-18)
 
 

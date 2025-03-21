@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.1](https://github.com/googleapis/google-cloud-node/compare/gdchardwaremanagement-v0.5.0...gdchardwaremanagement-v0.5.1) (2025-03-21)
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6185](https://github.com/googleapis/google-cloud-node/issues/6185)) ([ab30412](https://github.com/googleapis/google-cloud-node/commit/ab304122e3e825c9a76af7d6b0ef4ddc9aa6e906))
+
 ## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/gdchardwaremanagement-v0.4.1...gdchardwaremanagement-v0.5.0) (2025-03-18)
 
 
