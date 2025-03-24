@@ -15,8 +15,8 @@
 'use strict';
 
 const {describe, it} = require('mocha');
-const removeResponseLabel = require('./remove-response-label.cjs');
-const closeUnresponsive = require('./close-unresponsive.cjs');
+const removeResponseLabel = require('../remove-response-label.cjs');
+const closeUnresponsive = require('../close-unresponsive.cjs');
 
 function getISODateDaysAgo(days) {
   const today = new Date();

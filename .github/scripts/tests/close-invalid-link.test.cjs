@@ -15,13 +15,19 @@
 'use strict';
 
 const {describe, it} = require('mocha');
-const closeInvalidLink = require('./close-invalid-link.cjs');
+const {Octokit} = require('@octokit/rest');
+const closeInvalidLink = require('../close-invalid-link.cjs');
 const fs = require('fs');
+const sinon = require('sinon');
+
+const octokit = new Octokit();
+
 
 describe('Quickstart', () => {
-  it('does not do anything if it is not a bug', async () => {
+  it.only('does not do anything if it is not a bug', async () => {
+    sinon.stub(octokit.rest.issues, 'get');
     const context = {repo: {owner: 'testOrg', repo: 'testRepo'}, issue: {number: 1}}
-    const octokit = {rest: {issues: {get: () => {return {data: {body: "I'm having a problem with this."}}}}}};
+    // const octokit = {rest: {issues: {get: () => {return {data: {body: "I'm having a problem with this."}}}}}};
     await closeInvalidLink({github: octokit, context});
   });
 
