@@ -41,14 +41,14 @@
     "test": "c8 mocha build/test"
   },
   "dependencies": {
-    "google-gax": "^5.0.1-rc.0"
+    "google-gax": "^6.0.0-experimental"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",
     "@types/node": "^22.13.9",
     "@types/sinon": "^17.0.4",
     "c8": "^10.1.3",
-    "gapic-tools": "^1.0.0",
+    "gapic-tools": "^2.0.0-experimental",
     "gts": "^6.0.2",
     "jsdoc": "^4.0.4",
     "jsdoc-fresh": "^3.0.0",
