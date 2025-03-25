@@ -14,38 +14,73 @@
 
 'use strict';
 
-const {describe, it} = require('mocha');
-const {Octokit} = require('@octokit/rest');
+const { describe, it } = require('mocha');
 const closeInvalidLink = require('../close-invalid-link.cjs');
 const fs = require('fs');
 const sinon = require('sinon');
 
-const octokit = new Octokit();
+describe('close issues with invalid links', () => {
+  let octokitStub;
+  let issuesStub;
 
+  beforeEach(() => {
+    issuesStub = {
+      get: sinon.stub(),
+      createComment: sinon.stub(),
+      update: sinon.stub(),
+    };
+    octokitStub = {
+      rest: {
+        issues: issuesStub,
+      },
+    };
+  });
 
-describe('Quickstart', () => {
-  it.only('does not do anything if it is not a bug', async () => {
-    sinon.stub(octokit.rest.issues, 'get');
-    const context = {repo: {owner: 'testOrg', repo: 'testRepo'}, issue: {number: 1}}
-    // const octokit = {rest: {issues: {get: () => {return {data: {body: "I'm having a problem with this."}}}}}};
-    await closeInvalidLink({github: octokit, context});
+  afterEach(() => {
+    sinon.restore();
+  });
+
+  it('does not do anything if it is not a bug', async () => {
+    const context = { repo: { owner: 'testOrg', repo: 'testRepo' }, issue: { number: 1 } };
+    issuesStub.get.resolves({ data: { body: "I'm having a problem with this." } });
+
+    await closeInvalidLink({ github: octokitStub, context });
+
+    sinon.assert.calledOnce(issuesStub.get);
+    sinon.assert.notCalled(issuesStub.createComment);
+    sinon.assert.notCalled(issuesStub.update);
   });
 
   it('does not do anything if it is a bug with an appropriate link', async () => {
-    const context = {repo: {owner: 'testOrg', repo: 'testRepo'}, issue: {number: 1}}
-    const octokit = {rest: {issues: {get: () => {return {data: {body: fs.readFileSync('./fixtures/validIssueBody.txt', 'utf-8')}}}}}};
-    await closeInvalidLink({github: octokit, context});
+    const context = { repo: { owner: 'testOrg', repo: 'testRepo' }, issue: { number: 1 } };
+    issuesStub.get.resolves({ data: { body: fs.readFileSync('./fixtures/validIssueBody.txt', 'utf-8') } });
+
+    await closeInvalidLink({ github: octokitStub, context });
+
+    sinon.assert.calledOnce(issuesStub.get);
+    sinon.assert.notCalled(issuesStub.createComment);
+    sinon.assert.notCalled(issuesStub.update);
   });
 
   it('does not do anything if it is a bug with an appropriate link and the template changes', async () => {
-    const context = {repo: {owner: 'testOrg', repo: 'testRepo'}, issue: {number: 1}}
-    const octokit = {rest: {issues: {get: () => {return {data: {body: fs.readFileSync('./fixtures/validIssueBodyDifferentLinkLocation.txt', 'utf-8')}}}}}};
-    await closeInvalidLink({github: octokit, context});
+    const context = { repo: { owner: 'testOrg', repo: 'testRepo' }, issue: { number: 1 } };
+    issuesStub.get.resolves({ data: { body: fs.readFileSync('./fixtures/validIssueBodyDifferentLinkLocation.txt', 'utf-8') } });
+
+    await closeInvalidLink({ github: octokitStub, context });
+
+    sinon.assert.calledOnce(issuesStub.get);
+    sinon.assert.notCalled(issuesStub.createComment);
+    sinon.assert.notCalled(issuesStub.update);
   });
 
   it('closes the issue if the link is invalid', async () => {
-    const context = {repo: {owner: 'testOrg', repo: 'testRepo'}, issue: {number: 1}}
-    const octokit = {rest: {issues: {get: () => {return {data: {body: fs.readFileSync('./fixtures/invalidIssueBody.txt', 'utf-8')}}}, createComment: () => {return}, update: () => {return}}}};
-    await closeInvalidLink({github: octokit, context});
+    const context = { repo: { owner: 'testOrg', repo: 'testRepo' }, issue: { number: 1 } };
+    issuesStub.get.resolves({ data: { body: fs.readFileSync('./fixtures/invalidIssueBody.txt', 'utf-8') } });
+
+    await closeInvalidLink({ github: octokitStub, context });
+
+    sinon.assert.calledOnce(issuesStub.get);
+    sinon.assert.calledOnce(issuesStub.createComment);
+    sinon.assert.calledOnce(issuesStub.update);
   });
 });
