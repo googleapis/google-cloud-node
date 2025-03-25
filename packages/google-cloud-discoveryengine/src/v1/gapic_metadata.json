@@ -197,6 +197,11 @@
                 "getSession"
               ]
             },
+            "StreamAnswerQuery": {
+              "methods": [
+                "streamAnswerQuery"
+              ]
+            },
             "ListConversations": {
               "methods": [
                 "listConversations",
@@ -793,6 +798,11 @@
                 "getTargetSite"
               ]
             },
+            "FetchSitemaps": {
+              "methods": [
+                "fetchSitemaps"
+              ]
+            },
             "CreateTargetSite": {
               "methods": [
                 "createTargetSite"
@@ -811,6 +821,16 @@
             "DeleteTargetSite": {
               "methods": [
                 "deleteTargetSite"
+              ]
+            },
+            "CreateSitemap": {
+              "methods": [
+                "createSitemap"
+              ]
+            },
+            "DeleteSitemap": {
+              "methods": [
+                "deleteSitemap"
               ]
             },
             "EnableAdvancedSiteSearch": {
@@ -862,6 +882,11 @@
                 "getTargetSite"
               ]
             },
+            "FetchSitemaps": {
+              "methods": [
+                "fetchSitemaps"
+              ]
+            },
             "CreateTargetSite": {
               "methods": [
                 "createTargetSite"
@@ -880,6 +905,16 @@
             "DeleteTargetSite": {
               "methods": [
                 "deleteTargetSite"
+              ]
+            },
+            "CreateSitemap": {
+              "methods": [
+                "createSitemap"
+              ]
+            },
+            "DeleteSitemap": {
+              "methods": [
+                "deleteSitemap"
               ]
             },
             "EnableAdvancedSiteSearch": {
