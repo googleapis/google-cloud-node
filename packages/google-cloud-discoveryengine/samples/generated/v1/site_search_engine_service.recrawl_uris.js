@@ -42,9 +42,7 @@ function main(siteSearchEngine, uris) {
    */
   // const uris = ['abc','def']
   /**
-   *  Optional. Full resource name of the SiteCredential , such as
-   *  `projects/* /locations/* /collections/* /dataStores/* /siteSearchEngine/siteCredentials/*`.
-   *  Only set to crawl private URIs.
+   *  Optional. Credential id to use for crawling.
    */
   // const siteCredential = 'abc123'
 

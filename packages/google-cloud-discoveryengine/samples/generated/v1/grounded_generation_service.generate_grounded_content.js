@@ -44,7 +44,6 @@ function main(location) {
    *  For single-turn queries, this is a single instance. For multi-turn queries,
    *  this is a repeated field that contains conversation history + latest
    *  request.
-   *  Only a single-turn query is supported currently.
    */
   // const contents = [1,2,3,4]
   /**

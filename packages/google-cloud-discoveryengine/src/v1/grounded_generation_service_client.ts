@@ -264,6 +264,10 @@ export class GroundedGenerationServiceClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine'
         ),
+      projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine/sitemaps/{sitemap}'
+        ),
       projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine/targetSites/{target_site}'
@@ -326,6 +330,10 @@ export class GroundedGenerationServiceClient {
       projectLocationDataStoreSiteSearchEnginePathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/dataStores/{data_store}/siteSearchEngine'
+        ),
+      projectLocationDataStoreSiteSearchEngineSitemapPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/dataStores/{data_store}/siteSearchEngine/sitemaps/{sitemap}'
         ),
       projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate:
         new this._gaxModule.PathTemplate(
@@ -543,8 +551,6 @@ export class GroundedGenerationServiceClient {
    *   For single-turn queries, this is a single instance. For multi-turn queries,
    *   this is a repeated field that contains conversation history + latest
    *   request.
-   *
-   *   Only a single-turn query is supported currently.
    * @param {google.cloud.discoveryengine.v1.GenerateGroundedContentRequest.GenerationSpec} request.generationSpec
    *   Content generation specification.
    * @param {google.cloud.discoveryengine.v1.GenerateGroundedContentRequest.GroundingSpec} request.groundingSpec
@@ -696,7 +702,7 @@ export class GroundedGenerationServiceClient {
    *   Required. The resource name of the grounding config, such as
    *   `projects/* /locations/global/groundingConfigs/default_grounding_config`.
    * @param {string} request.answerCandidate
-   *   Answer candidate to check. Can have a maximum length of 1024 characters.
+   *   Answer candidate to check. It can have a maximum length of 4096 tokens.
    * @param {number[]} request.facts
    *   List of facts for the grounding check.
    *   We support up to 200 facts.
@@ -2276,6 +2282,109 @@ export class GroundedGenerationServiceClient {
   }
 
   /**
+   * Return a fully-qualified projectLocationCollectionDataStoreSiteSearchEngineSitemap resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} data_store
+   * @param {string} sitemap
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionDataStoreSiteSearchEngineSitemapPath(
+    project: string,
+    location: string,
+    collection: string,
+    dataStore: string,
+    sitemap: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        data_store: dataStore,
+        sitemap: sitemap,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+    projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+    projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+    projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+    ).collection;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationCollectionDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+    projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+    ).data_store;
+  }
+
+  /**
+   * Parse the sitemap from ProjectLocationCollectionDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the sitemap.
+   */
+  matchSitemapFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+    projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+    ).sitemap;
+  }
+
+  /**
    * Return a fully-qualified projectLocationCollectionDataStoreSiteSearchEngineTargetSite resource name string.
    *
    * @param {string} project
@@ -3757,6 +3866,91 @@ export class GroundedGenerationServiceClient {
     return this.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.match(
       projectLocationDataStoreSiteSearchEngineName
     ).data_store;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationDataStoreSiteSearchEngineSitemap resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_store
+   * @param {string} sitemap
+   * @returns {string} Resource name string.
+   */
+  projectLocationDataStoreSiteSearchEngineSitemapPath(
+    project: string,
+    location: string,
+    dataStore: string,
+    sitemap: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        data_store: dataStore,
+        sitemap: sitemap,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+    projectLocationDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationDataStoreSiteSearchEngineSitemapName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+    projectLocationDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationDataStoreSiteSearchEngineSitemapName
+    ).location;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+    projectLocationDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationDataStoreSiteSearchEngineSitemapName
+    ).data_store;
+  }
+
+  /**
+   * Parse the sitemap from ProjectLocationDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the sitemap.
+   */
+  matchSitemapFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+    projectLocationDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationDataStoreSiteSearchEngineSitemapName
+    ).sitemap;
   }
 
   /**

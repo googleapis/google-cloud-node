@@ -28,7 +28,7 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import {Transform} from 'stream';
+import {Transform, PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 import {loggingUtils as logging} from 'google-gax';
@@ -264,6 +264,10 @@ export class ConversationalSearchServiceClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine'
         ),
+      projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine/sitemaps/{sitemap}'
+        ),
       projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine/targetSites/{target_site}'
@@ -335,6 +339,10 @@ export class ConversationalSearchServiceClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/dataStores/{data_store}/siteSearchEngine'
         ),
+      projectLocationDataStoreSiteSearchEngineSitemapPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/dataStores/{data_store}/siteSearchEngine/sitemaps/{sitemap}'
+        ),
       projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/dataStores/{data_store}/siteSearchEngine/targetSites/{target_site}'
@@ -354,6 +362,16 @@ export class ConversationalSearchServiceClient {
         'pageToken',
         'nextPageToken',
         'sessions'
+      ),
+    };
+
+    // Some of the methods on this service provide streaming responses.
+    // Provide descriptors for these.
+    this.descriptors.stream = {
+      streamAnswerQuery: new this._gaxModule.StreamDescriptor(
+        this._gaxModule.StreamType.SERVER_STREAMING,
+        !!opts.fallback,
+        !!opts.gaxServerStreamingRetries
       ),
     };
 
@@ -415,6 +433,7 @@ export class ConversationalSearchServiceClient {
       'getConversation',
       'listConversations',
       'answerQuery',
+      'streamAnswerQuery',
       'getAnswer',
       'createSession',
       'deleteSession',
@@ -427,6 +446,18 @@ export class ConversationalSearchServiceClient {
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
+              if (methodName in this.descriptors.stream) {
+                const stream = new PassThrough({objectMode: true});
+                setImmediate(() => {
+                  stream.emit(
+                    'error',
+                    new this._gaxModule.GoogleError(
+                      'The client has already been closed.'
+                    )
+                  );
+                });
+                return stream;
+              }
               return Promise.reject('The client has already been closed.');
             }
             const func = stub[methodName];
@@ -437,7 +468,10 @@ export class ConversationalSearchServiceClient {
         }
       );
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        this.descriptors.stream[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -1277,6 +1311,8 @@ export class ConversationalSearchServiceClient {
    *   Model specification.
    * @param {google.cloud.discoveryengine.v1.AnswerQueryRequest.RelatedQuestionsSpec} request.relatedQuestionsSpec
    *   Related questions specification.
+   * @param {google.cloud.discoveryengine.v1.AnswerQueryRequest.GroundingSpec} [request.groundingSpec]
+   *   Optional. Grounding specification.
    * @param {google.cloud.discoveryengine.v1.AnswerQueryRequest.AnswerGenerationSpec} request.answerGenerationSpec
    *   Answer generation specification.
    * @param {google.cloud.discoveryengine.v1.AnswerQueryRequest.SearchSpec} request.searchSpec
@@ -1324,6 +1360,8 @@ export class ConversationalSearchServiceClient {
    *   See [Google Cloud
    *   Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
    *   for more details.
+   * @param {google.cloud.discoveryengine.v1.AnswerQueryRequest.EndUserSpec} [request.endUserSpec]
+   *   Optional. End user specification.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1950,6 +1988,9 @@ export class ConversationalSearchServiceClient {
    * @param {string} request.name
    *   Required. The resource name of the Session to get. Format:
    *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store_id}/sessions/{session_id}`
+   * @param {boolean} [request.includeAnswerDetails]
+   *   Optional. If set to true, the full session including all answer details
+   *   will be returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2060,6 +2101,116 @@ export class ConversationalSearchServiceClient {
           return [response, options, rawResponse];
         }
       );
+  }
+
+  /**
+   * Answer query method (streaming).
+   *
+   * It takes one
+   * {@link protos.google.cloud.discoveryengine.v1.AnswerQueryRequest|AnswerQueryRequest}
+   * and returns multiple
+   * {@link protos.google.cloud.discoveryengine.v1.AnswerQueryResponse|AnswerQueryResponse}
+   * messages in a stream.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.servingConfig
+   *   Required. The resource name of the Search serving config, such as
+   *   `projects/* /locations/global/collections/default_collection/engines/* /servingConfigs/default_serving_config`,
+   *   or
+   *   `projects/* /locations/global/collections/default_collection/dataStores/* /servingConfigs/default_serving_config`.
+   *   This field is used to identify the serving configuration name, set
+   *   of models used to make the search.
+   * @param {google.cloud.discoveryengine.v1.Query} request.query
+   *   Required. Current user query.
+   * @param {string} request.session
+   *   The session resource name. Not required.
+   *
+   *   When session field is not set, the API is in sessionless mode.
+   *
+   *   We support auto session mode: users can use the wildcard symbol `-` as
+   *   session ID.  A new ID will be automatically generated and assigned.
+   * @param {google.cloud.discoveryengine.v1.AnswerQueryRequest.SafetySpec} request.safetySpec
+   *   Model specification.
+   * @param {google.cloud.discoveryengine.v1.AnswerQueryRequest.RelatedQuestionsSpec} request.relatedQuestionsSpec
+   *   Related questions specification.
+   * @param {google.cloud.discoveryengine.v1.AnswerQueryRequest.GroundingSpec} [request.groundingSpec]
+   *   Optional. Grounding specification.
+   * @param {google.cloud.discoveryengine.v1.AnswerQueryRequest.AnswerGenerationSpec} request.answerGenerationSpec
+   *   Answer generation specification.
+   * @param {google.cloud.discoveryengine.v1.AnswerQueryRequest.SearchSpec} request.searchSpec
+   *   Search specification.
+   * @param {google.cloud.discoveryengine.v1.AnswerQueryRequest.QueryUnderstandingSpec} request.queryUnderstandingSpec
+   *   Query understanding specification.
+   * @param {boolean} request.asynchronousMode
+   *   Deprecated: This field is deprecated. Streaming Answer API will be
+   *   supported.
+   *
+   *   Asynchronous mode control.
+   *
+   *   If enabled, the response will be returned with answer/session resource
+   *   name without final answer. The API users need to do the polling to get
+   *   the latest status of answer/session by calling
+   *   {@link protos.google.cloud.discoveryengine.v1.ConversationalSearchService.GetAnswer|ConversationalSearchService.GetAnswer}
+   *   or
+   *   {@link protos.google.cloud.discoveryengine.v1.ConversationalSearchService.GetSession|ConversationalSearchService.GetSession}
+   *   method.
+   * @param {string} request.userPseudoId
+   *   A unique identifier for tracking visitors. For example, this could be
+   *   implemented with an HTTP cookie, which should be able to uniquely identify
+   *   a visitor on a single device. This unique identifier should not change if
+   *   the visitor logs in or out of the website.
+   *
+   *   This field should NOT have a fixed value such as `unknown_visitor`.
+   *
+   *   The field must be a UTF-8 encoded string with a length limit of 128
+   *   characters. Otherwise, an  `INVALID_ARGUMENT`  error is returned.
+   * @param {number[]} request.userLabels
+   *   The user labels applied to a resource must meet the following requirements:
+   *
+   *   * Each resource can have multiple labels, up to a maximum of 64.
+   *   * Each label must be a key-value pair.
+   *   * Keys have a minimum length of 1 character and a maximum length of 63
+   *     characters and cannot be empty. Values can be empty and have a maximum
+   *     length of 63 characters.
+   *   * Keys and values can contain only lowercase letters, numeric characters,
+   *     underscores, and dashes. All characters must use UTF-8 encoding, and
+   *     international characters are allowed.
+   *   * The key portion of a label must be unique. However, you can use the same
+   *     key with multiple resources.
+   *   * Keys must start with a lowercase letter or international character.
+   *
+   *   See [Google Cloud
+   *   Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
+   *   for more details.
+   * @param {google.cloud.discoveryengine.v1.AnswerQueryRequest.EndUserSpec} [request.endUserSpec]
+   *   Optional. End user specification.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits {@link protos.google.cloud.discoveryengine.v1.AnswerQueryResponse|AnswerQueryResponse} on 'data' event.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#server-streaming | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/conversational_search_service.stream_answer_query.js</caption>
+   * region_tag:discoveryengine_v1_generated_ConversationalSearchService_StreamAnswerQuery_async
+   */
+  streamAnswerQuery(
+    request?: protos.google.cloud.discoveryengine.v1.IAnswerQueryRequest,
+    options?: CallOptions
+  ): gax.CancellableStream {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        serving_config: request.servingConfig ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('streamAnswerQuery stream %j', options);
+    return this.innerApiCalls.streamAnswerQuery(request, options);
   }
 
   /**
@@ -2368,13 +2519,18 @@ export class ConversationalSearchServiceClient {
    *   A comma-separated list of fields to order by, sorted in ascending order.
    *   Use "desc" after a field name for descending.
    *   Supported fields:
+   *
    *     * `update_time`
    *     * `create_time`
    *     * `session_name`
+   *     * `is_pinned`
    *
    *   Example:
-   *   "update_time desc"
-   *   "create_time"
+   *
+   *   * "update_time desc"
+   *   * "create_time"
+   *   * "is_pinned desc,update_time desc": list sessions by is_pinned first, then
+   *      by update_time.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2513,13 +2669,18 @@ export class ConversationalSearchServiceClient {
    *   A comma-separated list of fields to order by, sorted in ascending order.
    *   Use "desc" after a field name for descending.
    *   Supported fields:
+   *
    *     * `update_time`
    *     * `create_time`
    *     * `session_name`
+   *     * `is_pinned`
    *
    *   Example:
-   *   "update_time desc"
-   *   "create_time"
+   *
+   *   * "update_time desc"
+   *   * "create_time"
+   *   * "is_pinned desc,update_time desc": list sessions by is_pinned first, then
+   *      by update_time.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -2581,13 +2742,18 @@ export class ConversationalSearchServiceClient {
    *   A comma-separated list of fields to order by, sorted in ascending order.
    *   Use "desc" after a field name for descending.
    *   Supported fields:
+   *
    *     * `update_time`
    *     * `create_time`
    *     * `session_name`
+   *     * `is_pinned`
    *
    *   Example:
-   *   "update_time desc"
-   *   "create_time"
+   *
+   *   * "update_time desc"
+   *   * "create_time"
+   *   * "is_pinned desc,update_time desc": list sessions by is_pinned first, then
+   *      by update_time.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -4048,6 +4214,109 @@ export class ConversationalSearchServiceClient {
     return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.match(
       projectLocationCollectionDataStoreSiteSearchEngineName
     ).data_store;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCollectionDataStoreSiteSearchEngineSitemap resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} data_store
+   * @param {string} sitemap
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionDataStoreSiteSearchEngineSitemapPath(
+    project: string,
+    location: string,
+    collection: string,
+    dataStore: string,
+    sitemap: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        data_store: dataStore,
+        sitemap: sitemap,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+    projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+    projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+    projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+    ).collection;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationCollectionDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+    projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+    ).data_store;
+  }
+
+  /**
+   * Parse the sitemap from ProjectLocationCollectionDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the sitemap.
+   */
+  matchSitemapFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+    projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+    ).sitemap;
   }
 
   /**
@@ -5720,6 +5989,91 @@ export class ConversationalSearchServiceClient {
     return this.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.match(
       projectLocationDataStoreSiteSearchEngineName
     ).data_store;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationDataStoreSiteSearchEngineSitemap resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_store
+   * @param {string} sitemap
+   * @returns {string} Resource name string.
+   */
+  projectLocationDataStoreSiteSearchEngineSitemapPath(
+    project: string,
+    location: string,
+    dataStore: string,
+    sitemap: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        data_store: dataStore,
+        sitemap: sitemap,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+    projectLocationDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationDataStoreSiteSearchEngineSitemapName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+    projectLocationDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationDataStoreSiteSearchEngineSitemapName
+    ).location;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+    projectLocationDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationDataStoreSiteSearchEngineSitemapName
+    ).data_store;
+  }
+
+  /**
+   * Parse the sitemap from ProjectLocationDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the sitemap.
+   */
+  matchSitemapFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+    projectLocationDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationDataStoreSiteSearchEngineSitemapName
+    ).sitemap;
   }
 
   /**

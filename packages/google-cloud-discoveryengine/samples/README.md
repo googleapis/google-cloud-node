@@ -33,6 +33,7 @@
   * [Conversational_search_service.get_session](#conversational_search_service.get_session)
   * [Conversational_search_service.list_conversations](#conversational_search_service.list_conversations)
   * [Conversational_search_service.list_sessions](#conversational_search_service.list_sessions)
+  * [Conversational_search_service.stream_answer_query](#conversational_search_service.stream_answer_query)
   * [Conversational_search_service.update_conversation](#conversational_search_service.update_conversation)
   * [Conversational_search_service.update_session](#conversational_search_service.update_session)
   * [Data_store_service.create_data_store](#data_store_service.create_data_store)
@@ -70,11 +71,14 @@
   * [Search_tuning_service.train_custom_model](#search_tuning_service.train_custom_model)
   * [Site_search_engine_service.batch_create_target_sites](#site_search_engine_service.batch_create_target_sites)
   * [Site_search_engine_service.batch_verify_target_sites](#site_search_engine_service.batch_verify_target_sites)
+  * [Site_search_engine_service.create_sitemap](#site_search_engine_service.create_sitemap)
   * [Site_search_engine_service.create_target_site](#site_search_engine_service.create_target_site)
+  * [Site_search_engine_service.delete_sitemap](#site_search_engine_service.delete_sitemap)
   * [Site_search_engine_service.delete_target_site](#site_search_engine_service.delete_target_site)
   * [Site_search_engine_service.disable_advanced_site_search](#site_search_engine_service.disable_advanced_site_search)
   * [Site_search_engine_service.enable_advanced_site_search](#site_search_engine_service.enable_advanced_site_search)
   * [Site_search_engine_service.fetch_domain_verification_status](#site_search_engine_service.fetch_domain_verification_status)
+  * [Site_search_engine_service.fetch_sitemaps](#site_search_engine_service.fetch_sitemaps)
   * [Site_search_engine_service.get_site_search_engine](#site_search_engine_service.get_site_search_engine)
   * [Site_search_engine_service.get_target_site](#site_search_engine_service.get_target_site)
   * [Site_search_engine_service.list_target_sites](#site_search_engine_service.list_target_sites)
@@ -650,6 +654,23 @@ __Usage:__
 
 
 `node packages/google-cloud-discoveryengine/samples/generated/v1/conversational_search_service.list_sessions.js`
+
+
+-----
+
+
+
+
+### Conversational_search_service.stream_answer_query
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/conversational_search_service.stream_answer_query.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/conversational_search_service.stream_answer_query.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1/conversational_search_service.stream_answer_query.js`
 
 
 -----
@@ -1286,6 +1307,23 @@ __Usage:__
 
 
 
+### Site_search_engine_service.create_sitemap
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/site_search_engine_service.create_sitemap.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/site_search_engine_service.create_sitemap.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1/site_search_engine_service.create_sitemap.js`
+
+
+-----
+
+
+
+
 ### Site_search_engine_service.create_target_site
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/site_search_engine_service.create_target_site.js).
@@ -1296,6 +1334,23 @@ __Usage:__
 
 
 `node packages/google-cloud-discoveryengine/samples/generated/v1/site_search_engine_service.create_target_site.js`
+
+
+-----
+
+
+
+
+### Site_search_engine_service.delete_sitemap
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/site_search_engine_service.delete_sitemap.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/site_search_engine_service.delete_sitemap.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1/site_search_engine_service.delete_sitemap.js`
 
 
 -----
@@ -1364,6 +1419,23 @@ __Usage:__
 
 
 `node packages/google-cloud-discoveryengine/samples/generated/v1/site_search_engine_service.fetch_domain_verification_status.js`
+
+
+-----
+
+
+
+
+### Site_search_engine_service.fetch_sitemaps
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/site_search_engine_service.fetch_sitemaps.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/site_search_engine_service.fetch_sitemaps.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1/site_search_engine_service.fetch_sitemaps.js`
 
 
 -----

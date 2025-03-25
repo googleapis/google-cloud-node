@@ -57,9 +57,12 @@ function main(parent) {
    *    * `update_time`
    *    * `create_time`
    *    * `session_name`
+   *    * `is_pinned`
    *  Example:
-   *  "update_time desc"
-   *  "create_time"
+   *  * "update_time desc"
+   *  * "create_time"
+   *  * "is_pinned desc,update_time desc": list sessions by is_pinned first, then
+   *     by update_time.
    */
   // const orderBy = 'abc123'
 

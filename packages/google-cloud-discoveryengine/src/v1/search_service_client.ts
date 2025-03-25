@@ -267,6 +267,10 @@ export class SearchServiceClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine'
         ),
+      projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine/sitemaps/{sitemap}'
+        ),
       projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine/targetSites/{target_site}'
@@ -341,6 +345,10 @@ export class SearchServiceClient {
       projectLocationDataStoreSiteSearchEnginePathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/dataStores/{data_store}/siteSearchEngine'
+        ),
+      projectLocationDataStoreSiteSearchEngineSitemapPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/dataStores/{data_store}/siteSearchEngine/sitemaps/{sitemap}'
         ),
       projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate:
         new this._gaxModule.PathTemplate(
@@ -583,10 +591,12 @@ export class SearchServiceClient {
    *   This applies to each OneBox type individually.
    *   Default number is 10.
    * @param {number[]} request.dataStoreSpecs
-   *   Specs defining dataStores to filter on in a search call and configurations
-   *   for those dataStores. This is only considered for engines with multiple
-   *   dataStores use case. For single dataStore within an engine, they should
-   *   use the specs at the top level.
+   *   Specifications that define the specific [DataStore]s to be searched, along
+   *   with configurations for those data stores. This is only considered for
+   *   {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}s with multiple data
+   *   stores. For engines with a single data store, the specs directly under
+   *   {@link protos.google.cloud.discoveryengine.v1.SearchRequest|SearchRequest} should be
+   *   used.
    * @param {string} request.filter
    *   The filter syntax consists of an expression language for constructing a
    *   predicate from one or more fields of the documents being filtered. Filter
@@ -631,7 +641,7 @@ export class SearchServiceClient {
    *   If this field is unrecognizable, an `INVALID_ARGUMENT` is returned.
    * @param {google.cloud.discoveryengine.v1.UserInfo} request.userInfo
    *   Information about the end user.
-   *   Highly recommended for analytics.
+   *   Highly recommended for analytics and personalization.
    *   {@link protos.google.cloud.discoveryengine.v1.UserInfo.user_agent|UserInfo.user_agent}
    *   is used to deduce `device_type` for analytics.
    * @param {string} request.languageCode
@@ -713,6 +723,9 @@ export class SearchServiceClient {
    *   Search as you type configuration. Only supported for the
    *   {@link protos.google.cloud.discoveryengine.v1.IndustryVertical.MEDIA|IndustryVertical.MEDIA}
    *   vertical.
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.DisplaySpec} [request.displaySpec]
+   *   Optional. Config for display feature, like match highlighting on search
+   *   results.
    * @param {string} request.session
    *   The session resource name. Optional.
    *
@@ -744,6 +757,16 @@ export class SearchServiceClient {
    *   Session specification.
    *
    *   Can be used only when `session` is set.
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceThreshold} request.relevanceThreshold
+   *   The relevance threshold of the search results.
+   *
+   *   Default to Google defined threshold, leveraging a balance of
+   *   precision and recall to deliver both highly accurate results and
+   *   comprehensive coverage of relevant information.
+   *
+   *   This feature is not supported for healthcare search.
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceScoreSpec} [request.relevanceScoreSpec]
+   *   Optional. The specification for returning the relevance score.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -907,10 +930,12 @@ export class SearchServiceClient {
    *   This applies to each OneBox type individually.
    *   Default number is 10.
    * @param {number[]} request.dataStoreSpecs
-   *   Specs defining dataStores to filter on in a search call and configurations
-   *   for those dataStores. This is only considered for engines with multiple
-   *   dataStores use case. For single dataStore within an engine, they should
-   *   use the specs at the top level.
+   *   Specifications that define the specific [DataStore]s to be searched, along
+   *   with configurations for those data stores. This is only considered for
+   *   {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}s with multiple data
+   *   stores. For engines with a single data store, the specs directly under
+   *   {@link protos.google.cloud.discoveryengine.v1.SearchRequest|SearchRequest} should be
+   *   used.
    * @param {string} request.filter
    *   The filter syntax consists of an expression language for constructing a
    *   predicate from one or more fields of the documents being filtered. Filter
@@ -955,7 +980,7 @@ export class SearchServiceClient {
    *   If this field is unrecognizable, an `INVALID_ARGUMENT` is returned.
    * @param {google.cloud.discoveryengine.v1.UserInfo} request.userInfo
    *   Information about the end user.
-   *   Highly recommended for analytics.
+   *   Highly recommended for analytics and personalization.
    *   {@link protos.google.cloud.discoveryengine.v1.UserInfo.user_agent|UserInfo.user_agent}
    *   is used to deduce `device_type` for analytics.
    * @param {string} request.languageCode
@@ -1037,6 +1062,9 @@ export class SearchServiceClient {
    *   Search as you type configuration. Only supported for the
    *   {@link protos.google.cloud.discoveryengine.v1.IndustryVertical.MEDIA|IndustryVertical.MEDIA}
    *   vertical.
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.DisplaySpec} [request.displaySpec]
+   *   Optional. Config for display feature, like match highlighting on search
+   *   results.
    * @param {string} request.session
    *   The session resource name. Optional.
    *
@@ -1068,6 +1096,16 @@ export class SearchServiceClient {
    *   Session specification.
    *
    *   Can be used only when `session` is set.
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceThreshold} request.relevanceThreshold
+   *   The relevance threshold of the search results.
+   *
+   *   Default to Google defined threshold, leveraging a balance of
+   *   precision and recall to deliver both highly accurate results and
+   *   comprehensive coverage of relevant information.
+   *
+   *   This feature is not supported for healthcare search.
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceScoreSpec} [request.relevanceScoreSpec]
+   *   Optional. The specification for returning the relevance score.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1160,10 +1198,12 @@ export class SearchServiceClient {
    *   This applies to each OneBox type individually.
    *   Default number is 10.
    * @param {number[]} request.dataStoreSpecs
-   *   Specs defining dataStores to filter on in a search call and configurations
-   *   for those dataStores. This is only considered for engines with multiple
-   *   dataStores use case. For single dataStore within an engine, they should
-   *   use the specs at the top level.
+   *   Specifications that define the specific [DataStore]s to be searched, along
+   *   with configurations for those data stores. This is only considered for
+   *   {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}s with multiple data
+   *   stores. For engines with a single data store, the specs directly under
+   *   {@link protos.google.cloud.discoveryengine.v1.SearchRequest|SearchRequest} should be
+   *   used.
    * @param {string} request.filter
    *   The filter syntax consists of an expression language for constructing a
    *   predicate from one or more fields of the documents being filtered. Filter
@@ -1208,7 +1248,7 @@ export class SearchServiceClient {
    *   If this field is unrecognizable, an `INVALID_ARGUMENT` is returned.
    * @param {google.cloud.discoveryengine.v1.UserInfo} request.userInfo
    *   Information about the end user.
-   *   Highly recommended for analytics.
+   *   Highly recommended for analytics and personalization.
    *   {@link protos.google.cloud.discoveryengine.v1.UserInfo.user_agent|UserInfo.user_agent}
    *   is used to deduce `device_type` for analytics.
    * @param {string} request.languageCode
@@ -1290,6 +1330,9 @@ export class SearchServiceClient {
    *   Search as you type configuration. Only supported for the
    *   {@link protos.google.cloud.discoveryengine.v1.IndustryVertical.MEDIA|IndustryVertical.MEDIA}
    *   vertical.
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.DisplaySpec} [request.displaySpec]
+   *   Optional. Config for display feature, like match highlighting on search
+   *   results.
    * @param {string} request.session
    *   The session resource name. Optional.
    *
@@ -1321,6 +1364,16 @@ export class SearchServiceClient {
    *   Session specification.
    *
    *   Can be used only when `session` is set.
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceThreshold} request.relevanceThreshold
+   *   The relevance threshold of the search results.
+   *
+   *   Default to Google defined threshold, leveraging a balance of
+   *   precision and recall to deliver both highly accurate results and
+   *   comprehensive coverage of relevant information.
+   *
+   *   This feature is not supported for healthcare search.
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceScoreSpec} [request.relevanceScoreSpec]
+   *   Optional. The specification for returning the relevance score.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -1424,10 +1477,12 @@ export class SearchServiceClient {
    *   This applies to each OneBox type individually.
    *   Default number is 10.
    * @param {number[]} request.dataStoreSpecs
-   *   Specs defining dataStores to filter on in a search call and configurations
-   *   for those dataStores. This is only considered for engines with multiple
-   *   dataStores use case. For single dataStore within an engine, they should
-   *   use the specs at the top level.
+   *   Specifications that define the specific [DataStore]s to be searched, along
+   *   with configurations for those data stores. This is only considered for
+   *   {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}s with multiple data
+   *   stores. For engines with a single data store, the specs directly under
+   *   {@link protos.google.cloud.discoveryengine.v1.SearchRequest|SearchRequest} should be
+   *   used.
    * @param {string} request.filter
    *   The filter syntax consists of an expression language for constructing a
    *   predicate from one or more fields of the documents being filtered. Filter
@@ -1472,7 +1527,7 @@ export class SearchServiceClient {
    *   If this field is unrecognizable, an `INVALID_ARGUMENT` is returned.
    * @param {google.cloud.discoveryengine.v1.UserInfo} request.userInfo
    *   Information about the end user.
-   *   Highly recommended for analytics.
+   *   Highly recommended for analytics and personalization.
    *   {@link protos.google.cloud.discoveryengine.v1.UserInfo.user_agent|UserInfo.user_agent}
    *   is used to deduce `device_type` for analytics.
    * @param {string} request.languageCode
@@ -1554,6 +1609,9 @@ export class SearchServiceClient {
    *   Search as you type configuration. Only supported for the
    *   {@link protos.google.cloud.discoveryengine.v1.IndustryVertical.MEDIA|IndustryVertical.MEDIA}
    *   vertical.
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.DisplaySpec} [request.displaySpec]
+   *   Optional. Config for display feature, like match highlighting on search
+   *   results.
    * @param {string} request.session
    *   The session resource name. Optional.
    *
@@ -1585,6 +1643,16 @@ export class SearchServiceClient {
    *   Session specification.
    *
    *   Can be used only when `session` is set.
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceThreshold} request.relevanceThreshold
+   *   The relevance threshold of the search results.
+   *
+   *   Default to Google defined threshold, leveraging a balance of
+   *   precision and recall to deliver both highly accurate results and
+   *   comprehensive coverage of relevant information.
+   *
+   *   This feature is not supported for healthcare search.
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceScoreSpec} [request.relevanceScoreSpec]
+   *   Optional. The specification for returning the relevance score.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1748,10 +1816,12 @@ export class SearchServiceClient {
    *   This applies to each OneBox type individually.
    *   Default number is 10.
    * @param {number[]} request.dataStoreSpecs
-   *   Specs defining dataStores to filter on in a search call and configurations
-   *   for those dataStores. This is only considered for engines with multiple
-   *   dataStores use case. For single dataStore within an engine, they should
-   *   use the specs at the top level.
+   *   Specifications that define the specific [DataStore]s to be searched, along
+   *   with configurations for those data stores. This is only considered for
+   *   {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}s with multiple data
+   *   stores. For engines with a single data store, the specs directly under
+   *   {@link protos.google.cloud.discoveryengine.v1.SearchRequest|SearchRequest} should be
+   *   used.
    * @param {string} request.filter
    *   The filter syntax consists of an expression language for constructing a
    *   predicate from one or more fields of the documents being filtered. Filter
@@ -1796,7 +1866,7 @@ export class SearchServiceClient {
    *   If this field is unrecognizable, an `INVALID_ARGUMENT` is returned.
    * @param {google.cloud.discoveryengine.v1.UserInfo} request.userInfo
    *   Information about the end user.
-   *   Highly recommended for analytics.
+   *   Highly recommended for analytics and personalization.
    *   {@link protos.google.cloud.discoveryengine.v1.UserInfo.user_agent|UserInfo.user_agent}
    *   is used to deduce `device_type` for analytics.
    * @param {string} request.languageCode
@@ -1878,6 +1948,9 @@ export class SearchServiceClient {
    *   Search as you type configuration. Only supported for the
    *   {@link protos.google.cloud.discoveryengine.v1.IndustryVertical.MEDIA|IndustryVertical.MEDIA}
    *   vertical.
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.DisplaySpec} [request.displaySpec]
+   *   Optional. Config for display feature, like match highlighting on search
+   *   results.
    * @param {string} request.session
    *   The session resource name. Optional.
    *
@@ -1909,6 +1982,16 @@ export class SearchServiceClient {
    *   Session specification.
    *
    *   Can be used only when `session` is set.
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceThreshold} request.relevanceThreshold
+   *   The relevance threshold of the search results.
+   *
+   *   Default to Google defined threshold, leveraging a balance of
+   *   precision and recall to deliver both highly accurate results and
+   *   comprehensive coverage of relevant information.
+   *
+   *   This feature is not supported for healthcare search.
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceScoreSpec} [request.relevanceScoreSpec]
+   *   Optional. The specification for returning the relevance score.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -2001,10 +2084,12 @@ export class SearchServiceClient {
    *   This applies to each OneBox type individually.
    *   Default number is 10.
    * @param {number[]} request.dataStoreSpecs
-   *   Specs defining dataStores to filter on in a search call and configurations
-   *   for those dataStores. This is only considered for engines with multiple
-   *   dataStores use case. For single dataStore within an engine, they should
-   *   use the specs at the top level.
+   *   Specifications that define the specific [DataStore]s to be searched, along
+   *   with configurations for those data stores. This is only considered for
+   *   {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}s with multiple data
+   *   stores. For engines with a single data store, the specs directly under
+   *   {@link protos.google.cloud.discoveryengine.v1.SearchRequest|SearchRequest} should be
+   *   used.
    * @param {string} request.filter
    *   The filter syntax consists of an expression language for constructing a
    *   predicate from one or more fields of the documents being filtered. Filter
@@ -2049,7 +2134,7 @@ export class SearchServiceClient {
    *   If this field is unrecognizable, an `INVALID_ARGUMENT` is returned.
    * @param {google.cloud.discoveryengine.v1.UserInfo} request.userInfo
    *   Information about the end user.
-   *   Highly recommended for analytics.
+   *   Highly recommended for analytics and personalization.
    *   {@link protos.google.cloud.discoveryengine.v1.UserInfo.user_agent|UserInfo.user_agent}
    *   is used to deduce `device_type` for analytics.
    * @param {string} request.languageCode
@@ -2131,6 +2216,9 @@ export class SearchServiceClient {
    *   Search as you type configuration. Only supported for the
    *   {@link protos.google.cloud.discoveryengine.v1.IndustryVertical.MEDIA|IndustryVertical.MEDIA}
    *   vertical.
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.DisplaySpec} [request.displaySpec]
+   *   Optional. Config for display feature, like match highlighting on search
+   *   results.
    * @param {string} request.session
    *   The session resource name. Optional.
    *
@@ -2162,6 +2250,16 @@ export class SearchServiceClient {
    *   Session specification.
    *
    *   Can be used only when `session` is set.
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceThreshold} request.relevanceThreshold
+   *   The relevance threshold of the search results.
+   *
+   *   Default to Google defined threshold, leveraging a balance of
+   *   precision and recall to deliver both highly accurate results and
+   *   comprehensive coverage of relevant information.
+   *
+   *   This feature is not supported for healthcare search.
+   * @param {google.cloud.discoveryengine.v1.SearchRequest.RelevanceScoreSpec} [request.relevanceScoreSpec]
+   *   Optional. The specification for returning the relevance score.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -3725,6 +3823,109 @@ export class SearchServiceClient {
     return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.match(
       projectLocationCollectionDataStoreSiteSearchEngineName
     ).data_store;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCollectionDataStoreSiteSearchEngineSitemap resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} data_store
+   * @param {string} sitemap
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionDataStoreSiteSearchEngineSitemapPath(
+    project: string,
+    location: string,
+    collection: string,
+    dataStore: string,
+    sitemap: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        data_store: dataStore,
+        sitemap: sitemap,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+    projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+    projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+    projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+    ).collection;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationCollectionDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+    projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+    ).data_store;
+  }
+
+  /**
+   * Parse the sitemap from ProjectLocationCollectionDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_collection_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the sitemap.
+   */
+  matchSitemapFromProjectLocationCollectionDataStoreSiteSearchEngineSitemapName(
+    projectLocationCollectionDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationCollectionDataStoreSiteSearchEngineSitemapName
+    ).sitemap;
   }
 
   /**
@@ -5482,6 +5683,91 @@ export class SearchServiceClient {
     return this.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.match(
       projectLocationDataStoreSiteSearchEngineName
     ).data_store;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationDataStoreSiteSearchEngineSitemap resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_store
+   * @param {string} sitemap
+   * @returns {string} Resource name string.
+   */
+  projectLocationDataStoreSiteSearchEngineSitemapPath(
+    project: string,
+    location: string,
+    dataStore: string,
+    sitemap: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        data_store: dataStore,
+        sitemap: sitemap,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+    projectLocationDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationDataStoreSiteSearchEngineSitemapName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+    projectLocationDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationDataStoreSiteSearchEngineSitemapName
+    ).location;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+    projectLocationDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationDataStoreSiteSearchEngineSitemapName
+    ).data_store;
+  }
+
+  /**
+   * Parse the sitemap from ProjectLocationDataStoreSiteSearchEngineSitemap resource.
+   *
+   * @param {string} projectLocationDataStoreSiteSearchEngineSitemapName
+   *   A fully-qualified path representing project_location_data_store_siteSearchEngine_sitemap resource.
+   * @returns {string} A string representing the sitemap.
+   */
+  matchSitemapFromProjectLocationDataStoreSiteSearchEngineSitemapName(
+    projectLocationDataStoreSiteSearchEngineSitemapName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreSiteSearchEngineSitemapPathTemplate.match(
+      projectLocationDataStoreSiteSearchEngineSitemapName
+    ).sitemap;
   }
 
   /**
