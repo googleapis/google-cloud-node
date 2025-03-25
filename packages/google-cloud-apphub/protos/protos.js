@@ -11117,6 +11117,7 @@
                                     return "type: enum value expected";
                                 case 0:
                                 case 1:
+                                case 2:
                                     break;
                                 }
                             return null;
@@ -11148,6 +11149,10 @@
                             case "REGIONAL":
                             case 1:
                                 message.type = 1;
+                                break;
+                            case "GLOBAL":
+                            case 2:
+                                message.type = 2;
                                 break;
                             }
                             return message;
@@ -11205,11 +11210,13 @@
                          * @enum {number}
                          * @property {number} TYPE_UNSPECIFIED=0 TYPE_UNSPECIFIED value
                          * @property {number} REGIONAL=1 REGIONAL value
+                         * @property {number} GLOBAL=2 GLOBAL value
                          */
                         Scope.Type = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "TYPE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "REGIONAL"] = 1;
+                            values[valuesById[2] = "GLOBAL"] = 2;
                             return values;
                         })();
     

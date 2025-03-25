@@ -4951,7 +4951,8 @@ export namespace google {
                     /** Type enum. */
                     enum Type {
                         TYPE_UNSPECIFIED = 0,
-                        REGIONAL = 1
+                        REGIONAL = 1,
+                        GLOBAL = 2
                     }
                 }
 
