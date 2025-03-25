@@ -279,6 +279,7 @@ export class ContainerAnalysisClient {
       'getIamPolicy',
       'testIamPermissions',
       'getVulnerabilityOccurrencesSummary',
+      'exportSboM',
     ];
     for (const methodName of containerAnalysisStubMethods) {
       const callPromise = this.containerAnalysisStub.then(
@@ -765,8 +766,8 @@ export class ContainerAnalysisClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the project to get a vulnerability summary for in the form of
-   *   `projects/[PROJECT_ID]`.
+   *   Required. The name of the project to get a vulnerability summary for in the
+   *   form of `projects/[PROJECT_ID]`.
    * @param {string} request.filter
    *   The filter expression.
    * @param {object} [options]
@@ -891,6 +892,137 @@ export class ContainerAnalysisClient {
             'getVulnerabilityOccurrencesSummary response %j',
             response
           );
+          return [response, options, rawResponse];
+        }
+      );
+  }
+  /**
+   * Generates an SBOM for the given resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the resource in the form of
+   *   `projects/[PROJECT_ID]/resources/[RESOURCE_URL]`.
+   * @param {google.devtools.containeranalysis.v1.ExportSBOMRequest.CloudStorageLocation} [request.cloudStorageLocation]
+   *   Optional. Empty placeholder to denote that this is a Google Cloud Storage
+   *   export request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.devtools.containeranalysis.v1.ExportSBOMResponse|ExportSBOMResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/container_analysis.export_s_b_o_m.js</caption>
+   * region_tag:containeranalysis_v1_generated_ContainerAnalysis_ExportSBOM_async
+   */
+  exportSBOM(
+    request?: protos.google.devtools.containeranalysis.v1.IExportSBOMRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.devtools.containeranalysis.v1.IExportSBOMResponse,
+      (
+        | protos.google.devtools.containeranalysis.v1.IExportSBOMRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  exportSBOM(
+    request: protos.google.devtools.containeranalysis.v1.IExportSBOMRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.devtools.containeranalysis.v1.IExportSBOMResponse,
+      | protos.google.devtools.containeranalysis.v1.IExportSBOMRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  exportSBOM(
+    request: protos.google.devtools.containeranalysis.v1.IExportSBOMRequest,
+    callback: Callback<
+      protos.google.devtools.containeranalysis.v1.IExportSBOMResponse,
+      | protos.google.devtools.containeranalysis.v1.IExportSBOMRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  exportSBOM(
+    request?: protos.google.devtools.containeranalysis.v1.IExportSBOMRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.devtools.containeranalysis.v1.IExportSBOMResponse,
+          | protos.google.devtools.containeranalysis.v1.IExportSBOMRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.devtools.containeranalysis.v1.IExportSBOMResponse,
+      | protos.google.devtools.containeranalysis.v1.IExportSBOMRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.devtools.containeranalysis.v1.IExportSBOMResponse,
+      (
+        | protos.google.devtools.containeranalysis.v1.IExportSBOMRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('exportSBOM request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.devtools.containeranalysis.v1.IExportSBOMResponse,
+          | protos.google.devtools.containeranalysis.v1.IExportSBOMRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('exportSBOM response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .exportSboM(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.devtools.containeranalysis.v1.IExportSBOMResponse,
+          (
+            | protos.google.devtools.containeranalysis.v1.IExportSBOMRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('exportSBOM response %j', response);
           return [response, options, rawResponse];
         }
       );
