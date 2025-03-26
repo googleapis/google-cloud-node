@@ -20,6 +20,8 @@ import {writeFileSync} from 'fs';
 
 const LANGUAGE = 'nodejs';
 
+const MIXINS = ['google.cloud.location.Locations', 'google.iam.v1.IAMPolicy', 'google.longrunning.Operations']
+
 export interface GHFile {
   content: string | undefined;
 }
@@ -119,7 +121,7 @@ export function getServiceName(serviceConfig: ServiceConfig) {
   let serviceName = '';
   if (serviceConfig?.apis) {
     for (const api of serviceConfig?.apis ?? []) {
-      if (api.name.endsWith('Service')) {
+      if (!(MIXINS.includes(api.name))) {
         serviceName = api.name.split('.')[api.name.split('.').length - 1];
       }
     }

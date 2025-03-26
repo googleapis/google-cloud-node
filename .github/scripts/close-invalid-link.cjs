@@ -43,16 +43,20 @@ module.exports = async ({ github, context }) => {
 
     const yamlData = fs.readFileSync(TEMPLATE_FILE_PATH, 'utf8');
     const obj = yaml.load(yamlData);
-    const linkMatchingText = obj.body.find(x => {return x.type === 'input' && x.validations.required === true && x.attributes.label.includes('link')});
+    const linkMatchingText = (obj.body.find(x => {return x.type === 'input' && x.validations.required === true && x.attributes.label.includes('link')})).attributes.label;
     const isBugTemplate = issue.data.body.includes(linkMatchingText);
 
     if (isBugTemplate) {
         console.log(`Issue ${number} is a bug template`)
         try {
             const text = issue.data.body;
-            const match = text.match(new RegExp(linkMatchingText));
-            if (match) {
-                const nextLineIndex = text.indexOf('http', match.index);
+            const match = text.indexOf(linkMatchingText);
+            if (match !== -1) {
+                const nextLineIndex = text.indexOf('http', match);
+                if (nextLineIndex == -1) {
+                    await closeIssue(github, owner, repo, number);
+                    return;
+                }
                 const link = text.substring(nextLineIndex, text.indexOf('\n', nextLineIndex));
                 console.log(`Issue ${number} contains this link: ${link}`);
                 const isValidLink = (await fetch(link)).ok;
