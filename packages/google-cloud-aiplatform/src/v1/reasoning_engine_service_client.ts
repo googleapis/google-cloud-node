@@ -2692,6 +2692,10 @@ export class ReasoningEngineServiceClient {
    *   Required. The name of the ReasoningEngine resource to be deleted.
    *   Format:
    *   `projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}`
+   * @param {boolean} [request.force]
+   *   Optional. If set to true, child resources of this reasoning engine will
+   *   also be deleted. Otherwise, the request will fail with FAILED_PRECONDITION
+   *   error when the reasoning engine has undeleted child resources.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
