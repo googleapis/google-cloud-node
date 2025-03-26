@@ -591,9 +591,10 @@ export class SearchServiceClient {
    *   This applies to each OneBox type individually.
    *   Default number is 10.
    * @param {number[]} request.dataStoreSpecs
-   *   Specifications that define the specific [DataStore]s to be searched, along
-   *   with configurations for those data stores. This is only considered for
-   *   {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}s with multiple data
+   *   Specifications that define the specific
+   *   {@link protos.google.cloud.discoveryengine.v1.DataStore|DataStore}s to be searched,
+   *   along with configurations for those data stores. This is only considered
+   *   for {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}s with multiple data
    *   stores. For engines with a single data store, the specs directly under
    *   {@link protos.google.cloud.discoveryengine.v1.SearchRequest|SearchRequest} should be
    *   used.
@@ -930,9 +931,10 @@ export class SearchServiceClient {
    *   This applies to each OneBox type individually.
    *   Default number is 10.
    * @param {number[]} request.dataStoreSpecs
-   *   Specifications that define the specific [DataStore]s to be searched, along
-   *   with configurations for those data stores. This is only considered for
-   *   {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}s with multiple data
+   *   Specifications that define the specific
+   *   {@link protos.google.cloud.discoveryengine.v1.DataStore|DataStore}s to be searched,
+   *   along with configurations for those data stores. This is only considered
+   *   for {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}s with multiple data
    *   stores. For engines with a single data store, the specs directly under
    *   {@link protos.google.cloud.discoveryengine.v1.SearchRequest|SearchRequest} should be
    *   used.
@@ -1198,9 +1200,10 @@ export class SearchServiceClient {
    *   This applies to each OneBox type individually.
    *   Default number is 10.
    * @param {number[]} request.dataStoreSpecs
-   *   Specifications that define the specific [DataStore]s to be searched, along
-   *   with configurations for those data stores. This is only considered for
-   *   {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}s with multiple data
+   *   Specifications that define the specific
+   *   {@link protos.google.cloud.discoveryengine.v1.DataStore|DataStore}s to be searched,
+   *   along with configurations for those data stores. This is only considered
+   *   for {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}s with multiple data
    *   stores. For engines with a single data store, the specs directly under
    *   {@link protos.google.cloud.discoveryengine.v1.SearchRequest|SearchRequest} should be
    *   used.
@@ -1477,9 +1480,10 @@ export class SearchServiceClient {
    *   This applies to each OneBox type individually.
    *   Default number is 10.
    * @param {number[]} request.dataStoreSpecs
-   *   Specifications that define the specific [DataStore]s to be searched, along
-   *   with configurations for those data stores. This is only considered for
-   *   {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}s with multiple data
+   *   Specifications that define the specific
+   *   {@link protos.google.cloud.discoveryengine.v1.DataStore|DataStore}s to be searched,
+   *   along with configurations for those data stores. This is only considered
+   *   for {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}s with multiple data
    *   stores. For engines with a single data store, the specs directly under
    *   {@link protos.google.cloud.discoveryengine.v1.SearchRequest|SearchRequest} should be
    *   used.
@@ -1816,9 +1820,10 @@ export class SearchServiceClient {
    *   This applies to each OneBox type individually.
    *   Default number is 10.
    * @param {number[]} request.dataStoreSpecs
-   *   Specifications that define the specific [DataStore]s to be searched, along
-   *   with configurations for those data stores. This is only considered for
-   *   {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}s with multiple data
+   *   Specifications that define the specific
+   *   {@link protos.google.cloud.discoveryengine.v1.DataStore|DataStore}s to be searched,
+   *   along with configurations for those data stores. This is only considered
+   *   for {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}s with multiple data
    *   stores. For engines with a single data store, the specs directly under
    *   {@link protos.google.cloud.discoveryengine.v1.SearchRequest|SearchRequest} should be
    *   used.
@@ -2084,9 +2089,10 @@ export class SearchServiceClient {
    *   This applies to each OneBox type individually.
    *   Default number is 10.
    * @param {number[]} request.dataStoreSpecs
-   *   Specifications that define the specific [DataStore]s to be searched, along
-   *   with configurations for those data stores. This is only considered for
-   *   {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}s with multiple data
+   *   Specifications that define the specific
+   *   {@link protos.google.cloud.discoveryengine.v1.DataStore|DataStore}s to be searched,
+   *   along with configurations for those data stores. This is only considered
+   *   for {@link protos.google.cloud.discoveryengine.v1.Engine|Engine}s with multiple data
    *   stores. For engines with a single data store, the specs directly under
    *   {@link protos.google.cloud.discoveryengine.v1.SearchRequest|SearchRequest} should be
    *   used.

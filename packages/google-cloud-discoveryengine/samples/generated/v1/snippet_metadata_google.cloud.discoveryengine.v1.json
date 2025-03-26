@@ -2682,7 +2682,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 306,
+                    "end": 307,
                     "type": "FULL"
                 }
             ],
@@ -2834,7 +2834,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 306,
+                    "end": 307,
                     "type": "FULL"
                 }
             ],
@@ -3067,6 +3067,50 @@
                     "service": {
                         "shortName": "SearchTuningService",
                         "fullName": "google.cloud.discoveryengine.v1.SearchTuningService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "discoveryengine_v1_generated_ServingConfigService_UpdateServingConfig_async",
+            "title": "CompletionService updateServingConfig Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates a ServingConfig. Returns a NOT_FOUND error if the ServingConfig does not exist.",
+            "canonical": true,
+            "file": "serving_config_service.update_serving_config.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 61,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateServingConfig",
+                "fullName": "google.cloud.discoveryengine.v1.ServingConfigService.UpdateServingConfig",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "serving_config",
+                        "type": ".google.cloud.discoveryengine.v1.ServingConfig"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.cloud.discoveryengine.v1.ServingConfig",
+                "client": {
+                    "shortName": "ServingConfigServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1.ServingConfigServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateServingConfig",
+                    "fullName": "google.cloud.discoveryengine.v1.ServingConfigService.UpdateServingConfig",
+                    "service": {
+                        "shortName": "ServingConfigService",
+                        "fullName": "google.cloud.discoveryengine.v1.ServingConfigService"
                     }
                 }
             }

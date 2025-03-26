@@ -69,6 +69,7 @@
   * [Search_service.search_lite](#search_service.search_lite)
   * [Search_tuning_service.list_custom_models](#search_tuning_service.list_custom_models)
   * [Search_tuning_service.train_custom_model](#search_tuning_service.train_custom_model)
+  * [Serving_config_service.update_serving_config](#serving_config_service.update_serving_config)
   * [Site_search_engine_service.batch_create_target_sites](#site_search_engine_service.batch_create_target_sites)
   * [Site_search_engine_service.batch_verify_target_sites](#site_search_engine_service.batch_verify_target_sites)
   * [Site_search_engine_service.create_sitemap](#site_search_engine_service.create_sitemap)
@@ -1266,6 +1267,23 @@ __Usage:__
 
 
 `node packages/google-cloud-discoveryengine/samples/generated/v1/search_tuning_service.train_custom_model.js`
+
+
+-----
+
+
+
+
+### Serving_config_service.update_serving_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/serving_config_service.update_serving_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/serving_config_service.update_serving_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1/serving_config_service.update_serving_config.js`
 
 
 -----
