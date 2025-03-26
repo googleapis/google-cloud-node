@@ -46,6 +46,8 @@ const SearchServiceClient = v1.SearchServiceClient;
 type SearchServiceClient = v1.SearchServiceClient;
 const SearchTuningServiceClient = v1.SearchTuningServiceClient;
 type SearchTuningServiceClient = v1.SearchTuningServiceClient;
+const ServingConfigServiceClient = v1.ServingConfigServiceClient;
+type ServingConfigServiceClient = v1.ServingConfigServiceClient;
 const SiteSearchEngineServiceClient = v1.SiteSearchEngineServiceClient;
 type SiteSearchEngineServiceClient = v1.SiteSearchEngineServiceClient;
 const UserEventServiceClient = v1.UserEventServiceClient;
@@ -68,6 +70,7 @@ export {
   SchemaServiceClient,
   SearchServiceClient,
   SearchTuningServiceClient,
+  ServingConfigServiceClient,
   SiteSearchEngineServiceClient,
   UserEventServiceClient,
 };
@@ -88,6 +91,7 @@ export default {
   SchemaServiceClient,
   SearchServiceClient,
   SearchTuningServiceClient,
+  ServingConfigServiceClient,
   SiteSearchEngineServiceClient,
   UserEventServiceClient,
 };

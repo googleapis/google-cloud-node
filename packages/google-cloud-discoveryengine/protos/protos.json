@@ -838,6 +838,13 @@
                         "userAgent": {
                           "type": "string",
                           "id": 2
+                        },
+                        "timeZone": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -8696,6 +8703,222 @@
                         },
                         "updateTime": {
                           "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ServingConfig": {
+                      "options": {
+                        "(google.api.resource).type": "discoveryengine.googleapis.com/ServingConfig",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/servingConfigs/{serving_config}"
+                      },
+                      "oneofs": {
+                        "verticalConfig": {
+                          "oneof": [
+                            "mediaConfig",
+                            "genericConfig"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "mediaConfig": {
+                          "type": "MediaConfig",
+                          "id": 7
+                        },
+                        "genericConfig": {
+                          "type": "GenericConfig",
+                          "id": 10
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "solutionType": {
+                          "type": "SolutionType",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "modelId": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "diversityLevel": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "rankingExpression": {
+                          "type": "string",
+                          "id": 21
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "filterControlIds": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 11
+                        },
+                        "boostControlIds": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 12
+                        },
+                        "redirectControlIds": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 14
+                        },
+                        "synonymsControlIds": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 15
+                        },
+                        "onewaySynonymsControlIds": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 16
+                        },
+                        "dissociateControlIds": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 17
+                        },
+                        "replacementControlIds": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 18
+                        },
+                        "ignoreControlIds": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 19
+                        },
+                        "promoteControlIds": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 26
+                        }
+                      },
+                      "nested": {
+                        "MediaConfig": {
+                          "oneofs": {
+                            "demoteContentWatched": {
+                              "oneof": [
+                                "contentWatchedPercentageThreshold",
+                                "contentWatchedSecondsThreshold"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "contentWatchedPercentageThreshold": {
+                              "type": "float",
+                              "id": 2
+                            },
+                            "contentWatchedSecondsThreshold": {
+                              "type": "float",
+                              "id": 5
+                            },
+                            "demotionEventType": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "demoteContentWatchedPastDays": {
+                              "type": "int32",
+                              "id": 37,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "contentFreshnessCutoffDays": {
+                              "type": "int32",
+                              "id": 4
+                            }
+                          }
+                        },
+                        "GenericConfig": {
+                          "fields": {
+                            "contentSearchSpec": {
+                              "type": "SearchRequest.ContentSearchSpec",
+                              "id": 1
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ServingConfigService": {
+                      "options": {
+                        "(google.api.default_host)": "discoveryengine.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "UpdateServingConfig": {
+                          "requestType": "UpdateServingConfigRequest",
+                          "responseType": "ServingConfig",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{serving_config.name=projects/*/locations/*/dataStores/*/servingConfigs/*}",
+                            "(google.api.http).body": "serving_config",
+                            "(google.api.http).additional_bindings.patch": "/v1/{serving_config.name=projects/*/locations/*/collections/*/engines/*/servingConfigs/*}",
+                            "(google.api.http).additional_bindings.body": "serving_config",
+                            "(google.api.method_signature)": "serving_config,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{serving_config.name=projects/*/locations/*/dataStores/*/servingConfigs/*}",
+                                "body": "serving_config",
+                                "additional_bindings": [
+                                  {
+                                    "patch": "/v1/{serving_config.name=projects/*/locations/*/collections/*/dataStores/*/servingConfigs/*}",
+                                    "body": "serving_config"
+                                  },
+                                  {
+                                    "patch": "/v1/{serving_config.name=projects/*/locations/*/collections/*/engines/*/servingConfigs/*}",
+                                    "body": "serving_config"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "serving_config,update_mask"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "UpdateServingConfigRequest": {
+                      "fields": {
+                        "servingConfig": {
+                          "type": "ServingConfig",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
                           "id": 2
                         }
                       }
