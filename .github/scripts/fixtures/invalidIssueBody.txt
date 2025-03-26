@@ -13,8 +13,7 @@
 
 N/A
 
-### Link to the code that reproduces this issue. A link to a **public** Github Repository with a minimal reproduction.
-
+### Link to the code that reproduces this issue. A link to a **public** Github Repository or gist with a minimal reproduction.
 
 not-a-link
 
