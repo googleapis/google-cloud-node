@@ -48,7 +48,7 @@ exports['tests for templates it should create the templates in the directory 3']
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=18.0.0"
   },
   "files": [
     "*.js"
