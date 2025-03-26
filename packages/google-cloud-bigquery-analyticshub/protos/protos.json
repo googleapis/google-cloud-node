@@ -13,12 +13,12 @@
                         "csharp_namespace": "Google.Cloud.BigQuery.AnalyticsHub.V1",
                         "go_package": "cloud.google.com/go/bigquery/analyticshub/apiv1/analyticshubpb;analyticshubpb",
                         "java_multiple_files": true,
-                        "java_outer_classname": "AnalyticsHubProto",
+                        "java_outer_classname": "PubsubProto",
                         "java_package": "com.google.cloud.bigquery.analyticshub.v1",
                         "php_namespace": "Google\\Cloud\\BigQuery\\AnalyticsHub\\V1",
                         "ruby_package": "Google::Cloud::Bigquery::AnalyticsHub::V1",
-                        "(google.api.resource_definition).type": "bigquery.googleapis.com/Table",
-                        "(google.api.resource_definition).pattern": "projects/{project}/datasets/{dataset}/tables/{table}"
+                        "(google.api.resource_definition).type": "cloudcommerceconsumerprocurement.googleapis.com/Order",
+                        "(google.api.resource_definition).pattern": "projects/{project}/orders/{order}"
                       },
                       "nested": {
                         "AnalyticsHubService": {
@@ -500,6 +500,13 @@
                             "DISCOVERY_TYPE_PUBLIC": 2
                           }
                         },
+                        "SharedResourceType": {
+                          "values": {
+                            "SHARED_RESOURCE_TYPE_UNSPECIFIED": 0,
+                            "BIGQUERY_DATASET": 1,
+                            "PUBSUB_TOPIC": 2
+                          }
+                        },
                         "DataExchange": {
                           "options": {
                             "(google.api.resource).type": "analyticshub.googleapis.com/DataExchange",
@@ -509,6 +516,11 @@
                             "_discoveryType": {
                               "oneof": [
                                 "discoveryType"
+                              ]
+                            },
+                            "_logLinkedDatasetQueryUserEmail": {
+                              "oneof": [
+                                "logLinkedDatasetQueryUserEmail"
                               ]
                             }
                           },
@@ -572,6 +584,14 @@
                             "discoveryType": {
                               "type": "DiscoveryType",
                               "id": 9,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            },
+                            "logLinkedDatasetQueryUserEmail": {
+                              "type": "bool",
+                              "id": 10,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL",
                                 "proto3_optional": true
@@ -730,6 +750,17 @@
                             }
                           }
                         },
+                        "DestinationPubSubSubscription": {
+                          "fields": {
+                            "pubsubSubscription": {
+                              "type": "PubSubSubscription",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
                         "Listing": {
                           "options": {
                             "(google.api.resource).type": "analyticshub.googleapis.com/Listing",
@@ -738,22 +769,29 @@
                           "oneofs": {
                             "source": {
                               "oneof": [
-                                "bigqueryDataset"
+                                "bigqueryDataset",
+                                "pubsubTopic"
                               ]
                             },
                             "_discoveryType": {
                               "oneof": [
                                 "discoveryType"
                               ]
+                            },
+                            "_logLinkedDatasetQueryUserEmail": {
+                              "oneof": [
+                                "logLinkedDatasetQueryUserEmail"
+                              ]
                             }
                           },
                           "fields": {
                             "bigqueryDataset": {
                               "type": "BigQueryDatasetSource",
-                              "id": 6,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
+                              "id": 6
+                            },
+                            "pubsubTopic": {
+                              "type": "PubSubTopicSource",
+                              "id": 16
                             },
                             "name": {
                               "type": "string",
@@ -847,6 +885,21 @@
                                 "(google.api.field_behavior)": "OPTIONAL",
                                 "proto3_optional": true
                               }
+                            },
+                            "resourceType": {
+                              "type": "SharedResourceType",
+                              "id": 15,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "logLinkedDatasetQueryUserEmail": {
+                              "type": "bool",
+                              "id": 18,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
                             }
                           },
                           "nested": {
@@ -856,6 +909,7 @@
                                   "type": "string",
                                   "id": 1,
                                   "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
                                     "(google.api.resource_reference).type": "bigquery.googleapis.com/Dataset"
                                   }
                                 },
@@ -918,6 +972,26 @@
                                         "(google.api.field_behavior)": "OPTIONAL"
                                       }
                                     }
+                                  }
+                                }
+                              }
+                            },
+                            "PubSubTopicSource": {
+                              "fields": {
+                                "topic": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED",
+                                    "(google.api.resource_reference).type": "pubsub.googleapis.com/Topic"
+                                  }
+                                },
+                                "dataAffinityRegions": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
                                   }
                                 }
                               }
@@ -989,6 +1063,11 @@
                               "oneof": [
                                 "listing",
                                 "dataExchange"
+                              ]
+                            },
+                            "_logLinkedDatasetQueryUserEmail": {
+                              "oneof": [
+                                "logLinkedDatasetQueryUserEmail"
                               ]
                             }
                           },
@@ -1063,6 +1142,29 @@
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
+                            },
+                            "linkedResources": {
+                              "rule": "repeated",
+                              "type": "LinkedResource",
+                              "id": 11,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "resourceType": {
+                              "type": "SharedResourceType",
+                              "id": 12,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "logLinkedDatasetQueryUserEmail": {
+                              "type": "bool",
+                              "id": 14,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
                             }
                           },
                           "nested": {
@@ -1070,7 +1172,8 @@
                               "oneofs": {
                                 "reference": {
                                   "oneof": [
-                                    "linkedDataset"
+                                    "linkedDataset",
+                                    "linkedPubsubSubscription"
                                   ]
                                 }
                               },
@@ -1078,6 +1181,20 @@
                                 "linkedDataset": {
                                   "type": "string",
                                   "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
+                                "linkedPubsubSubscription": {
+                                  "type": "string",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
+                                "listing": {
+                                  "type": "string",
+                                  "id": 2,
                                   "options": {
                                     "(google.api.field_behavior)": "OUTPUT_ONLY"
                                   }
@@ -1332,7 +1449,8 @@
                           "oneofs": {
                             "destination": {
                               "oneof": [
-                                "destinationDataset"
+                                "destinationDataset",
+                                "destinationPubsubSubscription"
                               ]
                             }
                           },
@@ -1340,6 +1458,13 @@
                             "destinationDataset": {
                               "type": "DestinationDataset",
                               "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "INPUT_ONLY"
+                              }
+                            },
+                            "destinationPubsubSubscription": {
+                              "type": "DestinationPubSubSubscription",
+                              "id": 5,
                               "options": {
                                 "(google.api.field_behavior)": "INPUT_ONLY"
                               }
@@ -1378,6 +1503,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED",
                                 "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                              }
+                            },
+                            "destinationDataset": {
+                              "type": "DestinationDataset",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
                             "subscription": {
@@ -1583,6 +1715,460 @@
                               "id": 7,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "PubSubSubscription": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "pushConfig": {
+                              "type": "PushConfig",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "bigqueryConfig": {
+                              "type": "BigQueryConfig",
+                              "id": 18,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "cloudStorageConfig": {
+                              "type": "CloudStorageConfig",
+                              "id": 22,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "ackDeadlineSeconds": {
+                              "type": "int32",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "retainAckedMessages": {
+                              "type": "bool",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "messageRetentionDuration": {
+                              "type": "google.protobuf.Duration",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "labels": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 9,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "enableMessageOrdering": {
+                              "type": "bool",
+                              "id": 10,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "expirationPolicy": {
+                              "type": "ExpirationPolicy",
+                              "id": 11,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "filter": {
+                              "type": "string",
+                              "id": 12,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "deadLetterPolicy": {
+                              "type": "DeadLetterPolicy",
+                              "id": 13,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "retryPolicy": {
+                              "type": "RetryPolicy",
+                              "id": 14,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "detached": {
+                              "type": "bool",
+                              "id": 15,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "enableExactlyOnceDelivery": {
+                              "type": "bool",
+                              "id": 16,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "messageTransforms": {
+                              "rule": "repeated",
+                              "type": "MessageTransform",
+                              "id": 25,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "RetryPolicy": {
+                          "fields": {
+                            "minimumBackoff": {
+                              "type": "google.protobuf.Duration",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "maximumBackoff": {
+                              "type": "google.protobuf.Duration",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "DeadLetterPolicy": {
+                          "fields": {
+                            "deadLetterTopic": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "maxDeliveryAttempts": {
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "ExpirationPolicy": {
+                          "fields": {
+                            "ttl": {
+                              "type": "google.protobuf.Duration",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "PushConfig": {
+                          "oneofs": {
+                            "authenticationMethod": {
+                              "oneof": [
+                                "oidcToken"
+                              ]
+                            },
+                            "wrapper": {
+                              "oneof": [
+                                "pubsubWrapper",
+                                "noWrapper"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "oidcToken": {
+                              "type": "OidcToken",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "pubsubWrapper": {
+                              "type": "PubsubWrapper",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "noWrapper": {
+                              "type": "NoWrapper",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "pushEndpoint": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "attributes": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "OidcToken": {
+                              "fields": {
+                                "serviceAccountEmail": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "audience": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            },
+                            "PubsubWrapper": {
+                              "fields": {}
+                            },
+                            "NoWrapper": {
+                              "fields": {
+                                "writeMetadata": {
+                                  "type": "bool",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "BigQueryConfig": {
+                          "fields": {
+                            "table": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "useTopicSchema": {
+                              "type": "bool",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "writeMetadata": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "dropUnknownFields": {
+                              "type": "bool",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "useTableSchema": {
+                              "type": "bool",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "serviceAccountEmail": {
+                              "type": "string",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "CloudStorageConfig": {
+                          "oneofs": {
+                            "outputFormat": {
+                              "oneof": [
+                                "textConfig",
+                                "avroConfig"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "textConfig": {
+                              "type": "TextConfig",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "avroConfig": {
+                              "type": "AvroConfig",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "bucket": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "filenamePrefix": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "filenameSuffix": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "filenameDatetimeFormat": {
+                              "type": "string",
+                              "id": 10,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "maxDuration": {
+                              "type": "google.protobuf.Duration",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "maxBytes": {
+                              "type": "int64",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "maxMessages": {
+                              "type": "int64",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "serviceAccountEmail": {
+                              "type": "string",
+                              "id": 11,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "TextConfig": {
+                              "fields": {}
+                            },
+                            "AvroConfig": {
+                              "fields": {
+                                "writeMetadata": {
+                                  "type": "bool",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "useTopicSchema": {
+                                  "type": "bool",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "MessageTransform": {
+                          "oneofs": {
+                            "transform": {
+                              "oneof": [
+                                "javascriptUdf"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "javascriptUdf": {
+                              "type": "JavaScriptUDF",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "enabled": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "deprecated": true,
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "disabled": {
+                              "type": "bool",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "JavaScriptUDF": {
+                          "fields": {
+                            "functionName": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "code": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
                               }
                             }
                           }
