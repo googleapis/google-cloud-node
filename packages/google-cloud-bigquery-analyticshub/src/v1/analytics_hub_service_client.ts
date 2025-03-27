@@ -640,9 +640,7 @@ export class AnalyticsHubServiceClient {
    *   e.g. `projects/myproject/locations/US`.
    * @param {string} request.dataExchangeId
    *   Required. The ID of the data exchange.
-   *   Must contain only Unicode letters, numbers (0-9), underscores (_).
-   *   Should not use characters that require URL-escaping, or characters
-   *   outside of ASCII, spaces.
+   *   Must contain only ASCII letters, numbers (0-9), underscores (_).
    *   Max length: 100 bytes.
    * @param {google.cloud.bigquery.analyticshub.v1.DataExchange} request.dataExchange
    *   Required. The data exchange to create.
@@ -1163,9 +1161,7 @@ export class AnalyticsHubServiceClient {
    *   e.g. `projects/myproject/locations/US/dataExchanges/123`.
    * @param {string} request.listingId
    *   Required. The ID of the listing to create.
-   *   Must contain only Unicode letters, numbers (0-9), underscores (_).
-   *   Should not use characters that require URL-escaping, or characters
-   *   outside of ASCII, spaces.
+   *   Must contain only ASCII letters, numbers (0-9), underscores (_).
    *   Max length: 100 bytes.
    * @param {google.cloud.bigquery.analyticshub.v1.Listing} request.listing
    *   Required. The listing to create.
@@ -1560,6 +1556,9 @@ export class AnalyticsHubServiceClient {
    *   The request object that will be sent.
    * @param {google.cloud.bigquery.analyticshub.v1.DestinationDataset} request.destinationDataset
    *   Input only. BigQuery destination dataset to create for the subscriber.
+   * @param {google.cloud.bigquery.analyticshub.v1.DestinationPubSubSubscription} request.destinationPubsubSubscription
+   *   Input only. Destination Pub/Sub subscription to create for the
+   *   subscriber.
    * @param {string} request.name
    *   Required. Resource name of the listing that you want to subscribe to.
    *   e.g. `projects/myproject/locations/US/dataExchanges/123/listings/456`.
@@ -2287,8 +2286,8 @@ export class AnalyticsHubServiceClient {
   }
 
   /**
-   * Creates a Subscription to a Data Exchange. This is a long-running operation
-   * as it will create one or more linked datasets.
+   * Creates a Subscription to a Data Clean Room. This is a long-running
+   * operation as it will create one or more linked datasets.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2298,6 +2297,8 @@ export class AnalyticsHubServiceClient {
    * @param {string} request.destination
    *   Required. The parent resource path of the Subscription.
    *   e.g. `projects/subscriberproject/locations/US`
+   * @param {google.cloud.bigquery.analyticshub.v1.DestinationDataset} [request.destinationDataset]
+   *   Optional. BigQuery destination dataset to create for the subscriber.
    * @param {string} request.subscription
    *   Required. Name of the subscription to create.
    *   e.g. `subscription1`

@@ -89,10 +89,13 @@ function main(servingConfig) {
    */
   // const oneBoxPageSize = 1234
   /**
-   *  Specs defining dataStores to filter on in a search call and configurations
-   *  for those dataStores. This is only considered for engines with multiple
-   *  dataStores use case. For single dataStore within an engine, they should
-   *  use the specs at the top level.
+   *  Specifications that define the specific
+   *  DataStore google.cloud.discoveryengine.v1.DataStore s to be searched,
+   *  along with configurations for those data stores. This is only considered
+   *  for Engine google.cloud.discoveryengine.v1.Engine s with multiple data
+   *  stores. For engines with a single data store, the specs directly under
+   *  SearchRequest google.cloud.discoveryengine.v1.SearchRequest  should be
+   *  used.
    */
   // const dataStoreSpecs = [1,2,3,4]
   /**
@@ -139,7 +142,7 @@ function main(servingConfig) {
   // const orderBy = 'abc123'
   /**
    *  Information about the end user.
-   *  Highly recommended for analytics.
+   *  Highly recommended for analytics and personalization.
    *  UserInfo.user_agent google.cloud.discoveryengine.v1.UserInfo.user_agent 
    *  is used to deduce `device_type` for analytics.
    */
@@ -236,6 +239,11 @@ function main(servingConfig) {
    */
   // const searchAsYouTypeSpec = {}
   /**
+   *  Optional. Config for display feature, like match highlighting on search
+   *  results.
+   */
+  // const displaySpec = {}
+  /**
    *  The session resource name. Optional.
    *  Session allows users to do multi-turn /search API calls or coordination
    *  between /search API calls and /answer API calls.
@@ -264,6 +272,18 @@ function main(servingConfig) {
    *  Can be used only when `session` is set.
    */
   // const sessionSpec = {}
+  /**
+   *  The relevance threshold of the search results.
+   *  Default to Google defined threshold, leveraging a balance of
+   *  precision and recall to deliver both highly accurate results and
+   *  comprehensive coverage of relevant information.
+   *  This feature is not supported for healthcare search.
+   */
+  // const relevanceThreshold = {}
+  /**
+   *  Optional. The specification for returning the relevance score.
+   */
+  // const relevanceScoreSpec = {}
 
   // Imports the Discoveryengine library
   const {SearchServiceClient} = require('@google-cloud/discoveryengine').v1;

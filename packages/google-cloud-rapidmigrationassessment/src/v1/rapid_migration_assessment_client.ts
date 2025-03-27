@@ -1330,7 +1330,7 @@ export class RapidMigrationAssessmentClient {
   }
   /**
    * Deletes a single Collector - changes state of collector to "Deleting".
-   * Background jobs does final deletion thorugh producer api.
+   * Background jobs does final deletion through producer API.
    *
    * @param {Object} request
    *   The request object that will be sent.
