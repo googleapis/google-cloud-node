@@ -35,7 +35,10 @@ guides.
   * [Create Subscription with ordering enabled](#create-subscription-with-ordering-enabled)
   * [Create Subscription With Retry Policy](#create-subscription-with-retry-policy)
   * [Create Topic](#create-topic)
+  * [Create Topic With AWS MSK Ingestion](#create-topic-with-aws-msk-ingestion)
+  * [Create Topic With Azure Event Hubs Ingestion](#create-topic-with-azure-event-hubs-ingestion)
   * [Create Topic With Cloud Storage Ingestion](#create-topic-with-cloud-storage-ingestion)
+  * [Create Topic With Confluent Cloud Ingestion](#create-topic-with-confluent-cloud-ingestion)
   * [Create Topic With Kinesis Ingestion](#create-topic-with-kinesis-ingestion)
   * [Create Topic With Schema](#create-topic-with-schema)
   * [Create Topic With Schema Revisions](#create-topic-with-schema-revisions)
@@ -390,6 +393,44 @@ __Usage:__
 
 
 
+### Create Topic With AWS MSK Ingestion
+
+Creates a new topic, with AWS MSK ingestion enabled.
+
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/createTopicWithAwsMskIngestion.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/createTopicWithAwsMskIngestion.js,samples/README.md)
+
+__Usage:__
+
+
+`node createTopicWithAwsMskIngestion.js <topic-name> <cluster-arn> <msk-topic> <role-arn> <gcp-service-account>`
+
+
+-----
+
+
+
+
+### Create Topic With Azure Event Hubs Ingestion
+
+Creates a new topic, with Azure Event Hubs ingestion enabled.
+
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/createTopicWithAzureEventHubsIngestion.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/createTopicWithAzureEventHubsIngestion.js,samples/README.md)
+
+__Usage:__
+
+
+`node createTopicWithAzureEventHubsIngestion.js <topic-name> <cluster-arn> <msk-topic> <role-arn> <gcp-service-account>`
+
+
+-----
+
+
+
+
 ### Create Topic With Cloud Storage Ingestion
 
 Creates a new topic, with Cloud Storage ingestion enabled.
@@ -402,6 +443,25 @@ __Usage:__
 
 
 `node createTopicWithCloudStorageIngestion.js <topic-name> <bucket> <input-format> <text-delimiter> <match-glob> <minimum-object-creation-time>`
+
+
+-----
+
+
+
+
+### Create Topic With Confluent Cloud Ingestion
+
+Creates a new topic, with Confluent Cloud ingestion enabled.
+
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/createTopicWithConfluentCloudIngestion.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/createTopicWithConfluentCloudIngestion.js,samples/README.md)
+
+__Usage:__
+
+
+`node createTopicWithConfluentCloudIngestion.js <topic-name> <bootstrap-server> <cluster-id> <confluent-topic> <identity-pool-id> <gcp-service-account>`
 
 
 -----
