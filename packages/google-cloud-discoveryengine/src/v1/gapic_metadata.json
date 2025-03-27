@@ -197,6 +197,11 @@
                 "getSession"
               ]
             },
+            "StreamAnswerQuery": {
+              "methods": [
+                "streamAnswerQuery"
+              ]
+            },
             "ListConversations": {
               "methods": [
                 "listConversations",
@@ -778,6 +783,30 @@
         }
       }
     },
+    "ServingConfigService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ServingConfigServiceClient",
+          "rpcs": {
+            "UpdateServingConfig": {
+              "methods": [
+                "updateServingConfig"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ServingConfigServiceClient",
+          "rpcs": {
+            "UpdateServingConfig": {
+              "methods": [
+                "updateServingConfig"
+              ]
+            }
+          }
+        }
+      }
+    },
     "SiteSearchEngineService": {
       "clients": {
         "grpc": {
@@ -791,6 +820,11 @@
             "GetTargetSite": {
               "methods": [
                 "getTargetSite"
+              ]
+            },
+            "FetchSitemaps": {
+              "methods": [
+                "fetchSitemaps"
               ]
             },
             "CreateTargetSite": {
@@ -811,6 +845,16 @@
             "DeleteTargetSite": {
               "methods": [
                 "deleteTargetSite"
+              ]
+            },
+            "CreateSitemap": {
+              "methods": [
+                "createSitemap"
+              ]
+            },
+            "DeleteSitemap": {
+              "methods": [
+                "deleteSitemap"
               ]
             },
             "EnableAdvancedSiteSearch": {
@@ -862,6 +906,11 @@
                 "getTargetSite"
               ]
             },
+            "FetchSitemaps": {
+              "methods": [
+                "fetchSitemaps"
+              ]
+            },
             "CreateTargetSite": {
               "methods": [
                 "createTargetSite"
@@ -880,6 +929,16 @@
             "DeleteTargetSite": {
               "methods": [
                 "deleteTargetSite"
+              ]
+            },
+            "CreateSitemap": {
+              "methods": [
+                "createSitemap"
+              ]
+            },
+            "DeleteSitemap": {
+              "methods": [
+                "deleteSitemap"
               ]
             },
             "EnableAdvancedSiteSearch": {

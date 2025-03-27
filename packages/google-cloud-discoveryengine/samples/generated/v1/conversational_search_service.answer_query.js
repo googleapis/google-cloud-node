@@ -57,6 +57,10 @@ function main(servingConfig, query) {
    */
   // const relatedQuestionsSpec = {}
   /**
+   *  Optional. Grounding specification.
+   */
+  // const groundingSpec = {}
+  /**
    *  Answer generation specification.
    */
   // const answerGenerationSpec = {}
@@ -96,6 +100,10 @@ function main(servingConfig, query) {
    *  for more details.
    */
   // const userLabels = [1,2,3,4]
+  /**
+   *  Optional. End user specification.
+   */
+  // const endUserSpec = {}
 
   // Imports the Discoveryengine library
   const {ConversationalSearchServiceClient} = require('@google-cloud/discoveryengine').v1;
