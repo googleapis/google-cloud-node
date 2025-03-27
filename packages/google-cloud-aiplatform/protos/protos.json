@@ -34183,6 +34183,14 @@
                         }
                       }
                     },
+                    "VertexAiSearchConfig": {
+                      "fields": {
+                        "servingConfig": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
                     "CorpusStatus": {
                       "fields": {
                         "state": {
@@ -34221,7 +34229,8 @@
                       "oneofs": {
                         "backendConfig": {
                           "oneof": [
-                            "vectorDbConfig"
+                            "vectorDbConfig",
+                            "vertexAiSearchConfig"
                           ]
                         }
                       },
@@ -34271,6 +34280,13 @@
                         "vectorDbConfig": {
                           "type": "RagVectorDbConfig",
                           "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "vertexAiSearchConfig": {
+                          "type": "VertexAiSearchConfig",
+                          "id": 10,
                           "options": {
                             "(google.api.field_behavior)": "IMMUTABLE"
                           }
