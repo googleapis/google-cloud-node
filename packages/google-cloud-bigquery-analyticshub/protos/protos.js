@@ -852,6 +852,22 @@
                             return values;
                         })();
     
+                        /**
+                         * SharedResourceType enum.
+                         * @name google.cloud.bigquery.analyticshub.v1.SharedResourceType
+                         * @enum {number}
+                         * @property {number} SHARED_RESOURCE_TYPE_UNSPECIFIED=0 SHARED_RESOURCE_TYPE_UNSPECIFIED value
+                         * @property {number} BIGQUERY_DATASET=1 BIGQUERY_DATASET value
+                         * @property {number} PUBSUB_TOPIC=2 PUBSUB_TOPIC value
+                         */
+                        v1.SharedResourceType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "SHARED_RESOURCE_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "BIGQUERY_DATASET"] = 1;
+                            values[valuesById[2] = "PUBSUB_TOPIC"] = 2;
+                            return values;
+                        })();
+    
                         v1.DataExchange = (function() {
     
                             /**
@@ -867,6 +883,7 @@
                              * @property {Uint8Array|null} [icon] DataExchange icon
                              * @property {google.cloud.bigquery.analyticshub.v1.ISharingEnvironmentConfig|null} [sharingEnvironmentConfig] DataExchange sharingEnvironmentConfig
                              * @property {google.cloud.bigquery.analyticshub.v1.DiscoveryType|null} [discoveryType] DataExchange discoveryType
+                             * @property {boolean|null} [logLinkedDatasetQueryUserEmail] DataExchange logLinkedDatasetQueryUserEmail
                              */
     
                             /**
@@ -956,6 +973,14 @@
                              */
                             DataExchange.prototype.discoveryType = null;
     
+                            /**
+                             * DataExchange logLinkedDatasetQueryUserEmail.
+                             * @member {boolean|null|undefined} logLinkedDatasetQueryUserEmail
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DataExchange
+                             * @instance
+                             */
+                            DataExchange.prototype.logLinkedDatasetQueryUserEmail = null;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
@@ -967,6 +992,17 @@
                              */
                             Object.defineProperty(DataExchange.prototype, "_discoveryType", {
                                 get: $util.oneOfGetter($oneOfFields = ["discoveryType"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * DataExchange _logLinkedDatasetQueryUserEmail.
+                             * @member {"logLinkedDatasetQueryUserEmail"|undefined} _logLinkedDatasetQueryUserEmail
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DataExchange
+                             * @instance
+                             */
+                            Object.defineProperty(DataExchange.prototype, "_logLinkedDatasetQueryUserEmail", {
+                                get: $util.oneOfGetter($oneOfFields = ["logLinkedDatasetQueryUserEmail"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -1012,6 +1048,8 @@
                                     $root.google.cloud.bigquery.analyticshub.v1.SharingEnvironmentConfig.encode(message.sharingEnvironmentConfig, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                                 if (message.discoveryType != null && Object.hasOwnProperty.call(message, "discoveryType"))
                                     writer.uint32(/* id 9, wireType 0 =*/72).int32(message.discoveryType);
+                                if (message.logLinkedDatasetQueryUserEmail != null && Object.hasOwnProperty.call(message, "logLinkedDatasetQueryUserEmail"))
+                                    writer.uint32(/* id 10, wireType 0 =*/80).bool(message.logLinkedDatasetQueryUserEmail);
                                 return writer;
                             };
     
@@ -1080,6 +1118,10 @@
                                         }
                                     case 9: {
                                             message.discoveryType = reader.int32();
+                                            break;
+                                        }
+                                    case 10: {
+                                            message.logLinkedDatasetQueryUserEmail = reader.bool();
                                             break;
                                         }
                                     default:
@@ -1155,6 +1197,11 @@
                                         break;
                                     }
                                 }
+                                if (message.logLinkedDatasetQueryUserEmail != null && message.hasOwnProperty("logLinkedDatasetQueryUserEmail")) {
+                                    properties._logLinkedDatasetQueryUserEmail = 1;
+                                    if (typeof message.logLinkedDatasetQueryUserEmail !== "boolean")
+                                        return "logLinkedDatasetQueryUserEmail: boolean expected";
+                                }
                                 return null;
                             };
     
@@ -1212,6 +1259,8 @@
                                     message.discoveryType = 2;
                                     break;
                                 }
+                                if (object.logLinkedDatasetQueryUserEmail != null)
+                                    message.logLinkedDatasetQueryUserEmail = Boolean(object.logLinkedDatasetQueryUserEmail);
                                 return message;
                             };
     
@@ -1264,6 +1313,11 @@
                                     object.discoveryType = options.enums === String ? $root.google.cloud.bigquery.analyticshub.v1.DiscoveryType[message.discoveryType] === undefined ? message.discoveryType : $root.google.cloud.bigquery.analyticshub.v1.DiscoveryType[message.discoveryType] : message.discoveryType;
                                     if (options.oneofs)
                                         object._discoveryType = "discoveryType";
+                                }
+                                if (message.logLinkedDatasetQueryUserEmail != null && message.hasOwnProperty("logLinkedDatasetQueryUserEmail")) {
+                                    object.logLinkedDatasetQueryUserEmail = message.logLinkedDatasetQueryUserEmail;
+                                    if (options.oneofs)
+                                        object._logLinkedDatasetQueryUserEmail = "logLinkedDatasetQueryUserEmail";
                                 }
                                 return object;
                             };
@@ -3021,6 +3075,214 @@
                             return DestinationDataset;
                         })();
     
+                        v1.DestinationPubSubSubscription = (function() {
+    
+                            /**
+                             * Properties of a DestinationPubSubSubscription.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @interface IDestinationPubSubSubscription
+                             * @property {google.cloud.bigquery.analyticshub.v1.IPubSubSubscription|null} [pubsubSubscription] DestinationPubSubSubscription pubsubSubscription
+                             */
+    
+                            /**
+                             * Constructs a new DestinationPubSubSubscription.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @classdesc Represents a DestinationPubSubSubscription.
+                             * @implements IDestinationPubSubSubscription
+                             * @constructor
+                             * @param {google.cloud.bigquery.analyticshub.v1.IDestinationPubSubSubscription=} [properties] Properties to set
+                             */
+                            function DestinationPubSubSubscription(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * DestinationPubSubSubscription pubsubSubscription.
+                             * @member {google.cloud.bigquery.analyticshub.v1.IPubSubSubscription|null|undefined} pubsubSubscription
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DestinationPubSubSubscription
+                             * @instance
+                             */
+                            DestinationPubSubSubscription.prototype.pubsubSubscription = null;
+    
+                            /**
+                             * Creates a new DestinationPubSubSubscription instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DestinationPubSubSubscription
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IDestinationPubSubSubscription=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.analyticshub.v1.DestinationPubSubSubscription} DestinationPubSubSubscription instance
+                             */
+                            DestinationPubSubSubscription.create = function create(properties) {
+                                return new DestinationPubSubSubscription(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DestinationPubSubSubscription message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.DestinationPubSubSubscription.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DestinationPubSubSubscription
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IDestinationPubSubSubscription} message DestinationPubSubSubscription message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DestinationPubSubSubscription.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.pubsubSubscription != null && Object.hasOwnProperty.call(message, "pubsubSubscription"))
+                                    $root.google.cloud.bigquery.analyticshub.v1.PubSubSubscription.encode(message.pubsubSubscription, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DestinationPubSubSubscription message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.DestinationPubSubSubscription.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DestinationPubSubSubscription
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IDestinationPubSubSubscription} message DestinationPubSubSubscription message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DestinationPubSubSubscription.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DestinationPubSubSubscription message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DestinationPubSubSubscription
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.analyticshub.v1.DestinationPubSubSubscription} DestinationPubSubSubscription
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DestinationPubSubSubscription.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.analyticshub.v1.DestinationPubSubSubscription();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.pubsubSubscription = $root.google.cloud.bigquery.analyticshub.v1.PubSubSubscription.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DestinationPubSubSubscription message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DestinationPubSubSubscription
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.analyticshub.v1.DestinationPubSubSubscription} DestinationPubSubSubscription
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DestinationPubSubSubscription.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DestinationPubSubSubscription message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DestinationPubSubSubscription
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DestinationPubSubSubscription.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.pubsubSubscription != null && message.hasOwnProperty("pubsubSubscription")) {
+                                    var error = $root.google.cloud.bigquery.analyticshub.v1.PubSubSubscription.verify(message.pubsubSubscription);
+                                    if (error)
+                                        return "pubsubSubscription." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DestinationPubSubSubscription message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DestinationPubSubSubscription
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.analyticshub.v1.DestinationPubSubSubscription} DestinationPubSubSubscription
+                             */
+                            DestinationPubSubSubscription.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.analyticshub.v1.DestinationPubSubSubscription)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.analyticshub.v1.DestinationPubSubSubscription();
+                                if (object.pubsubSubscription != null) {
+                                    if (typeof object.pubsubSubscription !== "object")
+                                        throw TypeError(".google.cloud.bigquery.analyticshub.v1.DestinationPubSubSubscription.pubsubSubscription: object expected");
+                                    message.pubsubSubscription = $root.google.cloud.bigquery.analyticshub.v1.PubSubSubscription.fromObject(object.pubsubSubscription);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a DestinationPubSubSubscription message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DestinationPubSubSubscription
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.DestinationPubSubSubscription} message DestinationPubSubSubscription
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DestinationPubSubSubscription.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.pubsubSubscription = null;
+                                if (message.pubsubSubscription != null && message.hasOwnProperty("pubsubSubscription"))
+                                    object.pubsubSubscription = $root.google.cloud.bigquery.analyticshub.v1.PubSubSubscription.toObject(message.pubsubSubscription, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this DestinationPubSubSubscription to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DestinationPubSubSubscription
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DestinationPubSubSubscription.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DestinationPubSubSubscription
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DestinationPubSubSubscription
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DestinationPubSubSubscription.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.analyticshub.v1.DestinationPubSubSubscription";
+                            };
+    
+                            return DestinationPubSubSubscription;
+                        })();
+    
                         v1.Listing = (function() {
     
                             /**
@@ -3028,6 +3290,7 @@
                              * @memberof google.cloud.bigquery.analyticshub.v1
                              * @interface IListing
                              * @property {google.cloud.bigquery.analyticshub.v1.Listing.IBigQueryDatasetSource|null} [bigqueryDataset] Listing bigqueryDataset
+                             * @property {google.cloud.bigquery.analyticshub.v1.Listing.IPubSubTopicSource|null} [pubsubTopic] Listing pubsubTopic
                              * @property {string|null} [name] Listing name
                              * @property {string|null} [displayName] Listing displayName
                              * @property {string|null} [description] Listing description
@@ -3041,6 +3304,8 @@
                              * @property {string|null} [requestAccess] Listing requestAccess
                              * @property {google.cloud.bigquery.analyticshub.v1.Listing.IRestrictedExportConfig|null} [restrictedExportConfig] Listing restrictedExportConfig
                              * @property {google.cloud.bigquery.analyticshub.v1.DiscoveryType|null} [discoveryType] Listing discoveryType
+                             * @property {google.cloud.bigquery.analyticshub.v1.SharedResourceType|null} [resourceType] Listing resourceType
+                             * @property {boolean|null} [logLinkedDatasetQueryUserEmail] Listing logLinkedDatasetQueryUserEmail
                              */
     
                             /**
@@ -3066,6 +3331,14 @@
                              * @instance
                              */
                             Listing.prototype.bigqueryDataset = null;
+    
+                            /**
+                             * Listing pubsubTopic.
+                             * @member {google.cloud.bigquery.analyticshub.v1.Listing.IPubSubTopicSource|null|undefined} pubsubTopic
+                             * @memberof google.cloud.bigquery.analyticshub.v1.Listing
+                             * @instance
+                             */
+                            Listing.prototype.pubsubTopic = null;
     
                             /**
                              * Listing name.
@@ -3171,17 +3444,33 @@
                              */
                             Listing.prototype.discoveryType = null;
     
+                            /**
+                             * Listing resourceType.
+                             * @member {google.cloud.bigquery.analyticshub.v1.SharedResourceType} resourceType
+                             * @memberof google.cloud.bigquery.analyticshub.v1.Listing
+                             * @instance
+                             */
+                            Listing.prototype.resourceType = 0;
+    
+                            /**
+                             * Listing logLinkedDatasetQueryUserEmail.
+                             * @member {boolean|null|undefined} logLinkedDatasetQueryUserEmail
+                             * @memberof google.cloud.bigquery.analyticshub.v1.Listing
+                             * @instance
+                             */
+                            Listing.prototype.logLinkedDatasetQueryUserEmail = null;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
                             /**
                              * Listing source.
-                             * @member {"bigqueryDataset"|undefined} source
+                             * @member {"bigqueryDataset"|"pubsubTopic"|undefined} source
                              * @memberof google.cloud.bigquery.analyticshub.v1.Listing
                              * @instance
                              */
                             Object.defineProperty(Listing.prototype, "source", {
-                                get: $util.oneOfGetter($oneOfFields = ["bigqueryDataset"]),
+                                get: $util.oneOfGetter($oneOfFields = ["bigqueryDataset", "pubsubTopic"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -3193,6 +3482,17 @@
                              */
                             Object.defineProperty(Listing.prototype, "_discoveryType", {
                                 get: $util.oneOfGetter($oneOfFields = ["discoveryType"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Listing _logLinkedDatasetQueryUserEmail.
+                             * @member {"logLinkedDatasetQueryUserEmail"|undefined} _logLinkedDatasetQueryUserEmail
+                             * @memberof google.cloud.bigquery.analyticshub.v1.Listing
+                             * @instance
+                             */
+                            Object.defineProperty(Listing.prototype, "_logLinkedDatasetQueryUserEmail", {
+                                get: $util.oneOfGetter($oneOfFields = ["logLinkedDatasetQueryUserEmail"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -3252,6 +3552,12 @@
                                     $root.google.cloud.bigquery.analyticshub.v1.Listing.RestrictedExportConfig.encode(message.restrictedExportConfig, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                                 if (message.discoveryType != null && Object.hasOwnProperty.call(message, "discoveryType"))
                                     writer.uint32(/* id 14, wireType 0 =*/112).int32(message.discoveryType);
+                                if (message.resourceType != null && Object.hasOwnProperty.call(message, "resourceType"))
+                                    writer.uint32(/* id 15, wireType 0 =*/120).int32(message.resourceType);
+                                if (message.pubsubTopic != null && Object.hasOwnProperty.call(message, "pubsubTopic"))
+                                    $root.google.cloud.bigquery.analyticshub.v1.Listing.PubSubTopicSource.encode(message.pubsubTopic, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
+                                if (message.logLinkedDatasetQueryUserEmail != null && Object.hasOwnProperty.call(message, "logLinkedDatasetQueryUserEmail"))
+                                    writer.uint32(/* id 18, wireType 0 =*/144).bool(message.logLinkedDatasetQueryUserEmail);
                                 return writer;
                             };
     
@@ -3288,6 +3594,10 @@
                                     switch (tag >>> 3) {
                                     case 6: {
                                             message.bigqueryDataset = $root.google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 16: {
+                                            message.pubsubTopic = $root.google.cloud.bigquery.analyticshub.v1.Listing.PubSubTopicSource.decode(reader, reader.uint32());
                                             break;
                                         }
                                     case 1: {
@@ -3349,6 +3659,14 @@
                                             message.discoveryType = reader.int32();
                                             break;
                                         }
+                                    case 15: {
+                                            message.resourceType = reader.int32();
+                                            break;
+                                        }
+                                    case 18: {
+                                            message.logLinkedDatasetQueryUserEmail = reader.bool();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -3391,6 +3709,16 @@
                                         var error = $root.google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.verify(message.bigqueryDataset);
                                         if (error)
                                             return "bigqueryDataset." + error;
+                                    }
+                                }
+                                if (message.pubsubTopic != null && message.hasOwnProperty("pubsubTopic")) {
+                                    if (properties.source === 1)
+                                        return "source: multiple values";
+                                    properties.source = 1;
+                                    {
+                                        var error = $root.google.cloud.bigquery.analyticshub.v1.Listing.PubSubTopicSource.verify(message.pubsubTopic);
+                                        if (error)
+                                            return "pubsubTopic." + error;
                                     }
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
@@ -3478,6 +3806,20 @@
                                         break;
                                     }
                                 }
+                                if (message.resourceType != null && message.hasOwnProperty("resourceType"))
+                                    switch (message.resourceType) {
+                                    default:
+                                        return "resourceType: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                if (message.logLinkedDatasetQueryUserEmail != null && message.hasOwnProperty("logLinkedDatasetQueryUserEmail")) {
+                                    properties._logLinkedDatasetQueryUserEmail = 1;
+                                    if (typeof message.logLinkedDatasetQueryUserEmail !== "boolean")
+                                        return "logLinkedDatasetQueryUserEmail: boolean expected";
+                                }
                                 return null;
                             };
     
@@ -3497,6 +3839,11 @@
                                     if (typeof object.bigqueryDataset !== "object")
                                         throw TypeError(".google.cloud.bigquery.analyticshub.v1.Listing.bigqueryDataset: object expected");
                                     message.bigqueryDataset = $root.google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.fromObject(object.bigqueryDataset);
+                                }
+                                if (object.pubsubTopic != null) {
+                                    if (typeof object.pubsubTopic !== "object")
+                                        throw TypeError(".google.cloud.bigquery.analyticshub.v1.Listing.pubsubTopic: object expected");
+                                    message.pubsubTopic = $root.google.cloud.bigquery.analyticshub.v1.Listing.PubSubTopicSource.fromObject(object.pubsubTopic);
                                 }
                                 if (object.name != null)
                                     message.name = String(object.name);
@@ -3659,6 +4006,28 @@
                                     message.discoveryType = 2;
                                     break;
                                 }
+                                switch (object.resourceType) {
+                                default:
+                                    if (typeof object.resourceType === "number") {
+                                        message.resourceType = object.resourceType;
+                                        break;
+                                    }
+                                    break;
+                                case "SHARED_RESOURCE_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.resourceType = 0;
+                                    break;
+                                case "BIGQUERY_DATASET":
+                                case 1:
+                                    message.resourceType = 1;
+                                    break;
+                                case "PUBSUB_TOPIC":
+                                case 2:
+                                    message.resourceType = 2;
+                                    break;
+                                }
+                                if (object.logLinkedDatasetQueryUserEmail != null)
+                                    message.logLinkedDatasetQueryUserEmail = Boolean(object.logLinkedDatasetQueryUserEmail);
                                 return message;
                             };
     
@@ -3695,6 +4064,7 @@
                                     object.publisher = null;
                                     object.requestAccess = "";
                                     object.restrictedExportConfig = null;
+                                    object.resourceType = options.enums === String ? "SHARED_RESOURCE_TYPE_UNSPECIFIED" : 0;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -3732,6 +4102,18 @@
                                     object.discoveryType = options.enums === String ? $root.google.cloud.bigquery.analyticshub.v1.DiscoveryType[message.discoveryType] === undefined ? message.discoveryType : $root.google.cloud.bigquery.analyticshub.v1.DiscoveryType[message.discoveryType] : message.discoveryType;
                                     if (options.oneofs)
                                         object._discoveryType = "discoveryType";
+                                }
+                                if (message.resourceType != null && message.hasOwnProperty("resourceType"))
+                                    object.resourceType = options.enums === String ? $root.google.cloud.bigquery.analyticshub.v1.SharedResourceType[message.resourceType] === undefined ? message.resourceType : $root.google.cloud.bigquery.analyticshub.v1.SharedResourceType[message.resourceType] : message.resourceType;
+                                if (message.pubsubTopic != null && message.hasOwnProperty("pubsubTopic")) {
+                                    object.pubsubTopic = $root.google.cloud.bigquery.analyticshub.v1.Listing.PubSubTopicSource.toObject(message.pubsubTopic, options);
+                                    if (options.oneofs)
+                                        object.source = "pubsubTopic";
+                                }
+                                if (message.logLinkedDatasetQueryUserEmail != null && message.hasOwnProperty("logLinkedDatasetQueryUserEmail")) {
+                                    object.logLinkedDatasetQueryUserEmail = message.logLinkedDatasetQueryUserEmail;
+                                    if (options.oneofs)
+                                        object._logLinkedDatasetQueryUserEmail = "logLinkedDatasetQueryUserEmail";
                                 }
                                 return object;
                             };
@@ -4525,6 +4907,249 @@
                                 return BigQueryDatasetSource;
                             })();
     
+                            Listing.PubSubTopicSource = (function() {
+    
+                                /**
+                                 * Properties of a PubSubTopicSource.
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.Listing
+                                 * @interface IPubSubTopicSource
+                                 * @property {string|null} [topic] PubSubTopicSource topic
+                                 * @property {Array.<string>|null} [dataAffinityRegions] PubSubTopicSource dataAffinityRegions
+                                 */
+    
+                                /**
+                                 * Constructs a new PubSubTopicSource.
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.Listing
+                                 * @classdesc Represents a PubSubTopicSource.
+                                 * @implements IPubSubTopicSource
+                                 * @constructor
+                                 * @param {google.cloud.bigquery.analyticshub.v1.Listing.IPubSubTopicSource=} [properties] Properties to set
+                                 */
+                                function PubSubTopicSource(properties) {
+                                    this.dataAffinityRegions = [];
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * PubSubTopicSource topic.
+                                 * @member {string} topic
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.Listing.PubSubTopicSource
+                                 * @instance
+                                 */
+                                PubSubTopicSource.prototype.topic = "";
+    
+                                /**
+                                 * PubSubTopicSource dataAffinityRegions.
+                                 * @member {Array.<string>} dataAffinityRegions
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.Listing.PubSubTopicSource
+                                 * @instance
+                                 */
+                                PubSubTopicSource.prototype.dataAffinityRegions = $util.emptyArray;
+    
+                                /**
+                                 * Creates a new PubSubTopicSource instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.Listing.PubSubTopicSource
+                                 * @static
+                                 * @param {google.cloud.bigquery.analyticshub.v1.Listing.IPubSubTopicSource=} [properties] Properties to set
+                                 * @returns {google.cloud.bigquery.analyticshub.v1.Listing.PubSubTopicSource} PubSubTopicSource instance
+                                 */
+                                PubSubTopicSource.create = function create(properties) {
+                                    return new PubSubTopicSource(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified PubSubTopicSource message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.Listing.PubSubTopicSource.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.Listing.PubSubTopicSource
+                                 * @static
+                                 * @param {google.cloud.bigquery.analyticshub.v1.Listing.IPubSubTopicSource} message PubSubTopicSource message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                PubSubTopicSource.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.topic != null && Object.hasOwnProperty.call(message, "topic"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.topic);
+                                    if (message.dataAffinityRegions != null && message.dataAffinityRegions.length)
+                                        for (var i = 0; i < message.dataAffinityRegions.length; ++i)
+                                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.dataAffinityRegions[i]);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified PubSubTopicSource message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.Listing.PubSubTopicSource.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.Listing.PubSubTopicSource
+                                 * @static
+                                 * @param {google.cloud.bigquery.analyticshub.v1.Listing.IPubSubTopicSource} message PubSubTopicSource message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                PubSubTopicSource.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a PubSubTopicSource message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.Listing.PubSubTopicSource
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.bigquery.analyticshub.v1.Listing.PubSubTopicSource} PubSubTopicSource
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                PubSubTopicSource.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.analyticshub.v1.Listing.PubSubTopicSource();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.topic = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                if (!(message.dataAffinityRegions && message.dataAffinityRegions.length))
+                                                    message.dataAffinityRegions = [];
+                                                message.dataAffinityRegions.push(reader.string());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a PubSubTopicSource message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.Listing.PubSubTopicSource
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.bigquery.analyticshub.v1.Listing.PubSubTopicSource} PubSubTopicSource
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                PubSubTopicSource.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a PubSubTopicSource message.
+                                 * @function verify
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.Listing.PubSubTopicSource
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                PubSubTopicSource.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.topic != null && message.hasOwnProperty("topic"))
+                                        if (!$util.isString(message.topic))
+                                            return "topic: string expected";
+                                    if (message.dataAffinityRegions != null && message.hasOwnProperty("dataAffinityRegions")) {
+                                        if (!Array.isArray(message.dataAffinityRegions))
+                                            return "dataAffinityRegions: array expected";
+                                        for (var i = 0; i < message.dataAffinityRegions.length; ++i)
+                                            if (!$util.isString(message.dataAffinityRegions[i]))
+                                                return "dataAffinityRegions: string[] expected";
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a PubSubTopicSource message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.Listing.PubSubTopicSource
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.bigquery.analyticshub.v1.Listing.PubSubTopicSource} PubSubTopicSource
+                                 */
+                                PubSubTopicSource.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.bigquery.analyticshub.v1.Listing.PubSubTopicSource)
+                                        return object;
+                                    var message = new $root.google.cloud.bigquery.analyticshub.v1.Listing.PubSubTopicSource();
+                                    if (object.topic != null)
+                                        message.topic = String(object.topic);
+                                    if (object.dataAffinityRegions) {
+                                        if (!Array.isArray(object.dataAffinityRegions))
+                                            throw TypeError(".google.cloud.bigquery.analyticshub.v1.Listing.PubSubTopicSource.dataAffinityRegions: array expected");
+                                        message.dataAffinityRegions = [];
+                                        for (var i = 0; i < object.dataAffinityRegions.length; ++i)
+                                            message.dataAffinityRegions[i] = String(object.dataAffinityRegions[i]);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a PubSubTopicSource message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.Listing.PubSubTopicSource
+                                 * @static
+                                 * @param {google.cloud.bigquery.analyticshub.v1.Listing.PubSubTopicSource} message PubSubTopicSource
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                PubSubTopicSource.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.arrays || options.defaults)
+                                        object.dataAffinityRegions = [];
+                                    if (options.defaults)
+                                        object.topic = "";
+                                    if (message.topic != null && message.hasOwnProperty("topic"))
+                                        object.topic = message.topic;
+                                    if (message.dataAffinityRegions && message.dataAffinityRegions.length) {
+                                        object.dataAffinityRegions = [];
+                                        for (var j = 0; j < message.dataAffinityRegions.length; ++j)
+                                            object.dataAffinityRegions[j] = message.dataAffinityRegions[j];
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this PubSubTopicSource to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.Listing.PubSubTopicSource
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                PubSubTopicSource.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for PubSubTopicSource
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.Listing.PubSubTopicSource
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                PubSubTopicSource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.bigquery.analyticshub.v1.Listing.PubSubTopicSource";
+                                };
+    
+                                return PubSubTopicSource;
+                            })();
+    
                             Listing.RestrictedExportConfig = (function() {
     
                                 /**
@@ -4858,6 +5483,9 @@
                              * @property {google.cloud.bigquery.analyticshub.v1.Subscription.State|null} [state] Subscription state
                              * @property {Object.<string,google.cloud.bigquery.analyticshub.v1.Subscription.ILinkedResource>|null} [linkedDatasetMap] Subscription linkedDatasetMap
                              * @property {string|null} [subscriberContact] Subscription subscriberContact
+                             * @property {Array.<google.cloud.bigquery.analyticshub.v1.Subscription.ILinkedResource>|null} [linkedResources] Subscription linkedResources
+                             * @property {google.cloud.bigquery.analyticshub.v1.SharedResourceType|null} [resourceType] Subscription resourceType
+                             * @property {boolean|null} [logLinkedDatasetQueryUserEmail] Subscription logLinkedDatasetQueryUserEmail
                              */
     
                             /**
@@ -4870,6 +5498,7 @@
                              */
                             function Subscription(properties) {
                                 this.linkedDatasetMap = {};
+                                this.linkedResources = [];
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                         if (properties[keys[i]] != null)
@@ -4956,6 +5585,30 @@
                              */
                             Subscription.prototype.subscriberContact = "";
     
+                            /**
+                             * Subscription linkedResources.
+                             * @member {Array.<google.cloud.bigquery.analyticshub.v1.Subscription.ILinkedResource>} linkedResources
+                             * @memberof google.cloud.bigquery.analyticshub.v1.Subscription
+                             * @instance
+                             */
+                            Subscription.prototype.linkedResources = $util.emptyArray;
+    
+                            /**
+                             * Subscription resourceType.
+                             * @member {google.cloud.bigquery.analyticshub.v1.SharedResourceType} resourceType
+                             * @memberof google.cloud.bigquery.analyticshub.v1.Subscription
+                             * @instance
+                             */
+                            Subscription.prototype.resourceType = 0;
+    
+                            /**
+                             * Subscription logLinkedDatasetQueryUserEmail.
+                             * @member {boolean|null|undefined} logLinkedDatasetQueryUserEmail
+                             * @memberof google.cloud.bigquery.analyticshub.v1.Subscription
+                             * @instance
+                             */
+                            Subscription.prototype.logLinkedDatasetQueryUserEmail = null;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
@@ -4967,6 +5620,17 @@
                              */
                             Object.defineProperty(Subscription.prototype, "resourceName", {
                                 get: $util.oneOfGetter($oneOfFields = ["listing", "dataExchange"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Subscription _logLinkedDatasetQueryUserEmail.
+                             * @member {"logLinkedDatasetQueryUserEmail"|undefined} _logLinkedDatasetQueryUserEmail
+                             * @memberof google.cloud.bigquery.analyticshub.v1.Subscription
+                             * @instance
+                             */
+                            Object.defineProperty(Subscription.prototype, "_logLinkedDatasetQueryUserEmail", {
+                                get: $util.oneOfGetter($oneOfFields = ["logLinkedDatasetQueryUserEmail"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -5017,6 +5681,13 @@
                                     writer.uint32(/* id 9, wireType 2 =*/74).string(message.subscriberContact);
                                 if (message.organizationDisplayName != null && Object.hasOwnProperty.call(message, "organizationDisplayName"))
                                     writer.uint32(/* id 10, wireType 2 =*/82).string(message.organizationDisplayName);
+                                if (message.linkedResources != null && message.linkedResources.length)
+                                    for (var i = 0; i < message.linkedResources.length; ++i)
+                                        $root.google.cloud.bigquery.analyticshub.v1.Subscription.LinkedResource.encode(message.linkedResources[i], writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                                if (message.resourceType != null && Object.hasOwnProperty.call(message, "resourceType"))
+                                    writer.uint32(/* id 12, wireType 0 =*/96).int32(message.resourceType);
+                                if (message.logLinkedDatasetQueryUserEmail != null && Object.hasOwnProperty.call(message, "logLinkedDatasetQueryUserEmail"))
+                                    writer.uint32(/* id 14, wireType 0 =*/112).bool(message.logLinkedDatasetQueryUserEmail);
                                 return writer;
                             };
     
@@ -5110,6 +5781,20 @@
                                             message.subscriberContact = reader.string();
                                             break;
                                         }
+                                    case 11: {
+                                            if (!(message.linkedResources && message.linkedResources.length))
+                                                message.linkedResources = [];
+                                            message.linkedResources.push($root.google.cloud.bigquery.analyticshub.v1.Subscription.LinkedResource.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 12: {
+                                            message.resourceType = reader.int32();
+                                            break;
+                                        }
+                                    case 14: {
+                                            message.logLinkedDatasetQueryUserEmail = reader.bool();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -5200,6 +5885,29 @@
                                 if (message.subscriberContact != null && message.hasOwnProperty("subscriberContact"))
                                     if (!$util.isString(message.subscriberContact))
                                         return "subscriberContact: string expected";
+                                if (message.linkedResources != null && message.hasOwnProperty("linkedResources")) {
+                                    if (!Array.isArray(message.linkedResources))
+                                        return "linkedResources: array expected";
+                                    for (var i = 0; i < message.linkedResources.length; ++i) {
+                                        var error = $root.google.cloud.bigquery.analyticshub.v1.Subscription.LinkedResource.verify(message.linkedResources[i]);
+                                        if (error)
+                                            return "linkedResources." + error;
+                                    }
+                                }
+                                if (message.resourceType != null && message.hasOwnProperty("resourceType"))
+                                    switch (message.resourceType) {
+                                    default:
+                                        return "resourceType: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                if (message.logLinkedDatasetQueryUserEmail != null && message.hasOwnProperty("logLinkedDatasetQueryUserEmail")) {
+                                    properties._logLinkedDatasetQueryUserEmail = 1;
+                                    if (typeof message.logLinkedDatasetQueryUserEmail !== "boolean")
+                                        return "logLinkedDatasetQueryUserEmail: boolean expected";
+                                }
                                 return null;
                             };
     
@@ -5271,6 +5979,38 @@
                                 }
                                 if (object.subscriberContact != null)
                                     message.subscriberContact = String(object.subscriberContact);
+                                if (object.linkedResources) {
+                                    if (!Array.isArray(object.linkedResources))
+                                        throw TypeError(".google.cloud.bigquery.analyticshub.v1.Subscription.linkedResources: array expected");
+                                    message.linkedResources = [];
+                                    for (var i = 0; i < object.linkedResources.length; ++i) {
+                                        if (typeof object.linkedResources[i] !== "object")
+                                            throw TypeError(".google.cloud.bigquery.analyticshub.v1.Subscription.linkedResources: object expected");
+                                        message.linkedResources[i] = $root.google.cloud.bigquery.analyticshub.v1.Subscription.LinkedResource.fromObject(object.linkedResources[i]);
+                                    }
+                                }
+                                switch (object.resourceType) {
+                                default:
+                                    if (typeof object.resourceType === "number") {
+                                        message.resourceType = object.resourceType;
+                                        break;
+                                    }
+                                    break;
+                                case "SHARED_RESOURCE_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.resourceType = 0;
+                                    break;
+                                case "BIGQUERY_DATASET":
+                                case 1:
+                                    message.resourceType = 1;
+                                    break;
+                                case "PUBSUB_TOPIC":
+                                case 2:
+                                    message.resourceType = 2;
+                                    break;
+                                }
+                                if (object.logLinkedDatasetQueryUserEmail != null)
+                                    message.logLinkedDatasetQueryUserEmail = Boolean(object.logLinkedDatasetQueryUserEmail);
                                 return message;
                             };
     
@@ -5287,6 +6027,8 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.linkedResources = [];
                                 if (options.objects || options.defaults)
                                     object.linkedDatasetMap = {};
                                 if (options.defaults) {
@@ -5297,6 +6039,7 @@
                                     object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
                                     object.subscriberContact = "";
                                     object.organizationDisplayName = "";
+                                    object.resourceType = options.enums === String ? "SHARED_RESOURCE_TYPE_UNSPECIFIED" : 0;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -5328,6 +6071,18 @@
                                     object.subscriberContact = message.subscriberContact;
                                 if (message.organizationDisplayName != null && message.hasOwnProperty("organizationDisplayName"))
                                     object.organizationDisplayName = message.organizationDisplayName;
+                                if (message.linkedResources && message.linkedResources.length) {
+                                    object.linkedResources = [];
+                                    for (var j = 0; j < message.linkedResources.length; ++j)
+                                        object.linkedResources[j] = $root.google.cloud.bigquery.analyticshub.v1.Subscription.LinkedResource.toObject(message.linkedResources[j], options);
+                                }
+                                if (message.resourceType != null && message.hasOwnProperty("resourceType"))
+                                    object.resourceType = options.enums === String ? $root.google.cloud.bigquery.analyticshub.v1.SharedResourceType[message.resourceType] === undefined ? message.resourceType : $root.google.cloud.bigquery.analyticshub.v1.SharedResourceType[message.resourceType] : message.resourceType;
+                                if (message.logLinkedDatasetQueryUserEmail != null && message.hasOwnProperty("logLinkedDatasetQueryUserEmail")) {
+                                    object.logLinkedDatasetQueryUserEmail = message.logLinkedDatasetQueryUserEmail;
+                                    if (options.oneofs)
+                                        object._logLinkedDatasetQueryUserEmail = "logLinkedDatasetQueryUserEmail";
+                                }
                                 return object;
                             };
     
@@ -5364,6 +6119,8 @@
                                  * @memberof google.cloud.bigquery.analyticshub.v1.Subscription
                                  * @interface ILinkedResource
                                  * @property {string|null} [linkedDataset] LinkedResource linkedDataset
+                                 * @property {string|null} [linkedPubsubSubscription] LinkedResource linkedPubsubSubscription
+                                 * @property {string|null} [listing] LinkedResource listing
                                  */
     
                                 /**
@@ -5389,17 +6146,33 @@
                                  */
                                 LinkedResource.prototype.linkedDataset = null;
     
+                                /**
+                                 * LinkedResource linkedPubsubSubscription.
+                                 * @member {string|null|undefined} linkedPubsubSubscription
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.Subscription.LinkedResource
+                                 * @instance
+                                 */
+                                LinkedResource.prototype.linkedPubsubSubscription = null;
+    
+                                /**
+                                 * LinkedResource listing.
+                                 * @member {string} listing
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.Subscription.LinkedResource
+                                 * @instance
+                                 */
+                                LinkedResource.prototype.listing = "";
+    
                                 // OneOf field names bound to virtual getters and setters
                                 var $oneOfFields;
     
                                 /**
                                  * LinkedResource reference.
-                                 * @member {"linkedDataset"|undefined} reference
+                                 * @member {"linkedDataset"|"linkedPubsubSubscription"|undefined} reference
                                  * @memberof google.cloud.bigquery.analyticshub.v1.Subscription.LinkedResource
                                  * @instance
                                  */
                                 Object.defineProperty(LinkedResource.prototype, "reference", {
-                                    get: $util.oneOfGetter($oneOfFields = ["linkedDataset"]),
+                                    get: $util.oneOfGetter($oneOfFields = ["linkedDataset", "linkedPubsubSubscription"]),
                                     set: $util.oneOfSetter($oneOfFields)
                                 });
     
@@ -5429,6 +6202,10 @@
                                         writer = $Writer.create();
                                     if (message.linkedDataset != null && Object.hasOwnProperty.call(message, "linkedDataset"))
                                         writer.uint32(/* id 1, wireType 2 =*/10).string(message.linkedDataset);
+                                    if (message.listing != null && Object.hasOwnProperty.call(message, "listing"))
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.listing);
+                                    if (message.linkedPubsubSubscription != null && Object.hasOwnProperty.call(message, "linkedPubsubSubscription"))
+                                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.linkedPubsubSubscription);
                                     return writer;
                                 };
     
@@ -5465,6 +6242,14 @@
                                         switch (tag >>> 3) {
                                         case 1: {
                                                 message.linkedDataset = reader.string();
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.linkedPubsubSubscription = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.listing = reader.string();
                                                 break;
                                             }
                                         default:
@@ -5508,6 +6293,16 @@
                                         if (!$util.isString(message.linkedDataset))
                                             return "linkedDataset: string expected";
                                     }
+                                    if (message.linkedPubsubSubscription != null && message.hasOwnProperty("linkedPubsubSubscription")) {
+                                        if (properties.reference === 1)
+                                            return "reference: multiple values";
+                                        properties.reference = 1;
+                                        if (!$util.isString(message.linkedPubsubSubscription))
+                                            return "linkedPubsubSubscription: string expected";
+                                    }
+                                    if (message.listing != null && message.hasOwnProperty("listing"))
+                                        if (!$util.isString(message.listing))
+                                            return "listing: string expected";
                                     return null;
                                 };
     
@@ -5525,6 +6320,10 @@
                                     var message = new $root.google.cloud.bigquery.analyticshub.v1.Subscription.LinkedResource();
                                     if (object.linkedDataset != null)
                                         message.linkedDataset = String(object.linkedDataset);
+                                    if (object.linkedPubsubSubscription != null)
+                                        message.linkedPubsubSubscription = String(object.linkedPubsubSubscription);
+                                    if (object.listing != null)
+                                        message.listing = String(object.listing);
                                     return message;
                                 };
     
@@ -5541,10 +6340,19 @@
                                     if (!options)
                                         options = {};
                                     var object = {};
+                                    if (options.defaults)
+                                        object.listing = "";
                                     if (message.linkedDataset != null && message.hasOwnProperty("linkedDataset")) {
                                         object.linkedDataset = message.linkedDataset;
                                         if (options.oneofs)
                                             object.reference = "linkedDataset";
+                                    }
+                                    if (message.listing != null && message.hasOwnProperty("listing"))
+                                        object.listing = message.listing;
+                                    if (message.linkedPubsubSubscription != null && message.hasOwnProperty("linkedPubsubSubscription")) {
+                                        object.linkedPubsubSubscription = message.linkedPubsubSubscription;
+                                        if (options.oneofs)
+                                            object.reference = "linkedPubsubSubscription";
                                     }
                                     return object;
                                 };
@@ -8896,6 +9704,7 @@
                              * @memberof google.cloud.bigquery.analyticshub.v1
                              * @interface ISubscribeListingRequest
                              * @property {google.cloud.bigquery.analyticshub.v1.IDestinationDataset|null} [destinationDataset] SubscribeListingRequest destinationDataset
+                             * @property {google.cloud.bigquery.analyticshub.v1.IDestinationPubSubSubscription|null} [destinationPubsubSubscription] SubscribeListingRequest destinationPubsubSubscription
                              * @property {string|null} [name] SubscribeListingRequest name
                              */
     
@@ -8923,6 +9732,14 @@
                             SubscribeListingRequest.prototype.destinationDataset = null;
     
                             /**
+                             * SubscribeListingRequest destinationPubsubSubscription.
+                             * @member {google.cloud.bigquery.analyticshub.v1.IDestinationPubSubSubscription|null|undefined} destinationPubsubSubscription
+                             * @memberof google.cloud.bigquery.analyticshub.v1.SubscribeListingRequest
+                             * @instance
+                             */
+                            SubscribeListingRequest.prototype.destinationPubsubSubscription = null;
+    
+                            /**
                              * SubscribeListingRequest name.
                              * @member {string} name
                              * @memberof google.cloud.bigquery.analyticshub.v1.SubscribeListingRequest
@@ -8935,12 +9752,12 @@
     
                             /**
                              * SubscribeListingRequest destination.
-                             * @member {"destinationDataset"|undefined} destination
+                             * @member {"destinationDataset"|"destinationPubsubSubscription"|undefined} destination
                              * @memberof google.cloud.bigquery.analyticshub.v1.SubscribeListingRequest
                              * @instance
                              */
                             Object.defineProperty(SubscribeListingRequest.prototype, "destination", {
-                                get: $util.oneOfGetter($oneOfFields = ["destinationDataset"]),
+                                get: $util.oneOfGetter($oneOfFields = ["destinationDataset", "destinationPubsubSubscription"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -8972,6 +9789,8 @@
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                                 if (message.destinationDataset != null && Object.hasOwnProperty.call(message, "destinationDataset"))
                                     $root.google.cloud.bigquery.analyticshub.v1.DestinationDataset.encode(message.destinationDataset, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.destinationPubsubSubscription != null && Object.hasOwnProperty.call(message, "destinationPubsubSubscription"))
+                                    $root.google.cloud.bigquery.analyticshub.v1.DestinationPubSubSubscription.encode(message.destinationPubsubSubscription, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                                 return writer;
                             };
     
@@ -9008,6 +9827,10 @@
                                     switch (tag >>> 3) {
                                     case 3: {
                                             message.destinationDataset = $root.google.cloud.bigquery.analyticshub.v1.DestinationDataset.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.destinationPubsubSubscription = $root.google.cloud.bigquery.analyticshub.v1.DestinationPubSubSubscription.decode(reader, reader.uint32());
                                             break;
                                         }
                                     case 1: {
@@ -9058,6 +9881,16 @@
                                             return "destinationDataset." + error;
                                     }
                                 }
+                                if (message.destinationPubsubSubscription != null && message.hasOwnProperty("destinationPubsubSubscription")) {
+                                    if (properties.destination === 1)
+                                        return "destination: multiple values";
+                                    properties.destination = 1;
+                                    {
+                                        var error = $root.google.cloud.bigquery.analyticshub.v1.DestinationPubSubSubscription.verify(message.destinationPubsubSubscription);
+                                        if (error)
+                                            return "destinationPubsubSubscription." + error;
+                                    }
+                                }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     if (!$util.isString(message.name))
                                         return "name: string expected";
@@ -9080,6 +9913,11 @@
                                     if (typeof object.destinationDataset !== "object")
                                         throw TypeError(".google.cloud.bigquery.analyticshub.v1.SubscribeListingRequest.destinationDataset: object expected");
                                     message.destinationDataset = $root.google.cloud.bigquery.analyticshub.v1.DestinationDataset.fromObject(object.destinationDataset);
+                                }
+                                if (object.destinationPubsubSubscription != null) {
+                                    if (typeof object.destinationPubsubSubscription !== "object")
+                                        throw TypeError(".google.cloud.bigquery.analyticshub.v1.SubscribeListingRequest.destinationPubsubSubscription: object expected");
+                                    message.destinationPubsubSubscription = $root.google.cloud.bigquery.analyticshub.v1.DestinationPubSubSubscription.fromObject(object.destinationPubsubSubscription);
                                 }
                                 if (object.name != null)
                                     message.name = String(object.name);
@@ -9107,6 +9945,11 @@
                                     object.destinationDataset = $root.google.cloud.bigquery.analyticshub.v1.DestinationDataset.toObject(message.destinationDataset, options);
                                     if (options.oneofs)
                                         object.destination = "destinationDataset";
+                                }
+                                if (message.destinationPubsubSubscription != null && message.hasOwnProperty("destinationPubsubSubscription")) {
+                                    object.destinationPubsubSubscription = $root.google.cloud.bigquery.analyticshub.v1.DestinationPubSubSubscription.toObject(message.destinationPubsubSubscription, options);
+                                    if (options.oneofs)
+                                        object.destination = "destinationPubsubSubscription";
                                 }
                                 return object;
                             };
@@ -9356,6 +10199,7 @@
                              * @interface ISubscribeDataExchangeRequest
                              * @property {string|null} [name] SubscribeDataExchangeRequest name
                              * @property {string|null} [destination] SubscribeDataExchangeRequest destination
+                             * @property {google.cloud.bigquery.analyticshub.v1.IDestinationDataset|null} [destinationDataset] SubscribeDataExchangeRequest destinationDataset
                              * @property {string|null} [subscription] SubscribeDataExchangeRequest subscription
                              * @property {string|null} [subscriberContact] SubscribeDataExchangeRequest subscriberContact
                              */
@@ -9390,6 +10234,14 @@
                              * @instance
                              */
                             SubscribeDataExchangeRequest.prototype.destination = "";
+    
+                            /**
+                             * SubscribeDataExchangeRequest destinationDataset.
+                             * @member {google.cloud.bigquery.analyticshub.v1.IDestinationDataset|null|undefined} destinationDataset
+                             * @memberof google.cloud.bigquery.analyticshub.v1.SubscribeDataExchangeRequest
+                             * @instance
+                             */
+                            SubscribeDataExchangeRequest.prototype.destinationDataset = null;
     
                             /**
                              * SubscribeDataExchangeRequest subscription.
@@ -9439,6 +10291,8 @@
                                     writer.uint32(/* id 3, wireType 2 =*/26).string(message.subscriberContact);
                                 if (message.subscription != null && Object.hasOwnProperty.call(message, "subscription"))
                                     writer.uint32(/* id 4, wireType 2 =*/34).string(message.subscription);
+                                if (message.destinationDataset != null && Object.hasOwnProperty.call(message, "destinationDataset"))
+                                    $root.google.cloud.bigquery.analyticshub.v1.DestinationDataset.encode(message.destinationDataset, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                                 return writer;
                             };
     
@@ -9479,6 +10333,10 @@
                                         }
                                     case 2: {
                                             message.destination = reader.string();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.destinationDataset = $root.google.cloud.bigquery.analyticshub.v1.DestinationDataset.decode(reader, reader.uint32());
                                             break;
                                         }
                                     case 4: {
@@ -9530,6 +10388,11 @@
                                 if (message.destination != null && message.hasOwnProperty("destination"))
                                     if (!$util.isString(message.destination))
                                         return "destination: string expected";
+                                if (message.destinationDataset != null && message.hasOwnProperty("destinationDataset")) {
+                                    var error = $root.google.cloud.bigquery.analyticshub.v1.DestinationDataset.verify(message.destinationDataset);
+                                    if (error)
+                                        return "destinationDataset." + error;
+                                }
                                 if (message.subscription != null && message.hasOwnProperty("subscription"))
                                     if (!$util.isString(message.subscription))
                                         return "subscription: string expected";
@@ -9555,6 +10418,11 @@
                                     message.name = String(object.name);
                                 if (object.destination != null)
                                     message.destination = String(object.destination);
+                                if (object.destinationDataset != null) {
+                                    if (typeof object.destinationDataset !== "object")
+                                        throw TypeError(".google.cloud.bigquery.analyticshub.v1.SubscribeDataExchangeRequest.destinationDataset: object expected");
+                                    message.destinationDataset = $root.google.cloud.bigquery.analyticshub.v1.DestinationDataset.fromObject(object.destinationDataset);
+                                }
                                 if (object.subscription != null)
                                     message.subscription = String(object.subscription);
                                 if (object.subscriberContact != null)
@@ -9580,6 +10448,7 @@
                                     object.destination = "";
                                     object.subscriberContact = "";
                                     object.subscription = "";
+                                    object.destinationDataset = null;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -9589,6 +10458,8 @@
                                     object.subscriberContact = message.subscriberContact;
                                 if (message.subscription != null && message.hasOwnProperty("subscription"))
                                     object.subscription = message.subscription;
+                                if (message.destinationDataset != null && message.hasOwnProperty("destinationDataset"))
+                                    object.destinationDataset = $root.google.cloud.bigquery.analyticshub.v1.DestinationDataset.toObject(message.destinationDataset, options);
                                 return object;
                             };
     
@@ -12416,6 +13287,4018 @@
                             };
     
                             return OperationMetadata;
+                        })();
+    
+                        v1.PubSubSubscription = (function() {
+    
+                            /**
+                             * Properties of a PubSubSubscription.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @interface IPubSubSubscription
+                             * @property {string|null} [name] PubSubSubscription name
+                             * @property {google.cloud.bigquery.analyticshub.v1.IPushConfig|null} [pushConfig] PubSubSubscription pushConfig
+                             * @property {google.cloud.bigquery.analyticshub.v1.IBigQueryConfig|null} [bigqueryConfig] PubSubSubscription bigqueryConfig
+                             * @property {google.cloud.bigquery.analyticshub.v1.ICloudStorageConfig|null} [cloudStorageConfig] PubSubSubscription cloudStorageConfig
+                             * @property {number|null} [ackDeadlineSeconds] PubSubSubscription ackDeadlineSeconds
+                             * @property {boolean|null} [retainAckedMessages] PubSubSubscription retainAckedMessages
+                             * @property {google.protobuf.IDuration|null} [messageRetentionDuration] PubSubSubscription messageRetentionDuration
+                             * @property {Object.<string,string>|null} [labels] PubSubSubscription labels
+                             * @property {boolean|null} [enableMessageOrdering] PubSubSubscription enableMessageOrdering
+                             * @property {google.cloud.bigquery.analyticshub.v1.IExpirationPolicy|null} [expirationPolicy] PubSubSubscription expirationPolicy
+                             * @property {string|null} [filter] PubSubSubscription filter
+                             * @property {google.cloud.bigquery.analyticshub.v1.IDeadLetterPolicy|null} [deadLetterPolicy] PubSubSubscription deadLetterPolicy
+                             * @property {google.cloud.bigquery.analyticshub.v1.IRetryPolicy|null} [retryPolicy] PubSubSubscription retryPolicy
+                             * @property {boolean|null} [detached] PubSubSubscription detached
+                             * @property {boolean|null} [enableExactlyOnceDelivery] PubSubSubscription enableExactlyOnceDelivery
+                             * @property {Array.<google.cloud.bigquery.analyticshub.v1.IMessageTransform>|null} [messageTransforms] PubSubSubscription messageTransforms
+                             */
+    
+                            /**
+                             * Constructs a new PubSubSubscription.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @classdesc Represents a PubSubSubscription.
+                             * @implements IPubSubSubscription
+                             * @constructor
+                             * @param {google.cloud.bigquery.analyticshub.v1.IPubSubSubscription=} [properties] Properties to set
+                             */
+                            function PubSubSubscription(properties) {
+                                this.labels = {};
+                                this.messageTransforms = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * PubSubSubscription name.
+                             * @member {string} name
+                             * @memberof google.cloud.bigquery.analyticshub.v1.PubSubSubscription
+                             * @instance
+                             */
+                            PubSubSubscription.prototype.name = "";
+    
+                            /**
+                             * PubSubSubscription pushConfig.
+                             * @member {google.cloud.bigquery.analyticshub.v1.IPushConfig|null|undefined} pushConfig
+                             * @memberof google.cloud.bigquery.analyticshub.v1.PubSubSubscription
+                             * @instance
+                             */
+                            PubSubSubscription.prototype.pushConfig = null;
+    
+                            /**
+                             * PubSubSubscription bigqueryConfig.
+                             * @member {google.cloud.bigquery.analyticshub.v1.IBigQueryConfig|null|undefined} bigqueryConfig
+                             * @memberof google.cloud.bigquery.analyticshub.v1.PubSubSubscription
+                             * @instance
+                             */
+                            PubSubSubscription.prototype.bigqueryConfig = null;
+    
+                            /**
+                             * PubSubSubscription cloudStorageConfig.
+                             * @member {google.cloud.bigquery.analyticshub.v1.ICloudStorageConfig|null|undefined} cloudStorageConfig
+                             * @memberof google.cloud.bigquery.analyticshub.v1.PubSubSubscription
+                             * @instance
+                             */
+                            PubSubSubscription.prototype.cloudStorageConfig = null;
+    
+                            /**
+                             * PubSubSubscription ackDeadlineSeconds.
+                             * @member {number} ackDeadlineSeconds
+                             * @memberof google.cloud.bigquery.analyticshub.v1.PubSubSubscription
+                             * @instance
+                             */
+                            PubSubSubscription.prototype.ackDeadlineSeconds = 0;
+    
+                            /**
+                             * PubSubSubscription retainAckedMessages.
+                             * @member {boolean} retainAckedMessages
+                             * @memberof google.cloud.bigquery.analyticshub.v1.PubSubSubscription
+                             * @instance
+                             */
+                            PubSubSubscription.prototype.retainAckedMessages = false;
+    
+                            /**
+                             * PubSubSubscription messageRetentionDuration.
+                             * @member {google.protobuf.IDuration|null|undefined} messageRetentionDuration
+                             * @memberof google.cloud.bigquery.analyticshub.v1.PubSubSubscription
+                             * @instance
+                             */
+                            PubSubSubscription.prototype.messageRetentionDuration = null;
+    
+                            /**
+                             * PubSubSubscription labels.
+                             * @member {Object.<string,string>} labels
+                             * @memberof google.cloud.bigquery.analyticshub.v1.PubSubSubscription
+                             * @instance
+                             */
+                            PubSubSubscription.prototype.labels = $util.emptyObject;
+    
+                            /**
+                             * PubSubSubscription enableMessageOrdering.
+                             * @member {boolean} enableMessageOrdering
+                             * @memberof google.cloud.bigquery.analyticshub.v1.PubSubSubscription
+                             * @instance
+                             */
+                            PubSubSubscription.prototype.enableMessageOrdering = false;
+    
+                            /**
+                             * PubSubSubscription expirationPolicy.
+                             * @member {google.cloud.bigquery.analyticshub.v1.IExpirationPolicy|null|undefined} expirationPolicy
+                             * @memberof google.cloud.bigquery.analyticshub.v1.PubSubSubscription
+                             * @instance
+                             */
+                            PubSubSubscription.prototype.expirationPolicy = null;
+    
+                            /**
+                             * PubSubSubscription filter.
+                             * @member {string} filter
+                             * @memberof google.cloud.bigquery.analyticshub.v1.PubSubSubscription
+                             * @instance
+                             */
+                            PubSubSubscription.prototype.filter = "";
+    
+                            /**
+                             * PubSubSubscription deadLetterPolicy.
+                             * @member {google.cloud.bigquery.analyticshub.v1.IDeadLetterPolicy|null|undefined} deadLetterPolicy
+                             * @memberof google.cloud.bigquery.analyticshub.v1.PubSubSubscription
+                             * @instance
+                             */
+                            PubSubSubscription.prototype.deadLetterPolicy = null;
+    
+                            /**
+                             * PubSubSubscription retryPolicy.
+                             * @member {google.cloud.bigquery.analyticshub.v1.IRetryPolicy|null|undefined} retryPolicy
+                             * @memberof google.cloud.bigquery.analyticshub.v1.PubSubSubscription
+                             * @instance
+                             */
+                            PubSubSubscription.prototype.retryPolicy = null;
+    
+                            /**
+                             * PubSubSubscription detached.
+                             * @member {boolean} detached
+                             * @memberof google.cloud.bigquery.analyticshub.v1.PubSubSubscription
+                             * @instance
+                             */
+                            PubSubSubscription.prototype.detached = false;
+    
+                            /**
+                             * PubSubSubscription enableExactlyOnceDelivery.
+                             * @member {boolean} enableExactlyOnceDelivery
+                             * @memberof google.cloud.bigquery.analyticshub.v1.PubSubSubscription
+                             * @instance
+                             */
+                            PubSubSubscription.prototype.enableExactlyOnceDelivery = false;
+    
+                            /**
+                             * PubSubSubscription messageTransforms.
+                             * @member {Array.<google.cloud.bigquery.analyticshub.v1.IMessageTransform>} messageTransforms
+                             * @memberof google.cloud.bigquery.analyticshub.v1.PubSubSubscription
+                             * @instance
+                             */
+                            PubSubSubscription.prototype.messageTransforms = $util.emptyArray;
+    
+                            /**
+                             * Creates a new PubSubSubscription instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.analyticshub.v1.PubSubSubscription
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IPubSubSubscription=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.analyticshub.v1.PubSubSubscription} PubSubSubscription instance
+                             */
+                            PubSubSubscription.create = function create(properties) {
+                                return new PubSubSubscription(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified PubSubSubscription message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.PubSubSubscription.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.PubSubSubscription
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IPubSubSubscription} message PubSubSubscription message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PubSubSubscription.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.pushConfig != null && Object.hasOwnProperty.call(message, "pushConfig"))
+                                    $root.google.cloud.bigquery.analyticshub.v1.PushConfig.encode(message.pushConfig, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.ackDeadlineSeconds != null && Object.hasOwnProperty.call(message, "ackDeadlineSeconds"))
+                                    writer.uint32(/* id 5, wireType 0 =*/40).int32(message.ackDeadlineSeconds);
+                                if (message.retainAckedMessages != null && Object.hasOwnProperty.call(message, "retainAckedMessages"))
+                                    writer.uint32(/* id 7, wireType 0 =*/56).bool(message.retainAckedMessages);
+                                if (message.messageRetentionDuration != null && Object.hasOwnProperty.call(message, "messageRetentionDuration"))
+                                    $root.google.protobuf.Duration.encode(message.messageRetentionDuration, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                                if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                    for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                        writer.uint32(/* id 9, wireType 2 =*/74).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                                if (message.enableMessageOrdering != null && Object.hasOwnProperty.call(message, "enableMessageOrdering"))
+                                    writer.uint32(/* id 10, wireType 0 =*/80).bool(message.enableMessageOrdering);
+                                if (message.expirationPolicy != null && Object.hasOwnProperty.call(message, "expirationPolicy"))
+                                    $root.google.cloud.bigquery.analyticshub.v1.ExpirationPolicy.encode(message.expirationPolicy, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                                if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                    writer.uint32(/* id 12, wireType 2 =*/98).string(message.filter);
+                                if (message.deadLetterPolicy != null && Object.hasOwnProperty.call(message, "deadLetterPolicy"))
+                                    $root.google.cloud.bigquery.analyticshub.v1.DeadLetterPolicy.encode(message.deadLetterPolicy, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                                if (message.retryPolicy != null && Object.hasOwnProperty.call(message, "retryPolicy"))
+                                    $root.google.cloud.bigquery.analyticshub.v1.RetryPolicy.encode(message.retryPolicy, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                                if (message.detached != null && Object.hasOwnProperty.call(message, "detached"))
+                                    writer.uint32(/* id 15, wireType 0 =*/120).bool(message.detached);
+                                if (message.enableExactlyOnceDelivery != null && Object.hasOwnProperty.call(message, "enableExactlyOnceDelivery"))
+                                    writer.uint32(/* id 16, wireType 0 =*/128).bool(message.enableExactlyOnceDelivery);
+                                if (message.bigqueryConfig != null && Object.hasOwnProperty.call(message, "bigqueryConfig"))
+                                    $root.google.cloud.bigquery.analyticshub.v1.BigQueryConfig.encode(message.bigqueryConfig, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
+                                if (message.cloudStorageConfig != null && Object.hasOwnProperty.call(message, "cloudStorageConfig"))
+                                    $root.google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.encode(message.cloudStorageConfig, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
+                                if (message.messageTransforms != null && message.messageTransforms.length)
+                                    for (var i = 0; i < message.messageTransforms.length; ++i)
+                                        $root.google.cloud.bigquery.analyticshub.v1.MessageTransform.encode(message.messageTransforms[i], writer.uint32(/* id 25, wireType 2 =*/202).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified PubSubSubscription message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.PubSubSubscription.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.PubSubSubscription
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IPubSubSubscription} message PubSubSubscription message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PubSubSubscription.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a PubSubSubscription message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.PubSubSubscription
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.analyticshub.v1.PubSubSubscription} PubSubSubscription
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PubSubSubscription.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.analyticshub.v1.PubSubSubscription(), key, value;
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.pushConfig = $root.google.cloud.bigquery.analyticshub.v1.PushConfig.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 18: {
+                                            message.bigqueryConfig = $root.google.cloud.bigquery.analyticshub.v1.BigQueryConfig.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 22: {
+                                            message.cloudStorageConfig = $root.google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.ackDeadlineSeconds = reader.int32();
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.retainAckedMessages = reader.bool();
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.messageRetentionDuration = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 9: {
+                                            if (message.labels === $util.emptyObject)
+                                                message.labels = {};
+                                            var end2 = reader.uint32() + reader.pos;
+                                            key = "";
+                                            value = "";
+                                            while (reader.pos < end2) {
+                                                var tag2 = reader.uint32();
+                                                switch (tag2 >>> 3) {
+                                                case 1:
+                                                    key = reader.string();
+                                                    break;
+                                                case 2:
+                                                    value = reader.string();
+                                                    break;
+                                                default:
+                                                    reader.skipType(tag2 & 7);
+                                                    break;
+                                                }
+                                            }
+                                            message.labels[key] = value;
+                                            break;
+                                        }
+                                    case 10: {
+                                            message.enableMessageOrdering = reader.bool();
+                                            break;
+                                        }
+                                    case 11: {
+                                            message.expirationPolicy = $root.google.cloud.bigquery.analyticshub.v1.ExpirationPolicy.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 12: {
+                                            message.filter = reader.string();
+                                            break;
+                                        }
+                                    case 13: {
+                                            message.deadLetterPolicy = $root.google.cloud.bigquery.analyticshub.v1.DeadLetterPolicy.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 14: {
+                                            message.retryPolicy = $root.google.cloud.bigquery.analyticshub.v1.RetryPolicy.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 15: {
+                                            message.detached = reader.bool();
+                                            break;
+                                        }
+                                    case 16: {
+                                            message.enableExactlyOnceDelivery = reader.bool();
+                                            break;
+                                        }
+                                    case 25: {
+                                            if (!(message.messageTransforms && message.messageTransforms.length))
+                                                message.messageTransforms = [];
+                                            message.messageTransforms.push($root.google.cloud.bigquery.analyticshub.v1.MessageTransform.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a PubSubSubscription message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.PubSubSubscription
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.analyticshub.v1.PubSubSubscription} PubSubSubscription
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PubSubSubscription.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a PubSubSubscription message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.analyticshub.v1.PubSubSubscription
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            PubSubSubscription.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.pushConfig != null && message.hasOwnProperty("pushConfig")) {
+                                    var error = $root.google.cloud.bigquery.analyticshub.v1.PushConfig.verify(message.pushConfig);
+                                    if (error)
+                                        return "pushConfig." + error;
+                                }
+                                if (message.bigqueryConfig != null && message.hasOwnProperty("bigqueryConfig")) {
+                                    var error = $root.google.cloud.bigquery.analyticshub.v1.BigQueryConfig.verify(message.bigqueryConfig);
+                                    if (error)
+                                        return "bigqueryConfig." + error;
+                                }
+                                if (message.cloudStorageConfig != null && message.hasOwnProperty("cloudStorageConfig")) {
+                                    var error = $root.google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.verify(message.cloudStorageConfig);
+                                    if (error)
+                                        return "cloudStorageConfig." + error;
+                                }
+                                if (message.ackDeadlineSeconds != null && message.hasOwnProperty("ackDeadlineSeconds"))
+                                    if (!$util.isInteger(message.ackDeadlineSeconds))
+                                        return "ackDeadlineSeconds: integer expected";
+                                if (message.retainAckedMessages != null && message.hasOwnProperty("retainAckedMessages"))
+                                    if (typeof message.retainAckedMessages !== "boolean")
+                                        return "retainAckedMessages: boolean expected";
+                                if (message.messageRetentionDuration != null && message.hasOwnProperty("messageRetentionDuration")) {
+                                    var error = $root.google.protobuf.Duration.verify(message.messageRetentionDuration);
+                                    if (error)
+                                        return "messageRetentionDuration." + error;
+                                }
+                                if (message.labels != null && message.hasOwnProperty("labels")) {
+                                    if (!$util.isObject(message.labels))
+                                        return "labels: object expected";
+                                    var key = Object.keys(message.labels);
+                                    for (var i = 0; i < key.length; ++i)
+                                        if (!$util.isString(message.labels[key[i]]))
+                                            return "labels: string{k:string} expected";
+                                }
+                                if (message.enableMessageOrdering != null && message.hasOwnProperty("enableMessageOrdering"))
+                                    if (typeof message.enableMessageOrdering !== "boolean")
+                                        return "enableMessageOrdering: boolean expected";
+                                if (message.expirationPolicy != null && message.hasOwnProperty("expirationPolicy")) {
+                                    var error = $root.google.cloud.bigquery.analyticshub.v1.ExpirationPolicy.verify(message.expirationPolicy);
+                                    if (error)
+                                        return "expirationPolicy." + error;
+                                }
+                                if (message.filter != null && message.hasOwnProperty("filter"))
+                                    if (!$util.isString(message.filter))
+                                        return "filter: string expected";
+                                if (message.deadLetterPolicy != null && message.hasOwnProperty("deadLetterPolicy")) {
+                                    var error = $root.google.cloud.bigquery.analyticshub.v1.DeadLetterPolicy.verify(message.deadLetterPolicy);
+                                    if (error)
+                                        return "deadLetterPolicy." + error;
+                                }
+                                if (message.retryPolicy != null && message.hasOwnProperty("retryPolicy")) {
+                                    var error = $root.google.cloud.bigquery.analyticshub.v1.RetryPolicy.verify(message.retryPolicy);
+                                    if (error)
+                                        return "retryPolicy." + error;
+                                }
+                                if (message.detached != null && message.hasOwnProperty("detached"))
+                                    if (typeof message.detached !== "boolean")
+                                        return "detached: boolean expected";
+                                if (message.enableExactlyOnceDelivery != null && message.hasOwnProperty("enableExactlyOnceDelivery"))
+                                    if (typeof message.enableExactlyOnceDelivery !== "boolean")
+                                        return "enableExactlyOnceDelivery: boolean expected";
+                                if (message.messageTransforms != null && message.hasOwnProperty("messageTransforms")) {
+                                    if (!Array.isArray(message.messageTransforms))
+                                        return "messageTransforms: array expected";
+                                    for (var i = 0; i < message.messageTransforms.length; ++i) {
+                                        var error = $root.google.cloud.bigquery.analyticshub.v1.MessageTransform.verify(message.messageTransforms[i]);
+                                        if (error)
+                                            return "messageTransforms." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a PubSubSubscription message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.PubSubSubscription
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.analyticshub.v1.PubSubSubscription} PubSubSubscription
+                             */
+                            PubSubSubscription.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.analyticshub.v1.PubSubSubscription)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.analyticshub.v1.PubSubSubscription();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.pushConfig != null) {
+                                    if (typeof object.pushConfig !== "object")
+                                        throw TypeError(".google.cloud.bigquery.analyticshub.v1.PubSubSubscription.pushConfig: object expected");
+                                    message.pushConfig = $root.google.cloud.bigquery.analyticshub.v1.PushConfig.fromObject(object.pushConfig);
+                                }
+                                if (object.bigqueryConfig != null) {
+                                    if (typeof object.bigqueryConfig !== "object")
+                                        throw TypeError(".google.cloud.bigquery.analyticshub.v1.PubSubSubscription.bigqueryConfig: object expected");
+                                    message.bigqueryConfig = $root.google.cloud.bigquery.analyticshub.v1.BigQueryConfig.fromObject(object.bigqueryConfig);
+                                }
+                                if (object.cloudStorageConfig != null) {
+                                    if (typeof object.cloudStorageConfig !== "object")
+                                        throw TypeError(".google.cloud.bigquery.analyticshub.v1.PubSubSubscription.cloudStorageConfig: object expected");
+                                    message.cloudStorageConfig = $root.google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.fromObject(object.cloudStorageConfig);
+                                }
+                                if (object.ackDeadlineSeconds != null)
+                                    message.ackDeadlineSeconds = object.ackDeadlineSeconds | 0;
+                                if (object.retainAckedMessages != null)
+                                    message.retainAckedMessages = Boolean(object.retainAckedMessages);
+                                if (object.messageRetentionDuration != null) {
+                                    if (typeof object.messageRetentionDuration !== "object")
+                                        throw TypeError(".google.cloud.bigquery.analyticshub.v1.PubSubSubscription.messageRetentionDuration: object expected");
+                                    message.messageRetentionDuration = $root.google.protobuf.Duration.fromObject(object.messageRetentionDuration);
+                                }
+                                if (object.labels) {
+                                    if (typeof object.labels !== "object")
+                                        throw TypeError(".google.cloud.bigquery.analyticshub.v1.PubSubSubscription.labels: object expected");
+                                    message.labels = {};
+                                    for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                        message.labels[keys[i]] = String(object.labels[keys[i]]);
+                                }
+                                if (object.enableMessageOrdering != null)
+                                    message.enableMessageOrdering = Boolean(object.enableMessageOrdering);
+                                if (object.expirationPolicy != null) {
+                                    if (typeof object.expirationPolicy !== "object")
+                                        throw TypeError(".google.cloud.bigquery.analyticshub.v1.PubSubSubscription.expirationPolicy: object expected");
+                                    message.expirationPolicy = $root.google.cloud.bigquery.analyticshub.v1.ExpirationPolicy.fromObject(object.expirationPolicy);
+                                }
+                                if (object.filter != null)
+                                    message.filter = String(object.filter);
+                                if (object.deadLetterPolicy != null) {
+                                    if (typeof object.deadLetterPolicy !== "object")
+                                        throw TypeError(".google.cloud.bigquery.analyticshub.v1.PubSubSubscription.deadLetterPolicy: object expected");
+                                    message.deadLetterPolicy = $root.google.cloud.bigquery.analyticshub.v1.DeadLetterPolicy.fromObject(object.deadLetterPolicy);
+                                }
+                                if (object.retryPolicy != null) {
+                                    if (typeof object.retryPolicy !== "object")
+                                        throw TypeError(".google.cloud.bigquery.analyticshub.v1.PubSubSubscription.retryPolicy: object expected");
+                                    message.retryPolicy = $root.google.cloud.bigquery.analyticshub.v1.RetryPolicy.fromObject(object.retryPolicy);
+                                }
+                                if (object.detached != null)
+                                    message.detached = Boolean(object.detached);
+                                if (object.enableExactlyOnceDelivery != null)
+                                    message.enableExactlyOnceDelivery = Boolean(object.enableExactlyOnceDelivery);
+                                if (object.messageTransforms) {
+                                    if (!Array.isArray(object.messageTransforms))
+                                        throw TypeError(".google.cloud.bigquery.analyticshub.v1.PubSubSubscription.messageTransforms: array expected");
+                                    message.messageTransforms = [];
+                                    for (var i = 0; i < object.messageTransforms.length; ++i) {
+                                        if (typeof object.messageTransforms[i] !== "object")
+                                            throw TypeError(".google.cloud.bigquery.analyticshub.v1.PubSubSubscription.messageTransforms: object expected");
+                                        message.messageTransforms[i] = $root.google.cloud.bigquery.analyticshub.v1.MessageTransform.fromObject(object.messageTransforms[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a PubSubSubscription message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.PubSubSubscription
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.PubSubSubscription} message PubSubSubscription
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            PubSubSubscription.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.messageTransforms = [];
+                                if (options.objects || options.defaults)
+                                    object.labels = {};
+                                if (options.defaults) {
+                                    object.name = "";
+                                    object.pushConfig = null;
+                                    object.ackDeadlineSeconds = 0;
+                                    object.retainAckedMessages = false;
+                                    object.messageRetentionDuration = null;
+                                    object.enableMessageOrdering = false;
+                                    object.expirationPolicy = null;
+                                    object.filter = "";
+                                    object.deadLetterPolicy = null;
+                                    object.retryPolicy = null;
+                                    object.detached = false;
+                                    object.enableExactlyOnceDelivery = false;
+                                    object.bigqueryConfig = null;
+                                    object.cloudStorageConfig = null;
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.pushConfig != null && message.hasOwnProperty("pushConfig"))
+                                    object.pushConfig = $root.google.cloud.bigquery.analyticshub.v1.PushConfig.toObject(message.pushConfig, options);
+                                if (message.ackDeadlineSeconds != null && message.hasOwnProperty("ackDeadlineSeconds"))
+                                    object.ackDeadlineSeconds = message.ackDeadlineSeconds;
+                                if (message.retainAckedMessages != null && message.hasOwnProperty("retainAckedMessages"))
+                                    object.retainAckedMessages = message.retainAckedMessages;
+                                if (message.messageRetentionDuration != null && message.hasOwnProperty("messageRetentionDuration"))
+                                    object.messageRetentionDuration = $root.google.protobuf.Duration.toObject(message.messageRetentionDuration, options);
+                                var keys2;
+                                if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                    object.labels = {};
+                                    for (var j = 0; j < keys2.length; ++j)
+                                        object.labels[keys2[j]] = message.labels[keys2[j]];
+                                }
+                                if (message.enableMessageOrdering != null && message.hasOwnProperty("enableMessageOrdering"))
+                                    object.enableMessageOrdering = message.enableMessageOrdering;
+                                if (message.expirationPolicy != null && message.hasOwnProperty("expirationPolicy"))
+                                    object.expirationPolicy = $root.google.cloud.bigquery.analyticshub.v1.ExpirationPolicy.toObject(message.expirationPolicy, options);
+                                if (message.filter != null && message.hasOwnProperty("filter"))
+                                    object.filter = message.filter;
+                                if (message.deadLetterPolicy != null && message.hasOwnProperty("deadLetterPolicy"))
+                                    object.deadLetterPolicy = $root.google.cloud.bigquery.analyticshub.v1.DeadLetterPolicy.toObject(message.deadLetterPolicy, options);
+                                if (message.retryPolicy != null && message.hasOwnProperty("retryPolicy"))
+                                    object.retryPolicy = $root.google.cloud.bigquery.analyticshub.v1.RetryPolicy.toObject(message.retryPolicy, options);
+                                if (message.detached != null && message.hasOwnProperty("detached"))
+                                    object.detached = message.detached;
+                                if (message.enableExactlyOnceDelivery != null && message.hasOwnProperty("enableExactlyOnceDelivery"))
+                                    object.enableExactlyOnceDelivery = message.enableExactlyOnceDelivery;
+                                if (message.bigqueryConfig != null && message.hasOwnProperty("bigqueryConfig"))
+                                    object.bigqueryConfig = $root.google.cloud.bigquery.analyticshub.v1.BigQueryConfig.toObject(message.bigqueryConfig, options);
+                                if (message.cloudStorageConfig != null && message.hasOwnProperty("cloudStorageConfig"))
+                                    object.cloudStorageConfig = $root.google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.toObject(message.cloudStorageConfig, options);
+                                if (message.messageTransforms && message.messageTransforms.length) {
+                                    object.messageTransforms = [];
+                                    for (var j = 0; j < message.messageTransforms.length; ++j)
+                                        object.messageTransforms[j] = $root.google.cloud.bigquery.analyticshub.v1.MessageTransform.toObject(message.messageTransforms[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this PubSubSubscription to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.analyticshub.v1.PubSubSubscription
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            PubSubSubscription.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for PubSubSubscription
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.analyticshub.v1.PubSubSubscription
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            PubSubSubscription.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.analyticshub.v1.PubSubSubscription";
+                            };
+    
+                            return PubSubSubscription;
+                        })();
+    
+                        v1.RetryPolicy = (function() {
+    
+                            /**
+                             * Properties of a RetryPolicy.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @interface IRetryPolicy
+                             * @property {google.protobuf.IDuration|null} [minimumBackoff] RetryPolicy minimumBackoff
+                             * @property {google.protobuf.IDuration|null} [maximumBackoff] RetryPolicy maximumBackoff
+                             */
+    
+                            /**
+                             * Constructs a new RetryPolicy.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @classdesc Represents a RetryPolicy.
+                             * @implements IRetryPolicy
+                             * @constructor
+                             * @param {google.cloud.bigquery.analyticshub.v1.IRetryPolicy=} [properties] Properties to set
+                             */
+                            function RetryPolicy(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * RetryPolicy minimumBackoff.
+                             * @member {google.protobuf.IDuration|null|undefined} minimumBackoff
+                             * @memberof google.cloud.bigquery.analyticshub.v1.RetryPolicy
+                             * @instance
+                             */
+                            RetryPolicy.prototype.minimumBackoff = null;
+    
+                            /**
+                             * RetryPolicy maximumBackoff.
+                             * @member {google.protobuf.IDuration|null|undefined} maximumBackoff
+                             * @memberof google.cloud.bigquery.analyticshub.v1.RetryPolicy
+                             * @instance
+                             */
+                            RetryPolicy.prototype.maximumBackoff = null;
+    
+                            /**
+                             * Creates a new RetryPolicy instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.analyticshub.v1.RetryPolicy
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IRetryPolicy=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.analyticshub.v1.RetryPolicy} RetryPolicy instance
+                             */
+                            RetryPolicy.create = function create(properties) {
+                                return new RetryPolicy(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified RetryPolicy message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.RetryPolicy.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.RetryPolicy
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IRetryPolicy} message RetryPolicy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RetryPolicy.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.minimumBackoff != null && Object.hasOwnProperty.call(message, "minimumBackoff"))
+                                    $root.google.protobuf.Duration.encode(message.minimumBackoff, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.maximumBackoff != null && Object.hasOwnProperty.call(message, "maximumBackoff"))
+                                    $root.google.protobuf.Duration.encode(message.maximumBackoff, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified RetryPolicy message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.RetryPolicy.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.RetryPolicy
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IRetryPolicy} message RetryPolicy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            RetryPolicy.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a RetryPolicy message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.RetryPolicy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.analyticshub.v1.RetryPolicy} RetryPolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RetryPolicy.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.analyticshub.v1.RetryPolicy();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.minimumBackoff = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.maximumBackoff = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a RetryPolicy message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.RetryPolicy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.analyticshub.v1.RetryPolicy} RetryPolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            RetryPolicy.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a RetryPolicy message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.analyticshub.v1.RetryPolicy
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            RetryPolicy.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.minimumBackoff != null && message.hasOwnProperty("minimumBackoff")) {
+                                    var error = $root.google.protobuf.Duration.verify(message.minimumBackoff);
+                                    if (error)
+                                        return "minimumBackoff." + error;
+                                }
+                                if (message.maximumBackoff != null && message.hasOwnProperty("maximumBackoff")) {
+                                    var error = $root.google.protobuf.Duration.verify(message.maximumBackoff);
+                                    if (error)
+                                        return "maximumBackoff." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a RetryPolicy message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.RetryPolicy
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.analyticshub.v1.RetryPolicy} RetryPolicy
+                             */
+                            RetryPolicy.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.analyticshub.v1.RetryPolicy)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.analyticshub.v1.RetryPolicy();
+                                if (object.minimumBackoff != null) {
+                                    if (typeof object.minimumBackoff !== "object")
+                                        throw TypeError(".google.cloud.bigquery.analyticshub.v1.RetryPolicy.minimumBackoff: object expected");
+                                    message.minimumBackoff = $root.google.protobuf.Duration.fromObject(object.minimumBackoff);
+                                }
+                                if (object.maximumBackoff != null) {
+                                    if (typeof object.maximumBackoff !== "object")
+                                        throw TypeError(".google.cloud.bigquery.analyticshub.v1.RetryPolicy.maximumBackoff: object expected");
+                                    message.maximumBackoff = $root.google.protobuf.Duration.fromObject(object.maximumBackoff);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a RetryPolicy message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.RetryPolicy
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.RetryPolicy} message RetryPolicy
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            RetryPolicy.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.minimumBackoff = null;
+                                    object.maximumBackoff = null;
+                                }
+                                if (message.minimumBackoff != null && message.hasOwnProperty("minimumBackoff"))
+                                    object.minimumBackoff = $root.google.protobuf.Duration.toObject(message.minimumBackoff, options);
+                                if (message.maximumBackoff != null && message.hasOwnProperty("maximumBackoff"))
+                                    object.maximumBackoff = $root.google.protobuf.Duration.toObject(message.maximumBackoff, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this RetryPolicy to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.analyticshub.v1.RetryPolicy
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            RetryPolicy.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for RetryPolicy
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.analyticshub.v1.RetryPolicy
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            RetryPolicy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.analyticshub.v1.RetryPolicy";
+                            };
+    
+                            return RetryPolicy;
+                        })();
+    
+                        v1.DeadLetterPolicy = (function() {
+    
+                            /**
+                             * Properties of a DeadLetterPolicy.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @interface IDeadLetterPolicy
+                             * @property {string|null} [deadLetterTopic] DeadLetterPolicy deadLetterTopic
+                             * @property {number|null} [maxDeliveryAttempts] DeadLetterPolicy maxDeliveryAttempts
+                             */
+    
+                            /**
+                             * Constructs a new DeadLetterPolicy.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @classdesc Represents a DeadLetterPolicy.
+                             * @implements IDeadLetterPolicy
+                             * @constructor
+                             * @param {google.cloud.bigquery.analyticshub.v1.IDeadLetterPolicy=} [properties] Properties to set
+                             */
+                            function DeadLetterPolicy(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * DeadLetterPolicy deadLetterTopic.
+                             * @member {string} deadLetterTopic
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DeadLetterPolicy
+                             * @instance
+                             */
+                            DeadLetterPolicy.prototype.deadLetterTopic = "";
+    
+                            /**
+                             * DeadLetterPolicy maxDeliveryAttempts.
+                             * @member {number} maxDeliveryAttempts
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DeadLetterPolicy
+                             * @instance
+                             */
+                            DeadLetterPolicy.prototype.maxDeliveryAttempts = 0;
+    
+                            /**
+                             * Creates a new DeadLetterPolicy instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DeadLetterPolicy
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IDeadLetterPolicy=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.analyticshub.v1.DeadLetterPolicy} DeadLetterPolicy instance
+                             */
+                            DeadLetterPolicy.create = function create(properties) {
+                                return new DeadLetterPolicy(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DeadLetterPolicy message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.DeadLetterPolicy.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DeadLetterPolicy
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IDeadLetterPolicy} message DeadLetterPolicy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DeadLetterPolicy.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.deadLetterTopic != null && Object.hasOwnProperty.call(message, "deadLetterTopic"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.deadLetterTopic);
+                                if (message.maxDeliveryAttempts != null && Object.hasOwnProperty.call(message, "maxDeliveryAttempts"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.maxDeliveryAttempts);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DeadLetterPolicy message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.DeadLetterPolicy.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DeadLetterPolicy
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IDeadLetterPolicy} message DeadLetterPolicy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DeadLetterPolicy.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DeadLetterPolicy message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DeadLetterPolicy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.analyticshub.v1.DeadLetterPolicy} DeadLetterPolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DeadLetterPolicy.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.analyticshub.v1.DeadLetterPolicy();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.deadLetterTopic = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.maxDeliveryAttempts = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DeadLetterPolicy message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DeadLetterPolicy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.analyticshub.v1.DeadLetterPolicy} DeadLetterPolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DeadLetterPolicy.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DeadLetterPolicy message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DeadLetterPolicy
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DeadLetterPolicy.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.deadLetterTopic != null && message.hasOwnProperty("deadLetterTopic"))
+                                    if (!$util.isString(message.deadLetterTopic))
+                                        return "deadLetterTopic: string expected";
+                                if (message.maxDeliveryAttempts != null && message.hasOwnProperty("maxDeliveryAttempts"))
+                                    if (!$util.isInteger(message.maxDeliveryAttempts))
+                                        return "maxDeliveryAttempts: integer expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DeadLetterPolicy message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DeadLetterPolicy
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.analyticshub.v1.DeadLetterPolicy} DeadLetterPolicy
+                             */
+                            DeadLetterPolicy.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.analyticshub.v1.DeadLetterPolicy)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.analyticshub.v1.DeadLetterPolicy();
+                                if (object.deadLetterTopic != null)
+                                    message.deadLetterTopic = String(object.deadLetterTopic);
+                                if (object.maxDeliveryAttempts != null)
+                                    message.maxDeliveryAttempts = object.maxDeliveryAttempts | 0;
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a DeadLetterPolicy message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DeadLetterPolicy
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.DeadLetterPolicy} message DeadLetterPolicy
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DeadLetterPolicy.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.deadLetterTopic = "";
+                                    object.maxDeliveryAttempts = 0;
+                                }
+                                if (message.deadLetterTopic != null && message.hasOwnProperty("deadLetterTopic"))
+                                    object.deadLetterTopic = message.deadLetterTopic;
+                                if (message.maxDeliveryAttempts != null && message.hasOwnProperty("maxDeliveryAttempts"))
+                                    object.maxDeliveryAttempts = message.maxDeliveryAttempts;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this DeadLetterPolicy to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DeadLetterPolicy
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DeadLetterPolicy.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DeadLetterPolicy
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DeadLetterPolicy
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DeadLetterPolicy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.analyticshub.v1.DeadLetterPolicy";
+                            };
+    
+                            return DeadLetterPolicy;
+                        })();
+    
+                        v1.ExpirationPolicy = (function() {
+    
+                            /**
+                             * Properties of an ExpirationPolicy.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @interface IExpirationPolicy
+                             * @property {google.protobuf.IDuration|null} [ttl] ExpirationPolicy ttl
+                             */
+    
+                            /**
+                             * Constructs a new ExpirationPolicy.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @classdesc Represents an ExpirationPolicy.
+                             * @implements IExpirationPolicy
+                             * @constructor
+                             * @param {google.cloud.bigquery.analyticshub.v1.IExpirationPolicy=} [properties] Properties to set
+                             */
+                            function ExpirationPolicy(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ExpirationPolicy ttl.
+                             * @member {google.protobuf.IDuration|null|undefined} ttl
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ExpirationPolicy
+                             * @instance
+                             */
+                            ExpirationPolicy.prototype.ttl = null;
+    
+                            /**
+                             * Creates a new ExpirationPolicy instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ExpirationPolicy
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IExpirationPolicy=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.analyticshub.v1.ExpirationPolicy} ExpirationPolicy instance
+                             */
+                            ExpirationPolicy.create = function create(properties) {
+                                return new ExpirationPolicy(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ExpirationPolicy message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.ExpirationPolicy.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ExpirationPolicy
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IExpirationPolicy} message ExpirationPolicy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ExpirationPolicy.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.ttl != null && Object.hasOwnProperty.call(message, "ttl"))
+                                    $root.google.protobuf.Duration.encode(message.ttl, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ExpirationPolicy message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.ExpirationPolicy.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ExpirationPolicy
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IExpirationPolicy} message ExpirationPolicy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ExpirationPolicy.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an ExpirationPolicy message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ExpirationPolicy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.analyticshub.v1.ExpirationPolicy} ExpirationPolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ExpirationPolicy.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.analyticshub.v1.ExpirationPolicy();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.ttl = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an ExpirationPolicy message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ExpirationPolicy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.analyticshub.v1.ExpirationPolicy} ExpirationPolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ExpirationPolicy.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an ExpirationPolicy message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ExpirationPolicy
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ExpirationPolicy.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.ttl != null && message.hasOwnProperty("ttl")) {
+                                    var error = $root.google.protobuf.Duration.verify(message.ttl);
+                                    if (error)
+                                        return "ttl." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an ExpirationPolicy message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ExpirationPolicy
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.analyticshub.v1.ExpirationPolicy} ExpirationPolicy
+                             */
+                            ExpirationPolicy.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.analyticshub.v1.ExpirationPolicy)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.analyticshub.v1.ExpirationPolicy();
+                                if (object.ttl != null) {
+                                    if (typeof object.ttl !== "object")
+                                        throw TypeError(".google.cloud.bigquery.analyticshub.v1.ExpirationPolicy.ttl: object expected");
+                                    message.ttl = $root.google.protobuf.Duration.fromObject(object.ttl);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an ExpirationPolicy message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ExpirationPolicy
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.ExpirationPolicy} message ExpirationPolicy
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ExpirationPolicy.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.ttl = null;
+                                if (message.ttl != null && message.hasOwnProperty("ttl"))
+                                    object.ttl = $root.google.protobuf.Duration.toObject(message.ttl, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ExpirationPolicy to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ExpirationPolicy
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ExpirationPolicy.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ExpirationPolicy
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.analyticshub.v1.ExpirationPolicy
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ExpirationPolicy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.analyticshub.v1.ExpirationPolicy";
+                            };
+    
+                            return ExpirationPolicy;
+                        })();
+    
+                        v1.PushConfig = (function() {
+    
+                            /**
+                             * Properties of a PushConfig.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @interface IPushConfig
+                             * @property {google.cloud.bigquery.analyticshub.v1.PushConfig.IOidcToken|null} [oidcToken] PushConfig oidcToken
+                             * @property {google.cloud.bigquery.analyticshub.v1.PushConfig.IPubsubWrapper|null} [pubsubWrapper] PushConfig pubsubWrapper
+                             * @property {google.cloud.bigquery.analyticshub.v1.PushConfig.INoWrapper|null} [noWrapper] PushConfig noWrapper
+                             * @property {string|null} [pushEndpoint] PushConfig pushEndpoint
+                             * @property {Object.<string,string>|null} [attributes] PushConfig attributes
+                             */
+    
+                            /**
+                             * Constructs a new PushConfig.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @classdesc Represents a PushConfig.
+                             * @implements IPushConfig
+                             * @constructor
+                             * @param {google.cloud.bigquery.analyticshub.v1.IPushConfig=} [properties] Properties to set
+                             */
+                            function PushConfig(properties) {
+                                this.attributes = {};
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * PushConfig oidcToken.
+                             * @member {google.cloud.bigquery.analyticshub.v1.PushConfig.IOidcToken|null|undefined} oidcToken
+                             * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig
+                             * @instance
+                             */
+                            PushConfig.prototype.oidcToken = null;
+    
+                            /**
+                             * PushConfig pubsubWrapper.
+                             * @member {google.cloud.bigquery.analyticshub.v1.PushConfig.IPubsubWrapper|null|undefined} pubsubWrapper
+                             * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig
+                             * @instance
+                             */
+                            PushConfig.prototype.pubsubWrapper = null;
+    
+                            /**
+                             * PushConfig noWrapper.
+                             * @member {google.cloud.bigquery.analyticshub.v1.PushConfig.INoWrapper|null|undefined} noWrapper
+                             * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig
+                             * @instance
+                             */
+                            PushConfig.prototype.noWrapper = null;
+    
+                            /**
+                             * PushConfig pushEndpoint.
+                             * @member {string} pushEndpoint
+                             * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig
+                             * @instance
+                             */
+                            PushConfig.prototype.pushEndpoint = "";
+    
+                            /**
+                             * PushConfig attributes.
+                             * @member {Object.<string,string>} attributes
+                             * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig
+                             * @instance
+                             */
+                            PushConfig.prototype.attributes = $util.emptyObject;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * PushConfig authenticationMethod.
+                             * @member {"oidcToken"|undefined} authenticationMethod
+                             * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig
+                             * @instance
+                             */
+                            Object.defineProperty(PushConfig.prototype, "authenticationMethod", {
+                                get: $util.oneOfGetter($oneOfFields = ["oidcToken"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * PushConfig wrapper.
+                             * @member {"pubsubWrapper"|"noWrapper"|undefined} wrapper
+                             * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig
+                             * @instance
+                             */
+                            Object.defineProperty(PushConfig.prototype, "wrapper", {
+                                get: $util.oneOfGetter($oneOfFields = ["pubsubWrapper", "noWrapper"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new PushConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IPushConfig=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.analyticshub.v1.PushConfig} PushConfig instance
+                             */
+                            PushConfig.create = function create(properties) {
+                                return new PushConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified PushConfig message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.PushConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IPushConfig} message PushConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PushConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.pushEndpoint != null && Object.hasOwnProperty.call(message, "pushEndpoint"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.pushEndpoint);
+                                if (message.attributes != null && Object.hasOwnProperty.call(message, "attributes"))
+                                    for (var keys = Object.keys(message.attributes), i = 0; i < keys.length; ++i)
+                                        writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.attributes[keys[i]]).ldelim();
+                                if (message.oidcToken != null && Object.hasOwnProperty.call(message, "oidcToken"))
+                                    $root.google.cloud.bigquery.analyticshub.v1.PushConfig.OidcToken.encode(message.oidcToken, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.pubsubWrapper != null && Object.hasOwnProperty.call(message, "pubsubWrapper"))
+                                    $root.google.cloud.bigquery.analyticshub.v1.PushConfig.PubsubWrapper.encode(message.pubsubWrapper, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.noWrapper != null && Object.hasOwnProperty.call(message, "noWrapper"))
+                                    $root.google.cloud.bigquery.analyticshub.v1.PushConfig.NoWrapper.encode(message.noWrapper, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified PushConfig message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.PushConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IPushConfig} message PushConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PushConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a PushConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.analyticshub.v1.PushConfig} PushConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PushConfig.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.analyticshub.v1.PushConfig(), key, value;
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 3: {
+                                            message.oidcToken = $root.google.cloud.bigquery.analyticshub.v1.PushConfig.OidcToken.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.pubsubWrapper = $root.google.cloud.bigquery.analyticshub.v1.PushConfig.PubsubWrapper.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.noWrapper = $root.google.cloud.bigquery.analyticshub.v1.PushConfig.NoWrapper.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 1: {
+                                            message.pushEndpoint = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (message.attributes === $util.emptyObject)
+                                                message.attributes = {};
+                                            var end2 = reader.uint32() + reader.pos;
+                                            key = "";
+                                            value = "";
+                                            while (reader.pos < end2) {
+                                                var tag2 = reader.uint32();
+                                                switch (tag2 >>> 3) {
+                                                case 1:
+                                                    key = reader.string();
+                                                    break;
+                                                case 2:
+                                                    value = reader.string();
+                                                    break;
+                                                default:
+                                                    reader.skipType(tag2 & 7);
+                                                    break;
+                                                }
+                                            }
+                                            message.attributes[key] = value;
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a PushConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.analyticshub.v1.PushConfig} PushConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PushConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a PushConfig message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            PushConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.oidcToken != null && message.hasOwnProperty("oidcToken")) {
+                                    properties.authenticationMethod = 1;
+                                    {
+                                        var error = $root.google.cloud.bigquery.analyticshub.v1.PushConfig.OidcToken.verify(message.oidcToken);
+                                        if (error)
+                                            return "oidcToken." + error;
+                                    }
+                                }
+                                if (message.pubsubWrapper != null && message.hasOwnProperty("pubsubWrapper")) {
+                                    properties.wrapper = 1;
+                                    {
+                                        var error = $root.google.cloud.bigquery.analyticshub.v1.PushConfig.PubsubWrapper.verify(message.pubsubWrapper);
+                                        if (error)
+                                            return "pubsubWrapper." + error;
+                                    }
+                                }
+                                if (message.noWrapper != null && message.hasOwnProperty("noWrapper")) {
+                                    if (properties.wrapper === 1)
+                                        return "wrapper: multiple values";
+                                    properties.wrapper = 1;
+                                    {
+                                        var error = $root.google.cloud.bigquery.analyticshub.v1.PushConfig.NoWrapper.verify(message.noWrapper);
+                                        if (error)
+                                            return "noWrapper." + error;
+                                    }
+                                }
+                                if (message.pushEndpoint != null && message.hasOwnProperty("pushEndpoint"))
+                                    if (!$util.isString(message.pushEndpoint))
+                                        return "pushEndpoint: string expected";
+                                if (message.attributes != null && message.hasOwnProperty("attributes")) {
+                                    if (!$util.isObject(message.attributes))
+                                        return "attributes: object expected";
+                                    var key = Object.keys(message.attributes);
+                                    for (var i = 0; i < key.length; ++i)
+                                        if (!$util.isString(message.attributes[key[i]]))
+                                            return "attributes: string{k:string} expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a PushConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.analyticshub.v1.PushConfig} PushConfig
+                             */
+                            PushConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.analyticshub.v1.PushConfig)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.analyticshub.v1.PushConfig();
+                                if (object.oidcToken != null) {
+                                    if (typeof object.oidcToken !== "object")
+                                        throw TypeError(".google.cloud.bigquery.analyticshub.v1.PushConfig.oidcToken: object expected");
+                                    message.oidcToken = $root.google.cloud.bigquery.analyticshub.v1.PushConfig.OidcToken.fromObject(object.oidcToken);
+                                }
+                                if (object.pubsubWrapper != null) {
+                                    if (typeof object.pubsubWrapper !== "object")
+                                        throw TypeError(".google.cloud.bigquery.analyticshub.v1.PushConfig.pubsubWrapper: object expected");
+                                    message.pubsubWrapper = $root.google.cloud.bigquery.analyticshub.v1.PushConfig.PubsubWrapper.fromObject(object.pubsubWrapper);
+                                }
+                                if (object.noWrapper != null) {
+                                    if (typeof object.noWrapper !== "object")
+                                        throw TypeError(".google.cloud.bigquery.analyticshub.v1.PushConfig.noWrapper: object expected");
+                                    message.noWrapper = $root.google.cloud.bigquery.analyticshub.v1.PushConfig.NoWrapper.fromObject(object.noWrapper);
+                                }
+                                if (object.pushEndpoint != null)
+                                    message.pushEndpoint = String(object.pushEndpoint);
+                                if (object.attributes) {
+                                    if (typeof object.attributes !== "object")
+                                        throw TypeError(".google.cloud.bigquery.analyticshub.v1.PushConfig.attributes: object expected");
+                                    message.attributes = {};
+                                    for (var keys = Object.keys(object.attributes), i = 0; i < keys.length; ++i)
+                                        message.attributes[keys[i]] = String(object.attributes[keys[i]]);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a PushConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.PushConfig} message PushConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            PushConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.objects || options.defaults)
+                                    object.attributes = {};
+                                if (options.defaults)
+                                    object.pushEndpoint = "";
+                                if (message.pushEndpoint != null && message.hasOwnProperty("pushEndpoint"))
+                                    object.pushEndpoint = message.pushEndpoint;
+                                var keys2;
+                                if (message.attributes && (keys2 = Object.keys(message.attributes)).length) {
+                                    object.attributes = {};
+                                    for (var j = 0; j < keys2.length; ++j)
+                                        object.attributes[keys2[j]] = message.attributes[keys2[j]];
+                                }
+                                if (message.oidcToken != null && message.hasOwnProperty("oidcToken")) {
+                                    object.oidcToken = $root.google.cloud.bigquery.analyticshub.v1.PushConfig.OidcToken.toObject(message.oidcToken, options);
+                                    if (options.oneofs)
+                                        object.authenticationMethod = "oidcToken";
+                                }
+                                if (message.pubsubWrapper != null && message.hasOwnProperty("pubsubWrapper")) {
+                                    object.pubsubWrapper = $root.google.cloud.bigquery.analyticshub.v1.PushConfig.PubsubWrapper.toObject(message.pubsubWrapper, options);
+                                    if (options.oneofs)
+                                        object.wrapper = "pubsubWrapper";
+                                }
+                                if (message.noWrapper != null && message.hasOwnProperty("noWrapper")) {
+                                    object.noWrapper = $root.google.cloud.bigquery.analyticshub.v1.PushConfig.NoWrapper.toObject(message.noWrapper, options);
+                                    if (options.oneofs)
+                                        object.wrapper = "noWrapper";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this PushConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            PushConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for PushConfig
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            PushConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.analyticshub.v1.PushConfig";
+                            };
+    
+                            PushConfig.OidcToken = (function() {
+    
+                                /**
+                                 * Properties of an OidcToken.
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig
+                                 * @interface IOidcToken
+                                 * @property {string|null} [serviceAccountEmail] OidcToken serviceAccountEmail
+                                 * @property {string|null} [audience] OidcToken audience
+                                 */
+    
+                                /**
+                                 * Constructs a new OidcToken.
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig
+                                 * @classdesc Represents an OidcToken.
+                                 * @implements IOidcToken
+                                 * @constructor
+                                 * @param {google.cloud.bigquery.analyticshub.v1.PushConfig.IOidcToken=} [properties] Properties to set
+                                 */
+                                function OidcToken(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * OidcToken serviceAccountEmail.
+                                 * @member {string} serviceAccountEmail
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig.OidcToken
+                                 * @instance
+                                 */
+                                OidcToken.prototype.serviceAccountEmail = "";
+    
+                                /**
+                                 * OidcToken audience.
+                                 * @member {string} audience
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig.OidcToken
+                                 * @instance
+                                 */
+                                OidcToken.prototype.audience = "";
+    
+                                /**
+                                 * Creates a new OidcToken instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig.OidcToken
+                                 * @static
+                                 * @param {google.cloud.bigquery.analyticshub.v1.PushConfig.IOidcToken=} [properties] Properties to set
+                                 * @returns {google.cloud.bigquery.analyticshub.v1.PushConfig.OidcToken} OidcToken instance
+                                 */
+                                OidcToken.create = function create(properties) {
+                                    return new OidcToken(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified OidcToken message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.PushConfig.OidcToken.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig.OidcToken
+                                 * @static
+                                 * @param {google.cloud.bigquery.analyticshub.v1.PushConfig.IOidcToken} message OidcToken message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                OidcToken.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.serviceAccountEmail != null && Object.hasOwnProperty.call(message, "serviceAccountEmail"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.serviceAccountEmail);
+                                    if (message.audience != null && Object.hasOwnProperty.call(message, "audience"))
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.audience);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified OidcToken message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.PushConfig.OidcToken.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig.OidcToken
+                                 * @static
+                                 * @param {google.cloud.bigquery.analyticshub.v1.PushConfig.IOidcToken} message OidcToken message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                OidcToken.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes an OidcToken message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig.OidcToken
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.bigquery.analyticshub.v1.PushConfig.OidcToken} OidcToken
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                OidcToken.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.analyticshub.v1.PushConfig.OidcToken();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.serviceAccountEmail = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.audience = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes an OidcToken message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig.OidcToken
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.bigquery.analyticshub.v1.PushConfig.OidcToken} OidcToken
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                OidcToken.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies an OidcToken message.
+                                 * @function verify
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig.OidcToken
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                OidcToken.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.serviceAccountEmail != null && message.hasOwnProperty("serviceAccountEmail"))
+                                        if (!$util.isString(message.serviceAccountEmail))
+                                            return "serviceAccountEmail: string expected";
+                                    if (message.audience != null && message.hasOwnProperty("audience"))
+                                        if (!$util.isString(message.audience))
+                                            return "audience: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates an OidcToken message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig.OidcToken
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.bigquery.analyticshub.v1.PushConfig.OidcToken} OidcToken
+                                 */
+                                OidcToken.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.bigquery.analyticshub.v1.PushConfig.OidcToken)
+                                        return object;
+                                    var message = new $root.google.cloud.bigquery.analyticshub.v1.PushConfig.OidcToken();
+                                    if (object.serviceAccountEmail != null)
+                                        message.serviceAccountEmail = String(object.serviceAccountEmail);
+                                    if (object.audience != null)
+                                        message.audience = String(object.audience);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from an OidcToken message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig.OidcToken
+                                 * @static
+                                 * @param {google.cloud.bigquery.analyticshub.v1.PushConfig.OidcToken} message OidcToken
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                OidcToken.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.serviceAccountEmail = "";
+                                        object.audience = "";
+                                    }
+                                    if (message.serviceAccountEmail != null && message.hasOwnProperty("serviceAccountEmail"))
+                                        object.serviceAccountEmail = message.serviceAccountEmail;
+                                    if (message.audience != null && message.hasOwnProperty("audience"))
+                                        object.audience = message.audience;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this OidcToken to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig.OidcToken
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                OidcToken.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for OidcToken
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig.OidcToken
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                OidcToken.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.bigquery.analyticshub.v1.PushConfig.OidcToken";
+                                };
+    
+                                return OidcToken;
+                            })();
+    
+                            PushConfig.PubsubWrapper = (function() {
+    
+                                /**
+                                 * Properties of a PubsubWrapper.
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig
+                                 * @interface IPubsubWrapper
+                                 */
+    
+                                /**
+                                 * Constructs a new PubsubWrapper.
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig
+                                 * @classdesc Represents a PubsubWrapper.
+                                 * @implements IPubsubWrapper
+                                 * @constructor
+                                 * @param {google.cloud.bigquery.analyticshub.v1.PushConfig.IPubsubWrapper=} [properties] Properties to set
+                                 */
+                                function PubsubWrapper(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Creates a new PubsubWrapper instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig.PubsubWrapper
+                                 * @static
+                                 * @param {google.cloud.bigquery.analyticshub.v1.PushConfig.IPubsubWrapper=} [properties] Properties to set
+                                 * @returns {google.cloud.bigquery.analyticshub.v1.PushConfig.PubsubWrapper} PubsubWrapper instance
+                                 */
+                                PubsubWrapper.create = function create(properties) {
+                                    return new PubsubWrapper(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified PubsubWrapper message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.PushConfig.PubsubWrapper.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig.PubsubWrapper
+                                 * @static
+                                 * @param {google.cloud.bigquery.analyticshub.v1.PushConfig.IPubsubWrapper} message PubsubWrapper message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                PubsubWrapper.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified PubsubWrapper message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.PushConfig.PubsubWrapper.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig.PubsubWrapper
+                                 * @static
+                                 * @param {google.cloud.bigquery.analyticshub.v1.PushConfig.IPubsubWrapper} message PubsubWrapper message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                PubsubWrapper.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a PubsubWrapper message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig.PubsubWrapper
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.bigquery.analyticshub.v1.PushConfig.PubsubWrapper} PubsubWrapper
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                PubsubWrapper.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.analyticshub.v1.PushConfig.PubsubWrapper();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a PubsubWrapper message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig.PubsubWrapper
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.bigquery.analyticshub.v1.PushConfig.PubsubWrapper} PubsubWrapper
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                PubsubWrapper.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a PubsubWrapper message.
+                                 * @function verify
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig.PubsubWrapper
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                PubsubWrapper.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a PubsubWrapper message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig.PubsubWrapper
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.bigquery.analyticshub.v1.PushConfig.PubsubWrapper} PubsubWrapper
+                                 */
+                                PubsubWrapper.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.bigquery.analyticshub.v1.PushConfig.PubsubWrapper)
+                                        return object;
+                                    return new $root.google.cloud.bigquery.analyticshub.v1.PushConfig.PubsubWrapper();
+                                };
+    
+                                /**
+                                 * Creates a plain object from a PubsubWrapper message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig.PubsubWrapper
+                                 * @static
+                                 * @param {google.cloud.bigquery.analyticshub.v1.PushConfig.PubsubWrapper} message PubsubWrapper
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                PubsubWrapper.toObject = function toObject() {
+                                    return {};
+                                };
+    
+                                /**
+                                 * Converts this PubsubWrapper to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig.PubsubWrapper
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                PubsubWrapper.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for PubsubWrapper
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig.PubsubWrapper
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                PubsubWrapper.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.bigquery.analyticshub.v1.PushConfig.PubsubWrapper";
+                                };
+    
+                                return PubsubWrapper;
+                            })();
+    
+                            PushConfig.NoWrapper = (function() {
+    
+                                /**
+                                 * Properties of a NoWrapper.
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig
+                                 * @interface INoWrapper
+                                 * @property {boolean|null} [writeMetadata] NoWrapper writeMetadata
+                                 */
+    
+                                /**
+                                 * Constructs a new NoWrapper.
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig
+                                 * @classdesc Represents a NoWrapper.
+                                 * @implements INoWrapper
+                                 * @constructor
+                                 * @param {google.cloud.bigquery.analyticshub.v1.PushConfig.INoWrapper=} [properties] Properties to set
+                                 */
+                                function NoWrapper(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * NoWrapper writeMetadata.
+                                 * @member {boolean} writeMetadata
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig.NoWrapper
+                                 * @instance
+                                 */
+                                NoWrapper.prototype.writeMetadata = false;
+    
+                                /**
+                                 * Creates a new NoWrapper instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig.NoWrapper
+                                 * @static
+                                 * @param {google.cloud.bigquery.analyticshub.v1.PushConfig.INoWrapper=} [properties] Properties to set
+                                 * @returns {google.cloud.bigquery.analyticshub.v1.PushConfig.NoWrapper} NoWrapper instance
+                                 */
+                                NoWrapper.create = function create(properties) {
+                                    return new NoWrapper(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified NoWrapper message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.PushConfig.NoWrapper.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig.NoWrapper
+                                 * @static
+                                 * @param {google.cloud.bigquery.analyticshub.v1.PushConfig.INoWrapper} message NoWrapper message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                NoWrapper.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.writeMetadata != null && Object.hasOwnProperty.call(message, "writeMetadata"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).bool(message.writeMetadata);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified NoWrapper message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.PushConfig.NoWrapper.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig.NoWrapper
+                                 * @static
+                                 * @param {google.cloud.bigquery.analyticshub.v1.PushConfig.INoWrapper} message NoWrapper message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                NoWrapper.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a NoWrapper message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig.NoWrapper
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.bigquery.analyticshub.v1.PushConfig.NoWrapper} NoWrapper
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                NoWrapper.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.analyticshub.v1.PushConfig.NoWrapper();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.writeMetadata = reader.bool();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a NoWrapper message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig.NoWrapper
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.bigquery.analyticshub.v1.PushConfig.NoWrapper} NoWrapper
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                NoWrapper.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a NoWrapper message.
+                                 * @function verify
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig.NoWrapper
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                NoWrapper.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.writeMetadata != null && message.hasOwnProperty("writeMetadata"))
+                                        if (typeof message.writeMetadata !== "boolean")
+                                            return "writeMetadata: boolean expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a NoWrapper message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig.NoWrapper
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.bigquery.analyticshub.v1.PushConfig.NoWrapper} NoWrapper
+                                 */
+                                NoWrapper.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.bigquery.analyticshub.v1.PushConfig.NoWrapper)
+                                        return object;
+                                    var message = new $root.google.cloud.bigquery.analyticshub.v1.PushConfig.NoWrapper();
+                                    if (object.writeMetadata != null)
+                                        message.writeMetadata = Boolean(object.writeMetadata);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a NoWrapper message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig.NoWrapper
+                                 * @static
+                                 * @param {google.cloud.bigquery.analyticshub.v1.PushConfig.NoWrapper} message NoWrapper
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                NoWrapper.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.writeMetadata = false;
+                                    if (message.writeMetadata != null && message.hasOwnProperty("writeMetadata"))
+                                        object.writeMetadata = message.writeMetadata;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this NoWrapper to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig.NoWrapper
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                NoWrapper.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for NoWrapper
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.PushConfig.NoWrapper
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                NoWrapper.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.bigquery.analyticshub.v1.PushConfig.NoWrapper";
+                                };
+    
+                                return NoWrapper;
+                            })();
+    
+                            return PushConfig;
+                        })();
+    
+                        v1.BigQueryConfig = (function() {
+    
+                            /**
+                             * Properties of a BigQueryConfig.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @interface IBigQueryConfig
+                             * @property {string|null} [table] BigQueryConfig table
+                             * @property {boolean|null} [useTopicSchema] BigQueryConfig useTopicSchema
+                             * @property {boolean|null} [writeMetadata] BigQueryConfig writeMetadata
+                             * @property {boolean|null} [dropUnknownFields] BigQueryConfig dropUnknownFields
+                             * @property {boolean|null} [useTableSchema] BigQueryConfig useTableSchema
+                             * @property {string|null} [serviceAccountEmail] BigQueryConfig serviceAccountEmail
+                             */
+    
+                            /**
+                             * Constructs a new BigQueryConfig.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @classdesc Represents a BigQueryConfig.
+                             * @implements IBigQueryConfig
+                             * @constructor
+                             * @param {google.cloud.bigquery.analyticshub.v1.IBigQueryConfig=} [properties] Properties to set
+                             */
+                            function BigQueryConfig(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * BigQueryConfig table.
+                             * @member {string} table
+                             * @memberof google.cloud.bigquery.analyticshub.v1.BigQueryConfig
+                             * @instance
+                             */
+                            BigQueryConfig.prototype.table = "";
+    
+                            /**
+                             * BigQueryConfig useTopicSchema.
+                             * @member {boolean} useTopicSchema
+                             * @memberof google.cloud.bigquery.analyticshub.v1.BigQueryConfig
+                             * @instance
+                             */
+                            BigQueryConfig.prototype.useTopicSchema = false;
+    
+                            /**
+                             * BigQueryConfig writeMetadata.
+                             * @member {boolean} writeMetadata
+                             * @memberof google.cloud.bigquery.analyticshub.v1.BigQueryConfig
+                             * @instance
+                             */
+                            BigQueryConfig.prototype.writeMetadata = false;
+    
+                            /**
+                             * BigQueryConfig dropUnknownFields.
+                             * @member {boolean} dropUnknownFields
+                             * @memberof google.cloud.bigquery.analyticshub.v1.BigQueryConfig
+                             * @instance
+                             */
+                            BigQueryConfig.prototype.dropUnknownFields = false;
+    
+                            /**
+                             * BigQueryConfig useTableSchema.
+                             * @member {boolean} useTableSchema
+                             * @memberof google.cloud.bigquery.analyticshub.v1.BigQueryConfig
+                             * @instance
+                             */
+                            BigQueryConfig.prototype.useTableSchema = false;
+    
+                            /**
+                             * BigQueryConfig serviceAccountEmail.
+                             * @member {string} serviceAccountEmail
+                             * @memberof google.cloud.bigquery.analyticshub.v1.BigQueryConfig
+                             * @instance
+                             */
+                            BigQueryConfig.prototype.serviceAccountEmail = "";
+    
+                            /**
+                             * Creates a new BigQueryConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.analyticshub.v1.BigQueryConfig
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IBigQueryConfig=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.analyticshub.v1.BigQueryConfig} BigQueryConfig instance
+                             */
+                            BigQueryConfig.create = function create(properties) {
+                                return new BigQueryConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified BigQueryConfig message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.BigQueryConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.BigQueryConfig
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IBigQueryConfig} message BigQueryConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BigQueryConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.table != null && Object.hasOwnProperty.call(message, "table"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.table);
+                                if (message.useTopicSchema != null && Object.hasOwnProperty.call(message, "useTopicSchema"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).bool(message.useTopicSchema);
+                                if (message.writeMetadata != null && Object.hasOwnProperty.call(message, "writeMetadata"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).bool(message.writeMetadata);
+                                if (message.dropUnknownFields != null && Object.hasOwnProperty.call(message, "dropUnknownFields"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).bool(message.dropUnknownFields);
+                                if (message.useTableSchema != null && Object.hasOwnProperty.call(message, "useTableSchema"))
+                                    writer.uint32(/* id 6, wireType 0 =*/48).bool(message.useTableSchema);
+                                if (message.serviceAccountEmail != null && Object.hasOwnProperty.call(message, "serviceAccountEmail"))
+                                    writer.uint32(/* id 7, wireType 2 =*/58).string(message.serviceAccountEmail);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified BigQueryConfig message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.BigQueryConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.BigQueryConfig
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IBigQueryConfig} message BigQueryConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            BigQueryConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a BigQueryConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.BigQueryConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.analyticshub.v1.BigQueryConfig} BigQueryConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BigQueryConfig.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.analyticshub.v1.BigQueryConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.table = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.useTopicSchema = reader.bool();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.writeMetadata = reader.bool();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.dropUnknownFields = reader.bool();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.useTableSchema = reader.bool();
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.serviceAccountEmail = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a BigQueryConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.BigQueryConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.analyticshub.v1.BigQueryConfig} BigQueryConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            BigQueryConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a BigQueryConfig message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.analyticshub.v1.BigQueryConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            BigQueryConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.table != null && message.hasOwnProperty("table"))
+                                    if (!$util.isString(message.table))
+                                        return "table: string expected";
+                                if (message.useTopicSchema != null && message.hasOwnProperty("useTopicSchema"))
+                                    if (typeof message.useTopicSchema !== "boolean")
+                                        return "useTopicSchema: boolean expected";
+                                if (message.writeMetadata != null && message.hasOwnProperty("writeMetadata"))
+                                    if (typeof message.writeMetadata !== "boolean")
+                                        return "writeMetadata: boolean expected";
+                                if (message.dropUnknownFields != null && message.hasOwnProperty("dropUnknownFields"))
+                                    if (typeof message.dropUnknownFields !== "boolean")
+                                        return "dropUnknownFields: boolean expected";
+                                if (message.useTableSchema != null && message.hasOwnProperty("useTableSchema"))
+                                    if (typeof message.useTableSchema !== "boolean")
+                                        return "useTableSchema: boolean expected";
+                                if (message.serviceAccountEmail != null && message.hasOwnProperty("serviceAccountEmail"))
+                                    if (!$util.isString(message.serviceAccountEmail))
+                                        return "serviceAccountEmail: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a BigQueryConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.BigQueryConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.analyticshub.v1.BigQueryConfig} BigQueryConfig
+                             */
+                            BigQueryConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.analyticshub.v1.BigQueryConfig)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.analyticshub.v1.BigQueryConfig();
+                                if (object.table != null)
+                                    message.table = String(object.table);
+                                if (object.useTopicSchema != null)
+                                    message.useTopicSchema = Boolean(object.useTopicSchema);
+                                if (object.writeMetadata != null)
+                                    message.writeMetadata = Boolean(object.writeMetadata);
+                                if (object.dropUnknownFields != null)
+                                    message.dropUnknownFields = Boolean(object.dropUnknownFields);
+                                if (object.useTableSchema != null)
+                                    message.useTableSchema = Boolean(object.useTableSchema);
+                                if (object.serviceAccountEmail != null)
+                                    message.serviceAccountEmail = String(object.serviceAccountEmail);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a BigQueryConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.BigQueryConfig
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.BigQueryConfig} message BigQueryConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            BigQueryConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.table = "";
+                                    object.useTopicSchema = false;
+                                    object.writeMetadata = false;
+                                    object.dropUnknownFields = false;
+                                    object.useTableSchema = false;
+                                    object.serviceAccountEmail = "";
+                                }
+                                if (message.table != null && message.hasOwnProperty("table"))
+                                    object.table = message.table;
+                                if (message.useTopicSchema != null && message.hasOwnProperty("useTopicSchema"))
+                                    object.useTopicSchema = message.useTopicSchema;
+                                if (message.writeMetadata != null && message.hasOwnProperty("writeMetadata"))
+                                    object.writeMetadata = message.writeMetadata;
+                                if (message.dropUnknownFields != null && message.hasOwnProperty("dropUnknownFields"))
+                                    object.dropUnknownFields = message.dropUnknownFields;
+                                if (message.useTableSchema != null && message.hasOwnProperty("useTableSchema"))
+                                    object.useTableSchema = message.useTableSchema;
+                                if (message.serviceAccountEmail != null && message.hasOwnProperty("serviceAccountEmail"))
+                                    object.serviceAccountEmail = message.serviceAccountEmail;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this BigQueryConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.analyticshub.v1.BigQueryConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            BigQueryConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for BigQueryConfig
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.analyticshub.v1.BigQueryConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            BigQueryConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.analyticshub.v1.BigQueryConfig";
+                            };
+    
+                            return BigQueryConfig;
+                        })();
+    
+                        v1.CloudStorageConfig = (function() {
+    
+                            /**
+                             * Properties of a CloudStorageConfig.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @interface ICloudStorageConfig
+                             * @property {google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.ITextConfig|null} [textConfig] CloudStorageConfig textConfig
+                             * @property {google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.IAvroConfig|null} [avroConfig] CloudStorageConfig avroConfig
+                             * @property {string|null} [bucket] CloudStorageConfig bucket
+                             * @property {string|null} [filenamePrefix] CloudStorageConfig filenamePrefix
+                             * @property {string|null} [filenameSuffix] CloudStorageConfig filenameSuffix
+                             * @property {string|null} [filenameDatetimeFormat] CloudStorageConfig filenameDatetimeFormat
+                             * @property {google.protobuf.IDuration|null} [maxDuration] CloudStorageConfig maxDuration
+                             * @property {number|Long|null} [maxBytes] CloudStorageConfig maxBytes
+                             * @property {number|Long|null} [maxMessages] CloudStorageConfig maxMessages
+                             * @property {string|null} [serviceAccountEmail] CloudStorageConfig serviceAccountEmail
+                             */
+    
+                            /**
+                             * Constructs a new CloudStorageConfig.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @classdesc Represents a CloudStorageConfig.
+                             * @implements ICloudStorageConfig
+                             * @constructor
+                             * @param {google.cloud.bigquery.analyticshub.v1.ICloudStorageConfig=} [properties] Properties to set
+                             */
+                            function CloudStorageConfig(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * CloudStorageConfig textConfig.
+                             * @member {google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.ITextConfig|null|undefined} textConfig
+                             * @memberof google.cloud.bigquery.analyticshub.v1.CloudStorageConfig
+                             * @instance
+                             */
+                            CloudStorageConfig.prototype.textConfig = null;
+    
+                            /**
+                             * CloudStorageConfig avroConfig.
+                             * @member {google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.IAvroConfig|null|undefined} avroConfig
+                             * @memberof google.cloud.bigquery.analyticshub.v1.CloudStorageConfig
+                             * @instance
+                             */
+                            CloudStorageConfig.prototype.avroConfig = null;
+    
+                            /**
+                             * CloudStorageConfig bucket.
+                             * @member {string} bucket
+                             * @memberof google.cloud.bigquery.analyticshub.v1.CloudStorageConfig
+                             * @instance
+                             */
+                            CloudStorageConfig.prototype.bucket = "";
+    
+                            /**
+                             * CloudStorageConfig filenamePrefix.
+                             * @member {string} filenamePrefix
+                             * @memberof google.cloud.bigquery.analyticshub.v1.CloudStorageConfig
+                             * @instance
+                             */
+                            CloudStorageConfig.prototype.filenamePrefix = "";
+    
+                            /**
+                             * CloudStorageConfig filenameSuffix.
+                             * @member {string} filenameSuffix
+                             * @memberof google.cloud.bigquery.analyticshub.v1.CloudStorageConfig
+                             * @instance
+                             */
+                            CloudStorageConfig.prototype.filenameSuffix = "";
+    
+                            /**
+                             * CloudStorageConfig filenameDatetimeFormat.
+                             * @member {string} filenameDatetimeFormat
+                             * @memberof google.cloud.bigquery.analyticshub.v1.CloudStorageConfig
+                             * @instance
+                             */
+                            CloudStorageConfig.prototype.filenameDatetimeFormat = "";
+    
+                            /**
+                             * CloudStorageConfig maxDuration.
+                             * @member {google.protobuf.IDuration|null|undefined} maxDuration
+                             * @memberof google.cloud.bigquery.analyticshub.v1.CloudStorageConfig
+                             * @instance
+                             */
+                            CloudStorageConfig.prototype.maxDuration = null;
+    
+                            /**
+                             * CloudStorageConfig maxBytes.
+                             * @member {number|Long} maxBytes
+                             * @memberof google.cloud.bigquery.analyticshub.v1.CloudStorageConfig
+                             * @instance
+                             */
+                            CloudStorageConfig.prototype.maxBytes = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * CloudStorageConfig maxMessages.
+                             * @member {number|Long} maxMessages
+                             * @memberof google.cloud.bigquery.analyticshub.v1.CloudStorageConfig
+                             * @instance
+                             */
+                            CloudStorageConfig.prototype.maxMessages = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * CloudStorageConfig serviceAccountEmail.
+                             * @member {string} serviceAccountEmail
+                             * @memberof google.cloud.bigquery.analyticshub.v1.CloudStorageConfig
+                             * @instance
+                             */
+                            CloudStorageConfig.prototype.serviceAccountEmail = "";
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * CloudStorageConfig outputFormat.
+                             * @member {"textConfig"|"avroConfig"|undefined} outputFormat
+                             * @memberof google.cloud.bigquery.analyticshub.v1.CloudStorageConfig
+                             * @instance
+                             */
+                            Object.defineProperty(CloudStorageConfig.prototype, "outputFormat", {
+                                get: $util.oneOfGetter($oneOfFields = ["textConfig", "avroConfig"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new CloudStorageConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.analyticshub.v1.CloudStorageConfig
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.ICloudStorageConfig=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.analyticshub.v1.CloudStorageConfig} CloudStorageConfig instance
+                             */
+                            CloudStorageConfig.create = function create(properties) {
+                                return new CloudStorageConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified CloudStorageConfig message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.CloudStorageConfig
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.ICloudStorageConfig} message CloudStorageConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CloudStorageConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.bucket != null && Object.hasOwnProperty.call(message, "bucket"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.bucket);
+                                if (message.filenamePrefix != null && Object.hasOwnProperty.call(message, "filenamePrefix"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.filenamePrefix);
+                                if (message.filenameSuffix != null && Object.hasOwnProperty.call(message, "filenameSuffix"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.filenameSuffix);
+                                if (message.textConfig != null && Object.hasOwnProperty.call(message, "textConfig"))
+                                    $root.google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.TextConfig.encode(message.textConfig, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.avroConfig != null && Object.hasOwnProperty.call(message, "avroConfig"))
+                                    $root.google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.AvroConfig.encode(message.avroConfig, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.maxDuration != null && Object.hasOwnProperty.call(message, "maxDuration"))
+                                    $root.google.protobuf.Duration.encode(message.maxDuration, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                if (message.maxBytes != null && Object.hasOwnProperty.call(message, "maxBytes"))
+                                    writer.uint32(/* id 7, wireType 0 =*/56).int64(message.maxBytes);
+                                if (message.maxMessages != null && Object.hasOwnProperty.call(message, "maxMessages"))
+                                    writer.uint32(/* id 8, wireType 0 =*/64).int64(message.maxMessages);
+                                if (message.filenameDatetimeFormat != null && Object.hasOwnProperty.call(message, "filenameDatetimeFormat"))
+                                    writer.uint32(/* id 10, wireType 2 =*/82).string(message.filenameDatetimeFormat);
+                                if (message.serviceAccountEmail != null && Object.hasOwnProperty.call(message, "serviceAccountEmail"))
+                                    writer.uint32(/* id 11, wireType 2 =*/90).string(message.serviceAccountEmail);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified CloudStorageConfig message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.CloudStorageConfig
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.ICloudStorageConfig} message CloudStorageConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CloudStorageConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a CloudStorageConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.CloudStorageConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.analyticshub.v1.CloudStorageConfig} CloudStorageConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CloudStorageConfig.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.analyticshub.v1.CloudStorageConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 4: {
+                                            message.textConfig = $root.google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.TextConfig.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.avroConfig = $root.google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.AvroConfig.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 1: {
+                                            message.bucket = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.filenamePrefix = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.filenameSuffix = reader.string();
+                                            break;
+                                        }
+                                    case 10: {
+                                            message.filenameDatetimeFormat = reader.string();
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.maxDuration = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.maxBytes = reader.int64();
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.maxMessages = reader.int64();
+                                            break;
+                                        }
+                                    case 11: {
+                                            message.serviceAccountEmail = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a CloudStorageConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.CloudStorageConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.analyticshub.v1.CloudStorageConfig} CloudStorageConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CloudStorageConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a CloudStorageConfig message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.analyticshub.v1.CloudStorageConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            CloudStorageConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.textConfig != null && message.hasOwnProperty("textConfig")) {
+                                    properties.outputFormat = 1;
+                                    {
+                                        var error = $root.google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.TextConfig.verify(message.textConfig);
+                                        if (error)
+                                            return "textConfig." + error;
+                                    }
+                                }
+                                if (message.avroConfig != null && message.hasOwnProperty("avroConfig")) {
+                                    if (properties.outputFormat === 1)
+                                        return "outputFormat: multiple values";
+                                    properties.outputFormat = 1;
+                                    {
+                                        var error = $root.google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.AvroConfig.verify(message.avroConfig);
+                                        if (error)
+                                            return "avroConfig." + error;
+                                    }
+                                }
+                                if (message.bucket != null && message.hasOwnProperty("bucket"))
+                                    if (!$util.isString(message.bucket))
+                                        return "bucket: string expected";
+                                if (message.filenamePrefix != null && message.hasOwnProperty("filenamePrefix"))
+                                    if (!$util.isString(message.filenamePrefix))
+                                        return "filenamePrefix: string expected";
+                                if (message.filenameSuffix != null && message.hasOwnProperty("filenameSuffix"))
+                                    if (!$util.isString(message.filenameSuffix))
+                                        return "filenameSuffix: string expected";
+                                if (message.filenameDatetimeFormat != null && message.hasOwnProperty("filenameDatetimeFormat"))
+                                    if (!$util.isString(message.filenameDatetimeFormat))
+                                        return "filenameDatetimeFormat: string expected";
+                                if (message.maxDuration != null && message.hasOwnProperty("maxDuration")) {
+                                    var error = $root.google.protobuf.Duration.verify(message.maxDuration);
+                                    if (error)
+                                        return "maxDuration." + error;
+                                }
+                                if (message.maxBytes != null && message.hasOwnProperty("maxBytes"))
+                                    if (!$util.isInteger(message.maxBytes) && !(message.maxBytes && $util.isInteger(message.maxBytes.low) && $util.isInteger(message.maxBytes.high)))
+                                        return "maxBytes: integer|Long expected";
+                                if (message.maxMessages != null && message.hasOwnProperty("maxMessages"))
+                                    if (!$util.isInteger(message.maxMessages) && !(message.maxMessages && $util.isInteger(message.maxMessages.low) && $util.isInteger(message.maxMessages.high)))
+                                        return "maxMessages: integer|Long expected";
+                                if (message.serviceAccountEmail != null && message.hasOwnProperty("serviceAccountEmail"))
+                                    if (!$util.isString(message.serviceAccountEmail))
+                                        return "serviceAccountEmail: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a CloudStorageConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.CloudStorageConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.analyticshub.v1.CloudStorageConfig} CloudStorageConfig
+                             */
+                            CloudStorageConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.analyticshub.v1.CloudStorageConfig)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.analyticshub.v1.CloudStorageConfig();
+                                if (object.textConfig != null) {
+                                    if (typeof object.textConfig !== "object")
+                                        throw TypeError(".google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.textConfig: object expected");
+                                    message.textConfig = $root.google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.TextConfig.fromObject(object.textConfig);
+                                }
+                                if (object.avroConfig != null) {
+                                    if (typeof object.avroConfig !== "object")
+                                        throw TypeError(".google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.avroConfig: object expected");
+                                    message.avroConfig = $root.google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.AvroConfig.fromObject(object.avroConfig);
+                                }
+                                if (object.bucket != null)
+                                    message.bucket = String(object.bucket);
+                                if (object.filenamePrefix != null)
+                                    message.filenamePrefix = String(object.filenamePrefix);
+                                if (object.filenameSuffix != null)
+                                    message.filenameSuffix = String(object.filenameSuffix);
+                                if (object.filenameDatetimeFormat != null)
+                                    message.filenameDatetimeFormat = String(object.filenameDatetimeFormat);
+                                if (object.maxDuration != null) {
+                                    if (typeof object.maxDuration !== "object")
+                                        throw TypeError(".google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.maxDuration: object expected");
+                                    message.maxDuration = $root.google.protobuf.Duration.fromObject(object.maxDuration);
+                                }
+                                if (object.maxBytes != null)
+                                    if ($util.Long)
+                                        (message.maxBytes = $util.Long.fromValue(object.maxBytes)).unsigned = false;
+                                    else if (typeof object.maxBytes === "string")
+                                        message.maxBytes = parseInt(object.maxBytes, 10);
+                                    else if (typeof object.maxBytes === "number")
+                                        message.maxBytes = object.maxBytes;
+                                    else if (typeof object.maxBytes === "object")
+                                        message.maxBytes = new $util.LongBits(object.maxBytes.low >>> 0, object.maxBytes.high >>> 0).toNumber();
+                                if (object.maxMessages != null)
+                                    if ($util.Long)
+                                        (message.maxMessages = $util.Long.fromValue(object.maxMessages)).unsigned = false;
+                                    else if (typeof object.maxMessages === "string")
+                                        message.maxMessages = parseInt(object.maxMessages, 10);
+                                    else if (typeof object.maxMessages === "number")
+                                        message.maxMessages = object.maxMessages;
+                                    else if (typeof object.maxMessages === "object")
+                                        message.maxMessages = new $util.LongBits(object.maxMessages.low >>> 0, object.maxMessages.high >>> 0).toNumber();
+                                if (object.serviceAccountEmail != null)
+                                    message.serviceAccountEmail = String(object.serviceAccountEmail);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a CloudStorageConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.CloudStorageConfig
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.CloudStorageConfig} message CloudStorageConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            CloudStorageConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.bucket = "";
+                                    object.filenamePrefix = "";
+                                    object.filenameSuffix = "";
+                                    object.maxDuration = null;
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.maxBytes = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.maxBytes = options.longs === String ? "0" : 0;
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.maxMessages = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.maxMessages = options.longs === String ? "0" : 0;
+                                    object.filenameDatetimeFormat = "";
+                                    object.serviceAccountEmail = "";
+                                }
+                                if (message.bucket != null && message.hasOwnProperty("bucket"))
+                                    object.bucket = message.bucket;
+                                if (message.filenamePrefix != null && message.hasOwnProperty("filenamePrefix"))
+                                    object.filenamePrefix = message.filenamePrefix;
+                                if (message.filenameSuffix != null && message.hasOwnProperty("filenameSuffix"))
+                                    object.filenameSuffix = message.filenameSuffix;
+                                if (message.textConfig != null && message.hasOwnProperty("textConfig")) {
+                                    object.textConfig = $root.google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.TextConfig.toObject(message.textConfig, options);
+                                    if (options.oneofs)
+                                        object.outputFormat = "textConfig";
+                                }
+                                if (message.avroConfig != null && message.hasOwnProperty("avroConfig")) {
+                                    object.avroConfig = $root.google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.AvroConfig.toObject(message.avroConfig, options);
+                                    if (options.oneofs)
+                                        object.outputFormat = "avroConfig";
+                                }
+                                if (message.maxDuration != null && message.hasOwnProperty("maxDuration"))
+                                    object.maxDuration = $root.google.protobuf.Duration.toObject(message.maxDuration, options);
+                                if (message.maxBytes != null && message.hasOwnProperty("maxBytes"))
+                                    if (typeof message.maxBytes === "number")
+                                        object.maxBytes = options.longs === String ? String(message.maxBytes) : message.maxBytes;
+                                    else
+                                        object.maxBytes = options.longs === String ? $util.Long.prototype.toString.call(message.maxBytes) : options.longs === Number ? new $util.LongBits(message.maxBytes.low >>> 0, message.maxBytes.high >>> 0).toNumber() : message.maxBytes;
+                                if (message.maxMessages != null && message.hasOwnProperty("maxMessages"))
+                                    if (typeof message.maxMessages === "number")
+                                        object.maxMessages = options.longs === String ? String(message.maxMessages) : message.maxMessages;
+                                    else
+                                        object.maxMessages = options.longs === String ? $util.Long.prototype.toString.call(message.maxMessages) : options.longs === Number ? new $util.LongBits(message.maxMessages.low >>> 0, message.maxMessages.high >>> 0).toNumber() : message.maxMessages;
+                                if (message.filenameDatetimeFormat != null && message.hasOwnProperty("filenameDatetimeFormat"))
+                                    object.filenameDatetimeFormat = message.filenameDatetimeFormat;
+                                if (message.serviceAccountEmail != null && message.hasOwnProperty("serviceAccountEmail"))
+                                    object.serviceAccountEmail = message.serviceAccountEmail;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this CloudStorageConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.analyticshub.v1.CloudStorageConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            CloudStorageConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for CloudStorageConfig
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.analyticshub.v1.CloudStorageConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            CloudStorageConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.analyticshub.v1.CloudStorageConfig";
+                            };
+    
+                            CloudStorageConfig.TextConfig = (function() {
+    
+                                /**
+                                 * Properties of a TextConfig.
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.CloudStorageConfig
+                                 * @interface ITextConfig
+                                 */
+    
+                                /**
+                                 * Constructs a new TextConfig.
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.CloudStorageConfig
+                                 * @classdesc Represents a TextConfig.
+                                 * @implements ITextConfig
+                                 * @constructor
+                                 * @param {google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.ITextConfig=} [properties] Properties to set
+                                 */
+                                function TextConfig(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Creates a new TextConfig instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.TextConfig
+                                 * @static
+                                 * @param {google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.ITextConfig=} [properties] Properties to set
+                                 * @returns {google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.TextConfig} TextConfig instance
+                                 */
+                                TextConfig.create = function create(properties) {
+                                    return new TextConfig(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified TextConfig message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.TextConfig.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.TextConfig
+                                 * @static
+                                 * @param {google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.ITextConfig} message TextConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                TextConfig.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified TextConfig message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.TextConfig.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.TextConfig
+                                 * @static
+                                 * @param {google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.ITextConfig} message TextConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                TextConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a TextConfig message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.TextConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.TextConfig} TextConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                TextConfig.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.TextConfig();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a TextConfig message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.TextConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.TextConfig} TextConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                TextConfig.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a TextConfig message.
+                                 * @function verify
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.TextConfig
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                TextConfig.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a TextConfig message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.TextConfig
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.TextConfig} TextConfig
+                                 */
+                                TextConfig.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.TextConfig)
+                                        return object;
+                                    return new $root.google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.TextConfig();
+                                };
+    
+                                /**
+                                 * Creates a plain object from a TextConfig message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.TextConfig
+                                 * @static
+                                 * @param {google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.TextConfig} message TextConfig
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                TextConfig.toObject = function toObject() {
+                                    return {};
+                                };
+    
+                                /**
+                                 * Converts this TextConfig to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.TextConfig
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                TextConfig.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for TextConfig
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.TextConfig
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                TextConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.TextConfig";
+                                };
+    
+                                return TextConfig;
+                            })();
+    
+                            CloudStorageConfig.AvroConfig = (function() {
+    
+                                /**
+                                 * Properties of an AvroConfig.
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.CloudStorageConfig
+                                 * @interface IAvroConfig
+                                 * @property {boolean|null} [writeMetadata] AvroConfig writeMetadata
+                                 * @property {boolean|null} [useTopicSchema] AvroConfig useTopicSchema
+                                 */
+    
+                                /**
+                                 * Constructs a new AvroConfig.
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.CloudStorageConfig
+                                 * @classdesc Represents an AvroConfig.
+                                 * @implements IAvroConfig
+                                 * @constructor
+                                 * @param {google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.IAvroConfig=} [properties] Properties to set
+                                 */
+                                function AvroConfig(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * AvroConfig writeMetadata.
+                                 * @member {boolean} writeMetadata
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.AvroConfig
+                                 * @instance
+                                 */
+                                AvroConfig.prototype.writeMetadata = false;
+    
+                                /**
+                                 * AvroConfig useTopicSchema.
+                                 * @member {boolean} useTopicSchema
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.AvroConfig
+                                 * @instance
+                                 */
+                                AvroConfig.prototype.useTopicSchema = false;
+    
+                                /**
+                                 * Creates a new AvroConfig instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.AvroConfig
+                                 * @static
+                                 * @param {google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.IAvroConfig=} [properties] Properties to set
+                                 * @returns {google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.AvroConfig} AvroConfig instance
+                                 */
+                                AvroConfig.create = function create(properties) {
+                                    return new AvroConfig(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified AvroConfig message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.AvroConfig.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.AvroConfig
+                                 * @static
+                                 * @param {google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.IAvroConfig} message AvroConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                AvroConfig.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.writeMetadata != null && Object.hasOwnProperty.call(message, "writeMetadata"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).bool(message.writeMetadata);
+                                    if (message.useTopicSchema != null && Object.hasOwnProperty.call(message, "useTopicSchema"))
+                                        writer.uint32(/* id 2, wireType 0 =*/16).bool(message.useTopicSchema);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified AvroConfig message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.AvroConfig.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.AvroConfig
+                                 * @static
+                                 * @param {google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.IAvroConfig} message AvroConfig message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                AvroConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes an AvroConfig message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.AvroConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.AvroConfig} AvroConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                AvroConfig.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.AvroConfig();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.writeMetadata = reader.bool();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.useTopicSchema = reader.bool();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes an AvroConfig message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.AvroConfig
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.AvroConfig} AvroConfig
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                AvroConfig.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies an AvroConfig message.
+                                 * @function verify
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.AvroConfig
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                AvroConfig.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.writeMetadata != null && message.hasOwnProperty("writeMetadata"))
+                                        if (typeof message.writeMetadata !== "boolean")
+                                            return "writeMetadata: boolean expected";
+                                    if (message.useTopicSchema != null && message.hasOwnProperty("useTopicSchema"))
+                                        if (typeof message.useTopicSchema !== "boolean")
+                                            return "useTopicSchema: boolean expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates an AvroConfig message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.AvroConfig
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.AvroConfig} AvroConfig
+                                 */
+                                AvroConfig.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.AvroConfig)
+                                        return object;
+                                    var message = new $root.google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.AvroConfig();
+                                    if (object.writeMetadata != null)
+                                        message.writeMetadata = Boolean(object.writeMetadata);
+                                    if (object.useTopicSchema != null)
+                                        message.useTopicSchema = Boolean(object.useTopicSchema);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from an AvroConfig message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.AvroConfig
+                                 * @static
+                                 * @param {google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.AvroConfig} message AvroConfig
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                AvroConfig.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.writeMetadata = false;
+                                        object.useTopicSchema = false;
+                                    }
+                                    if (message.writeMetadata != null && message.hasOwnProperty("writeMetadata"))
+                                        object.writeMetadata = message.writeMetadata;
+                                    if (message.useTopicSchema != null && message.hasOwnProperty("useTopicSchema"))
+                                        object.useTopicSchema = message.useTopicSchema;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this AvroConfig to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.AvroConfig
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                AvroConfig.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for AvroConfig
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.AvroConfig
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                AvroConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.AvroConfig";
+                                };
+    
+                                return AvroConfig;
+                            })();
+    
+                            return CloudStorageConfig;
+                        })();
+    
+                        v1.MessageTransform = (function() {
+    
+                            /**
+                             * Properties of a MessageTransform.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @interface IMessageTransform
+                             * @property {google.cloud.bigquery.analyticshub.v1.IJavaScriptUDF|null} [javascriptUdf] MessageTransform javascriptUdf
+                             * @property {boolean|null} [enabled] MessageTransform enabled
+                             * @property {boolean|null} [disabled] MessageTransform disabled
+                             */
+    
+                            /**
+                             * Constructs a new MessageTransform.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @classdesc Represents a MessageTransform.
+                             * @implements IMessageTransform
+                             * @constructor
+                             * @param {google.cloud.bigquery.analyticshub.v1.IMessageTransform=} [properties] Properties to set
+                             */
+                            function MessageTransform(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * MessageTransform javascriptUdf.
+                             * @member {google.cloud.bigquery.analyticshub.v1.IJavaScriptUDF|null|undefined} javascriptUdf
+                             * @memberof google.cloud.bigquery.analyticshub.v1.MessageTransform
+                             * @instance
+                             */
+                            MessageTransform.prototype.javascriptUdf = null;
+    
+                            /**
+                             * MessageTransform enabled.
+                             * @member {boolean} enabled
+                             * @memberof google.cloud.bigquery.analyticshub.v1.MessageTransform
+                             * @instance
+                             */
+                            MessageTransform.prototype.enabled = false;
+    
+                            /**
+                             * MessageTransform disabled.
+                             * @member {boolean} disabled
+                             * @memberof google.cloud.bigquery.analyticshub.v1.MessageTransform
+                             * @instance
+                             */
+                            MessageTransform.prototype.disabled = false;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * MessageTransform transform.
+                             * @member {"javascriptUdf"|undefined} transform
+                             * @memberof google.cloud.bigquery.analyticshub.v1.MessageTransform
+                             * @instance
+                             */
+                            Object.defineProperty(MessageTransform.prototype, "transform", {
+                                get: $util.oneOfGetter($oneOfFields = ["javascriptUdf"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new MessageTransform instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.analyticshub.v1.MessageTransform
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IMessageTransform=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.analyticshub.v1.MessageTransform} MessageTransform instance
+                             */
+                            MessageTransform.create = function create(properties) {
+                                return new MessageTransform(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified MessageTransform message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.MessageTransform.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.MessageTransform
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IMessageTransform} message MessageTransform message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MessageTransform.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.javascriptUdf != null && Object.hasOwnProperty.call(message, "javascriptUdf"))
+                                    $root.google.cloud.bigquery.analyticshub.v1.JavaScriptUDF.encode(message.javascriptUdf, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).bool(message.enabled);
+                                if (message.disabled != null && Object.hasOwnProperty.call(message, "disabled"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).bool(message.disabled);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified MessageTransform message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.MessageTransform.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.MessageTransform
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IMessageTransform} message MessageTransform message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MessageTransform.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a MessageTransform message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.MessageTransform
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.analyticshub.v1.MessageTransform} MessageTransform
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MessageTransform.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.analyticshub.v1.MessageTransform();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 2: {
+                                            message.javascriptUdf = $root.google.cloud.bigquery.analyticshub.v1.JavaScriptUDF.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.enabled = reader.bool();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.disabled = reader.bool();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a MessageTransform message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.MessageTransform
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.analyticshub.v1.MessageTransform} MessageTransform
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MessageTransform.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a MessageTransform message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.analyticshub.v1.MessageTransform
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            MessageTransform.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.javascriptUdf != null && message.hasOwnProperty("javascriptUdf")) {
+                                    properties.transform = 1;
+                                    {
+                                        var error = $root.google.cloud.bigquery.analyticshub.v1.JavaScriptUDF.verify(message.javascriptUdf);
+                                        if (error)
+                                            return "javascriptUdf." + error;
+                                    }
+                                }
+                                if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                    if (typeof message.enabled !== "boolean")
+                                        return "enabled: boolean expected";
+                                if (message.disabled != null && message.hasOwnProperty("disabled"))
+                                    if (typeof message.disabled !== "boolean")
+                                        return "disabled: boolean expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a MessageTransform message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.MessageTransform
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.analyticshub.v1.MessageTransform} MessageTransform
+                             */
+                            MessageTransform.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.analyticshub.v1.MessageTransform)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.analyticshub.v1.MessageTransform();
+                                if (object.javascriptUdf != null) {
+                                    if (typeof object.javascriptUdf !== "object")
+                                        throw TypeError(".google.cloud.bigquery.analyticshub.v1.MessageTransform.javascriptUdf: object expected");
+                                    message.javascriptUdf = $root.google.cloud.bigquery.analyticshub.v1.JavaScriptUDF.fromObject(object.javascriptUdf);
+                                }
+                                if (object.enabled != null)
+                                    message.enabled = Boolean(object.enabled);
+                                if (object.disabled != null)
+                                    message.disabled = Boolean(object.disabled);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a MessageTransform message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.MessageTransform
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.MessageTransform} message MessageTransform
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            MessageTransform.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.enabled = false;
+                                    object.disabled = false;
+                                }
+                                if (message.javascriptUdf != null && message.hasOwnProperty("javascriptUdf")) {
+                                    object.javascriptUdf = $root.google.cloud.bigquery.analyticshub.v1.JavaScriptUDF.toObject(message.javascriptUdf, options);
+                                    if (options.oneofs)
+                                        object.transform = "javascriptUdf";
+                                }
+                                if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                    object.enabled = message.enabled;
+                                if (message.disabled != null && message.hasOwnProperty("disabled"))
+                                    object.disabled = message.disabled;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this MessageTransform to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.analyticshub.v1.MessageTransform
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            MessageTransform.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for MessageTransform
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.analyticshub.v1.MessageTransform
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            MessageTransform.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.analyticshub.v1.MessageTransform";
+                            };
+    
+                            return MessageTransform;
+                        })();
+    
+                        v1.JavaScriptUDF = (function() {
+    
+                            /**
+                             * Properties of a JavaScriptUDF.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @interface IJavaScriptUDF
+                             * @property {string|null} [functionName] JavaScriptUDF functionName
+                             * @property {string|null} [code] JavaScriptUDF code
+                             */
+    
+                            /**
+                             * Constructs a new JavaScriptUDF.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @classdesc Represents a JavaScriptUDF.
+                             * @implements IJavaScriptUDF
+                             * @constructor
+                             * @param {google.cloud.bigquery.analyticshub.v1.IJavaScriptUDF=} [properties] Properties to set
+                             */
+                            function JavaScriptUDF(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * JavaScriptUDF functionName.
+                             * @member {string} functionName
+                             * @memberof google.cloud.bigquery.analyticshub.v1.JavaScriptUDF
+                             * @instance
+                             */
+                            JavaScriptUDF.prototype.functionName = "";
+    
+                            /**
+                             * JavaScriptUDF code.
+                             * @member {string} code
+                             * @memberof google.cloud.bigquery.analyticshub.v1.JavaScriptUDF
+                             * @instance
+                             */
+                            JavaScriptUDF.prototype.code = "";
+    
+                            /**
+                             * Creates a new JavaScriptUDF instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.analyticshub.v1.JavaScriptUDF
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IJavaScriptUDF=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.analyticshub.v1.JavaScriptUDF} JavaScriptUDF instance
+                             */
+                            JavaScriptUDF.create = function create(properties) {
+                                return new JavaScriptUDF(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified JavaScriptUDF message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.JavaScriptUDF.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.JavaScriptUDF
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IJavaScriptUDF} message JavaScriptUDF message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            JavaScriptUDF.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.functionName != null && Object.hasOwnProperty.call(message, "functionName"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.functionName);
+                                if (message.code != null && Object.hasOwnProperty.call(message, "code"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.code);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified JavaScriptUDF message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.JavaScriptUDF.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.JavaScriptUDF
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IJavaScriptUDF} message JavaScriptUDF message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            JavaScriptUDF.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a JavaScriptUDF message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.JavaScriptUDF
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.analyticshub.v1.JavaScriptUDF} JavaScriptUDF
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            JavaScriptUDF.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.analyticshub.v1.JavaScriptUDF();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.functionName = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.code = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a JavaScriptUDF message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.JavaScriptUDF
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.analyticshub.v1.JavaScriptUDF} JavaScriptUDF
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            JavaScriptUDF.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a JavaScriptUDF message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.analyticshub.v1.JavaScriptUDF
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            JavaScriptUDF.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.functionName != null && message.hasOwnProperty("functionName"))
+                                    if (!$util.isString(message.functionName))
+                                        return "functionName: string expected";
+                                if (message.code != null && message.hasOwnProperty("code"))
+                                    if (!$util.isString(message.code))
+                                        return "code: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a JavaScriptUDF message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.JavaScriptUDF
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.analyticshub.v1.JavaScriptUDF} JavaScriptUDF
+                             */
+                            JavaScriptUDF.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.analyticshub.v1.JavaScriptUDF)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.analyticshub.v1.JavaScriptUDF();
+                                if (object.functionName != null)
+                                    message.functionName = String(object.functionName);
+                                if (object.code != null)
+                                    message.code = String(object.code);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a JavaScriptUDF message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.JavaScriptUDF
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.JavaScriptUDF} message JavaScriptUDF
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            JavaScriptUDF.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.functionName = "";
+                                    object.code = "";
+                                }
+                                if (message.functionName != null && message.hasOwnProperty("functionName"))
+                                    object.functionName = message.functionName;
+                                if (message.code != null && message.hasOwnProperty("code"))
+                                    object.code = message.code;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this JavaScriptUDF to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.analyticshub.v1.JavaScriptUDF
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            JavaScriptUDF.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for JavaScriptUDF
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.analyticshub.v1.JavaScriptUDF
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            JavaScriptUDF.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.analyticshub.v1.JavaScriptUDF";
+                            };
+    
+                            return JavaScriptUDF;
                         })();
     
                         return v1;
