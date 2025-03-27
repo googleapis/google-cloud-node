@@ -40,7 +40,7 @@ TypeError [ERR_INVALID_ARG_TYPE]: The "chunk" argument must be of type string or
     at addChunk (node:internal/streams/readable:559:12) {
   code: 'ERR_INVALID_ARG_TYPE'
 
-### Link to the code that reproduces this issue. A link to a **public** Github Repository with a minimal reproduction.
+### Link to the code that reproduces this issue. A link to a **public** Github Repository or gist with a minimal reproduction.
 
 
 https://gist.github.com/orgads/13cbf44c91923da27d8772b5f10489c9

@@ -29,6 +29,11 @@
               "methods": [
                 "getVulnerabilityOccurrencesSummary"
               ]
+            },
+            "ExportSBOM": {
+              "methods": [
+                "exportSBOM"
+              ]
             }
           }
         },
@@ -53,6 +58,11 @@
             "GetVulnerabilityOccurrencesSummary": {
               "methods": [
                 "getVulnerabilityOccurrencesSummary"
+              ]
+            },
+            "ExportSBOM": {
+              "methods": [
+                "exportSBOM"
               ]
             }
           }
