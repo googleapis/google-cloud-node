@@ -4754,6 +4754,9 @@ export namespace google {
 
                     /** OracleAsmConfig oracleSslConfig */
                     oracleSslConfig?: (google.cloud.datastream.v1.IOracleSslConfig|null);
+
+                    /** OracleAsmConfig secretManagerStoredPassword */
+                    secretManagerStoredPassword?: (string|null);
                 }
 
                 /** Represents an OracleAsmConfig. */
@@ -4785,6 +4788,9 @@ export namespace google {
 
                     /** OracleAsmConfig oracleSslConfig. */
                     public oracleSslConfig?: (google.cloud.datastream.v1.IOracleSslConfig|null);
+
+                    /** OracleAsmConfig secretManagerStoredPassword. */
+                    public secretManagerStoredPassword: string;
 
                     /**
                      * Creates a new OracleAsmConfig instance using the specified properties.
@@ -4881,6 +4887,9 @@ export namespace google {
 
                     /** MysqlProfile sslConfig */
                     sslConfig?: (google.cloud.datastream.v1.IMysqlSslConfig|null);
+
+                    /** MysqlProfile secretManagerStoredPassword */
+                    secretManagerStoredPassword?: (string|null);
                 }
 
                 /** Represents a MysqlProfile. */
@@ -4906,6 +4915,9 @@ export namespace google {
 
                     /** MysqlProfile sslConfig. */
                     public sslConfig?: (google.cloud.datastream.v1.IMysqlSslConfig|null);
+
+                    /** MysqlProfile secretManagerStoredPassword. */
+                    public secretManagerStoredPassword: string;
 
                     /**
                      * Creates a new MysqlProfile instance using the specified properties.
@@ -5003,6 +5015,9 @@ export namespace google {
                     /** PostgresqlProfile database */
                     database?: (string|null);
 
+                    /** PostgresqlProfile secretManagerStoredPassword */
+                    secretManagerStoredPassword?: (string|null);
+
                     /** PostgresqlProfile sslConfig */
                     sslConfig?: (google.cloud.datastream.v1.IPostgresqlSslConfig|null);
                 }
@@ -5030,6 +5045,9 @@ export namespace google {
 
                     /** PostgresqlProfile database. */
                     public database: string;
+
+                    /** PostgresqlProfile secretManagerStoredPassword. */
+                    public secretManagerStoredPassword: string;
 
                     /** PostgresqlProfile sslConfig. */
                     public sslConfig?: (google.cloud.datastream.v1.IPostgresqlSslConfig|null);
@@ -5129,6 +5147,9 @@ export namespace google {
 
                     /** SqlServerProfile database */
                     database?: (string|null);
+
+                    /** SqlServerProfile secretManagerStoredPassword */
+                    secretManagerStoredPassword?: (string|null);
                 }
 
                 /** Represents a SqlServerProfile. */
@@ -5154,6 +5175,9 @@ export namespace google {
 
                     /** SqlServerProfile database. */
                     public database: string;
+
+                    /** SqlServerProfile secretManagerStoredPassword. */
+                    public secretManagerStoredPassword: string;
 
                     /**
                      * Creates a new SqlServerProfile instance using the specified properties.
@@ -5231,6 +5255,351 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SalesforceProfile. */
+                interface ISalesforceProfile {
+
+                    /** SalesforceProfile domain */
+                    domain?: (string|null);
+
+                    /** SalesforceProfile userCredentials */
+                    userCredentials?: (google.cloud.datastream.v1.SalesforceProfile.IUserCredentials|null);
+
+                    /** SalesforceProfile oauth2ClientCredentials */
+                    oauth2ClientCredentials?: (google.cloud.datastream.v1.SalesforceProfile.IOauth2ClientCredentials|null);
+                }
+
+                /** Represents a SalesforceProfile. */
+                class SalesforceProfile implements ISalesforceProfile {
+
+                    /**
+                     * Constructs a new SalesforceProfile.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datastream.v1.ISalesforceProfile);
+
+                    /** SalesforceProfile domain. */
+                    public domain: string;
+
+                    /** SalesforceProfile userCredentials. */
+                    public userCredentials?: (google.cloud.datastream.v1.SalesforceProfile.IUserCredentials|null);
+
+                    /** SalesforceProfile oauth2ClientCredentials. */
+                    public oauth2ClientCredentials?: (google.cloud.datastream.v1.SalesforceProfile.IOauth2ClientCredentials|null);
+
+                    /** SalesforceProfile credentials. */
+                    public credentials?: ("userCredentials"|"oauth2ClientCredentials");
+
+                    /**
+                     * Creates a new SalesforceProfile instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SalesforceProfile instance
+                     */
+                    public static create(properties?: google.cloud.datastream.v1.ISalesforceProfile): google.cloud.datastream.v1.SalesforceProfile;
+
+                    /**
+                     * Encodes the specified SalesforceProfile message. Does not implicitly {@link google.cloud.datastream.v1.SalesforceProfile.verify|verify} messages.
+                     * @param message SalesforceProfile message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datastream.v1.ISalesforceProfile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SalesforceProfile message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.SalesforceProfile.verify|verify} messages.
+                     * @param message SalesforceProfile message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datastream.v1.ISalesforceProfile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SalesforceProfile message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SalesforceProfile
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datastream.v1.SalesforceProfile;
+
+                    /**
+                     * Decodes a SalesforceProfile message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SalesforceProfile
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datastream.v1.SalesforceProfile;
+
+                    /**
+                     * Verifies a SalesforceProfile message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SalesforceProfile message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SalesforceProfile
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datastream.v1.SalesforceProfile;
+
+                    /**
+                     * Creates a plain object from a SalesforceProfile message. Also converts values to other types if specified.
+                     * @param message SalesforceProfile
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datastream.v1.SalesforceProfile, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SalesforceProfile to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SalesforceProfile
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SalesforceProfile {
+
+                    /** Properties of a UserCredentials. */
+                    interface IUserCredentials {
+
+                        /** UserCredentials username */
+                        username?: (string|null);
+
+                        /** UserCredentials password */
+                        password?: (string|null);
+
+                        /** UserCredentials securityToken */
+                        securityToken?: (string|null);
+
+                        /** UserCredentials secretManagerStoredPassword */
+                        secretManagerStoredPassword?: (string|null);
+
+                        /** UserCredentials secretManagerStoredSecurityToken */
+                        secretManagerStoredSecurityToken?: (string|null);
+                    }
+
+                    /** Represents a UserCredentials. */
+                    class UserCredentials implements IUserCredentials {
+
+                        /**
+                         * Constructs a new UserCredentials.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.datastream.v1.SalesforceProfile.IUserCredentials);
+
+                        /** UserCredentials username. */
+                        public username: string;
+
+                        /** UserCredentials password. */
+                        public password: string;
+
+                        /** UserCredentials securityToken. */
+                        public securityToken: string;
+
+                        /** UserCredentials secretManagerStoredPassword. */
+                        public secretManagerStoredPassword: string;
+
+                        /** UserCredentials secretManagerStoredSecurityToken. */
+                        public secretManagerStoredSecurityToken: string;
+
+                        /**
+                         * Creates a new UserCredentials instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UserCredentials instance
+                         */
+                        public static create(properties?: google.cloud.datastream.v1.SalesforceProfile.IUserCredentials): google.cloud.datastream.v1.SalesforceProfile.UserCredentials;
+
+                        /**
+                         * Encodes the specified UserCredentials message. Does not implicitly {@link google.cloud.datastream.v1.SalesforceProfile.UserCredentials.verify|verify} messages.
+                         * @param message UserCredentials message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.datastream.v1.SalesforceProfile.IUserCredentials, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UserCredentials message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.SalesforceProfile.UserCredentials.verify|verify} messages.
+                         * @param message UserCredentials message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.datastream.v1.SalesforceProfile.IUserCredentials, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a UserCredentials message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UserCredentials
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datastream.v1.SalesforceProfile.UserCredentials;
+
+                        /**
+                         * Decodes a UserCredentials message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UserCredentials
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datastream.v1.SalesforceProfile.UserCredentials;
+
+                        /**
+                         * Verifies a UserCredentials message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a UserCredentials message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UserCredentials
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.datastream.v1.SalesforceProfile.UserCredentials;
+
+                        /**
+                         * Creates a plain object from a UserCredentials message. Also converts values to other types if specified.
+                         * @param message UserCredentials
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.datastream.v1.SalesforceProfile.UserCredentials, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UserCredentials to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UserCredentials
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an Oauth2ClientCredentials. */
+                    interface IOauth2ClientCredentials {
+
+                        /** Oauth2ClientCredentials clientId */
+                        clientId?: (string|null);
+
+                        /** Oauth2ClientCredentials clientSecret */
+                        clientSecret?: (string|null);
+
+                        /** Oauth2ClientCredentials secretManagerStoredClientSecret */
+                        secretManagerStoredClientSecret?: (string|null);
+                    }
+
+                    /** Represents an Oauth2ClientCredentials. */
+                    class Oauth2ClientCredentials implements IOauth2ClientCredentials {
+
+                        /**
+                         * Constructs a new Oauth2ClientCredentials.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.datastream.v1.SalesforceProfile.IOauth2ClientCredentials);
+
+                        /** Oauth2ClientCredentials clientId. */
+                        public clientId: string;
+
+                        /** Oauth2ClientCredentials clientSecret. */
+                        public clientSecret: string;
+
+                        /** Oauth2ClientCredentials secretManagerStoredClientSecret. */
+                        public secretManagerStoredClientSecret: string;
+
+                        /**
+                         * Creates a new Oauth2ClientCredentials instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Oauth2ClientCredentials instance
+                         */
+                        public static create(properties?: google.cloud.datastream.v1.SalesforceProfile.IOauth2ClientCredentials): google.cloud.datastream.v1.SalesforceProfile.Oauth2ClientCredentials;
+
+                        /**
+                         * Encodes the specified Oauth2ClientCredentials message. Does not implicitly {@link google.cloud.datastream.v1.SalesforceProfile.Oauth2ClientCredentials.verify|verify} messages.
+                         * @param message Oauth2ClientCredentials message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.datastream.v1.SalesforceProfile.IOauth2ClientCredentials, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Oauth2ClientCredentials message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.SalesforceProfile.Oauth2ClientCredentials.verify|verify} messages.
+                         * @param message Oauth2ClientCredentials message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.datastream.v1.SalesforceProfile.IOauth2ClientCredentials, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an Oauth2ClientCredentials message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Oauth2ClientCredentials
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datastream.v1.SalesforceProfile.Oauth2ClientCredentials;
+
+                        /**
+                         * Decodes an Oauth2ClientCredentials message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Oauth2ClientCredentials
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datastream.v1.SalesforceProfile.Oauth2ClientCredentials;
+
+                        /**
+                         * Verifies an Oauth2ClientCredentials message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an Oauth2ClientCredentials message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Oauth2ClientCredentials
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.datastream.v1.SalesforceProfile.Oauth2ClientCredentials;
+
+                        /**
+                         * Creates a plain object from an Oauth2ClientCredentials message. Also converts values to other types if specified.
+                         * @param message Oauth2ClientCredentials
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.datastream.v1.SalesforceProfile.Oauth2ClientCredentials, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Oauth2ClientCredentials to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Oauth2ClientCredentials
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of a GcsProfile. */
@@ -5769,6 +6138,12 @@ export namespace google {
                     /** PrivateConnection error */
                     error?: (google.cloud.datastream.v1.IError|null);
 
+                    /** PrivateConnection satisfiesPzs */
+                    satisfiesPzs?: (boolean|null);
+
+                    /** PrivateConnection satisfiesPzi */
+                    satisfiesPzi?: (boolean|null);
+
                     /** PrivateConnection vpcPeeringConfig */
                     vpcPeeringConfig?: (google.cloud.datastream.v1.IVpcPeeringConfig|null);
                 }
@@ -5803,8 +6178,20 @@ export namespace google {
                     /** PrivateConnection error. */
                     public error?: (google.cloud.datastream.v1.IError|null);
 
+                    /** PrivateConnection satisfiesPzs. */
+                    public satisfiesPzs?: (boolean|null);
+
+                    /** PrivateConnection satisfiesPzi. */
+                    public satisfiesPzi?: (boolean|null);
+
                     /** PrivateConnection vpcPeeringConfig. */
                     public vpcPeeringConfig?: (google.cloud.datastream.v1.IVpcPeeringConfig|null);
+
+                    /** PrivateConnection _satisfiesPzs. */
+                    public _satisfiesPzs?: "satisfiesPzs";
+
+                    /** PrivateConnection _satisfiesPzi. */
+                    public _satisfiesPzi?: "satisfiesPzi";
 
                     /**
                      * Creates a new PrivateConnection instance using the specified properties.
@@ -6690,6 +7077,12 @@ export namespace google {
                     /** ConnectionProfile displayName */
                     displayName?: (string|null);
 
+                    /** ConnectionProfile satisfiesPzs */
+                    satisfiesPzs?: (boolean|null);
+
+                    /** ConnectionProfile satisfiesPzi */
+                    satisfiesPzi?: (boolean|null);
+
                     /** ConnectionProfile oracleProfile */
                     oracleProfile?: (google.cloud.datastream.v1.IOracleProfile|null);
 
@@ -6707,6 +7100,9 @@ export namespace google {
 
                     /** ConnectionProfile sqlServerProfile */
                     sqlServerProfile?: (google.cloud.datastream.v1.ISqlServerProfile|null);
+
+                    /** ConnectionProfile salesforceProfile */
+                    salesforceProfile?: (google.cloud.datastream.v1.ISalesforceProfile|null);
 
                     /** ConnectionProfile staticServiceIpConnectivity */
                     staticServiceIpConnectivity?: (google.cloud.datastream.v1.IStaticServiceIpConnectivity|null);
@@ -6742,6 +7138,12 @@ export namespace google {
                     /** ConnectionProfile displayName. */
                     public displayName: string;
 
+                    /** ConnectionProfile satisfiesPzs. */
+                    public satisfiesPzs?: (boolean|null);
+
+                    /** ConnectionProfile satisfiesPzi. */
+                    public satisfiesPzi?: (boolean|null);
+
                     /** ConnectionProfile oracleProfile. */
                     public oracleProfile?: (google.cloud.datastream.v1.IOracleProfile|null);
 
@@ -6760,6 +7162,9 @@ export namespace google {
                     /** ConnectionProfile sqlServerProfile. */
                     public sqlServerProfile?: (google.cloud.datastream.v1.ISqlServerProfile|null);
 
+                    /** ConnectionProfile salesforceProfile. */
+                    public salesforceProfile?: (google.cloud.datastream.v1.ISalesforceProfile|null);
+
                     /** ConnectionProfile staticServiceIpConnectivity. */
                     public staticServiceIpConnectivity?: (google.cloud.datastream.v1.IStaticServiceIpConnectivity|null);
 
@@ -6769,8 +7174,14 @@ export namespace google {
                     /** ConnectionProfile privateConnectivity. */
                     public privateConnectivity?: (google.cloud.datastream.v1.IPrivateConnectivity|null);
 
+                    /** ConnectionProfile _satisfiesPzs. */
+                    public _satisfiesPzs?: "satisfiesPzs";
+
+                    /** ConnectionProfile _satisfiesPzi. */
+                    public _satisfiesPzi?: "satisfiesPzi";
+
                     /** ConnectionProfile profile. */
-                    public profile?: ("oracleProfile"|"gcsProfile"|"mysqlProfile"|"bigqueryProfile"|"postgresqlProfile"|"sqlServerProfile");
+                    public profile?: ("oracleProfile"|"gcsProfile"|"mysqlProfile"|"bigqueryProfile"|"postgresqlProfile"|"sqlServerProfile"|"salesforceProfile");
 
                     /** ConnectionProfile connectivity. */
                     public connectivity?: ("staticServiceIpConnectivity"|"forwardSshConnectivity"|"privateConnectivity");
@@ -10105,6 +10516,424 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a SalesforceSourceConfig. */
+                interface ISalesforceSourceConfig {
+
+                    /** SalesforceSourceConfig includeObjects */
+                    includeObjects?: (google.cloud.datastream.v1.ISalesforceOrg|null);
+
+                    /** SalesforceSourceConfig excludeObjects */
+                    excludeObjects?: (google.cloud.datastream.v1.ISalesforceOrg|null);
+
+                    /** SalesforceSourceConfig pollingInterval */
+                    pollingInterval?: (google.protobuf.IDuration|null);
+                }
+
+                /** Represents a SalesforceSourceConfig. */
+                class SalesforceSourceConfig implements ISalesforceSourceConfig {
+
+                    /**
+                     * Constructs a new SalesforceSourceConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datastream.v1.ISalesforceSourceConfig);
+
+                    /** SalesforceSourceConfig includeObjects. */
+                    public includeObjects?: (google.cloud.datastream.v1.ISalesforceOrg|null);
+
+                    /** SalesforceSourceConfig excludeObjects. */
+                    public excludeObjects?: (google.cloud.datastream.v1.ISalesforceOrg|null);
+
+                    /** SalesforceSourceConfig pollingInterval. */
+                    public pollingInterval?: (google.protobuf.IDuration|null);
+
+                    /**
+                     * Creates a new SalesforceSourceConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SalesforceSourceConfig instance
+                     */
+                    public static create(properties?: google.cloud.datastream.v1.ISalesforceSourceConfig): google.cloud.datastream.v1.SalesforceSourceConfig;
+
+                    /**
+                     * Encodes the specified SalesforceSourceConfig message. Does not implicitly {@link google.cloud.datastream.v1.SalesforceSourceConfig.verify|verify} messages.
+                     * @param message SalesforceSourceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datastream.v1.ISalesforceSourceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SalesforceSourceConfig message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.SalesforceSourceConfig.verify|verify} messages.
+                     * @param message SalesforceSourceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datastream.v1.ISalesforceSourceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SalesforceSourceConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SalesforceSourceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datastream.v1.SalesforceSourceConfig;
+
+                    /**
+                     * Decodes a SalesforceSourceConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SalesforceSourceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datastream.v1.SalesforceSourceConfig;
+
+                    /**
+                     * Verifies a SalesforceSourceConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SalesforceSourceConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SalesforceSourceConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datastream.v1.SalesforceSourceConfig;
+
+                    /**
+                     * Creates a plain object from a SalesforceSourceConfig message. Also converts values to other types if specified.
+                     * @param message SalesforceSourceConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datastream.v1.SalesforceSourceConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SalesforceSourceConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SalesforceSourceConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SalesforceOrg. */
+                interface ISalesforceOrg {
+
+                    /** SalesforceOrg objects */
+                    objects?: (google.cloud.datastream.v1.ISalesforceObject[]|null);
+                }
+
+                /** Represents a SalesforceOrg. */
+                class SalesforceOrg implements ISalesforceOrg {
+
+                    /**
+                     * Constructs a new SalesforceOrg.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datastream.v1.ISalesforceOrg);
+
+                    /** SalesforceOrg objects. */
+                    public objects: google.cloud.datastream.v1.ISalesforceObject[];
+
+                    /**
+                     * Creates a new SalesforceOrg instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SalesforceOrg instance
+                     */
+                    public static create(properties?: google.cloud.datastream.v1.ISalesforceOrg): google.cloud.datastream.v1.SalesforceOrg;
+
+                    /**
+                     * Encodes the specified SalesforceOrg message. Does not implicitly {@link google.cloud.datastream.v1.SalesforceOrg.verify|verify} messages.
+                     * @param message SalesforceOrg message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datastream.v1.ISalesforceOrg, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SalesforceOrg message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.SalesforceOrg.verify|verify} messages.
+                     * @param message SalesforceOrg message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datastream.v1.ISalesforceOrg, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SalesforceOrg message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SalesforceOrg
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datastream.v1.SalesforceOrg;
+
+                    /**
+                     * Decodes a SalesforceOrg message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SalesforceOrg
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datastream.v1.SalesforceOrg;
+
+                    /**
+                     * Verifies a SalesforceOrg message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SalesforceOrg message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SalesforceOrg
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datastream.v1.SalesforceOrg;
+
+                    /**
+                     * Creates a plain object from a SalesforceOrg message. Also converts values to other types if specified.
+                     * @param message SalesforceOrg
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datastream.v1.SalesforceOrg, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SalesforceOrg to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SalesforceOrg
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SalesforceObject. */
+                interface ISalesforceObject {
+
+                    /** SalesforceObject objectName */
+                    objectName?: (string|null);
+
+                    /** SalesforceObject fields */
+                    fields?: (google.cloud.datastream.v1.ISalesforceField[]|null);
+                }
+
+                /** Represents a SalesforceObject. */
+                class SalesforceObject implements ISalesforceObject {
+
+                    /**
+                     * Constructs a new SalesforceObject.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datastream.v1.ISalesforceObject);
+
+                    /** SalesforceObject objectName. */
+                    public objectName: string;
+
+                    /** SalesforceObject fields. */
+                    public fields: google.cloud.datastream.v1.ISalesforceField[];
+
+                    /**
+                     * Creates a new SalesforceObject instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SalesforceObject instance
+                     */
+                    public static create(properties?: google.cloud.datastream.v1.ISalesforceObject): google.cloud.datastream.v1.SalesforceObject;
+
+                    /**
+                     * Encodes the specified SalesforceObject message. Does not implicitly {@link google.cloud.datastream.v1.SalesforceObject.verify|verify} messages.
+                     * @param message SalesforceObject message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datastream.v1.ISalesforceObject, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SalesforceObject message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.SalesforceObject.verify|verify} messages.
+                     * @param message SalesforceObject message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datastream.v1.ISalesforceObject, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SalesforceObject message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SalesforceObject
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datastream.v1.SalesforceObject;
+
+                    /**
+                     * Decodes a SalesforceObject message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SalesforceObject
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datastream.v1.SalesforceObject;
+
+                    /**
+                     * Verifies a SalesforceObject message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SalesforceObject message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SalesforceObject
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datastream.v1.SalesforceObject;
+
+                    /**
+                     * Creates a plain object from a SalesforceObject message. Also converts values to other types if specified.
+                     * @param message SalesforceObject
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datastream.v1.SalesforceObject, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SalesforceObject to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SalesforceObject
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SalesforceField. */
+                interface ISalesforceField {
+
+                    /** SalesforceField name */
+                    name?: (string|null);
+
+                    /** SalesforceField dataType */
+                    dataType?: (string|null);
+
+                    /** SalesforceField nillable */
+                    nillable?: (boolean|null);
+                }
+
+                /** Represents a SalesforceField. */
+                class SalesforceField implements ISalesforceField {
+
+                    /**
+                     * Constructs a new SalesforceField.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datastream.v1.ISalesforceField);
+
+                    /** SalesforceField name. */
+                    public name: string;
+
+                    /** SalesforceField dataType. */
+                    public dataType: string;
+
+                    /** SalesforceField nillable. */
+                    public nillable: boolean;
+
+                    /**
+                     * Creates a new SalesforceField instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SalesforceField instance
+                     */
+                    public static create(properties?: google.cloud.datastream.v1.ISalesforceField): google.cloud.datastream.v1.SalesforceField;
+
+                    /**
+                     * Encodes the specified SalesforceField message. Does not implicitly {@link google.cloud.datastream.v1.SalesforceField.verify|verify} messages.
+                     * @param message SalesforceField message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datastream.v1.ISalesforceField, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SalesforceField message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.SalesforceField.verify|verify} messages.
+                     * @param message SalesforceField message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datastream.v1.ISalesforceField, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SalesforceField message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SalesforceField
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datastream.v1.SalesforceField;
+
+                    /**
+                     * Decodes a SalesforceField message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SalesforceField
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datastream.v1.SalesforceField;
+
+                    /**
+                     * Verifies a SalesforceField message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SalesforceField message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SalesforceField
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datastream.v1.SalesforceField;
+
+                    /**
+                     * Creates a plain object from a SalesforceField message. Also converts values to other types if specified.
+                     * @param message SalesforceField
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datastream.v1.SalesforceField, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SalesforceField to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SalesforceField
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a SourceConfig. */
                 interface ISourceConfig {
 
@@ -10122,6 +10951,9 @@ export namespace google {
 
                     /** SourceConfig sqlServerSourceConfig */
                     sqlServerSourceConfig?: (google.cloud.datastream.v1.ISqlServerSourceConfig|null);
+
+                    /** SourceConfig salesforceSourceConfig */
+                    salesforceSourceConfig?: (google.cloud.datastream.v1.ISalesforceSourceConfig|null);
                 }
 
                 /** Represents a SourceConfig. */
@@ -10148,8 +10980,11 @@ export namespace google {
                     /** SourceConfig sqlServerSourceConfig. */
                     public sqlServerSourceConfig?: (google.cloud.datastream.v1.ISqlServerSourceConfig|null);
 
+                    /** SourceConfig salesforceSourceConfig. */
+                    public salesforceSourceConfig?: (google.cloud.datastream.v1.ISalesforceSourceConfig|null);
+
                     /** SourceConfig sourceStreamConfig. */
-                    public sourceStreamConfig?: ("oracleSourceConfig"|"mysqlSourceConfig"|"postgresqlSourceConfig"|"sqlServerSourceConfig");
+                    public sourceStreamConfig?: ("oracleSourceConfig"|"mysqlSourceConfig"|"postgresqlSourceConfig"|"sqlServerSourceConfig"|"salesforceSourceConfig");
 
                     /**
                      * Creates a new SourceConfig instance using the specified properties.
@@ -10576,6 +11411,9 @@ export namespace google {
                     /** BigQueryDestinationConfig dataFreshness */
                     dataFreshness?: (google.protobuf.IDuration|null);
 
+                    /** BigQueryDestinationConfig blmtConfig */
+                    blmtConfig?: (google.cloud.datastream.v1.BigQueryDestinationConfig.IBlmtConfig|null);
+
                     /** BigQueryDestinationConfig merge */
                     merge?: (google.cloud.datastream.v1.BigQueryDestinationConfig.IMerge|null);
 
@@ -10600,6 +11438,9 @@ export namespace google {
 
                     /** BigQueryDestinationConfig dataFreshness. */
                     public dataFreshness?: (google.protobuf.IDuration|null);
+
+                    /** BigQueryDestinationConfig blmtConfig. */
+                    public blmtConfig?: (google.cloud.datastream.v1.BigQueryDestinationConfig.IBlmtConfig|null);
 
                     /** BigQueryDestinationConfig merge. */
                     public merge?: (google.cloud.datastream.v1.BigQueryDestinationConfig.IMerge|null);
@@ -10999,6 +11840,142 @@ export namespace google {
                         }
                     }
 
+                    /** Properties of a BlmtConfig. */
+                    interface IBlmtConfig {
+
+                        /** BlmtConfig bucket */
+                        bucket?: (string|null);
+
+                        /** BlmtConfig rootPath */
+                        rootPath?: (string|null);
+
+                        /** BlmtConfig connectionName */
+                        connectionName?: (string|null);
+
+                        /** BlmtConfig fileFormat */
+                        fileFormat?: (google.cloud.datastream.v1.BigQueryDestinationConfig.BlmtConfig.FileFormat|keyof typeof google.cloud.datastream.v1.BigQueryDestinationConfig.BlmtConfig.FileFormat|null);
+
+                        /** BlmtConfig tableFormat */
+                        tableFormat?: (google.cloud.datastream.v1.BigQueryDestinationConfig.BlmtConfig.TableFormat|keyof typeof google.cloud.datastream.v1.BigQueryDestinationConfig.BlmtConfig.TableFormat|null);
+                    }
+
+                    /** Represents a BlmtConfig. */
+                    class BlmtConfig implements IBlmtConfig {
+
+                        /**
+                         * Constructs a new BlmtConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.datastream.v1.BigQueryDestinationConfig.IBlmtConfig);
+
+                        /** BlmtConfig bucket. */
+                        public bucket: string;
+
+                        /** BlmtConfig rootPath. */
+                        public rootPath: string;
+
+                        /** BlmtConfig connectionName. */
+                        public connectionName: string;
+
+                        /** BlmtConfig fileFormat. */
+                        public fileFormat: (google.cloud.datastream.v1.BigQueryDestinationConfig.BlmtConfig.FileFormat|keyof typeof google.cloud.datastream.v1.BigQueryDestinationConfig.BlmtConfig.FileFormat);
+
+                        /** BlmtConfig tableFormat. */
+                        public tableFormat: (google.cloud.datastream.v1.BigQueryDestinationConfig.BlmtConfig.TableFormat|keyof typeof google.cloud.datastream.v1.BigQueryDestinationConfig.BlmtConfig.TableFormat);
+
+                        /**
+                         * Creates a new BlmtConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BlmtConfig instance
+                         */
+                        public static create(properties?: google.cloud.datastream.v1.BigQueryDestinationConfig.IBlmtConfig): google.cloud.datastream.v1.BigQueryDestinationConfig.BlmtConfig;
+
+                        /**
+                         * Encodes the specified BlmtConfig message. Does not implicitly {@link google.cloud.datastream.v1.BigQueryDestinationConfig.BlmtConfig.verify|verify} messages.
+                         * @param message BlmtConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.datastream.v1.BigQueryDestinationConfig.IBlmtConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BlmtConfig message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.BigQueryDestinationConfig.BlmtConfig.verify|verify} messages.
+                         * @param message BlmtConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.datastream.v1.BigQueryDestinationConfig.IBlmtConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BlmtConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BlmtConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datastream.v1.BigQueryDestinationConfig.BlmtConfig;
+
+                        /**
+                         * Decodes a BlmtConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BlmtConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datastream.v1.BigQueryDestinationConfig.BlmtConfig;
+
+                        /**
+                         * Verifies a BlmtConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BlmtConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BlmtConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.datastream.v1.BigQueryDestinationConfig.BlmtConfig;
+
+                        /**
+                         * Creates a plain object from a BlmtConfig message. Also converts values to other types if specified.
+                         * @param message BlmtConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.datastream.v1.BigQueryDestinationConfig.BlmtConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BlmtConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for BlmtConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace BlmtConfig {
+
+                        /** FileFormat enum. */
+                        enum FileFormat {
+                            FILE_FORMAT_UNSPECIFIED = 0,
+                            PARQUET = 1
+                        }
+
+                        /** TableFormat enum. */
+                        enum TableFormat {
+                            TABLE_FORMAT_UNSPECIFIED = 0,
+                            ICEBERG = 1
+                        }
+                    }
+
                     /** Properties of an AppendOnly. */
                     interface IAppendOnly {
                     }
@@ -11335,6 +12312,12 @@ export namespace google {
 
                     /** Stream lastRecoveryTime */
                     lastRecoveryTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Stream satisfiesPzs */
+                    satisfiesPzs?: (boolean|null);
+
+                    /** Stream satisfiesPzi */
+                    satisfiesPzi?: (boolean|null);
                 }
 
                 /** Represents a Stream. */
@@ -11385,11 +12368,23 @@ export namespace google {
                     /** Stream lastRecoveryTime. */
                     public lastRecoveryTime?: (google.protobuf.ITimestamp|null);
 
+                    /** Stream satisfiesPzs. */
+                    public satisfiesPzs?: (boolean|null);
+
+                    /** Stream satisfiesPzi. */
+                    public satisfiesPzi?: (boolean|null);
+
                     /** Stream backfillStrategy. */
                     public backfillStrategy?: ("backfillAll"|"backfillNone");
 
                     /** Stream _customerManagedEncryptionKey. */
                     public _customerManagedEncryptionKey?: "customerManagedEncryptionKey";
+
+                    /** Stream _satisfiesPzs. */
+                    public _satisfiesPzs?: "satisfiesPzs";
+
+                    /** Stream _satisfiesPzi. */
+                    public _satisfiesPzi?: "satisfiesPzi";
 
                     /**
                      * Creates a new Stream instance using the specified properties.
@@ -11498,6 +12493,9 @@ export namespace google {
 
                         /** BackfillAllStrategy sqlServerExcludedObjects */
                         sqlServerExcludedObjects?: (google.cloud.datastream.v1.ISqlServerRdbms|null);
+
+                        /** BackfillAllStrategy salesforceExcludedObjects */
+                        salesforceExcludedObjects?: (google.cloud.datastream.v1.ISalesforceOrg|null);
                     }
 
                     /** Represents a BackfillAllStrategy. */
@@ -11521,8 +12519,11 @@ export namespace google {
                         /** BackfillAllStrategy sqlServerExcludedObjects. */
                         public sqlServerExcludedObjects?: (google.cloud.datastream.v1.ISqlServerRdbms|null);
 
+                        /** BackfillAllStrategy salesforceExcludedObjects. */
+                        public salesforceExcludedObjects?: (google.cloud.datastream.v1.ISalesforceOrg|null);
+
                         /** BackfillAllStrategy excludedObjects. */
-                        public excludedObjects?: ("oracleExcludedObjects"|"mysqlExcludedObjects"|"postgresqlExcludedObjects"|"sqlServerExcludedObjects");
+                        public excludedObjects?: ("oracleExcludedObjects"|"mysqlExcludedObjects"|"postgresqlExcludedObjects"|"sqlServerExcludedObjects"|"salesforceExcludedObjects");
 
                         /**
                          * Creates a new BackfillAllStrategy instance using the specified properties.
@@ -11841,6 +12842,9 @@ export namespace google {
 
                     /** SourceObjectIdentifier sqlServerIdentifier */
                     sqlServerIdentifier?: (google.cloud.datastream.v1.SourceObjectIdentifier.ISqlServerObjectIdentifier|null);
+
+                    /** SourceObjectIdentifier salesforceIdentifier */
+                    salesforceIdentifier?: (google.cloud.datastream.v1.SourceObjectIdentifier.ISalesforceObjectIdentifier|null);
                 }
 
                 /** Represents a SourceObjectIdentifier. */
@@ -11864,8 +12868,11 @@ export namespace google {
                     /** SourceObjectIdentifier sqlServerIdentifier. */
                     public sqlServerIdentifier?: (google.cloud.datastream.v1.SourceObjectIdentifier.ISqlServerObjectIdentifier|null);
 
+                    /** SourceObjectIdentifier salesforceIdentifier. */
+                    public salesforceIdentifier?: (google.cloud.datastream.v1.SourceObjectIdentifier.ISalesforceObjectIdentifier|null);
+
                     /** SourceObjectIdentifier sourceIdentifier. */
-                    public sourceIdentifier?: ("oracleIdentifier"|"mysqlIdentifier"|"postgresqlIdentifier"|"sqlServerIdentifier");
+                    public sourceIdentifier?: ("oracleIdentifier"|"mysqlIdentifier"|"postgresqlIdentifier"|"sqlServerIdentifier"|"salesforceIdentifier");
 
                     /**
                      * Creates a new SourceObjectIdentifier instance using the specified properties.
@@ -12353,6 +13360,103 @@ export namespace google {
 
                         /**
                          * Gets the default type url for SqlServerObjectIdentifier
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a SalesforceObjectIdentifier. */
+                    interface ISalesforceObjectIdentifier {
+
+                        /** SalesforceObjectIdentifier objectName */
+                        objectName?: (string|null);
+                    }
+
+                    /** Represents a SalesforceObjectIdentifier. */
+                    class SalesforceObjectIdentifier implements ISalesforceObjectIdentifier {
+
+                        /**
+                         * Constructs a new SalesforceObjectIdentifier.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.datastream.v1.SourceObjectIdentifier.ISalesforceObjectIdentifier);
+
+                        /** SalesforceObjectIdentifier objectName. */
+                        public objectName: string;
+
+                        /**
+                         * Creates a new SalesforceObjectIdentifier instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SalesforceObjectIdentifier instance
+                         */
+                        public static create(properties?: google.cloud.datastream.v1.SourceObjectIdentifier.ISalesforceObjectIdentifier): google.cloud.datastream.v1.SourceObjectIdentifier.SalesforceObjectIdentifier;
+
+                        /**
+                         * Encodes the specified SalesforceObjectIdentifier message. Does not implicitly {@link google.cloud.datastream.v1.SourceObjectIdentifier.SalesforceObjectIdentifier.verify|verify} messages.
+                         * @param message SalesforceObjectIdentifier message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.datastream.v1.SourceObjectIdentifier.ISalesforceObjectIdentifier, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SalesforceObjectIdentifier message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.SourceObjectIdentifier.SalesforceObjectIdentifier.verify|verify} messages.
+                         * @param message SalesforceObjectIdentifier message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.datastream.v1.SourceObjectIdentifier.ISalesforceObjectIdentifier, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SalesforceObjectIdentifier message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SalesforceObjectIdentifier
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datastream.v1.SourceObjectIdentifier.SalesforceObjectIdentifier;
+
+                        /**
+                         * Decodes a SalesforceObjectIdentifier message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SalesforceObjectIdentifier
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datastream.v1.SourceObjectIdentifier.SalesforceObjectIdentifier;
+
+                        /**
+                         * Verifies a SalesforceObjectIdentifier message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SalesforceObjectIdentifier message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SalesforceObjectIdentifier
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.datastream.v1.SourceObjectIdentifier.SalesforceObjectIdentifier;
+
+                        /**
+                         * Creates a plain object from a SalesforceObjectIdentifier message. Also converts values to other types if specified.
+                         * @param message SalesforceObjectIdentifier
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.datastream.v1.SourceObjectIdentifier.SalesforceObjectIdentifier, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SalesforceObjectIdentifier to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SalesforceObjectIdentifier
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -13280,6 +14384,9 @@ export namespace google {
 
                         /** SpecificStartPosition sqlServerLsnPosition */
                         sqlServerLsnPosition?: (google.cloud.datastream.v1.ISqlServerLsnPosition|null);
+
+                        /** SpecificStartPosition mysqlGtidPosition */
+                        mysqlGtidPosition?: (google.cloud.datastream.v1.IMysqlGtidPosition|null);
                     }
 
                     /** Represents a SpecificStartPosition. */
@@ -13300,8 +14407,11 @@ export namespace google {
                         /** SpecificStartPosition sqlServerLsnPosition. */
                         public sqlServerLsnPosition?: (google.cloud.datastream.v1.ISqlServerLsnPosition|null);
 
+                        /** SpecificStartPosition mysqlGtidPosition. */
+                        public mysqlGtidPosition?: (google.cloud.datastream.v1.IMysqlGtidPosition|null);
+
                         /** SpecificStartPosition position. */
-                        public position?: ("mysqlLogPosition"|"oracleScnPosition"|"sqlServerLsnPosition");
+                        public position?: ("mysqlLogPosition"|"oracleScnPosition"|"sqlServerLsnPosition"|"mysqlGtidPosition");
 
                         /**
                          * Creates a new SpecificStartPosition instance using the specified properties.
@@ -13676,6 +14786,103 @@ export namespace google {
 
                     /**
                      * Gets the default type url for MysqlLogPosition
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a MysqlGtidPosition. */
+                interface IMysqlGtidPosition {
+
+                    /** MysqlGtidPosition gtidSet */
+                    gtidSet?: (string|null);
+                }
+
+                /** Represents a MysqlGtidPosition. */
+                class MysqlGtidPosition implements IMysqlGtidPosition {
+
+                    /**
+                     * Constructs a new MysqlGtidPosition.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datastream.v1.IMysqlGtidPosition);
+
+                    /** MysqlGtidPosition gtidSet. */
+                    public gtidSet: string;
+
+                    /**
+                     * Creates a new MysqlGtidPosition instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MysqlGtidPosition instance
+                     */
+                    public static create(properties?: google.cloud.datastream.v1.IMysqlGtidPosition): google.cloud.datastream.v1.MysqlGtidPosition;
+
+                    /**
+                     * Encodes the specified MysqlGtidPosition message. Does not implicitly {@link google.cloud.datastream.v1.MysqlGtidPosition.verify|verify} messages.
+                     * @param message MysqlGtidPosition message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datastream.v1.IMysqlGtidPosition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MysqlGtidPosition message, length delimited. Does not implicitly {@link google.cloud.datastream.v1.MysqlGtidPosition.verify|verify} messages.
+                     * @param message MysqlGtidPosition message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datastream.v1.IMysqlGtidPosition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MysqlGtidPosition message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MysqlGtidPosition
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datastream.v1.MysqlGtidPosition;
+
+                    /**
+                     * Decodes a MysqlGtidPosition message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MysqlGtidPosition
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datastream.v1.MysqlGtidPosition;
+
+                    /**
+                     * Verifies a MysqlGtidPosition message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MysqlGtidPosition message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MysqlGtidPosition
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datastream.v1.MysqlGtidPosition;
+
+                    /**
+                     * Creates a plain object from a MysqlGtidPosition message. Also converts values to other types if specified.
+                     * @param message MysqlGtidPosition
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datastream.v1.MysqlGtidPosition, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MysqlGtidPosition to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MysqlGtidPosition
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
