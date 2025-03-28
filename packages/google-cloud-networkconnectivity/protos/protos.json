@@ -72,6 +72,1662 @@
                         }
                       }
                     },
+                    "CrossNetworkAutomationService": {
+                      "options": {
+                        "(google.api.default_host)": "networkconnectivity.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "ListServiceConnectionMaps": {
+                          "requestType": "ListServiceConnectionMapsRequest",
+                          "responseType": "ListServiceConnectionMapsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/serviceConnectionMaps",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/serviceConnectionMaps"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetServiceConnectionMap": {
+                          "requestType": "GetServiceConnectionMapRequest",
+                          "responseType": "ServiceConnectionMap",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/serviceConnectionMaps/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/serviceConnectionMaps/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateServiceConnectionMap": {
+                          "requestType": "CreateServiceConnectionMapRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/serviceConnectionMaps",
+                            "(google.api.http).body": "service_connection_map",
+                            "(google.api.method_signature)": "parent,service_connection_map,service_connection_map_id",
+                            "(google.longrunning.operation_info).response_type": "ServiceConnectionMap",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/serviceConnectionMaps",
+                                "body": "service_connection_map"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,service_connection_map,service_connection_map_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "ServiceConnectionMap",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UpdateServiceConnectionMap": {
+                          "requestType": "UpdateServiceConnectionMapRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{service_connection_map.name=projects/*/locations/*/serviceConnectionMaps/*}",
+                            "(google.api.http).body": "service_connection_map",
+                            "(google.api.method_signature)": "service_connection_map,update_mask",
+                            "(google.longrunning.operation_info).response_type": "ServiceConnectionMap",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{service_connection_map.name=projects/*/locations/*/serviceConnectionMaps/*}",
+                                "body": "service_connection_map"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "service_connection_map,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "ServiceConnectionMap",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteServiceConnectionMap": {
+                          "requestType": "DeleteServiceConnectionMapRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/serviceConnectionMaps/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/serviceConnectionMaps/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ListServiceConnectionPolicies": {
+                          "requestType": "ListServiceConnectionPoliciesRequest",
+                          "responseType": "ListServiceConnectionPoliciesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/serviceConnectionPolicies",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/serviceConnectionPolicies"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetServiceConnectionPolicy": {
+                          "requestType": "GetServiceConnectionPolicyRequest",
+                          "responseType": "ServiceConnectionPolicy",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/serviceConnectionPolicies/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/serviceConnectionPolicies/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateServiceConnectionPolicy": {
+                          "requestType": "CreateServiceConnectionPolicyRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/serviceConnectionPolicies",
+                            "(google.api.http).body": "service_connection_policy",
+                            "(google.api.method_signature)": "parent,service_connection_policy,service_connection_policy_id",
+                            "(google.longrunning.operation_info).response_type": "ServiceConnectionPolicy",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/serviceConnectionPolicies",
+                                "body": "service_connection_policy"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,service_connection_policy,service_connection_policy_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "ServiceConnectionPolicy",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UpdateServiceConnectionPolicy": {
+                          "requestType": "UpdateServiceConnectionPolicyRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{service_connection_policy.name=projects/*/locations/*/serviceConnectionPolicies/*}",
+                            "(google.api.http).body": "service_connection_policy",
+                            "(google.api.method_signature)": "service_connection_policy,update_mask",
+                            "(google.longrunning.operation_info).response_type": "ServiceConnectionPolicy",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{service_connection_policy.name=projects/*/locations/*/serviceConnectionPolicies/*}",
+                                "body": "service_connection_policy"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "service_connection_policy,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "ServiceConnectionPolicy",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteServiceConnectionPolicy": {
+                          "requestType": "DeleteServiceConnectionPolicyRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/serviceConnectionPolicies/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/serviceConnectionPolicies/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ListServiceClasses": {
+                          "requestType": "ListServiceClassesRequest",
+                          "responseType": "ListServiceClassesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/serviceClasses",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/serviceClasses"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetServiceClass": {
+                          "requestType": "GetServiceClassRequest",
+                          "responseType": "ServiceClass",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/serviceClasses/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/serviceClasses/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdateServiceClass": {
+                          "requestType": "UpdateServiceClassRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{service_class.name=projects/*/locations/*/serviceClasses/*}",
+                            "(google.api.http).body": "service_class",
+                            "(google.api.method_signature)": "service_class,update_mask",
+                            "(google.longrunning.operation_info).response_type": "ServiceClass",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{service_class.name=projects/*/locations/*/serviceClasses/*}",
+                                "body": "service_class"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "service_class,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "ServiceClass",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteServiceClass": {
+                          "requestType": "DeleteServiceClassRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/serviceClasses/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/serviceClasses/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "GetServiceConnectionToken": {
+                          "requestType": "GetServiceConnectionTokenRequest",
+                          "responseType": "ServiceConnectionToken",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/serviceConnectionTokens/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/serviceConnectionTokens/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListServiceConnectionTokens": {
+                          "requestType": "ListServiceConnectionTokensRequest",
+                          "responseType": "ListServiceConnectionTokensResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/serviceConnectionTokens",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/serviceConnectionTokens"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "CreateServiceConnectionToken": {
+                          "requestType": "CreateServiceConnectionTokenRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/serviceConnectionTokens",
+                            "(google.api.http).body": "service_connection_token",
+                            "(google.api.method_signature)": "parent,service_connection_token,service_connection_token_id",
+                            "(google.longrunning.operation_info).response_type": "ServiceConnectionToken",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/serviceConnectionTokens",
+                                "body": "service_connection_token"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,service_connection_token,service_connection_token_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "ServiceConnectionToken",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteServiceConnectionToken": {
+                          "requestType": "DeleteServiceConnectionTokenRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/serviceConnectionTokens/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/serviceConnectionTokens/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "Infrastructure": {
+                      "values": {
+                        "INFRASTRUCTURE_UNSPECIFIED": 0,
+                        "PSC": 1
+                      }
+                    },
+                    "ConnectionErrorType": {
+                      "values": {
+                        "CONNECTION_ERROR_TYPE_UNSPECIFIED": 0,
+                        "ERROR_INTERNAL": 1,
+                        "ERROR_CONSUMER_SIDE": 2,
+                        "ERROR_PRODUCER_SIDE": 3
+                      }
+                    },
+                    "IPVersion": {
+                      "values": {
+                        "IP_VERSION_UNSPECIFIED": 0,
+                        "IPV4": 1,
+                        "IPV6": 2
+                      }
+                    },
+                    "ServiceConnectionMap": {
+                      "options": {
+                        "(google.api.resource).type": "networkconnectivity.googleapis.com/ServiceConnectionMap",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/serviceConnectionMaps/{service_connection_map}"
+                      },
+                      "oneofs": {
+                        "_etag": {
+                          "oneof": [
+                            "etag"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 4
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "serviceClass": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "serviceClassUri": {
+                          "type": "string",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "infrastructure": {
+                          "type": "Infrastructure",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "producerPscConfigs": {
+                          "rule": "repeated",
+                          "type": "ProducerPscConfig",
+                          "id": 9
+                        },
+                        "consumerPscConfigs": {
+                          "rule": "repeated",
+                          "type": "ConsumerPscConfig",
+                          "id": 10
+                        },
+                        "consumerPscConnections": {
+                          "rule": "repeated",
+                          "type": "ConsumerPscConnection",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "token": {
+                          "type": "string",
+                          "id": 13
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ProducerPscConfig": {
+                          "fields": {
+                            "serviceAttachmentUri": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.resource_reference).type": "compute.googleapis.com/ServiceAttachment"
+                              }
+                            }
+                          }
+                        },
+                        "ConsumerPscConfig": {
+                          "oneofs": {
+                            "_ipVersion": {
+                              "oneof": [
+                                "ipVersion"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "project": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "network": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.resource_reference).type": "compute.googleapis.com/Network"
+                              }
+                            },
+                            "disableGlobalAccess": {
+                              "type": "bool",
+                              "id": 3
+                            },
+                            "state": {
+                              "type": "State",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "producerInstanceId": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "deprecated": true,
+                                "(google.api.field_behavior)": "IMMUTABLE"
+                              }
+                            },
+                            "serviceAttachmentIpAddressMap": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "consumerInstanceProject": {
+                              "type": "string",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "compute.googleapis.com/Project"
+                              }
+                            },
+                            "producerInstanceMetadata": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE"
+                              }
+                            },
+                            "ipVersion": {
+                              "type": "IPVersion",
+                              "id": 9,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            }
+                          },
+                          "nested": {
+                            "State": {
+                              "values": {
+                                "STATE_UNSPECIFIED": 0,
+                                "VALID": 1,
+                                "CONNECTION_POLICY_MISSING": 2,
+                                "POLICY_LIMIT_REACHED": 3,
+                                "CONSUMER_INSTANCE_PROJECT_NOT_ALLOWLISTED": 4
+                              }
+                            }
+                          }
+                        },
+                        "ConsumerPscConnection": {
+                          "oneofs": {
+                            "_ipVersion": {
+                              "oneof": [
+                                "ipVersion"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "serviceAttachmentUri": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "state": {
+                              "type": "State",
+                              "id": 2
+                            },
+                            "project": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "network": {
+                              "type": "string",
+                              "id": 4
+                            },
+                            "pscConnectionId": {
+                              "type": "string",
+                              "id": 5
+                            },
+                            "ip": {
+                              "type": "string",
+                              "id": 6
+                            },
+                            "errorType": {
+                              "type": "ConnectionErrorType",
+                              "id": 7,
+                              "options": {
+                                "deprecated": true
+                              }
+                            },
+                            "error": {
+                              "type": "google.rpc.Status",
+                              "id": 8,
+                              "options": {
+                                "deprecated": true
+                              }
+                            },
+                            "gceOperation": {
+                              "type": "string",
+                              "id": 9
+                            },
+                            "forwardingRule": {
+                              "type": "string",
+                              "id": 10
+                            },
+                            "errorInfo": {
+                              "type": "google.rpc.ErrorInfo",
+                              "id": 11,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "selectedSubnetwork": {
+                              "type": "string",
+                              "id": 12,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "producerInstanceId": {
+                              "type": "string",
+                              "id": 13,
+                              "options": {
+                                "deprecated": true,
+                                "(google.api.field_behavior)": "IMMUTABLE"
+                              }
+                            },
+                            "producerInstanceMetadata": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 14,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE"
+                              }
+                            },
+                            "ipVersion": {
+                              "type": "IPVersion",
+                              "id": 15,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            }
+                          },
+                          "nested": {
+                            "State": {
+                              "values": {
+                                "STATE_UNSPECIFIED": 0,
+                                "ACTIVE": 1,
+                                "FAILED": 2,
+                                "CREATING": 3,
+                                "DELETING": 4,
+                                "CREATE_REPAIRING": 5,
+                                "DELETE_REPAIRING": 6
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ListServiceConnectionMapsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "ListServiceConnectionMapsResponse": {
+                      "fields": {
+                        "serviceConnectionMaps": {
+                          "rule": "repeated",
+                          "type": "ServiceConnectionMap",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GetServiceConnectionMapRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networkconnectivity.googleapis.com/ServiceConnectionMap"
+                          }
+                        }
+                      }
+                    },
+                    "CreateServiceConnectionMapRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "networkconnectivity.googleapis.com/ServiceConnectionMap"
+                          }
+                        },
+                        "serviceConnectionMapId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "serviceConnectionMap": {
+                          "type": "ServiceConnectionMap",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateServiceConnectionMapRequest": {
+                      "fields": {
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "serviceConnectionMap": {
+                          "type": "ServiceConnectionMap",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteServiceConnectionMapRequest": {
+                      "oneofs": {
+                        "_etag": {
+                          "oneof": [
+                            "etag"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networkconnectivity.googleapis.com/ServiceConnectionMap"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "ServiceConnectionPolicy": {
+                      "options": {
+                        "(google.api.resource).type": "networkconnectivity.googleapis.com/ServiceConnectionPolicy",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/serviceConnectionPolicies/{service_connection_policy}"
+                      },
+                      "oneofs": {
+                        "_etag": {
+                          "oneof": [
+                            "etag"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 4
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "network": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.resource_reference).type": "compute.googleapis.com/Network"
+                          }
+                        },
+                        "serviceClass": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "infrastructure": {
+                          "type": "Infrastructure",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "pscConfig": {
+                          "type": "PscConfig",
+                          "id": 9
+                        },
+                        "pscConnections": {
+                          "rule": "repeated",
+                          "type": "PscConnection",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "PscConfig": {
+                          "oneofs": {
+                            "_limit": {
+                              "oneof": [
+                                "limit"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "subnetworks": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.resource_reference).type": "compute.googleapis.com/Subnetwork"
+                              }
+                            },
+                            "limit": {
+                              "type": "int64",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            },
+                            "producerInstanceLocation": {
+                              "type": "ProducerInstanceLocation",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "allowedGoogleProducersResourceHierarchyLevel": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "ProducerInstanceLocation": {
+                              "values": {
+                                "PRODUCER_INSTANCE_LOCATION_UNSPECIFIED": 0,
+                                "CUSTOM_RESOURCE_HIERARCHY_LEVELS": 1
+                              }
+                            }
+                          }
+                        },
+                        "PscConnection": {
+                          "oneofs": {
+                            "_ipVersion": {
+                              "oneof": [
+                                "ipVersion"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "state": {
+                              "type": "State",
+                              "id": 1
+                            },
+                            "consumerForwardingRule": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "consumerAddress": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "errorType": {
+                              "type": "ConnectionErrorType",
+                              "id": 4,
+                              "options": {
+                                "deprecated": true
+                              }
+                            },
+                            "error": {
+                              "type": "google.rpc.Status",
+                              "id": 5,
+                              "options": {
+                                "deprecated": true
+                              }
+                            },
+                            "gceOperation": {
+                              "type": "string",
+                              "id": 6
+                            },
+                            "consumerTargetProject": {
+                              "type": "string",
+                              "id": 7
+                            },
+                            "pscConnectionId": {
+                              "type": "string",
+                              "id": 8
+                            },
+                            "errorInfo": {
+                              "type": "google.rpc.ErrorInfo",
+                              "id": 9,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "selectedSubnetwork": {
+                              "type": "string",
+                              "id": 10,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "producerInstanceId": {
+                              "type": "string",
+                              "id": 11,
+                              "options": {
+                                "deprecated": true,
+                                "(google.api.field_behavior)": "IMMUTABLE"
+                              }
+                            },
+                            "producerInstanceMetadata": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 12,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE"
+                              }
+                            },
+                            "serviceClass": {
+                              "type": "string",
+                              "id": 13,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "ipVersion": {
+                              "type": "IPVersion",
+                              "id": 14,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "ACTIVE": 1,
+                            "FAILED": 2,
+                            "CREATING": 3,
+                            "DELETING": 4,
+                            "CREATE_REPAIRING": 5,
+                            "DELETE_REPAIRING": 6
+                          }
+                        }
+                      }
+                    },
+                    "ListServiceConnectionPoliciesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "ListServiceConnectionPoliciesResponse": {
+                      "fields": {
+                        "serviceConnectionPolicies": {
+                          "rule": "repeated",
+                          "type": "ServiceConnectionPolicy",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GetServiceConnectionPolicyRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networkconnectivity.googleapis.com/ServiceConnectionPolicy"
+                          }
+                        }
+                      }
+                    },
+                    "CreateServiceConnectionPolicyRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "networkconnectivity.googleapis.com/ServiceConnectionPolicy"
+                          }
+                        },
+                        "serviceConnectionPolicyId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "serviceConnectionPolicy": {
+                          "type": "ServiceConnectionPolicy",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateServiceConnectionPolicyRequest": {
+                      "fields": {
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "serviceConnectionPolicy": {
+                          "type": "ServiceConnectionPolicy",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteServiceConnectionPolicyRequest": {
+                      "oneofs": {
+                        "_etag": {
+                          "oneof": [
+                            "etag"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networkconnectivity.googleapis.com/ServiceConnectionPolicy"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "ServiceClass": {
+                      "options": {
+                        "(google.api.resource).type": "networkconnectivity.googleapis.com/ServiceClass",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/serviceClasses/{service_class}"
+                      },
+                      "oneofs": {
+                        "_etag": {
+                          "oneof": [
+                            "etag"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "serviceClass": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 4
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "ListServiceClassesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "ListServiceClassesResponse": {
+                      "fields": {
+                        "serviceClasses": {
+                          "rule": "repeated",
+                          "type": "ServiceClass",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GetServiceClassRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networkconnectivity.googleapis.com/ServiceClass"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateServiceClassRequest": {
+                      "fields": {
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "serviceClass": {
+                          "type": "ServiceClass",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteServiceClassRequest": {
+                      "oneofs": {
+                        "_etag": {
+                          "oneof": [
+                            "etag"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networkconnectivity.googleapis.com/ServiceClass"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "ServiceConnectionToken": {
+                      "options": {
+                        "(google.api.resource).type": "networkconnectivity.googleapis.com/ServiceConnectionToken",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/serviceConnectionTokens/{service_connection_token}"
+                      },
+                      "oneofs": {
+                        "_etag": {
+                          "oneof": [
+                            "etag"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 4
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "network": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.resource_reference).type": "compute.googleapis.com/Network"
+                          }
+                        },
+                        "token": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "expireTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "ListServiceConnectionTokensRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "ListServiceConnectionTokensResponse": {
+                      "fields": {
+                        "serviceConnectionTokens": {
+                          "rule": "repeated",
+                          "type": "ServiceConnectionToken",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GetServiceConnectionTokenRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networkconnectivity.googleapis.com/ServiceConnectionToken"
+                          }
+                        }
+                      }
+                    },
+                    "CreateServiceConnectionTokenRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "networkconnectivity.googleapis.com/ServiceConnectionToken"
+                          }
+                        },
+                        "serviceConnectionTokenId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "serviceConnectionToken": {
+                          "type": "ServiceConnectionToken",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteServiceConnectionTokenRequest": {
+                      "oneofs": {
+                        "_etag": {
+                          "oneof": [
+                            "etag"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networkconnectivity.googleapis.com/ServiceConnectionToken"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "HubService": {
                       "options": {
                         "(google.api.default_host)": "networkconnectivity.googleapis.com",
@@ -380,6 +2036,62 @@
                             }
                           ]
                         },
+                        "AcceptSpokeUpdate": {
+                          "requestType": "AcceptSpokeUpdateRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/global/hubs/*}:acceptSpokeUpdate",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,spoke_uri,spoke_etag",
+                            "(google.longrunning.operation_info).response_type": "AcceptSpokeUpdateResponse",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/global/hubs/*}:acceptSpokeUpdate",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,spoke_uri,spoke_etag"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "AcceptSpokeUpdateResponse",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "RejectSpokeUpdate": {
+                          "requestType": "RejectSpokeUpdateRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/global/hubs/*}:rejectSpokeUpdate",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,spoke_uri,spoke_etag",
+                            "(google.longrunning.operation_info).response_type": "RejectSpokeUpdateResponse",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/global/hubs/*}:rejectSpokeUpdate",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,spoke_uri,spoke_etag"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "RejectSpokeUpdateResponse",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "DeleteSpoke": {
                           "requestType": "DeleteSpokeRequest",
                           "responseType": "google.longrunning.Operation",
@@ -569,7 +2281,8 @@
                         "REJECTING": 9,
                         "UPDATING": 6,
                         "INACTIVE": 7,
-                        "OBSOLETE": 10
+                        "OBSOLETE": 10,
+                        "FAILED": 11
                       }
                     },
                     "SpokeType": {
@@ -636,7 +2349,10 @@
                         },
                         "description": {
                           "type": "string",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "uniqueId": {
                           "type": "string",
@@ -748,7 +2464,10 @@
                         },
                         "description": {
                           "type": "string",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "hub": {
                           "type": "string",
@@ -768,15 +2487,24 @@
                         },
                         "linkedVpnTunnels": {
                           "type": "LinkedVpnTunnels",
-                          "id": 17
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "linkedInterconnectAttachments": {
                           "type": "LinkedInterconnectAttachments",
-                          "id": 18
+                          "id": 18,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "linkedRouterApplianceInstances": {
                           "type": "LinkedRouterApplianceInstances",
-                          "id": 19
+                          "id": 19,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "linkedVpcNetwork": {
                           "type": "LinkedVpcNetwork",
@@ -820,6 +2548,21 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 27,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "fieldPathsPendingUpdate": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 28,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -845,7 +2588,10 @@
                                 "PENDING_REVIEW": 1,
                                 "REJECTED": 2,
                                 "PAUSED": 3,
-                                "FAILED": 4
+                                "FAILED": 4,
+                                "UPDATE_PENDING_REVIEW": 5,
+                                "UPDATE_REJECTED": 6,
+                                "UPDATE_FAILED": 7
                               }
                             }
                           }
@@ -1094,7 +2840,10 @@
                         "autoAcceptProjects": {
                           "rule": "repeated",
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1630,6 +3379,99 @@
                         }
                       }
                     },
+                    "AcceptSpokeUpdateRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networkconnectivity.googleapis.com/Hub"
+                          }
+                        },
+                        "spokeUri": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networkconnectivity.googleapis.com/Spoke"
+                          }
+                        },
+                        "spokeEtag": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "AcceptSpokeUpdateResponse": {
+                      "fields": {
+                        "spoke": {
+                          "type": "Spoke",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "RejectSpokeUpdateRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networkconnectivity.googleapis.com/Hub"
+                          }
+                        },
+                        "spokeUri": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networkconnectivity.googleapis.com/Spoke"
+                          }
+                        },
+                        "spokeEtag": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "details": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "RejectSpokeUpdateResponse": {
+                      "fields": {
+                        "spoke": {
+                          "type": "Spoke",
+                          "id": 1
+                        }
+                      }
+                    },
                     "GetRouteTableRequest": {
                       "fields": {
                         "name": {
@@ -1911,6 +3753,22 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "proposedIncludeExportRanges": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "proposedExcludeExportRanges": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "producerVpcSpokes": {
                           "rule": "repeated",
                           "type": "string",
@@ -1969,6 +3827,22 @@
                           "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "proposedIncludeExportRanges": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "proposedExcludeExportRanges": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       }
@@ -5441,9 +7315,9 @@
         "rpc": {
           "options": {
             "cc_enable_arenas": true,
-            "go_package": "google.golang.org/genproto/googleapis/rpc/status;status",
+            "go_package": "google.golang.org/genproto/googleapis/rpc/errdetails;errdetails",
             "java_multiple_files": true,
-            "java_outer_classname": "StatusProto",
+            "java_outer_classname": "ErrorDetailsProto",
             "java_package": "com.google.rpc",
             "objc_class_prefix": "RPC"
           },
@@ -5462,6 +7336,184 @@
                   "rule": "repeated",
                   "type": "google.protobuf.Any",
                   "id": 3
+                }
+              }
+            },
+            "ErrorInfo": {
+              "fields": {
+                "reason": {
+                  "type": "string",
+                  "id": 1
+                },
+                "domain": {
+                  "type": "string",
+                  "id": 2
+                },
+                "metadata": {
+                  "keyType": "string",
+                  "type": "string",
+                  "id": 3
+                }
+              }
+            },
+            "RetryInfo": {
+              "fields": {
+                "retryDelay": {
+                  "type": "google.protobuf.Duration",
+                  "id": 1
+                }
+              }
+            },
+            "DebugInfo": {
+              "fields": {
+                "stackEntries": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
+                },
+                "detail": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "QuotaFailure": {
+              "fields": {
+                "violations": {
+                  "rule": "repeated",
+                  "type": "Violation",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Violation": {
+                  "fields": {
+                    "subject": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "description": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "PreconditionFailure": {
+              "fields": {
+                "violations": {
+                  "rule": "repeated",
+                  "type": "Violation",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Violation": {
+                  "fields": {
+                    "type": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "subject": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "description": {
+                      "type": "string",
+                      "id": 3
+                    }
+                  }
+                }
+              }
+            },
+            "BadRequest": {
+              "fields": {
+                "fieldViolations": {
+                  "rule": "repeated",
+                  "type": "FieldViolation",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "FieldViolation": {
+                  "fields": {
+                    "field": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "description": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "RequestInfo": {
+              "fields": {
+                "requestId": {
+                  "type": "string",
+                  "id": 1
+                },
+                "servingData": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "ResourceInfo": {
+              "fields": {
+                "resourceType": {
+                  "type": "string",
+                  "id": 1
+                },
+                "resourceName": {
+                  "type": "string",
+                  "id": 2
+                },
+                "owner": {
+                  "type": "string",
+                  "id": 3
+                },
+                "description": {
+                  "type": "string",
+                  "id": 4
+                }
+              }
+            },
+            "Help": {
+              "fields": {
+                "links": {
+                  "rule": "repeated",
+                  "type": "Link",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Link": {
+                  "fields": {
+                    "description": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "url": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "LocalizedMessage": {
+              "fields": {
+                "locale": {
+                  "type": "string",
+                  "id": 1
+                },
+                "message": {
+                  "type": "string",
+                  "id": 2
                 }
               }
             }

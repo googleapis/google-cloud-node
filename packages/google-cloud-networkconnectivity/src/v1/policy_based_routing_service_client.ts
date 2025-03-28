@@ -240,6 +240,18 @@ export class PolicyBasedRoutingServiceClient {
       routeTablePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/global/hubs/{hub}/routeTables/{route_table}'
       ),
+      serviceClassPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/serviceClasses/{service_class}'
+      ),
+      serviceConnectionMapPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/serviceConnectionMaps/{service_connection_map}'
+      ),
+      serviceConnectionPolicyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/serviceConnectionPolicies/{service_connection_policy}'
+      ),
+      serviceConnectionTokenPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/serviceConnectionTokens/{service_connection_token}'
+      ),
       spokePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/spokes/{spoke}'
       ),
@@ -288,6 +300,15 @@ export class PolicyBasedRoutingServiceClient {
             {
               get: '/v1/{resource=projects/*/locations/global/policyBasedRoutes/*}:getIamPolicy',
             },
+            {
+              get: '/v1/{resource=projects/*/locations/*/serviceConnectionMaps/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/serviceConnectionPolicies/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/serviceClasses/*}:getIamPolicy',
+            },
           ],
         },
         {
@@ -307,6 +328,18 @@ export class PolicyBasedRoutingServiceClient {
               post: '/v1/{resource=projects/*/locations/global/policyBasedRoutes/*}:setIamPolicy',
               body: '*',
             },
+            {
+              post: '/v1/{resource=projects/*/locations/*/serviceConnectionMaps/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/serviceConnectionPolicies/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/serviceClasses/*}:setIamPolicy',
+              body: '*',
+            },
           ],
         },
         {
@@ -324,6 +357,18 @@ export class PolicyBasedRoutingServiceClient {
             },
             {
               post: '/v1/{resource=projects/*/locations/global/policyBasedRoutes/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/serviceConnectionMaps/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/serviceConnectionPolicies/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/serviceClasses/*}:testIamPermissions',
               body: '*',
             },
           ],
@@ -557,7 +602,7 @@ export class PolicyBasedRoutingServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * Gets details of a single PolicyBasedRoute.
+   * Gets details of a single policy-based route.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -685,27 +730,34 @@ export class PolicyBasedRoutingServiceClient {
   }
 
   /**
-   * Creates a new PolicyBasedRoute in a given project and location.
+   * Creates a new policy-based route in a given project and location.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent resource's name of the PolicyBasedRoute.
    * @param {string} request.policyBasedRouteId
-   *   Required. Unique id for the Policy Based Route to create.
+   *   Required. Unique id for the policy-based route to create. Provided by the
+   *   client when the resource is created. The name must comply with
+   *   https://google.aip.dev/122#resource-id-segments. Specifically, the name
+   *   must be 1-63 characters long and match the regular expression
+   *   [a-z]([a-z0-9-]*[a-z0-9])?. The first character must be a lowercase letter,
+   *   and all following characters (except for the last character) must be a
+   *   dash, lowercase letter, or digit. The last character must be a lowercase
+   *   letter or digit.
    * @param {google.cloud.networkconnectivity.v1.PolicyBasedRoute} request.policyBasedRoute
-   *   Required. Initial values for a new Policy Based Route.
+   *   Required. Initial values for a new policy-based route.
    * @param {string} [request.requestId]
    *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes since the first request.
+   *   request ID so that if you must retry your request, the server knows to
+   *   ignore the request if it has already been completed. The server guarantees
+   *   that for at least 60 minutes since the first request.
    *
    *   For example, consider a situation where you make an initial request and
    *   the request times out. If you make the request again with the same request
    *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
+   *   was received, and if so, ignores the second request. This prevents clients
+   *   from accidentally creating duplicate commitments.
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is
    *   not supported (00000000-0000-0000-0000-000000000000).
@@ -872,23 +924,23 @@ export class PolicyBasedRoutingServiceClient {
     >;
   }
   /**
-   * Deletes a single PolicyBasedRoute.
+   * Deletes a single policy-based route.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Name of the PolicyBasedRoute resource to delete.
+   *   Required. Name of the policy-based route resource to delete.
    * @param {string} [request.requestId]
    *   Optional. An optional request ID to identify requests. Specify a unique
-   *   request ID so that if you must retry your request, the server will know to
-   *   ignore the request if it has already been completed. The server will
-   *   guarantee that for at least 60 minutes after the first request.
+   *   request ID so that if you must retry your request, the server knows to
+   *   ignore the request if it has already been completed. The server guarantees
+   *   that for at least 60 minutes after the first request.
    *
    *   For example, consider a situation where you make an initial request and
    *   the request times out. If you make the request again with the same request
    *   ID, the server can check if original operation with the same request ID
-   *   was received, and if so, will ignore the second request. This prevents
-   *   clients from accidentally creating duplicate commitments.
+   *   was received, and if so, ignores the second request. This prevents clients
+   *   from accidentally creating duplicate commitments.
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is
    *   not supported (00000000-0000-0000-0000-000000000000).
@@ -1055,7 +1107,7 @@ export class PolicyBasedRoutingServiceClient {
     >;
   }
   /**
-   * Lists PolicyBasedRoutes in a given project and location.
+   * Lists policy-based routes in a given project and location.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2045,6 +2097,249 @@ export class PolicyBasedRoutingServiceClient {
   matchRouteTableFromRouteTableName(routeTableName: string) {
     return this.pathTemplates.routeTablePathTemplate.match(routeTableName)
       .route_table;
+  }
+
+  /**
+   * Return a fully-qualified serviceClass resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} service_class
+   * @returns {string} Resource name string.
+   */
+  serviceClassPath(project: string, location: string, serviceClass: string) {
+    return this.pathTemplates.serviceClassPathTemplate.render({
+      project: project,
+      location: location,
+      service_class: serviceClass,
+    });
+  }
+
+  /**
+   * Parse the project from ServiceClass resource.
+   *
+   * @param {string} serviceClassName
+   *   A fully-qualified path representing ServiceClass resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromServiceClassName(serviceClassName: string) {
+    return this.pathTemplates.serviceClassPathTemplate.match(serviceClassName)
+      .project;
+  }
+
+  /**
+   * Parse the location from ServiceClass resource.
+   *
+   * @param {string} serviceClassName
+   *   A fully-qualified path representing ServiceClass resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromServiceClassName(serviceClassName: string) {
+    return this.pathTemplates.serviceClassPathTemplate.match(serviceClassName)
+      .location;
+  }
+
+  /**
+   * Parse the service_class from ServiceClass resource.
+   *
+   * @param {string} serviceClassName
+   *   A fully-qualified path representing ServiceClass resource.
+   * @returns {string} A string representing the service_class.
+   */
+  matchServiceClassFromServiceClassName(serviceClassName: string) {
+    return this.pathTemplates.serviceClassPathTemplate.match(serviceClassName)
+      .service_class;
+  }
+
+  /**
+   * Return a fully-qualified serviceConnectionMap resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} service_connection_map
+   * @returns {string} Resource name string.
+   */
+  serviceConnectionMapPath(
+    project: string,
+    location: string,
+    serviceConnectionMap: string
+  ) {
+    return this.pathTemplates.serviceConnectionMapPathTemplate.render({
+      project: project,
+      location: location,
+      service_connection_map: serviceConnectionMap,
+    });
+  }
+
+  /**
+   * Parse the project from ServiceConnectionMap resource.
+   *
+   * @param {string} serviceConnectionMapName
+   *   A fully-qualified path representing ServiceConnectionMap resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromServiceConnectionMapName(serviceConnectionMapName: string) {
+    return this.pathTemplates.serviceConnectionMapPathTemplate.match(
+      serviceConnectionMapName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ServiceConnectionMap resource.
+   *
+   * @param {string} serviceConnectionMapName
+   *   A fully-qualified path representing ServiceConnectionMap resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromServiceConnectionMapName(serviceConnectionMapName: string) {
+    return this.pathTemplates.serviceConnectionMapPathTemplate.match(
+      serviceConnectionMapName
+    ).location;
+  }
+
+  /**
+   * Parse the service_connection_map from ServiceConnectionMap resource.
+   *
+   * @param {string} serviceConnectionMapName
+   *   A fully-qualified path representing ServiceConnectionMap resource.
+   * @returns {string} A string representing the service_connection_map.
+   */
+  matchServiceConnectionMapFromServiceConnectionMapName(
+    serviceConnectionMapName: string
+  ) {
+    return this.pathTemplates.serviceConnectionMapPathTemplate.match(
+      serviceConnectionMapName
+    ).service_connection_map;
+  }
+
+  /**
+   * Return a fully-qualified serviceConnectionPolicy resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} service_connection_policy
+   * @returns {string} Resource name string.
+   */
+  serviceConnectionPolicyPath(
+    project: string,
+    location: string,
+    serviceConnectionPolicy: string
+  ) {
+    return this.pathTemplates.serviceConnectionPolicyPathTemplate.render({
+      project: project,
+      location: location,
+      service_connection_policy: serviceConnectionPolicy,
+    });
+  }
+
+  /**
+   * Parse the project from ServiceConnectionPolicy resource.
+   *
+   * @param {string} serviceConnectionPolicyName
+   *   A fully-qualified path representing ServiceConnectionPolicy resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromServiceConnectionPolicyName(
+    serviceConnectionPolicyName: string
+  ) {
+    return this.pathTemplates.serviceConnectionPolicyPathTemplate.match(
+      serviceConnectionPolicyName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ServiceConnectionPolicy resource.
+   *
+   * @param {string} serviceConnectionPolicyName
+   *   A fully-qualified path representing ServiceConnectionPolicy resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromServiceConnectionPolicyName(
+    serviceConnectionPolicyName: string
+  ) {
+    return this.pathTemplates.serviceConnectionPolicyPathTemplate.match(
+      serviceConnectionPolicyName
+    ).location;
+  }
+
+  /**
+   * Parse the service_connection_policy from ServiceConnectionPolicy resource.
+   *
+   * @param {string} serviceConnectionPolicyName
+   *   A fully-qualified path representing ServiceConnectionPolicy resource.
+   * @returns {string} A string representing the service_connection_policy.
+   */
+  matchServiceConnectionPolicyFromServiceConnectionPolicyName(
+    serviceConnectionPolicyName: string
+  ) {
+    return this.pathTemplates.serviceConnectionPolicyPathTemplate.match(
+      serviceConnectionPolicyName
+    ).service_connection_policy;
+  }
+
+  /**
+   * Return a fully-qualified serviceConnectionToken resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} service_connection_token
+   * @returns {string} Resource name string.
+   */
+  serviceConnectionTokenPath(
+    project: string,
+    location: string,
+    serviceConnectionToken: string
+  ) {
+    return this.pathTemplates.serviceConnectionTokenPathTemplate.render({
+      project: project,
+      location: location,
+      service_connection_token: serviceConnectionToken,
+    });
+  }
+
+  /**
+   * Parse the project from ServiceConnectionToken resource.
+   *
+   * @param {string} serviceConnectionTokenName
+   *   A fully-qualified path representing ServiceConnectionToken resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromServiceConnectionTokenName(
+    serviceConnectionTokenName: string
+  ) {
+    return this.pathTemplates.serviceConnectionTokenPathTemplate.match(
+      serviceConnectionTokenName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ServiceConnectionToken resource.
+   *
+   * @param {string} serviceConnectionTokenName
+   *   A fully-qualified path representing ServiceConnectionToken resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromServiceConnectionTokenName(
+    serviceConnectionTokenName: string
+  ) {
+    return this.pathTemplates.serviceConnectionTokenPathTemplate.match(
+      serviceConnectionTokenName
+    ).location;
+  }
+
+  /**
+   * Parse the service_connection_token from ServiceConnectionToken resource.
+   *
+   * @param {string} serviceConnectionTokenName
+   *   A fully-qualified path representing ServiceConnectionToken resource.
+   * @returns {string} A string representing the service_connection_token.
+   */
+  matchServiceConnectionTokenFromServiceConnectionTokenName(
+    serviceConnectionTokenName: string
+  ) {
+    return this.pathTemplates.serviceConnectionTokenPathTemplate.match(
+      serviceConnectionTokenName
+    ).service_connection_token;
   }
 
   /**

@@ -17,11 +17,17 @@
 // ** All changes to this file may be overwritten. **
 
 import {
+  CrossNetworkAutomationServiceClient,
   HubServiceClient,
   PolicyBasedRoutingServiceClient,
 } from '@google-cloud/network-connectivity';
 
 // check that the client class type name can be used
+function doStuffWithCrossNetworkAutomationServiceClient(
+  client: CrossNetworkAutomationServiceClient
+) {
+  client.close();
+}
 function doStuffWithHubServiceClient(client: HubServiceClient) {
   client.close();
 }
@@ -32,6 +38,12 @@ function doStuffWithPolicyBasedRoutingServiceClient(
 }
 
 function main() {
+  // check that the client instance can be created
+  const crossNetworkAutomationServiceClient =
+    new CrossNetworkAutomationServiceClient();
+  doStuffWithCrossNetworkAutomationServiceClient(
+    crossNetworkAutomationServiceClient
+  );
   // check that the client instance can be created
   const hubServiceClient = new HubServiceClient();
   doStuffWithHubServiceClient(hubServiceClient);

@@ -17,8 +17,8 @@ const path = require('path');
 module.exports = {
   entry: './src/index.ts',
   output: {
-    library: 'HubService',
-    filename: './hub-service.js',
+    library: 'CrossNetworkAutomationService',
+    filename: './cross-network-automation-service.js',
   },
   node: {
     child_process: 'empty',

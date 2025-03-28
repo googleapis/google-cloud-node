@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START networkconnectivity_v1_generated_PolicyBasedRoutingService_DeletePolicyBasedRoute_async]
+function main(serviceConnectionMap) {
+  // [START networkconnectivity_v1_generated_CrossNetworkAutomationService_UpdateServiceConnectionMap_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,44 +29,52 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the policy-based route resource to delete.
+   *  Optional. Field mask is used to specify the fields to be overwritten in the
+   *  ServiceConnectionMap resource by the update.
+   *  The fields specified in the update_mask are relative to the resource, not
+   *  the full request. A field will be overwritten if it is in the mask. If the
+   *  user does not provide a mask then all fields will be overwritten.
    */
-  // const name = 'abc123'
+  // const updateMask = {}
+  /**
+   *  Required. New values to be patched into the resource.
+   */
+  // const serviceConnectionMap = {}
   /**
    *  Optional. An optional request ID to identify requests. Specify a unique
-   *  request ID so that if you must retry your request, the server knows to
-   *  ignore the request if it has already been completed. The server guarantees
-   *  that for at least 60 minutes after the first request.
+   *  request ID so that if you must retry your request, the server will know to
+   *  ignore the request if it has already been completed. The server will
+   *  guarantee that for at least 60 minutes since the first request.
    *  For example, consider a situation where you make an initial request and
    *  the request times out. If you make the request again with the same request
    *  ID, the server can check if original operation with the same request ID
-   *  was received, and if so, ignores the second request. This prevents clients
-   *  from accidentally creating duplicate commitments.
+   *  was received, and if so, will ignore the second request. This prevents
+   *  clients from accidentally creating duplicate commitments.
    *  The request ID must be a valid UUID with the exception that zero UUID is
    *  not supported (00000000-0000-0000-0000-000000000000).
    */
   // const requestId = 'abc123'
 
   // Imports the Networkconnectivity library
-  const {PolicyBasedRoutingServiceClient} = require('@google-cloud/network-connectivity').v1;
+  const {CrossNetworkAutomationServiceClient} = require('@google-cloud/network-connectivity').v1;
 
   // Instantiates a client
-  const networkconnectivityClient = new PolicyBasedRoutingServiceClient();
+  const networkconnectivityClient = new CrossNetworkAutomationServiceClient();
 
-  async function callDeletePolicyBasedRoute() {
+  async function callUpdateServiceConnectionMap() {
     // Construct request
     const request = {
-      name,
+      serviceConnectionMap,
     };
 
     // Run request
-    const [operation] = await networkconnectivityClient.deletePolicyBasedRoute(request);
+    const [operation] = await networkconnectivityClient.updateServiceConnectionMap(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callDeletePolicyBasedRoute();
-  // [END networkconnectivity_v1_generated_PolicyBasedRoutingService_DeletePolicyBasedRoute_async]
+  callUpdateServiceConnectionMap();
+  // [END networkconnectivity_v1_generated_CrossNetworkAutomationService_UpdateServiceConnectionMap_async]
 }
 
 process.on('unhandledRejection', err => {
