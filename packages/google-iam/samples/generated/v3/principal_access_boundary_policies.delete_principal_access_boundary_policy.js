@@ -45,8 +45,8 @@ function main(name) {
    */
   // const validateOnly = true
   /**
-   *  Optional. If set to true, the request will force the deletion of the Policy
-   *  even if the Policy references PolicyBindings.
+   *  Optional. If set to true, the request will force the deletion of the policy
+   *  even if the policy is referenced in policy bindings.
    */
   // const force = true
 

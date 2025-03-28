@@ -642,7 +642,7 @@ export class PrincipalAccessBoundaryPoliciesClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent resource where this principal access boundary policy
-   *   will be created. Only organization is supported now.
+   *   will be created. Only organizations are supported.
    *
    *   Format:
    *     `organizations/{organization_id}/locations/{location}`
@@ -1028,8 +1028,8 @@ export class PrincipalAccessBoundaryPoliciesClient {
    *   Optional. If set, validate the request and preview the deletion, but do not
    *   actually post it.
    * @param {boolean} [request.force]
-   *   Optional. If set to true, the request will force the deletion of the Policy
-   *   even if the Policy references PolicyBindings.
+   *   Optional. If set to true, the request will force the deletion of the policy
+   *   even if the policy is referenced in policy bindings.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

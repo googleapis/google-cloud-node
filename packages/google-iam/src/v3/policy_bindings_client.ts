@@ -611,8 +611,8 @@ export class PolicyBindingsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent resource where this policy binding will be created.
-   *   The binding parent is the closest Resource Manager resource (Project,
-   *   Folder or Organization) to the binding target.
+   *   The binding parent is the closest Resource Manager resource (project,
+   *   folder or organization) to the binding target.
    *
    *   Format:
    *

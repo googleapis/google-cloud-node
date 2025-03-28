@@ -365,6 +365,7 @@
                 "java_multiple_files": true,
                 "java_outer_classname": "PrincipalAccessBoundaryPolicyResourcesProto",
                 "java_package": "com.google.iam.v3",
+                "php_namespace": "Google\\Cloud\\Iam\\V3",
                 "(google.api.resource_definition).type": "iam.googleapis.com/FolderLocation",
                 "(google.api.resource_definition).pattern": "folders/{folder}/locations/{location}"
               },
