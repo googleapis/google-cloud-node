@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.2](https://github.com/googleapis/google-cloud-node/compare/developerconnect-v0.3.1...developerconnect-v0.3.2) (2025-03-28)
+
+
+### Bug Fixes
+
+* [Many APIs] await/catch promises, and update listOperationsAsync return type ([#6185](https://github.com/googleapis/google-cloud-node/issues/6185)) ([ab30412](https://github.com/googleapis/google-cloud-node/commit/ab304122e3e825c9a76af7d6b0ef4ddc9aa6e906))
+
 ## [0.3.1](https://github.com/googleapis/google-cloud-node/compare/developerconnect-v0.3.0...developerconnect-v0.3.1) (2025-03-21)
 
 
