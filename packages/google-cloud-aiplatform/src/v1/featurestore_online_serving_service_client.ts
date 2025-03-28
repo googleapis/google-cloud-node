@@ -31,6 +31,7 @@ import type {
 import {PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,6 +56,8 @@ export class FeaturestoreOnlineServingServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('aiplatform');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -91,7 +94,7 @@ export class FeaturestoreOnlineServingServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -667,8 +670,39 @@ export class FeaturestoreOnlineServingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         entity_type: request.entityType ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.readFeatureValues(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('readFeatureValues request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IReadFeatureValuesResponse,
+          | protos.google.cloud.aiplatform.v1.IReadFeatureValuesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('readFeatureValues response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .readFeatureValues(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IReadFeatureValuesResponse,
+          (
+            | protos.google.cloud.aiplatform.v1.IReadFeatureValuesRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('readFeatureValues response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Writes Feature values of one or more entities of an EntityType.
@@ -769,8 +803,39 @@ export class FeaturestoreOnlineServingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         entity_type: request.entityType ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.writeFeatureValues(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('writeFeatureValues request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IWriteFeatureValuesResponse,
+          | protos.google.cloud.aiplatform.v1.IWriteFeatureValuesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('writeFeatureValues response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .writeFeatureValues(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IWriteFeatureValuesResponse,
+          (
+            | protos.google.cloud.aiplatform.v1.IWriteFeatureValuesRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('writeFeatureValues response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -815,7 +880,10 @@ export class FeaturestoreOnlineServingServiceClient {
       this._gaxModule.routingHeader.fromParams({
         entity_type: request.entityType ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('streamingReadFeatureValues stream %j', options);
     return this.innerApiCalls.streamingReadFeatureValues(request, options);
   }
 
@@ -4570,6 +4638,7 @@ export class FeaturestoreOnlineServingServiceClient {
   close(): Promise<void> {
     if (this.featurestoreOnlineServingServiceStub && !this._terminated) {
       return this.featurestoreOnlineServingServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();

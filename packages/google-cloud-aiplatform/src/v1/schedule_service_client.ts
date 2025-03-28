@@ -35,6 +35,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -60,6 +61,8 @@ export class ScheduleServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('aiplatform');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -97,7 +100,7 @@ export class ScheduleServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -2276,8 +2279,36 @@ export class ScheduleServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createSchedule(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createSchedule request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.ISchedule,
+          | protos.google.cloud.aiplatform.v1.ICreateScheduleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createSchedule response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createSchedule(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.ISchedule,
+          protos.google.cloud.aiplatform.v1.ICreateScheduleRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createSchedule response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a Schedule.
@@ -2362,8 +2393,36 @@ export class ScheduleServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getSchedule(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getSchedule request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.ISchedule,
+          | protos.google.cloud.aiplatform.v1.IGetScheduleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getSchedule response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getSchedule(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.ISchedule,
+          protos.google.cloud.aiplatform.v1.IGetScheduleRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getSchedule response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Pauses a Schedule. Will mark
@@ -2457,8 +2516,36 @@ export class ScheduleServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.pauseSchedule(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('pauseSchedule request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.aiplatform.v1.IPauseScheduleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('pauseSchedule response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .pauseSchedule(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.aiplatform.v1.IPauseScheduleRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('pauseSchedule response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Resumes a paused Schedule to start scheduling new runs. Will mark
@@ -2563,8 +2650,36 @@ export class ScheduleServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.resumeSchedule(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('resumeSchedule request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.aiplatform.v1.IResumeScheduleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('resumeSchedule response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .resumeSchedule(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.aiplatform.v1.IResumeScheduleRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('resumeSchedule response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates an active or paused Schedule.
@@ -2667,8 +2782,36 @@ export class ScheduleServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'schedule.name': request.schedule!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateSchedule(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateSchedule request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.ISchedule,
+          | protos.google.cloud.aiplatform.v1.IUpdateScheduleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateSchedule response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateSchedule(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.ISchedule,
+          protos.google.cloud.aiplatform.v1.IUpdateScheduleRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateSchedule response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -2772,8 +2915,40 @@ export class ScheduleServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteSchedule(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteSchedule response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteSchedule request %j', request);
+    return this.innerApiCalls
+      .deleteSchedule(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteSchedule response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteSchedule()`.
@@ -2794,6 +2969,7 @@ export class ScheduleServiceClient {
       protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
     >
   > {
+    this._log.info('deleteSchedule long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2959,8 +3135,36 @@ export class ScheduleServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listSchedules(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListSchedulesRequest,
+          | protos.google.cloud.aiplatform.v1.IListSchedulesResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.ISchedule
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listSchedules values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listSchedules request %j', request);
+    return this.innerApiCalls
+      .listSchedules(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.ISchedule[],
+          protos.google.cloud.aiplatform.v1.IListSchedulesRequest | null,
+          protos.google.cloud.aiplatform.v1.IListSchedulesResponse,
+        ]) => {
+          this._log.info('listSchedules values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3054,7 +3258,10 @@ export class ScheduleServiceClient {
       });
     const defaultCallSettings = this._defaults['listSchedules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listSchedules stream %j', request);
     return this.descriptors.page.listSchedules.createStream(
       this.innerApiCalls.listSchedules as GaxCall,
       request,
@@ -3156,7 +3363,10 @@ export class ScheduleServiceClient {
       });
     const defaultCallSettings = this._defaults['listSchedules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listSchedules iterate %j', request);
     return this.descriptors.page.listSchedules.asyncIterate(
       this.innerApiCalls['listSchedules'] as GaxCall,
       request as {},
@@ -3473,7 +3683,7 @@ export class ScheduleServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -7174,6 +7384,7 @@ export class ScheduleServiceClient {
   close(): Promise<void> {
     if (this.scheduleServiceStub && !this._terminated) {
       return this.scheduleServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();

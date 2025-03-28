@@ -12110,7 +12110,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 56,
+                    "end": 62,
                     "type": "FULL"
                 }
             ],
@@ -12122,6 +12122,10 @@
                     {
                         "name": "name",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "force",
+                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",

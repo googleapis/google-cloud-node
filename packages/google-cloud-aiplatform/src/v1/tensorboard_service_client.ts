@@ -35,6 +35,7 @@ import type {
 import {Transform, PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -59,6 +60,8 @@ export class TensorboardServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('aiplatform');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -96,7 +99,7 @@ export class TensorboardServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -2409,8 +2412,36 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getTensorboard(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getTensorboard request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.ITensorboard,
+          | protos.google.cloud.aiplatform.v1.IGetTensorboardRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getTensorboard response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getTensorboard(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.ITensorboard,
+          protos.google.cloud.aiplatform.v1.IGetTensorboardRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getTensorboard response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns a list of monthly active users for a given TensorBoard instance.
@@ -2507,8 +2538,39 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         tensorboard: request.tensorboard ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.readTensorboardUsage(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('readTensorboardUsage request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IReadTensorboardUsageResponse,
+          | protos.google.cloud.aiplatform.v1.IReadTensorboardUsageRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('readTensorboardUsage response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .readTensorboardUsage(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IReadTensorboardUsageResponse,
+          (
+            | protos.google.cloud.aiplatform.v1.IReadTensorboardUsageRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('readTensorboardUsage response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Returns the storage size for a given TensorBoard instance.
@@ -2599,8 +2661,39 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         tensorboard: request.tensorboard ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.readTensorboardSize(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('readTensorboardSize request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IReadTensorboardSizeResponse,
+          | protos.google.cloud.aiplatform.v1.IReadTensorboardSizeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('readTensorboardSize response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .readTensorboardSize(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IReadTensorboardSizeResponse,
+          (
+            | protos.google.cloud.aiplatform.v1.IReadTensorboardSizeRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('readTensorboardSize response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a TensorboardExperiment.
@@ -2705,12 +2798,39 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createTensorboardExperiment(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createTensorboardExperiment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.ITensorboardExperiment,
+          | protos.google.cloud.aiplatform.v1.ICreateTensorboardExperimentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createTensorboardExperiment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createTensorboardExperiment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.ITensorboardExperiment,
+          (
+            | protos.google.cloud.aiplatform.v1.ICreateTensorboardExperimentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createTensorboardExperiment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a TensorboardExperiment.
@@ -2807,12 +2927,39 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getTensorboardExperiment(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getTensorboardExperiment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.ITensorboardExperiment,
+          | protos.google.cloud.aiplatform.v1.IGetTensorboardExperimentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getTensorboardExperiment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getTensorboardExperiment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.ITensorboardExperiment,
+          (
+            | protos.google.cloud.aiplatform.v1.IGetTensorboardExperimentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getTensorboardExperiment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a TensorboardExperiment.
@@ -2917,12 +3064,39 @@ export class TensorboardServiceClient {
         'tensorboard_experiment.name':
           request.tensorboardExperiment!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateTensorboardExperiment(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateTensorboardExperiment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.ITensorboardExperiment,
+          | protos.google.cloud.aiplatform.v1.IUpdateTensorboardExperimentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateTensorboardExperiment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateTensorboardExperiment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.ITensorboardExperiment,
+          (
+            | protos.google.cloud.aiplatform.v1.IUpdateTensorboardExperimentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateTensorboardExperiment response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a TensorboardRun.
@@ -3027,8 +3201,39 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createTensorboardRun(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createTensorboardRun request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.ITensorboardRun,
+          | protos.google.cloud.aiplatform.v1.ICreateTensorboardRunRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createTensorboardRun response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createTensorboardRun(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.ITensorboardRun,
+          (
+            | protos.google.cloud.aiplatform.v1.ICreateTensorboardRunRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createTensorboardRun response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Batch create TensorboardRuns.
@@ -3130,12 +3335,39 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.batchCreateTensorboardRuns(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('batchCreateTensorboardRuns request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IBatchCreateTensorboardRunsResponse,
+          | protos.google.cloud.aiplatform.v1.IBatchCreateTensorboardRunsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchCreateTensorboardRuns response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchCreateTensorboardRuns(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IBatchCreateTensorboardRunsResponse,
+          (
+            | protos.google.cloud.aiplatform.v1.IBatchCreateTensorboardRunsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchCreateTensorboardRuns response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a TensorboardRun.
@@ -3226,8 +3458,39 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getTensorboardRun(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getTensorboardRun request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.ITensorboardRun,
+          | protos.google.cloud.aiplatform.v1.IGetTensorboardRunRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getTensorboardRun response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getTensorboardRun(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.ITensorboardRun,
+          (
+            | protos.google.cloud.aiplatform.v1.IGetTensorboardRunRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getTensorboardRun response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a TensorboardRun.
@@ -3331,8 +3594,39 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'tensorboard_run.name': request.tensorboardRun!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateTensorboardRun(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateTensorboardRun request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.ITensorboardRun,
+          | protos.google.cloud.aiplatform.v1.IUpdateTensorboardRunRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateTensorboardRun response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateTensorboardRun(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.ITensorboardRun,
+          (
+            | protos.google.cloud.aiplatform.v1.IUpdateTensorboardRunRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateTensorboardRun response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Batch create TensorboardTimeSeries that belong to a TensorboardExperiment.
@@ -3436,12 +3730,45 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.batchCreateTensorboardTimeSeries(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('batchCreateTensorboardTimeSeries request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IBatchCreateTensorboardTimeSeriesResponse,
+          | protos.google.cloud.aiplatform.v1.IBatchCreateTensorboardTimeSeriesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'batchCreateTensorboardTimeSeries response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchCreateTensorboardTimeSeries(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IBatchCreateTensorboardTimeSeriesResponse,
+          (
+            | protos.google.cloud.aiplatform.v1.IBatchCreateTensorboardTimeSeriesRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'batchCreateTensorboardTimeSeries response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Creates a TensorboardTimeSeries.
@@ -3546,12 +3873,39 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createTensorboardTimeSeries(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createTensorboardTimeSeries request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.ITensorboardTimeSeries,
+          | protos.google.cloud.aiplatform.v1.ICreateTensorboardTimeSeriesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createTensorboardTimeSeries response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createTensorboardTimeSeries(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.ITensorboardTimeSeries,
+          (
+            | protos.google.cloud.aiplatform.v1.ICreateTensorboardTimeSeriesRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createTensorboardTimeSeries response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Gets a TensorboardTimeSeries.
@@ -3648,12 +4002,39 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getTensorboardTimeSeries(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getTensorboardTimeSeries request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.ITensorboardTimeSeries,
+          | protos.google.cloud.aiplatform.v1.IGetTensorboardTimeSeriesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getTensorboardTimeSeries response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getTensorboardTimeSeries(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.ITensorboardTimeSeries,
+          (
+            | protos.google.cloud.aiplatform.v1.IGetTensorboardTimeSeriesRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getTensorboardTimeSeries response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates a TensorboardTimeSeries.
@@ -3759,12 +4140,39 @@ export class TensorboardServiceClient {
         'tensorboard_time_series.name':
           request.tensorboardTimeSeries!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateTensorboardTimeSeries(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateTensorboardTimeSeries request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.ITensorboardTimeSeries,
+          | protos.google.cloud.aiplatform.v1.IUpdateTensorboardTimeSeriesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateTensorboardTimeSeries response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateTensorboardTimeSeries(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.ITensorboardTimeSeries,
+          (
+            | protos.google.cloud.aiplatform.v1.IUpdateTensorboardTimeSeriesRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateTensorboardTimeSeries response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Reads multiple TensorboardTimeSeries' data. The data point number limit is
@@ -3872,12 +4280,45 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         tensorboard: request.tensorboard ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.batchReadTensorboardTimeSeriesData(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('batchReadTensorboardTimeSeriesData request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IBatchReadTensorboardTimeSeriesDataResponse,
+          | protos.google.cloud.aiplatform.v1.IBatchReadTensorboardTimeSeriesDataRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'batchReadTensorboardTimeSeriesData response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchReadTensorboardTimeSeriesData(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IBatchReadTensorboardTimeSeriesDataResponse,
+          (
+            | protos.google.cloud.aiplatform.v1.IBatchReadTensorboardTimeSeriesDataRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'batchReadTensorboardTimeSeriesData response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Reads a TensorboardTimeSeries' data. By default, if the number of data
@@ -3985,12 +4426,39 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         tensorboard_time_series: request.tensorboardTimeSeries ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.readTensorboardTimeSeriesData(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('readTensorboardTimeSeriesData request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IReadTensorboardTimeSeriesDataResponse,
+          | protos.google.cloud.aiplatform.v1.IReadTensorboardTimeSeriesDataRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('readTensorboardTimeSeriesData response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .readTensorboardTimeSeriesData(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IReadTensorboardTimeSeriesDataResponse,
+          (
+            | protos.google.cloud.aiplatform.v1.IReadTensorboardTimeSeriesDataRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('readTensorboardTimeSeriesData response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Write time series data points of multiple TensorboardTimeSeries in multiple
@@ -4090,12 +4558,45 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         tensorboard_experiment: request.tensorboardExperiment ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.writeTensorboardExperimentData(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('writeTensorboardExperimentData request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IWriteTensorboardExperimentDataResponse,
+          | protos.google.cloud.aiplatform.v1.IWriteTensorboardExperimentDataRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'writeTensorboardExperimentData response %j',
+            response
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .writeTensorboardExperimentData(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IWriteTensorboardExperimentDataResponse,
+          (
+            | protos.google.cloud.aiplatform.v1.IWriteTensorboardExperimentDataRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'writeTensorboardExperimentData response %j',
+            response
+          );
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Write time series data points into multiple TensorboardTimeSeries under
@@ -4199,12 +4700,39 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         tensorboard_run: request.tensorboardRun ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.writeTensorboardRunData(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('writeTensorboardRunData request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IWriteTensorboardRunDataResponse,
+          | protos.google.cloud.aiplatform.v1.IWriteTensorboardRunDataRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('writeTensorboardRunData response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .writeTensorboardRunData(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IWriteTensorboardRunDataResponse,
+          (
+            | protos.google.cloud.aiplatform.v1.IWriteTensorboardRunDataRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('writeTensorboardRunData response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -4242,7 +4770,10 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         time_series: request.timeSeries ?? '',
       });
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('readTensorboardBlobData stream %j', options);
     return this.innerApiCalls.readTensorboardBlobData(request, options);
   }
 
@@ -4348,8 +4879,40 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createTensorboard(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.ITensorboard,
+            protos.google.cloud.aiplatform.v1.ICreateTensorboardOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createTensorboard response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createTensorboard request %j', request);
+    return this.innerApiCalls
+      .createTensorboard(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.ITensorboard,
+            protos.google.cloud.aiplatform.v1.ICreateTensorboardOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createTensorboard response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createTensorboard()`.
@@ -4370,6 +4933,7 @@ export class TensorboardServiceClient {
       protos.google.cloud.aiplatform.v1.CreateTensorboardOperationMetadata
     >
   > {
+    this._log.info('createTensorboard long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4493,8 +5057,40 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'tensorboard.name': request.tensorboard!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateTensorboard(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.ITensorboard,
+            protos.google.cloud.aiplatform.v1.IUpdateTensorboardOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateTensorboard response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateTensorboard request %j', request);
+    return this.innerApiCalls
+      .updateTensorboard(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.ITensorboard,
+            protos.google.cloud.aiplatform.v1.IUpdateTensorboardOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateTensorboard response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateTensorboard()`.
@@ -4515,6 +5111,7 @@ export class TensorboardServiceClient {
       protos.google.cloud.aiplatform.v1.UpdateTensorboardOperationMetadata
     >
   > {
+    this._log.info('updateTensorboard long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4631,8 +5228,40 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteTensorboard(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteTensorboard response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteTensorboard request %j', request);
+    return this.innerApiCalls
+      .deleteTensorboard(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteTensorboard response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteTensorboard()`.
@@ -4653,6 +5282,7 @@ export class TensorboardServiceClient {
       protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
     >
   > {
+    this._log.info('deleteTensorboard long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4769,12 +5399,46 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteTensorboardExperiment(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'deleteTensorboardExperiment response %j',
+            rawResponse
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteTensorboardExperiment request %j', request);
+    return this.innerApiCalls
+      .deleteTensorboardExperiment(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'deleteTensorboardExperiment response %j',
+            rawResponse
+          );
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteTensorboardExperiment()`.
@@ -4795,6 +5459,7 @@ export class TensorboardServiceClient {
       protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
     >
   > {
+    this._log.info('deleteTensorboardExperiment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -4911,8 +5576,40 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteTensorboardRun(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteTensorboardRun response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteTensorboardRun request %j', request);
+    return this.innerApiCalls
+      .deleteTensorboardRun(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteTensorboardRun response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteTensorboardRun()`.
@@ -4933,6 +5630,7 @@ export class TensorboardServiceClient {
       protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
     >
   > {
+    this._log.info('deleteTensorboardRun long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -5049,12 +5747,46 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteTensorboardTimeSeries(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'deleteTensorboardTimeSeries response %j',
+            rawResponse
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteTensorboardTimeSeries request %j', request);
+    return this.innerApiCalls
+      .deleteTensorboardTimeSeries(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'deleteTensorboardTimeSeries response %j',
+            rawResponse
+          );
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteTensorboardTimeSeries()`.
@@ -5075,6 +5807,7 @@ export class TensorboardServiceClient {
       protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
     >
   > {
+    this._log.info('deleteTensorboardTimeSeries long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -5201,8 +5934,36 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listTensorboards(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListTensorboardsRequest,
+          | protos.google.cloud.aiplatform.v1.IListTensorboardsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.ITensorboard
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listTensorboards values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listTensorboards request %j', request);
+    return this.innerApiCalls
+      .listTensorboards(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.ITensorboard[],
+          protos.google.cloud.aiplatform.v1.IListTensorboardsRequest | null,
+          protos.google.cloud.aiplatform.v1.IListTensorboardsResponse,
+        ]) => {
+          this._log.info('listTensorboards values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5257,7 +6018,10 @@ export class TensorboardServiceClient {
       });
     const defaultCallSettings = this._defaults['listTensorboards'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listTensorboards stream %j', request);
     return this.descriptors.page.listTensorboards.createStream(
       this.innerApiCalls.listTensorboards as GaxCall,
       request,
@@ -5320,7 +6084,10 @@ export class TensorboardServiceClient {
       });
     const defaultCallSettings = this._defaults['listTensorboards'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listTensorboards iterate %j', request);
     return this.descriptors.page.listTensorboards.asyncIterate(
       this.innerApiCalls['listTensorboards'] as GaxCall,
       request as {},
@@ -5438,12 +6205,36 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listTensorboardExperiments(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListTensorboardExperimentsRequest,
+          | protos.google.cloud.aiplatform.v1.IListTensorboardExperimentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.ITensorboardExperiment
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listTensorboardExperiments values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listTensorboardExperiments request %j', request);
+    return this.innerApiCalls
+      .listTensorboardExperiments(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.ITensorboardExperiment[],
+          protos.google.cloud.aiplatform.v1.IListTensorboardExperimentsRequest | null,
+          protos.google.cloud.aiplatform.v1.IListTensorboardExperimentsResponse,
+        ]) => {
+          this._log.info('listTensorboardExperiments values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5498,7 +6289,10 @@ export class TensorboardServiceClient {
       });
     const defaultCallSettings = this._defaults['listTensorboardExperiments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listTensorboardExperiments stream %j', request);
     return this.descriptors.page.listTensorboardExperiments.createStream(
       this.innerApiCalls.listTensorboardExperiments as GaxCall,
       request,
@@ -5561,7 +6355,10 @@ export class TensorboardServiceClient {
       });
     const defaultCallSettings = this._defaults['listTensorboardExperiments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listTensorboardExperiments iterate %j', request);
     return this.descriptors.page.listTensorboardExperiments.asyncIterate(
       this.innerApiCalls['listTensorboardExperiments'] as GaxCall,
       request as {},
@@ -5679,8 +6476,36 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listTensorboardRuns(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListTensorboardRunsRequest,
+          | protos.google.cloud.aiplatform.v1.IListTensorboardRunsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.ITensorboardRun
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listTensorboardRuns values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listTensorboardRuns request %j', request);
+    return this.innerApiCalls
+      .listTensorboardRuns(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.ITensorboardRun[],
+          protos.google.cloud.aiplatform.v1.IListTensorboardRunsRequest | null,
+          protos.google.cloud.aiplatform.v1.IListTensorboardRunsResponse,
+        ]) => {
+          this._log.info('listTensorboardRuns values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5735,7 +6560,10 @@ export class TensorboardServiceClient {
       });
     const defaultCallSettings = this._defaults['listTensorboardRuns'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listTensorboardRuns stream %j', request);
     return this.descriptors.page.listTensorboardRuns.createStream(
       this.innerApiCalls.listTensorboardRuns as GaxCall,
       request,
@@ -5798,7 +6626,10 @@ export class TensorboardServiceClient {
       });
     const defaultCallSettings = this._defaults['listTensorboardRuns'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listTensorboardRuns iterate %j', request);
     return this.descriptors.page.listTensorboardRuns.asyncIterate(
       this.innerApiCalls['listTensorboardRuns'] as GaxCall,
       request as {},
@@ -5916,12 +6747,36 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listTensorboardTimeSeries(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListTensorboardTimeSeriesRequest,
+          | protos.google.cloud.aiplatform.v1.IListTensorboardTimeSeriesResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.ITensorboardTimeSeries
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listTensorboardTimeSeries values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listTensorboardTimeSeries request %j', request);
+    return this.innerApiCalls
+      .listTensorboardTimeSeries(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.ITensorboardTimeSeries[],
+          protos.google.cloud.aiplatform.v1.IListTensorboardTimeSeriesRequest | null,
+          protos.google.cloud.aiplatform.v1.IListTensorboardTimeSeriesResponse,
+        ]) => {
+          this._log.info('listTensorboardTimeSeries values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -5976,7 +6831,10 @@ export class TensorboardServiceClient {
       });
     const defaultCallSettings = this._defaults['listTensorboardTimeSeries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listTensorboardTimeSeries stream %j', request);
     return this.descriptors.page.listTensorboardTimeSeries.createStream(
       this.innerApiCalls.listTensorboardTimeSeries as GaxCall,
       request,
@@ -6039,7 +6897,10 @@ export class TensorboardServiceClient {
       });
     const defaultCallSettings = this._defaults['listTensorboardTimeSeries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listTensorboardTimeSeries iterate %j', request);
     return this.descriptors.page.listTensorboardTimeSeries.asyncIterate(
       this.innerApiCalls['listTensorboardTimeSeries'] as GaxCall,
       request as {},
@@ -6157,12 +7018,36 @@ export class TensorboardServiceClient {
       this._gaxModule.routingHeader.fromParams({
         tensorboard_time_series: request.tensorboardTimeSeries ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.exportTensorboardTimeSeriesData(
-      request,
-      options,
-      callback
-    );
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IExportTensorboardTimeSeriesDataRequest,
+          | protos.google.cloud.aiplatform.v1.IExportTensorboardTimeSeriesDataResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.ITimeSeriesDataPoint
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('exportTensorboardTimeSeriesData values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('exportTensorboardTimeSeriesData request %j', request);
+    return this.innerApiCalls
+      .exportTensorboardTimeSeriesData(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.ITimeSeriesDataPoint[],
+          protos.google.cloud.aiplatform.v1.IExportTensorboardTimeSeriesDataRequest | null,
+          protos.google.cloud.aiplatform.v1.IExportTensorboardTimeSeriesDataResponse,
+        ]) => {
+          this._log.info('exportTensorboardTimeSeriesData values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -6217,7 +7102,10 @@ export class TensorboardServiceClient {
     const defaultCallSettings =
       this._defaults['exportTensorboardTimeSeriesData'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('exportTensorboardTimeSeriesData stream %j', request);
     return this.descriptors.page.exportTensorboardTimeSeriesData.createStream(
       this.innerApiCalls.exportTensorboardTimeSeriesData as GaxCall,
       request,
@@ -6280,7 +7168,10 @@ export class TensorboardServiceClient {
     const defaultCallSettings =
       this._defaults['exportTensorboardTimeSeriesData'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('exportTensorboardTimeSeriesData iterate %j', request);
     return this.descriptors.page.exportTensorboardTimeSeriesData.asyncIterate(
       this.innerApiCalls['exportTensorboardTimeSeriesData'] as GaxCall,
       request as {},
@@ -6597,7 +7488,7 @@ export class TensorboardServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -10321,6 +11212,7 @@ export class TensorboardServiceClient {
   close(): Promise<void> {
     if (this.tensorboardServiceStub && !this._terminated) {
       return this.tensorboardServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();

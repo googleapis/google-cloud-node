@@ -35,6 +35,7 @@ import type {
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -59,6 +60,8 @@ export class IndexEndpointServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('aiplatform');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -96,7 +99,7 @@ export class IndexEndpointServiceClient {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -2319,8 +2322,39 @@ export class IndexEndpointServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getIndexEndpoint(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getIndexEndpoint request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IIndexEndpoint,
+          | protos.google.cloud.aiplatform.v1.IGetIndexEndpointRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getIndexEndpoint response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getIndexEndpoint(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IIndexEndpoint,
+          (
+            | protos.google.cloud.aiplatform.v1.IGetIndexEndpointRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getIndexEndpoint response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
   /**
    * Updates an IndexEndpoint.
@@ -2412,8 +2446,39 @@ export class IndexEndpointServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'index_endpoint.name': request.indexEndpoint!.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateIndexEndpoint(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateIndexEndpoint request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IIndexEndpoint,
+          | protos.google.cloud.aiplatform.v1.IUpdateIndexEndpointRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateIndexEndpoint response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateIndexEndpoint(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.aiplatform.v1.IIndexEndpoint,
+          (
+            | protos.google.cloud.aiplatform.v1.IUpdateIndexEndpointRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateIndexEndpoint response %j', response);
+          return [response, options, rawResponse];
+        }
+      );
   }
 
   /**
@@ -2518,8 +2583,40 @@ export class IndexEndpointServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createIndexEndpoint(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IIndexEndpoint,
+            protos.google.cloud.aiplatform.v1.ICreateIndexEndpointOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createIndexEndpoint response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createIndexEndpoint request %j', request);
+    return this.innerApiCalls
+      .createIndexEndpoint(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IIndexEndpoint,
+            protos.google.cloud.aiplatform.v1.ICreateIndexEndpointOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createIndexEndpoint response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `createIndexEndpoint()`.
@@ -2540,6 +2637,7 @@ export class IndexEndpointServiceClient {
       protos.google.cloud.aiplatform.v1.CreateIndexEndpointOperationMetadata
     >
   > {
+    this._log.info('createIndexEndpoint long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2656,8 +2754,40 @@ export class IndexEndpointServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteIndexEndpoint(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteIndexEndpoint response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteIndexEndpoint request %j', request);
+    return this.innerApiCalls
+      .deleteIndexEndpoint(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteIndexEndpoint response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteIndexEndpoint()`.
@@ -2678,6 +2808,7 @@ export class IndexEndpointServiceClient {
       protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
     >
   > {
+    this._log.info('deleteIndexEndpoint long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2798,8 +2929,40 @@ export class IndexEndpointServiceClient {
       this._gaxModule.routingHeader.fromParams({
         index_endpoint: request.indexEndpoint ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deployIndex(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IDeployIndexResponse,
+            protos.google.cloud.aiplatform.v1.IDeployIndexOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deployIndex response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deployIndex request %j', request);
+    return this.innerApiCalls
+      .deployIndex(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IDeployIndexResponse,
+            protos.google.cloud.aiplatform.v1.IDeployIndexOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deployIndex response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `deployIndex()`.
@@ -2820,6 +2983,7 @@ export class IndexEndpointServiceClient {
       protos.google.cloud.aiplatform.v1.DeployIndexOperationMetadata
     >
   > {
+    this._log.info('deployIndex long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -2940,8 +3104,40 @@ export class IndexEndpointServiceClient {
       this._gaxModule.routingHeader.fromParams({
         index_endpoint: request.indexEndpoint ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.undeployIndex(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IUndeployIndexResponse,
+            protos.google.cloud.aiplatform.v1.IUndeployIndexOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('undeployIndex response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('undeployIndex request %j', request);
+    return this.innerApiCalls
+      .undeployIndex(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IUndeployIndexResponse,
+            protos.google.cloud.aiplatform.v1.IUndeployIndexOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('undeployIndex response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `undeployIndex()`.
@@ -2962,6 +3158,7 @@ export class IndexEndpointServiceClient {
       protos.google.cloud.aiplatform.v1.UndeployIndexOperationMetadata
     >
   > {
+    this._log.info('undeployIndex long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3084,8 +3281,40 @@ export class IndexEndpointServiceClient {
       this._gaxModule.routingHeader.fromParams({
         index_endpoint: request.indexEndpoint ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.mutateDeployedIndex(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IMutateDeployedIndexResponse,
+            protos.google.cloud.aiplatform.v1.IMutateDeployedIndexOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('mutateDeployedIndex response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('mutateDeployedIndex request %j', request);
+    return this.innerApiCalls
+      .mutateDeployedIndex(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IMutateDeployedIndexResponse,
+            protos.google.cloud.aiplatform.v1.IMutateDeployedIndexOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('mutateDeployedIndex response %j', rawResponse);
+          return [response, rawResponse, _];
+        }
+      );
   }
   /**
    * Check the status of the long running operation returned by `mutateDeployedIndex()`.
@@ -3106,6 +3335,7 @@ export class IndexEndpointServiceClient {
       protos.google.cloud.aiplatform.v1.MutateDeployedIndexOperationMetadata
     >
   > {
+    this._log.info('mutateDeployedIndex long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
         {name}
@@ -3242,8 +3472,36 @@ export class IndexEndpointServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listIndexEndpoints(request, options, callback);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListIndexEndpointsRequest,
+          | protos.google.cloud.aiplatform.v1.IListIndexEndpointsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.IIndexEndpoint
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listIndexEndpoints values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listIndexEndpoints request %j', request);
+    return this.innerApiCalls
+      .listIndexEndpoints(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.aiplatform.v1.IIndexEndpoint[],
+          protos.google.cloud.aiplatform.v1.IListIndexEndpointsRequest | null,
+          protos.google.cloud.aiplatform.v1.IListIndexEndpointsResponse,
+        ]) => {
+          this._log.info('listIndexEndpoints values %j', response);
+          return [response, input, output];
+        }
+      );
   }
 
   /**
@@ -3308,7 +3566,10 @@ export class IndexEndpointServiceClient {
       });
     const defaultCallSettings = this._defaults['listIndexEndpoints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listIndexEndpoints stream %j', request);
     return this.descriptors.page.listIndexEndpoints.createStream(
       this.innerApiCalls.listIndexEndpoints as GaxCall,
       request,
@@ -3381,7 +3642,10 @@ export class IndexEndpointServiceClient {
       });
     const defaultCallSettings = this._defaults['listIndexEndpoints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listIndexEndpoints iterate %j', request);
     return this.descriptors.page.listIndexEndpoints.asyncIterate(
       this.innerApiCalls['listIndexEndpoints'] as GaxCall,
       request as {},
@@ -3698,7 +3962,7 @@ export class IndexEndpointServiceClient {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -7399,6 +7663,7 @@ export class IndexEndpointServiceClient {
   close(): Promise<void> {
     if (this.indexEndpointServiceStub && !this._terminated) {
       return this.indexEndpointServiceStub.then(stub => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
         this.iamClient.close();
