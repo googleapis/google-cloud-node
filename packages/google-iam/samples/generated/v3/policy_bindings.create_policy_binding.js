@@ -30,8 +30,8 @@ function main(parent, policyBindingId, policyBinding) {
    */
   /**
    *  Required. The parent resource where this policy binding will be created.
-   *  The binding parent is the closest Resource Manager resource (Project,
-   *  Folder or Organization) to the binding target.
+   *  The binding parent is the closest Resource Manager resource (project,
+   *  folder or organization) to the binding target.
    *  Format:
    *  * `projects/{project_id}/locations/{location}`
    *  * `projects/{project_number}/locations/{location}`
