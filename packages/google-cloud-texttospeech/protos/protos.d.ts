@@ -1768,6 +1768,9 @@ export namespace google {
 
                     /** StreamingAudioConfig sampleRateHertz */
                     sampleRateHertz?: (number|null);
+
+                    /** StreamingAudioConfig speakingRate */
+                    speakingRate?: (number|null);
                 }
 
                 /** Represents a StreamingAudioConfig. */
@@ -1784,6 +1787,9 @@ export namespace google {
 
                     /** StreamingAudioConfig sampleRateHertz. */
                     public sampleRateHertz: number;
+
+                    /** StreamingAudioConfig speakingRate. */
+                    public speakingRate: number;
 
                     /**
                      * Creates a new StreamingAudioConfig instance using the specified properties.
@@ -1871,6 +1877,9 @@ export namespace google {
 
                     /** StreamingSynthesizeConfig streamingAudioConfig */
                     streamingAudioConfig?: (google.cloud.texttospeech.v1.IStreamingAudioConfig|null);
+
+                    /** StreamingSynthesizeConfig customPronunciations */
+                    customPronunciations?: (google.cloud.texttospeech.v1.ICustomPronunciations|null);
                 }
 
                 /** Represents a StreamingSynthesizeConfig. */
@@ -1887,6 +1896,9 @@ export namespace google {
 
                     /** StreamingSynthesizeConfig streamingAudioConfig. */
                     public streamingAudioConfig?: (google.cloud.texttospeech.v1.IStreamingAudioConfig|null);
+
+                    /** StreamingSynthesizeConfig customPronunciations. */
+                    public customPronunciations?: (google.cloud.texttospeech.v1.ICustomPronunciations|null);
 
                     /**
                      * Creates a new StreamingSynthesizeConfig instance using the specified properties.
