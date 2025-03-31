@@ -21,7 +21,7 @@
 'use strict';
 
 function main(name) {
-  // [START networkconnectivity_v1_generated_PolicyBasedRoutingService_DeletePolicyBasedRoute_async]
+  // [START networkconnectivity_v1_generated_CrossNetworkAutomationService_DeleteServiceConnectionPolicy_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,44 +29,50 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the policy-based route resource to delete.
+   *  Required. The name of the ServiceConnectionPolicy to delete.
    */
   // const name = 'abc123'
   /**
    *  Optional. An optional request ID to identify requests. Specify a unique
-   *  request ID so that if you must retry your request, the server knows to
-   *  ignore the request if it has already been completed. The server guarantees
-   *  that for at least 60 minutes after the first request.
+   *  request ID so that if you must retry your request, the server will know to
+   *  ignore the request if it has already been completed. The server will
+   *  guarantee that for at least 60 minutes after the first request.
    *  For example, consider a situation where you make an initial request and
    *  the request times out. If you make the request again with the same request
    *  ID, the server can check if original operation with the same request ID
-   *  was received, and if so, ignores the second request. This prevents clients
-   *  from accidentally creating duplicate commitments.
+   *  was received, and if so, will ignore the second request. This prevents
+   *  clients from accidentally creating duplicate commitments.
    *  The request ID must be a valid UUID with the exception that zero UUID is
    *  not supported (00000000-0000-0000-0000-000000000000).
    */
   // const requestId = 'abc123'
+  /**
+   *  Optional. The etag is computed by the server, and may be sent on update and
+   *  delete requests to ensure the client has an up-to-date value before
+   *  proceeding.
+   */
+  // const etag = 'abc123'
 
   // Imports the Networkconnectivity library
-  const {PolicyBasedRoutingServiceClient} = require('@google-cloud/network-connectivity').v1;
+  const {CrossNetworkAutomationServiceClient} = require('@google-cloud/network-connectivity').v1;
 
   // Instantiates a client
-  const networkconnectivityClient = new PolicyBasedRoutingServiceClient();
+  const networkconnectivityClient = new CrossNetworkAutomationServiceClient();
 
-  async function callDeletePolicyBasedRoute() {
+  async function callDeleteServiceConnectionPolicy() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const [operation] = await networkconnectivityClient.deletePolicyBasedRoute(request);
+    const [operation] = await networkconnectivityClient.deleteServiceConnectionPolicy(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callDeletePolicyBasedRoute();
-  // [END networkconnectivity_v1_generated_PolicyBasedRoutingService_DeletePolicyBasedRoute_async]
+  callDeleteServiceConnectionPolicy();
+  // [END networkconnectivity_v1_generated_CrossNetworkAutomationService_DeleteServiceConnectionPolicy_async]
 }
 
 process.on('unhandledRejection', err => {
