@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START networkconnectivity_v1_generated_PolicyBasedRoutingService_DeletePolicyBasedRoute_async]
+function main(name, spokeUri, spokeEtag) {
+  // [START networkconnectivity_v1_generated_HubService_AcceptSpokeUpdate_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,44 +29,55 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the policy-based route resource to delete.
+   *  Required. The name of the hub to accept spoke update.
    */
   // const name = 'abc123'
   /**
-   *  Optional. An optional request ID to identify requests. Specify a unique
-   *  request ID so that if you must retry your request, the server knows to
-   *  ignore the request if it has already been completed. The server guarantees
-   *  that for at least 60 minutes after the first request.
+   *  Required. The URI of the spoke to accept update.
+   */
+  // const spokeUri = 'abc123'
+  /**
+   *  Required. The etag of the spoke to accept update.
+   */
+  // const spokeEtag = 'abc123'
+  /**
+   *  Optional. A request ID to identify requests. Specify a unique request ID so
+   *  that if you must retry your request, the server knows to ignore the request
+   *  if it has already been completed. The server guarantees that a request
+   *  doesn't result in creation of duplicate commitments for at least 60
+   *  minutes.
    *  For example, consider a situation where you make an initial request and
    *  the request times out. If you make the request again with the same request
-   *  ID, the server can check if original operation with the same request ID
-   *  was received, and if so, ignores the second request. This prevents clients
-   *  from accidentally creating duplicate commitments.
-   *  The request ID must be a valid UUID with the exception that zero UUID is
+   *  ID, the server can check to see whether the original operation
+   *  was received. If it was, the server ignores the second request. This
+   *  behavior prevents clients from mistakenly creating duplicate commitments.
+   *  The request ID must be a valid UUID, with the exception that zero UUID is
    *  not supported (00000000-0000-0000-0000-000000000000).
    */
   // const requestId = 'abc123'
 
   // Imports the Networkconnectivity library
-  const {PolicyBasedRoutingServiceClient} = require('@google-cloud/network-connectivity').v1;
+  const {HubServiceClient} = require('@google-cloud/network-connectivity').v1;
 
   // Instantiates a client
-  const networkconnectivityClient = new PolicyBasedRoutingServiceClient();
+  const networkconnectivityClient = new HubServiceClient();
 
-  async function callDeletePolicyBasedRoute() {
+  async function callAcceptSpokeUpdate() {
     // Construct request
     const request = {
       name,
+      spokeUri,
+      spokeEtag,
     };
 
     // Run request
-    const [operation] = await networkconnectivityClient.deletePolicyBasedRoute(request);
+    const [operation] = await networkconnectivityClient.acceptSpokeUpdate(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callDeletePolicyBasedRoute();
-  // [END networkconnectivity_v1_generated_PolicyBasedRoutingService_DeletePolicyBasedRoute_async]
+  callAcceptSpokeUpdate();
+  // [END networkconnectivity_v1_generated_HubService_AcceptSpokeUpdate_async]
 }
 
 process.on('unhandledRejection', err => {
