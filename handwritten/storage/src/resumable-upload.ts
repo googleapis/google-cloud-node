@@ -421,11 +421,19 @@ export class Upload extends Writable {
     this.isPartialUpload = cfg.isPartialUpload ?? false;
 
     if (cfg.key) {
-      const base64Key = Buffer.from(cfg.key).toString('base64');
-      this.encryption = {
-        key: base64Key,
-        hash: createHash('sha256').update(cfg.key).digest('base64'),
-      };
+      if (typeof cfg.key === 'string') {
+        const base64Key = Buffer.from(cfg.key).toString('base64');
+        this.encryption = {
+          key: base64Key,
+          hash: createHash('sha256').update(cfg.key).digest('base64'),
+        };
+      } else {
+        const base64Key = cfg.key.toString('base64');
+        this.encryption = {
+          key: base64Key,
+          hash: createHash('sha256').update(cfg.key).digest('base64'),
+        };
+      }
     }
 
     this.predefinedAcl = cfg.predefinedAcl;

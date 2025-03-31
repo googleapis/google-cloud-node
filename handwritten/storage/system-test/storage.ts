@@ -1693,6 +1693,52 @@ describe('storage', function () {
       assert(metadata.hierarchicalNamespace);
       assert.strictEqual(metadata.hierarchicalNamespace.enabled, true);
     });
+
+    describe('file#moveFileAtomic', async () => {
+      let hnsBucket: Bucket;
+
+      afterEach(async () => {
+        try {
+          await hnsBucket.delete();
+        } catch {
+          //Ignore errors
+        }
+      });
+
+      it('Should move a file to a new name within the same HNS-enabled bucket.', async () => {
+        hnsBucket = storage.bucket(generateName());
+        await storage.createBucket(hnsBucket.name, {
+          hierarchicalNamespace: {enabled: true},
+          iamConfiguration: {
+            uniformBucketLevelAccess: {
+              enabled: true,
+            },
+          },
+        });
+        // Create a source file in the bucket and save some content.
+        const f1 = hnsBucket.file('move-src-obj');
+        await f1.save('move-src-obj');
+        assert(f1);
+        const [f1_metadata] = await f1.getMetadata();
+
+        // Move the source file to a new destination name within the same bucket.
+        await f1.moveFileAtomic('move-dst-obj');
+        const f2 = hnsBucket.file('move-dst-obj');
+        assert(f2);
+        const [f2_metadata] = await f2.getMetadata();
+
+        // Assert that the generation of the destination file is different from the source file,
+        // indicating a new file was created.
+        assert.notStrictEqual(f1_metadata.generation, f2_metadata.generation);
+
+        const [f1_exists] = await f1.exists();
+        const [f2_exists] = await f2.exists();
+        // Assert that the source file no longer exists after the move.
+        assert.strictEqual(f1_exists, false);
+        // Assert that the destination file exists after the move.
+        assert.strictEqual(f2_exists, true);
+      });
+    });
   });
 
   describe('bucket retention policies', () => {

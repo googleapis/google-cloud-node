@@ -282,6 +282,14 @@ export interface MakeFilePublicCallback {
   (err?: Error | null, apiResponse?: unknown): void;
 }
 
+interface MoveFileAtomicQuery {
+  userProject?: string;
+  ifGenerationMatch?: number | string;
+  ifGenerationNotMatch?: number | string;
+  ifMetagenerationMatch?: number | string;
+  ifMetagenerationNotMatch?: number | string;
+}
+
 export type MoveResponse = [unknown];
 
 export interface MoveCallback {
@@ -296,6 +304,10 @@ export interface MoveOptions {
   userProject?: string;
   preconditionOpts?: PreconditionOptions;
 }
+
+export type MoveFileAtomicOptions = MoveOptions;
+export type MoveFileAtomicCallback = MoveCallback;
+export type MoveFileAtomicResponse = MoveResponse;
 
 export type RenameOptions = MoveOptions;
 export type RenameResponse = MoveResponse;
@@ -3424,6 +3436,191 @@ class File extends ServiceObject<File, FileMetadata> {
     return `${this.storage.apiEndpoint}/${
       this.bucket.name
     }/${encodeURIComponent(this.name)}`;
+  }
+
+  moveFileAtomic(
+    destination: string | File,
+    options?: MoveFileAtomicOptions
+  ): Promise<MoveFileAtomicResponse>;
+  moveFileAtomic(
+    destination: string | File,
+    callback: MoveFileAtomicCallback
+  ): void;
+  moveFileAtomic(
+    destination: string | File,
+    options: MoveFileAtomicOptions,
+    callback: MoveFileAtomicCallback
+  ): void;
+  /**
+   * @typedef {array} MoveFileAtomicResponse
+   * @property {File} 0 The moved {@link File}.
+   * @property {object} 1 The full API response.
+   */
+  /**
+   * @callback MoveFileAtomicCallback
+   * @param {?Error} err Request error, if any.
+   * @param {File} movedFile The moved {@link File}.
+   * @param {object} apiResponse The full API response.
+   */
+  /**
+   * @typedef {object} MoveFileAtomicOptions Configuration options for File#moveFileAtomic(). See an
+   *     {@link https://cloud.google.com/storage/docs/json_api/v1/objects#resource| Object resource}.
+   * @property {string} [userProject] The ID of the project which will be
+   *     billed for the request.
+   * @property {object} [preconditionOpts] Precondition options.
+   * @property {number} [preconditionOpts.ifGenerationMatch] Makes the operation conditional on whether the object's current generation matches the given value.
+   */
+  /**
+   * Move this file within the same HNS-enabled bucket.
+   * The source object must exist and be a live object.
+   * The source and destination object IDs must be different.
+   * Overwriting the destination object is allowed by default, but can be prevented
+   * using preconditions.
+   * If the destination path includes non-existent parent folders, they will be created.
+   *
+   * See {@link https://cloud.google.com/storage/docs/json_api/v1/objects/move| Objects: move API Documentation}
+   *
+   * @throws {Error} If the destination file is not provided.
+   *
+   * @param {string|File} destination Destination file name or File object within the same bucket..
+   * @param {MoveFileAtomicOptions} [options] Configuration options. See an
+   * @param {MoveFileAtomicCallback} [callback] Callback function.
+   * @returns {Promise<MoveFileAtomicResponse>}
+   *
+   * @example
+   * ```
+   * const {Storage} = require('@google-cloud/storage');
+   * const storage = new Storage();
+   *
+   * //-
+   * // Assume 'my-hns-bucket' is an HNS-enabled bucket.
+   * //-
+   * const bucket = storage.bucket('my-hns-bucket');
+   * const file = bucket.file('my-image.png');
+   *
+   * //-
+   * // If you pass in a string for the destination, the file is copied to its
+   * // current bucket, under the new name provided.
+   * //-
+   * file.moveFileAtomic('moved-image.png', function(err, movedFile, apiResponse) {
+   *   // `my-hns-bucket` now contains:
+   *   // - "moved-image.png"
+   *
+   *   // `movedFile` is an instance of a File object that refers to your new
+   *   // file.
+   * });
+   *
+   * //-
+   * // Move the file to a subdirectory, creating parent folders if necessary.
+   * //-
+   * file.moveFileAtomic('new-folder/subfolder/moved-image.png', function(err, movedFile, apiResponse) {
+   * // `my-hns-bucket` now contains:
+   * // - "new-folder/subfolder/moved-image.png"
+   * });
+   *
+   * //-
+   * // Prevent overwriting an existing destination object using preconditions.
+   * //-
+   * file.moveFileAtomic('existing-destination.png', {
+   * preconditionOpts: {
+   * ifGenerationMatch: 0 // Fails if the destination object exists.
+   * }
+   * }, function(err, movedFile, apiResponse) {
+   * if (err) {
+   * // Handle the error (e.g., the destination object already exists).
+   * } else {
+   * // Move successful.
+   * }
+   * });
+   *
+   * //-
+   * // If the callback is omitted, we'll return a Promise.
+   * //-
+   * file.moveFileAtomic('moved-image.png).then(function(data) {
+   *   const newFile = data[0];
+   *   const apiResponse = data[1];
+   * });
+   *
+   * ```
+   * @example <caption>include:samples/files.js</caption>
+   * region_tag:storage_move_file_hns
+   * Another example:
+   */
+  moveFileAtomic(
+    destination: string | File,
+    optionsOrCallback?: MoveFileAtomicOptions | MoveFileAtomicCallback,
+    callback?: MoveFileAtomicCallback
+  ): Promise<MoveFileAtomicResponse> | void {
+    const noDestinationError = new Error(
+      FileExceptionMessages.DESTINATION_NO_NAME
+    );
+
+    if (!destination) {
+      throw noDestinationError;
+    }
+
+    let options: MoveFileAtomicOptions = {};
+    if (typeof optionsOrCallback === 'function') {
+      callback = optionsOrCallback;
+    } else if (optionsOrCallback) {
+      options = {...optionsOrCallback};
+    }
+
+    callback = callback || util.noop;
+
+    let destName: string;
+    let newFile: File;
+
+    if (typeof destination === 'string') {
+      const parsedDestination = GS_URL_REGEXP.exec(destination);
+      if (parsedDestination !== null && parsedDestination.length === 3) {
+        destName = parsedDestination[2];
+      } else {
+        destName = destination;
+      }
+    } else if (destination instanceof File) {
+      destName = destination.name;
+      newFile = destination;
+    } else {
+      throw noDestinationError;
+    }
+
+    newFile = newFile! || this.bucket.file(destName);
+
+    if (
+      !this.shouldRetryBasedOnPreconditionAndIdempotencyStrat(
+        options?.preconditionOpts
+      )
+    ) {
+      this.storage.retryOptions.autoRetry = false;
+    }
+    const query = {} as MoveFileAtomicQuery;
+    if (options.userProject !== undefined) {
+      query.userProject = options.userProject;
+      delete options.userProject;
+    }
+    if (options.preconditionOpts?.ifGenerationMatch !== undefined) {
+      query.ifGenerationMatch = options.preconditionOpts?.ifGenerationMatch;
+      delete options.preconditionOpts;
+    }
+
+    this.request(
+      {
+        method: 'POST',
+        uri: `/moveTo/o/${encodeURIComponent(newFile.name)}`,
+        qs: query,
+        json: options,
+      },
+      (err, resp) => {
+        this.storage.retryOptions.autoRetry = this.instanceRetryValue;
+        if (err) {
+          callback!(err, null, resp);
+          return;
+        }
+
+        callback!(null, newFile, resp);
+      }
+    );
   }
 
   move(

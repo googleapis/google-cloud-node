@@ -99,6 +99,7 @@ objects to users via direct download.
   * [Storage Make Bucket Public.](#storage-make-bucket-public.)
   * [Make Public](#make-public)
   * [Move File](#move-file)
+  * [Move File Atomic](#move-file-atomic)
   * [Print Bucket Acl](#print-bucket-acl)
   * [Print Bucket Acl For User](#print-bucket-acl-for-user)
   * [Print File Acl](#print-file-acl)
@@ -1587,6 +1588,23 @@ __Usage:__
 
 
 `node samples/moveFile.js`
+
+
+-----
+
+
+
+
+### Move File Atomic
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/main/samples/moveFileAtomic.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/moveFileAtomic.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/moveFileAtomic.js`
 
 
 -----

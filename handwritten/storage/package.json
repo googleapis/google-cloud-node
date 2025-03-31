@@ -74,7 +74,7 @@
   "dependencies": {
     "@google-cloud/paginator": "^5.0.0",
     "@google-cloud/projectify": "^4.0.0",
-    "@google-cloud/promisify": "^4.0.0",
+    "@google-cloud/promisify": "<4.1.0",
     "abort-controller": "^3.0.0",
     "async-retry": "^1.3.3",
     "duplexify": "^4.1.3",
