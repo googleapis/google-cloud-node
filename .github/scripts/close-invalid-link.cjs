@@ -14,7 +14,8 @@
 
 const fs = require('fs');
 const yaml = require('js-yaml');
-const TEMPLATE_FILE_PATH = '../ISSUE_TEMPLATE/bug_report.yml'
+const path = require('path');
+const TEMPLATE_FILE_PATH = path.resolve(__dirname, '../ISSUE_TEMPLATE/bug_report.yml')
 
 async function closeIssue(github, owner, repo, number) {
     await github.rest.issues.createComment({

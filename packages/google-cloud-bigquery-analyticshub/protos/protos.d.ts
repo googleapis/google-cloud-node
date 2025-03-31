@@ -522,6 +522,13 @@ export namespace google {
                         DISCOVERY_TYPE_PUBLIC = 2
                     }
 
+                    /** SharedResourceType enum. */
+                    enum SharedResourceType {
+                        SHARED_RESOURCE_TYPE_UNSPECIFIED = 0,
+                        BIGQUERY_DATASET = 1,
+                        PUBSUB_TOPIC = 2
+                    }
+
                     /** Properties of a DataExchange. */
                     interface IDataExchange {
 
@@ -551,6 +558,9 @@ export namespace google {
 
                         /** DataExchange discoveryType */
                         discoveryType?: (google.cloud.bigquery.analyticshub.v1.DiscoveryType|keyof typeof google.cloud.bigquery.analyticshub.v1.DiscoveryType|null);
+
+                        /** DataExchange logLinkedDatasetQueryUserEmail */
+                        logLinkedDatasetQueryUserEmail?: (boolean|null);
                     }
 
                     /** Represents a DataExchange. */
@@ -589,8 +599,14 @@ export namespace google {
                         /** DataExchange discoveryType. */
                         public discoveryType?: (google.cloud.bigquery.analyticshub.v1.DiscoveryType|keyof typeof google.cloud.bigquery.analyticshub.v1.DiscoveryType|null);
 
+                        /** DataExchange logLinkedDatasetQueryUserEmail. */
+                        public logLinkedDatasetQueryUserEmail?: (boolean|null);
+
                         /** DataExchange _discoveryType. */
                         public _discoveryType?: "discoveryType";
+
+                        /** DataExchange _logLinkedDatasetQueryUserEmail. */
+                        public _logLinkedDatasetQueryUserEmail?: "logLinkedDatasetQueryUserEmail";
 
                         /**
                          * Creates a new DataExchange instance using the specified properties.
@@ -1409,11 +1425,111 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Properties of a DestinationPubSubSubscription. */
+                    interface IDestinationPubSubSubscription {
+
+                        /** DestinationPubSubSubscription pubsubSubscription */
+                        pubsubSubscription?: (google.cloud.bigquery.analyticshub.v1.IPubSubSubscription|null);
+                    }
+
+                    /** Represents a DestinationPubSubSubscription. */
+                    class DestinationPubSubSubscription implements IDestinationPubSubSubscription {
+
+                        /**
+                         * Constructs a new DestinationPubSubSubscription.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.analyticshub.v1.IDestinationPubSubSubscription);
+
+                        /** DestinationPubSubSubscription pubsubSubscription. */
+                        public pubsubSubscription?: (google.cloud.bigquery.analyticshub.v1.IPubSubSubscription|null);
+
+                        /**
+                         * Creates a new DestinationPubSubSubscription instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DestinationPubSubSubscription instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.analyticshub.v1.IDestinationPubSubSubscription): google.cloud.bigquery.analyticshub.v1.DestinationPubSubSubscription;
+
+                        /**
+                         * Encodes the specified DestinationPubSubSubscription message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.DestinationPubSubSubscription.verify|verify} messages.
+                         * @param message DestinationPubSubSubscription message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.analyticshub.v1.IDestinationPubSubSubscription, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DestinationPubSubSubscription message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.DestinationPubSubSubscription.verify|verify} messages.
+                         * @param message DestinationPubSubSubscription message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.analyticshub.v1.IDestinationPubSubSubscription, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DestinationPubSubSubscription message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DestinationPubSubSubscription
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.analyticshub.v1.DestinationPubSubSubscription;
+
+                        /**
+                         * Decodes a DestinationPubSubSubscription message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DestinationPubSubSubscription
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.analyticshub.v1.DestinationPubSubSubscription;
+
+                        /**
+                         * Verifies a DestinationPubSubSubscription message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DestinationPubSubSubscription message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DestinationPubSubSubscription
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.analyticshub.v1.DestinationPubSubSubscription;
+
+                        /**
+                         * Creates a plain object from a DestinationPubSubSubscription message. Also converts values to other types if specified.
+                         * @param message DestinationPubSubSubscription
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.analyticshub.v1.DestinationPubSubSubscription, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DestinationPubSubSubscription to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DestinationPubSubSubscription
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Properties of a Listing. */
                     interface IListing {
 
                         /** Listing bigqueryDataset */
                         bigqueryDataset?: (google.cloud.bigquery.analyticshub.v1.Listing.IBigQueryDatasetSource|null);
+
+                        /** Listing pubsubTopic */
+                        pubsubTopic?: (google.cloud.bigquery.analyticshub.v1.Listing.IPubSubTopicSource|null);
 
                         /** Listing name */
                         name?: (string|null);
@@ -1453,6 +1569,12 @@ export namespace google {
 
                         /** Listing discoveryType */
                         discoveryType?: (google.cloud.bigquery.analyticshub.v1.DiscoveryType|keyof typeof google.cloud.bigquery.analyticshub.v1.DiscoveryType|null);
+
+                        /** Listing resourceType */
+                        resourceType?: (google.cloud.bigquery.analyticshub.v1.SharedResourceType|keyof typeof google.cloud.bigquery.analyticshub.v1.SharedResourceType|null);
+
+                        /** Listing logLinkedDatasetQueryUserEmail */
+                        logLinkedDatasetQueryUserEmail?: (boolean|null);
                     }
 
                     /** Represents a Listing. */
@@ -1466,6 +1588,9 @@ export namespace google {
 
                         /** Listing bigqueryDataset. */
                         public bigqueryDataset?: (google.cloud.bigquery.analyticshub.v1.Listing.IBigQueryDatasetSource|null);
+
+                        /** Listing pubsubTopic. */
+                        public pubsubTopic?: (google.cloud.bigquery.analyticshub.v1.Listing.IPubSubTopicSource|null);
 
                         /** Listing name. */
                         public name: string;
@@ -1506,11 +1631,20 @@ export namespace google {
                         /** Listing discoveryType. */
                         public discoveryType?: (google.cloud.bigquery.analyticshub.v1.DiscoveryType|keyof typeof google.cloud.bigquery.analyticshub.v1.DiscoveryType|null);
 
+                        /** Listing resourceType. */
+                        public resourceType: (google.cloud.bigquery.analyticshub.v1.SharedResourceType|keyof typeof google.cloud.bigquery.analyticshub.v1.SharedResourceType);
+
+                        /** Listing logLinkedDatasetQueryUserEmail. */
+                        public logLinkedDatasetQueryUserEmail?: (boolean|null);
+
                         /** Listing source. */
-                        public source?: "bigqueryDataset";
+                        public source?: ("bigqueryDataset"|"pubsubTopic");
 
                         /** Listing _discoveryType. */
                         public _discoveryType?: "discoveryType";
+
+                        /** Listing _logLinkedDatasetQueryUserEmail. */
+                        public _logLinkedDatasetQueryUserEmail?: "logLinkedDatasetQueryUserEmail";
 
                         /**
                          * Creates a new Listing instance using the specified properties.
@@ -1913,6 +2047,109 @@ export namespace google {
                             }
                         }
 
+                        /** Properties of a PubSubTopicSource. */
+                        interface IPubSubTopicSource {
+
+                            /** PubSubTopicSource topic */
+                            topic?: (string|null);
+
+                            /** PubSubTopicSource dataAffinityRegions */
+                            dataAffinityRegions?: (string[]|null);
+                        }
+
+                        /** Represents a PubSubTopicSource. */
+                        class PubSubTopicSource implements IPubSubTopicSource {
+
+                            /**
+                             * Constructs a new PubSubTopicSource.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.bigquery.analyticshub.v1.Listing.IPubSubTopicSource);
+
+                            /** PubSubTopicSource topic. */
+                            public topic: string;
+
+                            /** PubSubTopicSource dataAffinityRegions. */
+                            public dataAffinityRegions: string[];
+
+                            /**
+                             * Creates a new PubSubTopicSource instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns PubSubTopicSource instance
+                             */
+                            public static create(properties?: google.cloud.bigquery.analyticshub.v1.Listing.IPubSubTopicSource): google.cloud.bigquery.analyticshub.v1.Listing.PubSubTopicSource;
+
+                            /**
+                             * Encodes the specified PubSubTopicSource message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.Listing.PubSubTopicSource.verify|verify} messages.
+                             * @param message PubSubTopicSource message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.bigquery.analyticshub.v1.Listing.IPubSubTopicSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified PubSubTopicSource message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.Listing.PubSubTopicSource.verify|verify} messages.
+                             * @param message PubSubTopicSource message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.bigquery.analyticshub.v1.Listing.IPubSubTopicSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a PubSubTopicSource message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns PubSubTopicSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.analyticshub.v1.Listing.PubSubTopicSource;
+
+                            /**
+                             * Decodes a PubSubTopicSource message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns PubSubTopicSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.analyticshub.v1.Listing.PubSubTopicSource;
+
+                            /**
+                             * Verifies a PubSubTopicSource message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a PubSubTopicSource message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns PubSubTopicSource
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.analyticshub.v1.Listing.PubSubTopicSource;
+
+                            /**
+                             * Creates a plain object from a PubSubTopicSource message. Also converts values to other types if specified.
+                             * @param message PubSubTopicSource
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.bigquery.analyticshub.v1.Listing.PubSubTopicSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this PubSubTopicSource to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for PubSubTopicSource
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
                         /** Properties of a RestrictedExportConfig. */
                         interface IRestrictedExportConfig {
 
@@ -2085,6 +2322,15 @@ export namespace google {
 
                         /** Subscription subscriberContact */
                         subscriberContact?: (string|null);
+
+                        /** Subscription linkedResources */
+                        linkedResources?: (google.cloud.bigquery.analyticshub.v1.Subscription.ILinkedResource[]|null);
+
+                        /** Subscription resourceType */
+                        resourceType?: (google.cloud.bigquery.analyticshub.v1.SharedResourceType|keyof typeof google.cloud.bigquery.analyticshub.v1.SharedResourceType|null);
+
+                        /** Subscription logLinkedDatasetQueryUserEmail */
+                        logLinkedDatasetQueryUserEmail?: (boolean|null);
                     }
 
                     /** Represents a Subscription. */
@@ -2126,8 +2372,20 @@ export namespace google {
                         /** Subscription subscriberContact. */
                         public subscriberContact: string;
 
+                        /** Subscription linkedResources. */
+                        public linkedResources: google.cloud.bigquery.analyticshub.v1.Subscription.ILinkedResource[];
+
+                        /** Subscription resourceType. */
+                        public resourceType: (google.cloud.bigquery.analyticshub.v1.SharedResourceType|keyof typeof google.cloud.bigquery.analyticshub.v1.SharedResourceType);
+
+                        /** Subscription logLinkedDatasetQueryUserEmail. */
+                        public logLinkedDatasetQueryUserEmail?: (boolean|null);
+
                         /** Subscription resourceName. */
                         public resourceName?: ("listing"|"dataExchange");
+
+                        /** Subscription _logLinkedDatasetQueryUserEmail. */
+                        public _logLinkedDatasetQueryUserEmail?: "logLinkedDatasetQueryUserEmail";
 
                         /**
                          * Creates a new Subscription instance using the specified properties.
@@ -2214,6 +2472,12 @@ export namespace google {
 
                             /** LinkedResource linkedDataset */
                             linkedDataset?: (string|null);
+
+                            /** LinkedResource linkedPubsubSubscription */
+                            linkedPubsubSubscription?: (string|null);
+
+                            /** LinkedResource listing */
+                            listing?: (string|null);
                         }
 
                         /** Represents a LinkedResource. */
@@ -2228,8 +2492,14 @@ export namespace google {
                             /** LinkedResource linkedDataset. */
                             public linkedDataset?: (string|null);
 
+                            /** LinkedResource linkedPubsubSubscription. */
+                            public linkedPubsubSubscription?: (string|null);
+
+                            /** LinkedResource listing. */
+                            public listing: string;
+
                             /** LinkedResource reference. */
-                            public reference?: "linkedDataset";
+                            public reference?: ("linkedDataset"|"linkedPubsubSubscription");
 
                             /**
                              * Creates a new LinkedResource instance using the specified properties.
@@ -3772,6 +4042,9 @@ export namespace google {
                         /** SubscribeListingRequest destinationDataset */
                         destinationDataset?: (google.cloud.bigquery.analyticshub.v1.IDestinationDataset|null);
 
+                        /** SubscribeListingRequest destinationPubsubSubscription */
+                        destinationPubsubSubscription?: (google.cloud.bigquery.analyticshub.v1.IDestinationPubSubSubscription|null);
+
                         /** SubscribeListingRequest name */
                         name?: (string|null);
                     }
@@ -3788,11 +4061,14 @@ export namespace google {
                         /** SubscribeListingRequest destinationDataset. */
                         public destinationDataset?: (google.cloud.bigquery.analyticshub.v1.IDestinationDataset|null);
 
+                        /** SubscribeListingRequest destinationPubsubSubscription. */
+                        public destinationPubsubSubscription?: (google.cloud.bigquery.analyticshub.v1.IDestinationPubSubSubscription|null);
+
                         /** SubscribeListingRequest name. */
                         public name: string;
 
                         /** SubscribeListingRequest destination. */
-                        public destination?: "destinationDataset";
+                        public destination?: ("destinationDataset"|"destinationPubsubSubscription");
 
                         /**
                          * Creates a new SubscribeListingRequest instance using the specified properties.
@@ -3978,6 +4254,9 @@ export namespace google {
                         /** SubscribeDataExchangeRequest destination */
                         destination?: (string|null);
 
+                        /** SubscribeDataExchangeRequest destinationDataset */
+                        destinationDataset?: (google.cloud.bigquery.analyticshub.v1.IDestinationDataset|null);
+
                         /** SubscribeDataExchangeRequest subscription */
                         subscription?: (string|null);
 
@@ -3999,6 +4278,9 @@ export namespace google {
 
                         /** SubscribeDataExchangeRequest destination. */
                         public destination: string;
+
+                        /** SubscribeDataExchangeRequest destinationDataset. */
+                        public destinationDataset?: (google.cloud.bigquery.analyticshub.v1.IDestinationDataset|null);
 
                         /** SubscribeDataExchangeRequest subscription. */
                         public subscription: string;
@@ -5320,6 +5602,1610 @@ export namespace google {
 
                         /**
                          * Gets the default type url for OperationMetadata
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a PubSubSubscription. */
+                    interface IPubSubSubscription {
+
+                        /** PubSubSubscription name */
+                        name?: (string|null);
+
+                        /** PubSubSubscription pushConfig */
+                        pushConfig?: (google.cloud.bigquery.analyticshub.v1.IPushConfig|null);
+
+                        /** PubSubSubscription bigqueryConfig */
+                        bigqueryConfig?: (google.cloud.bigquery.analyticshub.v1.IBigQueryConfig|null);
+
+                        /** PubSubSubscription cloudStorageConfig */
+                        cloudStorageConfig?: (google.cloud.bigquery.analyticshub.v1.ICloudStorageConfig|null);
+
+                        /** PubSubSubscription ackDeadlineSeconds */
+                        ackDeadlineSeconds?: (number|null);
+
+                        /** PubSubSubscription retainAckedMessages */
+                        retainAckedMessages?: (boolean|null);
+
+                        /** PubSubSubscription messageRetentionDuration */
+                        messageRetentionDuration?: (google.protobuf.IDuration|null);
+
+                        /** PubSubSubscription labels */
+                        labels?: ({ [k: string]: string }|null);
+
+                        /** PubSubSubscription enableMessageOrdering */
+                        enableMessageOrdering?: (boolean|null);
+
+                        /** PubSubSubscription expirationPolicy */
+                        expirationPolicy?: (google.cloud.bigquery.analyticshub.v1.IExpirationPolicy|null);
+
+                        /** PubSubSubscription filter */
+                        filter?: (string|null);
+
+                        /** PubSubSubscription deadLetterPolicy */
+                        deadLetterPolicy?: (google.cloud.bigquery.analyticshub.v1.IDeadLetterPolicy|null);
+
+                        /** PubSubSubscription retryPolicy */
+                        retryPolicy?: (google.cloud.bigquery.analyticshub.v1.IRetryPolicy|null);
+
+                        /** PubSubSubscription detached */
+                        detached?: (boolean|null);
+
+                        /** PubSubSubscription enableExactlyOnceDelivery */
+                        enableExactlyOnceDelivery?: (boolean|null);
+
+                        /** PubSubSubscription messageTransforms */
+                        messageTransforms?: (google.cloud.bigquery.analyticshub.v1.IMessageTransform[]|null);
+                    }
+
+                    /** Represents a PubSubSubscription. */
+                    class PubSubSubscription implements IPubSubSubscription {
+
+                        /**
+                         * Constructs a new PubSubSubscription.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.analyticshub.v1.IPubSubSubscription);
+
+                        /** PubSubSubscription name. */
+                        public name: string;
+
+                        /** PubSubSubscription pushConfig. */
+                        public pushConfig?: (google.cloud.bigquery.analyticshub.v1.IPushConfig|null);
+
+                        /** PubSubSubscription bigqueryConfig. */
+                        public bigqueryConfig?: (google.cloud.bigquery.analyticshub.v1.IBigQueryConfig|null);
+
+                        /** PubSubSubscription cloudStorageConfig. */
+                        public cloudStorageConfig?: (google.cloud.bigquery.analyticshub.v1.ICloudStorageConfig|null);
+
+                        /** PubSubSubscription ackDeadlineSeconds. */
+                        public ackDeadlineSeconds: number;
+
+                        /** PubSubSubscription retainAckedMessages. */
+                        public retainAckedMessages: boolean;
+
+                        /** PubSubSubscription messageRetentionDuration. */
+                        public messageRetentionDuration?: (google.protobuf.IDuration|null);
+
+                        /** PubSubSubscription labels. */
+                        public labels: { [k: string]: string };
+
+                        /** PubSubSubscription enableMessageOrdering. */
+                        public enableMessageOrdering: boolean;
+
+                        /** PubSubSubscription expirationPolicy. */
+                        public expirationPolicy?: (google.cloud.bigquery.analyticshub.v1.IExpirationPolicy|null);
+
+                        /** PubSubSubscription filter. */
+                        public filter: string;
+
+                        /** PubSubSubscription deadLetterPolicy. */
+                        public deadLetterPolicy?: (google.cloud.bigquery.analyticshub.v1.IDeadLetterPolicy|null);
+
+                        /** PubSubSubscription retryPolicy. */
+                        public retryPolicy?: (google.cloud.bigquery.analyticshub.v1.IRetryPolicy|null);
+
+                        /** PubSubSubscription detached. */
+                        public detached: boolean;
+
+                        /** PubSubSubscription enableExactlyOnceDelivery. */
+                        public enableExactlyOnceDelivery: boolean;
+
+                        /** PubSubSubscription messageTransforms. */
+                        public messageTransforms: google.cloud.bigquery.analyticshub.v1.IMessageTransform[];
+
+                        /**
+                         * Creates a new PubSubSubscription instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PubSubSubscription instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.analyticshub.v1.IPubSubSubscription): google.cloud.bigquery.analyticshub.v1.PubSubSubscription;
+
+                        /**
+                         * Encodes the specified PubSubSubscription message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.PubSubSubscription.verify|verify} messages.
+                         * @param message PubSubSubscription message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.analyticshub.v1.IPubSubSubscription, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PubSubSubscription message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.PubSubSubscription.verify|verify} messages.
+                         * @param message PubSubSubscription message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.analyticshub.v1.IPubSubSubscription, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PubSubSubscription message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PubSubSubscription
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.analyticshub.v1.PubSubSubscription;
+
+                        /**
+                         * Decodes a PubSubSubscription message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PubSubSubscription
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.analyticshub.v1.PubSubSubscription;
+
+                        /**
+                         * Verifies a PubSubSubscription message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PubSubSubscription message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PubSubSubscription
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.analyticshub.v1.PubSubSubscription;
+
+                        /**
+                         * Creates a plain object from a PubSubSubscription message. Also converts values to other types if specified.
+                         * @param message PubSubSubscription
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.analyticshub.v1.PubSubSubscription, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PubSubSubscription to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PubSubSubscription
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a RetryPolicy. */
+                    interface IRetryPolicy {
+
+                        /** RetryPolicy minimumBackoff */
+                        minimumBackoff?: (google.protobuf.IDuration|null);
+
+                        /** RetryPolicy maximumBackoff */
+                        maximumBackoff?: (google.protobuf.IDuration|null);
+                    }
+
+                    /** Represents a RetryPolicy. */
+                    class RetryPolicy implements IRetryPolicy {
+
+                        /**
+                         * Constructs a new RetryPolicy.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.analyticshub.v1.IRetryPolicy);
+
+                        /** RetryPolicy minimumBackoff. */
+                        public minimumBackoff?: (google.protobuf.IDuration|null);
+
+                        /** RetryPolicy maximumBackoff. */
+                        public maximumBackoff?: (google.protobuf.IDuration|null);
+
+                        /**
+                         * Creates a new RetryPolicy instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RetryPolicy instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.analyticshub.v1.IRetryPolicy): google.cloud.bigquery.analyticshub.v1.RetryPolicy;
+
+                        /**
+                         * Encodes the specified RetryPolicy message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.RetryPolicy.verify|verify} messages.
+                         * @param message RetryPolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.analyticshub.v1.IRetryPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RetryPolicy message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.RetryPolicy.verify|verify} messages.
+                         * @param message RetryPolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.analyticshub.v1.IRetryPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RetryPolicy message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RetryPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.analyticshub.v1.RetryPolicy;
+
+                        /**
+                         * Decodes a RetryPolicy message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RetryPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.analyticshub.v1.RetryPolicy;
+
+                        /**
+                         * Verifies a RetryPolicy message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RetryPolicy message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RetryPolicy
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.analyticshub.v1.RetryPolicy;
+
+                        /**
+                         * Creates a plain object from a RetryPolicy message. Also converts values to other types if specified.
+                         * @param message RetryPolicy
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.analyticshub.v1.RetryPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RetryPolicy to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RetryPolicy
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DeadLetterPolicy. */
+                    interface IDeadLetterPolicy {
+
+                        /** DeadLetterPolicy deadLetterTopic */
+                        deadLetterTopic?: (string|null);
+
+                        /** DeadLetterPolicy maxDeliveryAttempts */
+                        maxDeliveryAttempts?: (number|null);
+                    }
+
+                    /** Represents a DeadLetterPolicy. */
+                    class DeadLetterPolicy implements IDeadLetterPolicy {
+
+                        /**
+                         * Constructs a new DeadLetterPolicy.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.analyticshub.v1.IDeadLetterPolicy);
+
+                        /** DeadLetterPolicy deadLetterTopic. */
+                        public deadLetterTopic: string;
+
+                        /** DeadLetterPolicy maxDeliveryAttempts. */
+                        public maxDeliveryAttempts: number;
+
+                        /**
+                         * Creates a new DeadLetterPolicy instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DeadLetterPolicy instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.analyticshub.v1.IDeadLetterPolicy): google.cloud.bigquery.analyticshub.v1.DeadLetterPolicy;
+
+                        /**
+                         * Encodes the specified DeadLetterPolicy message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.DeadLetterPolicy.verify|verify} messages.
+                         * @param message DeadLetterPolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.analyticshub.v1.IDeadLetterPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DeadLetterPolicy message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.DeadLetterPolicy.verify|verify} messages.
+                         * @param message DeadLetterPolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.analyticshub.v1.IDeadLetterPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DeadLetterPolicy message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DeadLetterPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.analyticshub.v1.DeadLetterPolicy;
+
+                        /**
+                         * Decodes a DeadLetterPolicy message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DeadLetterPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.analyticshub.v1.DeadLetterPolicy;
+
+                        /**
+                         * Verifies a DeadLetterPolicy message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DeadLetterPolicy message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DeadLetterPolicy
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.analyticshub.v1.DeadLetterPolicy;
+
+                        /**
+                         * Creates a plain object from a DeadLetterPolicy message. Also converts values to other types if specified.
+                         * @param message DeadLetterPolicy
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.analyticshub.v1.DeadLetterPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DeadLetterPolicy to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DeadLetterPolicy
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an ExpirationPolicy. */
+                    interface IExpirationPolicy {
+
+                        /** ExpirationPolicy ttl */
+                        ttl?: (google.protobuf.IDuration|null);
+                    }
+
+                    /** Represents an ExpirationPolicy. */
+                    class ExpirationPolicy implements IExpirationPolicy {
+
+                        /**
+                         * Constructs a new ExpirationPolicy.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.analyticshub.v1.IExpirationPolicy);
+
+                        /** ExpirationPolicy ttl. */
+                        public ttl?: (google.protobuf.IDuration|null);
+
+                        /**
+                         * Creates a new ExpirationPolicy instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ExpirationPolicy instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.analyticshub.v1.IExpirationPolicy): google.cloud.bigquery.analyticshub.v1.ExpirationPolicy;
+
+                        /**
+                         * Encodes the specified ExpirationPolicy message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.ExpirationPolicy.verify|verify} messages.
+                         * @param message ExpirationPolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.analyticshub.v1.IExpirationPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ExpirationPolicy message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.ExpirationPolicy.verify|verify} messages.
+                         * @param message ExpirationPolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.analyticshub.v1.IExpirationPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ExpirationPolicy message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ExpirationPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.analyticshub.v1.ExpirationPolicy;
+
+                        /**
+                         * Decodes an ExpirationPolicy message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ExpirationPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.analyticshub.v1.ExpirationPolicy;
+
+                        /**
+                         * Verifies an ExpirationPolicy message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ExpirationPolicy message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ExpirationPolicy
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.analyticshub.v1.ExpirationPolicy;
+
+                        /**
+                         * Creates a plain object from an ExpirationPolicy message. Also converts values to other types if specified.
+                         * @param message ExpirationPolicy
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.analyticshub.v1.ExpirationPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ExpirationPolicy to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ExpirationPolicy
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a PushConfig. */
+                    interface IPushConfig {
+
+                        /** PushConfig oidcToken */
+                        oidcToken?: (google.cloud.bigquery.analyticshub.v1.PushConfig.IOidcToken|null);
+
+                        /** PushConfig pubsubWrapper */
+                        pubsubWrapper?: (google.cloud.bigquery.analyticshub.v1.PushConfig.IPubsubWrapper|null);
+
+                        /** PushConfig noWrapper */
+                        noWrapper?: (google.cloud.bigquery.analyticshub.v1.PushConfig.INoWrapper|null);
+
+                        /** PushConfig pushEndpoint */
+                        pushEndpoint?: (string|null);
+
+                        /** PushConfig attributes */
+                        attributes?: ({ [k: string]: string }|null);
+                    }
+
+                    /** Represents a PushConfig. */
+                    class PushConfig implements IPushConfig {
+
+                        /**
+                         * Constructs a new PushConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.analyticshub.v1.IPushConfig);
+
+                        /** PushConfig oidcToken. */
+                        public oidcToken?: (google.cloud.bigquery.analyticshub.v1.PushConfig.IOidcToken|null);
+
+                        /** PushConfig pubsubWrapper. */
+                        public pubsubWrapper?: (google.cloud.bigquery.analyticshub.v1.PushConfig.IPubsubWrapper|null);
+
+                        /** PushConfig noWrapper. */
+                        public noWrapper?: (google.cloud.bigquery.analyticshub.v1.PushConfig.INoWrapper|null);
+
+                        /** PushConfig pushEndpoint. */
+                        public pushEndpoint: string;
+
+                        /** PushConfig attributes. */
+                        public attributes: { [k: string]: string };
+
+                        /** PushConfig authenticationMethod. */
+                        public authenticationMethod?: "oidcToken";
+
+                        /** PushConfig wrapper. */
+                        public wrapper?: ("pubsubWrapper"|"noWrapper");
+
+                        /**
+                         * Creates a new PushConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PushConfig instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.analyticshub.v1.IPushConfig): google.cloud.bigquery.analyticshub.v1.PushConfig;
+
+                        /**
+                         * Encodes the specified PushConfig message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.PushConfig.verify|verify} messages.
+                         * @param message PushConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.analyticshub.v1.IPushConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PushConfig message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.PushConfig.verify|verify} messages.
+                         * @param message PushConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.analyticshub.v1.IPushConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PushConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PushConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.analyticshub.v1.PushConfig;
+
+                        /**
+                         * Decodes a PushConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PushConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.analyticshub.v1.PushConfig;
+
+                        /**
+                         * Verifies a PushConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PushConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PushConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.analyticshub.v1.PushConfig;
+
+                        /**
+                         * Creates a plain object from a PushConfig message. Also converts values to other types if specified.
+                         * @param message PushConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.analyticshub.v1.PushConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PushConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PushConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace PushConfig {
+
+                        /** Properties of an OidcToken. */
+                        interface IOidcToken {
+
+                            /** OidcToken serviceAccountEmail */
+                            serviceAccountEmail?: (string|null);
+
+                            /** OidcToken audience */
+                            audience?: (string|null);
+                        }
+
+                        /** Represents an OidcToken. */
+                        class OidcToken implements IOidcToken {
+
+                            /**
+                             * Constructs a new OidcToken.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.bigquery.analyticshub.v1.PushConfig.IOidcToken);
+
+                            /** OidcToken serviceAccountEmail. */
+                            public serviceAccountEmail: string;
+
+                            /** OidcToken audience. */
+                            public audience: string;
+
+                            /**
+                             * Creates a new OidcToken instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns OidcToken instance
+                             */
+                            public static create(properties?: google.cloud.bigquery.analyticshub.v1.PushConfig.IOidcToken): google.cloud.bigquery.analyticshub.v1.PushConfig.OidcToken;
+
+                            /**
+                             * Encodes the specified OidcToken message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.PushConfig.OidcToken.verify|verify} messages.
+                             * @param message OidcToken message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.bigquery.analyticshub.v1.PushConfig.IOidcToken, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified OidcToken message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.PushConfig.OidcToken.verify|verify} messages.
+                             * @param message OidcToken message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.bigquery.analyticshub.v1.PushConfig.IOidcToken, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an OidcToken message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns OidcToken
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.analyticshub.v1.PushConfig.OidcToken;
+
+                            /**
+                             * Decodes an OidcToken message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns OidcToken
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.analyticshub.v1.PushConfig.OidcToken;
+
+                            /**
+                             * Verifies an OidcToken message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an OidcToken message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns OidcToken
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.analyticshub.v1.PushConfig.OidcToken;
+
+                            /**
+                             * Creates a plain object from an OidcToken message. Also converts values to other types if specified.
+                             * @param message OidcToken
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.bigquery.analyticshub.v1.PushConfig.OidcToken, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this OidcToken to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for OidcToken
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a PubsubWrapper. */
+                        interface IPubsubWrapper {
+                        }
+
+                        /** Represents a PubsubWrapper. */
+                        class PubsubWrapper implements IPubsubWrapper {
+
+                            /**
+                             * Constructs a new PubsubWrapper.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.bigquery.analyticshub.v1.PushConfig.IPubsubWrapper);
+
+                            /**
+                             * Creates a new PubsubWrapper instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns PubsubWrapper instance
+                             */
+                            public static create(properties?: google.cloud.bigquery.analyticshub.v1.PushConfig.IPubsubWrapper): google.cloud.bigquery.analyticshub.v1.PushConfig.PubsubWrapper;
+
+                            /**
+                             * Encodes the specified PubsubWrapper message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.PushConfig.PubsubWrapper.verify|verify} messages.
+                             * @param message PubsubWrapper message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.bigquery.analyticshub.v1.PushConfig.IPubsubWrapper, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified PubsubWrapper message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.PushConfig.PubsubWrapper.verify|verify} messages.
+                             * @param message PubsubWrapper message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.bigquery.analyticshub.v1.PushConfig.IPubsubWrapper, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a PubsubWrapper message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns PubsubWrapper
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.analyticshub.v1.PushConfig.PubsubWrapper;
+
+                            /**
+                             * Decodes a PubsubWrapper message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns PubsubWrapper
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.analyticshub.v1.PushConfig.PubsubWrapper;
+
+                            /**
+                             * Verifies a PubsubWrapper message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a PubsubWrapper message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns PubsubWrapper
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.analyticshub.v1.PushConfig.PubsubWrapper;
+
+                            /**
+                             * Creates a plain object from a PubsubWrapper message. Also converts values to other types if specified.
+                             * @param message PubsubWrapper
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.bigquery.analyticshub.v1.PushConfig.PubsubWrapper, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this PubsubWrapper to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for PubsubWrapper
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a NoWrapper. */
+                        interface INoWrapper {
+
+                            /** NoWrapper writeMetadata */
+                            writeMetadata?: (boolean|null);
+                        }
+
+                        /** Represents a NoWrapper. */
+                        class NoWrapper implements INoWrapper {
+
+                            /**
+                             * Constructs a new NoWrapper.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.bigquery.analyticshub.v1.PushConfig.INoWrapper);
+
+                            /** NoWrapper writeMetadata. */
+                            public writeMetadata: boolean;
+
+                            /**
+                             * Creates a new NoWrapper instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns NoWrapper instance
+                             */
+                            public static create(properties?: google.cloud.bigquery.analyticshub.v1.PushConfig.INoWrapper): google.cloud.bigquery.analyticshub.v1.PushConfig.NoWrapper;
+
+                            /**
+                             * Encodes the specified NoWrapper message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.PushConfig.NoWrapper.verify|verify} messages.
+                             * @param message NoWrapper message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.bigquery.analyticshub.v1.PushConfig.INoWrapper, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified NoWrapper message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.PushConfig.NoWrapper.verify|verify} messages.
+                             * @param message NoWrapper message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.bigquery.analyticshub.v1.PushConfig.INoWrapper, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a NoWrapper message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns NoWrapper
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.analyticshub.v1.PushConfig.NoWrapper;
+
+                            /**
+                             * Decodes a NoWrapper message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns NoWrapper
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.analyticshub.v1.PushConfig.NoWrapper;
+
+                            /**
+                             * Verifies a NoWrapper message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a NoWrapper message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns NoWrapper
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.analyticshub.v1.PushConfig.NoWrapper;
+
+                            /**
+                             * Creates a plain object from a NoWrapper message. Also converts values to other types if specified.
+                             * @param message NoWrapper
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.bigquery.analyticshub.v1.PushConfig.NoWrapper, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this NoWrapper to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for NoWrapper
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** Properties of a BigQueryConfig. */
+                    interface IBigQueryConfig {
+
+                        /** BigQueryConfig table */
+                        table?: (string|null);
+
+                        /** BigQueryConfig useTopicSchema */
+                        useTopicSchema?: (boolean|null);
+
+                        /** BigQueryConfig writeMetadata */
+                        writeMetadata?: (boolean|null);
+
+                        /** BigQueryConfig dropUnknownFields */
+                        dropUnknownFields?: (boolean|null);
+
+                        /** BigQueryConfig useTableSchema */
+                        useTableSchema?: (boolean|null);
+
+                        /** BigQueryConfig serviceAccountEmail */
+                        serviceAccountEmail?: (string|null);
+                    }
+
+                    /** Represents a BigQueryConfig. */
+                    class BigQueryConfig implements IBigQueryConfig {
+
+                        /**
+                         * Constructs a new BigQueryConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.analyticshub.v1.IBigQueryConfig);
+
+                        /** BigQueryConfig table. */
+                        public table: string;
+
+                        /** BigQueryConfig useTopicSchema. */
+                        public useTopicSchema: boolean;
+
+                        /** BigQueryConfig writeMetadata. */
+                        public writeMetadata: boolean;
+
+                        /** BigQueryConfig dropUnknownFields. */
+                        public dropUnknownFields: boolean;
+
+                        /** BigQueryConfig useTableSchema. */
+                        public useTableSchema: boolean;
+
+                        /** BigQueryConfig serviceAccountEmail. */
+                        public serviceAccountEmail: string;
+
+                        /**
+                         * Creates a new BigQueryConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BigQueryConfig instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.analyticshub.v1.IBigQueryConfig): google.cloud.bigquery.analyticshub.v1.BigQueryConfig;
+
+                        /**
+                         * Encodes the specified BigQueryConfig message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.BigQueryConfig.verify|verify} messages.
+                         * @param message BigQueryConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.analyticshub.v1.IBigQueryConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BigQueryConfig message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.BigQueryConfig.verify|verify} messages.
+                         * @param message BigQueryConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.analyticshub.v1.IBigQueryConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BigQueryConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BigQueryConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.analyticshub.v1.BigQueryConfig;
+
+                        /**
+                         * Decodes a BigQueryConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BigQueryConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.analyticshub.v1.BigQueryConfig;
+
+                        /**
+                         * Verifies a BigQueryConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BigQueryConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BigQueryConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.analyticshub.v1.BigQueryConfig;
+
+                        /**
+                         * Creates a plain object from a BigQueryConfig message. Also converts values to other types if specified.
+                         * @param message BigQueryConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.analyticshub.v1.BigQueryConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BigQueryConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for BigQueryConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a CloudStorageConfig. */
+                    interface ICloudStorageConfig {
+
+                        /** CloudStorageConfig textConfig */
+                        textConfig?: (google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.ITextConfig|null);
+
+                        /** CloudStorageConfig avroConfig */
+                        avroConfig?: (google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.IAvroConfig|null);
+
+                        /** CloudStorageConfig bucket */
+                        bucket?: (string|null);
+
+                        /** CloudStorageConfig filenamePrefix */
+                        filenamePrefix?: (string|null);
+
+                        /** CloudStorageConfig filenameSuffix */
+                        filenameSuffix?: (string|null);
+
+                        /** CloudStorageConfig filenameDatetimeFormat */
+                        filenameDatetimeFormat?: (string|null);
+
+                        /** CloudStorageConfig maxDuration */
+                        maxDuration?: (google.protobuf.IDuration|null);
+
+                        /** CloudStorageConfig maxBytes */
+                        maxBytes?: (number|Long|string|null);
+
+                        /** CloudStorageConfig maxMessages */
+                        maxMessages?: (number|Long|string|null);
+
+                        /** CloudStorageConfig serviceAccountEmail */
+                        serviceAccountEmail?: (string|null);
+                    }
+
+                    /** Represents a CloudStorageConfig. */
+                    class CloudStorageConfig implements ICloudStorageConfig {
+
+                        /**
+                         * Constructs a new CloudStorageConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.analyticshub.v1.ICloudStorageConfig);
+
+                        /** CloudStorageConfig textConfig. */
+                        public textConfig?: (google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.ITextConfig|null);
+
+                        /** CloudStorageConfig avroConfig. */
+                        public avroConfig?: (google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.IAvroConfig|null);
+
+                        /** CloudStorageConfig bucket. */
+                        public bucket: string;
+
+                        /** CloudStorageConfig filenamePrefix. */
+                        public filenamePrefix: string;
+
+                        /** CloudStorageConfig filenameSuffix. */
+                        public filenameSuffix: string;
+
+                        /** CloudStorageConfig filenameDatetimeFormat. */
+                        public filenameDatetimeFormat: string;
+
+                        /** CloudStorageConfig maxDuration. */
+                        public maxDuration?: (google.protobuf.IDuration|null);
+
+                        /** CloudStorageConfig maxBytes. */
+                        public maxBytes: (number|Long|string);
+
+                        /** CloudStorageConfig maxMessages. */
+                        public maxMessages: (number|Long|string);
+
+                        /** CloudStorageConfig serviceAccountEmail. */
+                        public serviceAccountEmail: string;
+
+                        /** CloudStorageConfig outputFormat. */
+                        public outputFormat?: ("textConfig"|"avroConfig");
+
+                        /**
+                         * Creates a new CloudStorageConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CloudStorageConfig instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.analyticshub.v1.ICloudStorageConfig): google.cloud.bigquery.analyticshub.v1.CloudStorageConfig;
+
+                        /**
+                         * Encodes the specified CloudStorageConfig message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.verify|verify} messages.
+                         * @param message CloudStorageConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.analyticshub.v1.ICloudStorageConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CloudStorageConfig message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.verify|verify} messages.
+                         * @param message CloudStorageConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.analyticshub.v1.ICloudStorageConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CloudStorageConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CloudStorageConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.analyticshub.v1.CloudStorageConfig;
+
+                        /**
+                         * Decodes a CloudStorageConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CloudStorageConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.analyticshub.v1.CloudStorageConfig;
+
+                        /**
+                         * Verifies a CloudStorageConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CloudStorageConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CloudStorageConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.analyticshub.v1.CloudStorageConfig;
+
+                        /**
+                         * Creates a plain object from a CloudStorageConfig message. Also converts values to other types if specified.
+                         * @param message CloudStorageConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.analyticshub.v1.CloudStorageConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CloudStorageConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CloudStorageConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace CloudStorageConfig {
+
+                        /** Properties of a TextConfig. */
+                        interface ITextConfig {
+                        }
+
+                        /** Represents a TextConfig. */
+                        class TextConfig implements ITextConfig {
+
+                            /**
+                             * Constructs a new TextConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.ITextConfig);
+
+                            /**
+                             * Creates a new TextConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns TextConfig instance
+                             */
+                            public static create(properties?: google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.ITextConfig): google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.TextConfig;
+
+                            /**
+                             * Encodes the specified TextConfig message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.TextConfig.verify|verify} messages.
+                             * @param message TextConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.ITextConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified TextConfig message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.TextConfig.verify|verify} messages.
+                             * @param message TextConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.ITextConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a TextConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns TextConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.TextConfig;
+
+                            /**
+                             * Decodes a TextConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns TextConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.TextConfig;
+
+                            /**
+                             * Verifies a TextConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a TextConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns TextConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.TextConfig;
+
+                            /**
+                             * Creates a plain object from a TextConfig message. Also converts values to other types if specified.
+                             * @param message TextConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.TextConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this TextConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for TextConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of an AvroConfig. */
+                        interface IAvroConfig {
+
+                            /** AvroConfig writeMetadata */
+                            writeMetadata?: (boolean|null);
+
+                            /** AvroConfig useTopicSchema */
+                            useTopicSchema?: (boolean|null);
+                        }
+
+                        /** Represents an AvroConfig. */
+                        class AvroConfig implements IAvroConfig {
+
+                            /**
+                             * Constructs a new AvroConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.IAvroConfig);
+
+                            /** AvroConfig writeMetadata. */
+                            public writeMetadata: boolean;
+
+                            /** AvroConfig useTopicSchema. */
+                            public useTopicSchema: boolean;
+
+                            /**
+                             * Creates a new AvroConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns AvroConfig instance
+                             */
+                            public static create(properties?: google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.IAvroConfig): google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.AvroConfig;
+
+                            /**
+                             * Encodes the specified AvroConfig message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.AvroConfig.verify|verify} messages.
+                             * @param message AvroConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.IAvroConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified AvroConfig message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.AvroConfig.verify|verify} messages.
+                             * @param message AvroConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.IAvroConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an AvroConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns AvroConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.AvroConfig;
+
+                            /**
+                             * Decodes an AvroConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns AvroConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.AvroConfig;
+
+                            /**
+                             * Verifies an AvroConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an AvroConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns AvroConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.AvroConfig;
+
+                            /**
+                             * Creates a plain object from an AvroConfig message. Also converts values to other types if specified.
+                             * @param message AvroConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.bigquery.analyticshub.v1.CloudStorageConfig.AvroConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this AvroConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for AvroConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** Properties of a MessageTransform. */
+                    interface IMessageTransform {
+
+                        /** MessageTransform javascriptUdf */
+                        javascriptUdf?: (google.cloud.bigquery.analyticshub.v1.IJavaScriptUDF|null);
+
+                        /** MessageTransform enabled */
+                        enabled?: (boolean|null);
+
+                        /** MessageTransform disabled */
+                        disabled?: (boolean|null);
+                    }
+
+                    /** Represents a MessageTransform. */
+                    class MessageTransform implements IMessageTransform {
+
+                        /**
+                         * Constructs a new MessageTransform.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.analyticshub.v1.IMessageTransform);
+
+                        /** MessageTransform javascriptUdf. */
+                        public javascriptUdf?: (google.cloud.bigquery.analyticshub.v1.IJavaScriptUDF|null);
+
+                        /** MessageTransform enabled. */
+                        public enabled: boolean;
+
+                        /** MessageTransform disabled. */
+                        public disabled: boolean;
+
+                        /** MessageTransform transform. */
+                        public transform?: "javascriptUdf";
+
+                        /**
+                         * Creates a new MessageTransform instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns MessageTransform instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.analyticshub.v1.IMessageTransform): google.cloud.bigquery.analyticshub.v1.MessageTransform;
+
+                        /**
+                         * Encodes the specified MessageTransform message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.MessageTransform.verify|verify} messages.
+                         * @param message MessageTransform message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.analyticshub.v1.IMessageTransform, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified MessageTransform message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.MessageTransform.verify|verify} messages.
+                         * @param message MessageTransform message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.analyticshub.v1.IMessageTransform, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a MessageTransform message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns MessageTransform
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.analyticshub.v1.MessageTransform;
+
+                        /**
+                         * Decodes a MessageTransform message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns MessageTransform
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.analyticshub.v1.MessageTransform;
+
+                        /**
+                         * Verifies a MessageTransform message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a MessageTransform message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns MessageTransform
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.analyticshub.v1.MessageTransform;
+
+                        /**
+                         * Creates a plain object from a MessageTransform message. Also converts values to other types if specified.
+                         * @param message MessageTransform
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.analyticshub.v1.MessageTransform, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this MessageTransform to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for MessageTransform
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a JavaScriptUDF. */
+                    interface IJavaScriptUDF {
+
+                        /** JavaScriptUDF functionName */
+                        functionName?: (string|null);
+
+                        /** JavaScriptUDF code */
+                        code?: (string|null);
+                    }
+
+                    /** Represents a JavaScriptUDF. */
+                    class JavaScriptUDF implements IJavaScriptUDF {
+
+                        /**
+                         * Constructs a new JavaScriptUDF.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.analyticshub.v1.IJavaScriptUDF);
+
+                        /** JavaScriptUDF functionName. */
+                        public functionName: string;
+
+                        /** JavaScriptUDF code. */
+                        public code: string;
+
+                        /**
+                         * Creates a new JavaScriptUDF instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns JavaScriptUDF instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.analyticshub.v1.IJavaScriptUDF): google.cloud.bigquery.analyticshub.v1.JavaScriptUDF;
+
+                        /**
+                         * Encodes the specified JavaScriptUDF message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.JavaScriptUDF.verify|verify} messages.
+                         * @param message JavaScriptUDF message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.analyticshub.v1.IJavaScriptUDF, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified JavaScriptUDF message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.JavaScriptUDF.verify|verify} messages.
+                         * @param message JavaScriptUDF message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.analyticshub.v1.IJavaScriptUDF, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a JavaScriptUDF message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns JavaScriptUDF
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.analyticshub.v1.JavaScriptUDF;
+
+                        /**
+                         * Decodes a JavaScriptUDF message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns JavaScriptUDF
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.analyticshub.v1.JavaScriptUDF;
+
+                        /**
+                         * Verifies a JavaScriptUDF message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a JavaScriptUDF message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns JavaScriptUDF
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.analyticshub.v1.JavaScriptUDF;
+
+                        /**
+                         * Creates a plain object from a JavaScriptUDF message. Also converts values to other types if specified.
+                         * @param message JavaScriptUDF
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.analyticshub.v1.JavaScriptUDF, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this JavaScriptUDF to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for JavaScriptUDF
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */

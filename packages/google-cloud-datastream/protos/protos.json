@@ -1585,6 +1585,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "secretManagerStoredPassword": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1618,6 +1625,13 @@
                         "sslConfig": {
                           "type": "MysqlSslConfig",
                           "id": 5
+                        },
+                        "secretManagerStoredPassword": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1653,6 +1667,13 @@
                           "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "secretManagerStoredPassword": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "sslConfig": {
@@ -1696,6 +1717,106 @@
                           "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "secretManagerStoredPassword": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "SalesforceProfile": {
+                      "oneofs": {
+                        "credentials": {
+                          "oneof": [
+                            "userCredentials",
+                            "oauth2ClientCredentials"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "domain": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "userCredentials": {
+                          "type": "UserCredentials",
+                          "id": 2
+                        },
+                        "oauth2ClientCredentials": {
+                          "type": "Oauth2ClientCredentials",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "UserCredentials": {
+                          "fields": {
+                            "username": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "password": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "securityToken": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "secretManagerStoredPassword": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "secretManagerStoredSecurityToken": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "Oauth2ClientCredentials": {
+                          "fields": {
+                            "clientId": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "clientSecret": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "secretManagerStoredClientSecret": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
                           }
                         }
                       }
@@ -1789,6 +1910,18 @@
                         "(google.api.resource).type": "datastream.googleapis.com/PrivateConnection",
                         "(google.api.resource).pattern": "projects/{project}/locations/{location}/privateConnections/{private_connection}"
                       },
+                      "oneofs": {
+                        "_satisfiesPzs": {
+                          "oneof": [
+                            "satisfiesPzs"
+                          ]
+                        },
+                        "_satisfiesPzi": {
+                          "oneof": [
+                            "satisfiesPzi"
+                          ]
+                        }
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -1835,6 +1968,22 @@
                           "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "satisfiesPzs": {
+                          "type": "bool",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "satisfiesPzi": {
+                          "type": "bool",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
                           }
                         },
                         "vpcPeeringConfig": {
@@ -1925,7 +2074,7 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "INPUT_ONLY"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "clientKeySet": {
@@ -1939,7 +2088,7 @@
                           "type": "string",
                           "id": 3,
                           "options": {
-                            "(google.api.field_behavior)": "INPUT_ONLY"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "clientCertificateSet": {
@@ -2027,7 +2176,7 @@
                               "type": "string",
                               "id": 2,
                               "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
                             "caCertificate": {
@@ -2047,6 +2196,16 @@
                         "(google.api.resource).pattern": "projects/{project}/locations/{location}/connectionProfiles/{connection_profile}"
                       },
                       "oneofs": {
+                        "_satisfiesPzs": {
+                          "oneof": [
+                            "satisfiesPzs"
+                          ]
+                        },
+                        "_satisfiesPzi": {
+                          "oneof": [
+                            "satisfiesPzi"
+                          ]
+                        },
                         "profile": {
                           "oneof": [
                             "oracleProfile",
@@ -2054,7 +2213,8 @@
                             "mysqlProfile",
                             "bigqueryProfile",
                             "postgresqlProfile",
-                            "sqlServerProfile"
+                            "sqlServerProfile",
+                            "salesforceProfile"
                           ]
                         },
                         "connectivity": {
@@ -2099,6 +2259,22 @@
                             "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
+                        "satisfiesPzs": {
+                          "type": "bool",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "satisfiesPzi": {
+                          "type": "bool",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
                         "oracleProfile": {
                           "type": "OracleProfile",
                           "id": 100
@@ -2122,6 +2298,10 @@
                         "sqlServerProfile": {
                           "type": "SqlServerProfile",
                           "id": 105
+                        },
+                        "salesforceProfile": {
+                          "type": "SalesforceProfile",
+                          "id": 107
                         },
                         "staticServiceIpConnectivity": {
                           "type": "StaticServiceIpConnectivity",
@@ -2649,6 +2829,63 @@
                         }
                       }
                     },
+                    "SalesforceSourceConfig": {
+                      "fields": {
+                        "includeObjects": {
+                          "type": "SalesforceOrg",
+                          "id": 1
+                        },
+                        "excludeObjects": {
+                          "type": "SalesforceOrg",
+                          "id": 2
+                        },
+                        "pollingInterval": {
+                          "type": "google.protobuf.Duration",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "SalesforceOrg": {
+                      "fields": {
+                        "objects": {
+                          "rule": "repeated",
+                          "type": "SalesforceObject",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "SalesforceObject": {
+                      "fields": {
+                        "objectName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "fields": {
+                          "rule": "repeated",
+                          "type": "SalesforceField",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "SalesforceField": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "dataType": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "nillable": {
+                          "type": "bool",
+                          "id": 3
+                        }
+                      }
+                    },
                     "SourceConfig": {
                       "oneofs": {
                         "sourceStreamConfig": {
@@ -2656,7 +2893,8 @@
                             "oracleSourceConfig",
                             "mysqlSourceConfig",
                             "postgresqlSourceConfig",
-                            "sqlServerSourceConfig"
+                            "sqlServerSourceConfig",
+                            "salesforceSourceConfig"
                           ]
                         }
                       },
@@ -2684,6 +2922,10 @@
                         "sqlServerSourceConfig": {
                           "type": "SqlServerSourceConfig",
                           "id": 103
+                        },
+                        "salesforceSourceConfig": {
+                          "type": "SalesforceSourceConfig",
+                          "id": 104
                         }
                       }
                     },
@@ -2778,6 +3020,13 @@
                           "type": "google.protobuf.Duration",
                           "id": 300
                         },
+                        "blmtConfig": {
+                          "type": "BlmtConfig",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "merge": {
                           "type": "Merge",
                           "id": 301
@@ -2821,6 +3070,56 @@
                                   "type": "string",
                                   "id": 3
                                 }
+                              }
+                            }
+                          }
+                        },
+                        "BlmtConfig": {
+                          "fields": {
+                            "bucket": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "rootPath": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "connectionName": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "fileFormat": {
+                              "type": "FileFormat",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "tableFormat": {
+                              "type": "TableFormat",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "FileFormat": {
+                              "values": {
+                                "FILE_FORMAT_UNSPECIFIED": 0,
+                                "PARQUET": 1
+                              }
+                            },
+                            "TableFormat": {
+                              "values": {
+                                "TABLE_FORMAT_UNSPECIFIED": 0,
+                                "ICEBERG": 1
                               }
                             }
                           }
@@ -2876,6 +3175,16 @@
                         "_customerManagedEncryptionKey": {
                           "oneof": [
                             "customerManagedEncryptionKey"
+                          ]
+                        },
+                        "_satisfiesPzs": {
+                          "oneof": [
+                            "satisfiesPzs"
+                          ]
+                        },
+                        "_satisfiesPzi": {
+                          "oneof": [
+                            "satisfiesPzi"
                           ]
                         }
                       },
@@ -2961,6 +3270,22 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "satisfiesPzs": {
+                          "type": "bool",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "satisfiesPzi": {
+                          "type": "bool",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
                         }
                       },
                       "nested": {
@@ -2984,7 +3309,8 @@
                                 "oracleExcludedObjects",
                                 "mysqlExcludedObjects",
                                 "postgresqlExcludedObjects",
-                                "sqlServerExcludedObjects"
+                                "sqlServerExcludedObjects",
+                                "salesforceExcludedObjects"
                               ]
                             }
                           },
@@ -3004,6 +3330,10 @@
                             "sqlServerExcludedObjects": {
                               "type": "SqlServerRdbms",
                               "id": 4
+                            },
+                            "salesforceExcludedObjects": {
+                              "type": "SalesforceOrg",
+                              "id": 5
                             }
                           }
                         },
@@ -3071,7 +3401,8 @@
                             "oracleIdentifier",
                             "mysqlIdentifier",
                             "postgresqlIdentifier",
-                            "sqlServerIdentifier"
+                            "sqlServerIdentifier",
+                            "salesforceIdentifier"
                           ]
                         }
                       },
@@ -3091,6 +3422,10 @@
                         "sqlServerIdentifier": {
                           "type": "SqlServerObjectIdentifier",
                           "id": 4
+                        },
+                        "salesforceIdentifier": {
+                          "type": "SalesforceObjectIdentifier",
+                          "id": 5
                         }
                       },
                       "nested": {
@@ -3160,6 +3495,17 @@
                             "table": {
                               "type": "string",
                               "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "SalesforceObjectIdentifier": {
+                          "fields": {
+                            "objectName": {
+                              "type": "string",
+                              "id": 1,
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED"
                               }
@@ -3371,7 +3717,8 @@
                               "oneof": [
                                 "mysqlLogPosition",
                                 "oracleScnPosition",
-                                "sqlServerLsnPosition"
+                                "sqlServerLsnPosition",
+                                "mysqlGtidPosition"
                               ]
                             }
                           },
@@ -3387,6 +3734,10 @@
                             "sqlServerLsnPosition": {
                               "type": "SqlServerLsnPosition",
                               "id": 103
+                            },
+                            "mysqlGtidPosition": {
+                              "type": "MysqlGtidPosition",
+                              "id": 104
                             }
                           }
                         }
@@ -3436,6 +3787,17 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "MysqlGtidPosition": {
+                      "fields": {
+                        "gtidSet": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
                       }

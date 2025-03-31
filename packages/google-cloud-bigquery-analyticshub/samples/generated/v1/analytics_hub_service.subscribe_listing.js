@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(destinationDataset, name) {
+function main(destinationDataset, destinationPubsubSubscription, name) {
   // [START analyticshub_v1_generated_AnalyticsHubService_SubscribeListing_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -32,6 +32,11 @@ function main(destinationDataset, name) {
    *  Input only. BigQuery destination dataset to create for the subscriber.
    */
   // const destinationDataset = {}
+  /**
+   *  Input only. Destination Pub/Sub subscription to create for the
+   *  subscriber.
+   */
+  // const destinationPubsubSubscription = {}
   /**
    *  Required. Resource name of the listing that you want to subscribe to.
    *  e.g. `projects/myproject/locations/US/dataExchanges/123/listings/456`.
@@ -48,6 +53,7 @@ function main(destinationDataset, name) {
     // Construct request
     const request = {
       destinationDataset,
+      destinationPubsubSubscription,
       name,
     };
 

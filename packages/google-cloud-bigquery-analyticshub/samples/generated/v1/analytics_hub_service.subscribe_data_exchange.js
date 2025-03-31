@@ -39,6 +39,10 @@ function main(name, destination, subscription) {
    */
   // const destination = 'abc123'
   /**
+   *  Optional. BigQuery destination dataset to create for the subscriber.
+   */
+  // const destinationDataset = {}
+  /**
    *  Required. Name of the subscription to create.
    *  e.g. `subscription1`
    */

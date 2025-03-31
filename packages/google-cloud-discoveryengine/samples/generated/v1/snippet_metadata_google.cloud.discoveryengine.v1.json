@@ -782,7 +782,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 118,
+                    "end": 126,
                     "type": "FULL"
                 }
             ],
@@ -812,6 +812,10 @@
                         "type": ".google.cloud.discoveryengine.v1.AnswerQueryRequest.RelatedQuestionsSpec"
                     },
                     {
+                        "name": "grounding_spec",
+                        "type": ".google.cloud.discoveryengine.v1.AnswerQueryRequest.GroundingSpec"
+                    },
+                    {
                         "name": "answer_generation_spec",
                         "type": ".google.cloud.discoveryengine.v1.AnswerQueryRequest.AnswerGenerationSpec"
                     },
@@ -834,6 +838,10 @@
                     {
                         "name": "user_labels",
                         "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "end_user_spec",
+                        "type": ".google.cloud.discoveryengine.v1.AnswerQueryRequest.EndUserSpec"
                     }
                 ],
                 "resultType": ".google.cloud.discoveryengine.v1.AnswerQueryResponse",
@@ -844,6 +852,94 @@
                 "method": {
                     "shortName": "AnswerQuery",
                     "fullName": "google.cloud.discoveryengine.v1.ConversationalSearchService.AnswerQuery",
+                    "service": {
+                        "shortName": "ConversationalSearchService",
+                        "fullName": "google.cloud.discoveryengine.v1.ConversationalSearchService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "discoveryengine_v1_generated_ConversationalSearchService_StreamAnswerQuery_async",
+            "title": "CompletionService streamAnswerQuery Sample",
+            "origin": "API_DEFINITION",
+            "description": " Answer query method (streaming). It takes one [AnswerQueryRequest][google.cloud.discoveryengine.v1.AnswerQueryRequest] and returns multiple [AnswerQueryResponse][google.cloud.discoveryengine.v1.AnswerQueryResponse] messages in a stream.",
+            "canonical": true,
+            "file": "conversational_search_service.stream_answer_query.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 128,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "StreamAnswerQuery",
+                "fullName": "google.cloud.discoveryengine.v1.ConversationalSearchService.StreamAnswerQuery",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "serving_config",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "query",
+                        "type": ".google.cloud.discoveryengine.v1.Query"
+                    },
+                    {
+                        "name": "session",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "safety_spec",
+                        "type": ".google.cloud.discoveryengine.v1.AnswerQueryRequest.SafetySpec"
+                    },
+                    {
+                        "name": "related_questions_spec",
+                        "type": ".google.cloud.discoveryengine.v1.AnswerQueryRequest.RelatedQuestionsSpec"
+                    },
+                    {
+                        "name": "grounding_spec",
+                        "type": ".google.cloud.discoveryengine.v1.AnswerQueryRequest.GroundingSpec"
+                    },
+                    {
+                        "name": "answer_generation_spec",
+                        "type": ".google.cloud.discoveryengine.v1.AnswerQueryRequest.AnswerGenerationSpec"
+                    },
+                    {
+                        "name": "search_spec",
+                        "type": ".google.cloud.discoveryengine.v1.AnswerQueryRequest.SearchSpec"
+                    },
+                    {
+                        "name": "query_understanding_spec",
+                        "type": ".google.cloud.discoveryengine.v1.AnswerQueryRequest.QueryUnderstandingSpec"
+                    },
+                    {
+                        "name": "asynchronous_mode",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "user_pseudo_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "user_labels",
+                        "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "end_user_spec",
+                        "type": ".google.cloud.discoveryengine.v1.AnswerQueryRequest.EndUserSpec"
+                    }
+                ],
+                "resultType": ".google.cloud.discoveryengine.v1.AnswerQueryResponse",
+                "client": {
+                    "shortName": "ConversationalSearchServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1.ConversationalSearchServiceClient"
+                },
+                "method": {
+                    "shortName": "StreamAnswerQuery",
+                    "fullName": "google.cloud.discoveryengine.v1.ConversationalSearchService.StreamAnswerQuery",
                     "service": {
                         "shortName": "ConversationalSearchService",
                         "fullName": "google.cloud.discoveryengine.v1.ConversationalSearchService"
@@ -1030,7 +1126,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 54,
+                    "end": 59,
                     "type": "FULL"
                 }
             ],
@@ -1042,6 +1138,10 @@
                     {
                         "name": "name",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "include_answer_details",
+                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.cloud.discoveryengine.v1.Session",
@@ -1070,7 +1170,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 85,
+                    "end": 88,
                     "type": "FULL"
                 }
             ],
@@ -1582,7 +1682,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 163,
+                    "end": 170,
                     "type": "FULL"
                 }
             ],
@@ -1650,6 +1750,10 @@
                     {
                         "name": "id_field",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "force_refresh_content",
+                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",
@@ -2006,7 +2110,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 98,
+                    "end": 97,
                     "type": "FULL"
                 }
             ],
@@ -2066,7 +2170,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 94,
+                    "end": 93,
                     "type": "FULL"
                 }
             ],
@@ -2578,7 +2682,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 287,
+                    "end": 307,
                     "type": "FULL"
                 }
             ],
@@ -2684,12 +2788,24 @@
                         "type": ".google.cloud.discoveryengine.v1.SearchRequest.SearchAsYouTypeSpec"
                     },
                     {
+                        "name": "display_spec",
+                        "type": ".google.cloud.discoveryengine.v1.SearchRequest.DisplaySpec"
+                    },
+                    {
                         "name": "session",
                         "type": "TYPE_STRING"
                     },
                     {
                         "name": "session_spec",
                         "type": ".google.cloud.discoveryengine.v1.SearchRequest.SessionSpec"
+                    },
+                    {
+                        "name": "relevance_threshold",
+                        "type": ".google.cloud.discoveryengine.v1.SearchRequest.RelevanceThreshold"
+                    },
+                    {
+                        "name": "relevance_score_spec",
+                        "type": ".google.cloud.discoveryengine.v1.SearchRequest.RelevanceScoreSpec"
                     }
                 ],
                 "resultType": ".google.cloud.discoveryengine.v1.SearchResponse",
@@ -2718,7 +2834,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 287,
+                    "end": 307,
                     "type": "FULL"
                 }
             ],
@@ -2824,12 +2940,24 @@
                         "type": ".google.cloud.discoveryengine.v1.SearchRequest.SearchAsYouTypeSpec"
                     },
                     {
+                        "name": "display_spec",
+                        "type": ".google.cloud.discoveryengine.v1.SearchRequest.DisplaySpec"
+                    },
+                    {
                         "name": "session",
                         "type": "TYPE_STRING"
                     },
                     {
                         "name": "session_spec",
                         "type": ".google.cloud.discoveryengine.v1.SearchRequest.SessionSpec"
+                    },
+                    {
+                        "name": "relevance_threshold",
+                        "type": ".google.cloud.discoveryengine.v1.SearchRequest.RelevanceThreshold"
+                    },
+                    {
+                        "name": "relevance_score_spec",
+                        "type": ".google.cloud.discoveryengine.v1.SearchRequest.RelevanceScoreSpec"
                     }
                 ],
                 "resultType": ".google.cloud.discoveryengine.v1.SearchResponse",
@@ -2939,6 +3067,50 @@
                     "service": {
                         "shortName": "SearchTuningService",
                         "fullName": "google.cloud.discoveryengine.v1.SearchTuningService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "discoveryengine_v1_generated_ServingConfigService_UpdateServingConfig_async",
+            "title": "CompletionService updateServingConfig Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates a ServingConfig. Returns a NOT_FOUND error if the ServingConfig does not exist.",
+            "canonical": true,
+            "file": "serving_config_service.update_serving_config.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 61,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateServingConfig",
+                "fullName": "google.cloud.discoveryengine.v1.ServingConfigService.UpdateServingConfig",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "serving_config",
+                        "type": ".google.cloud.discoveryengine.v1.ServingConfig"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.cloud.discoveryengine.v1.ServingConfig",
+                "client": {
+                    "shortName": "ServingConfigServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1.ServingConfigServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateServingConfig",
+                    "fullName": "google.cloud.discoveryengine.v1.ServingConfigService.UpdateServingConfig",
+                    "service": {
+                        "shortName": "ServingConfigService",
+                        "fullName": "google.cloud.discoveryengine.v1.ServingConfigService"
                     }
                 }
             }
@@ -3240,6 +3412,134 @@
             }
         },
         {
+            "regionTag": "discoveryengine_v1_generated_SiteSearchEngineService_CreateSitemap_async",
+            "title": "CompletionService createSitemap Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a [Sitemap][google.cloud.discoveryengine.v1.Sitemap].",
+            "canonical": true,
+            "file": "site_search_engine_service.create_sitemap.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 61,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateSitemap",
+                "fullName": "google.cloud.discoveryengine.v1.SiteSearchEngineService.CreateSitemap",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "sitemap",
+                        "type": ".google.cloud.discoveryengine.v1.Sitemap"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "SiteSearchEngineServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1.SiteSearchEngineServiceClient"
+                },
+                "method": {
+                    "shortName": "CreateSitemap",
+                    "fullName": "google.cloud.discoveryengine.v1.SiteSearchEngineService.CreateSitemap",
+                    "service": {
+                        "shortName": "SiteSearchEngineService",
+                        "fullName": "google.cloud.discoveryengine.v1.SiteSearchEngineService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "discoveryengine_v1_generated_SiteSearchEngineService_DeleteSitemap_async",
+            "title": "CompletionService deleteSitemap Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a [Sitemap][google.cloud.discoveryengine.v1.Sitemap].",
+            "canonical": true,
+            "file": "site_search_engine_service.delete_sitemap.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 61,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteSitemap",
+                "fullName": "google.cloud.discoveryengine.v1.SiteSearchEngineService.DeleteSitemap",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "SiteSearchEngineServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1.SiteSearchEngineServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteSitemap",
+                    "fullName": "google.cloud.discoveryengine.v1.SiteSearchEngineService.DeleteSitemap",
+                    "service": {
+                        "shortName": "SiteSearchEngineService",
+                        "fullName": "google.cloud.discoveryengine.v1.SiteSearchEngineService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "discoveryengine_v1_generated_SiteSearchEngineService_FetchSitemaps_async",
+            "title": "CompletionService fetchSitemaps Sample",
+            "origin": "API_DEFINITION",
+            "description": " Fetch [Sitemap][google.cloud.discoveryengine.v1.Sitemap]s in a [DataStore][google.cloud.discoveryengine.v1.DataStore].",
+            "canonical": true,
+            "file": "site_search_engine_service.fetch_sitemaps.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 62,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "FetchSitemaps",
+                "fullName": "google.cloud.discoveryengine.v1.SiteSearchEngineService.FetchSitemaps",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "matcher",
+                        "type": ".google.cloud.discoveryengine.v1.FetchSitemapsRequest.Matcher"
+                    }
+                ],
+                "resultType": ".google.cloud.discoveryengine.v1.FetchSitemapsResponse",
+                "client": {
+                    "shortName": "SiteSearchEngineServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1.SiteSearchEngineServiceClient"
+                },
+                "method": {
+                    "shortName": "FetchSitemaps",
+                    "fullName": "google.cloud.discoveryengine.v1.SiteSearchEngineService.FetchSitemaps",
+                    "service": {
+                        "shortName": "SiteSearchEngineService",
+                        "fullName": "google.cloud.discoveryengine.v1.SiteSearchEngineService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "discoveryengine_v1_generated_SiteSearchEngineService_EnableAdvancedSiteSearch_async",
             "title": "CompletionService enableAdvancedSiteSearch Sample",
             "origin": "API_DEFINITION",
@@ -3330,7 +3630,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 70,
+                    "end": 68,
                     "type": "FULL"
                 }
             ],
@@ -3514,7 +3814,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 73,
+                    "end": 81,
                     "type": "FULL"
                 }
             ],
@@ -3566,7 +3866,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 90,
+                    "end": 93,
                     "type": "FULL"
                 }
             ],
